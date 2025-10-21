@@ -1,0 +1,81 @@
+@page "/universidades"
+
+@using UCR.ECCI.PI.ThemePark.Frontend.Blazor.Application.Services
+@using UCR.ECCI.PI.ThemePark.Frontend.Blazor.Presentation.Models
+@using UCR.ECCI.PI.ThemePark.Frontend.Blazor.Domain.Entities.UniversityManagement
+@using UCR.ECCI.PI.ThemePark.Frontend.Blazor.Presentation.Components
+@using MudBlazor
+
+@inject IUniversityServices UniversityRepository
+@inject NavigationManager NavigationManager
+
+<Breadcrumbs />
+
+<PageTitle>Administración de Universidades</PageTitle>
+
+<MudPaper Class="pa-4">
+
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <MudText Typo="Typo.h5">Administración de Universidades</MudText>
+        <MudButton Variant="Variant.Outlined"
+                   Color="Color.Primary"
+                   Class="mr-2"
+                   OnClick="@GoToAddUniversity">
+            Agregar
+        </MudButton>
+
+    </div>
+
+    @if (universities == null)
+    {
+        <p><em>Cargando...</em></p>
+    }
+    else if (!universities.Any())
+    {
+        <MudText>No se encontraron universidades!</MudText>
+    }
+    else
+    {
+        <MudTable Items="@universities" Dense="true" Bordered="true" Hover="true" Elevation="0">
+            <HeaderContent>
+                <MudTh> Universidad</MudTh>
+                <MudTh>País</MudTh>
+                <MudTh>Sedes</MudTh>
+                <MudTh>Areas</MudTh>
+                <MudTh>Edificios</MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="Universidad">
+                    <MudLink Href="@($"/universidades/mostrar-universidad/{context.Name.Name}")">@context.Name.Name</MudLink>
+                </MudTd>
+                <MudTd DataLabel="´País">@context.Country.Location</MudTd>
+                <MudTd DataLabel="Sedes">
+                    <MudLink Href="/sedes">Ver</MudLink>
+                </MudTd>
+                <MudTd DataLabel="Area">
+                    <MudLink Href="/areas">Ver</MudLink>
+                </MudTd>
+                <MudTd DataLabel="Edificio">
+                    <MudLink Href="/edificios">Ver</MudLink>
+                </MudTd>
+            </RowTemplate>
+        </MudTable>
+    }
+</MudPaper>
+
+@code {
+    /// <summary>
+    /// Collection of Universities to display.
+    /// </summary>
+    private IEnumerable<University>? universities;
+
+    protected override async Task OnInitializedAsync()
+    {
+        universities = await UniversityRepository.ListUniversityAsync();
+    }
+
+    void GoToAddUniversity()
+    {
+        NavigationManager.NavigateTo("/universidades/agregar-universidad");
+    }
+}

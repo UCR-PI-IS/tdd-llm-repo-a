@@ -1,0 +1,249 @@
+:root {
+    --color-primary1: #41ADE7; /* Light Blue 1 */
+    --color-primary2: #FFFFFF; /* White */
+    --color-primary3: #204C6F; /* Blue 1 */
+    --color-secondary1: #249DD8; /* Light Blue 2 */
+    --color-secondary2: #0090D8; /* Light-ish Blue 1 */
+    --color-secondary3: #2980B9; /* Light-ish Blue 2 */
+    --color-secondary4: #0C344E; /* Dark Blue 1 */
+    --color-secondary5: #95B60A; /* Green 1 */
+    --color-secondary6: #609000; /* Green 2 */
+    --color-secondary7: #FFDD00; /* Yellow 1 */
+    --color-secondary8: #FFCC00; /* Yellow 2 */
+    --color-secondary9: #FDB727; /* Orange 1 */
+    --color-secondary10: #EBA71C; /* Orange 2 */
+    --color-secondary11: #E46305; /* Orange 3 */
+    --color-secondary12: #B14212; /* Orange 4 */
+    --color-gris1: #F5F5F5; /* Gray 1 */
+    --color-gris2: #ECECEC; /* Gray 2 */
+    --color-gris3: #CCCCCC; /* Gray 3 */
+    --color-gris4: #999999; /* Gray 4 */
+    --color-gris5: #666666; /* Gray 5 */
+    --color-success: #4caf50; /* A color for success */
+    --color-error: #f44336; /* A color for Error */
+    --color-warning: #ff9800; /* A color for warning */
+}
+
+.custom-header {
+    background-color: var(--mud-palette-primary);
+    color: var(--mud-palette-text-primary);
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 80px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.header-logo {
+    height: 60px;
+    margin-right: 15px;
+}
+
+.header-title {
+    margin: 0;
+    font-size: 1.8em;
+    flex-grow: 1;
+    color: var(--mud-palette-text-primary);
+}
+
+.header-actions a,
+.header-actions button {
+    color: var(--mud-palette-text-primary);
+    text-decoration: none;
+    margin-left: 15px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+    .header-actions button:hover {
+        text-decoration: underline;
+    }
+
+/* Custom Primary Button */
+.my-custom-button {
+    background-color: var(--mud-palette-primary);
+    color: var(--mud-palette-primary-text);
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.2s ease-in-out;
+}
+
+    .my-custom-button:hover {
+        background-color: var(--mud-palette-primary-darken);
+    }
+
+.my-secondary-button {
+    background-color: var(--mud-palette-secondary);
+    color: var(--mud-palette-tertiary-text);
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.2s ease-in-out;
+}
+
+    .my-secondary-button:hover {
+        background-color: var(--mud-palette-secondary-darken);
+    }
+
+.my-outlined-button {
+    background-color: transparent;
+    color: var(--mud-palette-primary);
+    border: 1px solid var(--mud-palette-primary);
+    padding: 7px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+    .my-outlined-button:hover {
+        background-color: var(--mud-palette-primary-lighten);
+        color: var(--mud-palette-text-primary);
+    }
+
+.my-page-title {
+    color: var(--mud-palette-text-primary);
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+.my-paragraph {
+    color: var(--mud-palette-text-secondary);
+    line-height: 1.6;
+}
+
+
+.my-label-success {
+    color: var(--mud-palette-success);
+    font-weight: 600;
+}
+
+.my-error-message {
+    color: var(--mud-palette-error);
+    font-weight: 600;
+    background-color: rgba(var(--mud-palette-error-rgb), 0.1);
+    padding: 8px 12px;
+    border-radius: 4px;
+    border: 1px solid var(--mud-palette-error);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--mud-palette-text-primary);
+}
+
+p {
+    color: var(--mud-palette-text-secondary);
+}
+
+.horizontal-nav-menu .mud-nav-link {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    height: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    white-space: nowrap;
+    flex-shrink: 0;
+    min-width: fit-content;
+}
+
+    .horizontal-nav-menu .mud-nav-link .mud-nav-link-text {
+        color: var(--mud-palette-secondary-text);
+    }
+
+.custom-footer {
+    background-color: var(--mud-palette-tertiary);
+    color: var(--mud-palette-tertiary-text, var(--mud-palette-text-primary));
+    padding: 15px 20px;
+    width: 100%;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 990;
+    border-top: 1px solid var(--mud-palette-lines-default);
+    height: 60px;
+}
+
+    .custom-footer .footer-content {
+        max-width: 960px;
+        margin-left: auto;
+        margin-right: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        height: 100%;
+    }
+
+    .custom-footer .footer-text {
+        font-size: 0.9em;
+        display: block;
+    }
+
+    .custom-footer .footer-tagline .footer-small-text {
+        font-size: 0.75em;
+        color: var(--mud-palette-secondary-text);
+    }
+
+.text-gray {
+    color: var(--mud-palette-text-tertiary) !important;
+}
+
+.custom-breadcrumbs .mud-breadcrumb-item,
+.custom-breadcrumbs .mud-link {
+    color: #204C6F;
+}
+
+    .custom-breadcrumbs .mud-link:hover {
+        color: var(--mud-palette-primary) !important;
+    }
+
+.no-wrap {
+    white-space: nowrap;
+}
+
+
+.custom-page-header {
+    color: #204C6F;
+}
+
+.page-background {
+    background-color: var(--color-gris1);
+}
+
+.custom-paper {
+    background-color: var(--color-primary2);
+}
+
+
+body {
+    background-color: var(--color-gris1) !important;
+}
+
+.mud-breadcrumb-item {
+    color: #204C6F !important;
+}
+
+.custom-mud-breadcrumb-item .mud-link:hover {
+    color: var(--mud-palette-primary) !important;
+}
+
+.pill-select {
+    background-color: #ECECEC !important;
+    border-radius: 50rem !important;
+    padding: 0.25rem 0.75rem;
+    max-height: 45px;
+    display: flex;
+    align-items: center;
+}

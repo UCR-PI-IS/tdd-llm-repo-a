@@ -1,0 +1,122 @@
+@page "/areas/mostrar-area/{AreaName}"
+
+@using UCR.ECCI.PI.ThemePark.Frontend.Blazor.Application.Services
+@using UCR.ECCI.PI.ThemePark.Frontend.Blazor.Domain.Entities.UniversityManagement
+@using UCR.ECCI.PI.ThemePark.Frontend.Blazor.Presentation.Components
+
+@inject IAreaServices AreaServices
+@inject NavigationManager NavigationManager
+
+<Breadcrumbs />
+<PageTitle>Area @area?.Name.Name</PageTitle>
+
+<h3>Detalles del area @area?.Name.Name</h3>
+
+@if (isLoading)
+{
+    <p><em>Cargando...</em></p>
+}
+else if (area is not null)
+{
+    <FluidContainer>
+        <!-- Header -->
+        <MudText Typo="Typo.h6" Class="mb-4" Color="Color.Primary">
+            <strong>Información del area</strong>
+        </MudText>
+
+        <!-- Area Information -->
+        <MudGrid Spacing="2" Class="mb-4">
+            <TitleLabel Label="Nombre" />
+            <ValueLabel Value="@area.Name.Name" />
+
+            <TitleLabel Label="Sede" />
+            <ValueLabel Value="@area.Campus.Name.Name" />
+        </MudGrid>
+
+        <!-- Buttons -->
+        <MudContainer Class="d-flex justify-end pa-0 mt-4">
+            <MudButton Variant="Variant.Filled"
+                       Color="Color.Error"
+                       Class="mr-2"
+                       OnClick="@DeleteArea">
+                Borrar
+            </MudButton>
+        </MudContainer>
+
+        @if (showError)
+        {
+            <div class="alert alert-danger" role="alert">
+                @errorMessage
+            </div>
+        }
+    </FluidContainer>
+}
+else
+{
+    <p><em>Area no encontrada.</em></p>
+}
+
+<PopupMessage @ref="_popupMessageRef"
+              Title="Borrado Exitoso"
+              Message="El area ha sido <b>borrado</b> correctamente."
+              OkText="OK"
+              ColorVarOk="--color-primary3"
+              OnAcknowledged="HandleOk" />
+
+@code {
+    [Parameter]
+    public string AreaName { get; set; } = string.Empty;
+
+    private Area? area;
+    private bool isLoading = true;
+    private bool showError = false;
+    private string errorMessage = string.Empty;
+    private PopupMessage? _popupMessageRef;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            area = await AreaServices.GetByNameAsync(AreaName);
+        }
+        catch
+        {
+            area = null;
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+
+    private async Task DeleteArea()
+    {
+        showError = false;
+        errorMessage = string.Empty;
+
+        try
+        {
+            var deleted = await AreaServices.DeleteAreaAsync(AreaName);
+
+            if (deleted)
+            {
+                await _popupMessageRef!.ProgrammaticShow();
+            }
+            else
+            {
+                showError = true;
+                errorMessage = "No se pudo eliminar la area. Inténtalo de nuevo.";
+            }
+        }
+        catch (Exception ex)
+        {
+            showError = true;
+            errorMessage = $"Ocurrió un error inesperado: {ex.Message}";
+        }
+    }
+
+    private void HandleOk()
+    {
+        NavigationManager.NavigateTo("/areas");
+    }
+}

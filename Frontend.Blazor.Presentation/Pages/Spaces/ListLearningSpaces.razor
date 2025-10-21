@@ -1,0 +1,294 @@
+﻿@using Microsoft.Kiota.Abstractions
+@using UCR.ECCI.PI.ThemePark.Frontend.Blazor.Application.Services
+@using UCR.ECCI.PI.ThemePark.Frontend.Blazor.Domain.Entities.Spaces
+@using UCR.ECCI.PI.ThemePark.Frontend.Blazor.Domain.ValueObjects
+@using UCR.ECCI.PI.ThemePark.Frontend.Blazor.Domain.Exceptions
+@using UCR.ECCI.PI.ThemePark.Frontend.Blazor.Presentation.Components
+@using UCR.ECCI.PI.ThemePark.Frontend.Blazor.Presentation.Components.Spaces
+@using UCR.ECCI.PI.ThemePark.Frontend.Blazor.Domain.Dtos.Spaces
+@using MudBlazor
+@using System.Collections
+@using System.Net
+
+@inject IBuildingsServices BuildingService
+@inject IFloorServices FloorService
+@inject ILearningSpaceServices LearningSpaceService
+@inject NavigationManager Navigation
+
+@page "/edificios/{buildingId:int}/espacios-de-aprendizaje"
+
+<Breadcrumbs />
+
+<PageTitle>Administración de Espacios de Aprendizaje</PageTitle>
+<div style="overflow-y: auto; padding: 1rem; padding-bottom: 80px;">
+
+    <div class="d-flex align-items-center justify-content-between flex-wrap mb-3" style="gap: 1rem; ">
+        <MudText Typo="Typo.h5" Class="me-3 mb-0" Style="font-weight: bold; color: var(--color-primary3); font-family: Arial, sans-serif;">
+            Administración de Espacios de Aprendizaje
+        </MudText>
+
+        @if (!_isLoading && !_error)
+        {
+            <div class="d-flex align-items-center" style="gap: 0.5rem;">
+
+                <div class="pill-select">
+                    <MudSelect T="int"
+                    Label="Pisos"
+                    Value="@_floorSelectedNumber"
+                    ValueChanged="OnFloorChanged"
+                    FitContent="true">
+                        @foreach (var floor in _floorsList!)
+                        {
+                            <MudSelectItem Value="@floor.Number.Value">@floor.Number.Value</MudSelectItem>
+                        }
+                    </MudSelect>
+                </div>
+
+                <CustomButton ButtonType="add" OnClick="OnAddClicked">
+                    Agregar
+                </CustomButton>            
+            </div>
+        }
+    </div>
+
+    @if (!_error && !_isLoading)
+    {
+        <MudText Typo="Typo.h6" Style="font-weight: normal; color: var(--color-primary3); font-family: Arial, sans-serif;">
+            Edificio: @_buildingName
+        </MudText>
+
+        <div style="overflow-x: auto; max-width: 100%;">
+            <MudTable Items="_learningSpaceList"
+            Hover="true"
+            Bordered="true"
+            FixedHeader="true"
+            Height="400px"
+            Class="mt-4"
+            HorizontalScrollbar="true"
+            Style="width: 100%;">
+                <HeaderContent>
+                    <MudTh Style="width: 40%; text-align: center;">Nombre</MudTh>
+                    <MudTh Style="width: 10%; text-align: center;">Piso</MudTh>
+                    <MudTh Style="width: 15%; text-align: center;">Tipo</MudTh>
+                    <MudTh Style="width: 35%; text-align: center;">Componentes de Aprendizaje</MudTh>
+                </HeaderContent>
+                <RowTemplate>
+                    <MudTd>
+                        <MudLink Href="@($"/edificios/{@buildingId}/pisos/{@_floorSelected!.FloorId}/espacios-de-aprendizaje/{context.LearningSpaceId}")">
+                            @context.Name
+                        </MudLink>
+                    </MudTd>
+                    <MudTd>@_floorSelectedNumber</MudTd>
+                    <MudTd>@context.Type</MudTd>
+                    <MudTd>
+                        <MudLink Href="@($"/edificios/{@buildingId}/espacios-de-aprendizaje/{context.LearningSpaceId}/listar-componentes")">
+                            Ver
+                        </MudLink>
+                    </MudTd>
+                </RowTemplate>
+                <PagerContent>
+                    <MudTablePager PageSizeOptions="new int[]{5, 10, 20}" />
+                </PagerContent>
+            </MudTable>
+
+            @if (_learningSpaceList is not null && _learningSpaceList.Count == 0)
+            {
+                <MudAlert Severity="Severity.Info" Variant="Variant.Outlined" Class="mt-4">
+                    No hay espacios de aprendizaje registrados en este piso.
+                </MudAlert>
+            }
+        </div>
+    }
+</div>
+
+<!--Error state of the page (Sad Path)-->
+@if (_isLoading)
+{
+    <MudProgressLinear Color="Color.Primary" Indeterminate="true" Class="my-7" />
+}
+else
+{
+    @if (_error)
+    {
+        <AlertMessage 
+        buildingId="@buildingId"
+        message=@_userMessage
+        NotFound=@_askForFloors />
+    }
+}
+
+
+@code {
+    // Parameters
+
+    /// <summary>
+    /// Building ID to display the learning spaces.
+    /// </summary>
+    [Parameter]
+    public int buildingId { get; set; }
+
+    /// <summary>
+    /// Name of the building to display in the UI.
+    /// </summary>
+    private string _buildingName = string.Empty;
+
+    // Lists 
+
+    /// <summary>
+    /// Lists of floors and learning spaces.
+    /// </summary>
+    private List<Floor>? _floorsList;
+
+    /// <summary>
+    /// List of learning spaces for the selected floor.
+    /// </summary>
+    private List<LearningSpaceOverviewDto>? _learningSpaceList;
+
+    // Selected items
+
+    /// <summary>
+    /// The floor selected by the user.
+    /// </summary>
+    private Floor? _floorSelected;
+
+    /// <summary>
+    /// The number of the floor selected by the user.
+    /// </summary>
+    private int _floorSelectedNumber;
+
+    // Flags
+
+    /// <summary>
+    /// Flag to indicate if there was an error loading the data.
+    /// </summary>
+    private bool _error = false;
+
+    /// <summary>
+    /// Flag to indicate that the building doesn't have any floors, and provides asks the user to add one.
+    /// </summary>
+    private bool _askForFloors = false;
+
+    /// <summary>
+    /// Flag to indicate that the building was not found.
+    /// </summary>
+    private bool _buildingNotFound = false;
+
+    /// <summary>
+    /// Flag to indicate that the floor ID is invalid.
+    /// </summary>
+    private bool _invalidFloorId = false;
+
+    /// <summary>
+    /// Flag to indicate that no learning spaces were found for the selected floor.
+    /// </summary>
+    private bool _learningSpacesNotFound = false;
+
+    // Loading state
+
+    /// <summary>
+    /// Flag to indicate if the page is loading data.
+    /// </summary>
+    private bool _isLoading = true;
+
+    // Messages
+
+    /// <summary>
+    /// User friendly message to display in the UI.
+    /// </summary>
+    private string _userMessage = string.Empty;
+
+    /// <summary>  
+    /// Initializes the component and loads the building and floors data.
+    /// </summary>
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            // Initialize the loading state
+            // Requests the building name and floors list
+            var building = await BuildingService.DisplayBuildingAsync(this.buildingId);
+            _floorsList = await FloorService.GetFloorsListAsync(buildingId);
+
+            // Check if the building has floors
+            if (_floorsList != null && _floorsList.Count > 0)
+            {
+                _buildingName = building!.Name!.Name;
+                _floorSelected = _floorsList[0];
+                _floorSelectedNumber = _floorSelected.Number.Value;
+                await LoadLearningSpaces();
+            }
+            else
+            {
+                // Requests the user to add floors
+                _error = true;
+                _askForFloors = true;
+                _userMessage = $"No se encontraron pisos en este edificio";
+            }
+        }
+        catch (DomainException ex)
+        {
+            _userMessage = ex.Message;
+            _error = true;
+
+            // Particular handling for specific exceptions
+            _ = ex switch
+            {
+                NotFoundException => _buildingNotFound = false,
+                ValidationException => _invalidFloorId = true,
+                _ => false
+            };
+        }
+        finally
+        {
+            _isLoading = false;
+        }
+    }
+
+    /// <summary>
+    /// Loads the learning spaces for the selected floor.
+    /// </summary>
+    private async Task LoadLearningSpaces()
+    {
+        try
+        {
+            // Requests the learning spaces for the selected floor
+            _learningSpaceList = await LearningSpaceService.GetLearningSpacesListAsync(_floorSelected!.FloorId);
+
+        }
+        catch (ValidationException ex)
+        {
+            _error = true;
+            _userMessage = ex.Message;
+        }
+        catch (NotFoundException)
+        {
+            _learningSpaceList = new List<LearningSpaceOverviewDto>();
+        }
+    }
+
+    ///  <summary>
+    /// Handles the event when the user selects a different floor from the dropdown.
+    /// </summary>
+    /// <param name="newFloor">The new floor number selected by the user.</param>
+    private async Task OnFloorChanged(int newFloor)
+    {
+        foreach (var floor in _floorsList!)
+        {
+            if (floor.Number.Value == newFloor)
+            {
+                _floorSelected = floor;
+                _floorSelectedNumber = _floorSelected.Number.Value;
+            }
+        }
+        await LoadLearningSpaces();
+        StateHasChanged();
+    }
+
+    /// <summary>
+    /// Handles the event when the user clicks the "Add" button to create a new learning space.
+    /// </summary>
+    private void OnAddClicked()
+    {
+        Navigation.NavigateTo($"/edificios/{buildingId}/espacios-de-aprendizaje/crear");
+    }
+}

@@ -1,0 +1,414 @@
+﻿@page "/edificios/{buildingId:int}/espacios-de-aprendizaje/{learningSpaceId:int}/listar-componentes/agregar-componente"
+
+@using UCR.ECCI.PI.ThemePark.Frontend.Blazor.Infrastructure.Kiota.Models
+@using UCR.ECCI.PI.ThemePark.Frontend.Blazor.Presentation.Models
+@using UCR.ECCI.PI.ThemePark.Frontend.Blazor.Presentation.Components
+@using UCR.ECCI.PI.ThemePark.Frontend.Blazor.Domain.Entities.ComponentsManagement
+@using UCR.ECCI.PI.ThemePark.Frontend.Blazor.Domain.ValueObjects.ComponentsManagement
+@using UCR.ECCI.PI.ThemePark.Frontend.Blazor.Domain.ValueObjects
+@using UCR.ECCI.PI.ThemePark.Frontend.Blazor.Domain.ValueObjects.UniversityManagement
+@using UCR.ECCI.PI.ThemePark.Frontend.Blazor.Application.Services
+@using MyOrientation = UCR.ECCI.PI.ThemePark.Frontend.Blazor.Domain.ValueObjects.ComponentsManagement.Orientation
+@using MyColor = UCR.ECCI.PI.ThemePark.Frontend.Blazor.Domain.ValueObjects.UniversityManagement.Colors
+@using MudBlazor
+
+@* Dependency injection for required services *@
+@inject ILearningComponentServices LearningComponentService
+@inject IProjectorServices ProjectorServices
+@inject IWhiteboardServices WhiteboardServices
+@inject NavigationManager Navigation
+@inject ISnackbar Snackbar
+
+@* Page that shows
+    - Breadcrumb navigation component
+    - A selection drop down menu to choose the type of component to add 
+    - Page with information about each learning component to be added 
+*@
+<div style="overflow-y: auto; padding: 1rem; padding-bottom: 80px;">
+    <Breadcrumbs />
+    <PageTitle>Agregar un nuevo componente</PageTitle>
+
+    <MudText Typo="Typo.h4" Style="color: #204c6f;">
+        Agregar un nuevo componente
+    </MudText>
+
+    <MudPaper Class="pa-4" Style="margin-top: 1rem;">
+        <MudGrid>
+            <MudItem xs="12" sm="6">
+                <MudSelect T="string" Label="Tipo de componente" Value="selectedComponentType" ValueChanged="@(EventCallback.Factory.Create<string>(this, OnComponentTypeSelected))" Variant="Variant.Filled">
+                    @foreach (var type in componentTypes)
+                    {
+                        <MudSelectItem Value="@type">@type</MudSelectItem>
+                    }
+                </MudSelect>
+            </MudItem>
+            <MudItem xs="12" sm="6" Class="d-flex align-center">
+                <CustomButton ButtonType="add" OnClick="OnAcceptClick">
+                    Aceptar
+                </CustomButton>
+            </MudItem>
+        </MudGrid>
+    </MudPaper>
+
+    @if (showForm)
+    {
+        <MudPaper Class="pa-4" Style="margin-top: 1rem;">
+            <MudGrid>
+                @if (selectedComponentType == "Proyector")
+                {
+                    //Orientation
+                    <MudItem xs="12">
+                        <div style="width: 200px;">
+                            <MudSelect T="string" Label="Orientación" @bind-Value="orientation" Variant="Variant.Filled">
+                                @foreach (var orientation in OrientationTranslations)
+                                {
+                                    <MudSelectItem Value="@orientation.Value">@orientation.Key</MudSelectItem>
+                                }
+                            </MudSelect>
+                        </div>
+                    </MudItem>
+
+                    // Dimensions
+                    <MudItem xs="12" sm="4">
+                        <MudNumericField T="double" @bind-Value="width" Label="Profundidad" Variant="Variant.Filled" FullWidth="true" Min="1"/>
+                    </MudItem>
+                    <MudItem xs="12" sm="4">
+                        <MudNumericField T="double" @bind-Value="height" Label="Alto" Variant="Variant.Filled" FullWidth="true" Min="1"/>
+                    </MudItem>
+                    <MudItem xs="12" sm="4">
+                        <MudNumericField T="double" @bind-Value="length" Label="Ancho" Variant="Variant.Filled" FullWidth="true" Min="1"/>
+                    </MudItem>
+
+                    // Position
+                    <MudItem xs="12" sm="6">
+                        <MudNumericField T="double" @bind-Value="coordinateX" Label="Posición X" Variant="Variant.Filled" FullWidth="true"/>
+                    </MudItem>
+                    <MudItem xs="12" sm="6">
+                        <MudNumericField T="double" @bind-Value="coordinateY" Label="Posición Y" Variant="Variant.Filled" FullWidth="true"/>
+                    </MudItem>
+
+                    // Projected area
+                    <MudItem xs="12" sm="6">
+                        <MudNumericField T="double" @bind-Value="projectedHeight" Label="Altura proyectada" Variant="Variant.Filled" FullWidth="true" Min="1"/>
+                    </MudItem>
+                    <MudItem xs="12" sm="6">
+                        <MudNumericField T="double" @bind-Value="projectedWidth" Label="Ancho proyectado" Variant="Variant.Filled" FullWidth="true" Min="1"/>
+                    </MudItem>
+
+                    // Projected content
+                    <MudItem xs="12">
+                        <MudTextField T="string" @bind-Value="projectedContent" Label="Contenido proyectado" Variant="Variant.Filled" FullWidth="true"/>
+                    </MudItem>
+
+                    <MudItem xs="12">
+                        @if (showError)
+                        {
+                            <MudAlert Severity="Severity.Error" Class="my-2">
+                                @errorMessage
+                            </MudAlert>
+                        }
+                    </MudItem>
+
+                    // Add Button
+                    <MudItem xs="12">
+                        <div style="display: flex; justify-content: flex-end;  gap: 1.5rem;margin-top: 1rem;">
+                            <CustomButton ButtonType="delete" OnClick="OnCancelClick">
+                                Cancelar
+                            </CustomButton>
+                            <CustomButton ButtonType="add" OnClick="AddComponent">
+                                Guardar
+                            </CustomButton>
+                        </div>
+                    </MudItem>
+
+
+                }
+                else if (selectedComponentType == "Pizarra")
+                {
+                    //Orientation
+                    <MudItem xs="12">
+                        <div style="width: 200px;">
+                            <MudSelect T="string" Label="Orientación" @bind-Value="orientation" Variant="Variant.Filled">
+                                @foreach (var orientation in OrientationTranslations)
+                                {
+                                    <MudSelectItem Value="@orientation.Value">@orientation.Key</MudSelectItem>
+                                }
+                            </MudSelect>
+                        </div>
+                    </MudItem>
+
+                    // Dimensions
+                    <MudItem xs="12" sm="4">
+                        <MudNumericField T="double" @bind-Value="width" Label="Profundidad" Variant="Variant.Filled" FullWidth="true" Min="1" />
+                    </MudItem>
+                    <MudItem xs="12" sm="4">
+                        <MudNumericField T="double" @bind-Value="height" Label="Alto" Variant="Variant.Filled" FullWidth="true" Min="1"/>
+                    </MudItem>
+                    <MudItem xs="12" sm="4">
+                        <MudNumericField T="double" @bind-Value="length" Label="Ancho" Variant="Variant.Filled" FullWidth="true" Min="1" />
+                    </MudItem>
+
+                    // Position
+                    <MudItem xs="12" sm="6">
+                        <MudNumericField T="double" @bind-Value="coordinateX" Label="Posición X" Variant="Variant.Filled" FullWidth="true" />
+                    </MudItem>
+                    <MudItem xs="12" sm="6">
+                        <MudNumericField T="double" @bind-Value="coordinateY" Label="Posición Y" Variant="Variant.Filled" FullWidth="true" />
+                    </MudItem>
+
+                    // Marker Color
+                    <MudItem xs="12">
+                        <div style="width: 200px;">
+                            <MudSelect T="string" Label="Color del marcador" @bind-Value="markerColor" Variant="Variant.Filled">
+                                @foreach (var colorPair in ColorTranslations)
+                                {
+                                    <MudSelectItem Value="@colorPair.Value">@colorPair.Key</MudSelectItem>
+                                }
+                            </MudSelect>
+                        </div>
+                    </MudItem>
+                    <MudItem xs="12">
+                        @if (showError)
+                        {
+                            <MudAlert Severity="Severity.Error" Class="my-2">
+                                @errorMessage
+                            </MudAlert>
+                        }
+                    </MudItem>
+                    // Add Button
+                    <MudItem xs="12">
+                        <div style="display: flex; justify-content: flex-end; gap: 1.5rem; margin-top: 1rem;">
+                            <CustomButton ButtonType="delete" OnClick="OnCancelClick">
+                                Cancelar
+                            </CustomButton>
+                            <CustomButton ButtonType="add" OnClick="AddComponent">
+                                Agregar
+                            </CustomButton>
+                        </div>
+                    </MudItem>
+                }
+            </MudGrid>
+        </MudPaper>
+
+    }
+</div>
+
+
+
+@code {
+
+    /// <summary>
+    /// The ID of the building Id from the route.
+    /// Used to retrieve components associated with that space.
+    /// </summary>
+    [Parameter] public int buildingId { get; set; }
+
+    /// <summary>
+    /// The ID of the learning space to which the new component will be added.
+    /// </summary>
+    [Parameter] public int learningSpaceId { get; set; }
+
+    /// <summary>
+    /// List of available component types to select from.
+    /// </summary>
+    private List<string> componentTypes = new() { "Proyector", "Pizarra" };
+
+    /// <summary>
+    /// Dictionary to translate marker colors from Spanish to English.
+    /// </summary>
+    private readonly Dictionary<string, string> ColorTranslations = new()
+    {
+        { "Rojo", "Red" },
+        { "Verde", "Green" },
+        { "Azul", "Blue" },
+        { "Negro", "Black" },
+        { "Naranja", "Orange" },
+        { "Rosado", "Pink" },
+    };
+
+    /// <summary>
+    /// Dictionary to translate orientation directions from Spanish to English.
+    /// </summary>
+    private readonly Dictionary<string, string> OrientationTranslations = new()
+    {
+        { "Norte", "North" },
+        { "Sur", "South" },
+        { "Este", "East" },
+        { "Oeste", "West" }
+    };
+
+    private string? selectedComponentType;
+
+    private bool showForm = false;
+    private bool showError = false;
+    private string errorMessage = string.Empty;
+
+    // LearningComponent
+    private string? orientation;
+    private double width;
+    private double height;
+    private double length;
+    private double coordinateX;
+    private double coordinateY;
+    private double coordinateZ = 0;
+
+    // Projector
+    private double projectedHeight;
+    private double projectedWidth;
+    private string projectedContent = string.Empty;
+
+    // Whiteboard
+    private string? markerColor;
+
+    /// <summary>
+    /// Handles adding either a projector or whiteboard component based on the selected type.
+    /// Performs validation and calls the corresponding service method.
+    /// </summary>
+    private async Task AddComponent()
+    {
+        try
+        {
+            bool added = false;
+
+            if (selectedComponentType == "Proyector")
+            {
+                if (string.IsNullOrWhiteSpace(projectedContent) || string.IsNullOrWhiteSpace(orientation))
+                {
+                    showError = true;
+                    errorMessage = "Por favor complete todos los campos requeridos con valores válidos.";
+                    return;
+                }
+
+                if (length <= 0 || width <= 0 || height <= 0)
+                {
+                    showError = true;
+                    errorMessage = "Ancho, largo y alto deben ser mayores a cero.";
+                    return;
+                }
+
+                if (projectedHeight <= 0 || projectedWidth <= 0)
+                {
+                    showError = true;
+                    errorMessage = "El área proyectada debe tener valores mayores a cero.";
+                    return;
+                }
+
+
+                string orientationInEnglish = !string.IsNullOrEmpty(orientation) && OrientationTranslations.TryGetValue(orientation, out var englishOrientation)
+                    ? englishOrientation
+                    : orientation ?? string.Empty;
+
+                var projector = new Projector(
+                    projectedContent: projectedContent!,
+                    orientation: MyOrientation.Create(orientationInEnglish!),
+                    dimensions: Dimension.Create(width, height, length),
+                    position: Coordinates.Create(coordinateX, coordinateY, coordinateZ),
+                    projectionArea: Area2D.Create(projectedHeight, projectedWidth)
+                );
+
+                added = await ProjectorServices.AddProjectorAsync(learningSpaceId, projector);
+            }
+            else if (selectedComponentType == "Pizarra")
+            {
+                if (string.IsNullOrWhiteSpace(markerColor) || string.IsNullOrWhiteSpace(orientation))
+                {
+                    showError = true;
+                    errorMessage = "Por favor complete todos los campos requeridos con valores válidos.";
+                    return;
+                }
+
+                if (length <= 0 || width <= 0 || height <= 0)
+                {
+                    showError = true;
+                    errorMessage = "Ancho, largo y alto deben ser mayores a cero.";
+                    return;
+                }
+
+                string colorInEnglish = !string.IsNullOrEmpty(markerColor) && ColorTranslations.TryGetValue(markerColor, out var englishColor)
+                    ? englishColor
+                    : markerColor ?? string.Empty;
+
+                string orientationInEnglish = !string.IsNullOrEmpty(orientation) && OrientationTranslations.TryGetValue(orientation, out var englishOrientation)
+                    ? englishOrientation
+                    : orientation ?? string.Empty;
+
+                var whiteboard = new Whiteboard(
+                   orientation: MyOrientation.Create(orientationInEnglish!),
+                   position: Coordinates.Create(coordinateX, coordinateY, coordinateZ),
+                   dimensions: Dimension.Create(width, height, length),
+                   markerColor: MyColor.Create(colorInEnglish!)
+                );
+
+                added = await WhiteboardServices.AddWhiteboardAsync(learningSpaceId, whiteboard);
+            }
+
+            if (added)
+            {
+                Snackbar.Add("Componente agregado exitosamente", Severity.Success);
+                Navigation.NavigateTo($"/edificios/{@buildingId}/espacios-de-aprendizaje/{@learningSpaceId}/listar-componentes");
+            }
+
+            else
+            {
+                Snackbar.Add("No se pudo agregar el componente", Severity.Error);
+            }
+        }
+        catch (Exception ex)
+        {
+            showError = true;
+            errorMessage = $"Error inesperado: {ex.Message}";
+        }
+
+    }
+
+    /// <summary>
+    /// Handles user confirmation after selecting a component type. Triggers the form display.
+    /// </summary>
+    private void OnAcceptClick()
+    {
+        if (string.IsNullOrEmpty(selectedComponentType))
+        {
+            showError = true;
+            errorMessage = "Debe seleccionar un tipo de componente antes de continuar.";
+            showForm = false;
+        }
+        else
+        {
+            showForm = false;
+            showForm = true;
+        }
+    }
+
+    /// <summary>
+    /// Called when the user selects a component type.
+    /// Resets all input fields and hides the form temporarily.
+    /// </summary>
+    /// <param name="newType">The selected component type.</param>
+    private void OnComponentTypeSelected(string newType)
+    {
+        selectedComponentType = newType;
+        showForm = false;
+
+        // Reset all fields
+        orientation = null;
+        width = 0;
+        height = 0;
+        length = 0;
+        coordinateX = 0;
+        coordinateY = 0;
+        coordinateZ = 0;
+        projectedContent = string.Empty;
+        projectedHeight = 0;
+        projectedWidth = 0;
+        markerColor = null;
+        showError = false;
+    }
+
+    /// <summary>
+    /// Cancels the operation and navigates back to the components list for the learning space.
+    /// </summary>
+    private void OnCancelClick()
+    {
+        Navigation.NavigateTo($"/edificios/{@buildingId}/espacios-de-aprendizaje/{@learningSpaceId}/listar-componentes");
+    }
+}

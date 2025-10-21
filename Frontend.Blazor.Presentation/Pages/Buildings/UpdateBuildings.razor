@@ -1,0 +1,275 @@
+@page "/edificios/editar-edificio/{BuildingId:int}"
+
+@using UCR.ECCI.PI.ThemePark.Frontend.Blazor.Application.Services
+@using UCR.ECCI.PI.ThemePark.Frontend.Blazor.Presentation.Models
+@using UCR.ECCI.PI.ThemePark.Frontend.Blazor.Domain.Entities.UniversityManagement
+@using UCR.ECCI.PI.ThemePark.Frontend.Blazor.Domain.ValueObjects.UniversityManagement
+@using UCR.ECCI.PI.ThemePark.Frontend.Blazor.Domain.ValueObjects
+@using UCR.ECCI.PI.ThemePark.Frontend.Blazor.Presentation.Components
+@using MudBlazor
+
+@inject IBuildingsServices BuildingsRepository
+@inject IAreaServices AreaRepository
+
+<Header />
+<Breadcrumbs />
+
+<!-- Title -->
+<MudText Typo="Typo.h4" Class="mb-6" Style="color: #2c5f7c; font-weight: 600;">
+    Editar Edificio
+</MudText>
+
+<div style="min-height: 100vh; display: flex; flex-direction: column;">
+    <main style="flex: 1;">
+        <MudContainer Class="mt-4 d-flex justify-center">
+            <MudPaper Class="pa-8" Elevation="2" Style="background: #f8f9fa; max-width: 600px; width: 100%;">
+
+                <!-- Name and Area -->
+                <MudGrid Class="mb-4">
+                    <StringInput Label="Nombre del edificio" @bind-Value="buildingName" Xs="12" Sm="6" />
+                    <MudItem xs="12" sm="6">
+                        <MudText Typo="Typo.subtitle1" Style="color: #2c5f7c; font-weight: 500;">
+                            Área del edificio
+                        </MudText>
+                        <MudSelect T="string" @bind-Value="area" Label="Área" Variant="Variant.Outlined" Style="background: white;" FullWidth="true">
+                            @if (areas != null)
+                            {
+                                @foreach (var area in areas)
+                                {
+                                    <MudSelectItem Value="@area.Name.Name">@area.Name.Name</MudSelectItem>
+                                }
+                            }
+                        </MudSelect>
+                    </MudItem>
+                </MudGrid>
+
+                <!-- Dimensions -->
+                <MudGrid Class="mb-4">
+                    <NumericInput Label="Ancho (m)" @bind-Value="width" Xs="12" Sm="4" />
+                    <NumericInput Label="Alto (m)" @bind-Value="height" Xs="12" Sm="4" />
+                    <NumericInput Label="Largo (m)" @bind-Value="length" Xs="12" Sm="4" />
+                </MudGrid>
+
+                <!-- Colors -- X / Y -->
+                <MudGrid Class="mb-4">
+                    <MudItem xs="12" sm="4">
+                        <MudText Typo="Typo.subtitle1" Style="color: #2c5f7c; font-weight: 500;">
+                            Color del edificio
+                        </MudText>
+                        <MudSelect T="string"
+                        @bind-Value="selectedColor"
+                        Label="Color"
+                        Variant="Variant.Outlined"
+                        Style="background: white;"
+                        FullWidth="true">
+                            @foreach (var colorPair in ColorTranslations)
+                            {
+                                <MudSelectItem Value="@colorPair.Key">@colorPair.Key</MudSelectItem>
+                            }
+                        </MudSelect>
+                    </MudItem>
+                    <MudItem xs="12" sm="4">
+                        <MudText Typo="Typo.subtitle1" Class="mb-2" Style="color: #2c5f7c; font-weight: 500;">
+                            Coordenada X
+                        </MudText>
+                        <MudTextField T="double"
+                        Label="Posición X"
+                        Value="coordinateX"
+                        Style="background: white;"
+                        ValueChanged="OnCoordinateXChanged"
+                        Immediate="true"
+                        InputType="InputType.Number"
+                        Variant="Variant.Outlined"
+                        FullWidth="true" />
+                    </MudItem>
+
+                    <MudItem xs="12" sm="4">
+                        <MudText Typo="Typo.subtitle1" Class="mb-2" Style="color: #2c5f7c; font-weight: 500;">
+                            Coordenada Y
+                        </MudText>
+                        <MudTextField T="double"
+                        Label="Posición Y"
+                        Value="coordinateY"
+                        Style="background: white;"
+                        ValueChanged="OnCoordinateYChanged"
+                        Immediate="true"
+                        InputType="InputType.Number"
+                        Variant="Variant.Outlined"
+                        FullWidth="true" />
+                    </MudItem>
+                </MudGrid>
+
+                <!-- Interactive Map -->
+                <MudPaper Class="pa-4 mb-6" Style="background: #e9ecef; min-height: 300px; display: flex; flex-direction: column; align-items: center; justify-content: center; border-radius: 8px;">
+                    <MudText Typo="Typo.h6" Class="mb-4" Style="color: #6c757d;">
+                        Selección en mapa
+                    </MudText>
+                    <canvas id="mapCanvas"
+                    width="400"
+                    height="200"
+                    style="border: 2px solid #dee2e6; background: white; cursor: pointer; border-radius: 4px;">
+                    </canvas>
+                    <MudText Typo="Typo.caption" Class="mt-2" Style="color: #6c757d;">
+                        Haz clic en el mapa para seleccionar la posición del edificio
+                    </MudText>
+                </MudPaper>
+
+                <!-- Buttons -->
+                <MudContainer Class="d-flex justify-end pa-0 mt-4">
+                    <MudButton Variant="Variant.Filled"
+                    Color="Color.Error"
+                    Class="mr-2"
+                    OnClick="@(() => Navigation.NavigateTo($"/edificios/mostrar-edificio/{BuildingId}"))">
+                        Cancelar
+                    </MudButton>
+                    <MudButton Variant="Variant.Outlined"
+                    Color="Color.Primary"
+                    OnClick="SubmitBuilding">
+                        Guardar
+                    </MudButton>
+                </MudContainer>
+            </MudPaper>
+        </MudContainer>
+    </main>
+</div>
+
+<PopupMessage @ref="_popupMessageRef"
+    Title="Actualizar Exitoso"
+    Message="El edificio ha sido <b>actualizado</b> correctamente."
+    OkText="OK"
+    ColorVarOk="--color-primary3"
+    OnAcknowledged="HandleOk" 
+/>
+
+@code {
+    [Parameter] public int BuildingId { get; set; }
+
+    private string buildingName;
+    private string selectedColor;
+    private string area;
+    private double length;
+    private double width;
+    private double height;
+    private double coordinateX;
+    private double coordinateY;
+    private bool response;
+    private IEnumerable<Area>? areas;
+    private PopupMessage? _popupMessageRef;
+
+    protected override async Task OnInitializedAsync()
+    {
+        areas = await AreaRepository.ListAreaAsync();
+
+        var building = await BuildingsRepository.DisplayBuildingAsync(BuildingId);
+
+        buildingName = building.Name.Name;
+        area = building.Area.Name.Name;
+        selectedColor = ColorTranslations.FirstOrDefault(c => c.Value == building.Color.Value).Key ?? building.Color.Value;
+        length = building.Dimensions.Length.Value;
+        width = building.Dimensions.Width.Value;
+        height = building.Dimensions.Height.Value;
+        coordinateX = building.BuildingCoordinates.X.Value;
+        coordinateY = building.BuildingCoordinates.Y.Value;
+    }
+
+    private readonly Dictionary<string, string> ColorTranslations = new()
+    {
+        { "Rojo", "Red" }, { "Verde", "Green" }, { "Azul", "Blue" }, { "Amarillo", "Yellow" },
+        { "Negro", "Black" }, { "Blanco", "White" }, { "Naranja", "Orange" }, { "Púrpura", "Purple" },
+        { "Gris", "Gray" }, { "Café", "Brown" }, { "Rosado", "Pink" }, { "Cian", "Cyan" },
+        { "Magenta", "Magenta" }, { "Lima", "Lime" }, { "Turquesa", "Teal" }, { "Olivo", "Olive" },
+        { "Azul Marino", "Navy" }, { "Granate", "Maroon" }, { "Plata", "Silver" }, { "Dorado", "Gold" }
+    };
+
+    [Inject] NavigationManager Navigation { get; set; }
+
+    private async Task SubmitBuilding()
+    {
+        var currentBuilding = await BuildingsRepository.DisplayBuildingAsync(BuildingId);
+
+        var updatedName = string.IsNullOrWhiteSpace(buildingName)
+            ? currentBuilding.Name
+            : new EntityName(buildingName);
+
+        var updatedArea = string.IsNullOrWhiteSpace(area)
+            ? currentBuilding.Area.Name
+            : new EntityName(area);
+
+        var updatedColor = string.IsNullOrWhiteSpace(selectedColor)
+            ? currentBuilding.Color
+            : new Domain.ValueObjects.UniversityManagement.Colors(ColorTranslations[selectedColor]);
+
+        var updatedLength = length == default
+            ? currentBuilding.Dimensions.Length
+            : length;
+
+        var updatedWidth = width == default
+            ? currentBuilding.Dimensions.Width
+            : width;
+
+        var updatedHeight = height == default
+            ? currentBuilding.Dimensions.Height
+            : height;
+
+        var updatedX = coordinateX == default
+            ? currentBuilding.BuildingCoordinates.X
+            : coordinateX;
+
+        var updatedY = coordinateY == default
+            ? currentBuilding.BuildingCoordinates.Y
+            : coordinateY;
+
+        var updatedBuilding = new Building(
+            updatedName,
+            new Coordinates(updatedX, updatedY, 0),
+            new Dimension(updatedLength, updatedWidth, updatedHeight),
+            updatedColor,
+            updatedArea
+        );
+
+        response = await BuildingsRepository.UpdateBuildingAsync(updatedBuilding, BuildingId);
+        await _popupMessageRef!.ProgrammaticShow();
+    }
+
+    [Inject] IJSRuntime JS { get; set; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JS.InvokeVoidAsync("buildingMap.init", DotNetObjectReference.Create(this));
+            await JS.InvokeVoidAsync("buildingMap.setPoint", coordinateX, coordinateY);
+        }
+    }
+
+    private void HandleOk()
+    {
+        Navigation.NavigateTo($"/edificios/mostrar-edificio/{BuildingId}", forceLoad: true);
+    }
+
+    [JSInvokable]
+    public async Task UpdateCoordinatesFromMap(double x, double y)
+    {
+        coordinateX = x;
+        coordinateY = y;
+        StateHasChanged(); // updates the UI
+    }
+
+    private async Task OnCoordinateXChanged(double value)
+    {
+        coordinateX = value;
+        await OnCoordinateChanged();
+    }
+
+    private async Task OnCoordinateYChanged(double value)
+    {
+        coordinateY = value;
+        await OnCoordinateChanged();
+    }
+
+    private async Task OnCoordinateChanged()
+    {
+        // Invoca JS para actualizar el punto en canvas
+        await JS.InvokeVoidAsync("buildingMap.setPoint", coordinateX, coordinateY);
+    }
+}
