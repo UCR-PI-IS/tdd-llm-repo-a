@@ -1,7 +1,0 @@
-﻿CREATE TABLE UserRole (
-  RoleId INT,
-  UserId INT,
-  PRIMARY KEY (RoleId, UserId),
-  FOREIGN KEY (RoleId) REFERENCES Role(Id) ON DELETE CASCADE,
-  FOREIGN KEY (UserId) REFERENCES UserAccount(Id) ON DELETE CASCADE
-);

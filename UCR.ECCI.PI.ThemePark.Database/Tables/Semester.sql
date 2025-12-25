@@ -1,0 +1,4 @@
+﻿CREATE TABLE [dbo].[Semester]
+(
+	[Id] NVARCHAR(50) NOT NULL PRIMARY KEY
+)

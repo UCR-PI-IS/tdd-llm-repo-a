@@ -1,90 +1,71 @@
-using Microsoft.AspNetCore.Diagnostics;
-using System.Text.Json;
-using UCR.ECCI.PI.ThemePark.Backend.Application;
-using UCR.ECCI.PI.ThemePark.Backend.DependencyInjection;
-using UCR.ECCI.PI.ThemePark.Backend.Presentation.Dtos.ComponentsManagement;
-using UCR.ECCI.PI.ThemePark.Backend.Presentation.Endpoints;
-using UCR.ECCI.PI.ThemePark.Backend.SchemaFilter;
+using Microsoft.AspNetCore.Builder;
+using UCR.ECCI.IS.ThemePark.Backend.DependencyInjection;
+using UCR.ECCI.IS.ThemePark.Backend.Presentation.Api.Endpoints;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container
+// Add services to the container.
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
+/// <summary>
+/// Registers all required services, including Swagger and application layer services.
+/// </summary>
 builder.Services.AddEndpointsApiExplorer();
-//builder.Services.AddSwaggerGen();
-builder.Services.AddSwaggerGen(c =>
-{
-    c.SchemaFilter<LearningComponentDiscriminatorSchemaFilter>();
-    c.UseAllOfForInheritance(); 
-    c.SelectSubTypesUsing(baseType =>
-    {
-        if (baseType == typeof(LearningComponentDto))
-            return new[] { typeof(ProjectorDto), typeof(WhiteboardDto) };
-
-        if (baseType == typeof(LearningComponentNoIdDto))
-            return new[] { typeof(ProjectorNoIdDto), typeof(WhiteboardNoIdDto) };
-
-        return Enumerable.Empty<Type>();
-    });
-});
-
+builder.Services.AddSwaggerGen();
 builder.Services.AddCleanArchitectureServices(builder.Configuration);
-
-
-if (builder.Environment.IsDevelopment())
-{
-    builder.Services.AddCors(options =>
-    {
-        options.AddDefaultPolicy(policy =>
-        {
-            policy.AllowAnyOrigin()
-                .AllowAnyMethod()
-                .AllowAnyHeader();
-        });
-    });
-}
 
 var app = builder.Build();
 
-// Global exception handler middleware
-app.UseExceptionHandler(errorApp =>
-{
-    errorApp.Run(async context =>
-    {
-        context.Response.ContentType = "application/json";
-
-        var exceptionHandlerPathFeature = context.Features.Get<IExceptionHandlerPathFeature>();
-
-        var ex = exceptionHandlerPathFeature?.Error;
-
-        context.Response.StatusCode = ex switch
-        {
-            BadHttpRequestException => StatusCodes.Status400BadRequest,
-            JsonException => StatusCodes.Status400BadRequest,
-            _ => StatusCodes.Status500InternalServerError
-        };
-
-        var errorResponse = new
-        {
-            error = ex is BadHttpRequestException || ex is JsonException
-                ? "Malformed JSON or invalid request."
-                : "An unexpected error occurred.",
-            details = ex?.Message
-        };
-
-        await context.Response.WriteAsJsonAsync(errorResponse);
-    });
-});
-
+// Configure the HTTP request pipeline.
+/// <summary>
+/// Configures the HTTP request pipeline, including Swagger UI for development and 
+/// the HTTPS redirection middleware.
+/// </summary>
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
 app.UseHttpsRedirection();
 
-app.UseCors();
+/// <summary>
+/// Creates a sample forecast for weather data.
+/// </summary>
+var summaries = new[] { "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching" };
+var forecasts = new WeatherForecast[5];
 
-app.MapEndpoints();
+for (int i = 0; i < forecasts.Length; i++)
+{
+    var date = DateOnly.FromDateTime(DateTime.Now.AddDays(i + 1));
+    var temp = Random.Shared.Next(-20, 55);
+    var summary = summaries[Random.Shared.Next(summaries.Length)];
+    forecasts[i] = new WeatherForecast(date, temp, summary);
+}
+
+/// <summary>
+/// Maps the weather forecast endpoint to the application, which returns a list of forecasts.
+/// </summary>
+app.MapGet("/weatherforecast", () => forecasts)
+    .WithName("GetWeatherForecast")
+    .WithOpenApi();
+
+/// <summary>
+/// Maps the Learning Space endpoints to the application.
+/// </summary>
+app.MapLearningSpaceEndpoints();
 
 app.Run();
+
+/// <summary>
+/// Record class representing a weather forecast.
+/// </summary>
+/// <param name="Date">The date of the forecast.</param>
+/// <param name="TemperatureC">The temperature in Celsius.</param>
+/// <param name="Summary">A summary of the weather forecast.</param>
+record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
+{
+    /// <summary>
+    /// Converts the temperature from Celsius to Fahrenheit.
+    /// </summary>
+    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+}
