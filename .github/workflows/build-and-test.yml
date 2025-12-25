@@ -1,0 +1,40 @@
+name: Build and Test
+
+on:
+  workflow_dispatch:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  build-and-test:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET SDKs
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: |
+            8.0.x
+
+      - name: Restore
+        run: dotnet restore UCR.ECCI.PI.ThemePark.sln
+
+      - name: Build
+        run: dotnet build UCR.ECCI.PI.ThemePark.sln --no-restore -c Release
+
+      - name: Run Backend Unit Tests
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          New-Item -ItemType Directory -Force -Path TestResults | Out-Null
+          $projects = Get-ChildItem -Path 'Backend.*.Tests.Unit' -Filter *.csproj -File -ErrorAction SilentlyContinue
+          if (-not $projects) {
+            Write-Host 'No Backend.*.Tests.Unit test projects found. Skipping tests.'
+            exit 0
+          }
+          foreach ($proj in $projects) {
+            Write-Host "Running tests for $($proj.FullName)"
+            dotnet test $proj.FullName -c Release --no-build --logger "trx;LogFileName=$($proj.BaseName).trx" --results-directory ./TestResults
+          }
