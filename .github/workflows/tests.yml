@@ -48,12 +48,12 @@ jobs:
             exit 0
           }
           foreach ($proj in $projects) {
-            Write-Host "Running tests for $($proj.FullName) with coverage"
-            dotnet test $proj.FullName -c Release --logger "trx;LogFileName=$($proj.BaseName).trx" --results-directory ./TestResults --collect "XPlat Code Coverage"
+            $projName = $proj.BaseName
+            $projResultsDir = Join-Path -Path "TestResults" -ChildPath $projName
+            New-Item -ItemType Directory -Force -Path $projResultsDir | Out-Null
+            Write-Host "Running tests for $($proj.FullName) with coverage into $projResultsDir"
+            dotnet test $proj.FullName -c Release --logger "trx;LogFileName=$projName.trx" --results-directory $projResultsDir --collect "XPlat Code Coverage"
           }
-
-      - name: Install ReportGenerator
-        run: dotnet tool install --global dotnet-reportgenerator-globaltool
 
       - name: Generate Coverage Reports
         shell: pwsh
@@ -66,8 +66,13 @@ jobs:
             Write-Host 'No coverage files found.'
             exit 0
           }
-          $inputFiles = ($coverageFiles | ForEach-Object { $_.FullName }) -join ';'
-          reportgenerator -reports:$inputFiles -targetdir:Coverage -reporttypes:"Html;Cobertura"
+          foreach ($cov in $coverageFiles) {
+            # Use parent folder name under TestResults as project name
+            $projName = Split-Path -Path $cov.Directory.Parent.FullName -Leaf
+            $targetDir = Join-Path -Path "Coverage" -ChildPath $projName
+            New-Item -ItemType Directory -Force -Path $targetDir | Out-Null
+            reportgenerator -reports:$($cov.FullName) -targetdir:$targetDir -reporttypes:"Cobertura;JsonSummary"
+          }
 
       - name: Upload Test Results
         uses: actions/upload-artifact@v4
