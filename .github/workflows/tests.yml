@@ -55,6 +55,13 @@ jobs:
             dotnet test $proj.FullName -c Release --logger "trx;LogFileName=$projName.trx" --results-directory $projResultsDir --collect "XPlat Code Coverage"
           }
 
+      - name: Install ReportGenerator
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          New-Item -ItemType Directory -Force -Path .tools | Out-Null
+          dotnet tool install --tool-path ./.tools dotnet-reportgenerator-globaltool
+
       - name: Generate Coverage Reports
         shell: pwsh
         run: |
@@ -64,7 +71,7 @@ jobs:
             Write-Host 'No coverage files found.'
             exit 0
           }
-          $toolPath = Join-Path $env:USERPROFILE ".dotnet\tools\reportgenerator.exe"
+          $toolPath = Join-Path (Resolve-Path ".").Path ".tools/reportgenerator.exe"
           if (-not (Test-Path $toolPath)) {
             Write-Error "ReportGenerator not found at $toolPath"
             exit 1
