@@ -21,8 +21,20 @@ jobs:
       - name: Restore
         run: dotnet restore UCR.ECCI.PI.ThemePark.sln
 
-      - name: Build
-        run: dotnet build UCR.ECCI.PI.ThemePark.sln --no-restore -c Release
+      # Build only .NET projects and skip the SQL Server Database (.sqlproj) that requires SSDT
+      - name: Build .NET projects (exclude .sqlproj)
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $csprojFiles = Get-ChildItem -Path . -Recurse -Filter *.csproj -File
+          if (-not $csprojFiles) {
+            Write-Host 'No .csproj files found to build.'
+            exit 0
+          }
+          foreach ($proj in $csprojFiles) {
+            Write-Host "Building $($proj.FullName)"
+            dotnet build $proj.FullName --no-restore -c Release
+          }
 
       - name: Run Backend Unit Tests
         shell: pwsh
