@@ -29,43 +29,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 /// <summary>
-/// Creates a sample forecast for weather data.
-/// </summary>
-var summaries = new[] { "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching" };
-var forecasts = new WeatherForecast[5];
-
-for (int i = 0; i < forecasts.Length; i++)
-{
-    var date = DateOnly.FromDateTime(DateTime.Now.AddDays(i + 1));
-    var temp = Random.Shared.Next(-20, 55);
-    var summary = summaries[Random.Shared.Next(summaries.Length)];
-    forecasts[i] = new WeatherForecast(date, temp, summary);
-}
-
-/// <summary>
-/// Maps the weather forecast endpoint to the application, which returns a list of forecasts.
-/// </summary>
-app.MapGet("/weatherforecast", () => forecasts)
-    .WithName("GetWeatherForecast")
-    .WithOpenApi();
-
-/// <summary>
 /// Maps the Learning Space endpoints to the application.
 /// </summary>
 app.MapLearningSpaceEndpoints();
 
 app.Run();
-
-/// <summary>
-/// Record class representing a weather forecast.
-/// </summary>
-/// <param name="Date">The date of the forecast.</param>
-/// <param name="TemperatureC">The temperature in Celsius.</param>
-/// <param name="Summary">A summary of the weather forecast.</param>
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    /// <summary>
-    /// Converts the temperature from Celsius to Fahrenheit.
-    /// </summary>
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}
