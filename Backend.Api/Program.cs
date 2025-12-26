@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Builder;
-using UCR.ECCI.IS.ThemePark.Backend.DependencyInjection;
-using UCR.ECCI.IS.ThemePark.Backend.Presentation.Api.Endpoints;
+using UCR.ECCI.PI.ThemePark.Backend.DependencyInjection;
+using UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Endpoints;
 
 var builder = WebApplication.CreateBuilder(args);
 

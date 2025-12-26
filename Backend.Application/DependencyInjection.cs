@@ -1,9 +1,8 @@
-﻿
-using Microsoft.Extensions.DependencyInjection;
-using UCR.ECCI.IS.ThemePark.Backend.Application.Services;
-using UCR.ECCI.IS.ThemePark.Backend.Application.Services.Implementations;
+﻿using Microsoft.Extensions.DependencyInjection;
+using UCR.ECCI.PI.ThemePark.Backend.Application.Services;
+using UCR.ECCI.PI.ThemePark.Backend.Application.Services.Implementations;
 
-namespace UCR.ECCI.IS.ThemePark.Backend.Application;
+namespace UCR.ECCI.PI.ThemePark.Backend.Application;
 
 /// <summary>
 /// Extension methods for registering services in the application layer.

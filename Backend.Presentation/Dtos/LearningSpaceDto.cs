@@ -1,4 +1,4 @@
-﻿namespace UCR.ECCI.IS.ThemePark.Backend.Presentation.Api.Dtos;
+﻿namespace UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Dtos;
 
 /// <summary>
 /// Represents the data transfer object for a learning space.

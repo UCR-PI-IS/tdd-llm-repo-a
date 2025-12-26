@@ -1,7 +1,7 @@
-﻿using UCR.ECCI.IS.ThemePark.Backend.Domain.Repositories;
+﻿using UCR.ECCI.PI.ThemePark.Backend.Domain.Repositories;
 using UCR.ECCI.PI.ThemePark.Backend.Domain.Entities;
 
-namespace UCR.ECCI.IS.ThemePark.Backend.Application.Services.Implementations;
+namespace UCR.ECCI.PI.ThemePark.Backend.Application.Services.Implementations;
 
 /// <summary>
 /// Service implementation for retrieving learning space data.

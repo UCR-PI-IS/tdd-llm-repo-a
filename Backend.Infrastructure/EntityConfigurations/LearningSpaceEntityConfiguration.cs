@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using UCR.ECCI.PI.ThemePark.Backend.Domain.Entities;
 
-namespace UCR.ECCI.IS.ThemePark.Backend.Infrastructure.EntityConfigurations;
+namespace UCR.ECCI.PI.ThemePark.Backend.Infrastructure.EntityConfigurations;
 
 /// <summary>
 /// Configuration class for the <see cref="LearningSpace"/> entity.

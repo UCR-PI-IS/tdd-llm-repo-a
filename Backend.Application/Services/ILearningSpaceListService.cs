@@ -1,6 +1,6 @@
 ﻿using UCR.ECCI.PI.ThemePark.Backend.Domain.Entities;
 
-namespace UCR.ECCI.IS.ThemePark.Backend.Application.Services;
+namespace UCR.ECCI.PI.ThemePark.Backend.Application.Services;
 
 /// <summary>
 /// Interface for the service that manages learning space data.

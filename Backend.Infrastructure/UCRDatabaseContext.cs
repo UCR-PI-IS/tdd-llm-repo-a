@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Reflection;
-using UCR.ECCI.IS.ThemePark.Backend.Infrastructure.EntityConfigurations;
+using UCR.ECCI.PI.ThemePark.Backend.Infrastructure.EntityConfigurations;
 using UCR.ECCI.PI.ThemePark.Backend.Domain.Entities;
 
-namespace UCR.ECCI.IS.ThemePark.Backend.Infrastructure;
+namespace UCR.ECCI.PI.ThemePark.Backend.Infrastructure;
 
 /// <summary>
 /// Represents the database context for the Theme Park system.

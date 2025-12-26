@@ -1,8 +1,8 @@
-﻿using UCR.ECCI.IS.ThemePark.Backend.Domain.Repositories;
+﻿using UCR.ECCI.PI.ThemePark.Backend.Domain.Repositories;
 using Microsoft.EntityFrameworkCore;
 using UCR.ECCI.PI.ThemePark.Backend.Domain.Entities;
 
-namespace UCR.ECCI.IS.ThemePark.Backend.Infrastructure.Repositories;
+namespace UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Repositories;
 
 /// <summary>
 /// SQL-based implementation of <see cref="ILearningSpaceListRepository"/>.

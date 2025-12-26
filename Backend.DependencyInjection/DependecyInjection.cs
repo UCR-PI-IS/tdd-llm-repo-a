@@ -1,9 +1,9 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using UCR.ECCI.IS.ThemePark.Backend.Application;
-using UCR.ECCI.IS.ThemePark.Backend.Infrastructure;
+using UCR.ECCI.PI.ThemePark.Backend.Application;
+using UCR.ECCI.PI.ThemePark.Backend.Infrastructure;
 using Microsoft.Extensions.Configuration;
 
-namespace UCR.ECCI.IS.ThemePark.Backend.DependencyInjection;
+namespace UCR.ECCI.PI.ThemePark.Backend.DependencyInjection;
 
 /// <summary>
 /// Provides extension methods to register the project's architecture layers into the service container.

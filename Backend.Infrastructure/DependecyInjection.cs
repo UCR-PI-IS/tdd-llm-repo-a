@@ -1,10 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using UCR.ECCI.IS.ThemePark.Backend.Domain.Repositories;
-using UCR.ECCI.IS.ThemePark.Backend.Infrastructure.Repositories;
+using UCR.ECCI.PI.ThemePark.Backend.Domain.Repositories;
+using UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Repositories;
 
-namespace UCR.ECCI.IS.ThemePark.Backend.Infrastructure;
+namespace UCR.ECCI.PI.ThemePark.Backend.Infrastructure;
 
 /// <summary>
 /// Provides extension methods for configuring the infrastructure layer services.

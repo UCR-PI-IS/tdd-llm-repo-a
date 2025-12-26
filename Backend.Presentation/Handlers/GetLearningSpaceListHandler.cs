@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using UCR.ECCI.IS.ThemePark.Backend.Application.Services;
-using UCR.ECCI.IS.ThemePark.Backend.Presentation.Api.Dtos;
-using UCR.ECCI.IS.ThemePark.Backend.Presentation.Api.Responses;
+using UCR.ECCI.PI.ThemePark.Backend.Application.Services;
+using UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Dtos;
+using UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Responses;
 
-namespace UCR.ECCI.IS.ThemePark.Backend.Presentation.Api.Handlers
+namespace UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Handlers
 {
     /// <summary>
     /// Handler for fetching a list of learning spaces.

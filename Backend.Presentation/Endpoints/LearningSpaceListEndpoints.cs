@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
-using UCR.ECCI.IS.ThemePark.Backend.Presentation.Api.Handlers;
+using UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Handlers;
 
-namespace UCR.ECCI.IS.ThemePark.Backend.Presentation.Api.Endpoints
+namespace UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Endpoints
 {
     /// <summary>
     /// Contains endpoint mappings for the learning space list API.
