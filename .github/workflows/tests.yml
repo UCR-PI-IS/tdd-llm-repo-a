@@ -57,8 +57,6 @@ jobs:
 
       - name: Generate Coverage Reports
         shell: pwsh
-        env:
-          PATH: C:\Users\runneradmin\.dotnet\tools;${{ env.PATH }}
         run: |
           $ErrorActionPreference = 'Stop'
           $coverageFiles = Get-ChildItem -Path TestResults -Recurse -Filter coverage.cobertura.xml -File -ErrorAction SilentlyContinue
@@ -66,12 +64,16 @@ jobs:
             Write-Host 'No coverage files found.'
             exit 0
           }
+          $toolPath = Join-Path $env:USERPROFILE ".dotnet\tools\reportgenerator.exe"
+          if (-not (Test-Path $toolPath)) {
+            Write-Error "ReportGenerator not found at $toolPath"
+            exit 1
+          }
           foreach ($cov in $coverageFiles) {
-            # Use parent folder name under TestResults as project name
             $projName = Split-Path -Path $cov.Directory.Parent.FullName -Leaf
             $targetDir = Join-Path -Path "Coverage" -ChildPath $projName
             New-Item -ItemType Directory -Force -Path $targetDir | Out-Null
-            reportgenerator -reports:$($cov.FullName) -targetdir:$targetDir -reporttypes:"Cobertura;JsonSummary"
+            & $toolPath -reports:$($cov.FullName) -targetdir:$targetDir -reporttypes:"Cobertura;JsonSummary"
           }
 
       - name: Upload Test Results
