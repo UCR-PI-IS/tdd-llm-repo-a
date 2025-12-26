@@ -27,9 +27,9 @@ jobs:
           $ErrorActionPreference = 'Stop'
           New-Item -ItemType Directory -Force -Path TestResults | Out-Null
           New-Item -ItemType Directory -Force -Path Coverage | Out-Null
-          # Find all Backend.*.Tests.Unit csproj files recursively
-          $allCsproj = Get-ChildItem -Path . -Recurse -Filter *.csproj -File
-          $projects = $allCsproj | Where-Object { $_.DirectoryName -match 'Backend\\\..*\.Tests\.Unit' }
+          # Find Backend.*.Tests.Unit projects via wildcard match on full path
+          $projects = Get-ChildItem -Path . -Recurse -Filter *.csproj -File |
+            Where-Object { $_.FullName -like '*Backend.*.Tests.Unit*' }
           if (-not $projects) {
             Write-Host 'No Backend.*.Tests.Unit test projects found. Skipping tests.'
             exit 0
