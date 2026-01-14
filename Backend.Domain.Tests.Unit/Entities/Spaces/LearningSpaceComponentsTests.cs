@@ -1,5 +1,4 @@
 using NUnit.Framework;
-using System;
 using System.Collections.Generic;
 
 namespace UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.Entities.Spaces
@@ -8,7 +7,7 @@ namespace UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.Entities.Spaces
     public class LearningSpaceComponentsTests
     {
         [Test]
-        public void ListComponents_ShouldReturnAllComponents_WhenAvailable()
+        public void ListComponents_ReturnsAllComponents_WhenAvailable()
         {
             var components = new List<LearningComponent> { new Whiteboard(), new Projector() };
             var learningSpace = new LearningSpace(components);
@@ -19,7 +18,7 @@ namespace UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.Entities.Spaces
         }
 
         [Test]
-        public void ListComponents_ShouldReturnEmptyList_WhenNoComponents()
+        public void ListComponents_ReturnsEmptyList_WhenNoComponents()
         {
             var learningSpace = new LearningSpace(new List<LearningComponent>());
             var listedComponents = learningSpace.ListComponents();
@@ -27,27 +26,10 @@ namespace UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.Entities.Spaces
         }
 
         [Test]
-        public void ListComponents_ShouldThrowDomainException_WhenLearningSpaceIsInvalid()
+        public void ListComponents_ThrowsDomainException_WhenLearningSpaceIsInvalid()
         {
             LearningSpace invalidLearningSpace = null;
             Assert.Throws<DomainException>(() => invalidLearningSpace.ListComponents());
         }
-    }
-
-    // Dummy classes for compilation - replace with actual domain classes
-    public class LearningSpace
-    {
-        private readonly List<LearningComponent> _components;
-        public LearningSpace(List<LearningComponent> components) => _components = components ?? throw new DomainException("Invalid LearningSpace");
-        public List<LearningComponent> ListComponents() => _components;
-    }
-
-    public class LearningComponent { }
-    public class Whiteboard : LearningComponent { }
-    public class Projector : LearningComponent { }
-
-    public class DomainException : Exception
-    {
-        public DomainException(string message) : base(message) { }
     }
 }
