@@ -8,7 +8,7 @@ namespace UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.Handlers.Spaces
     public class ListLearningSpaceComponentsHandlerTests
     {
         [Test]
-        public void GetComponents_ShouldReturn200WithComponents_WhenValidIdHasComponents()
+        public void GetComponents_Returns200WithComponents_WhenValidIdHasComponents()
         {
             var controller = new LearningSpaceComponentsController();
             var validLearningSpaceId = Guid.NewGuid();
@@ -18,7 +18,7 @@ namespace UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.Handlers.Spaces
         }
 
         [Test]
-        public void GetComponents_ShouldReturn200EmptyList_WhenValidIdHasNoComponents()
+        public void GetComponents_Returns200EmptyList_WhenValidIdHasNoComponents()
         {
             var controller = new LearningSpaceComponentsController();
             var learningSpaceIdWithNoComponents = Guid.NewGuid();
@@ -28,7 +28,7 @@ namespace UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.Handlers.Spaces
         }
 
         [Test]
-        public void GetComponents_ShouldReturn404_WhenInvalidLearningSpaceId()
+        public void GetComponents_Returns404_WhenInvalidLearningSpaceId()
         {
             var controller = new LearningSpaceComponentsController();
             var invalidLearningSpaceId = Guid.NewGuid();
@@ -37,29 +37,4 @@ namespace UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.Handlers.Spaces
             Assert.IsInstanceOf<ErrorResponse>(response.Value);
         }
     }
-
-    // Dummy controller for compilation
-    public class LearningSpaceComponentsController
-    {
-        public (int StatusCode, object Value) GetComponents(Guid learningSpaceId)
-        {
-            if (learningSpaceId == Guid.Empty)
-                return (404, new ErrorResponse("Learning space not found"));
-            if (learningSpaceId == Guid.Parse("00000000-0000-0000-0000-000000000001"))
-                return (200, new List<LearningComponent> { new Whiteboard(), new Projector() });
-            if (learningSpaceId == Guid.Parse("00000000-0000-0000-0000-000000000002"))
-                return (200, new List<LearningComponent>());
-            return (200, new List<LearningComponent>()); // default empty
-        }
-    }
-
-    public class ErrorResponse
-    {
-        public string Message { get; }
-        public ErrorResponse(string message) => Message = message;
-    }
-
-    public class LearningComponent { }
-    public class Whiteboard : LearningComponent { }
-    public class Projector : LearningComponent { }
 }
