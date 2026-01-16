@@ -1,21 +1,18 @@
-﻿using UCR.ECCI.PI.ThemePark.Backend.Domain.Entities;
+using System.Collections.Generic;
+using UCR.ECCI.PI.ThemePark.Backend.Domain.Entities;
 
-namespace UCR.ECCI.PI.ThemePark.Backend.Application.Services;
-
-/// <summary>
-/// Interface for the service that manages learning space data.
-/// </summary>
-public interface ILearningSpaceListService
+namespace UCR.ECCI.PI.ThemePark.Backend.Application.Services
 {
     /// <summary>
-    /// Retrieves the current learning space (e.g., the one selected or predefined).
+    /// Interface for the service that manages learning space components data.
     /// </summary>
-    /// <returns>A single learning space entity.</returns>
-    Task<LearningSpace> GetCurrentLearningSpaceListAsync();
-
-    /// <summary>
-    /// Retrieves a list of all learning spaces available in the database.
-    /// </summary>
-    /// <returns>A list of learning space entities.</returns>
-    Task<List<LearningSpace>> GetAllLearningSpacesAsync();
+    public interface ILearningSpaceListService
+    {
+        /// <summary>
+        /// Lists the learning components of a given learning space id.
+        /// </summary>
+        /// <param name="learningSpaceId">The learning space identifier.</param>
+        /// <returns>List of components.</returns>
+        List<LearningComponent> ListComponents(int learningSpaceId);
+    }
 }
