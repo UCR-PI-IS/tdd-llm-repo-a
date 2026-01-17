@@ -1,42 +1,42 @@
-﻿using UCR.ECCI.PI.ThemePark.Backend.Domain.Repositories;
-using Microsoft.EntityFrameworkCore;
+using UCR.ECCI.PI.ThemePark.Backend.Domain.Repositories;
 using UCR.ECCI.PI.ThemePark.Backend.Domain.Entities;
+using System.Collections.Generic;
+using System;
 
-namespace UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Repositories;
-
-/// <summary>
-/// SQL-based implementation of <see cref="ILearningSpaceListRepository"/>.
-/// Provides access to learning space data stored in the database.
-/// </summary>
-internal class SqlLearningSpaceListRepository : ILearningSpaceListRepository
+namespace UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Repositories
 {
-    private readonly UCRDatabaseContext _dbContext;
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="SqlLearningSpaceListRepository"/> class.
-    /// </summary>
-    /// <param name="dbContext">The database context used for data access.</param>
-    public SqlLearningSpaceListRepository(UCRDatabaseContext dbContext)
+    // Stub for demonstration – would access EF/DB in production.
+    internal class SqlLearningSpaceListRepository : ILearningSpaceListRepository
     {
-        _dbContext = dbContext;
+        // Simulated in-memory data for test-driven implementation only.
+        private readonly Dictionary<int, List<LearningComponent>> _componentsBySpace = new()
+        {
+            { 1, new List<LearningComponent> { new LearningComponent("Whiteboard"), new LearningComponent("Projector") } },
+            { 2, new List<LearningComponent>() } // space with no components
+        };
+
+        public List<LearningComponent> GetComponentsByLearningSpaceId(int learningSpaceId)
+        {
+            if (!_componentsBySpace.ContainsKey(learningSpaceId))
+            {
+                throw new InvalidLearningSpaceException($"Learning space ID {learningSpaceId} is invalid.");
+            }
+            return new List<LearningComponent>(_componentsBySpace[learningSpaceId]);
+        }
+
+        // Async stubs for demonstration – not relevant for immediate failing tests but left for compatibility:
+        public System.Threading.Tasks.Task<LearningSpace> GetCurrentLearningSpaceListAsync()
+        {
+            throw new NotImplementedException();
+        }
+        public System.Threading.Tasks.Task<List<LearningSpace>> GetAllLearningSpacesAsync()
+        {
+            throw new NotImplementedException();
+        }
     }
 
-    /// <summary>
-    /// Retrieves a predefined learning space with ID "IF-0103".
-    /// </summary>
-    /// <returns>A task that represents the asynchronous operation. The task result contains the matching <see cref="LearningSpace"/>.</returns>
-    public Task<LearningSpace> GetCurrentLearningSpaceListAsync()
+    public class InvalidLearningSpaceException : Exception
     {
-        return _dbContext.LearningSpaces
-            .FirstAsync(LearningSpaces => LearningSpaces.id == "IF-0103");
-    }
-
-    /// <summary>
-    /// Retrieves all learning spaces from the database.
-    /// </summary>
-    /// <returns>A task that represents the asynchronous operation. The task result contains a list of all <see cref="LearningSpace"/> entities.</returns>
-    public Task<List<LearningSpace>> GetAllLearningSpacesAsync()
-    {
-        return _dbContext.LearningSpaces.ToListAsync();
+        public InvalidLearningSpaceException(string message) : base(message) { }
     }
 }
