@@ -1,39 +1,37 @@
-﻿using UCR.ECCI.PI.ThemePark.Backend.Domain.Repositories;
+using UCR.ECCI.PI.ThemePark.Backend.Domain.Repositories;
 using UCR.ECCI.PI.ThemePark.Backend.Domain.Entities;
+using System.Collections.Generic;
+using System;
 
-namespace UCR.ECCI.PI.ThemePark.Backend.Application.Services.Implementations;
-
-/// <summary>
-/// Service implementation for retrieving learning space data.
-/// </summary>
-internal class LearningSpaceListService : ILearningSpaceListService
+namespace UCR.ECCI.PI.ThemePark.Backend.Application.Services.Implementations
 {
-    private readonly ILearningSpaceListRepository _learningSpaceListRepository;
-
     /// <summary>
-    /// Initializes a new instance of the <see cref="LearningSpaceListService"/> class.
+    /// Service implementation for retrieving learning space data.
     /// </summary>
-    /// <param name="learningSpaceListRepository">The learning space repository dependency.</param>
-    public LearningSpaceListService(ILearningSpaceListRepository learningSpaceListRepository)
+    internal class LearningSpaceListService : ILearningSpaceListService
     {
-        _learningSpaceListRepository = learningSpaceListRepository;
-    }
+        private readonly ILearningSpaceListRepository _learningSpaceListRepository;
 
-    /// <summary>
-    /// Retrieves the current learning space (e.g., the one selected or predefined).
-    /// </summary>
-    /// <returns>A single learning space entity.</returns>
-    public Task<LearningSpace> GetCurrentLearningSpaceListAsync()
-    {
-        return _learningSpaceListRepository.GetCurrentLearningSpaceListAsync();
-    }
+        public LearningSpaceListService(ILearningSpaceListRepository learningSpaceListRepository)
+        {
+            _learningSpaceListRepository = learningSpaceListRepository;
+        }
 
-    /// <summary>
-    /// Retrieves a list of all learning spaces available in the database.
-    /// </summary>
-    /// <returns>A list of learning space entities.</returns>
-    public Task<List<LearningSpace>> GetAllLearningSpacesAsync()
-    {
-        return _learningSpaceListRepository.GetAllLearningSpacesAsync();
+        // Added for listing components in a learning space
+        public List<LearningComponent> ListComponents(int learningSpaceId)
+        {
+            // Delegate to repository. Exception handling is at repo level (tests require exceptions surface naturally here).
+            return _learningSpaceListRepository.GetComponentsByLearningSpaceId(learningSpaceId);
+        }
+
+        public System.Threading.Tasks.Task<LearningSpace> GetCurrentLearningSpaceListAsync()
+        {
+            return _learningSpaceListRepository.GetCurrentLearningSpaceListAsync();
+        }
+
+        public System.Threading.Tasks.Task<List<LearningSpace>> GetAllLearningSpacesAsync()
+        {
+            return _learningSpaceListRepository.GetAllLearningSpacesAsync();
+        }
     }
 }
