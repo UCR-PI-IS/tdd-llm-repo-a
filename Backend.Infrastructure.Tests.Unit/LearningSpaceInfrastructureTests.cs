@@ -1,9 +1,8 @@
 using NUnit.Framework;
 using System;
+using System.Collections.Generic;
 using UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Repositories;
 using UCR.ECCI.PI.ThemePark.Backend.Domain.Entities;
-using UCR.ECCI.PI.ThemePark.Backend.Domain.Exceptions;
-using System.Collections.Generic;
 
 namespace UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit
 {
