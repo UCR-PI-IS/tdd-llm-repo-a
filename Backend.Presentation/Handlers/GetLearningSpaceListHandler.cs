@@ -4,15 +4,13 @@ using UCR.ECCI.PI.ThemePark.Backend.Application.Services;
 using UCR.ECCI.PI.ThemePark.Backend.Presentation.Dtos;
 using UCR.ECCI.PI.ThemePark.Backend.Presentation.Responses;
 using UCR.ECCI.PI.ThemePark.Backend.Domain.Exceptions;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace UCR.ECCI.PI.ThemePark.Backend.Presentation.Handlers
 {
     public static class GetLearningSpaceListHandler
     {
-        // Handles GET /learning-spaces/{id}/components
         public static async Task<IResult> HandleGetComponentsAsync([FromServices] ILearningSpaceListService service, [FromRoute] int id)
         {
             try
