@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using UCR.ECCI.PI.ThemePark.Backend.Domain.Entities;
 
@@ -19,13 +19,13 @@ internal class LearningSpaceEntityConfiguration : IEntityTypeConfiguration<Learn
         builder.ToTable("LearningSpace");
 
         // Primary key configuration
-        builder.HasKey(LearningSpace => LearningSpace.id);
+        builder.HasKey(learningSpace => learningSpace.Id);
 
-        // Property atribute configurations
-        builder.Property(LearningSpace => LearningSpace.type)
+        // Property attribute configurations
+        builder.Property(learningSpace => learningSpace.Type)
             .HasMaxLength(50);
 
-        builder.Property(LearningSpace => LearningSpace.id)
+        builder.Property(learningSpace => learningSpace.Id)
             .HasMaxLength(50);
     }
 }
