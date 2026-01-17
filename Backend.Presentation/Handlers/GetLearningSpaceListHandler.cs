@@ -1,49 +1,31 @@
-﻿using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using UCR.ECCI.PI.ThemePark.Backend.Application.Services;
-using UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Dtos;
-using UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Responses;
+using UCR.ECCI.PI.ThemePark.Backend.Presentation.Dtos;
+using UCR.ECCI.PI.ThemePark.Backend.Presentation.Responses;
+using UCR.ECCI.PI.ThemePark.Backend.Domain.Exceptions;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Linq;
 
-namespace UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Handlers
+namespace UCR.ECCI.PI.ThemePark.Backend.Presentation.Handlers
 {
-    /// <summary>
-    /// Handler for fetching a list of learning spaces.
-    /// </summary>
     public static class GetLearningSpaceListHandler
     {
-        
-        /*
-        public static async Task<Ok<GetLearningSpaceListResponse>> HandleAsync([FromServices] ILearningSpaceListService learningSpaceList)
+        // Handles GET /learning-spaces/{id}/components
+        public static async Task<IResult> HandleGetComponentsAsync([FromServices] ILearningSpaceListService service, [FromRoute] int id)
         {
-            // Fetches a single learning space by its id
-            var learningSpace = await learningSpaceList.GetCurrentLearningSpaceListAsync();
-
-            // Creates a response with the data of the fetched learning space
-            var response = new GetLearningSpaceListResponse(new LearningSpaceDto(learningSpace.id, learningSpace.type));
-
-            // Returns the response with status 200 OK
-            return TypedResults.Ok(response);
-        }
-        */
-
-        /// <summary>
-        /// Handles the asynchronous request to fetch all learning spaces.
-        /// </summary>
-        /// <param name="learningSpaceList">Service for accessing the list of learning spaces.</param>
-        /// <returns>An <see cref="Ok{T}"/> response containing the list of all learning spaces.</returns>
-        public static async Task<Ok<GetLearningSpaceListResponse>> HandleAsync([FromServices] ILearningSpaceListService learningSpaceList)
-        {
-            // Fetches all learning spaces from the service
-            var spaces = await learningSpaceList.GetAllLearningSpacesAsync();
-
-            // Creates a response containing a list of all learning spaces, mapped to DTOs
-            var response = new GetLearningSpaceListResponse(
-                spaces.Select(space => new LearningSpaceDto(space.id, space.type)).ToList()
-            );
-
-            // Returns the response with status 200 OK
-            return TypedResults.Ok(response);
+            try
+            {
+                var components = service.ListComponents(id);
+                var dtos = components.Select(c => new LearningComponentDto { Name = c.Name }).ToList();
+                return Results.Ok(dtos);
+            }
+            catch (InvalidLearningSpaceException ex)
+            {
+                return Results.NotFound(new ErrorResponse { Message = ex.Message });
+            }
         }
     }
 }
