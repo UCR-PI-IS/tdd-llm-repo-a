@@ -35,10 +35,6 @@ namespace UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit
                 }
                 return data[learningSpaceId];
             }
-
-            // Dummy implementations for interface completeness
-            public Task<LearningSpace> GetCurrentLearningSpaceListAsync() => Task.FromResult<LearningSpace>(null);
-            public Task<List<LearningSpace>> GetAllLearningSpacesAsync() => Task.FromResult(new List<LearningSpace>());
         }
 
         private LearningSpaceListService service;
