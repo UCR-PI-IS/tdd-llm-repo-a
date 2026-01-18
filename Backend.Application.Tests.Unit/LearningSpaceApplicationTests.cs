@@ -3,8 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UCR.ECCI.PI.ThemePark.Backend.Application.Services;
+using UCR.ECCI.PI.ThemePark.Backend.Application.Services.Implementations;
 using UCR.ECCI.PI.ThemePark.Backend.Domain.Entities;
 using UCR.ECCI.PI.ThemePark.Backend.Domain.Repositories;
+using UCR.ECCI.PI.ThemePark.Backend.Domain.Exceptions;
 
 namespace UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit
 {
@@ -33,6 +35,10 @@ namespace UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit
                 }
                 return data[learningSpaceId];
             }
+
+            // Implement contract methods not used in these tests
+            public Task<LearningSpace> GetCurrentLearningSpaceListAsync() => throw new NotImplementedException();
+            public Task<List<LearningSpace>> GetAllLearningSpacesAsync() => throw new NotImplementedException();
         }
 
         private LearningSpaceListService service;
