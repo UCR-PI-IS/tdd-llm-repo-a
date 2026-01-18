@@ -1,49 +1,51 @@
-﻿namespace UCR.ECCI.PI.ThemePark.Backend.Domain.Entities;
+using System;
+using System.Collections.Generic;
+
+namespace UCR.ECCI.PI.ThemePark.Backend.Domain.Entities;
 
 /// <summary>
-/// Represents a learning space in a building of the theme park UCR.
+/// Represents a learning space in the ThemePark UCR, e.g., classroom, lab, auditorium.
+/// Supports adding and listing learning components.
 /// </summary>
 public class LearningSpace
 {
     /// <summary>
     /// Unique identifier for the learning space.
     /// </summary>
-    public String id { get; }
-
-    /// <summary>
-    /// Type of the learning space (e.g., classroom, lab and auditorium).
-    /// </summary>
-    public String type { get; }
-
-    /// <summary>
-    /// Height of the learning space in meters.
-    /// </summary>
+    public string id { get; }
+    public string type { get; }
     public float height { get; }
-
-    /// <summary>
-    /// Width of the learning space in meters.
-    /// </summary>
     public float width { get; }
-
-    /// <summary>
-    /// Length of the learning space in meters.
-    /// </summary>
     public float length { get; }
 
-    /// <summary>
-    /// Constructor for the LearningSpace class.
-    /// </summary>
-    /// <param name="id">Unique identifier for the learning space</param>
-    /// <param name="type">Type of the learning space</param>
-    /// <param name="height">Height of the learning space in meters</param>
-    /// <param name="width">Width of the learning space in meters</param>
-    /// <param name="length">Length of the learning space in meters</param>
-    public LearningSpace(String id, String type, float height, float width, float length)
+    // Internal list of components
+    private readonly List<LearningComponent> _components = new();
+
+    public LearningSpace() {}
+
+    public LearningSpace(string id, string type, float height, float width, float length)
     {
         this.id = id;
         this.type = type;
         this.height = height;
         this.width = width;
         this.length = length;
+    }
+
+    /// <summary>
+    /// Adds a learning component to the space.
+    /// </summary>
+    public void AddComponent(LearningComponent component)
+    {
+        if (component == null) throw new ArgumentNullException(nameof(component));
+        _components.Add(component);
+    }
+
+    /// <summary>
+    /// Lists all components in this space. Returns empty list if none.
+    /// </summary>
+    public List<LearningComponent> ListComponents()
+    {
+        return new List<LearningComponent>(_components);
     }
 }
