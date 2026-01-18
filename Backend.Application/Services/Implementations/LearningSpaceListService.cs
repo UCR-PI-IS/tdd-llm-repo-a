@@ -1,5 +1,7 @@
-﻿using UCR.ECCI.PI.ThemePark.Backend.Domain.Repositories;
+using UCR.ECCI.PI.ThemePark.Backend.Domain.Repositories;
 using UCR.ECCI.PI.ThemePark.Backend.Domain.Entities;
+using UCR.ECCI.PI.ThemePark.Backend.Domain.Exceptions;
+using System.Collections.Generic;
 
 namespace UCR.ECCI.PI.ThemePark.Backend.Application.Services.Implementations;
 
@@ -17,6 +19,17 @@ internal class LearningSpaceListService : ILearningSpaceListService
     public LearningSpaceListService(ILearningSpaceListRepository learningSpaceListRepository)
     {
         _learningSpaceListRepository = learningSpaceListRepository;
+    }
+
+    /// <summary>
+    /// Retrieves a list of components belonging to the specified learning space ID.
+    /// </summary>
+    /// <param name="learningSpaceId">The ID of the learning space.</param>
+    /// <returns>List of learning components.</returns>
+    public List<LearningComponent> ListComponents(int learningSpaceId)
+    {
+        // Delegates to repository. Handles exception propagation, as test expects domain exception.
+        return _learningSpaceListRepository.GetComponentsByLearningSpaceId(learningSpaceId);
     }
 
     /// <summary>
