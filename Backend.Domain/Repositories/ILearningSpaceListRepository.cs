@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using UCR.ECCI.PI.ThemePark.Backend.Domain.Entities;
 
 namespace UCR.ECCI.PI.ThemePark.Backend.Domain.Repositories;
@@ -16,4 +18,10 @@ public interface ILearningSpaceListRepository
     /// Retrieves all learning spaces.
     /// </summary>
     Task<List<LearningSpace>> GetAllLearningSpacesAsync();
+
+    /// <summary>
+    /// Retrieves the components that belong to the given learning space id.
+    /// Implementations may throw InvalidLearningSpaceException when the id is not valid.
+    /// </summary>
+    List<LearningComponent> GetComponentsByLearningSpaceId(int learningSpaceId);
 }
