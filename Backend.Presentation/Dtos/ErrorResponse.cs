@@ -1,6 +1,6 @@
 namespace UCR.ECCI.PI.ThemePark.Backend.Presentation.Dtos;
 
 /// <summary>
-/// DTO for error messages in API responses.
+/// Simple error response for failed operations.
 /// </summary>
 public record class ErrorResponse(string Message);
