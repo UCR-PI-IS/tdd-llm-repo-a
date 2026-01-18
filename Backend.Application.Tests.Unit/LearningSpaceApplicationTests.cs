@@ -36,9 +36,9 @@ namespace UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit
                 return data[learningSpaceId];
             }
 
-            // Implement contract methods not used in these tests
-            public Task<LearningSpace> GetCurrentLearningSpaceListAsync() => throw new NotImplementedException();
-            public Task<List<LearningSpace>> GetAllLearningSpacesAsync() => throw new NotImplementedException();
+            // Dummy implementations for interface completeness
+            public Task<LearningSpace> GetCurrentLearningSpaceListAsync() => Task.FromResult<LearningSpace>(null);
+            public Task<List<LearningSpace>> GetAllLearningSpacesAsync() => Task.FromResult(new List<LearningSpace>());
         }
 
         private LearningSpaceListService service;
