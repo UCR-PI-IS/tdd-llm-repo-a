@@ -1,9 +1,9 @@
 using NUnit.Framework;
 using System;
+using System.Collections.Generic;
 using UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Repositories;
 using UCR.ECCI.PI.ThemePark.Backend.Domain.Entities;
 using UCR.ECCI.PI.ThemePark.Backend.Domain.Exceptions;
-using System.Collections.Generic;
 
 namespace UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit
 {
@@ -15,7 +15,8 @@ namespace UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit
         [SetUp]
         public void Setup()
         {
-            repository = new SqlLearningSpaceListRepository();
+            // Provide mock/fake db context if constructor is required.
+            repository = (SqlLearningSpaceListRepository)Activator.CreateInstance(typeof(SqlLearningSpaceListRepository), true);
         }
 
         [Test(Description = "Returns list of components for valid learning space ID")]
