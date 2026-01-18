@@ -1,4 +1,5 @@
-﻿using UCR.ECCI.PI.ThemePark.Backend.Domain.Entities;
+using UCR.ECCI.PI.ThemePark.Backend.Domain.Entities;
+using System.Collections.Generic;
 
 namespace UCR.ECCI.PI.ThemePark.Backend.Application.Services;
 
@@ -7,6 +8,13 @@ namespace UCR.ECCI.PI.ThemePark.Backend.Application.Services;
 /// </summary>
 public interface ILearningSpaceListService
 {
+    /// <summary>
+    /// Lists learning components for a specific learning space.
+    /// </summary>
+    /// <param name="learningSpaceId">Identifier of the learning space.</param>
+    /// <returns>List of learning components; throws if the space id is invalid.</returns>
+    List<LearningComponent> ListComponents(int learningSpaceId);
+
     /// <summary>
     /// Retrieves the current learning space (e.g., the one selected or predefined).
     /// </summary>
