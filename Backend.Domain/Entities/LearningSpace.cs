@@ -1,4 +1,6 @@
-﻿namespace UCR.ECCI.PI.ThemePark.Backend.Domain.Entities;
+namespace UCR.ECCI.PI.ThemePark.Backend.Domain.Entities;
+using System;
+using System.Collections.Generic;
 
 /// <summary>
 /// Represents a learning space in a building of the theme park UCR.
@@ -30,6 +32,9 @@ public class LearningSpace
     /// </summary>
     public float length { get; }
 
+    // List of components in this learning space
+    private readonly List<LearningComponent> _components = new();
+
     /// <summary>
     /// Constructor for the LearningSpace class.
     /// </summary>
@@ -45,5 +50,22 @@ public class LearningSpace
         this.height = height;
         this.width = width;
         this.length = length;
+    }
+
+    /// <summary>
+    /// Adds a learning component to this space.
+    /// </summary>
+    public void AddComponent(LearningComponent component)
+    {
+        if (component == null) throw new ArgumentNullException(nameof(component));
+        _components.Add(component);
+    }
+
+    /// <summary>
+    /// Returns all components in this learning space.
+    /// </summary>
+    public List<LearningComponent> ListComponents()
+    {
+        return new List<LearningComponent>(_components);
     }
 }
