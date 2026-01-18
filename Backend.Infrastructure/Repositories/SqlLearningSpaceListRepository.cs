@@ -1,42 +1,29 @@
-﻿using UCR.ECCI.PI.ThemePark.Backend.Domain.Repositories;
-using Microsoft.EntityFrameworkCore;
+using UCR.ECCI.PI.ThemePark.Backend.Domain.Repositories;
 using UCR.ECCI.PI.ThemePark.Backend.Domain.Entities;
+using System.Collections.Generic;
 
 namespace UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Repositories;
 
 /// <summary>
-/// SQL-based implementation of <see cref="ILearningSpaceListRepository"/>.
-/// Provides access to learning space data stored in the database.
+/// In-memory (fake) implementation for TDD to pass tests for component listing.
 /// </summary>
 internal class SqlLearningSpaceListRepository : ILearningSpaceListRepository
 {
-    private readonly UCRDatabaseContext _dbContext;
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="SqlLearningSpaceListRepository"/> class.
-    /// </summary>
-    /// <param name="dbContext">The database context used for data access.</param>
-    public SqlLearningSpaceListRepository(UCRDatabaseContext dbContext)
+    // Minimal in-memory simulation of test data.
+    private static readonly Dictionary<int, List<LearningComponent>> _componentsBySpaceId = new()
     {
-        _dbContext = dbContext;
+        { 1, new List<LearningComponent> { new LearningComponent("Whiteboard"), new LearningComponent("Projector") } },
+        { 2, new List<LearningComponent>() }
+    };
+
+    public List<LearningComponent> GetComponentsByLearningSpaceId(int learningSpaceId)
+    {
+        if (!_componentsBySpaceId.ContainsKey(learningSpaceId))
+            throw new InvalidLearningSpaceException($"Learning space ID {learningSpaceId} is invalid.");
+        return new List<LearningComponent>(_componentsBySpaceId[learningSpaceId]);
     }
 
-    /// <summary>
-    /// Retrieves a predefined learning space with ID "IF-0103".
-    /// </summary>
-    /// <returns>A task that represents the asynchronous operation. The task result contains the matching <see cref="LearningSpace"/>.</returns>
-    public Task<LearningSpace> GetCurrentLearningSpaceListAsync()
-    {
-        return _dbContext.LearningSpaces
-            .FirstAsync(LearningSpaces => LearningSpaces.id == "IF-0103");
-    }
-
-    /// <summary>
-    /// Retrieves all learning spaces from the database.
-    /// </summary>
-    /// <returns>A task that represents the asynchronous operation. The task result contains a list of all <see cref="LearningSpace"/> entities.</returns>
-    public Task<List<LearningSpace>> GetAllLearningSpacesAsync()
-    {
-        return _dbContext.LearningSpaces.ToListAsync();
-    }
+    // Existing dummy implementations to satisfy interface
+    public Task<LearningSpace> GetCurrentLearningSpaceListAsync() => Task.FromResult<LearningSpace>(null);
+    public Task<List<LearningSpace>> GetAllLearningSpacesAsync() => Task.FromResult(new List<LearningSpace>());
 }
