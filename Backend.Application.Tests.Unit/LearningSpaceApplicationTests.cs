@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UCR.ECCI.PI.ThemePark.Backend.Application.Services;
+using UCR.ECCI.PI.ThemePark.Backend.Application.Services.Implementations;
 using UCR.ECCI.PI.ThemePark.Backend.Domain.Entities;
 using UCR.ECCI.PI.ThemePark.Backend.Domain.Repositories;
 
@@ -32,6 +33,15 @@ namespace UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit
                     throw new InvalidLearningSpaceException($"Learning space ID {learningSpaceId} is invalid.");
                 }
                 return data[learningSpaceId];
+            }
+
+            public Task<LearningSpace> GetCurrentLearningSpaceListAsync()
+            {
+                throw new NotImplementedException();
+            }
+            public Task<List<LearningSpace>> GetAllLearningSpacesAsync()
+            {
+                throw new NotImplementedException();
             }
         }
 
