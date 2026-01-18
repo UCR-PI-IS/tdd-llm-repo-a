@@ -1,37 +1,34 @@
-﻿using UCR.ECCI.PI.ThemePark.Backend.Domain.Repositories;
+using UCR.ECCI.PI.ThemePark.Backend.Domain.Repositories;
 using UCR.ECCI.PI.ThemePark.Backend.Domain.Entities;
+using System.Collections.Generic;
 
 namespace UCR.ECCI.PI.ThemePark.Backend.Application.Services.Implementations;
 
 /// <summary>
-/// Service implementation for retrieving learning space data.
+/// Service implementation for retrieving learning components in a space.
 /// </summary>
 internal class LearningSpaceListService : ILearningSpaceListService
 {
     private readonly ILearningSpaceListRepository _learningSpaceListRepository;
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="LearningSpaceListService"/> class.
-    /// </summary>
-    /// <param name="learningSpaceListRepository">The learning space repository dependency.</param>
     public LearningSpaceListService(ILearningSpaceListRepository learningSpaceListRepository)
     {
         _learningSpaceListRepository = learningSpaceListRepository;
     }
 
     /// <summary>
-    /// Retrieves the current learning space (e.g., the one selected or predefined).
+    /// Lists learning components for the specified learning space ID.
     /// </summary>
-    /// <returns>A single learning space entity.</returns>
+    public List<LearningComponent> ListComponents(int learningSpaceId)
+    {
+        return _learningSpaceListRepository.GetComponentsByLearningSpaceId(learningSpaceId);
+    }
+
     public Task<LearningSpace> GetCurrentLearningSpaceListAsync()
     {
         return _learningSpaceListRepository.GetCurrentLearningSpaceListAsync();
     }
 
-    /// <summary>
-    /// Retrieves a list of all learning spaces available in the database.
-    /// </summary>
-    /// <returns>A list of learning space entities.</returns>
     public Task<List<LearningSpace>> GetAllLearningSpacesAsync()
     {
         return _learningSpaceListRepository.GetAllLearningSpacesAsync();
