@@ -15,7 +15,7 @@ namespace UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit
         [SetUp]
         public void Setup()
         {
-            // Provide mock/fake db context if constructor is required.
+            // Provide a fake dbContext or use a test constructor, so test instantiates
             repository = (SqlLearningSpaceListRepository)Activator.CreateInstance(typeof(SqlLearningSpaceListRepository), true);
         }
 
