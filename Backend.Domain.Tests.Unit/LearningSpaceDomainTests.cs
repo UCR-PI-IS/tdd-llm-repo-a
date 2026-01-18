@@ -15,11 +15,11 @@ namespace UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit
         [SetUp]
         public void Setup()
         {
-            learningSpaceWithComponents = new LearningSpace("id", "type", 2f, 2f, 2f);
+            learningSpaceWithComponents = new LearningSpace("id", "type", 0, 0, 0);
             learningSpaceWithComponents.AddComponent(new LearningComponent("Whiteboard"));
             learningSpaceWithComponents.AddComponent(new LearningComponent("Projector"));
 
-            learningSpaceWithoutComponents = new LearningSpace("id2", "type", 2f, 2f, 2f);
+            learningSpaceWithoutComponents = new LearningSpace("id2", "type", 0, 0, 0);
         }
 
         [Test(Description = "Returns all components when learning space has components")]
