@@ -1,6 +1,6 @@
 namespace UCR.ECCI.PI.ThemePark.Backend.Presentation.Dtos;
 
 /// <summary>
-/// Data Transfer Object for a learning component.
+/// DTO for a learning component in response.
 /// </summary>
 public record class LearningComponentDto(string Name);
