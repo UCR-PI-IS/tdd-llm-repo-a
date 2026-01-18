@@ -1,8 +1,8 @@
 using NUnit.Framework;
 using System;
 using System.Linq;
-using UCR.ECCI.PI.ThemePark.Backend.Domain.Entities;
 using System.Collections.Generic;
+using UCR.ECCI.PI.ThemePark.Backend.Domain.Entities;
 
 namespace UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit
 {
@@ -15,11 +15,11 @@ namespace UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit
         [SetUp]
         public void Setup()
         {
-            learningSpaceWithComponents = new LearningSpace();
+            learningSpaceWithComponents = new LearningSpace("id", "type", 2f, 2f, 2f);
             learningSpaceWithComponents.AddComponent(new LearningComponent("Whiteboard"));
             learningSpaceWithComponents.AddComponent(new LearningComponent("Projector"));
 
-            learningSpaceWithoutComponents = new LearningSpace();
+            learningSpaceWithoutComponents = new LearningSpace("id2", "type", 2f, 2f, 2f);
         }
 
         [Test(Description = "Returns all components when learning space has components")]
