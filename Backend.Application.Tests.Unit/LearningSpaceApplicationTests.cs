@@ -5,6 +5,7 @@ using System.Linq;
 using UCR.ECCI.PI.ThemePark.Backend.Application.Services;
 using UCR.ECCI.PI.ThemePark.Backend.Domain.Entities;
 using UCR.ECCI.PI.ThemePark.Backend.Domain.Repositories;
+using UCR.ECCI.PI.ThemePark.Backend.Domain.Exceptions;
 
 namespace UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit
 {
