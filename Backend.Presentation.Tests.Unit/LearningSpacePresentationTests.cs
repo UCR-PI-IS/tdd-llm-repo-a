@@ -2,7 +2,7 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
-using UCR.ECCI.PI.ThemePark.Backend.Presentation.Dtos;
+using UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Dtos;
 
 namespace UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit
 {
@@ -45,4 +45,30 @@ namespace UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit
             Assert.IsFalse(string.IsNullOrEmpty(error.Message));
         }
     }
+}
+
+// Minimal mock class for TestApiClient
+class TestApiClient
+{
+    public Task<HttpResponseMessage> GetAsync(string url)
+    {
+        throw new NotImplementedException("TestApiClient mock should be implemented or replaced with a real test client.");
+    }
+}
+
+// Minimal mock classes for HttpResponseMessage and related
+class HttpResponseMessage
+{
+    public int StatusCode { get; set; }
+    public HttpContent Content { get; set; }
+}
+
+class HttpContent
+{
+    public Task<T> ReadAsAsync<T>() => throw new NotImplementedException();
+}
+
+class ErrorResponse
+{
+    public string Message { get; set; }
 }
