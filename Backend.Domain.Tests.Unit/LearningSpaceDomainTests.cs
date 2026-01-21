@@ -39,11 +39,11 @@ namespace UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit
             Assert.AreEqual(0, components.Count);
         }
 
-        [Test(Description = "Throws ArgumentNullException when learning space is invalid (null)")]
+        [Test(Description = "Throws NullReferenceException when learning space is invalid (null)")]
         public void ListComponents_WhenLearningSpaceIsInvalid_ThrowsException()
         {
             LearningSpace invalidLearningSpace = null;
-            Assert.Throws<ArgumentNullException>(() =>
+            Assert.Throws<NullReferenceException>(() =>
             {
                 var components = invalidLearningSpace.ListComponents();
             });
