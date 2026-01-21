@@ -1,4 +1,4 @@
-﻿using UCR.ECCI.PI.ThemePark.Backend.Domain.Repositories;
+using UCR.ECCI.PI.ThemePark.Backend.Domain.Repositories;
 using UCR.ECCI.PI.ThemePark.Backend.Domain.Entities;
 
 namespace UCR.ECCI.PI.ThemePark.Backend.Application.Services.Implementations;
@@ -35,5 +35,13 @@ internal class LearningSpaceListService : ILearningSpaceListService
     public Task<List<LearningSpace>> GetAllLearningSpacesAsync()
     {
         return _learningSpaceListRepository.GetAllLearningSpacesAsync();
+    }
+
+    /// <summary>
+    /// Lists the components that belong to the specified learning space id.
+    /// </summary>
+    public List<LearningComponent> ListComponents(int learningSpaceId)
+    {
+        return _learningSpaceListRepository.GetComponentsByLearningSpaceId(learningSpaceId);
     }
 }
