@@ -1,4 +1,4 @@
-﻿using UCR.ECCI.PI.ThemePark.Backend.Domain.Entities;
+using UCR.ECCI.PI.ThemePark.Backend.Domain.Entities;
 
 namespace UCR.ECCI.PI.ThemePark.Backend.Application.Services;
 
@@ -18,4 +18,9 @@ public interface ILearningSpaceListService
     /// </summary>
     /// <returns>A list of learning space entities.</returns>
     Task<List<LearningSpace>> GetAllLearningSpacesAsync();
+
+    /// <summary>
+    /// Lists the components that belong to the specified learning space id.
+    /// </summary>
+    List<LearningComponent> ListComponents(int learningSpaceId);
 }
