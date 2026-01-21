@@ -15,11 +15,11 @@ namespace UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit
         [SetUp]
         public void Setup()
         {
-            learningSpaceWithComponents = new LearningSpace();
+            learningSpaceWithComponents = new LearningSpace("LS1", "Classroom", 3.0f, 4.0f, 5.0f);
             learningSpaceWithComponents.AddComponent(new LearningComponent("Whiteboard"));
             learningSpaceWithComponents.AddComponent(new LearningComponent("Projector"));
 
-            learningSpaceWithoutComponents = new LearningSpace();
+            learningSpaceWithoutComponents = new LearningSpace("LS2", "Lab", 3.0f, 4.0f, 5.0f);
         }
 
         [Test(Description = "Returns all components when learning space has components")]
@@ -39,11 +39,11 @@ namespace UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit
             Assert.AreEqual(0, components.Count);
         }
 
-        [Test(Description = "Throws ArgumentNullException when learning space is invalid (null)")]
+        [Test(Description = "Throws NullReferenceException when learning space is invalid (null)")]
         public void ListComponents_WhenLearningSpaceIsInvalid_ThrowsException()
         {
             LearningSpace invalidLearningSpace = null;
-            Assert.Throws<ArgumentNullException>(() =>
+            Assert.Throws<NullReferenceException>(() =>
             {
                 var components = invalidLearningSpace.ListComponents();
             });

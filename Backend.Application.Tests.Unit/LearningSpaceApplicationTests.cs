@@ -2,9 +2,11 @@ using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using UCR.ECCI.PI.ThemePark.Backend.Application.Services;
 using UCR.ECCI.PI.ThemePark.Backend.Domain.Entities;
 using UCR.ECCI.PI.ThemePark.Backend.Domain.Repositories;
+using UCR.ECCI.PI.ThemePark.Backend.Domain.Exceptions;
 
 namespace UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit
 {
@@ -32,6 +34,19 @@ namespace UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit
                     throw new InvalidLearningSpaceException($"Learning space ID {learningSpaceId} is invalid.");
                 }
                 return data[learningSpaceId];
+            }
+
+            // Added missing async methods
+            public Task<LearningSpace> GetCurrentLearningSpaceListAsync()
+            {
+                // Return dummy learning space
+                return Task.FromResult(new LearningSpace("LS1", "Classroom", 3.0f, 4.0f, 5.0f));
+            }
+
+            public Task<List<LearningSpace>> GetAllLearningSpacesAsync()
+            {
+                // Return empty list for simplicity
+                return Task.FromResult(new List<LearningSpace>());
             }
         }
 

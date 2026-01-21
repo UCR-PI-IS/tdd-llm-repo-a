@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
 using UCR.ECCI.PI.ThemePark.Backend.Application.Services;
 using UCR.ECCI.PI.ThemePark.Backend.Application.Services.Implementations;
 
@@ -16,7 +16,8 @@ public static class DependencyInjection
     /// <returns>The updated service collection.</returns>
     public static IServiceCollection AddApplicationLayerServices(this IServiceCollection services)
     {
-        services.AddScoped<ILearningSpaceListService, LearningSpaceListService>();
+        // Resolve ambiguity by fully qualifying
+        services.AddScoped<ILearningSpaceListService, UCR.ECCI.PI.ThemePark.Backend.Application.Services.Implementations.LearningSpaceListService>();
         return services;
     }
 }
