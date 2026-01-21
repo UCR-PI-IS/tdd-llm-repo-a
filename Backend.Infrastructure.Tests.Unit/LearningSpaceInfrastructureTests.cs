@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using System;
+using Microsoft.EntityFrameworkCore;
 using UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Repositories;
 using UCR.ECCI.PI.ThemePark.Backend.Domain.Entities;
 using UCR.ECCI.PI.ThemePark.Backend.Domain.Exceptions;
@@ -11,11 +12,16 @@ namespace UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit
     public class LearningSpaceInfrastructureTests
     {
         private SqlLearningSpaceListRepository repository;
+        private UCRDatabaseContext dbContext;
 
         [SetUp]
         public void Setup()
         {
-            repository = new SqlLearningSpaceListRepository();
+            var options = new DbContextOptionsBuilder<UCRDatabaseContext>()
+                .UseInMemoryDatabase(databaseName: "TestDb")
+                .Options;
+            dbContext = new UCRDatabaseContext(options);
+            repository = new SqlLearningSpaceListRepository(dbContext);
         }
 
         [Test(Description = "Returns list of components for valid learning space ID")]
