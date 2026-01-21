@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
 using UCR.ECCI.PI.ThemePark.Backend.Application;
 using UCR.ECCI.PI.ThemePark.Backend.Infrastructure;
 using Microsoft.Extensions.Configuration;
