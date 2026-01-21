@@ -62,6 +62,7 @@ public class LearningSpace
     /// </summary>
     public List<LearningComponent> ListComponents()
     {
+        if (this == null) throw new ArgumentNullException(nameof(this));
         return _components.ToList();
     }
 }
