@@ -5,13 +5,14 @@ namespace UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.Entities;
 
 /// <summary>
 /// Unit tests for the LearningComponent entity.
-/// User Story: CPD-LC-001-001 - List components in a learning space
+/// Tests verify proper construction and property initialization.
 /// </summary>
 [TestFixture]
 public class LearningComponentTests
 {
-    [Test(Description = "Verify LearningComponent can be constructed with valid ComponentId and LearningSpaceId")]
-    public void Constructor_WithValidParameters_ShouldSetComponentIdAndLearningSpaceId()
+    [Test]
+    [Description("Verify LearningComponent correctly initializes ComponentId and LearningSpaceId")]
+    public void Constructor_ValidParameters_SetsComponentIdAndLearningSpaceId()
     {
         // Arrange & Act
         var component = new LearningComponent(
@@ -31,8 +32,9 @@ public class LearningComponentTests
         Assert.That(component.LearningSpaceId, Is.EqualTo("LS-001"));
     }
 
-    [Test(Description = "Verify LearningComponent can be constructed with valid dimension properties")]
-    public void Constructor_WithValidParameters_ShouldSetDimensions()
+    [Test]
+    [Description("Verify LearningComponent correctly initializes dimension properties")]
+    public void Constructor_ValidParameters_SetsDimensions()
     {
         // Arrange & Act
         var component = new LearningComponent(
@@ -53,8 +55,9 @@ public class LearningComponentTests
         Assert.That(component.Depth, Is.EqualTo(0.5f));
     }
 
-    [Test(Description = "Verify LearningComponent can be constructed with valid position coordinates")]
-    public void Constructor_WithValidParameters_ShouldSetPositionCoordinates()
+    [Test]
+    [Description("Verify LearningComponent correctly initializes position coordinates")]
+    public void Constructor_ValidParameters_SetsPosition()
     {
         // Arrange & Act
         var component = new LearningComponent(
@@ -75,8 +78,9 @@ public class LearningComponentTests
         Assert.That(component.Z, Is.EqualTo(3.0f));
     }
 
-    [Test(Description = "Verify LearningComponent can be constructed with valid orientation")]
-    public void Constructor_WithValidParameters_ShouldSetOrientation()
+    [Test]
+    [Description("Verify LearningComponent correctly initializes orientation")]
+    public void Constructor_ValidParameters_SetsOrientation()
     {
         // Arrange & Act
         var component = new LearningComponent(
@@ -95,12 +99,12 @@ public class LearningComponentTests
         Assert.That(component.Orientation, Is.EqualTo("North"));
     }
 
-    [TestCase("North", TestName = "North orientation")]
-    [TestCase("South", TestName = "South orientation")]
-    [TestCase("East", TestName = "East orientation")]
-    [TestCase("West", TestName = "West orientation")]
-    [Test(Description = "Verify LearningComponent can be constructed with different valid orientations")]
-    public void Constructor_WithDifferentOrientations_ShouldSetOrientationCorrectly(string orientation)
+    [TestCase("North", TestName = "Constructor with North orientation")]
+    [TestCase("South", TestName = "Constructor with South orientation")]
+    [TestCase("East", TestName = "Constructor with East orientation")]
+    [TestCase("West", TestName = "Constructor with West orientation")]
+    [Description("Verify LearningComponent can be constructed with different valid orientations")]
+    public void Constructor_DifferentOrientations_SetsOrientationCorrectly(string orientation)
     {
         // Arrange & Act
         var component = new LearningComponent(
