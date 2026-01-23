@@ -1,31 +1,30 @@
 using Moq;
 using NUnit.Framework;
 using UCR.ECCI.PI.ThemePark.Backend.Application.Services;
+using UCR.ECCI.PI.ThemePark.Backend.Application.Services.Implementations;
 using UCR.ECCI.PI.ThemePark.Backend.Domain.Entities;
 using UCR.ECCI.PI.ThemePark.Backend.Domain.Repositories;
 
 namespace UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.Services;
 
 /// <summary>
-/// Unit tests for the LearningComponentService.
-/// Tests verify service logic, validation, and repository delegation.
+/// Unit tests for LearningComponentService
+/// User Story: CPD-LC-001-001 - List components in a learning space
 /// </summary>
 [TestFixture]
 public class LearningComponentServiceTests
 {
     private Mock<ILearningComponentRepository> _mockRepository;
-    private ILearningComponentService _service;
 
     [SetUp]
     public void SetUp()
     {
         _mockRepository = new Mock<ILearningComponentRepository>();
-        _service = new LearningComponentService(_mockRepository.Object);
     }
 
     [Test]
-    [Description("Service returns list of components when learning space has components")]
-    public async Task GetComponentsByLearningSpaceIdAsync_LearningSpaceHasComponents_ReturnsComponentsList()
+    [Description("Service should return list of components when learning space has one or more components")]
+    public async Task GetComponentsByLearningSpaceIdAsync_WithComponentsInLearningSpace_ShouldReturnComponentsList()
     {
         // Arrange
         var learningSpaceId = "LS-001";
@@ -36,10 +35,12 @@ public class LearningComponentServiceTests
         };
 
         _mockRepository.Setup(r => r.GetByLearningSpaceIdAsync(learningSpaceId))
-                       .ReturnsAsync(components);
+                      .ReturnsAsync(components);
+
+        var service = new LearningComponentService(_mockRepository.Object);
 
         // Act
-        var result = await _service.GetComponentsByLearningSpaceIdAsync(learningSpaceId);
+        var result = await service.GetComponentsByLearningSpaceIdAsync(learningSpaceId);
 
         // Assert
         Assert.That(result, Is.Not.Null);
@@ -47,18 +48,20 @@ public class LearningComponentServiceTests
     }
 
     [Test]
-    [Description("Service returns empty list when learning space has no components")]
-    public async Task GetComponentsByLearningSpaceIdAsync_LearningSpaceHasNoComponents_ReturnsEmptyList()
+    [Description("Service should return empty list when learning space has no components")]
+    public async Task GetComponentsByLearningSpaceIdAsync_WithNoComponentsInLearningSpace_ShouldReturnEmptyList()
     {
         // Arrange
         var learningSpaceId = "LS-002";
         var emptyComponents = new List<LearningComponent>();
 
         _mockRepository.Setup(r => r.GetByLearningSpaceIdAsync(learningSpaceId))
-                       .ReturnsAsync(emptyComponents);
+                      .ReturnsAsync(emptyComponents);
+
+        var service = new LearningComponentService(_mockRepository.Object);
 
         // Act
-        var result = await _service.GetComponentsByLearningSpaceIdAsync(learningSpaceId);
+        var result = await service.GetComponentsByLearningSpaceIdAsync(learningSpaceId);
 
         // Assert
         Assert.That(result, Is.Not.Null);
@@ -66,44 +69,46 @@ public class LearningComponentServiceTests
     }
 
     [Test]
-    [Description("Service throws ArgumentNullException when learning space ID is null")]
-    public void GetComponentsByLearningSpaceIdAsync_NullLearningSpaceId_ThrowsArgumentNullException()
+    [Description("Service should throw ArgumentNullException when learning space ID is null")]
+    public void GetComponentsByLearningSpaceIdAsync_WithNullLearningSpaceId_ShouldThrowArgumentNullException()
     {
         // Arrange
-        string nullLearningSpaceId = null;
+        var service = new LearningComponentService(_mockRepository.Object);
 
         // Act & Assert
         Assert.ThrowsAsync<ArgumentNullException>(
-            async () => await _service.GetComponentsByLearningSpaceIdAsync(nullLearningSpaceId)
+            async () => await service.GetComponentsByLearningSpaceIdAsync(null)
         );
     }
 
     [Test]
-    [Description("Service throws ArgumentException when learning space ID is empty string")]
-    public void GetComponentsByLearningSpaceIdAsync_EmptyLearningSpaceId_ThrowsArgumentException()
+    [Description("Service should throw ArgumentException when learning space ID is empty string")]
+    public void GetComponentsByLearningSpaceIdAsync_WithEmptyLearningSpaceId_ShouldThrowArgumentException()
     {
         // Arrange
-        var emptyLearningSpaceId = string.Empty;
+        var service = new LearningComponentService(_mockRepository.Object);
 
         // Act & Assert
         Assert.ThrowsAsync<ArgumentException>(
-            async () => await _service.GetComponentsByLearningSpaceIdAsync(emptyLearningSpaceId)
+            async () => await service.GetComponentsByLearningSpaceIdAsync(string.Empty)
         );
     }
 
     [Test]
-    [Description("Service calls repository with correct learning space ID")]
-    public async Task GetComponentsByLearningSpaceIdAsync_ValidLearningSpaceId_CallsRepositoryOnce()
+    [Description("Service should call repository GetByLearningSpaceIdAsync exactly once with correct learning space ID")]
+    public async Task GetComponentsByLearningSpaceIdAsync_WhenCalled_ShouldCallRepositoryWithCorrectId()
     {
         // Arrange
         var learningSpaceId = "LS-001";
         var components = new List<LearningComponent>();
 
         _mockRepository.Setup(r => r.GetByLearningSpaceIdAsync(learningSpaceId))
-                       .ReturnsAsync(components);
+                      .ReturnsAsync(components);
+
+        var service = new LearningComponentService(_mockRepository.Object);
 
         // Act
-        await _service.GetComponentsByLearningSpaceIdAsync(learningSpaceId);
+        await service.GetComponentsByLearningSpaceIdAsync(learningSpaceId);
 
         // Assert
         _mockRepository.Verify(r => r.GetByLearningSpaceIdAsync(learningSpaceId), Times.Once);
