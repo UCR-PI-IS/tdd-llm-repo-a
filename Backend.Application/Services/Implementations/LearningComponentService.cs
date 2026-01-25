@@ -24,8 +24,14 @@ public class LearningComponentService : ILearningComponentService
     /// </summary>
     /// <param name="learningSpaceId">The identifier of the learning space</param>
     /// <returns>A collection of learning components in the specified learning space</returns>
-    public Task<IEnumerable<LearningComponent>> GetComponentsByLearningSpaceIdAsync(string learningSpaceId)
+    public async Task<IEnumerable<LearningComponent>> GetComponentsByLearningSpaceIdAsync(string learningSpaceId)
     {
-        return _learningComponentRepository.GetByLearningSpaceIdAsync(learningSpaceId);
+        if (learningSpaceId == null)
+            throw new ArgumentNullException(nameof(learningSpaceId));
+            
+        if (string.IsNullOrWhiteSpace(learningSpaceId))
+            throw new ArgumentException("Learning space ID cannot be empty.", nameof(learningSpaceId));
+
+        return await _learningComponentRepository.GetByLearningSpaceIdAsync(learningSpaceId);
     }
 }
