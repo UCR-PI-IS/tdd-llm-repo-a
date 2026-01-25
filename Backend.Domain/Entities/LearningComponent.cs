@@ -1,69 +1,78 @@
 namespace UCR.ECCI.PI.ThemePark.Backend.Domain.Entities;
 
 /// <summary>
-/// Represents a learning component in a learning space.
-/// Components are interactive elements like whiteboards, projectors, etc.
+/// Represents a learning component within a learning space.
+/// A learning component is an interactive element like a whiteboard, projector, etc.
 /// </summary>
 public class LearningComponent
 {
     /// <summary>
-    /// Unique identifier for the component.
+    /// Gets the unique identifier for the component.
     /// </summary>
-    public int ComponentId { get; }
+    public int ComponentId { get; private set; }
 
     /// <summary>
-    /// Identifier of the learning space this component belongs to.
+    /// Gets the identifier of the learning space this component belongs to.
     /// </summary>
-    public string LearningSpaceId { get; }
+    public string LearningSpaceId { get; private set; }
 
     /// <summary>
-    /// Width of the component in meters.
+    /// Gets the width of the component in meters.
     /// </summary>
-    public float Width { get; }
+    public float Width { get; private set; }
 
     /// <summary>
-    /// Height of the component in meters.
+    /// Gets the height of the component in meters.
     /// </summary>
-    public float Height { get; }
+    public float Height { get; private set; }
 
     /// <summary>
-    /// Depth of the component in meters.
+    /// Gets the depth of the component in meters.
     /// </summary>
-    public float Depth { get; }
+    public float Depth { get; private set; }
 
     /// <summary>
-    /// X coordinate position of the component.
+    /// Gets the X coordinate of the component's position.
     /// </summary>
-    public float X { get; }
+    public float X { get; private set; }
 
     /// <summary>
-    /// Y coordinate position of the component.
+    /// Gets the Y coordinate of the component's position.
     /// </summary>
-    public float Y { get; }
+    public float Y { get; private set; }
 
     /// <summary>
-    /// Z coordinate position of the component.
+    /// Gets the Z coordinate of the component's position.
     /// </summary>
-    public float Z { get; }
+    public float Z { get; private set; }
 
     /// <summary>
-    /// Orientation of the component (e.g., North, South, East, West).
+    /// Gets the orientation of the component (e.g., North, South, East, West).
     /// </summary>
-    public string Orientation { get; }
+    public string Orientation { get; private set; }
 
     /// <summary>
-    /// Constructor for the LearningComponent class.
+    /// Initializes a new instance of the <see cref="LearningComponent"/> class.
     /// </summary>
-    /// <param name="componentId">Unique identifier for the component</param>
-    /// <param name="learningSpaceId">Identifier of the learning space</param>
-    /// <param name="width">Width of the component in meters</param>
-    /// <param name="height">Height of the component in meters</param>
-    /// <param name="depth">Depth of the component in meters</param>
-    /// <param name="x">X coordinate position</param>
-    /// <param name="y">Y coordinate position</param>
-    /// <param name="z">Z coordinate position</param>
-    /// <param name="orientation">Orientation of the component</param>
-    public LearningComponent(int componentId, string learningSpaceId, float width, float height, float depth, float x, float y, float z, string orientation)
+    /// <param name="componentId">The unique identifier for the component.</param>
+    /// <param name="learningSpaceId">The identifier of the learning space.</param>
+    /// <param name="width">The width of the component.</param>
+    /// <param name="height">The height of the component.</param>
+    /// <param name="depth">The depth of the component.</param>
+    /// <param name="x">The X coordinate position.</param>
+    /// <param name="y">The Y coordinate position.</param>
+    /// <param name="z">The Z coordinate position.</param>
+    /// <param name="orientation">The orientation of the component.</param>
+    public LearningComponent(
+        int componentId,
+        string learningSpaceId,
+        float width,
+        float height,
+        float depth,
+        float x,
+        float y,
+        float z,
+        string orientation)
     {
         ComponentId = componentId;
         LearningSpaceId = learningSpaceId;
