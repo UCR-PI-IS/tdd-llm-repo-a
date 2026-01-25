@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Application.Interfaces;
-using Domain.Entities;
+using UCR.ECCI.PI.ThemePark.Backend.Application.Interfaces;
+using UCR.ECCI.PI.ThemePark.Backend.Domain.Entities;
 
-namespace Application.Services
+namespace UCR.ECCI.PI.ThemePark.Backend.Application.Services
 {
     public class CPDLCMessageService
     {
