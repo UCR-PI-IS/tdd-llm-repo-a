@@ -31,7 +31,7 @@ public class GetLearningComponentsHandler
     {
         if (string.IsNullOrEmpty(learningSpaceId))
         {
-            return TypedResults.BadRequest("Learning space ID cannot be null or empty.");
+            return Microsoft.AspNetCore.Http.TypedResults.BadRequest("Learning space ID cannot be null or empty.");
         }
 
         var components = await _service.GetComponentsByLearningSpaceIdAsync(learningSpaceId);
@@ -52,6 +52,6 @@ public class GetLearningComponentsHandler
             }).ToList()
         };
 
-        return TypedResults.Ok(response);
+        return Microsoft.AspNetCore.Http.TypedResults.Ok(response);
     }
 }
