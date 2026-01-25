@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Domain.Entities;
+using UCR.ECCI.PI.ThemePark.Backend.Domain.Entities;
 
-namespace Application.Interfaces
+namespace UCR.ECCI.PI.ThemePark.Backend.Application.Interfaces
 {
     public interface ICPDLCMessageRepository
     {
