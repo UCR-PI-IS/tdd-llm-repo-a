@@ -6,7 +6,7 @@ namespace UCR.ECCI.PI.ThemePark.Backend.Application.Services.Implementations;
 /// <summary>
 /// Service implementation for retrieving learning component data.
 /// </summary>
-internal class LearningComponentService : ILearningComponentService
+public class LearningComponentService : ILearningComponentService
 {
     private readonly ILearningComponentRepository _learningComponentRepository;
 
