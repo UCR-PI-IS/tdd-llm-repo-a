@@ -1,4 +1,4 @@
-namespace Domain.Entities
+namespace UCR.ECCI.PI.ThemePark.Backend.Domain.Entities
 {
     public enum MessageStatus
     {
