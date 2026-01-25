@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using UCR.ECCI.PI.ThemePark.Backend.Domain.Entities;
 using UCR.ECCI.PI.ThemePark.Backend.Domain.Repositories;
 
@@ -14,8 +15,9 @@ namespace UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Repositories
 
         public async Task<IEnumerable<LearningComponent>> GetByLearningSpaceIdAsync(string learningSpaceId)
         {
-            // Placeholder implementation - will be replaced with actual EF Core query
-            return await Task.FromResult(new List<LearningComponent>());
+            return await _context.LearningComponents
+                .Where(c => c.LearningSpaceId == learningSpaceId)
+                .ToListAsync();
         }
     }
 }
