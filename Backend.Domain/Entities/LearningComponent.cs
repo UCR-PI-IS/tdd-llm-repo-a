@@ -48,7 +48,7 @@ public class LearningComponent
     /// <summary>
     /// Gets or sets the orientation of the component.
     /// </summary>
-    public double Orientation { get; set; }
+    public string Orientation { get; set; } = string.Empty;
 
     /// <summary>
     /// Gets or sets the navigation property to the associated learning space.
