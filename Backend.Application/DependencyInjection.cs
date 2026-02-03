@@ -18,6 +18,7 @@ public static class DependencyInjection
     {
         services.AddScoped<ILearningSpaceListService, LearningSpaceListService>();
         services.AddScoped<ILearningComponentService, LearningComponentService>();
+        services.AddScoped<IPersonService, PersonService>();
         return services;
     }
 }
