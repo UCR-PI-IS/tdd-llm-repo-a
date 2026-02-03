@@ -22,6 +22,7 @@ public static class DependencyInjection
         // Register repository implementation
         services.AddTransient<ILearningSpaceListRepository, SqlLearningSpaceListRepository>();
         services.AddTransient<ILearningComponentRepository, LearningComponentRepository>();
+        services.AddTransient<IPersonRepository, PersonRepository>();
 
         // Register EF Core DbContext with SQL Server provider
         services.AddDbContext<UCRDatabaseContext>(options =>
