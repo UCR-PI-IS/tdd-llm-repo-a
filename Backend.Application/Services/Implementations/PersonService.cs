@@ -6,7 +6,7 @@ namespace UCR.ECCI.PI.ThemePark.Backend.Application.Services;
 /// <summary>
 /// Service implementation for person operations.
 /// </summary>
-internal class PersonService : IPersonService
+public class PersonService : IPersonService
 {
     private readonly IPersonRepository _personRepository;
 
