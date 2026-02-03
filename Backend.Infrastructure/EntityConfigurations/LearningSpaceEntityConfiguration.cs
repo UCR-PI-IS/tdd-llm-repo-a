@@ -28,7 +28,7 @@ internal class LearningSpaceEntityConfiguration : IEntityTypeConfiguration<Learn
         builder.Property(LearningSpace => LearningSpace.id)
             .HasMaxLength(50);
 
-        // Configure to use parameterless constructor (if available) or skip constructor binding
-        builder.Metadata.SetPropertyAccessMode(PropertyAccessMode.Field);
+        // Ignore constructor binding - use reflection for setting readonly properties
+        builder.HasConstructorBinding(cb => cb.Bind(b => null, b => null, b => 0f, b => 0f, b => 0f));
     }
 }

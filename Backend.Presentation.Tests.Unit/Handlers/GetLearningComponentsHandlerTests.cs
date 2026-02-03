@@ -43,7 +43,7 @@ public class GetLearningComponentsHandlerTests
         var result = await handler.HandleAsync(learningSpaceId);
 
         // Assert
-        Assert.That(result, Is.TypeOf<Ok<GetLearningComponentsResponse>>());
+        Assert.That(result.Result, Is.TypeOf<Ok<GetLearningComponentsResponse>>());
     }
 
     [Test]
