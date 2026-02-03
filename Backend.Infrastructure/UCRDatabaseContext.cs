@@ -1,7 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using UCR.ECCI.PI.ThemePark.Backend.Infrastructure.EntityConfigurations;
 using UCR.ECCI.PI.ThemePark.Backend.Domain.Entities;
+
+[assembly: InternalsVisibleTo("UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit")]
 
 namespace UCR.ECCI.PI.ThemePark.Backend.Infrastructure;
 

@@ -98,11 +98,12 @@ public class GetLearningComponentsHandlerTests
         var handler = new GetLearningComponentsHandler(_mockService.Object);
 
         // Act
-        var result = await handler.HandleAsync(learningSpaceId) as Ok<GetLearningComponentsResponse>;
+        var response = await handler.HandleAsync(learningSpaceId);
+        var result = response.Result as Ok<GetLearningComponentsResponse>;
 
         // Assert
         Assert.That(result, Is.Not.Null);
-        Assert.That(result.Value, Is.Not.Null);
+        Assert.That(result!.Value, Is.Not.Null);
         Assert.That(result.Value.Components.Count, Is.EqualTo(1));
         Assert.That(result.Value.Components[0].ComponentId, Is.EqualTo(1));
     }
