@@ -1,7 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using UCR.ECCI.PI.ThemePark.Backend.Infrastructure.EntityConfigurations;
 using UCR.ECCI.PI.ThemePark.Backend.Domain.Entities;
+
+[assembly: InternalsVisibleTo("UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit")]
 
 namespace UCR.ECCI.PI.ThemePark.Backend.Infrastructure;
 
@@ -25,6 +28,11 @@ internal class UCRDatabaseContext : DbContext
     public virtual DbSet<LearningSpace> LearningSpaces { get; set; } = null!;
 
     /// <summary>
+    /// Gets or sets the collection of learning components in the database.
+    /// </summary>
+    public virtual DbSet<LearningComponent> LearningComponents { get; set; } = null!;
+
+    /// <summary>
     /// Configures the model relationships and entity mappings when the model for a context is being created.
     /// </summary>
     /// <param name="modelBuilder">The builder being used to construct the model for this context.</param>
@@ -32,6 +40,9 @@ internal class UCRDatabaseContext : DbContext
     {
         // Apply the LearningSpace entity configuration
         modelBuilder.ApplyConfiguration(new LearningSpaceEntityConfiguration());
+        
+        // Apply the LearningComponent entity configuration
+        modelBuilder.ApplyConfiguration(new LearningComponentEntityConfiguration());
 
         // Alternatively, you can apply all configurations from the assembly
         // modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());

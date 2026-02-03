@@ -27,5 +27,13 @@ internal class LearningSpaceEntityConfiguration : IEntityTypeConfiguration<Learn
 
         builder.Property(LearningSpace => LearningSpace.id)
             .HasMaxLength(50);
+
+        // Configure to use backing fields for readonly properties
+        builder.Property(ls => ls.id).Metadata.SetField("<id>k__BackingField");
+        builder.Property(ls => ls.type).Metadata.SetField("<type>k__BackingField");
+        builder.Property(ls => ls.height).Metadata.SetField("<height>k__BackingField");
+        builder.Property(ls => ls.width).Metadata.SetField("<width>k__BackingField");
+        builder.Property(ls => ls.length).Metadata.SetField("<length>k__BackingField");
+        builder.Metadata.SetPropertyAccessMode(PropertyAccessMode.Field);
     }
 }

@@ -18,7 +18,17 @@
   </ItemGroup>
 
   <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Using Include="NUnit" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Backend.Domain\UCR.ECCI.PI.ThemePark.Backend.Domain.csproj" />
+    <ProjectReference Include="..\Backend.Application\UCR.ECCI.PI.ThemePark.Backend.Application.csproj" />
+    <ProjectReference Include="..\Backend.Presentation\UCR.ECCI.PI.ThemePark.Backend.Presentation.csproj" />
   </ItemGroup>
 
 </Project>
