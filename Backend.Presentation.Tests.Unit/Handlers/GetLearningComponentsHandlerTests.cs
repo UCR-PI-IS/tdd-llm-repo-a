@@ -63,7 +63,7 @@ public class GetLearningComponentsHandlerTests
         var result = await handler.HandleAsync(learningSpaceId);
 
         // Assert
-        Assert.That(result, Is.TypeOf<Ok<GetLearningComponentsResponse>>());
+        Assert.That(result.Result, Is.TypeOf<Ok<GetLearningComponentsResponse>>());
     }
 
     [Test]
@@ -78,7 +78,7 @@ public class GetLearningComponentsHandlerTests
         var result = await handler.HandleAsync(invalidLearningSpaceId);
 
         // Assert
-        Assert.That(result, Is.TypeOf<BadRequest<string>>());
+        Assert.That(result.Result, Is.TypeOf<BadRequest<string>>());
     }
 
     [Test]
