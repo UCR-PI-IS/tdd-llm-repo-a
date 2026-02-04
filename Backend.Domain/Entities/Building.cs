@@ -8,7 +8,7 @@ public class Building
     /// <summary>
     /// Internal identifier for the building.
     /// </summary>
-    public int InternalID { get; }
+    public int InternalId { get; }
 
     /// <summary>
     /// Name of the building.

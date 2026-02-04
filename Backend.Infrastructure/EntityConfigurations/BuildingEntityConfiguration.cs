@@ -15,7 +15,7 @@ internal class BuildingEntityConfiguration : IEntityTypeConfiguration<Building>
     /// <param name="builder">The builder to configure the entity.</param>
     public void Configure(EntityTypeBuilder<Building> builder)
     {
-        builder.HasKey(b => b.InternalID);
+        builder.HasKey(b => b.InternalId);
 
         builder.Property(b => b.Name)
             .IsRequired()
