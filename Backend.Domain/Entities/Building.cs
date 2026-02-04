@@ -82,7 +82,7 @@ public class Building
         if (z < 0)
             throw new ArgumentOutOfRangeException(nameof(z), "Z coordinate cannot be negative");
 
-        InternalID = internalId;
+        InternalId = internalId;
         Name = name;
         Color = color;
         Height = height;
