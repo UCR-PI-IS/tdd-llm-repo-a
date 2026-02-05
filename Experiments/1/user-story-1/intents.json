@@ -1,0 +1,116 @@
+[
+    {
+        "user_story_id": "CPD-LC-001-001",
+        "layer": "Domain",
+        "test_intent": "var component = new LearningComponent(componentId: 1, learningSpaceId: \"LS-001\", width: 2.0f, height: 1.5f, depth: 0.5f, x: 1.0f, y: 0.0f, z: 3.0f, orientation: \"North\");\n\nAssert.That(component.ComponentId, Is.EqualTo(1));\nAssert.That(component.LearningSpaceId, Is.EqualTo(\"LS-001\"));",
+        "response": "YES"
+    },
+    {
+        "user_story_id": "CPD-LC-001-001",
+        "layer": "Domain",
+        "test_intent": "var component = new LearningComponent(componentId: 1, learningSpaceId: \"LS-001\", width: 2.0f, height: 1.5f, depth: 0.5f, x: 1.0f, y: 0.0f, z: 3.0f, orientation: \"North\");\n\nAssert.That(component.Width, Is.EqualTo(2.0f));\nAssert.That(component.Height, Is.EqualTo(1.5f));\nAssert.That(component.Depth, Is.EqualTo(0.5f));",
+        "response": "YES"
+    },
+    {
+        "user_story_id": "CPD-LC-001-001",
+        "layer": "Domain",
+        "test_intent": "var component = new LearningComponent(componentId: 1, learningSpaceId: \"LS-001\", width: 2.0f, height: 1.5f, depth: 0.5f, x: 1.0f, y: 0.0f, z: 3.0f, orientation: \"North\");\n\nAssert.That(component.X, Is.EqualTo(1.0f));\nAssert.That(component.Y, Is.EqualTo(0.0f));\nAssert.That(component.Z, Is.EqualTo(3.0f));",
+        "response": "YES"
+    },
+    {
+        "user_story_id": "CPD-LC-001-001",
+        "layer": "Domain",
+        "test_intent": "var component = new LearningComponent(componentId: 1, learningSpaceId: \"LS-001\", width: 2.0f, height: 1.5f, depth: 0.5f, x: 1.0f, y: 0.0f, z: 3.0f, orientation: \"North\");\n\nAssert.That(component.Orientation, Is.EqualTo(\"North\"));",
+        "response": "YES"
+    },
+    {
+        "user_story_id": "CPD-LC-001-001",
+        "layer": "Domain",
+        "test_intent": "// Repository interface contract - return components for valid learning space\nvar mockRepo = new Mock<ILearningComponentRepository>();\nvar components = new List<LearningComponent> \n{ \n    new LearningComponent(1, \"LS-001\", 2.0f, 1.5f, 0.5f, 1.0f, 0.0f, 3.0f, \"North\")\n};\n\nmockRepo.Setup(r => r.GetByLearningSpaceIdAsync(\"LS-001\"))\n        .ReturnsAsync(components);\n\nvar result = await mockRepo.Object.GetByLearningSpaceIdAsync(\"LS-001\");\n\nAssert.That(result, Is.Not.Null);\nAssert.That(result.Count(), Is.EqualTo(1));",
+        "response": "NO"
+    },
+    {
+        "user_story_id": "CPD-LC-001-001",
+        "layer": "Domain",
+        "test_intent": "// Verify LearningComponent can be constructed with different valid orientations\nvar northComponent = new LearningComponent(1, \"LS-001\", 2.0f, 1.5f, 0.5f, 1.0f, 0.0f, 3.0f, \"North\");\nvar southComponent = new LearningComponent(2, \"LS-001\", 2.0f, 1.5f, 0.5f, 1.0f, 0.0f, 3.0f, \"South\");\n\nAssert.That(northComponent.Orientation, Is.EqualTo(\"North\"));\nAssert.That(southComponent.Orientation, Is.EqualTo(\"South\"));",
+        "response": "YES"
+    },
+    {
+        "user_story_id": "CPD-LC-001-001",
+        "layer": "Application",
+        "test_intent": "// Service returns list of components when learning space has components\nvar mockRepo = new Mock<ILearningComponentRepository>();\nvar components = new List<LearningComponent> \n{ \n    new LearningComponent(1, \"LS-001\", 2.0f, 1.5f, 0.5f, 1.0f, 0.0f, 3.0f, \"North\"),\n    new LearningComponent(2, \"LS-001\", 3.0f, 2.0f, 0.3f, 2.0f, 1.0f, 4.0f, \"South\")\n};\n\nmockRepo.Setup(r => r.GetByLearningSpaceIdAsync(\"LS-001\"))\n        .ReturnsAsync(components);\n\nvar service = new LearningComponentService(mockRepo.Object);\nvar result = await service.GetComponentsByLearningSpaceIdAsync(\"LS-001\");\n\nAssert.That(result, Is.Not.Null);\nAssert.That(result.Count(), Is.EqualTo(2));",
+        "response": "YES"
+    },
+    {
+        "user_story_id": "CPD-LC-001-001",
+        "layer": "Application",
+        "test_intent": "// Service returns empty list when learning space has no components\nvar mockRepo = new Mock<ILearningComponentRepository>();\nvar emptyComponents = new List<LearningComponent>();\n\nmockRepo.Setup(r => r.GetByLearningSpaceIdAsync(\"LS-002\"))\n        .ReturnsAsync(emptyComponents);\n\nvar service = new LearningComponentService(mockRepo.Object);\nvar result = await service.GetComponentsByLearningSpaceIdAsync(\"LS-002\");\n\nAssert.That(result, Is.Not.Null);\nAssert.That(result.Count(), Is.EqualTo(0));",
+        "response": "YES"
+    },
+    {
+        "user_story_id": "CPD-LC-001-001",
+        "layer": "Application",
+        "test_intent": "// Service throws exception when learning space ID is null\nvar mockRepo = new Mock<ILearningComponentRepository>();\nvar service = new LearningComponentService(mockRepo.Object);\n\nAssert.ThrowsAsync<ArgumentNullException>(\n    async () => await service.GetComponentsByLearningSpaceIdAsync(null)\n);",
+        "response": "YES"
+    },
+    {
+        "user_story_id": "CPD-LC-001-001",
+        "layer": "Application",
+        "test_intent": "// Service throws exception when learning space ID is empty string\nvar mockRepo = new Mock<ILearningComponentRepository>();\nvar service = new LearningComponentService(mockRepo.Object);\n\nAssert.ThrowsAsync<ArgumentException>(\n    async () => await service.GetComponentsByLearningSpaceIdAsync(\"\")\n);",
+        "response": "YES"
+    },
+    {
+        "user_story_id": "CPD-LC-001-001",
+        "layer": "Application",
+        "test_intent": "// Service calls repository with correct learning space ID\nvar mockRepo = new Mock<ILearningComponentRepository>();\nvar components = new List<LearningComponent>();\n\nmockRepo.Setup(r => r.GetByLearningSpaceIdAsync(\"LS-001\"))\n        .ReturnsAsync(components);\n\nvar service = new LearningComponentService(mockRepo.Object);\nawait service.GetComponentsByLearningSpaceIdAsync(\"LS-001\");\n\nmockRepo.Verify(r => r.GetByLearningSpaceIdAsync(\"LS-001\"), Times.Once);",
+        "response": "YES"
+    },
+    {
+        "user_story_id": "CPD-LC-001-001",
+        "layer": "Infrastructure",
+        "test_intent": "// Repository returns components for valid learning space ID\nvar options = new DbContextOptionsBuilder<UCRDatabaseContext>()\n    .UseInMemoryDatabase(databaseName: \"TestDb_GetComponents\")\n    .Options;\n\nusing var context = new UCRDatabaseContext(options);\n\nvar component1 = new LearningComponent(1, \"LS-001\", 2.0f, 1.5f, 0.5f, 1.0f, 0.0f, 3.0f, \"North\");\nvar component2 = new LearningComponent(2, \"LS-001\", 3.0f, 2.0f, 0.3f, 2.0f, 1.0f, 4.0f, \"South\");\ncontext.LearningComponents.AddRange(component1, component2);\nawait context.SaveChangesAsync();\n\nvar repository = new LearningComponentRepository(context);\nvar result = await repository.GetByLearningSpaceIdAsync(\"LS-001\");\n\nAssert.That(result.Count(), Is.EqualTo(2));",
+        "response": "YES"
+    },
+    {
+        "user_story_id": "CPD-LC-001-001",
+        "layer": "Infrastructure",
+        "test_intent": "// Repository returns empty list when learning space has no components\nvar options = new DbContextOptionsBuilder<UCRDatabaseContext>()\n    .UseInMemoryDatabase(databaseName: \"TestDb_EmptyComponents\")\n    .Options;\n\nusing var context = new UCRDatabaseContext(options);\n\nvar repository = new LearningComponentRepository(context);\nvar result = await repository.GetByLearningSpaceIdAsync(\"LS-999\");\n\nAssert.That(result, Is.Not.Null);\nAssert.That(result.Count(), Is.EqualTo(0));",
+        "response": "YES"
+    },
+    {
+        "user_story_id": "CPD-LC-001-001",
+        "layer": "Infrastructure",
+        "test_intent": "// Repository filters components by learning space ID correctly\nvar options = new DbContextOptionsBuilder<UCRDatabaseContext>()\n    .UseInMemoryDatabase(databaseName: \"TestDb_FilterComponents\")\n    .Options;\n\nusing var context = new UCRDatabaseContext(options);\n\nvar component1 = new LearningComponent(1, \"LS-001\", 2.0f, 1.5f, 0.5f, 1.0f, 0.0f, 3.0f, \"North\");\nvar component2 = new LearningComponent(2, \"LS-002\", 3.0f, 2.0f, 0.3f, 2.0f, 1.0f, 4.0f, \"South\");\ncontext.LearningComponents.AddRange(component1, component2);\nawait context.SaveChangesAsync();\n\nvar repository = new LearningComponentRepository(context);\nvar result = await repository.GetByLearningSpaceIdAsync(\"LS-001\");\n\nAssert.That(result.Count(), Is.EqualTo(1));\nAssert.That(result.First().LearningSpaceId, Is.EqualTo(\"LS-001\"));",
+        "response": "YES"
+    },
+    {
+        "user_story_id": "CPD-LC-001-001",
+        "layer": "Presentation",
+        "test_intent": "// Handler returns OK with components when learning space has components\nvar mockService = new Mock<ILearningComponentService>();\nvar components = new List<LearningComponent> \n{ \n    new LearningComponent(1, \"LS-001\", 2.0f, 1.5f, 0.5f, 1.0f, 0.0f, 3.0f, \"North\")\n};\n\nmockService.Setup(s => s.GetComponentsByLearningSpaceIdAsync(\"LS-001\"))\n           .ReturnsAsync(components);\n\nvar handler = new GetLearningComponentsHandler(mockService.Object);\nvar result = await handler.HandleAsync(\"LS-001\");\n\nAssert.That(result, Is.TypeOf<Ok<GetLearningComponentsResponse>>());",
+        "response": "YES"
+    },
+    {
+        "user_story_id": "CPD-LC-001-001",
+        "layer": "Presentation",
+        "test_intent": "// Handler returns OK with empty list when no components exist\nvar mockService = new Mock<ILearningComponentService>();\nvar emptyComponents = new List<LearningComponent>();\n\nmockService.Setup(s => s.GetComponentsByLearningSpaceIdAsync(\"LS-002\"))\n           .ReturnsAsync(emptyComponents);\n\nvar handler = new GetLearningComponentsHandler(mockService.Object);\nvar result = await handler.HandleAsync(\"LS-002\");\n\nAssert.That(result, Is.TypeOf<Ok<GetLearningComponentsResponse>>());",
+        "response": "YES"
+    },
+    {
+        "user_story_id": "CPD-LC-001-001",
+        "layer": "Presentation",
+        "test_intent": "// Handler returns BadRequest when learning space ID is invalid (null or empty)\nvar mockService = new Mock<ILearningComponentService>();\nvar handler = new GetLearningComponentsHandler(mockService.Object);\n\nvar result = await handler.HandleAsync(null);\n\nAssert.That(result, Is.TypeOf<BadRequest<string>>());",
+        "response": "YES"
+    },
+    {
+        "user_story_id": "CPD-LC-001-001",
+        "layer": "Presentation",
+        "test_intent": "// Handler maps components to DTOs correctly\nvar mockService = new Mock<ILearningComponentService>();\nvar components = new List<LearningComponent> \n{ \n    new LearningComponent(1, \"LS-001\", 2.0f, 1.5f, 0.5f, 1.0f, 0.0f, 3.0f, \"North\")\n};\n\nmockService.Setup(s => s.GetComponentsByLearningSpaceIdAsync(\"LS-001\"))\n           .ReturnsAsync(components);\n\nvar handler = new GetLearningComponentsHandler(mockService.Object);\nvar result = await handler.HandleAsync(\"LS-001\") as Ok<GetLearningComponentsResponse>;\n\nAssert.That(result.Value.Components.Count, Is.EqualTo(1));\nAssert.That(result.Value.Components[0].ComponentId, Is.EqualTo(1));",
+        "response": "YES"
+    },
+    {
+        "user_story_id": "CPD-LC-001-001",
+        "layer": "Presentation",
+        "test_intent": "// Handler calls service with correct learning space ID\nvar mockService = new Mock<ILearningComponentService>();\nmockService.Setup(s => s.GetComponentsByLearningSpaceIdAsync(\"LS-001\"))\n           .ReturnsAsync(new List<LearningComponent>());\n\nvar handler = new GetLearningComponentsHandler(mockService.Object);\nawait handler.HandleAsync(\"LS-001\");\n\nmockService.Verify(s => s.GetComponentsByLearningSpaceIdAsync(\"LS-001\"), Times.Once);",
+        "response": "YES"
+    }
+]

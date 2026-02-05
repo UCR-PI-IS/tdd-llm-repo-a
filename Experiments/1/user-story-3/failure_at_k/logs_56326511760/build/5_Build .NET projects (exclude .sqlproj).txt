@@ -1,0 +1,116 @@
+﻿2026-02-04T00:54:38.0760632Z ##[group]Run $ErrorActionPreference = 'Stop'
+2026-02-04T00:54:38.0761142Z [36;1m$ErrorActionPreference = 'Stop'[0m
+2026-02-04T00:54:38.0761620Z [36;1m$csprojFiles = Get-ChildItem -Path . -Recurse -Filter *.csproj -File[0m
+2026-02-04T00:54:38.0762067Z [36;1mif (-not $csprojFiles) {[0m
+2026-02-04T00:54:38.0762396Z [36;1m  Write-Host 'No .csproj files found to build.'[0m
+2026-02-04T00:54:38.0762698Z [36;1m  exit 0[0m
+2026-02-04T00:54:38.0763209Z [36;1m}[0m
+2026-02-04T00:54:38.0763407Z [36;1mforeach ($proj in $csprojFiles) {[0m
+2026-02-04T00:54:38.0763738Z [36;1m  Write-Host "Building $($proj.FullName)"[0m
+2026-02-04T00:54:38.0764104Z [36;1m  dotnet build $proj.FullName --no-restore -c Release[0m
+2026-02-04T00:54:38.0764420Z [36;1m}[0m
+2026-02-04T00:54:38.0863751Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+2026-02-04T00:54:38.0864207Z env:
+2026-02-04T00:54:38.0864434Z   DOTNET_ROOT: C:\Program Files\dotnet
+2026-02-04T00:54:38.0864774Z ##[endgroup]
+2026-02-04T00:54:38.5803735Z Building D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Api\UCR.ECCI.PI.ThemePark.Backend.Api.csproj
+2026-02-04T00:55:08.2271520Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\Entities\Building.cs(85,9): error CS0103: The name 'InternalID' does not exist in the current context [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\UCR.ECCI.PI.ThemePark.Backend.Domain.csproj]
+2026-02-04T00:55:08.2286043Z 
+2026-02-04T00:55:08.2286216Z Build FAILED.
+2026-02-04T00:55:08.2286451Z 
+2026-02-04T00:55:08.2289031Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\Entities\Building.cs(85,9): error CS0103: The name 'InternalID' does not exist in the current context [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\UCR.ECCI.PI.ThemePark.Backend.Domain.csproj]
+2026-02-04T00:55:08.2291568Z     0 Warning(s)
+2026-02-04T00:55:08.2291882Z     1 Error(s)
+2026-02-04T00:55:08.2292087Z 
+2026-02-04T00:55:08.2292255Z Time Elapsed 00:00:27.93
+2026-02-04T00:55:08.2293226Z Building D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application\UCR.ECCI.PI.ThemePark.Backend.Application.csproj
+2026-02-04T00:55:09.7491085Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\Entities\Building.cs(85,9): error CS0103: The name 'InternalID' does not exist in the current context [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\UCR.ECCI.PI.ThemePark.Backend.Domain.csproj]
+2026-02-04T00:55:09.7498104Z 
+2026-02-04T00:55:09.7498843Z Build FAILED.
+2026-02-04T00:55:09.7499246Z 
+2026-02-04T00:55:09.7501945Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\Entities\Building.cs(85,9): error CS0103: The name 'InternalID' does not exist in the current context [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\UCR.ECCI.PI.ThemePark.Backend.Domain.csproj]
+2026-02-04T00:55:09.7504900Z     0 Warning(s)
+2026-02-04T00:55:09.7505416Z     1 Error(s)
+2026-02-04T00:55:09.7505747Z 
+2026-02-04T00:55:09.7506031Z Time Elapsed 00:00:01.18
+2026-02-04T00:55:09.7507326Z Building D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.csproj
+2026-02-04T00:55:10.5070076Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\Entities\Building.cs(85,9): error CS0103: The name 'InternalID' does not exist in the current context [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\UCR.ECCI.PI.ThemePark.Backend.Domain.csproj]
+2026-02-04T00:55:10.5426519Z 
+2026-02-04T00:55:10.5434027Z Build FAILED.
+2026-02-04T00:55:10.5513995Z 
+2026-02-04T00:55:10.5517572Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\Entities\Building.cs(85,9): error CS0103: The name 'InternalID' does not exist in the current context [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\UCR.ECCI.PI.ThemePark.Backend.Domain.csproj]
+2026-02-04T00:55:10.5521630Z     0 Warning(s)
+2026-02-04T00:55:10.5522383Z     1 Error(s)
+2026-02-04T00:55:10.5523216Z 
+2026-02-04T00:55:10.5523754Z Time Elapsed 00:00:01.35
+2026-02-04T00:55:10.5930560Z Building D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.DependencyInjection\UCR.ECCI.PI.ThemePark.Backend.DependencyInjection.csproj
+2026-02-04T00:55:12.6222896Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\Entities\Building.cs(85,9): error CS0103: The name 'InternalID' does not exist in the current context [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\UCR.ECCI.PI.ThemePark.Backend.Domain.csproj]
+2026-02-04T00:55:12.6492304Z 
+2026-02-04T00:55:12.6493339Z Build FAILED.
+2026-02-04T00:55:12.6501969Z 
+2026-02-04T00:55:12.6517581Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\Entities\Building.cs(85,9): error CS0103: The name 'InternalID' does not exist in the current context [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\UCR.ECCI.PI.ThemePark.Backend.Domain.csproj]
+2026-02-04T00:55:12.6540066Z     0 Warning(s)
+2026-02-04T00:55:12.6545153Z     1 Error(s)
+2026-02-04T00:55:12.6562407Z 
+2026-02-04T00:55:12.6562893Z Time Elapsed 00:00:01.51
+2026-02-04T00:55:12.6896344Z Building D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\UCR.ECCI.PI.ThemePark.Backend.Domain.csproj
+2026-02-04T00:55:14.3108483Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\Entities\Building.cs(85,9): error CS0103: The name 'InternalID' does not exist in the current context [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\UCR.ECCI.PI.ThemePark.Backend.Domain.csproj]
+2026-02-04T00:55:14.3279479Z 
+2026-02-04T00:55:14.3281195Z Build FAILED.
+2026-02-04T00:55:14.3292115Z 
+2026-02-04T00:55:14.3298966Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\Entities\Building.cs(85,9): error CS0103: The name 'InternalID' does not exist in the current context [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\UCR.ECCI.PI.ThemePark.Backend.Domain.csproj]
+2026-02-04T00:55:14.3320867Z     0 Warning(s)
+2026-02-04T00:55:14.3331719Z     1 Error(s)
+2026-02-04T00:55:14.3332478Z 
+2026-02-04T00:55:14.3356442Z Time Elapsed 00:00:00.92
+2026-02-04T00:55:14.3630544Z Building D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.csproj
+2026-02-04T00:55:15.8726171Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\Entities\Building.cs(85,9): error CS0103: The name 'InternalID' does not exist in the current context [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\UCR.ECCI.PI.ThemePark.Backend.Domain.csproj]
+2026-02-04T00:55:15.8906364Z 
+2026-02-04T00:55:15.8917308Z Build FAILED.
+2026-02-04T00:55:15.8918191Z 
+2026-02-04T00:55:15.8923239Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\Entities\Building.cs(85,9): error CS0103: The name 'InternalID' does not exist in the current context [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\UCR.ECCI.PI.ThemePark.Backend.Domain.csproj]
+2026-02-04T00:55:15.8963392Z     0 Warning(s)
+2026-02-04T00:55:15.8966162Z     1 Error(s)
+2026-02-04T00:55:15.8968378Z 
+2026-02-04T00:55:15.8968843Z Time Elapsed 00:00:01.09
+2026-02-04T00:55:15.9317396Z Building D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.csproj
+2026-02-04T00:55:17.3951853Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\Entities\Building.cs(85,9): error CS0103: The name 'InternalID' does not exist in the current context [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\UCR.ECCI.PI.ThemePark.Backend.Domain.csproj]
+2026-02-04T00:55:17.4145303Z 
+2026-02-04T00:55:17.4159598Z Build FAILED.
+2026-02-04T00:55:17.4189375Z 
+2026-02-04T00:55:17.4208058Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\Entities\Building.cs(85,9): error CS0103: The name 'InternalID' does not exist in the current context [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\UCR.ECCI.PI.ThemePark.Backend.Domain.csproj]
+2026-02-04T00:55:17.4219215Z     0 Warning(s)
+2026-02-04T00:55:17.4220245Z     1 Error(s)
+2026-02-04T00:55:17.4220792Z 
+2026-02-04T00:55:17.4221588Z Time Elapsed 00:00:01.11
+2026-02-04T00:55:17.4559994Z Building D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.csproj
+2026-02-04T00:55:19.1295137Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\Entities\Building.cs(85,9): error CS0103: The name 'InternalID' does not exist in the current context [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\UCR.ECCI.PI.ThemePark.Backend.Domain.csproj]
+2026-02-04T00:55:19.1585578Z 
+2026-02-04T00:55:19.1593786Z Build FAILED.
+2026-02-04T00:55:19.1598184Z 
+2026-02-04T00:55:19.1608634Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\Entities\Building.cs(85,9): error CS0103: The name 'InternalID' does not exist in the current context [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\UCR.ECCI.PI.ThemePark.Backend.Domain.csproj]
+2026-02-04T00:55:19.1620600Z     0 Warning(s)
+2026-02-04T00:55:19.1645069Z     1 Error(s)
+2026-02-04T00:55:19.1649078Z 
+2026-02-04T00:55:19.1661934Z Time Elapsed 00:00:01.30
+2026-02-04T00:55:19.1987062Z Building D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation\UCR.ECCI.PI.ThemePark.Backend.Presentation.csproj
+2026-02-04T00:55:21.0152762Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\Entities\Building.cs(85,9): error CS0103: The name 'InternalID' does not exist in the current context [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\UCR.ECCI.PI.ThemePark.Backend.Domain.csproj]
+2026-02-04T00:55:21.0386726Z 
+2026-02-04T00:55:21.0388114Z Build FAILED.
+2026-02-04T00:55:21.0388912Z 
+2026-02-04T00:55:21.0392075Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\Entities\Building.cs(85,9): error CS0103: The name 'InternalID' does not exist in the current context [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\UCR.ECCI.PI.ThemePark.Backend.Domain.csproj]
+2026-02-04T00:55:21.0396010Z     0 Warning(s)
+2026-02-04T00:55:21.0396976Z     1 Error(s)
+2026-02-04T00:55:21.0397567Z 
+2026-02-04T00:55:21.0427614Z Time Elapsed 00:00:01.41
+2026-02-04T00:55:21.0694640Z Building D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.csproj
+2026-02-04T00:55:22.7506178Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\Entities\Building.cs(85,9): error CS0103: The name 'InternalID' does not exist in the current context [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\UCR.ECCI.PI.ThemePark.Backend.Domain.csproj]
+2026-02-04T00:55:22.8317442Z 
+2026-02-04T00:55:22.8318787Z Build FAILED.
+2026-02-04T00:55:22.8319478Z 
+2026-02-04T00:55:22.8323584Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\Entities\Building.cs(85,9): error CS0103: The name 'InternalID' does not exist in the current context [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\UCR.ECCI.PI.ThemePark.Backend.Domain.csproj]
+2026-02-04T00:55:22.8332726Z     0 Warning(s)
+2026-02-04T00:55:22.8333433Z     1 Error(s)
+2026-02-04T00:55:22.8352641Z 
+2026-02-04T00:55:22.8354556Z Time Elapsed 00:00:01.34
+2026-02-04T00:55:22.9196156Z ##[error]Process completed with exit code 1.

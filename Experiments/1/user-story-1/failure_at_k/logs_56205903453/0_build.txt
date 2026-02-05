@@ -1,0 +1,303 @@
+﻿2026-02-03T01:28:23.6661441Z Current runner version: '2.331.0'
+2026-02-03T01:28:23.6696097Z ##[group]Runner Image Provisioner
+2026-02-03T01:28:23.6697238Z Hosted Compute Agent
+2026-02-03T01:28:23.6698064Z Version: 20260123.484
+2026-02-03T01:28:23.6699078Z Commit: 6bd6555ca37d84114959e1c76d2c01448ff61c5d
+2026-02-03T01:28:23.6700218Z Build Date: 2026-01-23T19:41:17Z
+2026-02-03T01:28:23.6701349Z Worker ID: {ab5ac914-fd04-41cf-9dce-2b4c4c52dd71}
+2026-02-03T01:28:23.6702491Z Azure Region: centralus
+2026-02-03T01:28:23.6703334Z ##[endgroup]
+2026-02-03T01:28:23.6705310Z ##[group]Operating System
+2026-02-03T01:28:23.6706297Z Microsoft Windows Server 2025
+2026-02-03T01:28:23.6708330Z 10.0.26100
+2026-02-03T01:28:23.6709153Z Datacenter
+2026-02-03T01:28:23.6709812Z ##[endgroup]
+2026-02-03T01:28:23.6710562Z ##[group]Runner Image
+2026-02-03T01:28:23.6711433Z Image: windows-2025
+2026-02-03T01:28:23.6712119Z Version: 20260127.11.2
+2026-02-03T01:28:23.6714478Z Included Software: https://github.com/actions/runner-images/blob/win25/20260127.11/images/windows/Windows2025-Readme.md
+2026-02-03T01:28:23.6717015Z Image Release: https://github.com/actions/runner-images/releases/tag/win25%2F20260127.11
+2026-02-03T01:28:23.6718450Z ##[endgroup]
+2026-02-03T01:28:23.6720134Z ##[group]GITHUB_TOKEN Permissions
+2026-02-03T01:28:23.6722552Z Contents: read
+2026-02-03T01:28:23.6723388Z Metadata: read
+2026-02-03T01:28:23.6724114Z Packages: read
+2026-02-03T01:28:23.6724961Z ##[endgroup]
+2026-02-03T01:28:23.6727979Z Secret source: Actions
+2026-02-03T01:28:23.6729085Z Prepare workflow directory
+2026-02-03T01:28:23.7225066Z Prepare all required actions
+2026-02-03T01:28:23.7280807Z Getting action download info
+2026-02-03T01:28:24.0491157Z Download action repository 'actions/checkout@v4' (SHA:34e114876b0b11c390a56381ad16ebd13914f8d5)
+2026-02-03T01:28:24.1865274Z Download action repository 'actions/setup-dotnet@v4' (SHA:67a3573c9a986a3f9c594539f4ab511d57bb3ce9)
+2026-02-03T01:28:24.9171780Z Complete job name: build
+2026-02-03T01:28:25.0732803Z ##[group]Run actions/checkout@v4
+2026-02-03T01:28:25.0733957Z with:
+2026-02-03T01:28:25.0734385Z   repository: UCR-PI-IS/tdd-llm-repo-a
+2026-02-03T01:28:25.0735156Z   token: ***
+2026-02-03T01:28:25.0735535Z   ssh-strict: true
+2026-02-03T01:28:25.0735931Z   ssh-user: git
+2026-02-03T01:28:25.0736316Z   persist-credentials: true
+2026-02-03T01:28:25.0736757Z   clean: true
+2026-02-03T01:28:25.0737167Z   sparse-checkout-cone-mode: true
+2026-02-03T01:28:25.0737659Z   fetch-depth: 1
+2026-02-03T01:28:25.0738028Z   fetch-tags: false
+2026-02-03T01:28:25.0738425Z   show-progress: true
+2026-02-03T01:28:25.0738820Z   lfs: false
+2026-02-03T01:28:25.0739180Z   submodules: false
+2026-02-03T01:28:25.0739580Z   set-safe-directory: true
+2026-02-03T01:28:25.0740218Z ##[endgroup]
+2026-02-03T01:28:25.2863065Z Syncing repository: UCR-PI-IS/tdd-llm-repo-a
+2026-02-03T01:28:25.2866135Z ##[group]Getting Git version info
+2026-02-03T01:28:25.2867789Z Working directory is 'D:\a\tdd-llm-repo-a\tdd-llm-repo-a'
+2026-02-03T01:28:25.3999127Z [command]"C:\Program Files\Git\bin\git.exe" version
+2026-02-03T01:28:25.7674560Z git version 2.52.0.windows.1
+2026-02-03T01:28:26.4004126Z ##[endgroup]
+2026-02-03T01:28:26.4011004Z Temporarily overriding HOME='D:\a\_temp\046b0f04-f925-45df-af9f-1ea3fceec621' before making global git config changes
+2026-02-03T01:28:26.4013926Z Adding repository directory to the temporary git global config as a safe directory
+2026-02-03T01:28:26.4016820Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\tdd-llm-repo-a\tdd-llm-repo-a
+2026-02-03T01:28:26.4021613Z Deleting the contents of 'D:\a\tdd-llm-repo-a\tdd-llm-repo-a'
+2026-02-03T01:28:26.4023990Z ##[group]Initializing the repository
+2026-02-03T01:28:26.4025974Z [command]"C:\Program Files\Git\bin\git.exe" init D:\a\tdd-llm-repo-a\tdd-llm-repo-a
+2026-02-03T01:28:26.4028507Z Initialized empty Git repository in D:/a/tdd-llm-repo-a/tdd-llm-repo-a/.git/
+2026-02-03T01:28:26.4035398Z [command]"C:\Program Files\Git\bin\git.exe" remote add origin https://github.com/UCR-PI-IS/tdd-llm-repo-a
+2026-02-03T01:28:26.4043587Z ##[endgroup]
+2026-02-03T01:28:26.4045253Z ##[group]Disabling automatic garbage collection
+2026-02-03T01:28:26.4047137Z [command]"C:\Program Files\Git\bin\git.exe" config --local gc.auto 0
+2026-02-03T01:28:26.4051396Z ##[endgroup]
+2026-02-03T01:28:26.4053468Z ##[group]Setting up auth
+2026-02-03T01:28:26.4055797Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+2026-02-03T01:28:26.4062801Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+2026-02-03T01:28:27.6444250Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-02-03T01:28:27.6797135Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+2026-02-03T01:28:28.4313207Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-02-03T01:28:28.4319099Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+2026-02-03T01:28:28.9129204Z [command]"C:\Program Files\Git\bin\git.exe" config --local http.https://github.com/.extraheader "AUTHORIZATION: basic ***"
+2026-02-03T01:28:28.9495622Z ##[endgroup]
+2026-02-03T01:28:28.9496437Z ##[group]Fetching the repository
+2026-02-03T01:28:28.9511634Z [command]"C:\Program Files\Git\bin\git.exe" -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +64bfeaa7f5a6a17f44e8d0fe493b58abd2244b24:refs/remotes/pull/17/merge
+2026-02-03T01:28:30.2162309Z From https://github.com/UCR-PI-IS/tdd-llm-repo-a
+2026-02-03T01:28:30.2163350Z  * [new ref]         64bfeaa7f5a6a17f44e8d0fe493b58abd2244b24 -> pull/17/merge
+2026-02-03T01:28:30.2440745Z ##[endgroup]
+2026-02-03T01:28:30.2441533Z ##[group]Determining the checkout info
+2026-02-03T01:28:30.2444191Z ##[endgroup]
+2026-02-03T01:28:30.2455981Z [command]"C:\Program Files\Git\bin\git.exe" sparse-checkout disable
+2026-02-03T01:28:30.3005845Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset-all extensions.worktreeConfig
+2026-02-03T01:28:30.3483473Z ##[group]Checking out the ref
+2026-02-03T01:28:30.3502137Z [command]"C:\Program Files\Git\bin\git.exe" checkout --progress --force refs/remotes/pull/17/merge
+2026-02-03T01:28:30.4638686Z Note: switching to 'refs/remotes/pull/17/merge'.
+2026-02-03T01:28:30.4668748Z 
+2026-02-03T01:28:30.4675517Z You are in 'detached HEAD' state. You can look around, make experimental
+2026-02-03T01:28:30.4685404Z changes and commit them, and you can discard any commits you make in this
+2026-02-03T01:28:30.4688993Z state without impacting any branches by switching back to a branch.
+2026-02-03T01:28:30.4706039Z 
+2026-02-03T01:28:30.4735264Z If you want to create a new branch to retain commits you create, you may
+2026-02-03T01:28:30.4736428Z do so (now or later) by using -c with the switch command. Example:
+2026-02-03T01:28:30.4737114Z 
+2026-02-03T01:28:30.4737462Z   git switch -c <new-branch-name>
+2026-02-03T01:28:30.4737931Z 
+2026-02-03T01:28:30.4738241Z Or undo this operation with:
+2026-02-03T01:28:30.4738693Z 
+2026-02-03T01:28:30.4738962Z   git switch -
+2026-02-03T01:28:30.4739274Z 
+2026-02-03T01:28:30.4739726Z Turn off this advice by setting config variable advice.detachedHead to false
+2026-02-03T01:28:30.4740443Z 
+2026-02-03T01:28:30.4741192Z HEAD is now at 64bfeaa Merge c03bf5aa9b11af915d5c9eab8b0012dd87536a8d into e442855824dff04704ec409956a7da5a24a6ba4e
+2026-02-03T01:28:30.4745689Z ##[endgroup]
+2026-02-03T01:28:30.5263606Z [command]"C:\Program Files\Git\bin\git.exe" log -1 --format=%H
+2026-02-03T01:28:30.5588761Z 64bfeaa7f5a6a17f44e8d0fe493b58abd2244b24
+2026-02-03T01:28:30.6028886Z ##[group]Run actions/setup-dotnet@v4
+2026-02-03T01:28:30.6029216Z with:
+2026-02-03T01:28:30.6029412Z   dotnet-version: 8.0.x
+
+2026-02-03T01:28:30.6029627Z   cache: false
+2026-02-03T01:28:30.6029793Z ##[endgroup]
+2026-02-03T01:28:31.0312475Z [command]"C:\Program Files\PowerShell\7\pwsh.exe" -NoLogo -Sta -NoProfile -NonInteractive -ExecutionPolicy Unrestricted -Command & 'D:\a\_actions\actions\setup-dotnet\v4\externals\install-dotnet.ps1' -SkipNonVersionedFiles -Runtime dotnet -Channel LTS
+2026-02-03T01:28:38.0318142Z dotnet-install: .NET Core Runtime with version '10.0.2' is already installed.
+2026-02-03T01:28:38.3988731Z [command]"C:\Program Files\PowerShell\7\pwsh.exe" -NoLogo -Sta -NoProfile -NonInteractive -ExecutionPolicy Unrestricted -Command & 'D:\a\_actions\actions\setup-dotnet\v4\externals\install-dotnet.ps1' -SkipNonVersionedFiles -Channel 8.0
+2026-02-03T01:28:39.5491861Z dotnet-install: .NET Core SDK with version '8.0.417' is already installed.
+2026-02-03T01:28:39.6665066Z ##[group]Run dotnet restore UCR.ECCI.PI.ThemePark.sln
+2026-02-03T01:28:39.6665683Z [36;1mdotnet restore UCR.ECCI.PI.ThemePark.sln[0m
+2026-02-03T01:28:39.6744739Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+2026-02-03T01:28:39.6745209Z env:
+2026-02-03T01:28:39.6745483Z   DOTNET_ROOT: C:\Program Files\dotnet
+2026-02-03T01:28:39.6745790Z ##[endgroup]
+2026-02-03T01:28:46.3673750Z D:\a\tdd-llm-repo-a\tdd-llm-repo-a\UCR.ECCI.PI.ThemePark.Database\UCR.ECCI.PI.ThemePark.Database.sqlproj : warning NU1503: Skipping restore for project 'D:\a\tdd-llm-repo-a\tdd-llm-repo-a\UCR.ECCI.PI.ThemePark.Database\UCR.ECCI.PI.ThemePark.Database.sqlproj'. The project file may be invalid or missing targets required for restore. [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\UCR.ECCI.PI.ThemePark.sln]
+2026-02-03T01:28:46.3694564Z   Determining projects to restore...
+2026-02-03T01:29:13.2342269Z   Restored D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.csproj (in 25.57 sec).
+2026-02-03T01:29:13.5244278Z   Restored D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.DependencyInjection\UCR.ECCI.PI.ThemePark.Backend.DependencyInjection.csproj (in 267 ms).
+2026-02-03T01:29:13.5325769Z   Restored D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application\UCR.ECCI.PI.ThemePark.Backend.Application.csproj (in 2 ms).
+2026-02-03T01:29:13.5493656Z   Restored D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.csproj (in 4 ms).
+2026-02-03T01:29:13.5573936Z   Restored D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation\UCR.ECCI.PI.ThemePark.Backend.Presentation.csproj (in 4 ms).
+2026-02-03T01:29:13.5644926Z   Restored D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.csproj (in 2 ms).
+2026-02-03T01:29:13.5877409Z   Restored D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.csproj (in 8 ms).
+2026-02-03T01:29:13.5902208Z   Restored D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.csproj (in 2 ms).
+2026-02-03T01:29:13.5959420Z   Restored D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\UCR.ECCI.PI.ThemePark.Backend.Domain.csproj (in 1 ms).
+2026-02-03T01:29:13.6242222Z   Restored D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Api\UCR.ECCI.PI.ThemePark.Backend.Api.csproj (in 26.12 sec).
+2026-02-03T01:29:13.8019693Z ##[group]Run $ErrorActionPreference = 'Stop'
+2026-02-03T01:29:13.8020373Z [36;1m$ErrorActionPreference = 'Stop'[0m
+2026-02-03T01:29:13.8020792Z [36;1m$csprojFiles = Get-ChildItem -Path . -Recurse -Filter *.csproj -File[0m
+2026-02-03T01:29:13.8021179Z [36;1mif (-not $csprojFiles) {[0m
+2026-02-03T01:29:13.8021455Z [36;1m  Write-Host 'No .csproj files found to build.'[0m
+2026-02-03T01:29:13.8021736Z [36;1m  exit 0[0m
+2026-02-03T01:29:13.8022123Z [36;1m}[0m
+2026-02-03T01:29:13.8022308Z [36;1mforeach ($proj in $csprojFiles) {[0m
+2026-02-03T01:29:13.8022601Z [36;1m  Write-Host "Building $($proj.FullName)"[0m
+2026-02-03T01:29:13.8022954Z [36;1m  dotnet build $proj.FullName --no-restore -c Release[0m
+2026-02-03T01:29:13.8023241Z [36;1m}[0m
+2026-02-03T01:29:13.8096021Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+2026-02-03T01:29:13.8096348Z env:
+2026-02-03T01:29:13.8096537Z   DOTNET_ROOT: C:\Program Files\dotnet
+2026-02-03T01:29:13.8096824Z ##[endgroup]
+2026-02-03T01:29:14.8143995Z Building D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Api\UCR.ECCI.PI.ThemePark.Backend.Api.csproj
+2026-02-03T01:29:32.4478766Z   UCR.ECCI.PI.ThemePark.Backend.Domain -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Domain.dll
+2026-02-03T01:29:33.0297820Z   UCR.ECCI.PI.ThemePark.Backend.Application -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Application.dll
+2026-02-03T01:29:33.5508976Z   UCR.ECCI.PI.ThemePark.Backend.Infrastructure -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.dll
+2026-02-03T01:29:35.7034773Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation\Handlers\GetLearningComponentsHandler.cs(33,20): error CS0103: The name 'TypedResults' does not exist in the current context [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation\UCR.ECCI.PI.ThemePark.Backend.Presentation.csproj]
+2026-02-03T01:29:35.7053528Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation\Handlers\GetLearningComponentsHandler.cs(54,16): error CS0103: The name 'TypedResults' does not exist in the current context [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation\UCR.ECCI.PI.ThemePark.Backend.Presentation.csproj]
+2026-02-03T01:29:37.0970353Z   UCR.ECCI.PI.ThemePark.Backend.DependencyInjection -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.DependencyInjection\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.DependencyInjection.dll
+2026-02-03T01:29:37.1263869Z 
+2026-02-03T01:29:37.1275450Z Build FAILED.
+2026-02-03T01:29:37.1276284Z 
+2026-02-03T01:29:37.1280108Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation\Handlers\GetLearningComponentsHandler.cs(33,20): error CS0103: The name 'TypedResults' does not exist in the current context [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation\UCR.ECCI.PI.ThemePark.Backend.Presentation.csproj]
+2026-02-03T01:29:37.1286695Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation\Handlers\GetLearningComponentsHandler.cs(54,16): error CS0103: The name 'TypedResults' does not exist in the current context [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation\UCR.ECCI.PI.ThemePark.Backend.Presentation.csproj]
+2026-02-03T01:29:37.1312122Z     0 Warning(s)
+2026-02-03T01:29:37.1335312Z     2 Error(s)
+2026-02-03T01:29:37.1336802Z 
+2026-02-03T01:29:37.1337497Z Time Elapsed 00:00:21.87
+2026-02-03T01:29:37.1813480Z Building D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application\UCR.ECCI.PI.ThemePark.Backend.Application.csproj
+2026-02-03T01:29:38.7048156Z   UCR.ECCI.PI.ThemePark.Backend.Domain -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Domain.dll
+2026-02-03T01:29:38.7841590Z   UCR.ECCI.PI.ThemePark.Backend.Application -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Application.dll
+2026-02-03T01:29:38.7964329Z 
+2026-02-03T01:29:38.7965024Z Build succeeded.
+2026-02-03T01:29:38.7965366Z     0 Warning(s)
+2026-02-03T01:29:38.7965637Z     0 Error(s)
+2026-02-03T01:29:38.7965798Z 
+2026-02-03T01:29:38.7965955Z Time Elapsed 00:00:01.12
+2026-02-03T01:29:38.8362827Z Building D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.csproj
+2026-02-03T01:29:40.4015011Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\Services\LearningComponentServiceTests.cs(3,49): error CS0234: The type or namespace name 'Services' does not exist in the namespace 'UCR.ECCI.PI.ThemePark.Backend.Application' (are you missing an assembly reference?) [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.csproj]
+2026-02-03T01:29:40.4025378Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\Services\LearningComponentServiceTests.cs(4,49): error CS0234: The type or namespace name 'Services' does not exist in the namespace 'UCR.ECCI.PI.ThemePark.Backend.Application' (are you missing an assembly reference?) [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.csproj]
+2026-02-03T01:29:40.4087659Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\Services\LearningComponentServiceTests.cs(5,37): error CS0234: The type or namespace name 'Domain' does not exist in the namespace 'UCR.ECCI.PI.ThemePark.Backend' (are you missing an assembly reference?) [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.csproj]
+2026-02-03T01:29:40.4115249Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\Services\LearningComponentServiceTests.cs(6,37): error CS0234: The type or namespace name 'Domain' does not exist in the namespace 'UCR.ECCI.PI.ThemePark.Backend' (are you missing an assembly reference?) [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.csproj]
+2026-02-03T01:29:40.4141464Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\Services\LearningComponentServiceTests.cs(17,18): error CS0246: The type or namespace name 'ILearningComponentRepository' could not be found (are you missing a using directive or an assembly reference?) [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.csproj]
+2026-02-03T01:29:40.4257934Z 
+2026-02-03T01:29:40.4269455Z Build FAILED.
+2026-02-03T01:29:40.4281454Z 
+2026-02-03T01:29:40.4300302Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\Services\LearningComponentServiceTests.cs(3,49): error CS0234: The type or namespace name 'Services' does not exist in the namespace 'UCR.ECCI.PI.ThemePark.Backend.Application' (are you missing an assembly reference?) [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.csproj]
+2026-02-03T01:29:40.4355922Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\Services\LearningComponentServiceTests.cs(4,49): error CS0234: The type or namespace name 'Services' does not exist in the namespace 'UCR.ECCI.PI.ThemePark.Backend.Application' (are you missing an assembly reference?) [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.csproj]
+2026-02-03T01:29:40.4452952Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\Services\LearningComponentServiceTests.cs(5,37): error CS0234: The type or namespace name 'Domain' does not exist in the namespace 'UCR.ECCI.PI.ThemePark.Backend' (are you missing an assembly reference?) [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.csproj]
+2026-02-03T01:29:40.4486728Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\Services\LearningComponentServiceTests.cs(6,37): error CS0234: The type or namespace name 'Domain' does not exist in the namespace 'UCR.ECCI.PI.ThemePark.Backend' (are you missing an assembly reference?) [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.csproj]
+2026-02-03T01:29:40.4521656Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\Services\LearningComponentServiceTests.cs(17,18): error CS0246: The type or namespace name 'ILearningComponentRepository' could not be found (are you missing a using directive or an assembly reference?) [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.csproj]
+2026-02-03T01:29:40.4526299Z     0 Warning(s)
+2026-02-03T01:29:40.4544568Z     5 Error(s)
+2026-02-03T01:29:40.4548660Z 
+2026-02-03T01:29:40.4549396Z Time Elapsed 00:00:01.13
+2026-02-03T01:29:40.4907301Z Building D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.DependencyInjection\UCR.ECCI.PI.ThemePark.Backend.DependencyInjection.csproj
+2026-02-03T01:29:42.0245884Z   UCR.ECCI.PI.ThemePark.Backend.Domain -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Domain.dll
+2026-02-03T01:29:42.6386089Z   UCR.ECCI.PI.ThemePark.Backend.Infrastructure -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.dll
+2026-02-03T01:29:42.7517268Z   UCR.ECCI.PI.ThemePark.Backend.Application -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Application.dll
+2026-02-03T01:29:42.9299351Z   UCR.ECCI.PI.ThemePark.Backend.DependencyInjection -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.DependencyInjection\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.DependencyInjection.dll
+2026-02-03T01:29:42.9451885Z 
+2026-02-03T01:29:42.9458924Z Build succeeded.
+2026-02-03T01:29:42.9478674Z     0 Warning(s)
+2026-02-03T01:29:42.9479587Z     0 Error(s)
+2026-02-03T01:29:42.9480235Z 
+2026-02-03T01:29:42.9480873Z Time Elapsed 00:00:02.08
+2026-02-03T01:29:42.9983713Z Building D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\UCR.ECCI.PI.ThemePark.Backend.Domain.csproj
+2026-02-03T01:29:44.4145548Z   UCR.ECCI.PI.ThemePark.Backend.Domain -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Domain.dll
+2026-02-03T01:29:44.4296418Z 
+2026-02-03T01:29:44.4309256Z Build succeeded.
+2026-02-03T01:29:44.4313433Z     0 Warning(s)
+2026-02-03T01:29:44.4319905Z     0 Error(s)
+2026-02-03T01:29:44.4322403Z 
+2026-02-03T01:29:44.4326270Z Time Elapsed 00:00:00.79
+2026-02-03T01:29:44.4585045Z Building D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.csproj
+2026-02-03T01:29:45.7199588Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain.Tests.Unit\Entities\LearningComponentTests.cs(2,44): error CS0234: The type or namespace name 'Entities' does not exist in the namespace 'UCR.ECCI.PI.ThemePark.Backend.Domain' (are you missing an assembly reference?) [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.csproj]
+2026-02-03T01:29:45.7328870Z 
+2026-02-03T01:29:45.7338952Z Build FAILED.
+2026-02-03T01:29:45.7340677Z 
+2026-02-03T01:29:45.7352465Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain.Tests.Unit\Entities\LearningComponentTests.cs(2,44): error CS0234: The type or namespace name 'Entities' does not exist in the namespace 'UCR.ECCI.PI.ThemePark.Backend.Domain' (are you missing an assembly reference?) [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.csproj]
+2026-02-03T01:29:45.7362972Z     0 Warning(s)
+2026-02-03T01:29:45.7382808Z     1 Error(s)
+2026-02-03T01:29:45.7387179Z 
+2026-02-03T01:29:45.7391583Z Time Elapsed 00:00:00.91
+2026-02-03T01:29:45.7650260Z Building D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.csproj
+2026-02-03T01:29:46.9663073Z   UCR.ECCI.PI.ThemePark.Backend.Domain -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Domain.dll
+2026-02-03T01:29:47.0549451Z   UCR.ECCI.PI.ThemePark.Backend.Infrastructure -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.dll
+2026-02-03T01:29:47.0662383Z 
+2026-02-03T01:29:47.0674024Z Build succeeded.
+2026-02-03T01:29:47.0676031Z     0 Warning(s)
+2026-02-03T01:29:47.0684987Z     0 Error(s)
+2026-02-03T01:29:47.0688216Z 
+2026-02-03T01:29:47.0693443Z Time Elapsed 00:00:00.92
+2026-02-03T01:29:47.0996795Z Building D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.csproj
+2026-02-03T01:29:48.3975448Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure.Tests.Unit\Repositories\LearningComponentRepositoryTests.cs(1,17): error CS0234: The type or namespace name 'EntityFrameworkCore' does not exist in the namespace 'Microsoft' (are you missing an assembly reference?) [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.csproj]
+2026-02-03T01:29:48.3992790Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure.Tests.Unit\Repositories\LearningComponentRepositoryTests.cs(3,37): error CS0234: The type or namespace name 'Domain' does not exist in the namespace 'UCR.ECCI.PI.ThemePark.Backend' (are you missing an assembly reference?) [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.csproj]
+2026-02-03T01:29:48.4007074Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure.Tests.Unit\Repositories\LearningComponentRepositoryTests.cs(5,52): error CS0234: The type or namespace name 'Repositories' does not exist in the namespace 'UCR.ECCI.PI.ThemePark.Backend.Infrastructure' (are you missing an assembly reference?) [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.csproj]
+2026-02-03T01:29:48.4015635Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure.Tests.Unit\Repositories\LearningComponentRepositoryTests.cs(16,13): error CS0246: The type or namespace name 'DbContextOptions<>' could not be found (are you missing a using directive or an assembly reference?) [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.csproj]
+2026-02-03T01:29:48.4039716Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure.Tests.Unit\Repositories\LearningComponentRepositoryTests.cs(16,30): error CS0246: The type or namespace name 'UCRDatabaseContext' could not be found (are you missing a using directive or an assembly reference?) [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.csproj]
+2026-02-03T01:29:48.4118584Z 
+2026-02-03T01:29:48.4134042Z Build FAILED.
+2026-02-03T01:29:48.4136164Z 
+2026-02-03T01:29:48.4149610Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure.Tests.Unit\Repositories\LearningComponentRepositoryTests.cs(1,17): error CS0234: The type or namespace name 'EntityFrameworkCore' does not exist in the namespace 'Microsoft' (are you missing an assembly reference?) [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.csproj]
+2026-02-03T01:29:48.4163621Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure.Tests.Unit\Repositories\LearningComponentRepositoryTests.cs(3,37): error CS0234: The type or namespace name 'Domain' does not exist in the namespace 'UCR.ECCI.PI.ThemePark.Backend' (are you missing an assembly reference?) [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.csproj]
+2026-02-03T01:29:48.4172971Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure.Tests.Unit\Repositories\LearningComponentRepositoryTests.cs(5,52): error CS0234: The type or namespace name 'Repositories' does not exist in the namespace 'UCR.ECCI.PI.ThemePark.Backend.Infrastructure' (are you missing an assembly reference?) [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.csproj]
+2026-02-03T01:29:48.4192936Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure.Tests.Unit\Repositories\LearningComponentRepositoryTests.cs(16,13): error CS0246: The type or namespace name 'DbContextOptions<>' could not be found (are you missing a using directive or an assembly reference?) [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.csproj]
+2026-02-03T01:29:48.4201506Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure.Tests.Unit\Repositories\LearningComponentRepositoryTests.cs(16,30): error CS0246: The type or namespace name 'UCRDatabaseContext' could not be found (are you missing a using directive or an assembly reference?) [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.csproj]
+2026-02-03T01:29:48.4204994Z     0 Warning(s)
+2026-02-03T01:29:48.4214119Z     5 Error(s)
+2026-02-03T01:29:48.4216075Z 
+2026-02-03T01:29:48.4219329Z Time Elapsed 00:00:01.01
+2026-02-03T01:29:48.4486713Z Building D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation\UCR.ECCI.PI.ThemePark.Backend.Presentation.csproj
+2026-02-03T01:29:49.8686168Z   UCR.ECCI.PI.ThemePark.Backend.Domain -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Domain.dll
+2026-02-03T01:29:50.0829788Z   UCR.ECCI.PI.ThemePark.Backend.Application -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Application.dll
+2026-02-03T01:29:50.3844572Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation\Handlers\GetLearningComponentsHandler.cs(33,20): error CS0103: The name 'TypedResults' does not exist in the current context [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation\UCR.ECCI.PI.ThemePark.Backend.Presentation.csproj]
+2026-02-03T01:29:50.3851313Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation\Handlers\GetLearningComponentsHandler.cs(54,16): error CS0103: The name 'TypedResults' does not exist in the current context [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation\UCR.ECCI.PI.ThemePark.Backend.Presentation.csproj]
+2026-02-03T01:29:50.4039040Z 
+2026-02-03T01:29:50.4039914Z Build FAILED.
+2026-02-03T01:29:50.4040798Z 
+2026-02-03T01:29:50.4045041Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation\Handlers\GetLearningComponentsHandler.cs(33,20): error CS0103: The name 'TypedResults' does not exist in the current context [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation\UCR.ECCI.PI.ThemePark.Backend.Presentation.csproj]
+2026-02-03T01:29:50.4051476Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation\Handlers\GetLearningComponentsHandler.cs(54,16): error CS0103: The name 'TypedResults' does not exist in the current context [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation\UCR.ECCI.PI.ThemePark.Backend.Presentation.csproj]
+2026-02-03T01:29:50.4054630Z     0 Warning(s)
+2026-02-03T01:29:50.4062949Z     2 Error(s)
+2026-02-03T01:29:50.4067473Z 
+2026-02-03T01:29:50.4077291Z Time Elapsed 00:00:01.59
+2026-02-03T01:29:50.4343785Z Building D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.csproj
+2026-02-03T01:29:51.6981128Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\Handlers\GetLearningComponentsHandlerTests.cs(1,17): error CS0234: The type or namespace name 'AspNetCore' does not exist in the namespace 'Microsoft' (are you missing an assembly reference?) [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.csproj]
+2026-02-03T01:29:51.6990304Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\Handlers\GetLearningComponentsHandlerTests.cs(4,37): error CS0234: The type or namespace name 'Application' does not exist in the namespace 'UCR.ECCI.PI.ThemePark.Backend' (are you missing an assembly reference?) [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.csproj]
+2026-02-03T01:29:51.6999927Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\Handlers\GetLearningComponentsHandlerTests.cs(5,37): error CS0234: The type or namespace name 'Domain' does not exist in the namespace 'UCR.ECCI.PI.ThemePark.Backend' (are you missing an assembly reference?) [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.csproj]
+2026-02-03T01:29:51.7029628Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\Handlers\GetLearningComponentsHandlerTests.cs(6,50): error CS0234: The type or namespace name 'Handlers' does not exist in the namespace 'UCR.ECCI.PI.ThemePark.Backend.Presentation' (are you missing an assembly reference?) [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.csproj]
+2026-02-03T01:29:51.7061654Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\Handlers\GetLearningComponentsHandlerTests.cs(7,50): error CS0234: The type or namespace name 'Responses' does not exist in the namespace 'UCR.ECCI.PI.ThemePark.Backend.Presentation' (are you missing an assembly reference?) [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.csproj]
+2026-02-03T01:29:51.7078679Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\Handlers\GetLearningComponentsHandlerTests.cs(18,18): error CS0246: The type or namespace name 'ILearningComponentService' could not be found (are you missing a using directive or an assembly reference?) [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.csproj]
+2026-02-03T01:29:51.7128187Z 
+2026-02-03T01:29:51.7133255Z Build FAILED.
+2026-02-03T01:29:51.7135247Z 
+2026-02-03T01:29:51.7146674Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\Handlers\GetLearningComponentsHandlerTests.cs(1,17): error CS0234: The type or namespace name 'AspNetCore' does not exist in the namespace 'Microsoft' (are you missing an assembly reference?) [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.csproj]
+2026-02-03T01:29:51.7157932Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\Handlers\GetLearningComponentsHandlerTests.cs(4,37): error CS0234: The type or namespace name 'Application' does not exist in the namespace 'UCR.ECCI.PI.ThemePark.Backend' (are you missing an assembly reference?) [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.csproj]
+2026-02-03T01:29:51.7169863Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\Handlers\GetLearningComponentsHandlerTests.cs(5,37): error CS0234: The type or namespace name 'Domain' does not exist in the namespace 'UCR.ECCI.PI.ThemePark.Backend' (are you missing an assembly reference?) [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.csproj]
+2026-02-03T01:29:51.7187813Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\Handlers\GetLearningComponentsHandlerTests.cs(6,50): error CS0234: The type or namespace name 'Handlers' does not exist in the namespace 'UCR.ECCI.PI.ThemePark.Backend.Presentation' (are you missing an assembly reference?) [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.csproj]
+2026-02-03T01:29:51.7247991Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\Handlers\GetLearningComponentsHandlerTests.cs(7,50): error CS0234: The type or namespace name 'Responses' does not exist in the namespace 'UCR.ECCI.PI.ThemePark.Backend.Presentation' (are you missing an assembly reference?) [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.csproj]
+2026-02-03T01:29:51.7257236Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\Handlers\GetLearningComponentsHandlerTests.cs(18,18): error CS0246: The type or namespace name 'ILearningComponentService' could not be found (are you missing a using directive or an assembly reference?) [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.csproj]
+2026-02-03T01:29:51.7261424Z     0 Warning(s)
+2026-02-03T01:29:51.7262146Z     6 Error(s)
+2026-02-03T01:29:51.7262718Z 
+2026-02-03T01:29:51.7263416Z Time Elapsed 00:00:00.90
+2026-02-03T01:29:51.7830854Z ##[error]Process completed with exit code 1.
+2026-02-03T01:29:51.8064237Z Post job cleanup.
+2026-02-03T01:29:52.1017144Z [command]"C:\Program Files\Git\bin\git.exe" version
+2026-02-03T01:29:52.1432387Z git version 2.52.0.windows.1
+2026-02-03T01:29:52.1563450Z Temporarily overriding HOME='D:\a\_temp\feb89e89-3950-402f-83d2-8f0bf32e3239' before making global git config changes
+2026-02-03T01:29:52.1609841Z Adding repository directory to the temporary git global config as a safe directory
+2026-02-03T01:29:52.1612810Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\tdd-llm-repo-a\tdd-llm-repo-a
+2026-02-03T01:29:52.2155226Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+2026-02-03T01:29:52.2630905Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+2026-02-03T01:29:52.8995542Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-02-03T01:29:52.9286635Z http.https://github.com/.extraheader
+2026-02-03T01:29:52.9345180Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset-all http.https://github.com/.extraheader
+2026-02-03T01:29:52.9693668Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+2026-02-03T01:29:53.5804110Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-02-03T01:29:53.6136871Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+2026-02-03T01:29:54.2067699Z Cleaning up orphan processes
+2026-02-03T01:29:54.2531601Z Terminate orphan process: pid (5428) (dotnet)
+2026-02-03T01:29:54.2613242Z Terminate orphan process: pid (6012) (conhost)
+2026-02-03T01:29:54.2997698Z Terminate orphan process: pid (4880) (VBCSCompiler)
+2026-02-03T01:29:54.3102164Z Terminate orphan process: pid (1852) (conhost)

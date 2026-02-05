@@ -1,0 +1,269 @@
+﻿2026-02-04T00:53:40.1004336Z Current runner version: '2.331.0'
+2026-02-04T00:53:40.1038395Z ##[group]Runner Image Provisioner
+2026-02-04T00:53:40.1039945Z Hosted Compute Agent
+2026-02-04T00:53:40.1040851Z Version: 20260123.484
+2026-02-04T00:53:40.1041708Z Commit: 6bd6555ca37d84114959e1c76d2c01448ff61c5d
+2026-02-04T00:53:40.1042845Z Build Date: 2026-01-23T19:41:17Z
+2026-02-04T00:53:40.1043806Z Worker ID: {326c8ad2-8cc6-45ca-a9c2-11d8cb2d29dd}
+2026-02-04T00:53:40.1044927Z Azure Region: westus
+2026-02-04T00:53:40.1045661Z ##[endgroup]
+2026-02-04T00:53:40.1047760Z ##[group]Operating System
+2026-02-04T00:53:40.1048673Z Microsoft Windows Server 2025
+2026-02-04T00:53:40.1049454Z 10.0.26100
+2026-02-04T00:53:40.1050204Z Datacenter
+2026-02-04T00:53:40.1050832Z ##[endgroup]
+2026-02-04T00:53:40.1051535Z ##[group]Runner Image
+2026-02-04T00:53:40.1052347Z Image: windows-2025
+2026-02-04T00:53:40.1053185Z Version: 20260127.11.2
+2026-02-04T00:53:40.1055468Z Included Software: https://github.com/actions/runner-images/blob/win25/20260127.11/images/windows/Windows2025-Readme.md
+2026-02-04T00:53:40.1058069Z Image Release: https://github.com/actions/runner-images/releases/tag/win25%2F20260127.11
+2026-02-04T00:53:40.1059976Z ##[endgroup]
+2026-02-04T00:53:40.1061847Z ##[group]GITHUB_TOKEN Permissions
+2026-02-04T00:53:40.1064253Z Contents: read
+2026-02-04T00:53:40.1065044Z Metadata: read
+2026-02-04T00:53:40.1065873Z Packages: read
+2026-02-04T00:53:40.1066606Z ##[endgroup]
+2026-02-04T00:53:40.1069280Z Secret source: Actions
+2026-02-04T00:53:40.1070385Z Prepare workflow directory
+2026-02-04T00:53:40.1573571Z Prepare all required actions
+2026-02-04T00:53:40.1627862Z Getting action download info
+2026-02-04T00:53:40.6036112Z Download action repository 'actions/checkout@v4' (SHA:34e114876b0b11c390a56381ad16ebd13914f8d5)
+2026-02-04T00:53:40.9438421Z Download action repository 'actions/setup-dotnet@v4' (SHA:67a3573c9a986a3f9c594539f4ab511d57bb3ce9)
+2026-02-04T00:53:42.1994274Z Complete job name: build
+2026-02-04T00:53:42.5054519Z ##[group]Run actions/checkout@v4
+2026-02-04T00:53:42.5056121Z with:
+2026-02-04T00:53:42.5056826Z   repository: UCR-PI-IS/tdd-llm-repo-a
+2026-02-04T00:53:42.5058082Z   token: ***
+2026-02-04T00:53:42.5058733Z   ssh-strict: true
+2026-02-04T00:53:42.5059409Z   ssh-user: git
+2026-02-04T00:53:42.5060087Z   persist-credentials: true
+2026-02-04T00:53:42.5060872Z   clean: true
+2026-02-04T00:53:42.5061557Z   sparse-checkout-cone-mode: true
+2026-02-04T00:53:42.5062424Z   fetch-depth: 1
+2026-02-04T00:53:42.5063088Z   fetch-tags: false
+2026-02-04T00:53:42.5063791Z   show-progress: true
+2026-02-04T00:53:42.5064497Z   lfs: false
+2026-02-04T00:53:42.5065137Z   submodules: false
+2026-02-04T00:53:42.5065875Z   set-safe-directory: true
+2026-02-04T00:53:42.5066995Z ##[endgroup]
+2026-02-04T00:53:43.3135556Z Syncing repository: UCR-PI-IS/tdd-llm-repo-a
+2026-02-04T00:53:43.3138580Z ##[group]Getting Git version info
+2026-02-04T00:53:43.3140951Z Working directory is 'D:\a\tdd-llm-repo-a\tdd-llm-repo-a'
+2026-02-04T00:53:43.3142669Z [command]"C:\Program Files\Git\bin\git.exe" version
+2026-02-04T00:53:44.2926026Z git version 2.52.0.windows.1
+2026-02-04T00:53:44.2929150Z ##[endgroup]
+2026-02-04T00:53:44.2936646Z Temporarily overriding HOME='D:\a\_temp\589b3eb4-bb06-4aaf-a2b6-71e92c24a520' before making global git config changes
+2026-02-04T00:53:44.2938467Z Adding repository directory to the temporary git global config as a safe directory
+2026-02-04T00:53:44.2939847Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\tdd-llm-repo-a\tdd-llm-repo-a
+2026-02-04T00:53:44.2942022Z Deleting the contents of 'D:\a\tdd-llm-repo-a\tdd-llm-repo-a'
+2026-02-04T00:53:44.2943131Z ##[group]Initializing the repository
+2026-02-04T00:53:44.2944010Z [command]"C:\Program Files\Git\bin\git.exe" init D:\a\tdd-llm-repo-a\tdd-llm-repo-a
+2026-02-04T00:53:44.2945147Z Initialized empty Git repository in D:/a/tdd-llm-repo-a/tdd-llm-repo-a/.git/
+2026-02-04T00:53:44.2947534Z [command]"C:\Program Files\Git\bin\git.exe" remote add origin https://github.com/UCR-PI-IS/tdd-llm-repo-a
+2026-02-04T00:53:44.4607213Z ##[endgroup]
+2026-02-04T00:53:44.4608185Z ##[group]Disabling automatic garbage collection
+2026-02-04T00:53:44.4609152Z [command]"C:\Program Files\Git\bin\git.exe" config --local gc.auto 0
+2026-02-04T00:53:44.4611186Z ##[endgroup]
+2026-02-04T00:53:44.4611817Z ##[group]Setting up auth
+2026-02-04T00:53:44.4612745Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+2026-02-04T00:53:45.2953745Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+2026-02-04T00:53:47.9517476Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-02-04T00:53:47.9859683Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+2026-02-04T00:53:48.5704164Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-02-04T00:53:48.6067399Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+2026-02-04T00:53:49.2118609Z [command]"C:\Program Files\Git\bin\git.exe" config --local http.https://github.com/.extraheader "AUTHORIZATION: basic ***"
+2026-02-04T00:53:49.2496609Z ##[endgroup]
+2026-02-04T00:53:49.2518152Z ##[group]Fetching the repository
+2026-02-04T00:53:49.2520008Z [command]"C:\Program Files\Git\bin\git.exe" -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +464a6ba7c27bdcfdad84a28a481ed207a87233f2:refs/remotes/pull/23/merge
+2026-02-04T00:53:51.7628618Z From https://github.com/UCR-PI-IS/tdd-llm-repo-a
+2026-02-04T00:53:51.7629864Z  * [new ref]         464a6ba7c27bdcfdad84a28a481ed207a87233f2 -> pull/23/merge
+2026-02-04T00:53:51.8085956Z ##[endgroup]
+2026-02-04T00:53:51.8086832Z ##[group]Determining the checkout info
+2026-02-04T00:53:51.8088461Z ##[endgroup]
+2026-02-04T00:53:51.8102382Z [command]"C:\Program Files\Git\bin\git.exe" sparse-checkout disable
+2026-02-04T00:53:51.8750795Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset-all extensions.worktreeConfig
+2026-02-04T00:53:51.9165338Z ##[group]Checking out the ref
+2026-02-04T00:53:51.9170725Z [command]"C:\Program Files\Git\bin\git.exe" checkout --progress --force refs/remotes/pull/23/merge
+2026-02-04T00:53:52.0929760Z Note: switching to 'refs/remotes/pull/23/merge'.
+2026-02-04T00:53:52.0931035Z 
+2026-02-04T00:53:52.0933301Z You are in 'detached HEAD' state. You can look around, make experimental
+2026-02-04T00:53:52.0951192Z changes and commit them, and you can discard any commits you make in this
+2026-02-04T00:53:52.0966773Z state without impacting any branches by switching back to a branch.
+2026-02-04T00:53:52.0976889Z 
+2026-02-04T00:53:52.0977990Z If you want to create a new branch to retain commits you create, you may
+2026-02-04T00:53:52.0978772Z do so (now or later) by using -c with the switch command. Example:
+2026-02-04T00:53:52.0979601Z 
+2026-02-04T00:53:52.0979804Z   git switch -c <new-branch-name>
+2026-02-04T00:53:52.0980687Z 
+2026-02-04T00:53:52.0986368Z Or undo this operation with:
+2026-02-04T00:53:52.0987221Z 
+2026-02-04T00:53:52.0987548Z   git switch -
+2026-02-04T00:53:52.0987925Z 
+2026-02-04T00:53:52.0988415Z Turn off this advice by setting config variable advice.detachedHead to false
+2026-02-04T00:53:52.0989104Z 
+2026-02-04T00:53:52.0989845Z HEAD is now at 464a6ba Merge eba45bb118a46ca36ce1de0f9a7b519839b18f39 into d524fa443df4f6fc27aeeb0bc8e7c5fd9665aee5
+2026-02-04T00:53:52.0997876Z ##[endgroup]
+2026-02-04T00:53:52.1531975Z [command]"C:\Program Files\Git\bin\git.exe" log -1 --format=%H
+2026-02-04T00:53:52.1869172Z 464a6ba7c27bdcfdad84a28a481ed207a87233f2
+2026-02-04T00:53:52.2327084Z ##[group]Run actions/setup-dotnet@v4
+2026-02-04T00:53:52.2327411Z with:
+2026-02-04T00:53:52.2327610Z   dotnet-version: 8.0.x
+
+2026-02-04T00:53:52.2327817Z   cache: false
+2026-02-04T00:53:52.2327981Z ##[endgroup]
+2026-02-04T00:53:52.7984320Z [command]"C:\Program Files\PowerShell\7\pwsh.exe" -NoLogo -Sta -NoProfile -NonInteractive -ExecutionPolicy Unrestricted -Command & 'D:\a\_actions\actions\setup-dotnet\v4\externals\install-dotnet.ps1' -SkipNonVersionedFiles -Runtime dotnet -Channel LTS
+2026-02-04T00:54:03.0124996Z dotnet-install: .NET Core Runtime with version '10.0.2' is already installed.
+2026-02-04T00:54:03.3788071Z [command]"C:\Program Files\PowerShell\7\pwsh.exe" -NoLogo -Sta -NoProfile -NonInteractive -ExecutionPolicy Unrestricted -Command & 'D:\a\_actions\actions\setup-dotnet\v4\externals\install-dotnet.ps1' -SkipNonVersionedFiles -Channel 8.0
+2026-02-04T00:54:04.2869400Z dotnet-install: .NET Core SDK with version '8.0.417' is already installed.
+2026-02-04T00:54:04.3998180Z ##[group]Run dotnet restore UCR.ECCI.PI.ThemePark.sln
+2026-02-04T00:54:04.3998632Z [36;1mdotnet restore UCR.ECCI.PI.ThemePark.sln[0m
+2026-02-04T00:54:04.4072460Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+2026-02-04T00:54:04.4072785Z env:
+2026-02-04T00:54:04.4072954Z   DOTNET_ROOT: C:\Program Files\dotnet
+2026-02-04T00:54:04.4073199Z ##[endgroup]
+2026-02-04T00:54:10.9513671Z D:\a\tdd-llm-repo-a\tdd-llm-repo-a\UCR.ECCI.PI.ThemePark.Database\UCR.ECCI.PI.ThemePark.Database.sqlproj : warning NU1503: Skipping restore for project 'D:\a\tdd-llm-repo-a\tdd-llm-repo-a\UCR.ECCI.PI.ThemePark.Database\UCR.ECCI.PI.ThemePark.Database.sqlproj'. The project file may be invalid or missing targets required for restore. [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\UCR.ECCI.PI.ThemePark.sln]
+2026-02-04T00:54:10.9529864Z   Determining projects to restore...
+2026-02-04T00:54:33.9305718Z   Restored D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.csproj (in 21.79 sec).
+2026-02-04T00:54:33.9307468Z   Restored D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.DependencyInjection\UCR.ECCI.PI.ThemePark.Backend.DependencyInjection.csproj (in 21.82 sec).
+2026-02-04T00:54:33.9433547Z   Restored D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application\UCR.ECCI.PI.ThemePark.Backend.Application.csproj (in 3 ms).
+2026-02-04T00:54:33.9446831Z   Restored D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.csproj (in 5 ms).
+2026-02-04T00:54:34.5132940Z   Restored D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation\UCR.ECCI.PI.ThemePark.Backend.Presentation.csproj (in 554 ms).
+2026-02-04T00:54:34.5614229Z   Restored D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.csproj (in 4 ms).
+2026-02-04T00:54:35.4539272Z   Restored D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.csproj (in 11 ms).
+2026-02-04T00:54:36.5266257Z   Restored D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.csproj (in 1.06 sec).
+2026-02-04T00:54:36.5333391Z   Restored D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\UCR.ECCI.PI.ThemePark.Backend.Domain.csproj (in 2 ms).
+2026-02-04T00:54:37.8687037Z   Restored D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Api\UCR.ECCI.PI.ThemePark.Backend.Api.csproj (in 3.92 sec).
+2026-02-04T00:54:38.0760663Z ##[group]Run $ErrorActionPreference = 'Stop'
+2026-02-04T00:54:38.0761145Z [36;1m$ErrorActionPreference = 'Stop'[0m
+2026-02-04T00:54:38.0761623Z [36;1m$csprojFiles = Get-ChildItem -Path . -Recurse -Filter *.csproj -File[0m
+2026-02-04T00:54:38.0762069Z [36;1mif (-not $csprojFiles) {[0m
+2026-02-04T00:54:38.0762398Z [36;1m  Write-Host 'No .csproj files found to build.'[0m
+2026-02-04T00:54:38.0762701Z [36;1m  exit 0[0m
+2026-02-04T00:54:38.0763211Z [36;1m}[0m
+2026-02-04T00:54:38.0763409Z [36;1mforeach ($proj in $csprojFiles) {[0m
+2026-02-04T00:54:38.0763741Z [36;1m  Write-Host "Building $($proj.FullName)"[0m
+2026-02-04T00:54:38.0764106Z [36;1m  dotnet build $proj.FullName --no-restore -c Release[0m
+2026-02-04T00:54:38.0764423Z [36;1m}[0m
+2026-02-04T00:54:38.0863760Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+2026-02-04T00:54:38.0864210Z env:
+2026-02-04T00:54:38.0864437Z   DOTNET_ROOT: C:\Program Files\dotnet
+2026-02-04T00:54:38.0864858Z ##[endgroup]
+2026-02-04T00:54:38.5803823Z Building D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Api\UCR.ECCI.PI.ThemePark.Backend.Api.csproj
+2026-02-04T00:55:08.2271612Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\Entities\Building.cs(85,9): error CS0103: The name 'InternalID' does not exist in the current context [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\UCR.ECCI.PI.ThemePark.Backend.Domain.csproj]
+2026-02-04T00:55:08.2286061Z 
+2026-02-04T00:55:08.2286220Z Build FAILED.
+2026-02-04T00:55:08.2286454Z 
+2026-02-04T00:55:08.2289043Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\Entities\Building.cs(85,9): error CS0103: The name 'InternalID' does not exist in the current context [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\UCR.ECCI.PI.ThemePark.Backend.Domain.csproj]
+2026-02-04T00:55:08.2291573Z     0 Warning(s)
+2026-02-04T00:55:08.2291913Z     1 Error(s)
+2026-02-04T00:55:08.2292090Z 
+2026-02-04T00:55:08.2292258Z Time Elapsed 00:00:27.93
+2026-02-04T00:55:08.2293270Z Building D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application\UCR.ECCI.PI.ThemePark.Backend.Application.csproj
+2026-02-04T00:55:09.7491131Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\Entities\Building.cs(85,9): error CS0103: The name 'InternalID' does not exist in the current context [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\UCR.ECCI.PI.ThemePark.Backend.Domain.csproj]
+2026-02-04T00:55:09.7498139Z 
+2026-02-04T00:55:09.7498855Z Build FAILED.
+2026-02-04T00:55:09.7499252Z 
+2026-02-04T00:55:09.7501966Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\Entities\Building.cs(85,9): error CS0103: The name 'InternalID' does not exist in the current context [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\UCR.ECCI.PI.ThemePark.Backend.Domain.csproj]
+2026-02-04T00:55:09.7504912Z     0 Warning(s)
+2026-02-04T00:55:09.7505420Z     1 Error(s)
+2026-02-04T00:55:09.7505770Z 
+2026-02-04T00:55:09.7506036Z Time Elapsed 00:00:01.18
+2026-02-04T00:55:09.7507367Z Building D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.csproj
+2026-02-04T00:55:10.5070139Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\Entities\Building.cs(85,9): error CS0103: The name 'InternalID' does not exist in the current context [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\UCR.ECCI.PI.ThemePark.Backend.Domain.csproj]
+2026-02-04T00:55:10.5426585Z 
+2026-02-04T00:55:10.5434056Z Build FAILED.
+2026-02-04T00:55:10.5514019Z 
+2026-02-04T00:55:10.5517589Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\Entities\Building.cs(85,9): error CS0103: The name 'InternalID' does not exist in the current context [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\UCR.ECCI.PI.ThemePark.Backend.Domain.csproj]
+2026-02-04T00:55:10.5521639Z     0 Warning(s)
+2026-02-04T00:55:10.5522391Z     1 Error(s)
+2026-02-04T00:55:10.5523224Z 
+2026-02-04T00:55:10.5523763Z Time Elapsed 00:00:01.35
+2026-02-04T00:55:10.5934499Z Building D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.DependencyInjection\UCR.ECCI.PI.ThemePark.Backend.DependencyInjection.csproj
+2026-02-04T00:55:12.6222980Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\Entities\Building.cs(85,9): error CS0103: The name 'InternalID' does not exist in the current context [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\UCR.ECCI.PI.ThemePark.Backend.Domain.csproj]
+2026-02-04T00:55:12.6492332Z 
+2026-02-04T00:55:12.6493352Z Build FAILED.
+2026-02-04T00:55:12.6501984Z 
+2026-02-04T00:55:12.6517602Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\Entities\Building.cs(85,9): error CS0103: The name 'InternalID' does not exist in the current context [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\UCR.ECCI.PI.ThemePark.Backend.Domain.csproj]
+2026-02-04T00:55:12.6540083Z     0 Warning(s)
+2026-02-04T00:55:12.6545170Z     1 Error(s)
+2026-02-04T00:55:12.6562441Z 
+2026-02-04T00:55:12.6562900Z Time Elapsed 00:00:01.51
+2026-02-04T00:55:12.6896424Z Building D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\UCR.ECCI.PI.ThemePark.Backend.Domain.csproj
+2026-02-04T00:55:14.3108568Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\Entities\Building.cs(85,9): error CS0103: The name 'InternalID' does not exist in the current context [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\UCR.ECCI.PI.ThemePark.Backend.Domain.csproj]
+2026-02-04T00:55:14.3279525Z 
+2026-02-04T00:55:14.3281211Z Build FAILED.
+2026-02-04T00:55:14.3292134Z 
+2026-02-04T00:55:14.3298987Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\Entities\Building.cs(85,9): error CS0103: The name 'InternalID' does not exist in the current context [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\UCR.ECCI.PI.ThemePark.Backend.Domain.csproj]
+2026-02-04T00:55:14.3320883Z     0 Warning(s)
+2026-02-04T00:55:14.3331734Z     1 Error(s)
+2026-02-04T00:55:14.3332493Z 
+2026-02-04T00:55:14.3356460Z Time Elapsed 00:00:00.92
+2026-02-04T00:55:14.3630624Z Building D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.csproj
+2026-02-04T00:55:15.8726251Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\Entities\Building.cs(85,9): error CS0103: The name 'InternalID' does not exist in the current context [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\UCR.ECCI.PI.ThemePark.Backend.Domain.csproj]
+2026-02-04T00:55:15.8906390Z 
+2026-02-04T00:55:15.8917328Z Build FAILED.
+2026-02-04T00:55:15.8918206Z 
+2026-02-04T00:55:15.8923263Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\Entities\Building.cs(85,9): error CS0103: The name 'InternalID' does not exist in the current context [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\UCR.ECCI.PI.ThemePark.Backend.Domain.csproj]
+2026-02-04T00:55:15.8963409Z     0 Warning(s)
+2026-02-04T00:55:15.8966177Z     1 Error(s)
+2026-02-04T00:55:15.8968394Z 
+2026-02-04T00:55:15.8968849Z Time Elapsed 00:00:01.09
+2026-02-04T00:55:15.9317481Z Building D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.csproj
+2026-02-04T00:55:17.3951960Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\Entities\Building.cs(85,9): error CS0103: The name 'InternalID' does not exist in the current context [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\UCR.ECCI.PI.ThemePark.Backend.Domain.csproj]
+2026-02-04T00:55:17.4145353Z 
+2026-02-04T00:55:17.4159621Z Build FAILED.
+2026-02-04T00:55:17.4189393Z 
+2026-02-04T00:55:17.4208081Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\Entities\Building.cs(85,9): error CS0103: The name 'InternalID' does not exist in the current context [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\UCR.ECCI.PI.ThemePark.Backend.Domain.csproj]
+2026-02-04T00:55:17.4219233Z     0 Warning(s)
+2026-02-04T00:55:17.4220258Z     1 Error(s)
+2026-02-04T00:55:17.4220801Z 
+2026-02-04T00:55:17.4221599Z Time Elapsed 00:00:01.11
+2026-02-04T00:55:17.4561384Z Building D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.csproj
+2026-02-04T00:55:19.1295222Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\Entities\Building.cs(85,9): error CS0103: The name 'InternalID' does not exist in the current context [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\UCR.ECCI.PI.ThemePark.Backend.Domain.csproj]
+2026-02-04T00:55:19.1585626Z 
+2026-02-04T00:55:19.1593805Z Build FAILED.
+2026-02-04T00:55:19.1598207Z 
+2026-02-04T00:55:19.1608657Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\Entities\Building.cs(85,9): error CS0103: The name 'InternalID' does not exist in the current context [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\UCR.ECCI.PI.ThemePark.Backend.Domain.csproj]
+2026-02-04T00:55:19.1620616Z     0 Warning(s)
+2026-02-04T00:55:19.1645085Z     1 Error(s)
+2026-02-04T00:55:19.1649096Z 
+2026-02-04T00:55:19.1663455Z Time Elapsed 00:00:01.30
+2026-02-04T00:55:19.1987147Z Building D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation\UCR.ECCI.PI.ThemePark.Backend.Presentation.csproj
+2026-02-04T00:55:21.0152815Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\Entities\Building.cs(85,9): error CS0103: The name 'InternalID' does not exist in the current context [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\UCR.ECCI.PI.ThemePark.Backend.Domain.csproj]
+2026-02-04T00:55:21.0386774Z 
+2026-02-04T00:55:21.0388131Z Build FAILED.
+2026-02-04T00:55:21.0388923Z 
+2026-02-04T00:55:21.0392094Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\Entities\Building.cs(85,9): error CS0103: The name 'InternalID' does not exist in the current context [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\UCR.ECCI.PI.ThemePark.Backend.Domain.csproj]
+2026-02-04T00:55:21.0396022Z     0 Warning(s)
+2026-02-04T00:55:21.0396985Z     1 Error(s)
+2026-02-04T00:55:21.0397574Z 
+2026-02-04T00:55:21.0427628Z Time Elapsed 00:00:01.41
+2026-02-04T00:55:21.0694721Z Building D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.csproj
+2026-02-04T00:55:22.7506263Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\Entities\Building.cs(85,9): error CS0103: The name 'InternalID' does not exist in the current context [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\UCR.ECCI.PI.ThemePark.Backend.Domain.csproj]
+2026-02-04T00:55:22.8317538Z 
+2026-02-04T00:55:22.8318800Z Build FAILED.
+2026-02-04T00:55:22.8319486Z 
+2026-02-04T00:55:22.8323606Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\Entities\Building.cs(85,9): error CS0103: The name 'InternalID' does not exist in the current context [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\UCR.ECCI.PI.ThemePark.Backend.Domain.csproj]
+2026-02-04T00:55:22.8332748Z     0 Warning(s)
+2026-02-04T00:55:22.8333442Z     1 Error(s)
+2026-02-04T00:55:22.8352661Z 
+2026-02-04T00:55:22.8354575Z Time Elapsed 00:00:01.34
+2026-02-04T00:55:22.9196204Z ##[error]Process completed with exit code 1.
+2026-02-04T00:55:22.9481428Z Post job cleanup.
+2026-02-04T00:55:23.2678011Z [command]"C:\Program Files\Git\bin\git.exe" version
+2026-02-04T00:55:23.3220592Z git version 2.52.0.windows.1
+2026-02-04T00:55:23.3436664Z Temporarily overriding HOME='D:\a\_temp\623f48fe-be5f-4f29-8509-ff9dead8906c' before making global git config changes
+2026-02-04T00:55:23.3471466Z Adding repository directory to the temporary git global config as a safe directory
+2026-02-04T00:55:23.3496826Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\tdd-llm-repo-a\tdd-llm-repo-a
+2026-02-04T00:55:23.3968418Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+2026-02-04T00:55:23.4514332Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+2026-02-04T00:55:24.1451965Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-02-04T00:55:24.1804820Z http.https://github.com/.extraheader
+2026-02-04T00:55:24.1863257Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset-all http.https://github.com/.extraheader
+2026-02-04T00:55:24.2252990Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+2026-02-04T00:55:25.0593773Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-02-04T00:55:25.0973759Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+2026-02-04T00:55:25.8528067Z Cleaning up orphan processes
+2026-02-04T00:55:25.8952423Z Terminate orphan process: pid (1092) (dotnet)
+2026-02-04T00:55:25.9086567Z Terminate orphan process: pid (2008) (conhost)
+2026-02-04T00:55:25.9472372Z Terminate orphan process: pid (508) (VBCSCompiler)

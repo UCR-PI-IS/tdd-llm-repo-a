@@ -1,0 +1,67 @@
+﻿2026-02-03T01:46:14.8599087Z ##[group]Run $ErrorActionPreference = 'Stop'
+2026-02-03T01:46:14.8599505Z [36;1m$ErrorActionPreference = 'Stop'[0m
+2026-02-03T01:46:14.8599885Z [36;1m$projects = Get-ChildItem -Path . -Recurse -Filter *.csproj -File |[0m
+2026-02-03T01:46:14.8600358Z [36;1m  Where-Object { $_.FullName -like '*Backend.*.Tests.Unit*' }[0m
+2026-02-03T01:46:14.8600897Z [36;1mif ($projects) {[0m
+2026-02-03T01:46:14.8601117Z [36;1m  foreach ($proj in $projects) {[0m
+2026-02-03T01:46:14.8601423Z [36;1m    Write-Host "Building test project $($proj.FullName)"[0m
+2026-02-03T01:46:14.8601784Z [36;1m    dotnet build $proj.FullName -c Release --no-restore[0m
+2026-02-03T01:46:14.8602064Z [36;1m  }[0m
+2026-02-03T01:46:14.8602202Z [36;1m}[0m
+2026-02-03T01:46:14.8672436Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+2026-02-03T01:46:14.8672759Z env:
+2026-02-03T01:46:14.8672924Z   DOTNET_ROOT: C:\Program Files\dotnet
+2026-02-03T01:46:14.8673171Z ##[endgroup]
+2026-02-03T01:46:15.3235425Z Building test project D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.csproj
+2026-02-03T01:46:24.7427279Z   UCR.ECCI.PI.ThemePark.Backend.Domain -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Domain.dll
+2026-02-03T01:46:25.4942999Z   UCR.ECCI.PI.ThemePark.Backend.Application -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Application.dll
+2026-02-03T01:46:25.9777433Z ##[warning]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\Services\LearningComponentServiceTests.cs(80,75): warning CS8625: Cannot convert null literal to non-nullable reference type. [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.csproj]
+2026-02-03T01:46:25.9799265Z ##[warning]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\Services\LearningComponentServiceTests.cs(17,48): warning CS8618: Non-nullable field '_mockRepository' must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring the field as nullable. [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.csproj]
+2026-02-03T01:46:26.1184400Z   UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.dll
+2026-02-03T01:46:26.1390980Z 
+2026-02-03T01:46:26.1432312Z Build succeeded.
+2026-02-03T01:46:26.1433119Z 
+2026-02-03T01:46:26.1437078Z ##[warning]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\Services\LearningComponentServiceTests.cs(80,75): warning CS8625: Cannot convert null literal to non-nullable reference type. [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.csproj]
+2026-02-03T01:46:26.1446137Z ##[warning]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\Services\LearningComponentServiceTests.cs(17,48): warning CS8618: Non-nullable field '_mockRepository' must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring the field as nullable. [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.csproj]
+2026-02-03T01:46:26.1450696Z     2 Warning(s)
+2026-02-03T01:46:26.1471154Z     0 Error(s)
+2026-02-03T01:46:26.1472413Z 
+2026-02-03T01:46:26.1472955Z Time Elapsed 00:00:10.42
+2026-02-03T01:46:26.1855685Z Building test project D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.csproj
+2026-02-03T01:46:27.7282907Z   UCR.ECCI.PI.ThemePark.Backend.Domain -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Domain.dll
+2026-02-03T01:46:28.0791398Z   UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain.Tests.Unit\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.dll
+2026-02-03T01:46:28.0932585Z 
+2026-02-03T01:46:28.0934884Z Build succeeded.
+2026-02-03T01:46:28.0935830Z     0 Warning(s)
+2026-02-03T01:46:28.0944884Z     0 Error(s)
+2026-02-03T01:46:28.0946655Z 
+2026-02-03T01:46:28.0949395Z Time Elapsed 00:00:01.22
+2026-02-03T01:46:28.1233418Z Building test project D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.csproj
+2026-02-03T01:46:29.5011965Z   UCR.ECCI.PI.ThemePark.Backend.Domain -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Domain.dll
+2026-02-03T01:46:30.1516686Z   UCR.ECCI.PI.ThemePark.Backend.Infrastructure -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.dll
+2026-02-03T01:46:30.4807976Z ##[warning]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure.Tests.Unit\Repositories\LearningComponentRepositoryTests.cs(16,50): warning CS8618: Non-nullable field '_options' must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring the field as nullable. [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.csproj]
+2026-02-03T01:46:30.7894212Z   UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure.Tests.Unit\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.dll
+2026-02-03T01:46:30.8222980Z 
+2026-02-03T01:46:30.8325092Z Build succeeded.
+2026-02-03T01:46:30.8350238Z 
+2026-02-03T01:46:30.8384773Z ##[warning]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure.Tests.Unit\Repositories\LearningComponentRepositoryTests.cs(16,50): warning CS8618: Non-nullable field '_options' must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring the field as nullable. [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.csproj]
+2026-02-03T01:46:30.8395207Z     1 Warning(s)
+2026-02-03T01:46:30.8427665Z     0 Error(s)
+2026-02-03T01:46:30.8448879Z 
+2026-02-03T01:46:30.8485794Z Time Elapsed 00:00:02.32
+2026-02-03T01:46:30.8972334Z Building test project D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.csproj
+2026-02-03T01:46:32.6670880Z   UCR.ECCI.PI.ThemePark.Backend.Domain -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Domain.dll
+2026-02-03T01:46:33.0080077Z   UCR.ECCI.PI.ThemePark.Backend.Application -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Application.dll
+2026-02-03T01:46:34.8249859Z   UCR.ECCI.PI.ThemePark.Backend.Presentation -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Presentation.dll
+2026-02-03T01:46:35.1957232Z ##[warning]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\Handlers\GetLearningComponentsHandlerTests.cs(107,21): warning CS8602: Dereference of a possibly null reference. [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.csproj]
+2026-02-03T01:46:35.1967450Z ##[warning]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\Handlers\GetLearningComponentsHandlerTests.cs(18,45): warning CS8618: Non-nullable field '_mockService' must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring the field as nullable. [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.csproj]
+2026-02-03T01:46:35.3385633Z   UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.dll
+2026-02-03T01:46:35.3549134Z 
+2026-02-03T01:46:35.3551398Z Build succeeded.
+2026-02-03T01:46:35.3560782Z 
+2026-02-03T01:46:35.3564505Z ##[warning]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\Handlers\GetLearningComponentsHandlerTests.cs(107,21): warning CS8602: Dereference of a possibly null reference. [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.csproj]
+2026-02-03T01:46:35.3593351Z ##[warning]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\Handlers\GetLearningComponentsHandlerTests.cs(18,45): warning CS8618: Non-nullable field '_mockService' must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring the field as nullable. [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.csproj]
+2026-02-03T01:46:35.3625407Z     2 Warning(s)
+2026-02-03T01:46:35.3626159Z     0 Error(s)
+2026-02-03T01:46:35.3626578Z 
+2026-02-03T01:46:35.3626991Z Time Elapsed 00:00:03.91

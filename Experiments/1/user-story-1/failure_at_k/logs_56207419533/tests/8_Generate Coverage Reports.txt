@@ -1,0 +1,63 @@
+﻿2026-02-03T01:56:06.2393854Z ##[group]Run $ErrorActionPreference = 'Stop'
+2026-02-03T01:56:06.2394497Z [36;1m$ErrorActionPreference = 'Stop'[0m
+2026-02-03T01:56:06.2395581Z [36;1m$coverageFiles = Get-ChildItem -Path TestResults -Recurse -Filter coverage.cobertura.xml -File -ErrorAction SilentlyContinue[0m
+2026-02-03T01:56:06.2396574Z [36;1mif (-not $coverageFiles) {[0m
+2026-02-03T01:56:06.2396871Z [36;1m  Write-Host 'No coverage files found.'[0m
+2026-02-03T01:56:06.2397135Z [36;1m  exit 0[0m
+2026-02-03T01:56:06.2397287Z [36;1m}[0m
+2026-02-03T01:56:06.2397588Z [36;1m$toolPath = Join-Path (Resolve-Path ".").Path ".tools/reportgenerator.exe"[0m
+2026-02-03T01:56:06.2397996Z [36;1mif (-not (Test-Path $toolPath)) {[0m
+2026-02-03T01:56:06.2398321Z [36;1m  Write-Error "ReportGenerator not found at $toolPath"[0m
+2026-02-03T01:56:06.2398625Z [36;1m  exit 1[0m
+2026-02-03T01:56:06.2398786Z [36;1m}[0m
+2026-02-03T01:56:06.2398965Z [36;1mforeach ($cov in $coverageFiles) {[0m
+2026-02-03T01:56:06.2399320Z [36;1m  $projName = Split-Path -Path $cov.Directory.Parent.FullName -Leaf[0m
+2026-02-03T01:56:06.2400030Z [36;1m  $targetDir = Join-Path -Path "Coverage" -ChildPath $projName[0m
+2026-02-03T01:56:06.2400459Z [36;1m  New-Item -ItemType Directory -Force -Path $targetDir | Out-Null[0m
+2026-02-03T01:56:06.2400999Z [36;1m  & $toolPath -reports:$($cov.FullName) -targetdir:$targetDir -reporttypes:"Cobertura;JsonSummary"[0m
+2026-02-03T01:56:06.2401421Z [36;1m}[0m
+2026-02-03T01:56:06.2468333Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+2026-02-03T01:56:06.2468896Z env:
+2026-02-03T01:56:06.2469160Z   DOTNET_ROOT: C:\Program Files\dotnet
+2026-02-03T01:56:06.2469562Z ##[endgroup]
+2026-02-03T01:56:06.7304230Z 2026-02-03T01:56:06: Arguments
+2026-02-03T01:56:06.7306428Z 2026-02-03T01:56:06:  -reports:D:\a\tdd-llm-repo-a\tdd-llm-repo-a\TestResults\UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit\052d960a-1bff-4868-a6fa-59fdd017772a\coverage.cobertura.xml
+2026-02-03T01:56:06.7308662Z 2026-02-03T01:56:06:  -targetdir:Coverage\UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit
+2026-02-03T01:56:06.7313638Z 2026-02-03T01:56:06:  -reporttypes:Cobertura;JsonSummary
+2026-02-03T01:56:06.9318584Z 2026-02-03T01:56:06: Writing report file 'Coverage\UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit\Cobertura.xml'
+2026-02-03T01:56:06.9363947Z 2026-02-03T01:56:06: Writing report file 'Coverage\UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit\Summary.json'
+2026-02-03T01:56:06.9442062Z 2026-02-03T01:56:06: Report generation took 0.1 seconds
+2026-02-03T01:56:07.0172147Z 2026-02-03T01:56:07: Arguments
+2026-02-03T01:56:07.0174342Z 2026-02-03T01:56:07:  -reports:D:\a\tdd-llm-repo-a\tdd-llm-repo-a\TestResults\UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit\runneradmin_runnervmzwdec_2026-02-03_01_55_48\In\runnervmzwdec\coverage.cobertura.xml
+2026-02-03T01:56:07.0176434Z 2026-02-03T01:56:07:  -targetdir:Coverage\In
+2026-02-03T01:56:07.0177331Z 2026-02-03T01:56:07:  -reporttypes:Cobertura;JsonSummary
+2026-02-03T01:56:07.2184508Z 2026-02-03T01:56:07: Writing report file 'Coverage\In\Cobertura.xml'
+2026-02-03T01:56:07.2234125Z 2026-02-03T01:56:07: Writing report file 'Coverage\In\Summary.json'
+2026-02-03T01:56:07.2315841Z 2026-02-03T01:56:07: Report generation took 0.1 seconds
+2026-02-03T01:56:07.3040560Z 2026-02-03T01:56:07: Arguments
+2026-02-03T01:56:07.3042921Z 2026-02-03T01:56:07:  -reports:D:\a\tdd-llm-repo-a\tdd-llm-repo-a\TestResults\UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit\8046cbc0-5972-4318-944a-a204fdf522d7\coverage.cobertura.xml
+2026-02-03T01:56:07.3045092Z 2026-02-03T01:56:07:  -targetdir:Coverage\UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit
+2026-02-03T01:56:07.3046306Z 2026-02-03T01:56:07:  -reporttypes:Cobertura;JsonSummary
+2026-02-03T01:56:07.5268795Z 2026-02-03T01:56:07: Writing report file 'Coverage\UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit\Cobertura.xml'
+2026-02-03T01:56:07.5317297Z 2026-02-03T01:56:07: Writing report file 'Coverage\UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit\Summary.json'
+2026-02-03T01:56:07.5395556Z 2026-02-03T01:56:07: Report generation took 0.1 seconds
+2026-02-03T01:56:07.6096769Z 2026-02-03T01:56:07: Arguments
+2026-02-03T01:56:07.6098944Z 2026-02-03T01:56:07:  -reports:D:\a\tdd-llm-repo-a\tdd-llm-repo-a\TestResults\UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit\runneradmin_runnervmzwdec_2026-02-03_01_55_52\In\runnervmzwdec\coverage.cobertura.xml
+2026-02-03T01:56:07.6100975Z 2026-02-03T01:56:07:  -targetdir:Coverage\In
+2026-02-03T01:56:07.6101913Z 2026-02-03T01:56:07:  -reporttypes:Cobertura;JsonSummary
+2026-02-03T01:56:07.8307732Z 2026-02-03T01:56:07: Writing report file 'Coverage\In\Cobertura.xml'
+2026-02-03T01:56:07.8354308Z 2026-02-03T01:56:07: Writing report file 'Coverage\In\Summary.json'
+2026-02-03T01:56:07.8430812Z 2026-02-03T01:56:07: Report generation took 0.1 seconds
+2026-02-03T01:56:07.9115268Z 2026-02-03T01:56:07: Arguments
+2026-02-03T01:56:07.9117313Z 2026-02-03T01:56:07:  -reports:D:\a\tdd-llm-repo-a\tdd-llm-repo-a\TestResults\UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit\e947b3e3-8c6c-4184-8766-e43b3242d931\coverage.cobertura.xml
+2026-02-03T01:56:07.9120947Z 2026-02-03T01:56:07:  -targetdir:Coverage\UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit
+2026-02-03T01:56:07.9122583Z 2026-02-03T01:56:07:  -reporttypes:Cobertura;JsonSummary
+2026-02-03T01:56:08.1322339Z 2026-02-03T01:56:08: Writing report file 'Coverage\UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit\Cobertura.xml'
+2026-02-03T01:56:08.1371111Z 2026-02-03T01:56:08: Writing report file 'Coverage\UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit\Summary.json'
+2026-02-03T01:56:08.1453418Z 2026-02-03T01:56:08: Report generation took 0.1 seconds
+2026-02-03T01:56:08.2159003Z 2026-02-03T01:56:08: Arguments
+2026-02-03T01:56:08.2161298Z 2026-02-03T01:56:08:  -reports:D:\a\tdd-llm-repo-a\tdd-llm-repo-a\TestResults\UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit\runneradmin_runnervmzwdec_2026-02-03_01_56_02\In\runnervmzwdec\coverage.cobertura.xml
+2026-02-03T01:56:08.2163410Z 2026-02-03T01:56:08:  -targetdir:Coverage\In
+2026-02-03T01:56:08.2164330Z 2026-02-03T01:56:08:  -reporttypes:Cobertura;JsonSummary
+2026-02-03T01:56:08.4477824Z 2026-02-03T01:56:08: Writing report file 'Coverage\In\Cobertura.xml'
+2026-02-03T01:56:08.4633402Z 2026-02-03T01:56:08: Writing report file 'Coverage\In\Summary.json'

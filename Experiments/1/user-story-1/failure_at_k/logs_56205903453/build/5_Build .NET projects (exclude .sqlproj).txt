@@ -1,0 +1,149 @@
+﻿2026-02-03T01:29:13.8019668Z ##[group]Run $ErrorActionPreference = 'Stop'
+2026-02-03T01:29:13.8020369Z [36;1m$ErrorActionPreference = 'Stop'[0m
+2026-02-03T01:29:13.8020788Z [36;1m$csprojFiles = Get-ChildItem -Path . -Recurse -Filter *.csproj -File[0m
+2026-02-03T01:29:13.8021177Z [36;1mif (-not $csprojFiles) {[0m
+2026-02-03T01:29:13.8021452Z [36;1m  Write-Host 'No .csproj files found to build.'[0m
+2026-02-03T01:29:13.8021733Z [36;1m  exit 0[0m
+2026-02-03T01:29:13.8022120Z [36;1m}[0m
+2026-02-03T01:29:13.8022306Z [36;1mforeach ($proj in $csprojFiles) {[0m
+2026-02-03T01:29:13.8022599Z [36;1m  Write-Host "Building $($proj.FullName)"[0m
+2026-02-03T01:29:13.8022951Z [36;1m  dotnet build $proj.FullName --no-restore -c Release[0m
+2026-02-03T01:29:13.8023238Z [36;1m}[0m
+2026-02-03T01:29:13.8096010Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+2026-02-03T01:29:13.8096345Z env:
+2026-02-03T01:29:13.8096534Z   DOTNET_ROOT: C:\Program Files\dotnet
+2026-02-03T01:29:13.8096784Z ##[endgroup]
+2026-02-03T01:29:14.8143943Z Building D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Api\UCR.ECCI.PI.ThemePark.Backend.Api.csproj
+2026-02-03T01:29:32.4478717Z   UCR.ECCI.PI.ThemePark.Backend.Domain -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Domain.dll
+2026-02-03T01:29:33.0297776Z   UCR.ECCI.PI.ThemePark.Backend.Application -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Application.dll
+2026-02-03T01:29:33.5508930Z   UCR.ECCI.PI.ThemePark.Backend.Infrastructure -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.dll
+2026-02-03T01:29:35.7034691Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation\Handlers\GetLearningComponentsHandler.cs(33,20): error CS0103: The name 'TypedResults' does not exist in the current context [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation\UCR.ECCI.PI.ThemePark.Backend.Presentation.csproj]
+2026-02-03T01:29:35.7053503Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation\Handlers\GetLearningComponentsHandler.cs(54,16): error CS0103: The name 'TypedResults' does not exist in the current context [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation\UCR.ECCI.PI.ThemePark.Backend.Presentation.csproj]
+2026-02-03T01:29:37.0970306Z   UCR.ECCI.PI.ThemePark.Backend.DependencyInjection -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.DependencyInjection\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.DependencyInjection.dll
+2026-02-03T01:29:37.1263810Z 
+2026-02-03T01:29:37.1275426Z Build FAILED.
+2026-02-03T01:29:37.1276275Z 
+2026-02-03T01:29:37.1280088Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation\Handlers\GetLearningComponentsHandler.cs(33,20): error CS0103: The name 'TypedResults' does not exist in the current context [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation\UCR.ECCI.PI.ThemePark.Backend.Presentation.csproj]
+2026-02-03T01:29:37.1286647Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation\Handlers\GetLearningComponentsHandler.cs(54,16): error CS0103: The name 'TypedResults' does not exist in the current context [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation\UCR.ECCI.PI.ThemePark.Backend.Presentation.csproj]
+2026-02-03T01:29:37.1312103Z     0 Warning(s)
+2026-02-03T01:29:37.1335288Z     2 Error(s)
+2026-02-03T01:29:37.1336793Z 
+2026-02-03T01:29:37.1337477Z Time Elapsed 00:00:21.87
+2026-02-03T01:29:37.1813431Z Building D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application\UCR.ECCI.PI.ThemePark.Backend.Application.csproj
+2026-02-03T01:29:38.7048104Z   UCR.ECCI.PI.ThemePark.Backend.Domain -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Domain.dll
+2026-02-03T01:29:38.7841544Z   UCR.ECCI.PI.ThemePark.Backend.Application -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Application.dll
+2026-02-03T01:29:38.7947460Z 
+2026-02-03T01:29:38.7965015Z Build succeeded.
+2026-02-03T01:29:38.7965361Z     0 Warning(s)
+2026-02-03T01:29:38.7965633Z     0 Error(s)
+2026-02-03T01:29:38.7965794Z 
+2026-02-03T01:29:38.7965951Z Time Elapsed 00:00:01.12
+2026-02-03T01:29:38.8362786Z Building D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.csproj
+2026-02-03T01:29:40.4014965Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\Services\LearningComponentServiceTests.cs(3,49): error CS0234: The type or namespace name 'Services' does not exist in the namespace 'UCR.ECCI.PI.ThemePark.Backend.Application' (are you missing an assembly reference?) [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.csproj]
+2026-02-03T01:29:40.4025329Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\Services\LearningComponentServiceTests.cs(4,49): error CS0234: The type or namespace name 'Services' does not exist in the namespace 'UCR.ECCI.PI.ThemePark.Backend.Application' (are you missing an assembly reference?) [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.csproj]
+2026-02-03T01:29:40.4087635Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\Services\LearningComponentServiceTests.cs(5,37): error CS0234: The type or namespace name 'Domain' does not exist in the namespace 'UCR.ECCI.PI.ThemePark.Backend' (are you missing an assembly reference?) [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.csproj]
+2026-02-03T01:29:40.4115214Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\Services\LearningComponentServiceTests.cs(6,37): error CS0234: The type or namespace name 'Domain' does not exist in the namespace 'UCR.ECCI.PI.ThemePark.Backend' (are you missing an assembly reference?) [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.csproj]
+2026-02-03T01:29:40.4141445Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\Services\LearningComponentServiceTests.cs(17,18): error CS0246: The type or namespace name 'ILearningComponentRepository' could not be found (are you missing a using directive or an assembly reference?) [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.csproj]
+2026-02-03T01:29:40.4257879Z 
+2026-02-03T01:29:40.4269437Z Build FAILED.
+2026-02-03T01:29:40.4281435Z 
+2026-02-03T01:29:40.4300247Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\Services\LearningComponentServiceTests.cs(3,49): error CS0234: The type or namespace name 'Services' does not exist in the namespace 'UCR.ECCI.PI.ThemePark.Backend.Application' (are you missing an assembly reference?) [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.csproj]
+2026-02-03T01:29:40.4355898Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\Services\LearningComponentServiceTests.cs(4,49): error CS0234: The type or namespace name 'Services' does not exist in the namespace 'UCR.ECCI.PI.ThemePark.Backend.Application' (are you missing an assembly reference?) [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.csproj]
+2026-02-03T01:29:40.4452906Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\Services\LearningComponentServiceTests.cs(5,37): error CS0234: The type or namespace name 'Domain' does not exist in the namespace 'UCR.ECCI.PI.ThemePark.Backend' (are you missing an assembly reference?) [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.csproj]
+2026-02-03T01:29:40.4485792Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\Services\LearningComponentServiceTests.cs(6,37): error CS0234: The type or namespace name 'Domain' does not exist in the namespace 'UCR.ECCI.PI.ThemePark.Backend' (are you missing an assembly reference?) [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.csproj]
+2026-02-03T01:29:40.4521620Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\Services\LearningComponentServiceTests.cs(17,18): error CS0246: The type or namespace name 'ILearningComponentRepository' could not be found (are you missing a using directive or an assembly reference?) [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.csproj]
+2026-02-03T01:29:40.4526286Z     0 Warning(s)
+2026-02-03T01:29:40.4544554Z     5 Error(s)
+2026-02-03T01:29:40.4548645Z 
+2026-02-03T01:29:40.4549368Z Time Elapsed 00:00:01.13
+2026-02-03T01:29:40.4907250Z Building D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.DependencyInjection\UCR.ECCI.PI.ThemePark.Backend.DependencyInjection.csproj
+2026-02-03T01:29:42.0245837Z   UCR.ECCI.PI.ThemePark.Backend.Domain -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Domain.dll
+2026-02-03T01:29:42.6386025Z   UCR.ECCI.PI.ThemePark.Backend.Infrastructure -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.dll
+2026-02-03T01:29:42.7517221Z   UCR.ECCI.PI.ThemePark.Backend.Application -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Application.dll
+2026-02-03T01:29:42.9299299Z   UCR.ECCI.PI.ThemePark.Backend.DependencyInjection -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.DependencyInjection\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.DependencyInjection.dll
+2026-02-03T01:29:42.9451831Z 
+2026-02-03T01:29:42.9458868Z Build succeeded.
+2026-02-03T01:29:42.9478658Z     0 Warning(s)
+2026-02-03T01:29:42.9479579Z     0 Error(s)
+2026-02-03T01:29:42.9480227Z 
+2026-02-03T01:29:42.9480865Z Time Elapsed 00:00:02.08
+2026-02-03T01:29:42.9983647Z Building D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\UCR.ECCI.PI.ThemePark.Backend.Domain.csproj
+2026-02-03T01:29:44.4145501Z   UCR.ECCI.PI.ThemePark.Backend.Domain -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Domain.dll
+2026-02-03T01:29:44.4296376Z 
+2026-02-03T01:29:44.4309234Z Build succeeded.
+2026-02-03T01:29:44.4313412Z     0 Warning(s)
+2026-02-03T01:29:44.4319887Z     0 Error(s)
+2026-02-03T01:29:44.4322387Z 
+2026-02-03T01:29:44.4326255Z Time Elapsed 00:00:00.79
+2026-02-03T01:29:44.4585000Z Building D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.csproj
+2026-02-03T01:29:45.7199505Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain.Tests.Unit\Entities\LearningComponentTests.cs(2,44): error CS0234: The type or namespace name 'Entities' does not exist in the namespace 'UCR.ECCI.PI.ThemePark.Backend.Domain' (are you missing an assembly reference?) [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.csproj]
+2026-02-03T01:29:45.7328838Z 
+2026-02-03T01:29:45.7338933Z Build FAILED.
+2026-02-03T01:29:45.7340662Z 
+2026-02-03T01:29:45.7352445Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain.Tests.Unit\Entities\LearningComponentTests.cs(2,44): error CS0234: The type or namespace name 'Entities' does not exist in the namespace 'UCR.ECCI.PI.ThemePark.Backend.Domain' (are you missing an assembly reference?) [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.csproj]
+2026-02-03T01:29:45.7362957Z     0 Warning(s)
+2026-02-03T01:29:45.7382784Z     1 Error(s)
+2026-02-03T01:29:45.7387163Z 
+2026-02-03T01:29:45.7389428Z Time Elapsed 00:00:00.91
+2026-02-03T01:29:45.7650216Z Building D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.csproj
+2026-02-03T01:29:46.9663027Z   UCR.ECCI.PI.ThemePark.Backend.Domain -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Domain.dll
+2026-02-03T01:29:47.0549407Z   UCR.ECCI.PI.ThemePark.Backend.Infrastructure -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.dll
+2026-02-03T01:29:47.0662343Z 
+2026-02-03T01:29:47.0673995Z Build succeeded.
+2026-02-03T01:29:47.0676015Z     0 Warning(s)
+2026-02-03T01:29:47.0684970Z     0 Error(s)
+2026-02-03T01:29:47.0688201Z 
+2026-02-03T01:29:47.0693428Z Time Elapsed 00:00:00.92
+2026-02-03T01:29:47.0996752Z Building D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.csproj
+2026-02-03T01:29:48.3975367Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure.Tests.Unit\Repositories\LearningComponentRepositoryTests.cs(1,17): error CS0234: The type or namespace name 'EntityFrameworkCore' does not exist in the namespace 'Microsoft' (are you missing an assembly reference?) [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.csproj]
+2026-02-03T01:29:48.3992766Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure.Tests.Unit\Repositories\LearningComponentRepositoryTests.cs(3,37): error CS0234: The type or namespace name 'Domain' does not exist in the namespace 'UCR.ECCI.PI.ThemePark.Backend' (are you missing an assembly reference?) [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.csproj]
+2026-02-03T01:29:48.4007032Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure.Tests.Unit\Repositories\LearningComponentRepositoryTests.cs(5,52): error CS0234: The type or namespace name 'Repositories' does not exist in the namespace 'UCR.ECCI.PI.ThemePark.Backend.Infrastructure' (are you missing an assembly reference?) [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.csproj]
+2026-02-03T01:29:48.4015619Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure.Tests.Unit\Repositories\LearningComponentRepositoryTests.cs(16,13): error CS0246: The type or namespace name 'DbContextOptions<>' could not be found (are you missing a using directive or an assembly reference?) [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.csproj]
+2026-02-03T01:29:48.4039685Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure.Tests.Unit\Repositories\LearningComponentRepositoryTests.cs(16,30): error CS0246: The type or namespace name 'UCRDatabaseContext' could not be found (are you missing a using directive or an assembly reference?) [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.csproj]
+2026-02-03T01:29:48.4118551Z 
+2026-02-03T01:29:48.4134022Z Build FAILED.
+2026-02-03T01:29:48.4136140Z 
+2026-02-03T01:29:48.4149591Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure.Tests.Unit\Repositories\LearningComponentRepositoryTests.cs(1,17): error CS0234: The type or namespace name 'EntityFrameworkCore' does not exist in the namespace 'Microsoft' (are you missing an assembly reference?) [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.csproj]
+2026-02-03T01:29:48.4163326Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure.Tests.Unit\Repositories\LearningComponentRepositoryTests.cs(3,37): error CS0234: The type or namespace name 'Domain' does not exist in the namespace 'UCR.ECCI.PI.ThemePark.Backend' (are you missing an assembly reference?) [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.csproj]
+2026-02-03T01:29:48.4172951Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure.Tests.Unit\Repositories\LearningComponentRepositoryTests.cs(5,52): error CS0234: The type or namespace name 'Repositories' does not exist in the namespace 'UCR.ECCI.PI.ThemePark.Backend.Infrastructure' (are you missing an assembly reference?) [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.csproj]
+2026-02-03T01:29:48.4192903Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure.Tests.Unit\Repositories\LearningComponentRepositoryTests.cs(16,13): error CS0246: The type or namespace name 'DbContextOptions<>' could not be found (are you missing a using directive or an assembly reference?) [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.csproj]
+2026-02-03T01:29:48.4201479Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure.Tests.Unit\Repositories\LearningComponentRepositoryTests.cs(16,30): error CS0246: The type or namespace name 'UCRDatabaseContext' could not be found (are you missing a using directive or an assembly reference?) [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.csproj]
+2026-02-03T01:29:48.4204982Z     0 Warning(s)
+2026-02-03T01:29:48.4214105Z     5 Error(s)
+2026-02-03T01:29:48.4216061Z 
+2026-02-03T01:29:48.4219317Z Time Elapsed 00:00:01.01
+2026-02-03T01:29:48.4486652Z Building D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation\UCR.ECCI.PI.ThemePark.Backend.Presentation.csproj
+2026-02-03T01:29:49.8686125Z   UCR.ECCI.PI.ThemePark.Backend.Domain -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Domain.dll
+2026-02-03T01:29:50.0829714Z   UCR.ECCI.PI.ThemePark.Backend.Application -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Application.dll
+2026-02-03T01:29:50.3844539Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation\Handlers\GetLearningComponentsHandler.cs(33,20): error CS0103: The name 'TypedResults' does not exist in the current context [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation\UCR.ECCI.PI.ThemePark.Backend.Presentation.csproj]
+2026-02-03T01:29:50.3851288Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation\Handlers\GetLearningComponentsHandler.cs(54,16): error CS0103: The name 'TypedResults' does not exist in the current context [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation\UCR.ECCI.PI.ThemePark.Backend.Presentation.csproj]
+2026-02-03T01:29:50.4039012Z 
+2026-02-03T01:29:50.4039902Z Build FAILED.
+2026-02-03T01:29:50.4040784Z 
+2026-02-03T01:29:50.4044999Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation\Handlers\GetLearningComponentsHandler.cs(33,20): error CS0103: The name 'TypedResults' does not exist in the current context [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation\UCR.ECCI.PI.ThemePark.Backend.Presentation.csproj]
+2026-02-03T01:29:50.4051458Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation\Handlers\GetLearningComponentsHandler.cs(54,16): error CS0103: The name 'TypedResults' does not exist in the current context [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation\UCR.ECCI.PI.ThemePark.Backend.Presentation.csproj]
+2026-02-03T01:29:50.4054620Z     0 Warning(s)
+2026-02-03T01:29:50.4062933Z     2 Error(s)
+2026-02-03T01:29:50.4067455Z 
+2026-02-03T01:29:50.4077278Z Time Elapsed 00:00:01.59
+2026-02-03T01:29:50.4343750Z Building D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.csproj
+2026-02-03T01:29:51.6979215Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\Handlers\GetLearningComponentsHandlerTests.cs(1,17): error CS0234: The type or namespace name 'AspNetCore' does not exist in the namespace 'Microsoft' (are you missing an assembly reference?) [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.csproj]
+2026-02-03T01:29:51.6990287Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\Handlers\GetLearningComponentsHandlerTests.cs(4,37): error CS0234: The type or namespace name 'Application' does not exist in the namespace 'UCR.ECCI.PI.ThemePark.Backend' (are you missing an assembly reference?) [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.csproj]
+2026-02-03T01:29:51.6999895Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\Handlers\GetLearningComponentsHandlerTests.cs(5,37): error CS0234: The type or namespace name 'Domain' does not exist in the namespace 'UCR.ECCI.PI.ThemePark.Backend' (are you missing an assembly reference?) [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.csproj]
+2026-02-03T01:29:51.7029608Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\Handlers\GetLearningComponentsHandlerTests.cs(6,50): error CS0234: The type or namespace name 'Handlers' does not exist in the namespace 'UCR.ECCI.PI.ThemePark.Backend.Presentation' (are you missing an assembly reference?) [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.csproj]
+2026-02-03T01:29:51.7060105Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\Handlers\GetLearningComponentsHandlerTests.cs(7,50): error CS0234: The type or namespace name 'Responses' does not exist in the namespace 'UCR.ECCI.PI.ThemePark.Backend.Presentation' (are you missing an assembly reference?) [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.csproj]
+2026-02-03T01:29:51.7078661Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\Handlers\GetLearningComponentsHandlerTests.cs(18,18): error CS0246: The type or namespace name 'ILearningComponentService' could not be found (are you missing a using directive or an assembly reference?) [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.csproj]
+2026-02-03T01:29:51.7128170Z 
+2026-02-03T01:29:51.7133237Z Build FAILED.
+2026-02-03T01:29:51.7135233Z 
+2026-02-03T01:29:51.7146636Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\Handlers\GetLearningComponentsHandlerTests.cs(1,17): error CS0234: The type or namespace name 'AspNetCore' does not exist in the namespace 'Microsoft' (are you missing an assembly reference?) [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.csproj]
+2026-02-03T01:29:51.7157913Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\Handlers\GetLearningComponentsHandlerTests.cs(4,37): error CS0234: The type or namespace name 'Application' does not exist in the namespace 'UCR.ECCI.PI.ThemePark.Backend' (are you missing an assembly reference?) [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.csproj]
+2026-02-03T01:29:51.7169837Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\Handlers\GetLearningComponentsHandlerTests.cs(5,37): error CS0234: The type or namespace name 'Domain' does not exist in the namespace 'UCR.ECCI.PI.ThemePark.Backend' (are you missing an assembly reference?) [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.csproj]
+2026-02-03T01:29:51.7187512Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\Handlers\GetLearningComponentsHandlerTests.cs(6,50): error CS0234: The type or namespace name 'Handlers' does not exist in the namespace 'UCR.ECCI.PI.ThemePark.Backend.Presentation' (are you missing an assembly reference?) [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.csproj]
+2026-02-03T01:29:51.7247970Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\Handlers\GetLearningComponentsHandlerTests.cs(7,50): error CS0234: The type or namespace name 'Responses' does not exist in the namespace 'UCR.ECCI.PI.ThemePark.Backend.Presentation' (are you missing an assembly reference?) [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.csproj]
+2026-02-03T01:29:51.7257203Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\Handlers\GetLearningComponentsHandlerTests.cs(18,18): error CS0246: The type or namespace name 'ILearningComponentService' could not be found (are you missing a using directive or an assembly reference?) [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.csproj]
+2026-02-03T01:29:51.7261411Z     0 Warning(s)
+2026-02-03T01:29:51.7262141Z     6 Error(s)
+2026-02-03T01:29:51.7262710Z 
+2026-02-03T01:29:51.7263410Z Time Elapsed 00:00:00.90
+2026-02-03T01:29:51.7830822Z ##[error]Process completed with exit code 1.

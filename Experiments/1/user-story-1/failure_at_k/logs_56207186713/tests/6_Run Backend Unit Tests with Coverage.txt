@@ -1,0 +1,316 @@
+﻿2026-02-03T01:51:26.9819132Z ##[group]Run $ErrorActionPreference = 'Stop'
+2026-02-03T01:51:26.9819577Z [36;1m$ErrorActionPreference = 'Stop'[0m
+2026-02-03T01:51:26.9819964Z [36;1mNew-Item -ItemType Directory -Force -Path TestResults | Out-Null[0m
+2026-02-03T01:51:26.9820435Z [36;1mNew-Item -ItemType Directory -Force -Path Coverage | Out-Null[0m
+2026-02-03T01:51:26.9820893Z [36;1m# Find Backend.*.Tests.Unit projects via wildcard match on full path[0m
+2026-02-03T01:51:26.9821365Z [36;1m$projects = Get-ChildItem -Path . -Recurse -Filter *.csproj -File |[0m
+2026-02-03T01:51:26.9821834Z [36;1m  Where-Object { $_.FullName -like '*Backend.*.Tests.Unit*' }[0m
+2026-02-03T01:51:26.9822176Z [36;1mif (-not $projects) {[0m
+2026-02-03T01:51:26.9822527Z [36;1m  Write-Host 'No Backend.*.Tests.Unit test projects found. Skipping tests.'[0m
+2026-02-03T01:51:26.9822883Z [36;1m  exit 0[0m
+2026-02-03T01:51:26.9823044Z [36;1m}[0m
+2026-02-03T01:51:26.9823206Z [36;1mforeach ($proj in $projects) {[0m
+2026-02-03T01:51:26.9823471Z [36;1m  $projName = $proj.BaseName[0m
+2026-02-03T01:51:26.9823861Z [36;1m  $projResultsDir = Join-Path -Path "TestResults" -ChildPath $projName[0m
+2026-02-03T01:51:26.9824348Z [36;1m  New-Item -ItemType Directory -Force -Path $projResultsDir | Out-Null[0m
+2026-02-03T01:51:26.9824856Z [36;1m  Write-Host "Running tests for $($proj.FullName) with coverage into $projResultsDir"[0m
+2026-02-03T01:51:26.9825659Z [36;1m  dotnet test $proj.FullName -c Release --logger "trx;LogFileName=$projName.trx" --results-directory $projResultsDir --collect "XPlat Code Coverage"[0m
+2026-02-03T01:51:26.9826267Z [36;1m}[0m
+2026-02-03T01:51:26.9897009Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+2026-02-03T01:51:26.9897348Z env:
+2026-02-03T01:51:26.9897530Z   DOTNET_ROOT: C:\Program Files\dotnet
+2026-02-03T01:51:26.9897766Z ##[endgroup]
+2026-02-03T01:51:27.4560300Z Running tests for D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.csproj with coverage into TestResults\UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit
+2026-02-03T01:51:28.3530123Z   Determining projects to restore...
+2026-02-03T01:51:29.2691134Z   All projects are up-to-date for restore.
+2026-02-03T01:51:29.9948362Z   UCR.ECCI.PI.ThemePark.Backend.Domain -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Domain.dll
+2026-02-03T01:51:30.2171853Z   UCR.ECCI.PI.ThemePark.Backend.Application -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Application.dll
+2026-02-03T01:51:30.6473271Z   UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.dll
+2026-02-03T01:51:30.6797921Z Test run for D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.dll (.NETCoreApp,Version=v8.0)
+2026-02-03T01:51:30.8703016Z VSTest version 18.0.1 (x64)
+2026-02-03T01:51:30.8773574Z 
+2026-02-03T01:51:31.3259968Z Starting test execution, please wait...
+2026-02-03T01:51:31.3947042Z A total of 1 test files matched the specified pattern.
+2026-02-03T01:51:35.6450000Z Results File: D:\a\tdd-llm-repo-a\tdd-llm-repo-a\TestResults\UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.trx
+2026-02-03T01:51:35.6451645Z 
+2026-02-03T01:51:35.6489986Z Passed!  - Failed:     0, Passed:     5, Skipped:     0, Total:     5, Duration: 222 ms - UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.dll (net8.0)
+2026-02-03T01:51:35.8676454Z 
+2026-02-03T01:51:35.8681488Z Attachments:
+2026-02-03T01:51:35.8684096Z   D:\a\tdd-llm-repo-a\tdd-llm-repo-a\TestResults\UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit\5ce6497c-2159-44a0-8cd1-fb37e706fb7c\coverage.cobertura.xml
+2026-02-03T01:51:35.9554631Z Running tests for D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.csproj with coverage into TestResults\UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit
+2026-02-03T01:51:36.8182609Z   Determining projects to restore...
+2026-02-03T01:51:37.1621978Z   All projects are up-to-date for restore.
+2026-02-03T01:51:37.5530184Z   UCR.ECCI.PI.ThemePark.Backend.Domain -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Domain.dll
+2026-02-03T01:51:37.6724161Z   UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain.Tests.Unit\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.dll
+2026-02-03T01:51:37.6837976Z Test run for D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain.Tests.Unit\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.dll (.NETCoreApp,Version=v8.0)
+2026-02-03T01:51:37.7490119Z VSTest version 18.0.1 (x64)
+2026-02-03T01:51:37.7515478Z 
+2026-02-03T01:51:37.8416306Z Starting test execution, please wait...
+2026-02-03T01:51:37.8812450Z A total of 1 test files matched the specified pattern.
+2026-02-03T01:51:39.2481534Z Results File: D:\a\tdd-llm-repo-a\tdd-llm-repo-a\TestResults\UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.trx
+2026-02-03T01:51:39.2483771Z 
+2026-02-03T01:51:39.2521331Z Passed!  - Failed:     0, Passed:    10, Skipped:     0, Total:    10, Duration: 52 ms - UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.dll (net8.0)
+2026-02-03T01:51:39.4538813Z 
+2026-02-03T01:51:39.4543347Z Attachments:
+2026-02-03T01:51:39.4545602Z   D:\a\tdd-llm-repo-a\tdd-llm-repo-a\TestResults\UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit\67182834-49a6-453a-967e-453159d817fa\coverage.cobertura.xml
+2026-02-03T01:51:39.5337497Z Running tests for D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.csproj with coverage into TestResults\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit
+2026-02-03T01:51:40.4273459Z   Determining projects to restore...
+2026-02-03T01:51:41.3473923Z   All projects are up-to-date for restore.
+2026-02-03T01:51:42.0875777Z   UCR.ECCI.PI.ThemePark.Backend.Domain -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Domain.dll
+2026-02-03T01:51:42.3320325Z   UCR.ECCI.PI.ThemePark.Backend.Infrastructure -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.dll
+2026-02-03T01:51:42.9244672Z   UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure.Tests.Unit\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.dll
+2026-02-03T01:51:42.9470120Z Test run for D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure.Tests.Unit\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.dll (.NETCoreApp,Version=v8.0)
+2026-02-03T01:51:43.0440245Z VSTest version 18.0.1 (x64)
+2026-02-03T01:51:43.0467652Z 
+2026-02-03T01:51:43.1939163Z Starting test execution, please wait...
+2026-02-03T01:51:43.2367851Z A total of 1 test files matched the specified pattern.
+2026-02-03T01:51:46.3776269Z   Failed GetByLearningSpaceIdAsync_WithMultipleLearningSpaces_ShouldReturnOnlyMatchingComponents [489 ms]
+2026-02-03T01:51:46.3777658Z   Error Message:
+2026-02-03T01:51:46.3779322Z    System.InvalidOperationException : No suitable constructor was found for entity type 'LearningSpace'. The following constructors had parameters that could not be bound to properties of the entity type: 
+2026-02-03T01:51:46.3781542Z     Cannot bind 'height', 'width', 'length' in 'LearningSpace(string id, string type, float height, float width, float length)'
+2026-02-03T01:51:46.3784093Z Note that only mapped properties can be bound to constructor parameters. Navigations to related entities, including references to owned types, cannot be bound.
+2026-02-03T01:51:46.3786916Z   Stack Trace:
+2026-02-03T01:51:46.3788781Z      at Microsoft.EntityFrameworkCore.Metadata.Internal.ConstructorBindingFactory.GetBindings[T](T type, Func`5 bindToProperty, Func`5 bind, InstantiationBinding& constructorBinding, InstantiationBinding& serviceOnlyBinding)
+2026-02-03T01:51:46.3792016Z    at Microsoft.EntityFrameworkCore.Metadata.Internal.ConstructorBindingFactory.GetBindings(IMutableEntityType entityType, InstantiationBinding& constructorBinding, InstantiationBinding& serviceOnlyBinding)
+2026-02-03T01:51:46.3795089Z    at Microsoft.EntityFrameworkCore.Metadata.Conventions.ConstructorBindingConvention.ProcessModelFinalizing(IConventionModelBuilder modelBuilder, IConventionContext`1 context)
+2026-02-03T01:51:46.3798005Z    at Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal.ConventionDispatcher.ImmediateConventionScope.OnModelFinalizing(IConventionModelBuilder modelBuilder)
+2026-02-03T01:51:46.3800634Z    at Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal.ConventionDispatcher.OnModelFinalizing(IConventionModelBuilder modelBuilder)
+2026-02-03T01:51:46.3802396Z    at Microsoft.EntityFrameworkCore.Metadata.Internal.Model.FinalizeModel()
+2026-02-03T01:51:46.3804639Z    at Microsoft.EntityFrameworkCore.Infrastructure.ModelRuntimeInitializer.Initialize(IModel model, Boolean designTime, IDiagnosticsLogger`1 validationLogger)
+2026-02-03T01:51:46.3807121Z    at Microsoft.EntityFrameworkCore.Infrastructure.ModelSource.GetModel(DbContext context, ModelCreationDependencies modelCreationDependencies, Boolean designTime)
+2026-02-03T01:51:46.3809107Z    at Microsoft.EntityFrameworkCore.Internal.DbContextServices.CreateModel(Boolean designTime)
+2026-02-03T01:51:46.3810293Z    at Microsoft.EntityFrameworkCore.Internal.DbContextServices.get_Model()
+2026-02-03T01:51:46.3811753Z    at Microsoft.EntityFrameworkCore.Infrastructure.EntityFrameworkServicesBuilder.<>c.<TryAddCoreServices>b__8_4(IServiceProvider p)
+2026-02-03T01:51:46.3813997Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitFactory(FactoryCallSite factoryCallSite, RuntimeResolverContext context)
+2026-02-03T01:51:46.3816259Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+2026-02-03T01:51:46.3819048Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+2026-02-03T01:51:46.3822185Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+2026-02-03T01:51:46.3824429Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+2026-02-03T01:51:46.3827059Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+2026-02-03T01:51:46.3829961Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+2026-02-03T01:51:46.3832815Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+2026-02-03T01:51:46.3835812Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+2026-02-03T01:51:46.3838284Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+2026-02-03T01:51:46.3847057Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+2026-02-03T01:51:46.3850084Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+2026-02-03T01:51:46.3853192Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+2026-02-03T01:51:46.3856475Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+2026-02-03T01:51:46.3858934Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+2026-02-03T01:51:46.3861476Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+2026-02-03T01:51:46.3864891Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+2026-02-03T01:51:46.3867986Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+2026-02-03T01:51:46.3871299Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+2026-02-03T01:51:46.3873809Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+2026-02-03T01:51:46.3876392Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+2026-02-03T01:51:46.3878974Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+2026-02-03T01:51:46.3881962Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+2026-02-03T01:51:46.3885647Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+2026-02-03T01:51:46.3888108Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+2026-02-03T01:51:46.3890673Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+2026-02-03T01:51:46.3894343Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+2026-02-03T01:51:46.3897298Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+2026-02-03T01:51:46.3900572Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+2026-02-03T01:51:46.3903067Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+2026-02-03T01:51:46.3905954Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.Resolve(ServiceCallSite callSite, ServiceProviderEngineScope scope)
+2026-02-03T01:51:46.3908920Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.DynamicServiceProviderEngine.<>c__DisplayClass2_0.<RealizeService>b__0(ServiceProviderEngineScope scope)
+2026-02-03T01:51:46.3911636Z    at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(ServiceIdentifier serviceIdentifier, ServiceProviderEngineScope serviceProviderEngineScope)
+2026-02-03T01:51:46.3914044Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
+2026-02-03T01:51:46.3916297Z    at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+2026-02-03T01:51:46.3919270Z    at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+2026-02-03T01:51:46.3921061Z    at Microsoft.EntityFrameworkCore.DbContext.get_DbContextDependencies()
+2026-02-03T01:51:46.3922166Z    at Microsoft.EntityFrameworkCore.DbContext.get_ContextServices()
+2026-02-03T01:51:46.3923329Z    at Microsoft.EntityFrameworkCore.DbContext.get_InternalServiceProvider()
+2026-02-03T01:51:46.3924958Z    at Microsoft.EntityFrameworkCore.DbContext.get_DbContextDependencies()
+2026-02-03T01:51:46.3964222Z    at Microsoft.EntityFrameworkCore.DbContext.Microsoft.EntityFrameworkCore.Internal.IDbContextDependencies.get_StateManager()
+2026-02-03T01:51:46.3975223Z    at Microsoft.EntityFrameworkCore.Internal.InternalDbSet`1.SetEntityStates(IEnumerable`1 entities, EntityState entityState)
+2026-02-03T01:51:46.3976723Z    at Microsoft.EntityFrameworkCore.Internal.InternalDbSet`1.AddRange(TEntity[] entities)
+2026-02-03T01:51:46.3980107Z    at UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.Repositories.LearningComponentRepositoryTests.GetByLearningSpaceIdAsync_WithMultipleLearningSpaces_ShouldReturnOnlyMatchingComponents() in D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure.Tests.Unit\Repositories\LearningComponentRepositoryTests.cs:line 72
+2026-02-03T01:51:46.3983495Z    at NUnit.Framework.Internal.TaskAwaitAdapter.GenericAdapter`1.GetResult()
+2026-02-03T01:51:46.3984614Z    at NUnit.Framework.Internal.AsyncToSyncAdapter.Await(Func`1 invoke)
+2026-02-03T01:51:46.3985886Z    at NUnit.Framework.Internal.Commands.TestMethodCommand.RunTestMethod(TestExecutionContext context)
+2026-02-03T01:51:46.3987360Z    at NUnit.Framework.Internal.Commands.TestMethodCommand.Execute(TestExecutionContext context)
+2026-02-03T01:51:46.3988834Z    at NUnit.Framework.Internal.Commands.BeforeAndAfterTestCommand.<>c__DisplayClass1_0.<Execute>b__0()
+2026-02-03T01:51:46.3991163Z    at NUnit.Framework.Internal.Commands.DelegatingTestCommand.RunTestMethodInThreadAbortSafeZone(TestExecutionContext context, Action action)
+2026-02-03T01:51:46.3992600Z 
+2026-02-03T01:51:46.3993322Z   Failed GetByLearningSpaceIdAsync_WithNonExistentLearningSpaceId_ShouldReturnEmptyList [38 ms]
+2026-02-03T01:51:46.3994388Z   Error Message:
+2026-02-03T01:51:46.3996316Z    System.InvalidOperationException : No suitable constructor was found for entity type 'LearningSpace'. The following constructors had parameters that could not be bound to properties of the entity type: 
+2026-02-03T01:51:46.3998621Z     Cannot bind 'height', 'width', 'length' in 'LearningSpace(string id, string type, float height, float width, float length)'
+2026-02-03T01:51:46.4000693Z Note that only mapped properties can be bound to constructor parameters. Navigations to related entities, including references to owned types, cannot be bound.
+2026-02-03T01:51:46.4002116Z   Stack Trace:
+2026-02-03T01:51:46.4003935Z      at Microsoft.EntityFrameworkCore.Metadata.Internal.ConstructorBindingFactory.GetBindings[T](T type, Func`5 bindToProperty, Func`5 bind, InstantiationBinding& constructorBinding, InstantiationBinding& serviceOnlyBinding)
+2026-02-03T01:51:46.4007341Z    at Microsoft.EntityFrameworkCore.Metadata.Internal.ConstructorBindingFactory.GetBindings(IMutableEntityType entityType, InstantiationBinding& constructorBinding, InstantiationBinding& serviceOnlyBinding)
+2026-02-03T01:51:46.4011863Z    at Microsoft.EntityFrameworkCore.Metadata.Conventions.ConstructorBindingConvention.ProcessModelFinalizing(IConventionModelBuilder modelBuilder, IConventionContext`1 context)
+2026-02-03T01:51:46.4014821Z    at Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal.ConventionDispatcher.ImmediateConventionScope.OnModelFinalizing(IConventionModelBuilder modelBuilder)
+2026-02-03T01:51:46.4017534Z    at Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal.ConventionDispatcher.OnModelFinalizing(IConventionModelBuilder modelBuilder)
+2026-02-03T01:51:46.4019383Z    at Microsoft.EntityFrameworkCore.Metadata.Internal.Model.FinalizeModel()
+2026-02-03T01:51:46.4021265Z    at Microsoft.EntityFrameworkCore.Infrastructure.ModelRuntimeInitializer.Initialize(IModel model, Boolean designTime, IDiagnosticsLogger`1 validationLogger)
+2026-02-03T01:51:46.4023768Z    at Microsoft.EntityFrameworkCore.Infrastructure.ModelSource.GetModel(DbContext context, ModelCreationDependencies modelCreationDependencies, Boolean designTime)
+2026-02-03T01:51:46.4025792Z    at Microsoft.EntityFrameworkCore.Internal.DbContextServices.CreateModel(Boolean designTime)
+2026-02-03T01:51:46.4027097Z    at Microsoft.EntityFrameworkCore.Internal.DbContextServices.get_Model()
+2026-02-03T01:51:46.4028665Z    at Microsoft.EntityFrameworkCore.Infrastructure.EntityFrameworkServicesBuilder.<>c.<TryAddCoreServices>b__8_4(IServiceProvider p)
+2026-02-03T01:51:46.4031339Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitFactory(FactoryCallSite factoryCallSite, RuntimeResolverContext context)
+2026-02-03T01:51:46.4034226Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+2026-02-03T01:51:46.4037220Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+2026-02-03T01:51:46.4040498Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+2026-02-03T01:51:46.4042955Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+2026-02-03T01:51:46.4045519Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+2026-02-03T01:51:46.4048127Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+2026-02-03T01:51:46.4051101Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+2026-02-03T01:51:46.4055048Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+2026-02-03T01:51:46.4057464Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+2026-02-03T01:51:46.4059953Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+2026-02-03T01:51:46.4062483Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+2026-02-03T01:51:46.4065428Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+2026-02-03T01:51:46.4068917Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+2026-02-03T01:51:46.4071366Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+2026-02-03T01:51:46.4074280Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+2026-02-03T01:51:46.4076813Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+2026-02-03T01:51:46.4079739Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+2026-02-03T01:51:46.4082904Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+2026-02-03T01:51:46.4085268Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+2026-02-03T01:51:46.4087719Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+2026-02-03T01:51:46.4090232Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+2026-02-03T01:51:46.4093488Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+2026-02-03T01:51:46.4096657Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+2026-02-03T01:51:46.4099454Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+2026-02-03T01:51:46.4103915Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+2026-02-03T01:51:46.4106555Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+2026-02-03T01:51:46.4109501Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+2026-02-03T01:51:46.4112962Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+2026-02-03T01:51:46.4115314Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+2026-02-03T01:51:46.4117595Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.Resolve(ServiceCallSite callSite, ServiceProviderEngineScope scope)
+2026-02-03T01:51:46.4120502Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.DynamicServiceProviderEngine.<>c__DisplayClass2_0.<RealizeService>b__0(ServiceProviderEngineScope scope)
+2026-02-03T01:51:46.4123130Z    at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(ServiceIdentifier serviceIdentifier, ServiceProviderEngineScope serviceProviderEngineScope)
+2026-02-03T01:51:46.4125385Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
+2026-02-03T01:51:46.4127808Z    at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+2026-02-03T01:51:46.4130007Z    at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+2026-02-03T01:51:46.4131666Z    at Microsoft.EntityFrameworkCore.DbContext.get_DbContextDependencies()
+2026-02-03T01:51:46.4132665Z    at Microsoft.EntityFrameworkCore.DbContext.get_ContextServices()
+2026-02-03T01:51:46.4133539Z    at Microsoft.EntityFrameworkCore.DbContext.get_Model()
+2026-02-03T01:51:46.4134315Z    at Microsoft.EntityFrameworkCore.Internal.InternalDbSet`1.get_EntityType()
+2026-02-03T01:51:46.4135524Z    at Microsoft.EntityFrameworkCore.Internal.InternalDbSet`1.CheckState()
+2026-02-03T01:51:46.4136754Z    at Microsoft.EntityFrameworkCore.Internal.InternalDbSet`1.get_EntityQueryable()
+2026-02-03T01:51:46.4138135Z    at Microsoft.EntityFrameworkCore.Internal.InternalDbSet`1.System.Linq.IQueryable.get_Provider()
+2026-02-03T01:51:46.4139493Z    at System.Linq.Queryable.Where[TSource](IQueryable`1 source, Expression`1 predicate)
+2026-02-03T01:51:46.4142477Z    at UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Repositories.LearningComponentRepository.GetByLearningSpaceIdAsync(String learningSpaceId) in D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure\Repositories\LearningComponentRepository.cs:line 30
+2026-02-03T01:51:46.4147142Z    at UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.Repositories.LearningComponentRepositoryTests.GetByLearningSpaceIdAsync_WithNonExistentLearningSpaceId_ShouldReturnEmptyList() in D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure.Tests.Unit\Repositories\LearningComponentRepositoryTests.cs:line 56
+2026-02-03T01:51:46.4150518Z    at NUnit.Framework.Internal.TaskAwaitAdapter.GenericAdapter`1.GetResult()
+2026-02-03T01:51:46.4151705Z    at NUnit.Framework.Internal.AsyncToSyncAdapter.Await(Func`1 invoke)
+2026-02-03T01:51:46.4153006Z    at NUnit.Framework.Internal.Commands.TestMethodCommand.RunTestMethod(TestExecutionContext context)
+2026-02-03T01:51:46.4154511Z    at NUnit.Framework.Internal.Commands.TestMethodCommand.Execute(TestExecutionContext context)
+2026-02-03T01:51:46.4156063Z    at NUnit.Framework.Internal.Commands.BeforeAndAfterTestCommand.<>c__DisplayClass1_0.<Execute>b__0()
+2026-02-03T01:51:46.4158039Z    at NUnit.Framework.Internal.Commands.DelegatingTestCommand.RunTestMethodInThreadAbortSafeZone(TestExecutionContext context, Action action)
+2026-02-03T01:51:46.4159430Z 
+2026-02-03T01:51:46.4160464Z   Failed GetByLearningSpaceIdAsync_WithValidLearningSpaceId_ShouldReturnComponents [14 ms]
+2026-02-03T01:51:46.4161476Z   Error Message:
+2026-02-03T01:51:46.4163017Z    System.InvalidOperationException : No suitable constructor was found for entity type 'LearningSpace'. The following constructors had parameters that could not be bound to properties of the entity type: 
+2026-02-03T01:51:46.4165529Z     Cannot bind 'height', 'width', 'length' in 'LearningSpace(string id, string type, float height, float width, float length)'
+2026-02-03T01:51:46.4168338Z Note that only mapped properties can be bound to constructor parameters. Navigations to related entities, including references to owned types, cannot be bound.
+2026-02-03T01:51:46.4169826Z   Stack Trace:
+2026-02-03T01:51:46.4171724Z      at Microsoft.EntityFrameworkCore.Metadata.Internal.ConstructorBindingFactory.GetBindings[T](T type, Func`5 bindToProperty, Func`5 bind, InstantiationBinding& constructorBinding, InstantiationBinding& serviceOnlyBinding)
+2026-02-03T01:51:46.4175260Z    at Microsoft.EntityFrameworkCore.Metadata.Internal.ConstructorBindingFactory.GetBindings(IMutableEntityType entityType, InstantiationBinding& constructorBinding, InstantiationBinding& serviceOnlyBinding)
+2026-02-03T01:51:46.4178427Z    at Microsoft.EntityFrameworkCore.Metadata.Conventions.ConstructorBindingConvention.ProcessModelFinalizing(IConventionModelBuilder modelBuilder, IConventionContext`1 context)
+2026-02-03T01:51:46.4182145Z    at Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal.ConventionDispatcher.ImmediateConventionScope.OnModelFinalizing(IConventionModelBuilder modelBuilder)
+2026-02-03T01:51:46.4184999Z    at Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal.ConventionDispatcher.OnModelFinalizing(IConventionModelBuilder modelBuilder)
+2026-02-03T01:51:46.4186866Z    at Microsoft.EntityFrameworkCore.Metadata.Internal.Model.FinalizeModel()
+2026-02-03T01:51:46.4188774Z    at Microsoft.EntityFrameworkCore.Infrastructure.ModelRuntimeInitializer.Initialize(IModel model, Boolean designTime, IDiagnosticsLogger`1 validationLogger)
+2026-02-03T01:51:46.4191400Z    at Microsoft.EntityFrameworkCore.Infrastructure.ModelSource.GetModel(DbContext context, ModelCreationDependencies modelCreationDependencies, Boolean designTime)
+2026-02-03T01:51:46.4193498Z    at Microsoft.EntityFrameworkCore.Internal.DbContextServices.CreateModel(Boolean designTime)
+2026-02-03T01:51:46.4194923Z    at Microsoft.EntityFrameworkCore.Internal.DbContextServices.get_Model()
+2026-02-03T01:51:46.4196510Z    at Microsoft.EntityFrameworkCore.Infrastructure.EntityFrameworkServicesBuilder.<>c.<TryAddCoreServices>b__8_4(IServiceProvider p)
+2026-02-03T01:51:46.4198934Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitFactory(FactoryCallSite factoryCallSite, RuntimeResolverContext context)
+2026-02-03T01:51:46.4201751Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+2026-02-03T01:51:46.4204745Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+2026-02-03T01:51:46.4207939Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+2026-02-03T01:51:46.4210430Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+2026-02-03T01:51:46.4212916Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+2026-02-03T01:51:46.4215419Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+2026-02-03T01:51:46.4218364Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+2026-02-03T01:51:46.4222078Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+2026-02-03T01:51:46.4224708Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+2026-02-03T01:51:46.4227245Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+2026-02-03T01:51:46.4229883Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+2026-02-03T01:51:46.4232852Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+2026-02-03T01:51:46.4236021Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+2026-02-03T01:51:46.4304491Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+2026-02-03T01:51:46.4366525Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+2026-02-03T01:51:46.4415212Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+2026-02-03T01:51:46.4446589Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+2026-02-03T01:51:46.4478433Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+2026-02-03T01:51:46.4494178Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+2026-02-03T01:51:46.4586377Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+2026-02-03T01:51:46.4617914Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+2026-02-03T01:51:46.4641328Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+2026-02-03T01:51:46.4694273Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+2026-02-03T01:51:46.4712056Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+2026-02-03T01:51:46.4715106Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+2026-02-03T01:51:46.4742912Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+2026-02-03T01:51:46.4753916Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+2026-02-03T01:51:46.4807162Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+2026-02-03T01:51:46.4811962Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+2026-02-03T01:51:46.4854343Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.Resolve(ServiceCallSite callSite, ServiceProviderEngineScope scope)
+2026-02-03T01:51:46.4857620Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.DynamicServiceProviderEngine.<>c__DisplayClass2_0.<RealizeService>b__0(ServiceProviderEngineScope scope)
+2026-02-03T01:51:46.4889469Z    at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(ServiceIdentifier serviceIdentifier, ServiceProviderEngineScope serviceProviderEngineScope)
+2026-02-03T01:51:46.4915205Z    at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
+2026-02-03T01:51:46.4936256Z    at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+2026-02-03T01:51:46.5011513Z    at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+2026-02-03T01:51:46.5014670Z    at Microsoft.EntityFrameworkCore.DbContext.get_DbContextDependencies()
+2026-02-03T01:51:46.5016352Z    at Microsoft.EntityFrameworkCore.DbContext.get_ContextServices()
+2026-02-03T01:51:46.5017521Z    at Microsoft.EntityFrameworkCore.DbContext.get_InternalServiceProvider()
+2026-02-03T01:51:46.5022282Z    at Microsoft.EntityFrameworkCore.DbContext.get_DbContextDependencies()
+2026-02-03T01:51:46.5024137Z    at Microsoft.EntityFrameworkCore.DbContext.Microsoft.EntityFrameworkCore.Internal.IDbContextDependencies.get_StateManager()
+2026-02-03T01:51:46.5026422Z    at Microsoft.EntityFrameworkCore.Internal.InternalDbSet`1.SetEntityStates(IEnumerable`1 entities, EntityState entityState)
+2026-02-03T01:51:46.5028081Z    at Microsoft.EntityFrameworkCore.Internal.InternalDbSet`1.AddRange(TEntity[] entities)
+2026-02-03T01:51:46.5031355Z    at UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.Repositories.LearningComponentRepositoryTests.GetByLearningSpaceIdAsync_WithValidLearningSpaceId_ShouldReturnComponents() in D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure.Tests.Unit\Repositories\LearningComponentRepositoryTests.cs:line 35
+2026-02-03T01:51:46.5036157Z    at NUnit.Framework.Internal.TaskAwaitAdapter.GenericAdapter`1.GetResult()
+2026-02-03T01:51:46.5037678Z    at NUnit.Framework.Internal.AsyncToSyncAdapter.Await(Func`1 invoke)
+2026-02-03T01:51:46.5039162Z    at NUnit.Framework.Internal.Commands.TestMethodCommand.RunTestMethod(TestExecutionContext context)
+2026-02-03T01:51:46.5046912Z    at NUnit.Framework.Internal.Commands.TestMethodCommand.Execute(TestExecutionContext context)
+2026-02-03T01:51:46.5049003Z    at NUnit.Framework.Internal.Commands.BeforeAndAfterTestCommand.<>c__DisplayClass1_0.<Execute>b__0()
+2026-02-03T01:51:46.5051056Z    at NUnit.Framework.Internal.Commands.DelegatingTestCommand.RunTestMethodInThreadAbortSafeZone(TestExecutionContext context, Action action)
+2026-02-03T01:51:46.5053312Z 
+2026-02-03T01:51:46.5054929Z Results File: D:\a\tdd-llm-repo-a\tdd-llm-repo-a\TestResults\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.trx
+2026-02-03T01:51:46.5056512Z 
+2026-02-03T01:51:46.5057688Z Failed!  - Failed:     3, Passed:     0, Skipped:     0, Total:     3, Duration: 566 ms - UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.dll (net8.0)
+2026-02-03T01:51:46.6804610Z 
+2026-02-03T01:51:46.6809710Z Attachments:
+2026-02-03T01:51:46.6812351Z   D:\a\tdd-llm-repo-a\tdd-llm-repo-a\TestResults\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit\8f5302ed-6014-4262-8659-3219827ad4ac\coverage.cobertura.xml
+2026-02-03T01:51:46.7621775Z Running tests for D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.csproj with coverage into TestResults\UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit
+2026-02-03T01:51:47.6138645Z   Determining projects to restore...
+2026-02-03T01:51:48.5988953Z   All projects are up-to-date for restore.
+2026-02-03T01:51:49.3989205Z   UCR.ECCI.PI.ThemePark.Backend.Domain -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Domain.dll
+2026-02-03T01:51:49.6234799Z   UCR.ECCI.PI.ThemePark.Backend.Application -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Application.dll
+2026-02-03T01:51:50.1454142Z   UCR.ECCI.PI.ThemePark.Backend.Presentation -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Presentation.dll
+2026-02-03T01:51:50.7094233Z   UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.dll
+2026-02-03T01:51:50.7298574Z Test run for D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.dll (.NETCoreApp,Version=v8.0)
+2026-02-03T01:51:50.7943087Z VSTest version 18.0.1 (x64)
+2026-02-03T01:51:50.7968160Z 
+2026-02-03T01:51:50.9157890Z Starting test execution, please wait...
+2026-02-03T01:51:50.9705972Z A total of 1 test files matched the specified pattern.
+2026-02-03T01:51:53.8692789Z   Failed HandleAsync_WithComponentsInLearningSpace_ShouldReturnOkWithComponents [71 ms]
+2026-02-03T01:51:53.8963362Z   Error Message:
+2026-02-03T01:51:53.8978655Z      Expected: <Microsoft.AspNetCore.Http.HttpResults.Ok`1[UCR.ECCI.PI.ThemePark.Backend.Presentation.Responses.GetLearningComponentsResponse]>
+2026-02-03T01:51:53.8988320Z   But was:  <Microsoft.AspNetCore.Http.HttpResults.Results`2[Microsoft.AspNetCore.Http.HttpResults.Ok`1[UCR.ECCI.PI.ThemePark.Backend.Presentation.Responses.GetLearningComponentsResponse],Microsoft.AspNetCore.Http.HttpResults.BadRequest`1[System.String]]>
+2026-02-03T01:51:53.9019531Z 
+2026-02-03T01:51:53.9041948Z   Stack Trace:
+2026-02-03T01:51:53.9093715Z      at UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.Handlers.GetLearningComponentsHandlerTests.HandleAsync_WithComponentsInLearningSpace_ShouldReturnOkWithComponents() in D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\Handlers\GetLearningComponentsHandlerTests.cs:line 43
+2026-02-03T01:51:53.9097151Z    at NUnit.Framework.Internal.TaskAwaitAdapter.GenericAdapter`1.GetResult()
+2026-02-03T01:51:53.9098580Z    at NUnit.Framework.Internal.AsyncToSyncAdapter.Await(Func`1 invoke)
+2026-02-03T01:51:53.9099951Z    at NUnit.Framework.Internal.Commands.TestMethodCommand.RunTestMethod(TestExecutionContext context)
+2026-02-03T01:51:53.9129097Z    at NUnit.Framework.Internal.Commands.TestMethodCommand.Execute(TestExecutionContext context)
+2026-02-03T01:51:53.9152566Z    at NUnit.Framework.Internal.Commands.BeforeAndAfterTestCommand.<>c__DisplayClass1_0.<Execute>b__0()
+2026-02-03T01:51:53.9185998Z    at NUnit.Framework.Internal.Commands.DelegatingTestCommand.RunTestMethodInThreadAbortSafeZone(TestExecutionContext context, Action action)
+2026-02-03T01:51:53.9245687Z 
+2026-02-03T01:51:53.9249333Z 1)    at UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.Handlers.GetLearningComponentsHandlerTests.HandleAsync_WithComponentsInLearningSpace_ShouldReturnOkWithComponents() in D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\Handlers\GetLearningComponentsHandlerTests.cs:line 43
+2026-02-03T01:51:53.9253166Z    at System.Runtime.CompilerServices.AsyncMethodBuilderCore.Start[TStateMachine](TStateMachine& stateMachine)
+2026-02-03T01:51:53.9255571Z    at UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.Handlers.GetLearningComponentsHandlerTests.HandleAsync_WithComponentsInLearningSpace_ShouldReturnOkWithComponents()
+2026-02-03T01:51:53.9257223Z 
+2026-02-03T01:51:53.9257451Z 
+2026-02-03T01:51:53.9260081Z Results File: D:\a\tdd-llm-repo-a\tdd-llm-repo-a\TestResults\UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.trx
+2026-02-03T01:51:53.9261610Z 
+2026-02-03T01:51:53.9262735Z Failed!  - Failed:     1, Passed:     5, Skipped:     0, Total:     6, Duration: 241 ms - UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.dll (net8.0)
+2026-02-03T01:51:54.1439761Z 
+2026-02-03T01:51:54.1506711Z Attachments:
+2026-02-03T01:51:54.1635468Z   D:\a\tdd-llm-repo-a\tdd-llm-repo-a\TestResults\UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit\230e9cff-ab00-4486-aed5-5363bc0d0a4f\coverage.cobertura.xml
+2026-02-03T01:51:54.2759745Z ##[error]Process completed with exit code 1.

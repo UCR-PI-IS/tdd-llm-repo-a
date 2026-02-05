@@ -1,0 +1,77 @@
+﻿2026-02-04T00:49:40.3172019Z ##[group]Run $ErrorActionPreference = 'Stop'
+2026-02-04T00:49:40.3172643Z [36;1m$ErrorActionPreference = 'Stop'[0m
+2026-02-04T00:49:40.3173700Z [36;1m$coverageFiles = Get-ChildItem -Path TestResults -Recurse -Filter coverage.cobertura.xml -File -ErrorAction SilentlyContinue[0m
+2026-02-04T00:49:40.3174725Z [36;1mif (-not $coverageFiles) {[0m
+2026-02-04T00:49:40.3175178Z [36;1m  Write-Host 'No coverage files found.'[0m
+2026-02-04T00:49:40.3175610Z [36;1m  exit 0[0m
+2026-02-04T00:49:40.3175872Z [36;1m}[0m
+2026-02-04T00:49:40.3176359Z [36;1m$toolPath = Join-Path (Resolve-Path ".").Path ".tools/reportgenerator.exe"[0m
+2026-02-04T00:49:40.3177069Z [36;1mif (-not (Test-Path $toolPath)) {[0m
+2026-02-04T00:49:40.3177627Z [36;1m  Write-Error "ReportGenerator not found at $toolPath"[0m
+2026-02-04T00:49:40.3178153Z [36;1m  exit 1[0m
+2026-02-04T00:49:40.3178442Z [36;1m}[0m
+2026-02-04T00:49:40.3178737Z [36;1mforeach ($cov in $coverageFiles) {[0m
+2026-02-04T00:49:40.3179359Z [36;1m  $projName = Split-Path -Path $cov.Directory.Parent.FullName -Leaf[0m
+2026-02-04T00:49:40.3180214Z [36;1m  $targetDir = Join-Path -Path "Coverage" -ChildPath $projName[0m
+2026-02-04T00:49:40.3181003Z [36;1m  New-Item -ItemType Directory -Force -Path $targetDir | Out-Null[0m
+2026-02-04T00:49:40.3182001Z [36;1m  & $toolPath -reports:$($cov.FullName) -targetdir:$targetDir -reporttypes:"Cobertura;JsonSummary"[0m
+2026-02-04T00:49:40.3182793Z [36;1m}[0m
+2026-02-04T00:49:40.3254629Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+2026-02-04T00:49:40.3255190Z env:
+2026-02-04T00:49:40.3255461Z   DOTNET_ROOT: C:\Program Files\dotnet
+2026-02-04T00:49:40.3255860Z ##[endgroup]
+2026-02-04T00:49:41.1203208Z 2026-02-04T00:49:41: Arguments
+2026-02-04T00:49:41.1217993Z 2026-02-04T00:49:41:  -reports:D:\a\tdd-llm-repo-a\tdd-llm-repo-a\TestResults\UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit\77056d52-ea2b-4ace-b740-c08dbce2d821\coverage.cobertura.xml
+2026-02-04T00:49:41.1220504Z 2026-02-04T00:49:41:  -targetdir:Coverage\UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit
+2026-02-04T00:49:41.1222037Z 2026-02-04T00:49:41:  -reporttypes:Cobertura;JsonSummary
+2026-02-04T00:49:41.4139897Z 2026-02-04T00:49:41: Writing report file 'Coverage\UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit\Cobertura.xml'
+2026-02-04T00:49:41.4337055Z 2026-02-04T00:49:41: Writing report file 'Coverage\UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit\Summary.json'
+2026-02-04T00:49:41.5497187Z 2026-02-04T00:49:41: Arguments
+2026-02-04T00:49:41.5502618Z 2026-02-04T00:49:41:  -reports:D:\a\tdd-llm-repo-a\tdd-llm-repo-a\TestResults\UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit\runneradmin_runnervmzwdec_2026-02-04_00_49_17\In\runnervmzwdec\coverage.cobertura.xml
+2026-02-04T00:49:41.5505212Z 2026-02-04T00:49:41:  -targetdir:Coverage\In
+2026-02-04T00:49:41.5506168Z 2026-02-04T00:49:41:  -reporttypes:Cobertura;JsonSummary
+2026-02-04T00:49:41.8880523Z 2026-02-04T00:49:41: Writing report file 'Coverage\In\Cobertura.xml'
+2026-02-04T00:49:41.8934149Z 2026-02-04T00:49:41: Writing report file 'Coverage\In\Summary.json'
+2026-02-04T00:49:41.9019404Z 2026-02-04T00:49:41: Report generation took 0.2 seconds
+2026-02-04T00:49:41.9749448Z 2026-02-04T00:49:41: Arguments
+2026-02-04T00:49:41.9751549Z 2026-02-04T00:49:41:  -reports:D:\a\tdd-llm-repo-a\tdd-llm-repo-a\TestResults\UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit\9ca3e825-ec88-4ff6-a4d9-86cd092ffacb\coverage.cobertura.xml
+2026-02-04T00:49:41.9753757Z 2026-02-04T00:49:41:  -targetdir:Coverage\UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit
+2026-02-04T00:49:41.9754951Z 2026-02-04T00:49:41:  -reporttypes:Cobertura;JsonSummary
+2026-02-04T00:49:42.2076162Z 2026-02-04T00:49:42: Writing report file 'Coverage\UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit\Cobertura.xml'
+2026-02-04T00:49:42.2158967Z 2026-02-04T00:49:42: Writing report file 'Coverage\UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit\Summary.json'
+2026-02-04T00:49:42.2251181Z 2026-02-04T00:49:42: Report generation took 0.1 seconds
+2026-02-04T00:49:42.3014082Z 2026-02-04T00:49:42: Arguments
+2026-02-04T00:49:42.3016595Z 2026-02-04T00:49:42:  -reports:D:\a\tdd-llm-repo-a\tdd-llm-repo-a\TestResults\UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit\runneradmin_runnervmzwdec_2026-02-04_00_49_21\In\runnervmzwdec\coverage.cobertura.xml
+2026-02-04T00:49:42.3018774Z 2026-02-04T00:49:42:  -targetdir:Coverage\In
+2026-02-04T00:49:42.3019701Z 2026-02-04T00:49:42:  -reporttypes:Cobertura;JsonSummary
+2026-02-04T00:49:42.5230546Z 2026-02-04T00:49:42: Writing report file 'Coverage\In\Cobertura.xml'
+2026-02-04T00:49:42.5285172Z 2026-02-04T00:49:42: Writing report file 'Coverage\In\Summary.json'
+2026-02-04T00:49:42.5369116Z 2026-02-04T00:49:42: Report generation took 0.1 seconds
+2026-02-04T00:49:42.6111617Z 2026-02-04T00:49:42: Arguments
+2026-02-04T00:49:42.6113931Z 2026-02-04T00:49:42:  -reports:D:\a\tdd-llm-repo-a\tdd-llm-repo-a\TestResults\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit\72a40d4d-a663-4079-a2d3-f415779568ff\coverage.cobertura.xml
+2026-02-04T00:49:42.6116360Z 2026-02-04T00:49:42:  -targetdir:Coverage\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit
+2026-02-04T00:49:42.6117671Z 2026-02-04T00:49:42:  -reporttypes:Cobertura;JsonSummary
+2026-02-04T00:49:42.8594189Z 2026-02-04T00:49:42: Writing report file 'Coverage\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit\Cobertura.xml'
+2026-02-04T00:49:42.8646082Z 2026-02-04T00:49:42: Writing report file 'Coverage\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit\Summary.json'
+2026-02-04T00:49:42.8736668Z 2026-02-04T00:49:42: Report generation took 0.1 seconds
+2026-02-04T00:49:42.9675032Z 2026-02-04T00:49:42: Arguments
+2026-02-04T00:49:42.9677443Z 2026-02-04T00:49:42:  -reports:D:\a\tdd-llm-repo-a\tdd-llm-repo-a\TestResults\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit\runneradmin_runnervmzwdec_2026-02-04_00_49_28\In\runnervmzwdec\coverage.cobertura.xml
+2026-02-04T00:49:42.9679648Z 2026-02-04T00:49:42:  -targetdir:Coverage\In
+2026-02-04T00:49:42.9680548Z 2026-02-04T00:49:42:  -reporttypes:Cobertura;JsonSummary
+2026-02-04T00:49:43.1818739Z 2026-02-04T00:49:43: Writing report file 'Coverage\In\Cobertura.xml'
+2026-02-04T00:49:43.1871031Z 2026-02-04T00:49:43: Writing report file 'Coverage\In\Summary.json'
+2026-02-04T00:49:43.1959238Z 2026-02-04T00:49:43: Report generation took 0.1 seconds
+2026-02-04T00:49:43.2684136Z 2026-02-04T00:49:43: Arguments
+2026-02-04T00:49:43.2686408Z 2026-02-04T00:49:43:  -reports:D:\a\tdd-llm-repo-a\tdd-llm-repo-a\TestResults\UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit\1955f8fa-a3f5-4b73-bf50-f8fc372dc6a7\coverage.cobertura.xml
+2026-02-04T00:49:43.2688762Z 2026-02-04T00:49:43:  -targetdir:Coverage\UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit
+2026-02-04T00:49:43.2690047Z 2026-02-04T00:49:43:  -reporttypes:Cobertura;JsonSummary
+2026-02-04T00:49:43.5319000Z 2026-02-04T00:49:43: Writing report file 'Coverage\UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit\Cobertura.xml'
+2026-02-04T00:49:43.9194208Z 2026-02-04T00:49:43: Writing report file 'Coverage\UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit\Summary.json'
+2026-02-04T00:49:43.9203794Z 2026-02-04T00:49:43: Report generation took 0.1 seconds
+2026-02-04T00:49:43.9211413Z 2026-02-04T00:49:43: Arguments
+2026-02-04T00:49:43.9214692Z 2026-02-04T00:49:43:  -reports:D:\a\tdd-llm-repo-a\tdd-llm-repo-a\TestResults\UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit\runneradmin_runnervmzwdec_2026-02-04_00_49_36\In\runnervmzwdec\coverage.cobertura.xml
+2026-02-04T00:49:43.9216214Z 2026-02-04T00:49:43:  -targetdir:Coverage\In
+2026-02-04T00:49:43.9216747Z 2026-02-04T00:49:43:  -reporttypes:Cobertura;JsonSummary
+2026-02-04T00:49:43.9217423Z 2026-02-04T00:49:43: Writing report file 'Coverage\In\Cobertura.xml'
+2026-02-04T00:49:43.9218102Z 2026-02-04T00:49:43: Writing report file 'Coverage\In\Summary.json'
+2026-02-04T00:49:43.9218669Z 2026-02-04T00:49:43: Report generation took 0.1 seconds

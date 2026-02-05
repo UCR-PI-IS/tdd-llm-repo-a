@@ -1,0 +1,75 @@
+﻿2026-02-03T01:28:25.0732733Z ##[group]Run actions/checkout@v4
+2026-02-03T01:28:25.0733949Z with:
+2026-02-03T01:28:25.0734381Z   repository: UCR-PI-IS/tdd-llm-repo-a
+2026-02-03T01:28:25.0735152Z   token: ***
+2026-02-03T01:28:25.0735532Z   ssh-strict: true
+2026-02-03T01:28:25.0735928Z   ssh-user: git
+2026-02-03T01:28:25.0736312Z   persist-credentials: true
+2026-02-03T01:28:25.0736753Z   clean: true
+2026-02-03T01:28:25.0737162Z   sparse-checkout-cone-mode: true
+2026-02-03T01:28:25.0737656Z   fetch-depth: 1
+2026-02-03T01:28:25.0738025Z   fetch-tags: false
+2026-02-03T01:28:25.0738414Z   show-progress: true
+2026-02-03T01:28:25.0738816Z   lfs: false
+2026-02-03T01:28:25.0739176Z   submodules: false
+2026-02-03T01:28:25.0739575Z   set-safe-directory: true
+2026-02-03T01:28:25.0740211Z ##[endgroup]
+2026-02-03T01:28:25.2862973Z Syncing repository: UCR-PI-IS/tdd-llm-repo-a
+2026-02-03T01:28:25.2866107Z ##[group]Getting Git version info
+2026-02-03T01:28:25.2867650Z Working directory is 'D:\a\tdd-llm-repo-a\tdd-llm-repo-a'
+2026-02-03T01:28:25.3999043Z [command]"C:\Program Files\Git\bin\git.exe" version
+2026-02-03T01:28:25.7674482Z git version 2.52.0.windows.1
+2026-02-03T01:28:26.4004080Z ##[endgroup]
+2026-02-03T01:28:26.4010966Z Temporarily overriding HOME='D:\a\_temp\046b0f04-f925-45df-af9f-1ea3fceec621' before making global git config changes
+2026-02-03T01:28:26.4013898Z Adding repository directory to the temporary git global config as a safe directory
+2026-02-03T01:28:26.4016800Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\tdd-llm-repo-a\tdd-llm-repo-a
+2026-02-03T01:28:26.4021590Z Deleting the contents of 'D:\a\tdd-llm-repo-a\tdd-llm-repo-a'
+2026-02-03T01:28:26.4023973Z ##[group]Initializing the repository
+2026-02-03T01:28:26.4025956Z [command]"C:\Program Files\Git\bin\git.exe" init D:\a\tdd-llm-repo-a\tdd-llm-repo-a
+2026-02-03T01:28:26.4028481Z Initialized empty Git repository in D:/a/tdd-llm-repo-a/tdd-llm-repo-a/.git/
+2026-02-03T01:28:26.4035325Z [command]"C:\Program Files\Git\bin\git.exe" remote add origin https://github.com/UCR-PI-IS/tdd-llm-repo-a
+2026-02-03T01:28:26.4043555Z ##[endgroup]
+2026-02-03T01:28:26.4045238Z ##[group]Disabling automatic garbage collection
+2026-02-03T01:28:26.4047120Z [command]"C:\Program Files\Git\bin\git.exe" config --local gc.auto 0
+2026-02-03T01:28:26.4051366Z ##[endgroup]
+2026-02-03T01:28:26.4053449Z ##[group]Setting up auth
+2026-02-03T01:28:26.4055780Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+2026-02-03T01:28:26.4062777Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+2026-02-03T01:28:27.6444191Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-02-03T01:28:27.6797008Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+2026-02-03T01:28:28.4313156Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-02-03T01:28:28.4319076Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+2026-02-03T01:28:28.9129154Z [command]"C:\Program Files\Git\bin\git.exe" config --local http.https://github.com/.extraheader "AUTHORIZATION: basic ***"
+2026-02-03T01:28:28.9495586Z ##[endgroup]
+2026-02-03T01:28:28.9496425Z ##[group]Fetching the repository
+2026-02-03T01:28:28.9511610Z [command]"C:\Program Files\Git\bin\git.exe" -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +64bfeaa7f5a6a17f44e8d0fe493b58abd2244b24:refs/remotes/pull/17/merge
+2026-02-03T01:28:30.2157636Z From https://github.com/UCR-PI-IS/tdd-llm-repo-a
+2026-02-03T01:28:30.2163337Z  * [new ref]         64bfeaa7f5a6a17f44e8d0fe493b58abd2244b24 -> pull/17/merge
+2026-02-03T01:28:30.2440701Z ##[endgroup]
+2026-02-03T01:28:30.2441523Z ##[group]Determining the checkout info
+2026-02-03T01:28:30.2444173Z ##[endgroup]
+2026-02-03T01:28:30.2455957Z [command]"C:\Program Files\Git\bin\git.exe" sparse-checkout disable
+2026-02-03T01:28:30.3005790Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset-all extensions.worktreeConfig
+2026-02-03T01:28:30.3483430Z ##[group]Checking out the ref
+2026-02-03T01:28:30.3502119Z [command]"C:\Program Files\Git\bin\git.exe" checkout --progress --force refs/remotes/pull/17/merge
+2026-02-03T01:28:30.4638653Z Note: switching to 'refs/remotes/pull/17/merge'.
+2026-02-03T01:28:30.4668732Z 
+2026-02-03T01:28:30.4675500Z You are in 'detached HEAD' state. You can look around, make experimental
+2026-02-03T01:28:30.4685353Z changes and commit them, and you can discard any commits you make in this
+2026-02-03T01:28:30.4688823Z state without impacting any branches by switching back to a branch.
+2026-02-03T01:28:30.4706009Z 
+2026-02-03T01:28:30.4735248Z If you want to create a new branch to retain commits you create, you may
+2026-02-03T01:28:30.4736420Z do so (now or later) by using -c with the switch command. Example:
+2026-02-03T01:28:30.4737105Z 
+2026-02-03T01:28:30.4737457Z   git switch -c <new-branch-name>
+2026-02-03T01:28:30.4737926Z 
+2026-02-03T01:28:30.4738235Z Or undo this operation with:
+2026-02-03T01:28:30.4738688Z 
+2026-02-03T01:28:30.4738957Z   git switch -
+2026-02-03T01:28:30.4739270Z 
+2026-02-03T01:28:30.4739720Z Turn off this advice by setting config variable advice.detachedHead to false
+2026-02-03T01:28:30.4740438Z 
+2026-02-03T01:28:30.4741186Z HEAD is now at 64bfeaa Merge c03bf5aa9b11af915d5c9eab8b0012dd87536a8d into e442855824dff04704ec409956a7da5a24a6ba4e
+2026-02-03T01:28:30.4745677Z ##[endgroup]
+2026-02-03T01:28:30.5263511Z [command]"C:\Program Files\Git\bin\git.exe" log -1 --format=%H
+2026-02-03T01:28:30.5588716Z 64bfeaa7f5a6a17f44e8d0fe493b58abd2244b24

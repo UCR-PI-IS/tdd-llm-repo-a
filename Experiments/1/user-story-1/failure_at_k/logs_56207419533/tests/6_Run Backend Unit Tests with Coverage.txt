@@ -1,0 +1,78 @@
+﻿2026-02-03T01:55:39.9810602Z ##[group]Run $ErrorActionPreference = 'Stop'
+2026-02-03T01:55:39.9811045Z [36;1m$ErrorActionPreference = 'Stop'[0m
+2026-02-03T01:55:39.9811437Z [36;1mNew-Item -ItemType Directory -Force -Path TestResults | Out-Null[0m
+2026-02-03T01:55:39.9811922Z [36;1mNew-Item -ItemType Directory -Force -Path Coverage | Out-Null[0m
+2026-02-03T01:55:39.9812376Z [36;1m# Find Backend.*.Tests.Unit projects via wildcard match on full path[0m
+2026-02-03T01:55:39.9812841Z [36;1m$projects = Get-ChildItem -Path . -Recurse -Filter *.csproj -File |[0m
+2026-02-03T01:55:39.9813292Z [36;1m  Where-Object { $_.FullName -like '*Backend.*.Tests.Unit*' }[0m
+2026-02-03T01:55:39.9813619Z [36;1mif (-not $projects) {[0m
+2026-02-03T01:55:39.9813960Z [36;1m  Write-Host 'No Backend.*.Tests.Unit test projects found. Skipping tests.'[0m
+2026-02-03T01:55:39.9814314Z [36;1m  exit 0[0m
+2026-02-03T01:55:39.9814475Z [36;1m}[0m
+2026-02-03T01:55:39.9814636Z [36;1mforeach ($proj in $projects) {[0m
+2026-02-03T01:55:39.9814886Z [36;1m  $projName = $proj.BaseName[0m
+2026-02-03T01:55:39.9815277Z [36;1m  $projResultsDir = Join-Path -Path "TestResults" -ChildPath $projName[0m
+2026-02-03T01:55:39.9815769Z [36;1m  New-Item -ItemType Directory -Force -Path $projResultsDir | Out-Null[0m
+2026-02-03T01:55:39.9816288Z [36;1m  Write-Host "Running tests for $($proj.FullName) with coverage into $projResultsDir"[0m
+2026-02-03T01:55:39.9817095Z [36;1m  dotnet test $proj.FullName -c Release --logger "trx;LogFileName=$projName.trx" --results-directory $projResultsDir --collect "XPlat Code Coverage"[0m
+2026-02-03T01:55:39.9817705Z [36;1m}[0m
+2026-02-03T01:55:39.9883837Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+2026-02-03T01:55:39.9884166Z env:
+2026-02-03T01:55:39.9884337Z   DOTNET_ROOT: C:\Program Files\dotnet
+2026-02-03T01:55:39.9884573Z ##[endgroup]
+2026-02-03T01:55:40.4562032Z Running tests for D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.csproj with coverage into TestResults\UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit
+2026-02-03T01:55:41.3523385Z   Determining projects to restore...
+2026-02-03T01:55:42.2772101Z   All projects are up-to-date for restore.
+2026-02-03T01:55:43.0032070Z   UCR.ECCI.PI.ThemePark.Backend.Domain -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Domain.dll
+2026-02-03T01:55:43.2174328Z   UCR.ECCI.PI.ThemePark.Backend.Application -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Application.dll
+2026-02-03T01:55:43.6455622Z   UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.dll
+2026-02-03T01:55:43.6786281Z Test run for D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.dll (.NETCoreApp,Version=v8.0)
+2026-02-03T01:55:43.9100715Z VSTest version 18.0.1 (x64)
+2026-02-03T01:55:43.9125519Z 
+2026-02-03T01:55:44.3753861Z Starting test execution, please wait...
+2026-02-03T01:55:44.4376925Z A total of 1 test files matched the specified pattern.
+2026-02-03T01:55:48.8260752Z Results File: D:\a\tdd-llm-repo-a\tdd-llm-repo-a\TestResults\UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.trx
+2026-02-03T01:55:48.8263091Z 
+2026-02-03T01:55:48.8302929Z Passed!  - Failed:     0, Passed:     5, Skipped:     0, Total:     5, Duration: 210 ms - UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.dll (net8.0)
+2026-02-03T01:55:49.0521203Z 
+2026-02-03T01:55:49.0535177Z Attachments:
+2026-02-03T01:55:49.0555106Z   D:\a\tdd-llm-repo-a\tdd-llm-repo-a\TestResults\UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit\052d960a-1bff-4868-a6fa-59fdd017772a\coverage.cobertura.xml
+2026-02-03T01:55:49.1392414Z Running tests for D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.csproj with coverage into TestResults\UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit
+2026-02-03T01:55:50.0034026Z   Determining projects to restore...
+2026-02-03T01:55:50.3438041Z   All projects are up-to-date for restore.
+2026-02-03T01:55:50.7316422Z   UCR.ECCI.PI.ThemePark.Backend.Domain -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Domain.dll
+2026-02-03T01:55:50.8485872Z   UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain.Tests.Unit\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.dll
+2026-02-03T01:55:50.8598610Z Test run for D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain.Tests.Unit\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.dll (.NETCoreApp,Version=v8.0)
+2026-02-03T01:55:50.9246986Z VSTest version 18.0.1 (x64)
+2026-02-03T01:55:50.9271758Z 
+2026-02-03T01:55:51.0262606Z Starting test execution, please wait...
+2026-02-03T01:55:51.0600132Z A total of 1 test files matched the specified pattern.
+2026-02-03T01:55:52.4741217Z Results File: D:\a\tdd-llm-repo-a\tdd-llm-repo-a\TestResults\UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.trx
+2026-02-03T01:55:52.4743441Z 
+2026-02-03T01:55:52.4780281Z Passed!  - Failed:     0, Passed:    10, Skipped:     0, Total:    10, Duration: 76 ms - UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.dll (net8.0)
+2026-02-03T01:55:52.6799926Z 
+2026-02-03T01:55:52.6804934Z Attachments:
+2026-02-03T01:55:52.6807599Z   D:\a\tdd-llm-repo-a\tdd-llm-repo-a\TestResults\UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit\8046cbc0-5972-4318-944a-a204fdf522d7\coverage.cobertura.xml
+2026-02-03T01:55:52.7558831Z Running tests for D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.csproj with coverage into TestResults\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit
+2026-02-03T01:55:53.6294623Z   Determining projects to restore...
+2026-02-03T01:55:54.5661872Z   All projects are up-to-date for restore.
+2026-02-03T01:55:55.3116536Z   UCR.ECCI.PI.ThemePark.Backend.Domain -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Domain.dll
+2026-02-03T01:55:55.6710959Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure\EntityConfigurations\LearningSpaceEntityConfiguration.cs(32,17): error CS1061: 'EntityTypeBuilder<LearningSpace>' does not contain a definition for 'HasConstructorBinding' and no accessible extension method 'HasConstructorBinding' accepting a first argument of type 'EntityTypeBuilder<LearningSpace>' could be found (are you missing a using directive or an assembly reference?) [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.csproj]
+2026-02-03T01:55:55.7267255Z Running tests for D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.csproj with coverage into TestResults\UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit
+2026-02-03T01:55:56.6466000Z   Determining projects to restore...
+2026-02-03T01:55:57.6519255Z   All projects are up-to-date for restore.
+2026-02-03T01:55:58.4971927Z   UCR.ECCI.PI.ThemePark.Backend.Domain -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Domain.dll
+2026-02-03T01:55:58.7017432Z   UCR.ECCI.PI.ThemePark.Backend.Application -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Application.dll
+2026-02-03T01:55:59.2427169Z   UCR.ECCI.PI.ThemePark.Backend.Presentation -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Presentation.dll
+2026-02-03T01:55:59.7817445Z   UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.dll
+2026-02-03T01:55:59.8014475Z Test run for D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.dll (.NETCoreApp,Version=v8.0)
+2026-02-03T01:55:59.8662344Z VSTest version 18.0.1 (x64)
+2026-02-03T01:55:59.8689197Z 
+2026-02-03T01:55:59.9703919Z Starting test execution, please wait...
+2026-02-03T01:56:00.0336191Z A total of 1 test files matched the specified pattern.
+2026-02-03T01:56:02.9250344Z Results File: D:\a\tdd-llm-repo-a\tdd-llm-repo-a\TestResults\UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.trx
+2026-02-03T01:56:02.9359932Z 
+2026-02-03T01:56:02.9361390Z Passed!  - Failed:     0, Passed:     6, Skipped:     0, Total:     6, Duration: 170 ms - UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.dll (net8.0)
+2026-02-03T01:56:03.1768914Z 
+2026-02-03T01:56:03.1892524Z Attachments:
+2026-02-03T01:56:03.1983364Z   D:\a\tdd-llm-repo-a\tdd-llm-repo-a\TestResults\UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit\e947b3e3-8c6c-4184-8766-e43b3242d931\coverage.cobertura.xml

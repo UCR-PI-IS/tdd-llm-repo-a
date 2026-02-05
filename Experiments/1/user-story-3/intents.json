@@ -1,0 +1,140 @@
+[
+    {
+        "user_story_id": "PQL-AE-001-001",
+        "layer": "Domain",
+        "test_intent": "var building = new Building(1, \"Engineering Building\", \"Blue\", 15.5, 30.0, 20.0, 100.0, 200.0, 0.0);\nAssert.That(building.InternalID, Is.EqualTo(1));\nAssert.That(building.Name, Is.EqualTo(\"Engineering Building\"));\nAssert.That(building.Color, Is.EqualTo(\"Blue\"));\nAssert.That(building.Height, Is.EqualTo(15.5));",
+        "response": "YES"
+    },
+    {
+        "user_story_id": "PQL-AE-001-001",
+        "layer": "Domain",
+        "test_intent": "// Verify that Building constructor throws ArgumentException when Name is null\nAssert.Throws<ArgumentException>(() =>\n{\n    var building = new Building(internalID: 1, name: null, color: \"Blue\", height: 15.5, length: 30.0, width: 20.0, x: 100.0, y: 200.0, z: 0.0);\n});",
+        "response": "YES"
+    },
+    {
+        "user_story_id": "PQL-AE-001-001",
+        "layer": "Domain",
+        "test_intent": "// Verify that Building constructor throws ArgumentException when Name is empty\nAssert.Throws<ArgumentException>(() =>\n{\n    var building = new Building(1, \"\", \"Blue\", 15.5, 30.0, 20.0, 100.0, 200.0, 0.0);\n});",
+        "response": "YES"
+    },
+    {
+        "user_story_id": "PQL-AE-001-001",
+        "layer": "Domain",
+        "test_intent": "// Verify that Building constructor throws ArgumentException when Color is null\nAssert.Throws<ArgumentException>(() =>\n{\n    var building = new Building(1, \"Engineering Building\", null, 15.5, 30.0, 20.0, 100.0, 200.0, 0.0);\n});",
+        "response": "YES"
+    },
+    {
+        "user_story_id": "PQL-AE-001-001",
+        "layer": "Domain",
+        "test_intent": "// Verify that Building constructor throws ArgumentException when Height is negative\nAssert.Throws<ArgumentException>(() =>\n{\n    var building = new Building(1, \"Engineering Building\", \"Blue\", -15.5, 30.0, 20.0, 100.0, 200.0, 0.0);\n});",
+        "response": "YES"
+    },
+    {
+        "user_story_id": "PQL-AE-001-001",
+        "layer": "Domain",
+        "test_intent": "// Verify that Building constructor throws ArgumentException when Height is zero\nAssert.Throws<ArgumentException>(() =>\n{\n    var building = new Building(1, \"Engineering Building\", \"Blue\", 0.0, 30.0, 20.0, 100.0, 200.0, 0.0);\n});",
+        "response": "YES"
+    },
+    {
+        "user_story_id": "PQL-AE-001-001",
+        "layer": "Domain",
+        "test_intent": "// Verify that Building constructor throws ArgumentException when Length is negative\nAssert.Throws<ArgumentException>(() =>\n{\n    var building = new Building(1, \"Engineering Building\", \"Blue\", 15.5, -30.0, 20.0, 100.0, 200.0, 0.0);\n});",
+        "response": "YES"
+    },
+    {
+        "user_story_id": "PQL-AE-001-001",
+        "layer": "Domain",
+        "test_intent": "// Verify that Building constructor throws ArgumentException when Width is negative\nAssert.Throws<ArgumentException>(() =>\n{\n    var building = new Building(1, \"Engineering Building\", \"Blue\", 15.5, 30.0, -20.0, 100.0, 200.0, 0.0);\n});",
+        "response": "YES"
+    },
+    {
+        "user_story_id": "PQL-AE-001-001",
+        "layer": "Domain",
+        "test_intent": "// Verify that Building constructor throws ArgumentException when X coordinate is negative\nAssert.Throws<ArgumentException>(() =>\n{\n    var building = new Building(1, \"Engineering Building\", \"Blue\", 15.5, 30.0, 20.0, -100.0, 200.0, 0.0);\n});",
+        "response": "YES"
+    },
+    {
+        "user_story_id": "PQL-AE-001-001",
+        "layer": "Domain",
+        "test_intent": "// Verify that Building constructor throws ArgumentException when Y coordinate is negative\nAssert.Throws<ArgumentException>(() =>\n{\n    var building = new Building(1, \"Engineering Building\", \"Blue\", 15.5, 30.0, 20.0, 100.0, -200.0, 0.0);\n});",
+        "response": "YES"
+    },
+    {
+        "user_story_id": "PQL-AE-001-001",
+        "layer": "Domain",
+        "test_intent": "// Verify that Building constructor throws ArgumentException when Z coordinate is negative\nAssert.Throws<ArgumentException>(() =>\n{\n    var building = new Building(1, \"Engineering Building\", \"Blue\", 15.5, 30.0, 20.0, 100.0, 200.0, -5.0);\n});",
+        "response": "YES"
+    },
+    {
+        "user_story_id": "PQL-AE-001-001",
+        "layer": "Application",
+        "test_intent": "// Mock repository returns null (no duplicate), then returns true on Add\n_mockRepository.Setup(r => r.GetByNameAsync(\"Engineering Building\")).ReturnsAsync((Building)null);\n_mockRepository.Setup(r => r.AddAsync(It.IsAny<Building>())).ReturnsAsync(true);\n\nvar result = await _service.AddBuildingAsync(\"Engineering Building\", \"Blue\", 15.5, 30.0, 20.0, 100.0, 200.0, 0.0);\n\nAssert.That(result, Is.True);\n_mockRepository.Verify(r => r.GetByNameAsync(\"Engineering Building\"), Times.Once);\n_mockRepository.Verify(r => r.AddAsync(It.IsAny<Building>()), Times.Once);",
+        "response": "YES"
+    },
+    {
+        "user_story_id": "PQL-AE-001-001",
+        "layer": "Application",
+        "test_intent": "// Mock repository returns existing building with same name\nvar existingBuilding = new Building(1, \"Engineering Building\", \"Red\", 10.0, 20.0, 15.0, 50.0, 60.0, 0.0);\n_mockRepository.Setup(r => r.GetByNameAsync(\"Engineering Building\")).ReturnsAsync(existingBuilding);\n\nAssert.ThrowsAsync<InvalidOperationException>(async () =>\n{\n    await _service.AddBuildingAsync(\"Engineering Building\", \"Blue\", 15.5, 30.0, 20.0, 100.0, 200.0, 0.0);\n});\n\n_mockRepository.Verify(r => r.GetByNameAsync(\"Engineering Building\"), Times.Once);\n_mockRepository.Verify(r => r.AddAsync(It.IsAny<Building>()), Times.Never);",
+        "response": "YES"
+    },
+    {
+        "user_story_id": "PQL-AE-001-001",
+        "layer": "Application",
+        "test_intent": "// Service validates null name before calling repository\nAssert.ThrowsAsync<ArgumentException>(async () =>\n{\n    await _service.AddBuildingAsync(null, \"Blue\", 15.5, 30.0, 20.0, 100.0, 200.0, 0.0);\n});\n\n_mockRepository.Verify(r => r.GetByNameAsync(It.IsAny<string>()), Times.Never);\n_mockRepository.Verify(r => r.AddAsync(It.IsAny<Building>()), Times.Never);",
+        "response": "YES"
+    },
+    {
+        "user_story_id": "PQL-AE-001-001",
+        "layer": "Application",
+        "test_intent": "// Service validates null color before calling repository\nAssert.ThrowsAsync<ArgumentException>(async () =>\n{\n    await _service.AddBuildingAsync(\"Engineering Building\", null, 15.5, 30.0, 20.0, 100.0, 200.0, 0.0);\n});\n\n_mockRepository.Verify(r => r.AddAsync(It.IsAny<Building>()), Times.Never);",
+        "response": "YES"
+    },
+    {
+        "user_story_id": "PQL-AE-001-001",
+        "layer": "Infrastructure",
+        "test_intent": "// Arrange: create building and add to repository\nvar building = new Building(1, \"Engineering Building\", \"Blue\", 15.5, 30.0, 20.0, 100.0, 200.0, 0.0);\n\n// Act\nvar result = await _repository.AddAsync(building);\n\n// Assert\nAssert.That(result, Is.True);\nvar savedBuilding = await _repository.GetByNameAsync(\"Engineering Building\");\nAssert.That(savedBuilding, Is.Not.Null);\nAssert.That(savedBuilding.Name, Is.EqualTo(\"Engineering Building\"));",
+        "response": "YES"
+    },
+    {
+        "user_story_id": "PQL-AE-001-001",
+        "layer": "Infrastructure",
+        "test_intent": "// Query for non-existent building\nvar result = await _repository.GetByNameAsync(\"NonExistentBuilding\");\n\nAssert.That(result, Is.Null);",
+        "response": "YES"
+    },
+    {
+        "user_story_id": "PQL-AE-001-001",
+        "layer": "Infrastructure",
+        "test_intent": "// Add a building first\nvar building = new Building(1, \"Science Building\", \"Green\", 20.0, 40.0, 30.0, 150.0, 250.0, 0.0);\nawait _repository.AddAsync(building);\n\n// Query by name\nvar result = await _repository.GetByNameAsync(\"Science Building\");\n\nAssert.That(result, Is.Not.Null);\nAssert.That(result.Name, Is.EqualTo(\"Science Building\"));\nAssert.That(result.Color, Is.EqualTo(\"Green\"));",
+        "response": "YES"
+    },
+    {
+        "user_story_id": "PQL-AE-001-001",
+        "layer": "Presentation",
+        "test_intent": "// Mock service returns true\nvar request = new AddBuildingRequest\n{\n    Name = \"Engineering Building\",\n    Color = \"Blue\",\n    Height = 15.5,\n    Length = 30.0,\n    Width = 20.0,\n    X = 100.0,\n    Y = 200.0,\n    Z = 0.0\n};\n\n_mockService.Setup(s => s.AddBuildingAsync(\"Engineering Building\", \"Blue\", 15.5, 30.0, 20.0, 100.0, 200.0, 0.0))\n    .ReturnsAsync(true);\n\nvar result = await _handler.HandleAsync(request);\n\nAssert.That(result.Success, Is.True);\n_mockService.Verify(s => s.AddBuildingAsync(\"Engineering Building\", \"Blue\", 15.5, 30.0, 20.0, 100.0, 200.0, 0.0), Times.Once);",
+        "response": "YES"
+    },
+    {
+        "user_story_id": "PQL-AE-001-001",
+        "layer": "Presentation",
+        "test_intent": "// Mock service throws InvalidOperationException for duplicate\nvar request = new AddBuildingRequest\n{\n    Name = \"Engineering Building\",\n    Color = \"Blue\",\n    Height = 15.5,\n    Length = 30.0,\n    Width = 20.0,\n    X = 100.0,\n    Y = 200.0,\n    Z = 0.0\n};\n\n_mockService.Setup(s => s.AddBuildingAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<double>(), It.IsAny<double>(), It.IsAny<double>(), It.IsAny<double>(), It.IsAny<double>(), It.IsAny<double>()))\n    .ThrowsAsync(new InvalidOperationException(\"Building with this name already exists\"));\n\nvar result = await _handler.HandleAsync(request);\n\nAssert.That(result.Success, Is.False);\nAssert.That(result.ErrorMessage, Does.Contain(\"already exists\"));",
+        "response": "YES"
+    },
+    {
+        "user_story_id": "PQL-AE-001-001",
+        "layer": "Presentation",
+        "test_intent": "// Mock service throws ArgumentException for invalid input\nvar request = new AddBuildingRequest\n{\n    Name = null,\n    Color = \"Blue\",\n    Height = 15.5,\n    Length = 30.0,\n    Width = 20.0,\n    X = 100.0,\n    Y = 200.0,\n    Z = 0.0\n};\n\n_mockService.Setup(s => s.AddBuildingAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<double>(), It.IsAny<double>(), It.IsAny<double>(), It.IsAny<double>(), It.IsAny<double>(), It.IsAny<double>()))\n    .ThrowsAsync(new ArgumentException(\"Name is required\"));\n\nvar result = await _handler.HandleAsync(request);\n\nAssert.That(result.Success, Is.False);\nAssert.That(result.ErrorMessage, Does.Contain(\"Name is required\"));",
+        "response": "YES"
+    },
+    {
+        "user_story_id": "PQL-AE-001-001",
+        "layer": "Presentation",
+        "test_intent": "// Mock service throws ArgumentException for invalid input\nvar request = new AddBuildingRequest\n{\n    Name = null,\n    Color = \"Blue\",\n    Height = 15.5,\n    Length = 30.0,\n    Width = 20.0,\n    X = 100.0,\n    Y = 200.0,\n    Z = 0.0\n};\n\n_mockService.Setup(s => s.AddBuildingAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<double>(), It.IsAny<double>(), It.IsAny<double>(), It.IsAny<double>(), It.IsAny<double>(), It.IsAny<double>()))\n    .ThrowsAsync(new ArgumentException(\"Name is required\"));\n\nvar result = await _handler.HandleAsync(request);\n\nAssert.That(result.Success, Is.False);\nAssert.That(result.ErrorMessage, Does.Contain(\"Name is required\"));",
+        "response": "YES"
+    },
+    {
+        "user_story_id": "PQL-AE-001-001",
+        "layer": "Presentation",
+        "test_intent": "// Mock service throws ArgumentException for invalid input\nvar request = new AddBuildingRequest\n{\n    Name = null,\n    Color = \"Blue\",\n    Height = 15.5,\n    Length = 30.0,\n    Width = 20.0,\n    X = 100.0,\n    Y = 200.0,\n    Z = 0.0\n};\n\n_mockService.Setup(s => s.AddBuildingAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<double>(), It.IsAny<double>(), It.IsAny<double>(), It.IsAny<double>(), It.IsAny<double>(), It.IsAny<double>()))\n    .ThrowsAsync(new ArgumentException(\"Name is required\"));\n\nvar result = await _handler.HandleAsync(request);\n\nAssert.That(result.Success, Is.False);\nAssert.That(result.ErrorMessage, Does.Contain(\"Name is required\"));",
+        "response": "YES"
+    }
+]

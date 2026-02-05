@@ -1,0 +1,129 @@
+﻿2026-02-03T01:42:23.0369483Z ##[group]Run $ErrorActionPreference = 'Stop'
+2026-02-03T01:42:23.0369907Z [36;1m$ErrorActionPreference = 'Stop'[0m
+2026-02-03T01:42:23.0370296Z [36;1m$csprojFiles = Get-ChildItem -Path . -Recurse -Filter *.csproj -File[0m
+2026-02-03T01:42:23.0370671Z [36;1mif (-not $csprojFiles) {[0m
+2026-02-03T01:42:23.0370936Z [36;1m  Write-Host 'No .csproj files found to build.'[0m
+2026-02-03T01:42:23.0371204Z [36;1m  exit 0[0m
+2026-02-03T01:42:23.0371575Z [36;1m}[0m
+2026-02-03T01:42:23.0371749Z [36;1mforeach ($proj in $csprojFiles) {[0m
+2026-02-03T01:42:23.0372020Z [36;1m  Write-Host "Building $($proj.FullName)"[0m
+2026-02-03T01:42:23.0372351Z [36;1m  dotnet build $proj.FullName --no-restore -c Release[0m
+2026-02-03T01:42:23.0372634Z [36;1m}[0m
+2026-02-03T01:42:23.0440844Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+2026-02-03T01:42:23.0441169Z env:
+2026-02-03T01:42:23.0441339Z   DOTNET_ROOT: C:\Program Files\dotnet
+2026-02-03T01:42:23.0441570Z ##[endgroup]
+2026-02-03T01:42:23.4525390Z Building D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Api\UCR.ECCI.PI.ThemePark.Backend.Api.csproj
+2026-02-03T01:42:36.8854857Z   UCR.ECCI.PI.ThemePark.Backend.Domain -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Domain.dll
+2026-02-03T01:42:37.4634515Z   UCR.ECCI.PI.ThemePark.Backend.Application -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Application.dll
+2026-02-03T01:42:37.9512295Z   UCR.ECCI.PI.ThemePark.Backend.Infrastructure -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.dll
+2026-02-03T01:42:41.1667270Z   UCR.ECCI.PI.ThemePark.Backend.Presentation -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Presentation.dll
+2026-02-03T01:42:41.6044092Z   UCR.ECCI.PI.ThemePark.Backend.DependencyInjection -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.DependencyInjection\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.DependencyInjection.dll
+2026-02-03T01:42:43.4301909Z   UCR.ECCI.PI.ThemePark.Backend.Api -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Api\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Api.dll
+2026-02-03T01:42:43.4411255Z 
+2026-02-03T01:42:43.4417316Z Build succeeded.
+2026-02-03T01:42:43.4421715Z     0 Warning(s)
+2026-02-03T01:42:43.4429655Z     0 Error(s)
+2026-02-03T01:42:43.4431671Z 
+2026-02-03T01:42:43.4433833Z Time Elapsed 00:00:19.51
+2026-02-03T01:42:43.4767909Z Building D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application\UCR.ECCI.PI.ThemePark.Backend.Application.csproj
+2026-02-03T01:42:44.6424269Z   UCR.ECCI.PI.ThemePark.Backend.Domain -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Domain.dll
+2026-02-03T01:42:44.7162553Z   UCR.ECCI.PI.ThemePark.Backend.Application -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Application.dll
+2026-02-03T01:42:44.7267319Z 
+2026-02-03T01:42:44.7271844Z Build succeeded.
+2026-02-03T01:42:44.7279921Z     0 Warning(s)
+2026-02-03T01:42:44.7281986Z     0 Error(s)
+2026-02-03T01:42:44.7291086Z 
+2026-02-03T01:42:44.7292880Z Time Elapsed 00:00:00.88
+2026-02-03T01:42:44.7566082Z Building D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.csproj
+2026-02-03T01:42:46.0768696Z   UCR.ECCI.PI.ThemePark.Backend.Domain -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Domain.dll
+2026-02-03T01:42:46.3544101Z   UCR.ECCI.PI.ThemePark.Backend.Application -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Application.dll
+2026-02-03T01:42:46.6886742Z ##[warning]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\Services\LearningComponentServiceTests.cs(80,75): warning CS8625: Cannot convert null literal to non-nullable reference type. [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.csproj]
+2026-02-03T01:42:46.6908707Z ##[warning]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\Services\LearningComponentServiceTests.cs(17,48): warning CS8618: Non-nullable field '_mockRepository' must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring the field as nullable. [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.csproj]
+2026-02-03T01:42:46.8967741Z   UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.dll
+2026-02-03T01:42:46.9226542Z 
+2026-02-03T01:42:46.9228143Z Build succeeded.
+2026-02-03T01:42:46.9228987Z 
+2026-02-03T01:42:46.9233155Z ##[warning]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\Services\LearningComponentServiceTests.cs(80,75): warning CS8625: Cannot convert null literal to non-nullable reference type. [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.csproj]
+2026-02-03T01:42:46.9263600Z ##[warning]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\Services\LearningComponentServiceTests.cs(17,48): warning CS8618: Non-nullable field '_mockRepository' must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring the field as nullable. [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.csproj]
+2026-02-03T01:42:46.9269434Z     2 Warning(s)
+2026-02-03T01:42:46.9310815Z     0 Error(s)
+2026-02-03T01:42:46.9315975Z 
+2026-02-03T01:42:46.9316615Z Time Elapsed 00:00:01.80
+2026-02-03T01:42:46.9660404Z Building D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.DependencyInjection\UCR.ECCI.PI.ThemePark.Backend.DependencyInjection.csproj
+2026-02-03T01:42:48.7094668Z   UCR.ECCI.PI.ThemePark.Backend.Domain -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Domain.dll
+2026-02-03T01:42:48.9578638Z   UCR.ECCI.PI.ThemePark.Backend.Infrastructure -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.dll
+2026-02-03T01:42:48.9720926Z   UCR.ECCI.PI.ThemePark.Backend.Application -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Application.dll
+2026-02-03T01:42:49.0462955Z   UCR.ECCI.PI.ThemePark.Backend.DependencyInjection -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.DependencyInjection\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.DependencyInjection.dll
+2026-02-03T01:42:49.0638031Z 
+2026-02-03T01:42:49.0660327Z Build succeeded.
+2026-02-03T01:42:49.0661602Z     0 Warning(s)
+2026-02-03T01:42:49.0662726Z     0 Error(s)
+2026-02-03T01:42:49.0663353Z 
+2026-02-03T01:42:49.0664481Z Time Elapsed 00:00:01.61
+2026-02-03T01:42:49.0926464Z Building D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\UCR.ECCI.PI.ThemePark.Backend.Domain.csproj
+2026-02-03T01:42:50.8708069Z   UCR.ECCI.PI.ThemePark.Backend.Domain -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Domain.dll
+2026-02-03T01:42:50.9201618Z 
+2026-02-03T01:42:50.9206071Z Build succeeded.
+2026-02-03T01:42:50.9293366Z     0 Warning(s)
+2026-02-03T01:42:50.9309646Z     0 Error(s)
+2026-02-03T01:42:50.9318575Z 
+2026-02-03T01:42:50.9334797Z Time Elapsed 00:00:01.22
+2026-02-03T01:42:50.9750332Z Building D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.csproj
+2026-02-03T01:42:52.5702068Z   UCR.ECCI.PI.ThemePark.Backend.Domain -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Domain.dll
+2026-02-03T01:42:52.9156971Z   UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain.Tests.Unit\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.dll
+2026-02-03T01:42:52.9285052Z 
+2026-02-03T01:42:52.9296687Z Build succeeded.
+2026-02-03T01:42:52.9297460Z     0 Warning(s)
+2026-02-03T01:42:52.9305295Z     0 Error(s)
+2026-02-03T01:42:52.9308886Z 
+2026-02-03T01:42:52.9332801Z Time Elapsed 00:00:01.43
+2026-02-03T01:42:52.9558488Z Building D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.csproj
+2026-02-03T01:42:54.1993291Z   UCR.ECCI.PI.ThemePark.Backend.Domain -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Domain.dll
+2026-02-03T01:42:54.2876319Z   UCR.ECCI.PI.ThemePark.Backend.Infrastructure -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.dll
+2026-02-03T01:42:54.2996038Z 
+2026-02-03T01:42:54.2996934Z Build succeeded.
+2026-02-03T01:42:54.2999018Z     0 Warning(s)
+2026-02-03T01:42:54.3008471Z     0 Error(s)
+2026-02-03T01:42:54.3010325Z 
+2026-02-03T01:42:54.3026803Z Time Elapsed 00:00:00.96
+2026-02-03T01:42:54.3295393Z Building D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.csproj
+2026-02-03T01:42:55.6745046Z   UCR.ECCI.PI.ThemePark.Backend.Domain -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Domain.dll
+2026-02-03T01:42:56.0294326Z   UCR.ECCI.PI.ThemePark.Backend.Infrastructure -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.dll
+2026-02-03T01:42:56.2800851Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure.Tests.Unit\Repositories\LearningComponentRepositoryTests.cs(16,30): error CS0122: 'UCRDatabaseContext' is inaccessible due to its protection level [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.csproj]
+2026-02-03T01:42:56.2940080Z 
+2026-02-03T01:42:56.2959887Z Build FAILED.
+2026-02-03T01:42:56.2960666Z 
+2026-02-03T01:42:56.2964846Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure.Tests.Unit\Repositories\LearningComponentRepositoryTests.cs(16,30): error CS0122: 'UCRDatabaseContext' is inaccessible due to its protection level [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.csproj]
+2026-02-03T01:42:56.2968937Z     0 Warning(s)
+2026-02-03T01:42:56.2969897Z     1 Error(s)
+2026-02-03T01:42:56.2970440Z 
+2026-02-03T01:42:56.2977461Z Time Elapsed 00:00:01.58
+2026-02-03T01:42:56.3230356Z Building D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation\UCR.ECCI.PI.ThemePark.Backend.Presentation.csproj
+2026-02-03T01:42:57.7856494Z   UCR.ECCI.PI.ThemePark.Backend.Domain -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Domain.dll
+2026-02-03T01:42:57.9898331Z   UCR.ECCI.PI.ThemePark.Backend.Application -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Application.dll
+2026-02-03T01:42:58.0914792Z   UCR.ECCI.PI.ThemePark.Backend.Presentation -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Presentation.dll
+2026-02-03T01:42:58.1035146Z 
+2026-02-03T01:42:58.1035729Z Build succeeded.
+2026-02-03T01:42:58.1044564Z     0 Warning(s)
+2026-02-03T01:42:58.1046616Z     0 Error(s)
+2026-02-03T01:42:58.1055427Z 
+2026-02-03T01:42:58.1057389Z Time Elapsed 00:00:01.37
+2026-02-03T01:42:58.1295819Z Building D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.csproj
+2026-02-03T01:42:59.4674197Z   UCR.ECCI.PI.ThemePark.Backend.Domain -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Domain.dll
+2026-02-03T01:42:59.8399035Z   UCR.ECCI.PI.ThemePark.Backend.Application -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Application.dll
+2026-02-03T01:42:59.9822261Z   UCR.ECCI.PI.ThemePark.Backend.Presentation -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Presentation.dll
+2026-02-03T01:43:00.3712390Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\Handlers\GetLearningComponentsHandlerTests.cs(101,22): error CS0039: Cannot convert type 'Microsoft.AspNetCore.Http.HttpResults.Results<Microsoft.AspNetCore.Http.HttpResults.Ok<UCR.ECCI.PI.ThemePark.Backend.Presentation.Responses.GetLearningComponentsResponse>, Microsoft.AspNetCore.Http.HttpResults.BadRequest<string>>' to 'Microsoft.AspNetCore.Http.HttpResults.Ok<UCR.ECCI.PI.ThemePark.Backend.Presentation.Responses.GetLearningComponentsResponse>' via a reference conversion, boxing conversion, unboxing conversion, wrapping conversion, or null type conversion [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.csproj]
+2026-02-03T01:43:00.3725664Z ##[warning]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\Handlers\GetLearningComponentsHandlerTests.cs(106,21): warning CS8602: Dereference of a possibly null reference. [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.csproj]
+2026-02-03T01:43:00.3776452Z ##[warning]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\Handlers\GetLearningComponentsHandlerTests.cs(18,45): warning CS8618: Non-nullable field '_mockService' must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring the field as nullable. [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.csproj]
+2026-02-03T01:43:00.3856963Z 
+2026-02-03T01:43:00.3866455Z Build FAILED.
+2026-02-03T01:43:00.3882351Z 
+2026-02-03T01:43:00.3899813Z ##[warning]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\Handlers\GetLearningComponentsHandlerTests.cs(106,21): warning CS8602: Dereference of a possibly null reference. [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.csproj]
+2026-02-03T01:43:00.3925066Z ##[warning]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\Handlers\GetLearningComponentsHandlerTests.cs(18,45): warning CS8618: Non-nullable field '_mockService' must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring the field as nullable. [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.csproj]
+2026-02-03T01:43:00.3954246Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\Handlers\GetLearningComponentsHandlerTests.cs(101,22): error CS0039: Cannot convert type 'Microsoft.AspNetCore.Http.HttpResults.Results<Microsoft.AspNetCore.Http.HttpResults.Ok<UCR.ECCI.PI.ThemePark.Backend.Presentation.Responses.GetLearningComponentsResponse>, Microsoft.AspNetCore.Http.HttpResults.BadRequest<string>>' to 'Microsoft.AspNetCore.Http.HttpResults.Ok<UCR.ECCI.PI.ThemePark.Backend.Presentation.Responses.GetLearningComponentsResponse>' via a reference conversion, boxing conversion, unboxing conversion, wrapping conversion, or null type conversion [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.csproj]
+2026-02-03T01:43:00.3992209Z     2 Warning(s)
+2026-02-03T01:43:00.3995046Z     1 Error(s)
+2026-02-03T01:43:00.3995764Z 
+2026-02-03T01:43:00.3996333Z Time Elapsed 00:00:01.90
+2026-02-03T01:43:00.4540491Z ##[error]Process completed with exit code 1.

@@ -1,0 +1,283 @@
+﻿2026-02-03T01:40:42.2094129Z Current runner version: '2.331.0'
+2026-02-03T01:40:42.2124404Z ##[group]Runner Image Provisioner
+2026-02-03T01:40:42.2125634Z Hosted Compute Agent
+2026-02-03T01:40:42.2126671Z Version: 20260123.484
+2026-02-03T01:40:42.2127589Z Commit: 6bd6555ca37d84114959e1c76d2c01448ff61c5d
+2026-02-03T01:40:42.2128712Z Build Date: 2026-01-23T19:41:17Z
+2026-02-03T01:40:42.2130090Z Worker ID: {c35227a8-5c54-4519-8a06-b6f284d19f4b}
+2026-02-03T01:40:42.2131235Z Azure Region: eastus2
+2026-02-03T01:40:42.2132065Z ##[endgroup]
+2026-02-03T01:40:42.2134617Z ##[group]Operating System
+2026-02-03T01:40:42.2135964Z Microsoft Windows Server 2025
+2026-02-03T01:40:42.2136885Z 10.0.26100
+2026-02-03T01:40:42.2137727Z Datacenter
+2026-02-03T01:40:42.2138768Z ##[endgroup]
+2026-02-03T01:40:42.2139950Z ##[group]Runner Image
+2026-02-03T01:40:42.2141186Z Image: windows-2025
+2026-02-03T01:40:42.2142158Z Version: 20260127.11.2
+2026-02-03T01:40:42.2144530Z Included Software: https://github.com/actions/runner-images/blob/win25/20260127.11/images/windows/Windows2025-Readme.md
+2026-02-03T01:40:42.2148578Z Image Release: https://github.com/actions/runner-images/releases/tag/win25%2F20260127.11
+2026-02-03T01:40:42.2150173Z ##[endgroup]
+2026-02-03T01:40:42.2152612Z ##[group]GITHUB_TOKEN Permissions
+2026-02-03T01:40:42.2155379Z Contents: read
+2026-02-03T01:40:42.2156377Z Metadata: read
+2026-02-03T01:40:42.2157240Z Packages: read
+2026-02-03T01:40:42.2158090Z ##[endgroup]
+2026-02-03T01:40:42.2160864Z Secret source: Actions
+2026-02-03T01:40:42.2162047Z Prepare workflow directory
+2026-02-03T01:40:42.2604961Z Prepare all required actions
+2026-02-03T01:40:42.2644075Z Getting action download info
+2026-02-03T01:40:42.5488128Z Download action repository 'actions/checkout@v4' (SHA:34e114876b0b11c390a56381ad16ebd13914f8d5)
+2026-02-03T01:40:43.6391382Z Download action repository 'actions/setup-dotnet@v4' (SHA:67a3573c9a986a3f9c594539f4ab511d57bb3ce9)
+2026-02-03T01:40:46.4269827Z Complete job name: build
+2026-02-03T01:40:48.0344097Z ##[group]Run actions/checkout@v4
+2026-02-03T01:40:48.0345005Z with:
+2026-02-03T01:40:48.0345343Z   repository: UCR-PI-IS/tdd-llm-repo-a
+2026-02-03T01:40:48.0345972Z   token: ***
+2026-02-03T01:40:48.0346263Z   ssh-strict: true
+2026-02-03T01:40:48.0346563Z   ssh-user: git
+2026-02-03T01:40:48.0346872Z   persist-credentials: true
+2026-02-03T01:40:48.0347231Z   clean: true
+2026-02-03T01:40:48.0347547Z   sparse-checkout-cone-mode: true
+2026-02-03T01:40:48.0347950Z   fetch-depth: 1
+2026-02-03T01:40:48.0348236Z   fetch-tags: false
+2026-02-03T01:40:48.0348543Z   show-progress: true
+2026-02-03T01:40:48.0348863Z   lfs: false
+2026-02-03T01:40:48.0349140Z   submodules: false
+2026-02-03T01:40:48.0349463Z   set-safe-directory: true
+2026-02-03T01:40:48.0354808Z ##[endgroup]
+2026-02-03T01:40:49.3119627Z Syncing repository: UCR-PI-IS/tdd-llm-repo-a
+2026-02-03T01:40:49.3123836Z ##[group]Getting Git version info
+2026-02-03T01:40:49.3126514Z Working directory is 'D:\a\tdd-llm-repo-a\tdd-llm-repo-a'
+2026-02-03T01:40:50.4772645Z [command]"C:\Program Files\Git\bin\git.exe" version
+2026-02-03T01:41:12.3066384Z git version 2.52.0.windows.1
+2026-02-03T01:41:12.3143354Z ##[endgroup]
+2026-02-03T01:41:12.3172904Z Temporarily overriding HOME='D:\a\_temp\fdb97257-3961-43f5-a82c-4cea00be3a36' before making global git config changes
+2026-02-03T01:41:12.3174620Z Adding repository directory to the temporary git global config as a safe directory
+2026-02-03T01:41:12.3191898Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\tdd-llm-repo-a\tdd-llm-repo-a
+2026-02-03T01:41:13.5338729Z Deleting the contents of 'D:\a\tdd-llm-repo-a\tdd-llm-repo-a'
+2026-02-03T01:41:13.5617224Z ##[group]Initializing the repository
+2026-02-03T01:41:13.5625954Z [command]"C:\Program Files\Git\bin\git.exe" init D:\a\tdd-llm-repo-a\tdd-llm-repo-a
+2026-02-03T01:41:19.4287973Z Initialized empty Git repository in D:/a/tdd-llm-repo-a/tdd-llm-repo-a/.git/
+2026-02-03T01:41:19.4831099Z [command]"C:\Program Files\Git\bin\git.exe" remote add origin https://github.com/UCR-PI-IS/tdd-llm-repo-a
+2026-02-03T01:41:20.5581916Z ##[endgroup]
+2026-02-03T01:41:20.5608039Z ##[group]Disabling automatic garbage collection
+2026-02-03T01:41:20.5631480Z [command]"C:\Program Files\Git\bin\git.exe" config --local gc.auto 0
+2026-02-03T01:41:20.5938762Z ##[endgroup]
+2026-02-03T01:41:20.5939624Z ##[group]Setting up auth
+2026-02-03T01:41:20.5955922Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+2026-02-03T01:41:20.6308215Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+2026-02-03T01:41:35.2344442Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-02-03T01:41:35.2700299Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+2026-02-03T01:41:35.8536157Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-02-03T01:41:35.9011930Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+2026-02-03T01:41:36.4832109Z [command]"C:\Program Files\Git\bin\git.exe" config --local http.https://github.com/.extraheader "AUTHORIZATION: basic ***"
+2026-02-03T01:41:36.5253316Z ##[endgroup]
+2026-02-03T01:41:36.5265964Z ##[group]Fetching the repository
+2026-02-03T01:41:36.5268278Z [command]"C:\Program Files\Git\bin\git.exe" -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +1a591706949a274ee2014ea6f1ba512d76b1858e:refs/remotes/pull/17/merge
+2026-02-03T01:41:37.5755695Z From https://github.com/UCR-PI-IS/tdd-llm-repo-a
+2026-02-03T01:41:37.5757034Z  * [new ref]         1a591706949a274ee2014ea6f1ba512d76b1858e -> pull/17/merge
+2026-02-03T01:41:37.6031543Z ##[endgroup]
+2026-02-03T01:41:37.6032420Z ##[group]Determining the checkout info
+2026-02-03T01:41:37.6034625Z ##[endgroup]
+2026-02-03T01:41:37.6047219Z [command]"C:\Program Files\Git\bin\git.exe" sparse-checkout disable
+2026-02-03T01:41:37.6403363Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset-all extensions.worktreeConfig
+2026-02-03T01:41:37.6718908Z ##[group]Checking out the ref
+2026-02-03T01:41:37.6736889Z [command]"C:\Program Files\Git\bin\git.exe" checkout --progress --force refs/remotes/pull/17/merge
+2026-02-03T01:41:37.7788190Z Note: switching to 'refs/remotes/pull/17/merge'.
+2026-02-03T01:41:37.7789384Z 
+2026-02-03T01:41:37.7791581Z You are in 'detached HEAD' state. You can look around, make experimental
+2026-02-03T01:41:37.7792846Z changes and commit them, and you can discard any commits you make in this
+2026-02-03T01:41:37.7824159Z state without impacting any branches by switching back to a branch.
+2026-02-03T01:41:37.7833160Z 
+2026-02-03T01:41:37.7842822Z If you want to create a new branch to retain commits you create, you may
+2026-02-03T01:41:37.7849254Z do so (now or later) by using -c with the switch command. Example:
+2026-02-03T01:41:37.7880603Z 
+2026-02-03T01:41:37.7901552Z   git switch -c <new-branch-name>
+2026-02-03T01:41:37.7907895Z 
+2026-02-03T01:41:37.7908289Z Or undo this operation with:
+2026-02-03T01:41:37.7908709Z 
+2026-02-03T01:41:37.7908965Z   git switch -
+2026-02-03T01:41:37.7909292Z 
+2026-02-03T01:41:37.7909754Z Turn off this advice by setting config variable advice.detachedHead to false
+2026-02-03T01:41:37.7910456Z 
+2026-02-03T01:41:37.7911205Z HEAD is now at 1a59170 Merge ac89934072cc0e429866194db7d0adda639c2e39 into e442855824dff04704ec409956a7da5a24a6ba4e
+2026-02-03T01:41:37.7913672Z ##[endgroup]
+2026-02-03T01:41:37.8246776Z [command]"C:\Program Files\Git\bin\git.exe" log -1 --format=%H
+2026-02-03T01:41:37.8529292Z 1a591706949a274ee2014ea6f1ba512d76b1858e
+2026-02-03T01:41:37.8938022Z ##[group]Run actions/setup-dotnet@v4
+2026-02-03T01:41:37.8938327Z with:
+2026-02-03T01:41:37.8938558Z   dotnet-version: 8.0.x
+
+2026-02-03T01:41:37.8938778Z   cache: false
+2026-02-03T01:41:37.8938948Z ##[endgroup]
+2026-02-03T01:41:38.3195456Z [command]"C:\Program Files\PowerShell\7\pwsh.exe" -NoLogo -Sta -NoProfile -NonInteractive -ExecutionPolicy Unrestricted -Command & 'D:\a\_actions\actions\setup-dotnet\v4\externals\install-dotnet.ps1' -SkipNonVersionedFiles -Runtime dotnet -Channel LTS
+2026-02-03T01:41:45.0268038Z dotnet-install: .NET Core Runtime with version '10.0.2' is already installed.
+2026-02-03T01:41:45.3644732Z [command]"C:\Program Files\PowerShell\7\pwsh.exe" -NoLogo -Sta -NoProfile -NonInteractive -ExecutionPolicy Unrestricted -Command & 'D:\a\_actions\actions\setup-dotnet\v4\externals\install-dotnet.ps1' -SkipNonVersionedFiles -Channel 8.0
+2026-02-03T01:41:46.3493473Z dotnet-install: .NET Core SDK with version '8.0.417' is already installed.
+2026-02-03T01:41:46.4595032Z ##[group]Run dotnet restore UCR.ECCI.PI.ThemePark.sln
+2026-02-03T01:41:46.4595663Z [36;1mdotnet restore UCR.ECCI.PI.ThemePark.sln[0m
+2026-02-03T01:41:46.4669182Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+2026-02-03T01:41:46.4669591Z env:
+2026-02-03T01:41:46.4669876Z   DOTNET_ROOT: C:\Program Files\dotnet
+2026-02-03T01:41:46.4670175Z ##[endgroup]
+2026-02-03T01:41:59.7554456Z D:\a\tdd-llm-repo-a\tdd-llm-repo-a\UCR.ECCI.PI.ThemePark.Database\UCR.ECCI.PI.ThemePark.Database.sqlproj : warning NU1503: Skipping restore for project 'D:\a\tdd-llm-repo-a\tdd-llm-repo-a\UCR.ECCI.PI.ThemePark.Database\UCR.ECCI.PI.ThemePark.Database.sqlproj'. The project file may be invalid or missing targets required for restore. [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\UCR.ECCI.PI.ThemePark.sln]
+2026-02-03T01:41:59.7572371Z   Determining projects to restore...
+2026-02-03T01:42:05.9132892Z   Restored D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation\UCR.ECCI.PI.ThemePark.Backend.Presentation.csproj (in 4.18 sec).
+2026-02-03T01:42:19.8673730Z   Restored D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.csproj (in 13.94 sec).
+2026-02-03T01:42:20.7337716Z   Restored D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.csproj (in 19.15 sec).
+2026-02-03T01:42:20.7347602Z   Restored D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.csproj (in 855 ms).
+2026-02-03T01:42:20.7412587Z   Restored D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\UCR.ECCI.PI.ThemePark.Backend.Domain.csproj (in 1 ms).
+2026-02-03T01:42:20.7465578Z   Restored D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.csproj (in 3 ms).
+2026-02-03T01:42:20.7513329Z   Restored D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application\UCR.ECCI.PI.ThemePark.Backend.Application.csproj (in 1 ms).
+2026-02-03T01:42:20.7564276Z   Restored D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.DependencyInjection\UCR.ECCI.PI.ThemePark.Backend.DependencyInjection.csproj (in 8 ms).
+2026-02-03T01:42:20.7593695Z   Restored D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.csproj (in 3 ms).
+2026-02-03T01:42:22.8767024Z   Restored D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Api\UCR.ECCI.PI.ThemePark.Backend.Api.csproj (in 2.12 sec).
+2026-02-03T01:42:23.0369506Z ##[group]Run $ErrorActionPreference = 'Stop'
+2026-02-03T01:42:23.0369910Z [36;1m$ErrorActionPreference = 'Stop'[0m
+2026-02-03T01:42:23.0370299Z [36;1m$csprojFiles = Get-ChildItem -Path . -Recurse -Filter *.csproj -File[0m
+2026-02-03T01:42:23.0370673Z [36;1mif (-not $csprojFiles) {[0m
+2026-02-03T01:42:23.0370938Z [36;1m  Write-Host 'No .csproj files found to build.'[0m
+2026-02-03T01:42:23.0371206Z [36;1m  exit 0[0m
+2026-02-03T01:42:23.0371578Z [36;1m}[0m
+2026-02-03T01:42:23.0371751Z [36;1mforeach ($proj in $csprojFiles) {[0m
+2026-02-03T01:42:23.0372023Z [36;1m  Write-Host "Building $($proj.FullName)"[0m
+2026-02-03T01:42:23.0372353Z [36;1m  dotnet build $proj.FullName --no-restore -c Release[0m
+2026-02-03T01:42:23.0372636Z [36;1m}[0m
+2026-02-03T01:42:23.0440853Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+2026-02-03T01:42:23.0441172Z env:
+2026-02-03T01:42:23.0441342Z   DOTNET_ROOT: C:\Program Files\dotnet
+2026-02-03T01:42:23.0441880Z ##[endgroup]
+2026-02-03T01:42:23.4525439Z Building D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Api\UCR.ECCI.PI.ThemePark.Backend.Api.csproj
+2026-02-03T01:42:36.8854906Z   UCR.ECCI.PI.ThemePark.Backend.Domain -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Domain.dll
+2026-02-03T01:42:37.4634565Z   UCR.ECCI.PI.ThemePark.Backend.Application -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Application.dll
+2026-02-03T01:42:37.9512351Z   UCR.ECCI.PI.ThemePark.Backend.Infrastructure -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.dll
+2026-02-03T01:42:41.1667319Z   UCR.ECCI.PI.ThemePark.Backend.Presentation -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Presentation.dll
+2026-02-03T01:42:41.6044184Z   UCR.ECCI.PI.ThemePark.Backend.DependencyInjection -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.DependencyInjection\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.DependencyInjection.dll
+2026-02-03T01:42:43.4301960Z   UCR.ECCI.PI.ThemePark.Backend.Api -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Api\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Api.dll
+2026-02-03T01:42:43.4411285Z 
+2026-02-03T01:42:43.4417332Z Build succeeded.
+2026-02-03T01:42:43.4421730Z     0 Warning(s)
+2026-02-03T01:42:43.4429673Z     0 Error(s)
+2026-02-03T01:42:43.4431707Z 
+2026-02-03T01:42:43.4433851Z Time Elapsed 00:00:19.51
+2026-02-03T01:42:43.4767953Z Building D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application\UCR.ECCI.PI.ThemePark.Backend.Application.csproj
+2026-02-03T01:42:44.6424326Z   UCR.ECCI.PI.ThemePark.Backend.Domain -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Domain.dll
+2026-02-03T01:42:44.7162634Z   UCR.ECCI.PI.ThemePark.Backend.Application -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Application.dll
+2026-02-03T01:42:44.7267359Z 
+2026-02-03T01:42:44.7271863Z Build succeeded.
+2026-02-03T01:42:44.7279939Z     0 Warning(s)
+2026-02-03T01:42:44.7282001Z     0 Error(s)
+2026-02-03T01:42:44.7291105Z 
+2026-02-03T01:42:44.7292896Z Time Elapsed 00:00:00.88
+2026-02-03T01:42:44.7566110Z Building D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.csproj
+2026-02-03T01:42:46.0768749Z   UCR.ECCI.PI.ThemePark.Backend.Domain -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Domain.dll
+2026-02-03T01:42:46.3544168Z   UCR.ECCI.PI.ThemePark.Backend.Application -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Application.dll
+2026-02-03T01:42:46.6889965Z ##[warning]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\Services\LearningComponentServiceTests.cs(80,75): warning CS8625: Cannot convert null literal to non-nullable reference type. [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.csproj]
+2026-02-03T01:42:46.6908726Z ##[warning]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\Services\LearningComponentServiceTests.cs(17,48): warning CS8618: Non-nullable field '_mockRepository' must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring the field as nullable. [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.csproj]
+2026-02-03T01:42:46.8967801Z   UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.dll
+2026-02-03T01:42:46.9226595Z 
+2026-02-03T01:42:46.9228159Z Build succeeded.
+2026-02-03T01:42:46.9228998Z 
+2026-02-03T01:42:46.9233205Z ##[warning]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\Services\LearningComponentServiceTests.cs(80,75): warning CS8625: Cannot convert null literal to non-nullable reference type. [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.csproj]
+2026-02-03T01:42:46.9263618Z ##[warning]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\Services\LearningComponentServiceTests.cs(17,48): warning CS8618: Non-nullable field '_mockRepository' must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring the field as nullable. [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.csproj]
+2026-02-03T01:42:46.9269449Z     2 Warning(s)
+2026-02-03T01:42:46.9310830Z     0 Error(s)
+2026-02-03T01:42:46.9315991Z 
+2026-02-03T01:42:46.9316622Z Time Elapsed 00:00:01.80
+2026-02-03T01:42:46.9660470Z Building D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.DependencyInjection\UCR.ECCI.PI.ThemePark.Backend.DependencyInjection.csproj
+2026-02-03T01:42:48.7094722Z   UCR.ECCI.PI.ThemePark.Backend.Domain -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Domain.dll
+2026-02-03T01:42:48.9578694Z   UCR.ECCI.PI.ThemePark.Backend.Infrastructure -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.dll
+2026-02-03T01:42:48.9720968Z   UCR.ECCI.PI.ThemePark.Backend.Application -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Application.dll
+2026-02-03T01:42:49.0463008Z   UCR.ECCI.PI.ThemePark.Backend.DependencyInjection -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.DependencyInjection\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.DependencyInjection.dll
+2026-02-03T01:42:49.0638084Z 
+2026-02-03T01:42:49.0660359Z Build succeeded.
+2026-02-03T01:42:49.0661648Z     0 Warning(s)
+2026-02-03T01:42:49.0662740Z     0 Error(s)
+2026-02-03T01:42:49.0663364Z 
+2026-02-03T01:42:49.0664497Z Time Elapsed 00:00:01.61
+2026-02-03T01:42:49.0926507Z Building D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\UCR.ECCI.PI.ThemePark.Backend.Domain.csproj
+2026-02-03T01:42:50.8708129Z   UCR.ECCI.PI.ThemePark.Backend.Domain -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Domain.dll
+2026-02-03T01:42:50.9201675Z 
+2026-02-03T01:42:50.9206089Z Build succeeded.
+2026-02-03T01:42:50.9293384Z     0 Warning(s)
+2026-02-03T01:42:50.9309662Z     0 Error(s)
+2026-02-03T01:42:50.9318592Z 
+2026-02-03T01:42:50.9334813Z Time Elapsed 00:00:01.22
+2026-02-03T01:42:50.9750383Z Building D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.csproj
+2026-02-03T01:42:52.5703626Z   UCR.ECCI.PI.ThemePark.Backend.Domain -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Domain.dll
+2026-02-03T01:42:52.9157025Z   UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain.Tests.Unit\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.dll
+2026-02-03T01:42:52.9285083Z 
+2026-02-03T01:42:52.9296704Z Build succeeded.
+2026-02-03T01:42:52.9297470Z     0 Warning(s)
+2026-02-03T01:42:52.9305310Z     0 Error(s)
+2026-02-03T01:42:52.9308901Z 
+2026-02-03T01:42:52.9332818Z Time Elapsed 00:00:01.43
+2026-02-03T01:42:52.9558535Z Building D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.csproj
+2026-02-03T01:42:54.1993345Z   UCR.ECCI.PI.ThemePark.Backend.Domain -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Domain.dll
+2026-02-03T01:42:54.2876410Z   UCR.ECCI.PI.ThemePark.Backend.Infrastructure -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.dll
+2026-02-03T01:42:54.2996076Z 
+2026-02-03T01:42:54.2996942Z Build succeeded.
+2026-02-03T01:42:54.2999033Z     0 Warning(s)
+2026-02-03T01:42:54.3008538Z     0 Error(s)
+2026-02-03T01:42:54.3010341Z 
+2026-02-03T01:42:54.3026820Z Time Elapsed 00:00:00.96
+2026-02-03T01:42:54.3295426Z Building D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.csproj
+2026-02-03T01:42:55.6745097Z   UCR.ECCI.PI.ThemePark.Backend.Domain -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Domain.dll
+2026-02-03T01:42:56.0294378Z   UCR.ECCI.PI.ThemePark.Backend.Infrastructure -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.dll
+2026-02-03T01:42:56.2800939Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure.Tests.Unit\Repositories\LearningComponentRepositoryTests.cs(16,30): error CS0122: 'UCRDatabaseContext' is inaccessible due to its protection level [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.csproj]
+2026-02-03T01:42:56.2940109Z 
+2026-02-03T01:42:56.2959901Z Build FAILED.
+2026-02-03T01:42:56.2960674Z 
+2026-02-03T01:42:56.2964863Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure.Tests.Unit\Repositories\LearningComponentRepositoryTests.cs(16,30): error CS0122: 'UCRDatabaseContext' is inaccessible due to its protection level [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.csproj]
+2026-02-03T01:42:56.2968950Z     0 Warning(s)
+2026-02-03T01:42:56.2969906Z     1 Error(s)
+2026-02-03T01:42:56.2970447Z 
+2026-02-03T01:42:56.2977478Z Time Elapsed 00:00:01.58
+2026-02-03T01:42:56.3230390Z Building D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation\UCR.ECCI.PI.ThemePark.Backend.Presentation.csproj
+2026-02-03T01:42:57.7856578Z   UCR.ECCI.PI.ThemePark.Backend.Domain -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Domain.dll
+2026-02-03T01:42:57.9898386Z   UCR.ECCI.PI.ThemePark.Backend.Application -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Application.dll
+2026-02-03T01:42:58.0914858Z   UCR.ECCI.PI.ThemePark.Backend.Presentation -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Presentation.dll
+2026-02-03T01:42:58.1035184Z 
+2026-02-03T01:42:58.1035738Z Build succeeded.
+2026-02-03T01:42:58.1044578Z     0 Warning(s)
+2026-02-03T01:42:58.1046630Z     0 Error(s)
+2026-02-03T01:42:58.1055460Z 
+2026-02-03T01:42:58.1057405Z Time Elapsed 00:00:01.37
+2026-02-03T01:42:58.1295865Z Building D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.csproj
+2026-02-03T01:42:59.4674683Z   UCR.ECCI.PI.ThemePark.Backend.Domain -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Domain.dll
+2026-02-03T01:42:59.8399088Z   UCR.ECCI.PI.ThemePark.Backend.Application -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Application.dll
+2026-02-03T01:42:59.9822322Z   UCR.ECCI.PI.ThemePark.Backend.Presentation -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Presentation.dll
+2026-02-03T01:43:00.3712473Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\Handlers\GetLearningComponentsHandlerTests.cs(101,22): error CS0039: Cannot convert type 'Microsoft.AspNetCore.Http.HttpResults.Results<Microsoft.AspNetCore.Http.HttpResults.Ok<UCR.ECCI.PI.ThemePark.Backend.Presentation.Responses.GetLearningComponentsResponse>, Microsoft.AspNetCore.Http.HttpResults.BadRequest<string>>' to 'Microsoft.AspNetCore.Http.HttpResults.Ok<UCR.ECCI.PI.ThemePark.Backend.Presentation.Responses.GetLearningComponentsResponse>' via a reference conversion, boxing conversion, unboxing conversion, wrapping conversion, or null type conversion [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.csproj]
+2026-02-03T01:43:00.3725685Z ##[warning]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\Handlers\GetLearningComponentsHandlerTests.cs(106,21): warning CS8602: Dereference of a possibly null reference. [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.csproj]
+2026-02-03T01:43:00.3776505Z ##[warning]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\Handlers\GetLearningComponentsHandlerTests.cs(18,45): warning CS8618: Non-nullable field '_mockService' must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring the field as nullable. [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.csproj]
+2026-02-03T01:43:00.3856986Z 
+2026-02-03T01:43:00.3866470Z Build FAILED.
+2026-02-03T01:43:00.3882367Z 
+2026-02-03T01:43:00.3899831Z ##[warning]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\Handlers\GetLearningComponentsHandlerTests.cs(106,21): warning CS8602: Dereference of a possibly null reference. [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.csproj]
+2026-02-03T01:43:00.3925103Z ##[warning]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\Handlers\GetLearningComponentsHandlerTests.cs(18,45): warning CS8618: Non-nullable field '_mockService' must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring the field as nullable. [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.csproj]
+2026-02-03T01:43:00.3954273Z ##[error]D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\Handlers\GetLearningComponentsHandlerTests.cs(101,22): error CS0039: Cannot convert type 'Microsoft.AspNetCore.Http.HttpResults.Results<Microsoft.AspNetCore.Http.HttpResults.Ok<UCR.ECCI.PI.ThemePark.Backend.Presentation.Responses.GetLearningComponentsResponse>, Microsoft.AspNetCore.Http.HttpResults.BadRequest<string>>' to 'Microsoft.AspNetCore.Http.HttpResults.Ok<UCR.ECCI.PI.ThemePark.Backend.Presentation.Responses.GetLearningComponentsResponse>' via a reference conversion, boxing conversion, unboxing conversion, wrapping conversion, or null type conversion [D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.csproj]
+2026-02-03T01:43:00.3992225Z     2 Warning(s)
+2026-02-03T01:43:00.3995071Z     1 Error(s)
+2026-02-03T01:43:00.3995775Z 
+2026-02-03T01:43:00.3996341Z Time Elapsed 00:00:01.90
+2026-02-03T01:43:00.4540776Z ##[error]Process completed with exit code 1.
+2026-02-03T01:43:00.4755698Z Post job cleanup.
+2026-02-03T01:43:00.7596567Z [command]"C:\Program Files\Git\bin\git.exe" version
+2026-02-03T01:43:00.8028670Z git version 2.52.0.windows.1
+2026-02-03T01:43:00.8195799Z Temporarily overriding HOME='D:\a\_temp\eb079f0a-7955-4389-bc25-72d7e983a3a8' before making global git config changes
+2026-02-03T01:43:00.8214796Z Adding repository directory to the temporary git global config as a safe directory
+2026-02-03T01:43:00.8218710Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\tdd-llm-repo-a\tdd-llm-repo-a
+2026-02-03T01:43:00.8600731Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+2026-02-03T01:43:00.8920783Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+2026-02-03T01:43:01.5094983Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-02-03T01:43:01.5368573Z http.https://github.com/.extraheader
+2026-02-03T01:43:01.5427197Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset-all http.https://github.com/.extraheader
+2026-02-03T01:43:01.5739513Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+2026-02-03T01:43:02.1819533Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-02-03T01:43:02.2167594Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+2026-02-03T01:43:02.8108084Z Cleaning up orphan processes
+2026-02-03T01:43:02.8290031Z Terminate orphan process: pid (1308) (dotnet)
+2026-02-03T01:43:02.8381649Z Terminate orphan process: pid (7056) (conhost)
+2026-02-03T01:43:02.8603401Z Terminate orphan process: pid (1852) (VBCSCompiler)
+2026-02-03T01:43:02.8678510Z Terminate orphan process: pid (6660) (conhost)

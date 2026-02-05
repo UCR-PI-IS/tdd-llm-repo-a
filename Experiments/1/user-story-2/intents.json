@@ -1,0 +1,110 @@
+[
+    {
+        "user_story_id": "SPT-UM-001-003",
+        "layer": "Domain",
+        "test_intent": "var person = new Person(\n    id: Guid.NewGuid(),\n    firstName: \"John\",\n    lastName: \"Doe\",\n    email: \"john.doe@example.com\",\n    identityNumber: \"123456789\",\n    birthDate: new DateTime(1990, 1, 1),\n    phone: \"555-1234\"\n);\n\nAssert.That(person.FirstName, Is.EqualTo(\"John\"));\nAssert.That(person.LastName, Is.EqualTo(\"Doe\"));\nAssert.That(person.Email, Is.EqualTo(\"john.doe@example.com\"));\nAssert.That(person.IdentityNumber, Is.EqualTo(\"123456789\"));\nAssert.That(person.BirthDate, Is.EqualTo(new DateTime(1990, 1, 1)));\nAssert.That(person.Phone, Is.EqualTo(\"555-1234\"));",
+        "response": "YES"
+    },
+    {
+        "user_story_id": "SPT-UM-001-003",
+        "layer": "Domain",
+        "test_intent": "var person = new Person(\n    id: Guid.NewGuid(),\n    firstName: \"Jane\",\n    lastName: \"Smith\",\n    email: \"jane.smith@example.com\",\n    identityNumber: \"987654321\",\n    birthDate: new DateTime(1985, 5, 15),\n    phone: null  // Phone is optional\n);\n\nAssert.That(person.Phone, Is.Null);\nAssert.That(person.Email, Is.EqualTo(\"jane.smith@example.com\"));",
+        "response": "YES"
+    },
+    {
+        "user_story_id": "SPT-UM-001-003",
+        "layer": "Domain",
+        "test_intent": "// Test missing required field: Email\nAssert.Throws<ArgumentException>(() => \n{\n    var person = new Person(\n        id: Guid.NewGuid(),\n        firstName: \"John\",\n        lastName: \"Doe\",\n        email: null,  // Required field missing\n        identityNumber: \"123456789\",\n        birthDate: new DateTime(1990, 1, 1),\n        phone: \"555-1234\"\n    );\n});",
+        "response": "YES"
+    },
+    {
+        "user_story_id": "SPT-UM-001-003",
+        "layer": "Domain",
+        "test_intent": "// Test missing required field: FirstName\nAssert.Throws<ArgumentException>(() => \n{\n    var person = new Person(\n        id: Guid.NewGuid(),\n        firstName: null,  // Required field missing\n        lastName: \"Doe\",\n        email: \"john.doe@example.com\",\n        identityNumber: \"123456789\",\n        birthDate: new DateTime(1990, 1, 1),\n        phone: \"555-1234\"\n    );\n});",
+        "response": "YES"
+    },
+    {
+        "user_story_id": "SPT-UM-001-003",
+        "layer": "Domain",
+        "test_intent": "// Test missing required field: LastName\nAssert.Throws<ArgumentException>(() => \n{\n    var person = new Person(\n        id: Guid.NewGuid(),\n        firstName: \"John\",\n        lastName: null,  // Required field missing\n        email: \"john.doe@example.com\",\n        identityNumber: \"123456789\",\n        birthDate: new DateTime(1990, 1, 1),\n        phone: \"555-1234\"\n    );\n});",
+        "response": "YES"
+    },
+    {
+        "user_story_id": "SPT-UM-001-003",
+        "layer": "Domain",
+        "test_intent": "// Verify that Person constructor rejects null IdentityNumber\n// IdentityNumber is mandatory per domain requirements\nAssert.Throws<ArgumentException>(() => \n{\n    var person = new Person(\n        id: Guid.NewGuid(),\n        firstName: \"John\",\n        lastName: \"Doe\",\n        email: \"john.doe@example.com\",\n        identityNumber: null,\n        birthDate: new DateTime(1990, 1, 1),\n        phone: \"555-1234\"\n    );\n});",
+        "response": "YES"
+    },
+    {
+        "user_story_id": "SPT-UM-001-003",
+        "layer": "Domain",
+        "test_intent": "// Test invalid BirthDate: future date\nAssert.Throws<ArgumentException>(() => \n{\n    var person = new Person(\n        id: Guid.NewGuid(),\n        firstName: \"John\",\n        lastName: \"Doe\",\n        email: \"john.doe@example.com\",\n        identityNumber: \"123456789\",\n        birthDate: DateTime.Now.AddDays(1),  // Future date - invalid\n        phone: \"555-1234\"\n    );\n});",
+        "response": "YES"
+    },
+    {
+        "user_story_id": "SPT-UM-001-003",
+        "layer": "Application",
+        "test_intent": "// Test successful person creation via service\nvar mockRepository = new Mock<IPersonRepository>();\nmockRepository\n    .Setup(r => r.GetByEmailAsync(\"john.doe@example.com\"))\n    .ReturnsAsync((Person)null);  // No duplicate\nmockRepository\n    .Setup(r => r.GetByIdentityNumberAsync(\"123456789\"))\n    .ReturnsAsync((Person)null);  // No duplicate\nmockRepository\n    .Setup(r => r.AddAsync(It.IsAny<Person>()))\n    .ReturnsAsync(true);\n\nvar service = new PersonService(mockRepository.Object);\nvar result = await service.CreatePersonAsync(\n    firstName: \"John\",\n    lastName: \"Doe\",\n    email: \"john.doe@example.com\",\n    identityNumber: \"123456789\",\n    birthDate: new DateTime(1990, 1, 1),\n    phone: \"555-1234\"\n);\n\nAssert.That(result, Is.True);\nmockRepository.Verify(r => r.AddAsync(It.IsAny<Person>()), Times.Once);",
+        "response": "YES"
+    },
+    {
+        "user_story_id": "SPT-UM-001-003",
+        "layer": "Application",
+        "test_intent": "// Test rejection when email already exists\nvar existingPerson = new Person(\n    Guid.NewGuid(),\n    \"Jane\",\n    \"Smith\",\n    \"duplicate@example.com\",\n    \"111111111\",\n    new DateTime(1985, 1, 1),\n    null\n);\n\nvar mockRepository = new Mock<IPersonRepository>();\nmockRepository\n    .Setup(r => r.GetByEmailAsync(\"duplicate@example.com\"))\n    .ReturnsAsync(existingPerson);  // Duplicate found\n\nvar service = new PersonService(mockRepository.Object);\n\nAssert.ThrowsAsync<InvalidOperationException>(async () =>\n{\n    await service.CreatePersonAsync(\n        firstName: \"John\",\n        lastName: \"Doe\",\n        email: \"duplicate@example.com\",\n        identityNumber: \"123456789\",\n        birthDate: new DateTime(1990, 1, 1),\n        phone: \"555-1234\"\n    );\n});\n\nmockRepository.Verify(r => r.AddAsync(It.IsAny<Person>()), Times.Never);",
+        "response": "YES"
+    },
+    {
+        "user_story_id": "SPT-UM-001-003",
+        "layer": "Application",
+        "test_intent": "// Test rejection when identity number already exists\nvar existingPerson = new Person(\n    Guid.NewGuid(),\n    \"Jane\",\n    \"Smith\",\n    \"jane@example.com\",\n    \"999999999\",\n    new DateTime(1985, 1, 1),\n    null\n);\n\nvar mockRepository = new Mock<IPersonRepository>();\nmockRepository\n    .Setup(r => r.GetByEmailAsync(\"john.doe@example.com\"))\n    .ReturnsAsync((Person)null);  // Email is unique\nmockRepository\n    .Setup(r => r.GetByIdentityNumberAsync(\"999999999\"))\n    .ReturnsAsync(existingPerson);  // IdentityNumber duplicate found\n\nvar service = new PersonService(mockRepository.Object);\n\nAssert.ThrowsAsync<InvalidOperationException>(async () =>\n{\n    await service.CreatePersonAsync(\n        firstName: \"John\",\n        lastName: \"Doe\",\n        email: \"john.doe@example.com\",\n        identityNumber: \"999999999\",\n        birthDate: new DateTime(1990, 1, 1),\n        phone: \"555-1234\"\n    );\n});\n\nmockRepository.Verify(r => r.AddAsync(It.IsAny<Person>()), Times.Never);",
+        "response": "YES"
+    },
+    {
+        "user_story_id": "SPT-UM-001-003",
+        "layer": "Application",
+        "test_intent": "// Test validation error for missing required fields\nvar mockRepository = new Mock<IPersonRepository>();\nvar service = new PersonService(mockRepository.Object);\n\nAssert.ThrowsAsync<ArgumentException>(async () =>\n{\n    await service.CreatePersonAsync(\n        firstName: null,  // Missing required field\n        lastName: \"Doe\",\n        email: \"john.doe@example.com\",\n        identityNumber: \"123456789\",\n        birthDate: new DateTime(1990, 1, 1),\n        phone: \"555-1234\"\n    );\n});\n\nmockRepository.Verify(r => r.AddAsync(It.IsAny<Person>()), Times.Never);",
+        "response": "YES"
+    },
+    {
+        "user_story_id": "SPT-UM-001-003",
+        "layer": "Infrastructure",
+        "test_intent": "// Test repository AddAsync successfully saves person to database\nvar options = new DbContextOptionsBuilder<UCRDatabaseContext>()\n    .UseInMemoryDatabase(databaseName: \"TestDb_AddPerson\")\n    .Options;\n\nusing var context = new UCRDatabaseContext(options);\nvar repository = new PersonRepository(context);\n\nvar person = new Person(\n    Guid.NewGuid(),\n    \"John\",\n    \"Doe\",\n    \"john.doe@example.com\",\n    \"123456789\",\n    new DateTime(1990, 1, 1),\n    \"555-1234\"\n);\n\nvar result = await repository.AddAsync(person);\n\nAssert.That(result, Is.True);\nAssert.That(context.Persons.Count(), Is.EqualTo(1));\nvar savedPerson = await context.Persons.FirstOrDefaultAsync();\nAssert.That(savedPerson.Email, Is.EqualTo(\"john.doe@example.com\"));",
+        "response": "YES"
+    },
+    {
+        "user_story_id": "SPT-UM-001-003",
+        "layer": "Infrastructure",
+        "test_intent": "// Test GetByEmailAsync returns person when email exists\nvar options = new DbContextOptionsBuilder<UCRDatabaseContext>()\n    .UseInMemoryDatabase(databaseName: \"TestDb_GetByEmail\")\n    .Options;\n\nusing var context = new UCRDatabaseContext(options);\nvar person = new Person(\n    Guid.NewGuid(),\n    \"John\",\n    \"Doe\",\n    \"john.doe@example.com\",\n    \"123456789\",\n    new DateTime(1990, 1, 1),\n    \"555-1234\"\n);\ncontext.Persons.Add(person);\nawait context.SaveChangesAsync();\n\nvar repository = new PersonRepository(context);\nvar result = await repository.GetByEmailAsync(\"john.doe@example.com\");\n\nAssert.That(result, Is.Not.Null);\nAssert.That(result.Email, Is.EqualTo(\"john.doe@example.com\"));",
+        "response": "YES"
+    },
+    {
+        "user_story_id": "SPT-UM-001-003",
+        "layer": "Infrastructure",
+        "test_intent": "// Test GetByIdentityNumberAsync returns person when identity number exists\nvar options = new DbContextOptionsBuilder<UCRDatabaseContext>()\n    .UseInMemoryDatabase(databaseName: \"TestDb_GetByIdentityNumber\")\n    .Options;\n\nusing var context = new UCRDatabaseContext(options);\nvar person = new Person(\n    Guid.NewGuid(),\n    \"John\",\n    \"Doe\",\n    \"john.doe@example.com\",\n    \"123456789\",\n    new DateTime(1990, 1, 1),\n    \"555-1234\"\n);\ncontext.Persons.Add(person);\nawait context.SaveChangesAsync();\n\nvar repository = new PersonRepository(context);\nvar result = await repository.GetByIdentityNumberAsync(\"123456789\");\n\nAssert.That(result, Is.Not.Null);\nAssert.That(result.IdentityNumber, Is.EqualTo(\"123456789\"));",
+        "response": "YES"
+    },
+    {
+        "user_story_id": "SPT-UM-001-003",
+        "layer": "Presentation",
+        "test_intent": "// Test successful person creation returns 200 OK with success response\nvar mockService = new Mock<IPersonService>();\nmockService\n    .Setup(s => s.CreatePersonAsync(\n        \"John\",\n        \"Doe\",\n        \"john.doe@example.com\",\n        \"123456789\",\n        It.IsAny<DateTime>(),\n        \"555-1234\"))\n    .ReturnsAsync(true);\n\nvar handler = new CreatePersonHandler(mockService.Object);\nvar request = new CreatePersonRequest\n{\n    FirstName = \"John\",\n    LastName = \"Doe\",\n    Email = \"john.doe@example.com\",\n    IdentityNumber = \"123456789\",\n    BirthDate = new DateTime(1990, 1, 1),\n    Phone = \"555-1234\"\n};\n\nvar result = await handler.HandleAsync(request);\n\nAssert.That(result.StatusCode, Is.EqualTo(200));\nAssert.That(result.Success, Is.True);",
+        "response": "YES"
+    },
+    {
+        "user_story_id": "SPT-UM-001-003",
+        "layer": "Presentation",
+        "test_intent": "// Test successful person creation returns 200 OK with success response\nvar mockService = new Mock<IPersonService>();\nmockService\n    .Setup(s => s.CreatePersonAsync(\n        \"John\",\n        \"Doe\",\n        \"john.doe@example.com\",\n        \"123456789\",\n        It.IsAny<DateTime>(),\n        \"555-1234\"))\n    .ReturnsAsync(true);\n\nvar handler = new CreatePersonHandler(mockService.Object);\nvar request = new CreatePersonRequest\n{\n    FirstName = \"John\",\n    LastName = \"Doe\",\n    Email = \"john.doe@example.com\",\n    IdentityNumber = \"123456789\",\n    BirthDate = new DateTime(1990, 1, 1),\n    Phone = \"555-1234\"\n};\n\nvar result = await handler.HandleAsync(request);\n\nAssert.That(result.StatusCode, Is.EqualTo(200));\nAssert.That(result.Success, Is.True);",
+        "response": "YES"
+    },
+    {
+        "user_story_id": "SPT-UM-001-003",
+        "layer": "Presentation",
+        "test_intent": "// Test duplicate person returns 400 Bad Request with error message\nvar mockService = new Mock<IPersonService>();\nmockService\n    .Setup(s => s.CreatePersonAsync(\n        \"John\",\n        \"Doe\",\n        \"duplicate@example.com\",\n        \"123456789\",\n        It.IsAny<DateTime>(),\n        \"555-1234\"))\n    .ThrowsAsync(new InvalidOperationException(\"Person with this email already exists\"));\n\nvar handler = new CreatePersonHandler(mockService.Object);\nvar request = new CreatePersonRequest\n{\n    FirstName = \"John\",\n    LastName = \"Doe\",\n    Email = \"duplicate@example.com\",\n    IdentityNumber = \"123456789\",\n    BirthDate = new DateTime(1990, 1, 1),\n    Phone = \"555-1234\"\n};\n\nvar result = await handler.HandleAsync(request);\n\nAssert.That(result.StatusCode, Is.EqualTo(400));\nAssert.That(result.Success, Is.False);",
+        "response": "YES"
+    },
+    {
+        "user_story_id": "SPT-UM-001-003",
+        "layer": "Presentation",
+        "test_intent": "// Test validation error returns 400 Bad Request\nvar mockService = new Mock<IPersonService>();\nmockService\n    .Setup(s => s.CreatePersonAsync(\n        null,\n        \"Doe\",\n        \"john.doe@example.com\",\n        \"123456789\",\n        It.IsAny<DateTime>(),\n        \"555-1234\"))\n    .ThrowsAsync(new ArgumentException(\"FirstName is required\"));\n\nvar handler = new CreatePersonHandler(mockService.Object);\nvar request = new CreatePersonRequest\n{\n    FirstName = null,\n    LastName = \"Doe\",\n    Email = \"john.doe@example.com\",\n    IdentityNumber = \"123456789\",\n    BirthDate = new DateTime(1990, 1, 1),\n    Phone = \"555-1234\"\n};\n\nvar result = await handler.HandleAsync(request);\n\nAssert.That(result.StatusCode, Is.EqualTo(400));\nAssert.That(result.Success, Is.False);",
+        "response": "YES"
+    }
+]
