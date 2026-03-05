@@ -22,7 +22,7 @@ namespace UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.Entities
             var building = new Building(internalId, name, color, height, length, width, x, y, z);
 
             // Assert
-            Assert.That(building.InternalID, Is.EqualTo(internalId));
+            Assert.That(building.InternalId, Is.EqualTo(internalId));
             Assert.That(building.Name, Is.EqualTo(name));
             Assert.That(building.Color, Is.EqualTo(color));
             Assert.That(building.Height, Is.EqualTo(height));
