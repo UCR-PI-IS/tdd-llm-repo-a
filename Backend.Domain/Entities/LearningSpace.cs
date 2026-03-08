@@ -46,4 +46,30 @@ public class LearningSpace
         this.width = width;
         this.length = length;
     }
+
+    /// <summary>
+    /// Constructor for the LearningSpace class (simplified for 2D spaces).
+    /// </summary>
+    /// <param name="id">Unique identifier for the learning space</param>
+    /// <param name="type">Type of the learning space</param>
+    /// <param name="width">Width of the learning space in meters</param>
+    /// <param name="height">Height of the learning space in meters</param>
+    public LearningSpace(String id, String type, double width, double height)
+    {
+        this.id = id;
+        this.type = type;
+        this.width = (float)width;
+        this.height = (float)height;
+        this.length = 0;
+    }
+
+    /// <summary>
+    /// Checks if a whiteboard can fit in this learning space.
+    /// </summary>
+    /// <param name="whiteboard">The whiteboard to check</param>
+    /// <returns>True if the whiteboard fits, false otherwise</returns>
+    public bool CanFitWhiteboard(Whiteboard whiteboard)
+    {
+        return whiteboard.Width <= this.width && whiteboard.Height <= this.height;
+    }
 }
