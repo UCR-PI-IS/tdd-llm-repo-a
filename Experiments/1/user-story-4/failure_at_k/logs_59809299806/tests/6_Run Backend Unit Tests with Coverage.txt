@@ -1,0 +1,118 @@
+﻿2026-03-08T21:26:15.5802080Z ##[group]Run $ErrorActionPreference = 'Stop'
+2026-03-08T21:26:15.5802489Z [36;1m$ErrorActionPreference = 'Stop'[0m
+2026-03-08T21:26:15.5802862Z [36;1mNew-Item -ItemType Directory -Force -Path TestResults | Out-Null[0m
+2026-03-08T21:26:15.5803322Z [36;1mNew-Item -ItemType Directory -Force -Path Coverage | Out-Null[0m
+2026-03-08T21:26:15.5803785Z [36;1m# Find Backend.*.Tests.Unit projects via wildcard match on full path[0m
+2026-03-08T21:26:15.5804260Z [36;1m$projects = Get-ChildItem -Path . -Recurse -Filter *.csproj -File |[0m
+2026-03-08T21:26:15.5804701Z [36;1m  Where-Object { $_.FullName -like '*Backend.*.Tests.Unit*' }[0m
+2026-03-08T21:26:15.5805046Z [36;1mif (-not $projects) {[0m
+2026-03-08T21:26:15.5805395Z [36;1m  Write-Host 'No Backend.*.Tests.Unit test projects found. Skipping tests.'[0m
+2026-03-08T21:26:15.5805753Z [36;1m  exit 0[0m
+2026-03-08T21:26:15.5805916Z [36;1m}[0m
+2026-03-08T21:26:15.5806085Z [36;1mforeach ($proj in $projects) {[0m
+2026-03-08T21:26:15.5806336Z [36;1m  $projName = $proj.BaseName[0m
+2026-03-08T21:26:15.5806718Z [36;1m  $projResultsDir = Join-Path -Path "TestResults" -ChildPath $projName[0m
+2026-03-08T21:26:15.5807199Z [36;1m  New-Item -ItemType Directory -Force -Path $projResultsDir | Out-Null[0m
+2026-03-08T21:26:15.5807715Z [36;1m  Write-Host "Running tests for $($proj.FullName) with coverage into $projResultsDir"[0m
+2026-03-08T21:26:15.5808506Z [36;1m  dotnet test $proj.FullName -c Release --logger "trx;LogFileName=$projName.trx" --results-directory $projResultsDir --collect "XPlat Code Coverage"[0m
+2026-03-08T21:26:15.5809114Z [36;1m}[0m
+2026-03-08T21:26:15.5876564Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+2026-03-08T21:26:15.5876905Z env:
+2026-03-08T21:26:15.5877075Z   DOTNET_ROOT: C:\Program Files\dotnet
+2026-03-08T21:26:15.5877306Z ##[endgroup]
+2026-03-08T21:26:16.0201196Z Running tests for D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.csproj with coverage into TestResults\UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit
+2026-03-08T21:26:16.7772507Z   Determining projects to restore...
+2026-03-08T21:26:17.6335611Z   All projects are up-to-date for restore.
+2026-03-08T21:26:18.2865772Z   UCR.ECCI.PI.ThemePark.Backend.Domain -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Domain.dll
+2026-03-08T21:26:18.4818660Z   UCR.ECCI.PI.ThemePark.Backend.Application -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Application.dll
+2026-03-08T21:26:18.7673603Z   UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.dll
+2026-03-08T21:26:18.7922998Z Test run for D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application.Tests.Unit\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.dll (.NETCoreApp,Version=v8.0)
+2026-03-08T21:26:19.4477940Z VSTest version 18.0.1 (x64)
+2026-03-08T21:26:19.4528776Z 
+2026-03-08T21:26:20.7298352Z Starting test execution, please wait...
+2026-03-08T21:26:20.8899066Z A total of 1 test files matched the specified pattern.
+2026-03-08T21:26:36.7947199Z Results File: D:\a\tdd-llm-repo-a\tdd-llm-repo-a\TestResults\UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.trx
+2026-03-08T21:26:36.7949136Z 
+2026-03-08T21:26:36.7984240Z Passed!  - Failed:     0, Passed:    26, Skipped:     0, Total:    26, Duration: 1 s - UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.dll (net8.0)
+2026-03-08T21:26:37.0449996Z 
+2026-03-08T21:26:37.0455874Z Attachments:
+2026-03-08T21:26:37.0458703Z   D:\a\tdd-llm-repo-a\tdd-llm-repo-a\TestResults\UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit\e8613150-42e9-48f4-ada1-e43f188ae9c9\coverage.cobertura.xml
+2026-03-08T21:26:37.1302094Z Running tests for D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.csproj with coverage into TestResults\UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit
+2026-03-08T21:26:38.5061653Z   Determining projects to restore...
+2026-03-08T21:26:38.8378967Z   All projects are up-to-date for restore.
+2026-03-08T21:26:39.2367157Z   UCR.ECCI.PI.ThemePark.Backend.Domain -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Domain.dll
+2026-03-08T21:26:39.3578627Z   UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain.Tests.Unit\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.dll
+2026-03-08T21:26:39.3688628Z Test run for D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain.Tests.Unit\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.dll (.NETCoreApp,Version=v8.0)
+2026-03-08T21:26:39.4326453Z VSTest version 18.0.1 (x64)
+2026-03-08T21:26:39.4350733Z 
+2026-03-08T21:26:39.5320296Z Starting test execution, please wait...
+2026-03-08T21:26:39.5640588Z A total of 1 test files matched the specified pattern.
+2026-03-08T21:26:40.7893499Z   Failed CanFitWhiteboard_WhenWhiteboardDoesNotFit_ReturnsFalse(5.0d,5.0d,5.1d,1.5d,False) [< 1 ms]
+2026-03-08T21:26:40.7896952Z   Error Message:
+2026-03-08T21:26:40.7897493Z    Too many arguments provided, provide at most 4 arguments.
+2026-03-08T21:26:40.7898003Z   Stack Trace:
+2026-03-08T21:26:40.7899068Z   Failed CanFitWhiteboard_WhenWhiteboardDoesNotFit_ReturnsFalse(5.0d,5.0d,2.0d,5.1d,False) [< 1 ms]
+2026-03-08T21:26:40.7899870Z   Error Message:
+2026-03-08T21:26:40.7900272Z    Too many arguments provided, provide at most 4 arguments.
+2026-03-08T21:26:40.7900807Z   Stack Trace:
+2026-03-08T21:26:40.7902038Z   Failed CanFitWhiteboard_WhenWhiteboardDoesNotFit_ReturnsFalse(5.0d,5.0d,6.0d,6.0d,False) [< 1 ms]
+2026-03-08T21:26:40.7902888Z   Error Message:
+2026-03-08T21:26:40.7903323Z    Too many arguments provided, provide at most 4 arguments.
+2026-03-08T21:26:40.7903863Z   Stack Trace:
+2026-03-08T21:26:40.7904547Z   Failed CanFitWhiteboard_WhenWhiteboardDoesNotFit_ReturnsFalse(5.0d,5.0d,5.1d,5.1d,False) [< 1 ms]
+2026-03-08T21:26:40.7905332Z   Error Message:
+2026-03-08T21:26:40.7905762Z    Too many arguments provided, provide at most 4 arguments.
+2026-03-08T21:26:40.7906262Z   Stack Trace:
+2026-03-08T21:26:40.7906858Z   Failed CanFitWhiteboard_WhenWhiteboardFits_ReturnsTrue(5.0d,5.0d,2.0d,1.5d,True) [< 1 ms]
+2026-03-08T21:26:40.7907589Z   Error Message:
+2026-03-08T21:26:40.7908003Z    Too many arguments provided, provide at most 4 arguments.
+2026-03-08T21:26:40.7908530Z   Stack Trace:
+2026-03-08T21:26:40.7909458Z   Failed CanFitWhiteboard_WhenWhiteboardFits_ReturnsTrue(5.0d,5.0d,5.0d,5.0d,True) [< 1 ms]
+2026-03-08T21:26:40.7910195Z   Error Message:
+2026-03-08T21:26:40.7910614Z    Too many arguments provided, provide at most 4 arguments.
+2026-03-08T21:26:40.7911116Z   Stack Trace:
+2026-03-08T21:26:40.7911718Z   Failed CanFitWhiteboard_WhenWhiteboardFits_ReturnsTrue(5.0d,5.0d,4.9d,4.9d,True) [< 1 ms]
+2026-03-08T21:26:40.7912443Z   Error Message:
+2026-03-08T21:26:40.7912840Z    Too many arguments provided, provide at most 4 arguments.
+2026-03-08T21:26:40.7913331Z   Stack Trace:
+2026-03-08T21:26:41.1191400Z Results File: D:\a\tdd-llm-repo-a\tdd-llm-repo-a\TestResults\UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.trx
+2026-03-08T21:26:41.1194000Z 
+2026-03-08T21:26:41.1242578Z Failed!  - Failed:     7, Passed:    53, Skipped:     0, Total:    60, Duration: 53 ms - UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.dll (net8.0)
+2026-03-08T21:26:41.3297387Z 
+2026-03-08T21:26:41.3303373Z Attachments:
+2026-03-08T21:26:41.3305799Z   D:\a\tdd-llm-repo-a\tdd-llm-repo-a\TestResults\UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit\cf431a38-1dae-4d64-af79-af5717b5c61f\coverage.cobertura.xml
+2026-03-08T21:26:41.4028742Z Running tests for D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.csproj with coverage into TestResults\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit
+2026-03-08T21:26:42.1209785Z   Determining projects to restore...
+2026-03-08T21:26:43.0226104Z   All projects are up-to-date for restore.
+2026-03-08T21:26:43.6687973Z   UCR.ECCI.PI.ThemePark.Backend.Domain -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Domain.dll
+2026-03-08T21:26:43.8621405Z   UCR.ECCI.PI.ThemePark.Backend.Infrastructure -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.dll
+2026-03-08T21:26:44.2307018Z   UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure.Tests.Unit\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.dll
+2026-03-08T21:26:44.2523127Z Test run for D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Infrastructure.Tests.Unit\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.dll (.NETCoreApp,Version=v8.0)
+2026-03-08T21:26:44.3220636Z VSTest version 18.0.1 (x64)
+2026-03-08T21:26:44.3245699Z 
+2026-03-08T21:26:44.4425587Z Starting test execution, please wait...
+2026-03-08T21:26:44.4897107Z A total of 1 test files matched the specified pattern.
+2026-03-08T21:26:48.3846801Z Results File: D:\a\tdd-llm-repo-a\tdd-llm-repo-a\TestResults\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.trx
+2026-03-08T21:26:48.3849029Z 
+2026-03-08T21:26:48.3892043Z Passed!  - Failed:     0, Passed:    20, Skipped:     0, Total:    20, Duration: 1 s - UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.dll (net8.0)
+2026-03-08T21:26:48.5915958Z 
+2026-03-08T21:26:48.5921351Z Attachments:
+2026-03-08T21:26:48.5923314Z   D:\a\tdd-llm-repo-a\tdd-llm-repo-a\TestResults\UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit\a8910f1b-ffc8-496b-b244-bcab38581774\coverage.cobertura.xml
+2026-03-08T21:26:48.6612280Z Running tests for D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.csproj with coverage into TestResults\UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit
+2026-03-08T21:26:49.3418266Z   Determining projects to restore...
+2026-03-08T21:26:50.2991053Z   All projects are up-to-date for restore.
+2026-03-08T21:26:50.9502624Z   UCR.ECCI.PI.ThemePark.Backend.Domain -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Domain\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Domain.dll
+2026-03-08T21:26:51.2210992Z   UCR.ECCI.PI.ThemePark.Backend.Application -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Application\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Application.dll
+2026-03-08T21:26:51.4730626Z   UCR.ECCI.PI.ThemePark.Backend.Presentation -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Presentation.dll
+2026-03-08T21:26:51.8568200Z   UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit -> D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.dll
+2026-03-08T21:26:51.8777075Z Test run for D:\a\tdd-llm-repo-a\tdd-llm-repo-a\Backend.Presentation.Tests.Unit\bin\Release\net8.0\UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.dll (.NETCoreApp,Version=v8.0)
+2026-03-08T21:26:51.9536318Z VSTest version 18.0.1 (x64)
+2026-03-08T21:26:51.9567669Z 
+2026-03-08T21:26:52.0800269Z Starting test execution, please wait...
+2026-03-08T21:26:52.1272010Z A total of 1 test files matched the specified pattern.
+2026-03-08T21:26:54.9596466Z Results File: D:\a\tdd-llm-repo-a\tdd-llm-repo-a\TestResults\UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit\UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.trx
+2026-03-08T21:26:54.9598533Z 
+2026-03-08T21:26:54.9647358Z Passed!  - Failed:     0, Passed:    20, Skipped:     0, Total:    20, Duration: 218 ms - UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.dll (net8.0)
+2026-03-08T21:26:55.2018561Z 
+2026-03-08T21:26:55.2024315Z Attachments:
+2026-03-08T21:26:55.2026505Z   D:\a\tdd-llm-repo-a\tdd-llm-repo-a\TestResults\UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit\c891e800-5c72-47e7-a019-fe4e8ff81c10\coverage.cobertura.xml

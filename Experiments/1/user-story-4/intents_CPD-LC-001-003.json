@@ -1,0 +1,104 @@
+[
+    {
+        "user_story_id": "CPD-LC-001-003",
+        "layer": "Domain",
+        "test_intent": "var whiteboard = new Whiteboard(\"WB-001\", 2.0, 1.5);\nAssert.That(whiteboard.Id, Is.EqualTo(\"WB-001\"));\nAssert.That(whiteboard.Width, Is.EqualTo(2.0));\nAssert.That(whiteboard.Height, Is.EqualTo(1.5));",
+        "response": "YES"
+    },
+    {
+        "user_story_id": "CPD-LC-001-003",
+        "layer": "Domain",
+        "test_intent": "var exception = Assert.Throws<ArgumentException>(() => new Whiteboard(\"WB-001\", -2.0, 1.5));\nAssert.That(exception.ParamName, Is.EqualTo(\"width\"));",
+        "response": "YES"
+    },
+    {
+        "user_story_id": "CPD-LC-001-003",
+        "layer": "Domain",
+        "test_intent": "var exception = Assert.Throws<ArgumentException>(() => new Whiteboard(\"WB-001\", 2.0, -1.5));\nAssert.That(exception.ParamName, Is.EqualTo(\"height\"));",
+        "response": "YES"
+    },
+    {
+        "user_story_id": "CPD-LC-001-003",
+        "layer": "Domain",
+        "test_intent": "var exception = Assert.Throws<ArgumentException>(() => new Whiteboard(null, 2.0, 1.5));\nAssert.That(exception.ParamName, Is.EqualTo(\"id\"));",
+        "response": "YES"
+    },
+    {
+        "user_story_id": "CPD-LC-001-003",
+        "layer": "Domain",
+        "test_intent": "var learningSpace = new LearningSpace(\"LS-001\", 10.0, 8.0);\nvar whiteboard = new Whiteboard(\"WB-001\", 2.0, 1.5);\nbool fits = learningSpace.CanFit(whiteboard);\nAssert.That(fits, Is.True);",
+        "response": "YES"
+    },
+    {
+        "user_story_id": "CPD-LC-001-003",
+        "layer": "Domain",
+        "test_intent": "var learningSpace = new LearningSpace(\"LS-001\", 10.0, 8.0);\nvar whiteboard = new Whiteboard(\"WB-001\", 12.0, 1.5);\nbool fits = learningSpace.CanFit(whiteboard);\nAssert.That(fits, Is.False);",
+        "response": "YES"
+    },
+    {
+        "user_story_id": "CPD-LC-001-003",
+        "layer": "Domain",
+        "test_intent": "var exception = Assert.Throws<ArgumentException>(() => new Whiteboard(\"WB-001\", 0.0, 1.5));\nAssert.That(exception.ParamName, Is.EqualTo(\"width\"));",
+        "response": "YES"
+    },
+    {
+        "user_story_id": "CPD-LC-001-003",
+        "layer": "Domain",
+        "test_intent": "var exception = Assert.Throws<ArgumentException>(() => new Whiteboard(\"WB-001\", 2.0, 0.0));\nAssert.That(exception.ParamName, Is.EqualTo(\"height\"));",
+        "response": "YES"
+    },
+    {
+        "user_story_id": "CPD-LC-001-003",
+        "layer": "Application",
+        "test_intent": "var mockRepo = new Mock<IWhiteboardRepository>();\nvar mockLsRepo = new Mock<ILearningSpaceRepository>();\nvar service = new WhiteboardService(mockRepo.Object, mockLsRepo.Object);\n\nvar result = await service.CreateWhiteboardAsync(\"WB-001\", 2.0, 1.5, \"LS-001\");\n\nAssert.That(result.IsSuccess, Is.True);\nmockRepo.Verify(r => r.AddAsync(It.IsAny<Whiteboard>()), Times.Once);",
+        "response": "YES"
+    },
+    {
+        "user_story_id": "CPD-LC-001-003",
+        "layer": "Application",
+        "test_intent": "var mockRepo = new Mock<IWhiteboardRepository>();\nvar mockLsRepo = new Mock<ILearningSpaceRepository>();\nvar learningSpace = new LearningSpace(\"LS-001\", 1.0, 1.0); // Small space\nmockLsRepo.Setup(r => r.GetByIdAsync(\"LS-001\")).ReturnsAsync(learningSpace);\nvar service = new WhiteboardService(mockRepo.Object, mockLsRepo.Object);\n\nvar result = await service.CreateWhiteboardAsync(\"WB-001\", 5.0, 5.0, \"LS-001\");\n\nAssert.That(result.IsSuccess, Is.False);\nAssert.That(result.ErrorMessage, Does.Contain(\"doesn't fit\"));\nmockRepo.Verify(r => r.AddAsync(It.IsAny<Whiteboard>()), Times.Never);",
+        "response": "YES"
+    },
+    {
+        "user_story_id": "CPD-LC-001-003",
+        "layer": "Application",
+        "test_intent": "var mockRepo = new Mock<IWhiteboardRepository>();\nvar mockLsRepo = new Mock<ILearningSpaceRepository>();\nmockLsRepo.Setup(r => r.GetByIdAsync(\"LS-999\")).ReturnsAsync((LearningSpace)null);\nvar service = new WhiteboardService(mockRepo.Object, mockLsRepo.Object);\n\nvar result = await service.CreateWhiteboardAsync(\"WB-001\", 2.0, 1.5, \"LS-999\");\n\nAssert.That(result.IsSuccess, Is.False);\nAssert.That(result.ErrorMessage, Does.Contain(\"not found\"));\nmockRepo.Verify(r => r.AddAsync(It.IsAny<Whiteboard>()), Times.Never);",
+        "response": "YES"
+    },
+    {
+        "user_story_id": "CPD-LC-001-003",
+        "layer": "Application",
+        "test_intent": "var mockRepo = new Mock<IWhiteboardRepository>();\nvar mockLsRepo = new Mock<ILearningSpaceRepository>();\nvar service = new WhiteboardService(mockRepo.Object, mockLsRepo.Object);\n\nvar result = await service.CreateWhiteboardAsync(\"WB-001\", -2.0, 1.5, \"LS-001\");\n\nAssert.That(result.IsSuccess, Is.False);\nAssert.That(result.ErrorMessage, Does.Contain(\"width\"));\nmockRepo.Verify(r => r.AddAsync(It.IsAny<Whiteboard>()), Times.Never);",
+        "response": "YES"
+    },
+    {
+        "user_story_id": "CPD-LC-001-003",
+        "layer": "Infrastructure",
+        "test_intent": "var options = new DbContextOptionsBuilder<UCRDatabaseContext>()\n    .UseInMemoryDatabase(databaseName: \"TestDb\")\n    .Options;\nvar context = new UCRDatabaseContext(options);\nvar repository = new WhiteboardRepository(context);\nvar whiteboard = new Whiteboard(\"WB-001\", 2.0, 1.5);\n\nawait repository.AddAsync(whiteboard);\nawait context.SaveChangesAsync();\n\nvar saved = await context.Whiteboards.FindAsync(\"WB-001\");\nAssert.That(saved, Is.Not.Null);\nAssert.That(saved.Id, Is.EqualTo(\"WB-001\"));",
+        "response": "YES"
+    },
+    {
+        "user_story_id": "CPD-LC-001-003",
+        "layer": "Infrastructure",
+        "test_intent": "var options = new DbContextOptionsBuilder<UCRDatabaseContext>()\n    .UseInMemoryDatabase(databaseName: \"TestDb\")\n    .Options;\nvar context = new UCRDatabaseContext(options);\nvar repository = new WhiteboardRepository(context);\nvar whiteboard = new Whiteboard(\"WB-001\", 2.0, 1.5);\nawait repository.AddAsync(whiteboard);\nawait context.SaveChangesAsync();\n\nvar retrieved = await repository.GetByIdAsync(\"WB-001\");\n\nAssert.That(retrieved, Is.Not.Null);\nAssert.That(retrieved.Id, Is.EqualTo(\"WB-001\"));\nAssert.That(retrieved.Width, Is.EqualTo(2.0));\nAssert.That(retrieved.Height, Is.EqualTo(1.5));",
+        "response": "YES"
+    },
+    {
+        "user_story_id": "CPD-LC-001-003",
+        "layer": "Infrastructure",
+        "test_intent": "var options = new DbContextOptionsBuilder<UCRDatabaseContext>()\n    .UseInMemoryDatabase(databaseName: \"TestDb\")\n    .Options;\nvar context = new UCRDatabaseContext(options);\nvar repository = new WhiteboardRepository(context);\n\nvar retrieved = await repository.GetByIdAsync(\"WB-999\");\n\nAssert.That(retrieved, Is.Null);",
+        "response": "YES"
+    },
+    {
+        "user_story_id": "CPD-LC-001-003",
+        "layer": "Presentation",
+        "test_intent": "var mockService = new Mock<IWhiteboardService>();\nvar successResult = Result.Success();\nmockService.Setup(s => s.CreateWhiteboardAsync(\"WB-001\", 2.0, 1.5, \"LS-001\"))\n    .ReturnsAsync(successResult);\nvar handler = new CreateWhiteboardHandler(mockService.Object);\nvar request = new CreateWhiteboardRequest(\"WB-001\", 2.0, 1.5, \"LS-001\");\n\nvar result = await handler.HandleAsync(request);\n\nAssert.That(result.StatusCode, Is.EqualTo(201));\nAssert.That(result.Response.Success, Is.True);",
+        "response": "YES"
+    },
+    {
+        "user_story_id": "CPD-LC-001-003",
+        "layer": "Presentation",
+        "test_intent": "var mockService = new Mock<IWhiteboardService>();\nvar failureResult = Result.Failure(\"Whiteboard doesn't fit in learning space\");\nmockService.Setup(s => s.CreateWhiteboardAsync(\"WB-001\", 5.0, 5.0, \"LS-001\"))\n    .ReturnsAsync(failureResult);\nvar handler = new CreateWhiteboardHandler(mockService.Object);\nvar request = new CreateWhiteboardRequest(\"WB-001\", 5.0, 5.0, \"LS-001\");\n\nvar result = await handler.HandleAsync(request);\n\nAssert.That(result.StatusCode, Is.EqualTo(400));\nAssert.That(result.Response.Success, Is.False);\nAssert.That(result.Response.ErrorMessage, Does.Contain(\"doesn't fit\"));",
+        "response": "YES"
+    }
+]

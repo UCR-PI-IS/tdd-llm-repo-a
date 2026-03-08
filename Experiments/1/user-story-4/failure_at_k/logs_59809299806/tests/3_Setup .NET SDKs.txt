@@ -1,0 +1,16 @@
+﻿2026-03-08T21:24:35.3163723Z ##[group]Run actions/setup-dotnet@v4
+2026-03-08T21:24:35.3164088Z with:
+2026-03-08T21:24:35.3164286Z   dotnet-version: 8.0.x
+
+2026-03-08T21:24:35.3164513Z   cache: false
+2026-03-08T21:24:35.3164920Z ##[endgroup]
+2026-03-08T21:24:35.7191188Z [command]"C:\Program Files\PowerShell\7\pwsh.exe" -NoLogo -Sta -NoProfile -NonInteractive -ExecutionPolicy Unrestricted -Command & 'D:\a\_actions\actions\setup-dotnet\v4\externals\install-dotnet.ps1' -SkipNonVersionedFiles -Runtime dotnet -Channel LTS
+2026-03-08T21:24:55.8567663Z dotnet-install: Downloaded file https://builds.dotnet.microsoft.com/dotnet/Runtime/10.0.3/dotnet-runtime-10.0.3-win-x64.zip size is 37106541 bytes.
+2026-03-08T21:24:55.8578544Z dotnet-install: Either downloaded or local package size can not be measured. One of them may be corrupted.
+2026-03-08T21:24:55.8603053Z dotnet-install: Extracting the archive.
+2026-03-08T21:24:57.2683379Z dotnet-install: Note that the script does not ensure your Windows version is supported during the installation.
+2026-03-08T21:24:57.2689201Z dotnet-install: To check the list of supported versions, go to https://learn.microsoft.com/dotnet/core/install/windows#supported-versions
+2026-03-08T21:24:57.2695329Z dotnet-install: Installed version is 10.0.3
+2026-03-08T21:24:57.2704128Z dotnet-install: Installation finished
+2026-03-08T21:24:57.5825323Z [command]"C:\Program Files\PowerShell\7\pwsh.exe" -NoLogo -Sta -NoProfile -NonInteractive -ExecutionPolicy Unrestricted -Command & 'D:\a\_actions\actions\setup-dotnet\v4\externals\install-dotnet.ps1' -SkipNonVersionedFiles -Channel 8.0
+2026-03-08T21:24:58.3383983Z dotnet-install: .NET Core SDK with version '8.0.418' is already installed.
