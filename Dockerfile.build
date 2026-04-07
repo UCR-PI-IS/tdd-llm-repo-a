@@ -1,0 +1,17 @@
+# Lightweight Alpine-based .NET SDK for build and test operations
+# Alpine image is ~200MB vs ~700MB for standard Debian-based image
+FROM mcr.microsoft.com/dotnet/sdk:8.0-alpine
+
+# Set working directory
+WORKDIR /workspace
+
+# Install bash for script compatibility
+RUN apk add --no-cache bash
+
+# Set environment variables for non-interactive builds
+ENV DOTNET_CLI_TELEMETRY_OPTOUT=1
+ENV DOTNET_SKIP_FIRST_TIME_EXPERIENCE=1
+ENV DOTNET_NOLOGO=1
+
+# Default command (can be overridden)
+CMD ["/bin/bash"]
