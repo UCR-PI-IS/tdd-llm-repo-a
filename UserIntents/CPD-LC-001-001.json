@@ -1,0 +1,238 @@
+{
+  "storyId": "CPD-LC-001-001",
+  "source": "UserStories/CPD-LC-001-001.md",
+  "generatedAt": "2026-04-07T00:00:00Z",
+  "intents": [
+    {
+      "id": "Domain-001",
+      "layer": "Domain",
+      "targetClass": "LearningComponent",
+      "methodUnderTest": "Constructor",
+      "scenario": "Verify that a LearningComponent entity can be created with valid parameters",
+      "assertionCode": "var component = new LearningComponent(componentId, learningSpaceId, width, height, depth, x, y, z, orientation);\nAssert.That(component.ComponentId, Is.EqualTo(componentId));\nAssert.That(component.LearningSpaceId, Is.EqualTo(learningSpaceId));\nAssert.That(component.Width, Is.EqualTo(width));\nAssert.That(component.Height, Is.EqualTo(height));\nAssert.That(component.Depth, Is.EqualTo(depth));\nAssert.That(component.X, Is.EqualTo(x));\nAssert.That(component.Y, Is.EqualTo(y));\nAssert.That(component.Z, Is.EqualTo(z));\nAssert.That(component.Orientation, Is.EqualTo(orientation));",
+      "acceptanceCriteria": "All scenarios - foundational entity test",
+      "testType": "Positive",
+      "status": "confirmed"
+    },
+    {
+      "id": "Domain-002",
+      "layer": "Domain",
+      "targetClass": "LearningComponent",
+      "methodUnderTest": "Constructor validation for negative dimensions",
+      "scenario": "Verify that creating a LearningComponent with negative width throws ArgumentException",
+      "assertionCode": "var ex = Assert.Throws<ArgumentException>(() => \n    new LearningComponent(componentId, learningSpaceId, invalidWidth, height, depth, x, y, z, orientation));\nAssert.That(ex.ParamName, Is.EqualTo(\"width\"));",
+      "acceptanceCriteria": "Scenario 3 - foundational validation for invalid data",
+      "testType": "Negative",
+      "status": "confirmed"
+    },
+    {
+      "id": "Domain-003",
+      "layer": "Domain",
+      "targetClass": "LearningComponent",
+      "methodUnderTest": "Constructor validation for negative height",
+      "scenario": "Verify that creating a LearningComponent with negative height throws ArgumentException",
+      "assertionCode": "var ex = Assert.Throws<ArgumentException>(() => \n    new LearningComponent(componentId, learningSpaceId, width, invalidHeight, depth, x, y, z, orientation));\nAssert.That(ex.ParamName, Is.EqualTo(\"height\"));",
+      "acceptanceCriteria": "Scenario 3 - foundational validation for invalid data",
+      "testType": "Negative",
+      "status": "confirmed"
+    },
+    {
+      "id": "Domain-004",
+      "layer": "Domain",
+      "targetClass": "LearningComponent",
+      "methodUnderTest": "Constructor validation for negative depth",
+      "scenario": "Verify that creating a LearningComponent with negative depth throws ArgumentException",
+      "assertionCode": "var ex = Assert.Throws<ArgumentException>(() => \n    new LearningComponent(componentId, learningSpaceId, width, height, invalidDepth, x, y, z, orientation));\nAssert.That(ex.ParamName, Is.EqualTo(\"depth\"));",
+      "acceptanceCriteria": "Scenario 3 - foundational validation for invalid data",
+      "testType": "Negative",
+      "status": "confirmed"
+    },
+    {
+      "id": "Domain-005",
+      "layer": "Domain",
+      "targetClass": "LearningComponent",
+      "methodUnderTest": "Constructor validation for negative X coordinate",
+      "scenario": "Verify that creating a LearningComponent with negative X coordinate throws ArgumentException",
+      "assertionCode": "var ex = Assert.Throws<ArgumentException>(() => \n    new LearningComponent(componentId, learningSpaceId, width, height, depth, invalidX, y, z, orientation));\nAssert.That(ex.ParamName, Is.EqualTo(\"x\"));",
+      "acceptanceCriteria": "Scenario 3 - foundational validation for invalid data",
+      "testType": "Negative",
+      "status": "confirmed"
+    },
+    {
+      "id": "Domain-006",
+      "layer": "Domain",
+      "targetClass": "LearningComponent",
+      "methodUnderTest": "Constructor validation for negative Y coordinate",
+      "scenario": "Verify that creating a LearningComponent with negative Y coordinate throws ArgumentException",
+      "assertionCode": "var ex = Assert.Throws<ArgumentException>(() => \n    new LearningComponent(componentId, learningSpaceId, width, height, depth, x, invalidY, z, orientation));\nAssert.That(ex.ParamName, Is.EqualTo(\"y\"));",
+      "acceptanceCriteria": "Scenario 3 - foundational validation for invalid data",
+      "testType": "Negative",
+      "status": "confirmed"
+    },
+    {
+      "id": "Domain-007",
+      "layer": "Domain",
+      "targetClass": "LearningComponent",
+      "methodUnderTest": "Constructor validation for negative Z coordinate",
+      "scenario": "Verify that creating a LearningComponent with negative Z coordinate throws ArgumentException",
+      "assertionCode": "var ex = Assert.Throws<ArgumentException>(() => \n    new LearningComponent(componentId, learningSpaceId, width, height, depth, x, y, invalidZ, orientation));\nAssert.That(ex.ParamName, Is.EqualTo(\"z\"));",
+      "acceptanceCriteria": "Scenario 3 - foundational validation for invalid data",
+      "testType": "Negative",
+      "status": "confirmed"
+    },
+    {
+      "id": "Domain-008",
+      "layer": "Domain",
+      "targetClass": "LearningComponent",
+      "methodUnderTest": "Constructor validation for invalid orientation",
+      "scenario": "Verify that creating a LearningComponent with invalid orientation throws ArgumentException",
+      "assertionCode": "var ex = Assert.Throws<ArgumentException>(() => \n    new LearningComponent(componentId, learningSpaceId, width, height, depth, x, y, z, invalidOrientation));\nAssert.That(ex.ParamName, Is.EqualTo(\"orientation\"));",
+      "acceptanceCriteria": "Scenario 3 - foundational validation for invalid data",
+      "testType": "Negative",
+      "status": "confirmed"
+    },
+    {
+      "id": "Domain-009",
+      "layer": "Domain",
+      "targetClass": "LearningComponent",
+      "methodUnderTest": "Constructor with valid orientation values",
+      "scenario": "Verify that creating a LearningComponent with valid orientations (North, South, East, West) succeeds",
+      "assertionCode": "foreach (var orientation in validOrientations)\n{\n    var component = new LearningComponent(componentId, learningSpaceId, width, height, depth, x, y, z, orientation);\n    Assert.That(component.Orientation, Is.EqualTo(orientation));\n}",
+      "acceptanceCriteria": "All scenarios - foundational entity test",
+      "testType": "Positive",
+      "status": "confirmed"
+    },
+    {
+      "id": "Domain-010",
+      "layer": "Domain",
+      "targetClass": "LearningComponent",
+      "methodUnderTest": "Constructor with zero values for dimensions and coordinates",
+      "scenario": "Verify that creating a LearningComponent with zero values for dimensions and coordinates succeeds (boundary test)",
+      "assertionCode": "var component = new LearningComponent(componentId, learningSpaceId, width, height, depth, x, y, z, orientation);\nAssert.That(component.Width, Is.EqualTo(0f));\nAssert.That(component.Height, Is.EqualTo(0f));\nAssert.That(component.Depth, Is.EqualTo(0f));\nAssert.That(component.X, Is.EqualTo(0f));\nAssert.That(component.Y, Is.EqualTo(0f));\nAssert.That(component.Z, Is.EqualTo(0f));",
+      "acceptanceCriteria": "All scenarios - boundary value testing",
+      "testType": "Edge case",
+      "status": "confirmed"
+    },
+    {
+      "id": "Application-001",
+      "layer": "Application",
+      "targetClass": "LearningComponentService",
+      "methodUnderTest": "GetComponentsByLearningSpaceIdAsync",
+      "scenario": "Verify service returns list of components when learning space has components",
+      "assertionCode": "var result = await service.GetComponentsByLearningSpaceIdAsync(learningSpaceId);\nAssert.That(result, Is.Not.Null);\nAssert.That(result.Count, Is.EqualTo(2));\nAssert.That(result[0].LearningSpaceId, Is.EqualTo(learningSpaceId));\nAssert.That(result[1].LearningSpaceId, Is.EqualTo(learningSpaceId));",
+      "acceptanceCriteria": "Scenario 1 - Successfully listed the learning components in a learning space",
+      "testType": "Positive",
+      "status": "confirmed"
+    },
+    {
+      "id": "Application-002",
+      "layer": "Application",
+      "targetClass": "LearningComponentService",
+      "methodUnderTest": "GetComponentsByLearningSpaceIdAsync",
+      "scenario": "Verify service returns empty list when learning space has no components",
+      "assertionCode": "var result = await service.GetComponentsByLearningSpaceIdAsync(learningSpaceId);\nAssert.That(result, Is.Not.Null);\nAssert.That(result.Count, Is.EqualTo(0));\nAssert.That(result, Is.Empty);",
+      "acceptanceCriteria": "Scenario 2 - Attempted to list the learning components of a learning space that has none",
+      "testType": "Positive",
+      "status": "confirmed"
+    },
+    {
+      "id": "Application-003",
+      "layer": "Application",
+      "targetClass": "LearningComponentService",
+      "methodUnderTest": "GetComponentsByLearningSpaceIdAsync",
+      "scenario": "Verify service throws exception when learning space ID is null or empty",
+      "assertionCode": "var ex = Assert.ThrowsAsync<ArgumentException>(async () => \n    await service.GetComponentsByLearningSpaceIdAsync(invalidLearningSpaceId));\nAssert.That(ex.ParamName, Is.EqualTo(\"learningSpaceId\"));",
+      "acceptanceCriteria": "Scenario 3 - Attempted to list the learning components of an invalid learning space",
+      "testType": "Negative",
+      "status": "confirmed"
+    },
+    {
+      "id": "Application-004",
+      "layer": "Application",
+      "targetClass": "LearningComponentService",
+      "methodUnderTest": "GetComponentsByLearningSpaceIdAsync",
+      "scenario": "Verify service throws exception when learning space ID is null",
+      "assertionCode": "var ex = Assert.ThrowsAsync<ArgumentException>(async () => \n    await service.GetComponentsByLearningSpaceIdAsync(nullLearningSpaceId!));\nAssert.That(ex.ParamName, Is.EqualTo(\"learningSpaceId\"));",
+      "acceptanceCriteria": "Scenario 3 - Attempted to list the learning components of an invalid learning space",
+      "testType": "Negative",
+      "status": "confirmed"
+    },
+    {
+      "id": "Infrastructure-001",
+      "layer": "Infrastructure",
+      "targetClass": "SqlLearningComponentRepository",
+      "methodUnderTest": "GetComponentsByLearningSpaceIdAsync",
+      "scenario": "Verify repository returns list of components for a valid learning space ID from database",
+      "assertionCode": "var result = await repository.GetComponentsByLearningSpaceIdAsync(learningSpaceId);\nAssert.That(result, Is.Not.Null);\nAssert.That(result.Count, Is.EqualTo(2));\nAssert.That(result.All(c => c.LearningSpaceId == learningSpaceId), Is.True);",
+      "acceptanceCriteria": "Scenario 1 - Successfully listed the learning components in a learning space",
+      "testType": "Positive",
+      "status": "confirmed"
+    },
+    {
+      "id": "Infrastructure-002",
+      "layer": "Infrastructure",
+      "targetClass": "SqlLearningComponentRepository",
+      "methodUnderTest": "GetComponentsByLearningSpaceIdAsync",
+      "scenario": "Verify repository returns empty list when learning space has no components",
+      "assertionCode": "var result = await repository.GetComponentsByLearningSpaceIdAsync(learningSpaceId);\nAssert.That(result, Is.Not.Null);\nAssert.That(result.Count, Is.EqualTo(0));\nAssert.That(result, Is.Empty);",
+      "acceptanceCriteria": "Scenario 2 - Attempted to list the learning components of a learning space that has none",
+      "testType": "Positive",
+      "status": "confirmed"
+    },
+    {
+      "id": "Infrastructure-003",
+      "layer": "Infrastructure",
+      "targetClass": "SqlLearningComponentRepository",
+      "methodUnderTest": "GetComponentsByLearningSpaceIdAsync",
+      "scenario": "Verify repository returns empty list when learning space ID does not exist in database",
+      "assertionCode": "var result = await repository.GetComponentsByLearningSpaceIdAsync(nonExistentLearningSpaceId);\nAssert.That(result, Is.Not.Null);\nAssert.That(result.Count, Is.EqualTo(0));\nAssert.That(result, Is.Empty);",
+      "acceptanceCriteria": "Scenario 3 - Attempted to list the learning components of an invalid learning space",
+      "testType": "Negative",
+      "status": "confirmed"
+    },
+    {
+      "id": "Presentation-001",
+      "layer": "Presentation",
+      "targetClass": "GetLearningComponentsHandler",
+      "methodUnderTest": "HandleAsync",
+      "scenario": "Verify handler returns OK response with list of components when learning space has components",
+      "assertionCode": "var result = await GetLearningComponentsHandler.HandleAsync(mockService.Object, learningSpaceId);\nAssert.That(result, Is.TypeOf<Ok<GetLearningComponentsResponse>>());\nvar okResult = result as Ok<GetLearningComponentsResponse>;\nAssert.That(okResult!.Value!.Components.Count, Is.EqualTo(2));\nAssert.That(okResult.Value.Components[0].LearningSpaceId, Is.EqualTo(learningSpaceId));",
+      "acceptanceCriteria": "Scenario 1 - Successfully listed the learning components in a learning space",
+      "testType": "Positive",
+      "status": "confirmed"
+    },
+    {
+      "id": "Presentation-002",
+      "layer": "Presentation",
+      "targetClass": "GetLearningComponentsHandler",
+      "methodUnderTest": "HandleAsync",
+      "scenario": "Verify handler returns OK response with empty list when learning space has no components",
+      "assertionCode": "var result = await GetLearningComponentsHandler.HandleAsync(mockService.Object, learningSpaceId);\nAssert.That(result, Is.TypeOf<Ok<GetLearningComponentsResponse>>());\nvar okResult = result as Ok<GetLearningComponentsResponse>;\nAssert.That(okResult!.Value!.Components.Count, Is.EqualTo(0));\nAssert.That(okResult.Value.Components, Is.Empty);",
+      "acceptanceCriteria": "Scenario 2 - Attempted to list the learning components of a learning space that has none",
+      "testType": "Positive",
+      "status": "confirmed"
+    },
+    {
+      "id": "Presentation-003",
+      "layer": "Presentation",
+      "targetClass": "GetLearningComponentsHandler",
+      "methodUnderTest": "HandleAsync",
+      "scenario": "Verify handler returns BadRequest response when learning space ID is null or empty",
+      "assertionCode": "var result = await GetLearningComponentsHandler.HandleAsync(mockService.Object, invalidLearningSpaceId);\nAssert.That(result, Is.TypeOf<BadRequest<ErrorResponse>>());\nvar badRequestResult = result as BadRequest<ErrorResponse>;\nAssert.That(badRequestResult!.Value!.Message, Does.Contain(\"Learning space ID cannot be null or empty\"));",
+      "acceptanceCriteria": "Scenario 3 - Attempted to list the learning components of an invalid learning space",
+      "testType": "Negative",
+      "status": "confirmed"
+    },
+    {
+      "id": "Presentation-004",
+      "layer": "Presentation",
+      "targetClass": "GetLearningComponentsHandler",
+      "methodUnderTest": "HandleAsync",
+      "scenario": "Verify handler returns NotFound response when learning space does not exist",
+      "assertionCode": "var result = await GetLearningComponentsHandler.HandleAsync(mockService.Object, nonExistentLearningSpaceId);\nAssert.That(result, Is.TypeOf<NotFound<ErrorResponse>>());\nvar notFoundResult = result as NotFound<ErrorResponse>;\nAssert.That(notFoundResult!.Value!.Message, Does.Contain(nonExistentLearningSpaceId));",
+      "acceptanceCriteria": "Scenario 3 - Attempted to list the learning components of an invalid learning space",
+      "testType": "Negative",
+      "status": "confirmed"
+    }
+  ]
+}

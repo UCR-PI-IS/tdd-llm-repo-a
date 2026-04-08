@@ -1,0 +1,79 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {},
+  "provider": {
+    "azure-cognitive-services": {
+      "options": {
+        "apiKey": "",
+        "baseURL": "https://citic.cognitiveservices.azure.com/openai",
+        "useCompletionUrls": true
+      },
+      "models": {
+        "gpt-5.1": {
+          "name": "gpt-5.1-custom",
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "gpt-4.1": {
+          "name": "gpt-4.1-custom",
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        }
+      }
+    },
+    "azure-foundry-base-models": {
+      "npm": "@ai-sdk/openai-compatible",
+      "options": {
+        "apiKey": "",
+        "baseURL": "https://citic.services.ai.azure.com/openai/v1"
+      },
+      "models": {
+        "Kimi-K2.5": {
+          "name": "Kimi K2.5-custom",
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "DeepSeek-V3.1": {
+          "name": "DeepSeek V3.1-custom",
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "grok-4-1-fast-reasoning": {
+          "name": "Grok 4.1 Fast Reasoning",
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
