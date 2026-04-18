@@ -5,7 +5,7 @@ top_p: 0.1
 description: "Generates NUnit test classes from confirmed intents in UserIntents/ JSON files, following Clean Architecture layer conventions."
 color: "#E8833A"
 mode: all
-permissions:
+permission:
   edit: "ask"
   bash: "ask"
 ---

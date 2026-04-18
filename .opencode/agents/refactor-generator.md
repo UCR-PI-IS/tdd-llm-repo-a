@@ -5,7 +5,7 @@ top_p: 0.1
 description: "Completes the TDD cycle by running Microsoft Code Metrics, analyzing violations, executing targeted refactoring, and storing before/after comparisons per user story."
 color: "#9B59B6"
 mode: all
-permissions:
+permission:
   edit: "ask"
   bash: "ask"
 ---

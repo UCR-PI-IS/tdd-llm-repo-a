@@ -5,7 +5,7 @@ top_p: 0.1
 description: "Implements minimal code to make failing tests pass, following DDD layer boundaries. Builds and tests autonomously via Docker."
 color: "#2ECC71"
 mode: all
-permissions:
+permission:
   edit: "ask"
   bash: "ask"
 ---

@@ -5,7 +5,7 @@ top_p: 0.1
 description: "Orchestrates the TDD pipeline: test generation, code generation, and refactoring for a given user story. Coordinates subagents autonomously."
 color: "#E74C3C"
 mode: primary
-permissions:
+permission:
   edit: "ask"
   bash: "ask"
 ---
