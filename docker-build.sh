@@ -50,7 +50,7 @@ echo ""
 
 # Find and build all .csproj files (excluding .sqlproj)
 echo ">>> Building .NET projects (excluding .sqlproj)..."
-find . -name "*.csproj" -type f | while read -r proj; do
+find . -name "*.csproj" -type f -not -path "./tools/*" | while read -r proj; do
     echo "Building: $proj"
     dotnet build "$proj" --no-restore -c Release
     echo ""
