@@ -54,11 +54,10 @@ echo "=== Starting Code Metrics Analysis ==="
 echo "Working directory: $(pwd)"
 echo ""
 
-# Step 1: Build the MetricsCalculator tool
-echo ">>> Building MetricsCalculator tool..."
-dotnet build tools/MetricsCalculator/MetricsCalculator.csproj -c Release --nologo -v q
-CALCULATOR="dotnet run --project tools/MetricsCalculator/MetricsCalculator.csproj -c Release --no-build --"
-echo "MetricsCalculator built successfully."
+# Step 1: Prepare MetricsCalculator tool (builds on first use via dotnet run)
+CALCULATOR="dotnet run --project tools/MetricsCalculator/MetricsCalculator.csproj -c Release --"
+echo ">>> Restoring MetricsCalculator dependencies..."
+dotnet restore tools/MetricsCalculator/MetricsCalculator.csproj --nologo -v q
 echo ""
 
 # Step 2: Restore the solution
