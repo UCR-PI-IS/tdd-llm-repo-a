@@ -40,6 +40,14 @@ Before generating tests, read the following from the repository:
    - `Backend.Presentation/Dtos/`, `Backend.Presentation/Handlers/`, `Backend.Presentation/Endpoints/`
 4. **Architecture guidelines**: `Docs/Guidelines/CA-GUIDELINES.md`
 
+# Docker-Only Rule
+
+ALL build, test, restore, and metrics operations MUST use the dedicated Docker scripts:
+- Build: `./Automations/docker-build.py` — NEVER run `dotnet build` or `dotnet restore` directly
+- Test: `./Automations/docker-test.py` — NEVER run `dotnet test` directly
+
+Do not use any raw dotnet CLI commands for build, test, or restore operations. All compilation and execution happens inside Docker containers.
+
 # Hard Constraints
 
 - The user story **is NOT implemented yet**. Missing classes are expected.

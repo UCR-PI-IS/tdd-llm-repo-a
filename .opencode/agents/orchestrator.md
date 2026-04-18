@@ -18,6 +18,15 @@ TDD Pipeline Orchestrator for Domain-Driven Design projects. You coordinate the 
 
 Given a user story ID, verify that confirmed intents exist, then drive the full test-implement-refactor cycle autonomously by delegating to subagents in sequence. Report progress and results back to the user at each stage.
 
+# Docker-Only Rule
+
+ALL build, test, restore, and metrics operations MUST use the dedicated Docker scripts:
+- Build: `./Automations/docker-build.py` — NEVER run `dotnet build` or `dotnet restore` directly
+- Test: `./Automations/docker-test.py` — NEVER run `dotnet test` directly
+- Metrics: `./Automations/docker-metrics.py <STORY-ID>` — NEVER run `dotnet msbuild` directly
+
+Do not use any raw dotnet CLI commands. All compilation and execution happens inside Docker containers. Read results from the JSON summaries in the output directories.
+
 # Prerequisites
 
 Before this agent runs, the user must have completed the interactive intent generation step using `@intent-generator`. The orchestrator does NOT handle intent generation — that requires user interaction (YES/NO/UNKNOWN confirmation loop).
@@ -57,23 +66,23 @@ Invoke the `test-generator` subagent with the following context:
 
 Invoke the `code-generator` subagent with the following context:
 
-> Implement minimal code to make failing tests pass for story `<STORY-ID>`. Read the user story from `UserStories/<STORY-ID>.md` and confirmed intents from `UserIntents/<STORY-ID>.json`. Find test files in `Backend.*.Tests.Unit/` directories. Build using `./docker-build.sh` and test using `./docker-test.sh`. Keep all changes in the local workspace.
+> Implement minimal code to make failing tests pass for story `<STORY-ID>`. Read the user story from `UserStories/<STORY-ID>.md` and confirmed intents from `UserIntents/<STORY-ID>.json`. Find test files in `Backend.*.Tests.Unit/` directories. Build using `./Automations/docker-build.py` and test using `./Automations/docker-test.py`. Keep all changes in the local workspace.
 
 **After completion:**
-- Check the latest `BuildResults/` directory for build status
-- Check the latest `TestResults/` directory for test results
+- Read `build-summary.json` from the latest `BuildResults/` timestamped directory for build status
+- Read `test-summary.json` from the latest `TestResults/` timestamped directory for test results
 - Report to user: "Code generation complete. Build: PASS/FAIL. Tests: X passed, Y failed."
-- If tests failed, report the failures and stop.
+- If `test-summary.json` shows `totalFailed > 0`, report the failures and stop.
 
 ## 4. Refactoring
 
 Invoke the `refactor-generator` subagent with the following context:
 
-> Run code metrics and refactor for story `<STORY-ID>`. Execute `./docker-metrics.sh <STORY-ID>` to get baseline metrics. Analyze violations against thresholds (MI: 0-9 RED, 10-19 YELLOW; CC: >25 RED, 11-25 YELLOW; Coupling: >40 RED, 10-40 YELLOW; DIT: >=6 RED). Refactor only code related to this story. Re-run metrics after refactoring. Keep all changes in the local workspace.
+> Run code metrics and refactor for story `<STORY-ID>`. Execute `./Automations/docker-metrics.py <STORY-ID>` to get baseline metrics. Analyze violations against thresholds (MI: 0-9 RED, 10-19 YELLOW; CC: >25 RED, 11-25 YELLOW; Coupling: >40 RED, 10-40 YELLOW; DIT: >=6 RED). Refactor only code related to this story. Re-run metrics after refactoring. Keep all changes in the local workspace.
 
 **After completion:**
-- Read the metrics summary from the latest `MetricsResults/<STORY-ID>/` timestamp folder
-- Report to user: before/after metrics comparison
+- Read `metrics-summary.json` from the latest `MetricsResults/<STORY-ID>/` timestamp folders (before and after)
+- Report to user: before/after metrics comparison from JSON data
 
 ## 5. Final Report
 

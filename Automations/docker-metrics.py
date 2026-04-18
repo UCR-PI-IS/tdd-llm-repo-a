@@ -1,53 +1,21 @@
-#!/bin/bash
+#!/usr/bin/env python3
+"""Docker Metrics Script for Theme Park Solution.
 
-# Docker Metrics Script for Theme Park Solution
-# Runs Microsoft Code Metrics via a cross-platform Roslyn-based calculator
-# Results stored per user story with timestamped directories
-# Usage: ./docker-metrics.sh <STORY-ID>
-# Example: ./docker-metrics.sh CPD-LC-001-001
+Runs Microsoft Code Metrics via a cross-platform Roslyn-based calculator.
+Results stored per user story with timestamped directories.
+Usage: ./docker-metrics.py <STORY-ID>
+Example: ./docker-metrics.py CPD-LC-001-001
+"""
 
-set -e  # Exit on error
+import sys
+from pathlib import Path
 
-# Color codes for output
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
-NC='\033[0m' # No Color
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import docker_utils as du
 
-# Validate input
-if [ -z "$1" ]; then
-    echo -e "${RED}Error: STORY-ID is required${NC}"
-    echo "Usage: ./docker-metrics.sh <STORY-ID>"
-    echo "Example: ./docker-metrics.sh CPD-LC-001-001"
-    exit 1
-fi
-
-STORY_ID="$1"
-TIMESTAMP=$(date +"%Y-%m-%d_%H-%M-%S")
-METRICS_OUTPUT_DIR="MetricsResults/${STORY_ID}/${TIMESTAMP}"
-
-echo -e "${YELLOW}=== Docker Metrics Script ===${NC}"
-echo "Story ID: ${STORY_ID}"
-echo "Timestamp: ${TIMESTAMP}"
-echo "Output directory: ${METRICS_OUTPUT_DIR}"
-echo ""
-
-# Create output directory
-mkdir -p "${METRICS_OUTPUT_DIR}"
-
-# Get absolute path to workspace root
-WORKSPACE_ROOT="$(cd "$(dirname "$0")" && pwd)"
-
-# Docker image name (uses full Debian SDK for Roslyn workspace compatibility)
-IMAGE_NAME="themepark-dotnet-metrics"
-
-# Build Docker image
-echo -e "${YELLOW}Building Docker metrics image...${NC}"
-docker build -t "${IMAGE_NAME}" -f Dockerfile.metrics .
-
-# Create the metrics script to run inside the container
-cat > "${METRICS_OUTPUT_DIR}/metrics-script.sh" << 'METRICS_EOF'
-#!/bin/bash
+# This inner script runs inside the Debian-based Docker container (has python3).
+# It contains inline python3 for text summary and JSON generation.
+METRICS_SCRIPT = r"""#!/bin/bash
 set -e
 
 echo "=== Starting Code Metrics Analysis ==="
@@ -118,22 +86,17 @@ for xml_file in /output/*.Metrics.xml; do
         echo "  Project: $proj_name" >> "$SUMMARY_FILE"
         echo "----------------------------------------------------------------" >> "$SUMMARY_FILE"
 
-        # Extract NamedType metrics (class-level)
         echo "" >> "$SUMMARY_FILE"
         echo "  Types:" >> "$SUMMARY_FILE"
-        # Find NamedType elements and extract their metrics
         grep -E '<NamedType ' "$xml_file" 2>/dev/null | while read -r line; do
             name=$(echo "$line" | grep -oP 'Name="[^"]*"' | head -1 | sed 's/Name="//;s/"//')
             echo "    $name" >> "$SUMMARY_FILE"
         done || true
 
-        # Extract all Metric elements with their context
         echo "" >> "$SUMMARY_FILE"
         echo "  Maintainability Index by type:" >> "$SUMMARY_FILE"
-        # Parse XML for NamedType > Metrics > Metric where Name=MaintainabilityIndex
         python3 -c "
 import xml.etree.ElementTree as ET
-import sys
 try:
     tree = ET.parse('$xml_file')
     root = tree.getroot()
@@ -207,6 +170,67 @@ echo "  Depth of Inheritance: 0-4 GREEN, 5 YELLOW, >=6 RED" >> "$SUMMARY_FILE"
 echo "  Lines per Method: 5-20 GREEN, 21-50 YELLOW, >50 RED" >> "$SUMMARY_FILE"
 echo "================================================================" >> "$SUMMARY_FILE"
 
+# Step 7: Generate JSON summary
+echo ">>> Generating metrics-summary.json..."
+python3 -c "
+import json, os, xml.etree.ElementTree as ET
+from datetime import datetime, timezone
+
+def flag_mi(v):
+    return 'RED' if v < 10 else 'YELLOW' if v < 20 else 'GREEN'
+def flag_cc(v):
+    return 'RED' if v > 25 else 'YELLOW' if v > 10 else 'GREEN'
+def flag_coupling(v):
+    return 'RED' if v > 40 else 'YELLOW' if v > 9 else 'GREEN'
+def flag_dit(v):
+    return 'RED' if v >= 6 else 'YELLOW' if v >= 5 else 'GREEN'
+
+projects = []
+for xml_file in sorted([f for f in os.listdir('/output') if f.endswith('.Metrics.xml')]):
+    proj_name = xml_file.replace('.Metrics.xml', '')
+    tree = ET.parse(os.path.join('/output', xml_file))
+    root = tree.getroot()
+    types = []
+    for nt in root.iter('NamedType'):
+        name = nt.get('Name', 'unknown')
+        metrics = {}
+        for m in nt.findall('./Metrics/Metric'):
+            metrics[m.get('Name')] = int(m.get('Value', '0'))
+        methods = []
+        for method in nt.findall('Method'):
+            mm = {}
+            for m in method.findall('./Metrics/Metric'):
+                mm[m.get('Name')] = int(m.get('Value', '0'))
+            methods.append({
+                'name': method.get('Name', 'unknown'),
+                'maintainabilityIndex': {'value': mm.get('MaintainabilityIndex', 0), 'flag': flag_mi(mm.get('MaintainabilityIndex', 0))},
+                'cyclomaticComplexity': {'value': mm.get('CyclomaticComplexity', 0), 'flag': flag_cc(mm.get('CyclomaticComplexity', 0))},
+                'sourceLines': mm.get('SourceLines', 0),
+                'executableLines': mm.get('ExecutableLines', 0)
+            })
+        types.append({
+            'name': name,
+            'maintainabilityIndex': {'value': metrics.get('MaintainabilityIndex', 0), 'flag': flag_mi(metrics.get('MaintainabilityIndex', 0))},
+            'cyclomaticComplexity': {'value': metrics.get('CyclomaticComplexity', 0), 'flag': flag_cc(metrics.get('CyclomaticComplexity', 0))},
+            'classCoupling': {'value': metrics.get('ClassCoupling', 0), 'flag': flag_coupling(metrics.get('ClassCoupling', 0))},
+            'depthOfInheritance': {'value': metrics.get('DepthOfInheritance', 0), 'flag': flag_dit(metrics.get('DepthOfInheritance', 0))},
+            'sourceLines': metrics.get('SourceLines', 0),
+            'executableLines': metrics.get('ExecutableLines', 0),
+            'methods': methods
+        })
+    projects.append({'name': proj_name, 'types': types})
+
+summary = {
+    'status': 'success' if $METRICS_FAILED == 0 else 'failure',
+    'timestamp': datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ'),
+    'storyId': os.environ.get('STORY_ID', ''),
+    'projects': projects
+}
+with open('/output/metrics-summary.json', 'w') as f:
+    json.dump(summary, f, indent=2)
+print('metrics-summary.json generated.')
+" 2>&1 || echo "Warning: Failed to generate metrics-summary.json"
+
 echo ""
 cat "$SUMMARY_FILE"
 
@@ -217,38 +241,45 @@ fi
 
 echo ""
 echo "=== Code Metrics Analysis Complete ==="
-METRICS_EOF
+"""
 
-chmod +x "${METRICS_OUTPUT_DIR}/metrics-script.sh"
 
-# Run metrics in Docker container with output capture
-echo -e "${YELLOW}Running code metrics in Docker container...${NC}"
-echo ""
+def main():
+    if len(sys.argv) < 2:
+        du.cprint("Error: STORY-ID is required", "RED")
+        print("Usage: ./docker-metrics.py <STORY-ID>")
+        print("Example: ./docker-metrics.py CPD-LC-001-001")
+        sys.exit(1)
 
-docker run --rm \
-    -v "${WORKSPACE_ROOT}:/workspace" \
-    -v "${WORKSPACE_ROOT}/${METRICS_OUTPUT_DIR}:/output" \
-    -v "${HOME}/.nuget/packages:/root/.nuget/packages" \
-    -w /workspace \
-    "${IMAGE_NAME}" \
-    bash /output/metrics-script.sh 2>&1 | tee "${METRICS_OUTPUT_DIR}/metrics.log"
+    story_id = sys.argv[1]
+    timestamp = du.generate_timestamp()
+    output_dir = Path("MetricsResults") / story_id / timestamp
+    output_dir.mkdir(parents=True, exist_ok=True)
+    ws = du.get_workspace_root()
 
-# Capture exit code
-METRICS_EXIT_CODE=${PIPESTATUS[0]}
+    du.print_banner("Docker Metrics Script", timestamp, str(output_dir))
+    print(f"Story ID: {story_id}")
+    print()
 
-# Print summary
-echo ""
-if [ $METRICS_EXIT_CODE -eq 0 ]; then
-    echo -e "${GREEN}✓ Metrics analysis succeeded${NC}"
-    echo -e "${GREEN}Results: ${METRICS_OUTPUT_DIR}/${NC}"
-else
-    echo -e "${RED}✗ Metrics analysis failed (exit code: ${METRICS_EXIT_CODE})${NC}"
-    echo -e "${RED}Logs: ${METRICS_OUTPUT_DIR}/metrics.log${NC}"
-fi
+    du.build_docker_image("themepark-dotnet-metrics", "Automations/Dockerfile.metrics")
 
-echo ""
-echo "Output location: ${METRICS_OUTPUT_DIR}"
-echo "Metrics XML files: ${METRICS_OUTPUT_DIR}/*.Metrics.xml"
-echo "Summary: ${METRICS_OUTPUT_DIR}/metrics-summary.txt"
+    du.write_inner_script(output_dir, "metrics-script.sh", METRICS_SCRIPT)
 
-exit $METRICS_EXIT_CODE
+    du.cprint("Running code metrics in Docker container...", "YELLOW")
+    print()
+
+    exit_code = du.run_docker_container(
+        "themepark-dotnet-metrics", ws, output_dir,
+        "/output/metrics-script.sh", "metrics.log",
+        env_vars={"STORY_ID": story_id},
+    )
+
+    du.print_result(exit_code == 0, str(output_dir), "metrics.log")
+    print(f"Metrics XML files: {output_dir}/*.Metrics.xml")
+    print(f"Summary: {output_dir}/metrics-summary.txt")
+    print(f"JSON: {output_dir}/metrics-summary.json")
+    sys.exit(exit_code)
+
+
+if __name__ == "__main__":
+    main()

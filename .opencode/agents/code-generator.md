@@ -27,6 +27,15 @@ Given a user story ID, find the corresponding test files in the workspace, imple
 - No new dependencies unless the story requires them
 - Reduce user interaction to the absolute minimum
 
+# Docker-Only Rule
+
+ALL build, test, restore, and metrics operations MUST use the dedicated Docker scripts:
+- Build: `./Automations/docker-build.py` — NEVER run `dotnet build` or `dotnet restore` directly
+- Test: `./Automations/docker-test.py` — NEVER run `dotnet test` directly
+- Metrics: `./Automations/docker-metrics.py <STORY-ID>` — NEVER run `dotnet msbuild` directly
+
+Do not use any raw dotnet CLI commands for build, test, or restore operations. All compilation and execution happens inside Docker containers. Read results from the JSON summaries in the output directories.
+
 # Input
 
 The user provides a story ID (e.g., `CPD-LC-001-001`). From this you derive:
@@ -97,33 +106,44 @@ Also check and update:
 Run the Docker build script to validate compilation:
 
 ```bash
-./docker-build.sh
+./Automations/docker-build.py
 ```
 
-- Results are automatically saved to `BuildResults/<timestamp>/build.log`
+- Results are automatically saved to `BuildResults/<timestamp>/`
+  - `build.log` — full build output
+  - `build-summary.json` — structured JSON summary
+- Read `build-summary.json` to check status. JSON schema:
+  ```json
+  {"status": "success|failure", "projects": [{"name": "...", "status": "...", "warnings": 0, "errors": 0, "errorMessages": []}], "totalWarnings": 0, "totalErrors": 0}
+  ```
 - **On success**: proceed to test validation
 - **On failure**: 
-  1. Read the latest build log from `BuildResults/` (find the most recent timestamped directory)
-  2. Analyze compilation errors
+  1. Read `build-summary.json` from the latest `BuildResults/` timestamped directory
+  2. Check `errorMessages` per project to identify compilation errors
   3. Fix the issues (missing namespaces, wrong references, typos, missing project references)
-  4. Re-run `./docker-build.sh`
-  6. Repeat until build passes (max 5 attempts)
+  4. Re-run `./Automations/docker-build.py`
+  5. Repeat until build passes (max 5 attempts)
 
 ## 5. Test Validation (Autonomous)
 Run the Docker test script to validate tests pass:
 
 ```bash
-./docker-test.sh
+./Automations/docker-test.py
 ```
 
 - Results are automatically saved to `TestResults/<timestamp>/`
   - `test.log` — full test output
+  - `test-summary.json` — structured JSON summary
   - `TestResults/` — TRX files per test project
   - `Coverage/` — code coverage reports (HTML + Cobertura)
+- Read `test-summary.json` to check status. JSON schema:
+  ```json
+  {"status": "success|failure", "projects": [{"name": "...", "total": 0, "passed": 0, "failed": 0, "skipped": 0}], "totalTests": 0, "totalPassed": 0, "totalFailed": 0, "totalSkipped": 0}
+  ```
 - **On success**: report results
 - **On failure**:
-  1. Read the latest test log from `TestResults/` (find the most recent timestamped directory)
-  2. Analyze test failures from the log
+  1. Read `test-summary.json` from the latest `TestResults/` timestamped directory
+  2. Identify which projects have `failed > 0`, then read `test.log` for failure details
   3. Return to Step 3 with targeted fixes for failing tests only
   4. Rebuild, retest
   5. Repeat until all tests pass (max 5 attempts)

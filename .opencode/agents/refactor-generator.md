@@ -27,6 +27,15 @@ Given a user story ID, run Microsoft Code Metrics against the implemented code, 
 - Do not modify test files — only refactor production code
 - Reduce user interaction to the absolute minimum
 
+# Docker-Only Rule
+
+ALL build, test, restore, and metrics operations MUST use the dedicated Docker scripts:
+- Build: `./Automations/docker-build.py` — NEVER run `dotnet build` or `dotnet restore` directly
+- Test: `./Automations/docker-test.py` — NEVER run `dotnet test` directly
+- Metrics: `./Automations/docker-metrics.py <STORY-ID>` — NEVER run `dotnet msbuild` directly
+
+Do not use any raw dotnet CLI commands for build, test, or restore operations. All compilation and execution happens inside Docker containers. Read results from the JSON summaries in the output directories.
+
 # Input
 
 The user provides a story ID (e.g., `CPD-LC-001-001`). From this you derive:
@@ -59,16 +68,18 @@ Priority order: Critical maintainability first, then cyclomatic complexity, then
 Execute the Docker metrics script:
 
 ```bash
-./docker-metrics.sh <STORY-ID>
+./Automations/docker-metrics.py <STORY-ID>
 ```
 
 - Results are saved to `MetricsResults/<STORY-ID>/<timestamp>/`
-- Read `metrics-summary.txt` for a quick overview of violations
-- Read individual `*.Metrics.xml` files for detailed per-method and per-type metrics
+  - `metrics-summary.json` — structured JSON with per-type/per-method metrics and RED/YELLOW/GREEN flags
+  - `metrics-summary.txt` — human-readable overview
+  - `*.Metrics.xml` — raw XML per project
+- Read `metrics-summary.json` for structured analysis. Check each type's `flag` fields for violations.
 - Record the timestamp folder path as the **baseline**
 
 ## 3. Analyze Violations
-- Parse the metrics results and identify all violations against the thresholds above
+- Parse `metrics-summary.json` and identify all violations against the thresholds above
 - Filter to only code related to the user story (ignore metrics from unrelated code)
 - Create a prioritized list of violations to address
 - If no violations are found, report clean metrics and stop
@@ -92,18 +103,19 @@ Constraints:
 For each planned refactoring:
 
 1. Apply the code change to the implementation file
-2. Run `./docker-build.sh` to verify compilation
-   - **On failure**: read latest `BuildResults/` log, fix the issue, retry (max 3 attempts per change)
-3. Run `./docker-test.sh` to verify all tests still pass
+2. Run `./Automations/docker-build.py` to verify compilation
+   - Read `build-summary.json` from latest `BuildResults/` directory to check status
+   - **On failure**: check `errorMessages` per project, fix the issue, retry (max 3 attempts per change)
+3. Run `./Automations/docker-test.py` to verify all tests still pass
+   - Read `test-summary.json` from latest `TestResults/` directory to check status
    - **On failure**: revert the change and try an alternative refactoring approach
-   - Read latest `TestResults/` log to understand what broke
 4. Move to the next violation
 
 ## 6. Run Final Metrics (After)
 Execute the metrics script again:
 
 ```bash
-./docker-metrics.sh <STORY-ID>
+./Automations/docker-metrics.py <STORY-ID>
 ```
 
 A new timestamped folder is created under `MetricsResults/<STORY-ID>/`. The before/after comparison uses the two timestamp folders.
