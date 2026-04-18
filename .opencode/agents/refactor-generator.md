@@ -4,7 +4,7 @@ temperature: 1.0
 top_p: 0.1
 description: "Completes the TDD cycle by running Microsoft Code Metrics, analyzing violations, executing targeted refactoring, and storing before/after comparisons per user story."
 color: "#9B59B6"
-mode: primary
+mode: all
 permissions:
   edit: "ask"
   bash: "ask"
