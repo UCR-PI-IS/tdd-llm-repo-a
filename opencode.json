@@ -1,6 +1,28 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "mcp": {},
+  "agent": {
+    "intent-generator": {
+      "model": "azure-foundry-base-models/Kimi-K2.5",
+      "temperature": 1.0,
+      "top_p": 0.1
+    },
+    "test-generator": {
+      "model": "azure-foundry-base-models/Kimi-K2.5",
+      "temperature": 1.0,
+      "top_p": 0.1
+    },
+    "code-generator": {
+      "model": "azure-foundry-base-models/Kimi-K2.5",
+      "temperature": 1.0,
+      "top_p": 0.1
+    },
+    "refactor-generator": {
+      "model": "azure-foundry-base-models/Kimi-K2.5",
+      "temperature": 1.0,
+      "top_p": 0.1
+    }
+  },
   "provider": {
     "azure-cognitive-services": {
       "options": {
