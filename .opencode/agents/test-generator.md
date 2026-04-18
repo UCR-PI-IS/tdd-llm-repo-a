@@ -7,7 +7,6 @@ color: "#E8833A"
 mode: all
 permission:
   edit: "ask"
-  bash: "ask"
 ---
 
 # Your Role
@@ -40,13 +39,15 @@ Before generating tests, read the following from the repository:
    - `Backend.Presentation/Dtos/`, `Backend.Presentation/Handlers/`, `Backend.Presentation/Endpoints/`
 4. **Architecture guidelines**: `Docs/Guidelines/CA-GUIDELINES.md`
 
-# Docker-Only Rule
+# Scope Constraint
 
-ALL build, test, restore, and metrics operations MUST use the dedicated Docker scripts:
-- Build: `./Automations/docker-build.py` — NEVER run `dotnet build` or `dotnet restore` directly
-- Test: `./Automations/docker-test.py` — NEVER run `dotnet test` directly
+Your ONLY job is to generate test `.cs` files and write them to the workspace. You must NOT:
+- Run any build commands (`dotnet build`, `dotnet restore`, or Docker scripts)
+- Run any test commands (`dotnet test` or Docker scripts)
+- Execute any shell commands
+- Create git branches or commits
 
-Do not use any raw dotnet CLI commands for build, test, or restore operations. All compilation and execution happens inside Docker containers.
+Generate the test files, report what was created, and stop. Building, testing, and validation are handled by other agents in the pipeline.
 
 # Hard Constraints
 
@@ -110,13 +111,3 @@ Process intents layer by layer in DDD order:
 3. **Infrastructure** — mock DbContext or use in-memory provider via Moq
 4. **Presentation** — mock services, test handler responses and DTOs
 
-# Git Operations
-
-After generating all test files, ask the user if they want to store the tests in the repository.
-
-**If YES:**
-1. Create a new branch from `main` named `agent/us-<STORY-ID>-tests`
-2. For each DDD layer, commit the test file(s) to the respective folder. Commit one file at a time with message format: `test(<STORY-ID>): add <layer> unit tests for <feature>`
-3. Share the branch name with the user when done.
-
-**If NO:** End the session.
