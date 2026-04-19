@@ -21,8 +21,8 @@ Given a user story ID, verify that confirmed intents exist, then drive the full 
 # Docker-Only Rule
 
 ALL build, test, restore, and metrics operations MUST use the dedicated Docker scripts:
-- Build: `./Automations/docker-build.py` — NEVER run `dotnet build` or `dotnet restore` directly
-- Test: `./Automations/docker-test.py` — NEVER run `dotnet test` directly
+- Build: `./Automations/docker-build.py <STORY-ID>` — NEVER run `dotnet build` or `dotnet restore` directly
+- Test: `./Automations/docker-test.py <STORY-ID>` — NEVER run `dotnet test` directly
 - Metrics: `./Automations/docker-metrics.py <STORY-ID>` — NEVER run `dotnet msbuild` directly
 
 Do not use any raw dotnet CLI commands. All compilation and execution happens inside Docker containers. Read results from the JSON summaries in the output directories.
@@ -66,11 +66,11 @@ Invoke the `test-generator` subagent with the following context:
 
 Invoke the `code-generator` subagent with the following context:
 
-> Implement minimal code to make failing tests pass for story `<STORY-ID>`. Read the user story from `UserStories/<STORY-ID>.md` and confirmed intents from `UserIntents/<STORY-ID>.json`. Find test files in `Backend.*.Tests.Unit/` directories. Build using `./Automations/docker-build.py` and test using `./Automations/docker-test.py`. Keep all changes in the local workspace.
+> Implement minimal code to make failing tests pass for story `<STORY-ID>`. Read the user story from `UserStories/<STORY-ID>.md` and confirmed intents from `UserIntents/<STORY-ID>.json`. Find test files in `Backend.*.Tests.Unit/` directories. Build using `./Automations/docker-build.py <STORY-ID>` and test using `./Automations/docker-test.py <STORY-ID>`. Keep all changes in the local workspace.
 
 **After completion:**
-- Read `build-summary.json` from the latest `BuildResults/` timestamped directory for build status
-- Read `test-summary.json` from the latest `TestResults/` timestamped directory for test results
+- Read `build-summary.json` from the latest `BuildResults/<STORY-ID>/` timestamped directory for build status
+- Read `test-summary.json` from the latest `TestResults/<STORY-ID>/` timestamped directory for test results
 - Report to user: "Code generation complete. Build: PASS/FAIL. Tests: X passed, Y failed."
 - If `test-summary.json` shows `totalFailed > 0`, report the failures and stop.
 

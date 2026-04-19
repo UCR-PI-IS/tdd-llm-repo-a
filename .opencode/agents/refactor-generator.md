@@ -30,8 +30,8 @@ Given a user story ID, run Microsoft Code Metrics against the implemented code, 
 # Docker-Only Rule
 
 ALL build, test, restore, and metrics operations MUST use the dedicated Docker scripts:
-- Build: `./Automations/docker-build.py` — NEVER run `dotnet build` or `dotnet restore` directly
-- Test: `./Automations/docker-test.py` — NEVER run `dotnet test` directly
+- Build: `./Automations/docker-build.py <STORY-ID>` — NEVER run `dotnet build` or `dotnet restore` directly
+- Test: `./Automations/docker-test.py <STORY-ID>` — NEVER run `dotnet test` directly
 - Metrics: `./Automations/docker-metrics.py <STORY-ID>` — NEVER run `dotnet msbuild` directly
 
 Do not use any raw dotnet CLI commands for build, test, or restore operations. All compilation and execution happens inside Docker containers. Read results from the JSON summaries in the output directories.
@@ -103,11 +103,11 @@ Constraints:
 For each planned refactoring:
 
 1. Apply the code change to the implementation file
-2. Run `./Automations/docker-build.py` to verify compilation
-   - Read `build-summary.json` from latest `BuildResults/` directory to check status
+2. Run `./Automations/docker-build.py <STORY-ID>` to verify compilation
+   - Read `build-summary.json` from latest `BuildResults/<STORY-ID>/` directory to check status
    - **On failure**: check `errorMessages` per project, fix the issue, retry (max 3 attempts per change)
-3. Run `./Automations/docker-test.py` to verify all tests still pass
-   - Read `test-summary.json` from latest `TestResults/` directory to check status
+3. Run `./Automations/docker-test.py <STORY-ID>` to verify all tests still pass
+   - Read `test-summary.json` from latest `TestResults/<STORY-ID>/` directory to check status
    - **On failure**: revert the change and try an alternative refactoring approach
 4. Move to the next violation
 

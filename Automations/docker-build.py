@@ -2,7 +2,8 @@
 """Docker Build Script for Theme Park Solution.
 
 Runs build in an ephemeral Docker container with timestamped output directories.
-Usage: ./docker-build.py
+Usage: ./docker-build.py <STORY-ID>
+Example: ./docker-build.py CPD-LC-001-001
 """
 
 import json
@@ -39,7 +40,7 @@ echo "=== Build Complete ==="
 """
 
 
-def parse_build_log(log_path: Path, exit_code: int, timestamp: str) -> dict:
+def parse_build_log(log_path: Path, exit_code: int, timestamp: str, story_id: str = "") -> dict:
     log = log_path.read_text()
     sections = re.split(r"Building: (\./[^\n]+)", log)
     projects = []
@@ -72,6 +73,7 @@ def parse_build_log(log_path: Path, exit_code: int, timestamp: str) -> dict:
     return {
         "status": "failure" if exit_code != 0 or total_errors > 0 else "success",
         "timestamp": timestamp,
+        "storyId": story_id,
         "projects": projects,
         "totalWarnings": total_warnings,
         "totalErrors": total_errors,
@@ -79,12 +81,21 @@ def parse_build_log(log_path: Path, exit_code: int, timestamp: str) -> dict:
 
 
 def main():
+    if len(sys.argv) < 2:
+        du.cprint("Error: STORY-ID is required", "RED")
+        print("Usage: ./Automations/docker-build.py <STORY-ID>")
+        print("Example: ./Automations/docker-build.py CPD-LC-001-001")
+        sys.exit(1)
+
+    story_id = sys.argv[1]
     timestamp = du.generate_timestamp()
-    output_dir = Path("BuildResults") / timestamp
+    output_dir = Path("BuildResults") / story_id / timestamp
     output_dir.mkdir(parents=True, exist_ok=True)
     ws = du.get_workspace_root()
 
     du.print_banner("Docker Build Script", timestamp, str(output_dir))
+    print(f"Story ID: {story_id}")
+    print()
     du.build_docker_image("themepark-dotnet-sdk", "Automations/Dockerfile.build")
 
     du.write_inner_script(output_dir, "build-script.sh", BUILD_SCRIPT)
@@ -97,7 +108,7 @@ def main():
         "/output/build-script.sh", "build.log",
     )
 
-    summary = parse_build_log(ws / output_dir / "build.log", exit_code, timestamp)
+    summary = parse_build_log(ws / output_dir / "build.log", exit_code, timestamp, story_id)
     (ws / output_dir / "build-summary.json").write_text(json.dumps(summary, indent=2))
 
     du.print_result(exit_code == 0, str(output_dir), "build.log")

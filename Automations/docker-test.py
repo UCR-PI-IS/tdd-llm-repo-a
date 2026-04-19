@@ -2,7 +2,8 @@
 """Docker Test Script for Theme Park Solution.
 
 Runs tests with coverage in an ephemeral Docker container with timestamped output directories.
-Usage: ./docker-test.py
+Usage: ./docker-test.py <STORY-ID>
+Example: ./docker-test.py CPD-LC-001-001
 """
 
 import json
@@ -96,7 +97,7 @@ echo "=== Test Complete ==="
 TRX_NS = {"t": "http://microsoft.com/schemas/VisualStudio/TeamTest/2010"}
 
 
-def parse_test_results(output_dir: Path, exit_code: int, timestamp: str) -> dict:
+def parse_test_results(output_dir: Path, exit_code: int, timestamp: str, story_id: str = "") -> dict:
     trx_base = output_dir / "TestResults"
     projects = []
     total_tests = 0
@@ -151,16 +152,26 @@ def parse_test_results(output_dir: Path, exit_code: int, timestamp: str) -> dict
         "totalPassed": total_passed,
         "totalFailed": total_failed,
         "totalSkipped": total_skipped,
+        "storyId": story_id,
     }
 
 
 def main():
+    if len(sys.argv) < 2:
+        du.cprint("Error: STORY-ID is required", "RED")
+        print("Usage: ./Automations/docker-test.py <STORY-ID>")
+        print("Example: ./Automations/docker-test.py CPD-LC-001-001")
+        sys.exit(1)
+
+    story_id = sys.argv[1]
     timestamp = du.generate_timestamp()
-    output_dir = Path("TestResults") / timestamp
+    output_dir = Path("TestResults") / story_id / timestamp
     output_dir.mkdir(parents=True, exist_ok=True)
     ws = du.get_workspace_root()
 
     du.print_banner("Docker Test Script", timestamp, str(output_dir))
+    print(f"Story ID: {story_id}")
+    print()
     du.build_docker_image("themepark-dotnet-sdk", "Automations/Dockerfile.build")
 
     du.write_inner_script(output_dir, "test-script.sh", TEST_SCRIPT)
@@ -173,7 +184,7 @@ def main():
         "/output/test-script.sh", "test.log",
     )
 
-    summary = parse_test_results(ws / output_dir, exit_code, timestamp)
+    summary = parse_test_results(ws / output_dir, exit_code, timestamp, story_id)
     (ws / output_dir / "test-summary.json").write_text(json.dumps(summary, indent=2))
 
     du.print_result(exit_code == 0, str(output_dir), "test.log")
