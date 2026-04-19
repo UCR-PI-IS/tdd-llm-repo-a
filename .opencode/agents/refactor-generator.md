@@ -78,14 +78,22 @@ Execute the Docker metrics script:
 - Read `metrics-summary.json` for structured analysis. Check each type's `flag` fields for violations.
 - Record the timestamp folder path as the **baseline**
 
-## 3. Analyze Violations
-- Parse `metrics-summary.json` and identify all violations against the thresholds above
-- Filter to only code related to the user story (ignore metrics from unrelated code)
-- Create a prioritized list of violations to address
-- If no violations are found, report clean metrics and stop
+## 3. Iterative Refactoring Loop
 
-## 4. Plan Refactoring
-For each violation, plan a targeted refactoring:
+**Target**: ALL metrics flags GREEN for code related to this user story.
+**Maximum iterations**: 10 (stop and report if target not reached).
+
+### For each iteration (1 through 10):
+
+#### 3a. Analyze Violations
+- Parse the latest `metrics-summary.json`
+- Filter to only types/methods related to the user story (ignore unrelated code)
+- Check if ALL flags are GREEN for the story's code
+- **If all GREEN**: target achieved — go to Step 4 (Report)
+- **If violations remain**: continue to 3b
+
+#### 3b. Plan Refactoring
+Pick the highest-priority violation and plan a targeted refactoring:
 
 | Violation | Refactoring Technique |
 |-----------|----------------------|
@@ -94,14 +102,14 @@ For each violation, plan a targeted refactoring:
 | High Class Coupling | Extract interfaces, apply dependency injection, break large classes |
 | Deep Inheritance | Flatten hierarchy, use composition, extract shared behavior to services |
 
+Priority: RED before YELLOW. Within same severity: MI first, then CC, then Coupling, then DIT.
+
 Constraints:
 - Scope changes to files for this user story only
 - Maintain all DDD layer boundaries
 - Do not introduce new dependencies unless absolutely necessary
 
-## 5. Execute Refactoring
-For each planned refactoring:
-
+#### 3c. Execute Refactoring
 1. Apply the code change to the implementation file
 2. Run `./Automations/docker-build.py <STORY-ID>` to verify compilation
    - Read `build-summary.json` from latest `BuildResults/<STORY-ID>/` directory to check status
@@ -109,32 +117,41 @@ For each planned refactoring:
 3. Run `./Automations/docker-test.py <STORY-ID>` to verify all tests still pass
    - Read `test-summary.json` from latest `TestResults/<STORY-ID>/` directory to check status
    - **On failure**: revert the change and try an alternative refactoring approach
-4. Move to the next violation
 
-## 6. Run Final Metrics (After)
-Execute the metrics script again:
-
+#### 3d. Re-run Metrics
 ```bash
 ./Automations/docker-metrics.py <STORY-ID>
 ```
+A new timestamped folder is created. Read the new `metrics-summary.json` and loop back to 3a.
 
-A new timestamped folder is created under `MetricsResults/<STORY-ID>/`. The before/after comparison uses the two timestamp folders.
+#### 3e. Iteration Tracking
+After each iteration, report a one-line status:
+```
+Iteration X/10: Y violations remaining (Z RED, W YELLOW)
+```
 
-## 7. Report Results
-Display a comparison table:
+### Stop Conditions
+- **Success**: All flags GREEN for the story's code — proceed to Step 4
+- **Max iterations**: 10 iterations reached without all-GREEN — proceed to Step 4 with remaining violations noted
+- **Stuck**: If the same violation cannot be improved after 3 consecutive attempts, skip it and move to the next
+
+## 4. Report Results
+Display a comparison table (baseline vs final):
 
 ```
-Metric              | Before | After  | Change
---------------------|--------|--------|--------
-Maintainability Idx | 35     | 52     | +17
-Cyclomatic Complex  | 14     | 8      | -6
-Class Coupling      | 12     | 7      | -5
+Metric              | Baseline | Final  | Change | Iterations
+--------------------|----------|--------|--------|----------
+Maintainability Idx | 35       | 52     | +17    | 10
+Cyclomatic Complex  | 14       | 8      | -6     | 10
+Class Coupling      | 12       | 7      | -5     | 10
+Target achieved     |          |        |        | YES/NO
 ```
 
 Also report:
+- Total iterations performed
 - Files modified during refactoring
 - Any remaining violations that could not be addressed
-- Total refactoring iterations performed
+- Whether all-GREEN target was achieved
 
 # Reading Metrics Results
 
@@ -162,6 +179,7 @@ The `*.Metrics.xml` files contain hierarchical metrics at assembly, namespace, t
 - Never refactor code outside the user story scope
 - All tests must pass after every refactoring step
 - If a refactoring breaks tests, revert immediately and try an alternative
-- If 3 consecutive refactoring attempts fail for the same violation, skip it and report to the user
+- If 3 consecutive attempts fail for the same violation, skip it and move to the next
 - Do not add comments, documentation, or annotations beyond what the refactoring requires
-- Maximum 5 total build/test retry cycles across all refactorings before stopping
+- Maximum 10 refactoring iterations total; stop and report if all-GREEN target not reached
+- Maximum 3 build/test retries per individual refactoring change
