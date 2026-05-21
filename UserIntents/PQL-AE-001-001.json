@@ -1,0 +1,205 @@
+{
+  "storyId": "PQL-AE-001-001",
+  "source": "UserStories/PQL-AE-001-001.md",
+  "generatedAt": "2026-05-21T00:00:00Z",
+  "intents": [
+    {
+      "id": "Domain-001",
+      "layer": "Domain",
+      "targetClass": "Building",
+      "methodUnderTest": "Constructor",
+      "scenario": "Verify that a Building entity is correctly instantiated with all valid properties",
+      "assertionCode": "var building = new Building(name, color, height, length, width, x, y, z, areaId);\nAssert.That(building.Name, Is.EqualTo(name));\nAssert.That(building.Color, Is.EqualTo(color));\nAssert.That(building.Height, Is.EqualTo(height));\nAssert.That(building.Length, Is.EqualTo(length));\nAssert.That(building.Width, Is.EqualTo(width));\nAssert.That(building.X, Is.EqualTo(x));\nAssert.That(building.Y, Is.EqualTo(y));\nAssert.That(building.Z, Is.EqualTo(z));\nAssert.That(building.AreaId, Is.EqualTo(areaId));",
+      "acceptanceCriteria": "Scenario 1 - Successful adding of the new building",
+      "testType": "Positive",
+      "status": "confirmed"
+    },
+    {
+      "id": "Domain-002",
+      "layer": "Domain",
+      "targetClass": "Building",
+      "methodUnderTest": "Constructor validation (null/empty name)",
+      "scenario": "Verify that creating a Building with null or empty name throws ArgumentException",
+      "assertionCode": "var ex = Assert.Throws<ArgumentException>(() => \n    new Building(name!, color, height, length, width, x, y, z, areaId));\nAssert.That(ex.ParamName, Is.EqualTo(\"name\"));",
+      "acceptanceCriteria": "Scenario 2 - Prevent addition with incorrect property format",
+      "testType": "Negative",
+      "status": "confirmed"
+    },
+    {
+      "id": "Domain-003",
+      "layer": "Domain",
+      "targetClass": "Building",
+      "methodUnderTest": "Constructor validation (empty string name)",
+      "scenario": "Verify that creating a Building with empty string name throws ArgumentException",
+      "assertionCode": "var ex = Assert.Throws<ArgumentException>(() => \n    new Building(name, color, height, length, width, x, y, z, areaId));\nAssert.That(ex.ParamName, Is.EqualTo(\"name\"));",
+      "acceptanceCriteria": "Scenario 2 - Prevent addition with incorrect property format",
+      "testType": "Negative",
+      "status": "confirmed"
+    },
+    {
+      "id": "Domain-004",
+      "layer": "Domain",
+      "targetClass": "Building",
+      "methodUnderTest": "Constructor validation (null/empty color)",
+      "scenario": "Verify that creating a Building with null or empty color throws ArgumentException",
+      "assertionCode": "var ex = Assert.Throws<ArgumentException>(() => \n    new Building(name, color!, height, length, width, x, y, z, areaId));\nAssert.That(ex.ParamName, Is.EqualTo(\"color\"));",
+      "acceptanceCriteria": "Scenario 2 - Prevent addition with incorrect property format",
+      "testType": "Negative",
+      "status": "confirmed"
+    },
+    {
+      "id": "Domain-005",
+      "layer": "Domain",
+      "targetClass": "Building",
+      "methodUnderTest": "Constructor validation (zero or negative height)",
+      "scenario": "Verify that creating a Building with zero or negative height throws ArgumentException",
+      "assertionCode": "var ex = Assert.Throws<ArgumentException>(() => \n    new Building(name, color, height, length, width, x, y, z, areaId));\nAssert.That(ex.ParamName, Is.EqualTo(\"height\"));",
+      "acceptanceCriteria": "Scenario 2 - Prevent addition with incorrect property format",
+      "testType": "Negative",
+      "status": "confirmed"
+    },
+    {
+      "id": "Domain-006",
+      "layer": "Domain",
+      "targetClass": "Building",
+      "methodUnderTest": "Constructor validation (zero or negative length)",
+      "scenario": "Verify that creating a Building with zero or negative length throws ArgumentException",
+      "assertionCode": "var ex = Assert.Throws<ArgumentException>(() => \n    new Building(name, color, height, length, width, x, y, z, areaId));\nAssert.That(ex.ParamName, Is.EqualTo(\"length\"));",
+      "acceptanceCriteria": "Scenario 2 - Prevent addition with incorrect property format",
+      "testType": "Negative",
+      "status": "confirmed"
+    },
+    {
+      "id": "Domain-007",
+      "layer": "Domain",
+      "targetClass": "Building",
+      "methodUnderTest": "Constructor validation (zero or negative width)",
+      "scenario": "Verify that creating a Building with zero or negative width throws ArgumentException",
+      "assertionCode": "var ex = Assert.Throws<ArgumentException>(() => \n    new Building(name, color, height, length, width, x, y, z, areaId));\nAssert.That(ex.ParamName, Is.EqualTo(\"width\"));",
+      "acceptanceCriteria": "Scenario 2 - Prevent addition with incorrect property format",
+      "testType": "Negative",
+      "status": "confirmed"
+    },
+    {
+      "id": "Domain-008",
+      "layer": "Domain",
+      "targetClass": "Building",
+      "methodUnderTest": "Constructor validation (invalid areaId)",
+      "scenario": "Verify that creating a Building with zero or negative areaId throws ArgumentException",
+      "assertionCode": "var ex = Assert.Throws<ArgumentException>(() => \n    new Building(name, color, height, length, width, x, y, z, areaId));\nAssert.That(ex.ParamName, Is.EqualTo(\"areaId\"));",
+      "acceptanceCriteria": "Scenario 2 - Prevent addition with incorrect property format",
+      "testType": "Negative",
+      "status": "confirmed"
+    },
+    {
+      "id": "Domain-009",
+      "layer": "Domain",
+      "targetClass": "Building",
+      "methodUnderTest": "Constructor validation (boundary values - minimum valid dimensions)",
+      "scenario": "Verify that a Building can be created with minimum valid positive values for dimensions",
+      "assertionCode": "var building = new Building(name, color, height, length, width, x, y, z, areaId);\nAssert.That(building.Height, Is.EqualTo(height));\nAssert.That(building.Length, Is.EqualTo(length));\nAssert.That(building.Width, Is.EqualTo(width));",
+      "acceptanceCriteria": "Scenario 1 - Successful adding with boundary values",
+      "testType": "Edge case",
+      "status": "confirmed"
+    },
+    {
+      "id": "Application-001",
+      "layer": "Application",
+      "targetClass": "BuildingService",
+      "methodUnderTest": "AddBuildingAsync",
+      "scenario": "Verify that a valid building is successfully added when no duplicate exists",
+      "assertionCode": "var result = await service.AddBuildingAsync(building);\nAssert.That(result, Is.Not.Null);\nAssert.That(result.Name, Is.EqualTo(building.Name));\nmockRepository.Verify(r => r.AddAsync(building), Times.Once);",
+      "acceptanceCriteria": "Scenario 1 - Successful adding of the new building",
+      "testType": "Positive",
+      "status": "confirmed"
+    },
+    {
+      "id": "Application-002",
+      "layer": "Application",
+      "targetClass": "BuildingService",
+      "methodUnderTest": "AddBuildingAsync",
+      "scenario": "Verify that adding a building with duplicate name throws DuplicateBuildingException",
+      "assertionCode": "var ex = Assert.ThrowsAsync<DuplicateBuildingException>(() => \n    service.AddBuildingAsync(building));\nAssert.That(ex.Message, Contains.Substring(\"Building with name 'Engineering Building' already exists\"));\nmockRepository.Verify(r => r.AddAsync(It.IsAny<Building>()), Times.Never);",
+      "acceptanceCriteria": "Scenario 3 - Prevent duplicate building registration",
+      "testType": "Negative",
+      "status": "confirmed"
+    },
+    {
+      "id": "Application-003",
+      "layer": "Application",
+      "targetClass": "BuildingService",
+      "methodUnderTest": "AddBuildingAsync",
+      "scenario": "Verify that adding a building to a non-existent area throws AreaNotFoundException",
+      "assertionCode": "var ex = Assert.ThrowsAsync<AreaNotFoundException>(() => \n    service.AddBuildingAsync(building));\nmockRepository.Verify(r => r.AddAsync(It.IsAny<Building>()), Times.Never);",
+      "acceptanceCriteria": "Scenario 2 - Prevent addition with incorrect property format (invalid area reference)",
+      "testType": "Negative",
+      "status": "confirmed"
+    },
+    {
+      "id": "Infrastructure-001",
+      "layer": "Infrastructure",
+      "targetClass": "SqlBuildingRepository",
+      "methodUnderTest": "AddAsync",
+      "scenario": "Verify that a building is correctly persisted to the database",
+      "assertionCode": "var result = await repository.AddAsync(building);\nAssert.That(result, Is.Not.Null);\nmockDbSet.Verify(d => d.AddAsync(building, It.IsAny<CancellationToken>()), Times.Once);\nmockDbContext.Verify(c => c.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Once);",
+      "acceptanceCriteria": "Scenario 1 - Successful adding of the new building",
+      "testType": "Positive",
+      "status": "confirmed"
+    },
+    {
+      "id": "Infrastructure-002",
+      "layer": "Infrastructure",
+      "targetClass": "SqlBuildingRepository",
+      "methodUnderTest": "ExistsByNameAsync",
+      "scenario": "Verify that checking for existing building by name returns true when building exists",
+      "assertionCode": "var result = await repository.ExistsByNameAsync(buildingName);\nAssert.That(result, Is.True);",
+      "acceptanceCriteria": "Scenario 3 - Prevent duplicate building registration",
+      "testType": "Positive",
+      "status": "confirmed"
+    },
+    {
+      "id": "Infrastructure-003",
+      "layer": "Infrastructure",
+      "targetClass": "SqlBuildingRepository",
+      "methodUnderTest": "ExistsByNameAsync",
+      "scenario": "Verify that checking for existing building by name returns false when building does not exist",
+      "assertionCode": "var result = await repository.ExistsByNameAsync(buildingName);\nAssert.That(result, Is.False);",
+      "acceptanceCriteria": "Scenario 3 - Prevent duplicate building registration",
+      "testType": "Negative",
+      "status": "confirmed"
+    },
+    {
+      "id": "Presentation-001",
+      "layer": "Presentation",
+      "targetClass": "AddBuildingHandler",
+      "methodUnderTest": "HandleAsync",
+      "scenario": "Verify that a valid building creation request returns 201 Created with the building data",
+      "assertionCode": "var result = await AddBuildingHandler.HandleAsync(request, mockService.Object);\nAssert.That(result, Is.TypeOf<Created<AddBuildingResponse>>());\nvar createdResult = (Created<AddBuildingResponse>)result;\nAssert.That(createdResult.Value.Building.Name, Is.EqualTo(request.Name));",
+      "acceptanceCriteria": "Scenario 1 - Successful adding of the new building",
+      "testType": "Positive",
+      "status": "confirmed"
+    },
+    {
+      "id": "Presentation-002",
+      "layer": "Presentation",
+      "targetClass": "AddBuildingHandler",
+      "methodUnderTest": "HandleAsync",
+      "scenario": "Verify that attempting to add a duplicate building returns 409 Conflict with error message",
+      "assertionCode": "var result = await AddBuildingHandler.HandleAsync(request, mockService.Object);\nAssert.That(result, Is.TypeOf<Conflict<string>>());\nvar conflictResult = (Conflict<string>)result;\nAssert.That(conflictResult.Value, Contains.Substring(\"already exists\"));",
+      "acceptanceCriteria": "Scenario 3 - Prevent duplicate building registration",
+      "testType": "Negative",
+      "status": "confirmed"
+    },
+    {
+      "id": "Presentation-003",
+      "layer": "Presentation",
+      "targetClass": "AddBuildingHandler",
+      "methodUnderTest": "HandleAsync",
+      "scenario": "Verify that attempting to add a building with invalid data returns 400 Bad Request with error message",
+      "assertionCode": "var result = await AddBuildingHandler.HandleAsync(request, mockService.Object);\nAssert.That(result, Is.TypeOf<BadRequest<string>>());\nvar badRequestResult = (BadRequest<string>)result;\nAssert.That(badRequestResult.Value, Contains.Substring(\"cannot be empty\"));",
+      "acceptanceCriteria": "Scenario 2 - Prevent addition with incorrect property format",
+      "testType": "Negative",
+      "status": "confirmed"
+    }
+  ]
+}
