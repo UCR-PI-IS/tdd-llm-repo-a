@@ -1,0 +1,293 @@
+{
+  "storyId": "SQL-LS-001-007",
+  "source": "UserStories/SQL-LS-001-007.md",
+  "generatedAt": "2026-05-21T00:00:00Z",
+  "intents": [
+    {
+      "id": "Domain-001",
+      "layer": "Domain",
+      "targetClass": "LearningSpace",
+      "methodUnderTest": "Constructor",
+      "scenario": "Verify that a LearningSpace entity can be created with all valid parameters including auto-generated internal ID",
+      "assertionCode": "// Arrange\nvar type = \"Classroom\";\nvar height = 3.0f;\nvar width = 8.0f;\nvar length = 10.0f;\n\n// Act\nvar learningSpace = new LearningSpace(type, height, width, length);\n\n// Assert\nAssert.That(learningSpace.Type, Is.EqualTo(type));\nAssert.That(learningSpace.Height, Is.EqualTo(height));\nAssert.That(learningSpace.Width, Is.EqualTo(width));\nAssert.That(learningSpace.Length, Is.EqualTo(length));\nAssert.That(learningSpace.LearningSpaceId, Is.GreaterThan(0));",
+      "acceptanceCriteria": "Create a new learning space with all specifications and internal ID",
+      "testType": "Positive",
+      "status": "confirmed"
+    },
+    {
+      "id": "Domain-002",
+      "layer": "Domain",
+      "targetClass": "LearningSpace",
+      "methodUnderTest": "Constructor",
+      "scenario": "Verify that creating a LearningSpace with an invalid type throws ArgumentException",
+      "assertionCode": "// Arrange\nvar invalidType = \"InvalidType\";\nvar height = 3.0f;\nvar width = 8.0f;\nvar length = 10.0f;\n\n// Act & Assert\nvar ex = Assert.Throws<ArgumentException>(() => \n    new LearningSpace(invalidType, height, width, length));\nAssert.That(ex.Message, Does.Contain(\"Type must be Classroom, Auditorium, or Laboratory\"));",
+      "acceptanceCriteria": "Missing required fields when creating a learning space",
+      "testType": "Negative",
+      "status": "confirmed"
+    },
+    {
+      "id": "Domain-003",
+      "layer": "Domain",
+      "targetClass": "LearningSpace",
+      "methodUnderTest": "Constructor",
+      "scenario": "Verify that creating a LearningSpace with zero height throws ArgumentException",
+      "assertionCode": "// Arrange\nvar type = \"Classroom\";\nvar height = 0.0f;\nvar width = 8.0f;\nvar length = 10.0f;\n\n// Act & Assert\nvar ex = Assert.Throws<ArgumentException>(() => \n    new LearningSpace(type, height, width, length));\nAssert.That(ex.Message, Does.Contain(\"Height must be positive and non-zero\"));",
+      "acceptanceCriteria": "Missing required fields when creating a learning space",
+      "testType": "Negative",
+      "status": "confirmed"
+    },
+    {
+      "id": "Domain-004",
+      "layer": "Domain",
+      "targetClass": "LearningSpace",
+      "methodUnderTest": "Constructor",
+      "scenario": "Verify that creating a LearningSpace with zero width throws ArgumentException",
+      "assertionCode": "// Arrange\nvar type = \"Classroom\";\nvar height = 3.0f;\nvar width = 0.0f;\nvar length = 10.0f;\n\n// Act & Assert\nvar ex = Assert.Throws<ArgumentException>(() => \n    new LearningSpace(type, height, width, length));\nAssert.That(ex.Message, Does.Contain(\"Width must be positive and non-zero\"));",
+      "acceptanceCriteria": "Missing required fields when creating a learning space",
+      "testType": "Negative",
+      "status": "confirmed"
+    },
+    {
+      "id": "Domain-005",
+      "layer": "Domain",
+      "targetClass": "LearningSpace",
+      "methodUnderTest": "Constructor",
+      "scenario": "Verify that creating a LearningSpace with zero length throws ArgumentException",
+      "assertionCode": "// Arrange\nvar type = \"Classroom\";\nvar height = 3.0f;\nvar width = 8.0f;\nvar length = 0.0f;\n\n// Act & Assert\nvar ex = Assert.Throws<ArgumentException>(() => \n    new LearningSpace(type, height, width, length));\nAssert.That(ex.Message, Does.Contain(\"Length must be positive and non-zero\"));",
+      "acceptanceCriteria": "Missing required fields when creating a learning space",
+      "testType": "Negative",
+      "status": "confirmed"
+    },
+    {
+      "id": "Domain-006",
+      "layer": "Domain",
+      "targetClass": "LearningSpace",
+      "methodUnderTest": "Constructor",
+      "scenario": "Verify that creating a LearningSpace with negative height throws ArgumentException",
+      "assertionCode": "// Arrange\nvar type = \"Classroom\";\nvar height = -3.0f;\nvar width = 8.0f;\nvar length = 10.0f;\n\n// Act & Assert\nvar ex = Assert.Throws<ArgumentException>(() => \n    new LearningSpace(type, height, width, length));\nAssert.That(ex.Message, Does.Contain(\"Height must be positive and non-zero\"));",
+      "acceptanceCriteria": "Missing required fields when creating a learning space",
+      "testType": "Negative",
+      "status": "confirmed"
+    },
+    {
+      "id": "Domain-007",
+      "layer": "Domain",
+      "targetClass": "LearningSpace",
+      "methodUnderTest": "Constructor",
+      "scenario": "Verify that creating a LearningSpace with negative width throws ArgumentException",
+      "assertionCode": "// Arrange\nvar type = \"Classroom\";\nvar height = 3.0f;\nvar width = -8.0f;\nvar length = 10.0f;\n\n// Act & Assert\nvar ex = Assert.Throws<ArgumentException>(() => \n    new LearningSpace(type, height, width, length));\nAssert.That(ex.Message, Does.Contain(\"Width must be positive and non-zero\"));",
+      "acceptanceCriteria": "Missing required fields when creating a learning space",
+      "testType": "Negative",
+      "status": "confirmed"
+    },
+    {
+      "id": "Domain-008",
+      "layer": "Domain",
+      "targetClass": "LearningSpace",
+      "methodUnderTest": "Constructor",
+      "scenario": "Verify that creating a LearningSpace with negative length throws ArgumentException",
+      "assertionCode": "// Arrange\nvar type = \"Classroom\";\nvar height = 3.0f;\nvar width = 8.0f;\nvar length = -10.0f;\n\n// Act & Assert\nvar ex = Assert.Throws<ArgumentException>(() => \n    new LearningSpace(type, height, width, length));\nAssert.That(ex.Message, Does.Contain(\"Length must be positive and non-zero\"));",
+      "acceptanceCriteria": "Missing required fields when creating a learning space",
+      "testType": "Negative",
+      "status": "confirmed"
+    },
+    {
+      "id": "Domain-009",
+      "layer": "Domain",
+      "targetClass": "LearningSpace",
+      "methodUnderTest": "Constructor",
+      "scenario": "Verify that a LearningSpace can be created with valid type \"Auditorium\"",
+      "assertionCode": "// Arrange\nvar type = \"Auditorium\";\nvar height = 5.0f;\nvar width = 15.0f;\nvar length = 20.0f;\n\n// Act\nvar learningSpace = new LearningSpace(type, height, width, length);\n\n// Assert\nAssert.That(learningSpace.Type, Is.EqualTo(type));\nAssert.That(learningSpace.LearningSpaceId, Is.GreaterThan(0));",
+      "acceptanceCriteria": "Create a new learning space with all specifications and internal ID",
+      "testType": "Positive",
+      "status": "confirmed"
+    },
+    {
+      "id": "Domain-010",
+      "layer": "Domain",
+      "targetClass": "LearningSpace",
+      "methodUnderTest": "Constructor",
+      "scenario": "Verify that a LearningSpace can be created with valid type \"Laboratory\"",
+      "assertionCode": "// Arrange\nvar type = \"Laboratory\";\nvar height = 3.5f;\nvar width = 12.0f;\nvar length = 15.0f;\n\n// Act\nvar learningSpace = new LearningSpace(type, height, width, length);\n\n// Assert\nAssert.That(learningSpace.Type, Is.EqualTo(type));\nAssert.That(learningSpace.LearningSpaceId, Is.GreaterThan(0));",
+      "acceptanceCriteria": "Create a new learning space with all specifications and internal ID",
+      "testType": "Positive",
+      "status": "confirmed"
+    },
+    {
+      "id": "Domain-011",
+      "layer": "Domain",
+      "targetClass": "LearningSpace",
+      "methodUnderTest": "Constructor",
+      "scenario": "Verify that creating a LearningSpace with null type throws ArgumentException",
+      "assertionCode": "// Arrange\nstring? type = null;\nvar height = 3.0f;\nvar width = 8.0f;\nvar length = 10.0f;\n\n// Act & Assert\nvar ex = Assert.Throws<ArgumentException>(() => \n    new LearningSpace(type!, height, width, length));\nAssert.That(ex.Message, Does.Contain(\"Type is required\"));",
+      "acceptanceCriteria": "Missing required fields when creating a learning space",
+      "testType": "Negative",
+      "status": "confirmed"
+    },
+    {
+      "id": "Domain-012",
+      "layer": "Domain",
+      "targetClass": "LearningSpace",
+      "methodUnderTest": "Constructor",
+      "scenario": "Verify that creating a LearningSpace with empty type throws ArgumentException",
+      "assertionCode": "// Arrange\nvar type = \"\";\nvar height = 3.0f;\nvar width = 8.0f;\nvar length = 10.0f;\n\n// Act & Assert\nvar ex = Assert.Throws<ArgumentException>(() => \n    new LearningSpace(type, height, width, length));\nAssert.That(ex.Message, Does.Contain(\"Type is required\"));",
+      "acceptanceCriteria": "Missing required fields when creating a learning space",
+      "testType": "Negative",
+      "status": "confirmed"
+    },
+    {
+      "id": "Application-001",
+      "layer": "Application",
+      "targetClass": "LearningSpaceCreateService",
+      "methodUnderTest": "CreateLearningSpaceAsync",
+      "scenario": "Verify that the service successfully creates a learning space with valid input and returns the created entity with generated ID",
+      "assertionCode": "// Arrange\nvar mockRepository = new Mock<ILearningSpaceRepository>();\nvar service = new LearningSpaceCreateService(mockRepository.Object);\nvar type = \"Classroom\";\nvar height = 3.0f;\nvar width = 8.0f;\nvar length = 10.0f;\n\n// Act\nvar result = await service.CreateLearningSpaceAsync(type, height, width, length);\n\n// Assert\nAssert.That(result, Is.Not.Null);\nAssert.That(result.Type, Is.EqualTo(type));\nAssert.That(result.Height, Is.EqualTo(height));\nAssert.That(result.LearningSpaceId, Is.GreaterThan(0));\nmockRepository.Verify(r => r.AddAsync(It.IsAny<LearningSpace>()), Times.Once);",
+      "acceptanceCriteria": "Create a new learning space with all specifications and internal ID",
+      "testType": "Positive",
+      "status": "confirmed"
+    },
+    {
+      "id": "Application-002",
+      "layer": "Application",
+      "targetClass": "LearningSpaceCreateService",
+      "methodUnderTest": "CreateLearningSpaceAsync",
+      "scenario": "Verify that the service propagates ArgumentException when domain validation fails for invalid type",
+      "assertionCode": "// Arrange\nvar mockRepository = new Mock<ILearningSpaceRepository>();\nvar service = new LearningSpaceCreateService(mockRepository.Object);\nvar invalidType = \"InvalidType\";\nvar height = 3.0f;\nvar width = 8.0f;\nvar length = 10.0f;\n\n// Act & Assert\nvar ex = Assert.ThrowsAsync<ArgumentException>(async () => \n    await service.CreateLearningSpaceAsync(invalidType, height, width, length));\nAssert.That(ex.Message, Does.Contain(\"Type must be Classroom, Auditorium, or Laboratory\"));\nmockRepository.Verify(r => r.AddAsync(It.IsAny<LearningSpace>()), Times.Never);",
+      "acceptanceCriteria": "Missing required fields when creating a learning space",
+      "testType": "Negative",
+      "status": "confirmed"
+    },
+    {
+      "id": "Application-003",
+      "layer": "Application",
+      "targetClass": "LearningSpaceCreateService",
+      "methodUnderTest": "CreateLearningSpaceAsync",
+      "scenario": "Verify that the service propagates ArgumentException when domain validation fails for zero dimension",
+      "assertionCode": "// Arrange\nvar mockRepository = new Mock<ILearningSpaceRepository>();\nvar service = new LearningSpaceCreateService(mockRepository.Object);\nvar type = \"Classroom\";\nvar height = 0.0f;\nvar width = 8.0f;\nvar length = 10.0f;\n\n// Act & Assert\nvar ex = Assert.ThrowsAsync<ArgumentException>(async () => \n    await service.CreateLearningSpaceAsync(type, height, width, length));\nAssert.That(ex.Message, Does.Contain(\"Height must be positive and non-zero\"));\nmockRepository.Verify(r => r.AddAsync(It.IsAny<LearningSpace>()), Times.Never);",
+      "acceptanceCriteria": "Missing required fields when creating a learning space",
+      "testType": "Negative",
+      "status": "confirmed"
+    },
+    {
+      "id": "Application-004",
+      "layer": "Application",
+      "targetClass": "LearningSpaceCreateService",
+      "methodUnderTest": "CreateLearningSpaceAsync",
+      "scenario": "Verify that the service propagates ArgumentException when domain validation fails for negative dimension",
+      "assertionCode": "// Arrange\nvar mockRepository = new Mock<ILearningSpaceRepository>();\nvar service = new LearningSpaceCreateService(mockRepository.Object);\nvar type = \"Classroom\";\nvar height = 3.0f;\nvar width = -8.0f;\nvar length = 10.0f;\n\n// Act & Assert\nvar ex = Assert.ThrowsAsync<ArgumentException>(async () => \n    await service.CreateLearningSpaceAsync(type, height, width, length));\nAssert.That(ex.Message, Does.Contain(\"Width must be positive and non-zero\"));\nmockRepository.Verify(r => r.AddAsync(It.IsAny<LearningSpace>()), Times.Never);",
+      "acceptanceCriteria": "Missing required fields when creating a learning space",
+      "testType": "Negative",
+      "status": "confirmed"
+    },
+    {
+      "id": "Application-005",
+      "layer": "Application",
+      "targetClass": "LearningSpaceCreateService",
+      "methodUnderTest": "CreateLearningSpaceAsync",
+      "scenario": "Verify that the service propagates repository exceptions when database operation fails",
+      "assertionCode": "// Arrange\nvar mockRepository = new Mock<ILearningSpaceRepository>();\nmockRepository.Setup(r => r.AddAsync(It.IsAny<LearningSpace>()))\n    .ThrowsAsync(new InvalidOperationException(\"Database connection failed\"));\nvar service = new LearningSpaceCreateService(mockRepository.Object);\nvar type = \"Classroom\";\nvar height = 3.0f;\nvar width = 8.0f;\nvar length = 10.0f;\n\n// Act & Assert\nvar ex = Assert.ThrowsAsync<InvalidOperationException>(async () => \n    await service.CreateLearningSpaceAsync(type, height, width, length));\nAssert.That(ex.Message, Does.Contain(\"Database connection failed\"));",
+      "acceptanceCriteria": "Create a new learning space with all specifications and internal ID (error handling)",
+      "testType": "Negative",
+      "status": "confirmed"
+    },
+    {
+      "id": "Infrastructure-001",
+      "layer": "Infrastructure",
+      "targetClass": "SqlLearningSpaceRepository",
+      "methodUnderTest": "AddAsync",
+      "scenario": "Verify that the repository successfully adds a learning space to the database and assigns a sequential internal ID",
+      "assertionCode": "// Arrange\nvar options = new DbContextOptionsBuilder<UCRDatabaseContext>()\n    .UseInMemoryDatabase(databaseName: \"TestDb\")\n    .Options;\nusing var context = new UCRDatabaseContext(options);\nvar repository = new SqlLearningSpaceRepository(context);\nvar learningSpace = new LearningSpace(\"Classroom\", 3.0f, 8.0f, 10.0f);\n\n// Act\nawait repository.AddAsync(learningSpace);\n\n// Assert\nvar savedSpace = await context.LearningSpaces.FirstOrDefaultAsync();\nAssert.That(savedSpace, Is.Not.Null);\nAssert.That(savedSpace.LearningSpaceId, Is.GreaterThan(0));\nAssert.That(savedSpace.Type, Is.EqualTo(\"Classroom\"));",
+      "acceptanceCriteria": "Create a new learning space with all specifications and internal ID",
+      "testType": "Positive",
+      "status": "confirmed"
+    },
+    {
+      "id": "Infrastructure-002",
+      "layer": "Infrastructure",
+      "targetClass": "SqlLearningSpaceRepository",
+      "methodUnderTest": "AddAsync",
+      "scenario": "Verify that the repository calls SaveChanges to persist the learning space to the database",
+      "assertionCode": "// Arrange\nvar mockContext = new Mock<UCRDatabaseContext>();\nvar mockDbSet = new Mock<DbSet<LearningSpace>>();\nmockContext.Setup(c => c.LearningSpaces).Returns(mockDbSet.Object);\nmockContext.Setup(c => c.SaveChangesAsync(It.IsAny<CancellationToken>()))\n    .ReturnsAsync(1);\nvar repository = new SqlLearningSpaceRepository(mockContext.Object);\nvar learningSpace = new LearningSpace(\"Classroom\", 3.0f, 8.0f, 10.0f);\n\n// Act\nawait repository.AddAsync(learningSpace);\n\n// Assert\nmockDbSet.Verify(d => d.Add(It.Is<LearningSpace>(ls => \n    ls.Type == \"Classroom\" && ls.Height == 3.0f)), Times.Once);\nmockContext.Verify(c => c.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Once);",
+      "acceptanceCriteria": "Create a new learning space with all specifications and internal ID",
+      "testType": "Positive",
+      "status": "confirmed"
+    },
+    {
+      "id": "Infrastructure-003",
+      "layer": "Infrastructure",
+      "targetClass": "SqlLearningSpaceRepository",
+      "methodUnderTest": "AddAsync",
+      "scenario": "Verify that the repository propagates database exceptions when SaveChanges fails",
+      "assertionCode": "// Arrange\nvar mockContext = new Mock<UCRDatabaseContext>();\nvar mockDbSet = new Mock<DbSet<LearningSpace>>();\nmockContext.Setup(c => c.LearningSpaces).Returns(mockDbSet.Object);\nmockContext.Setup(c => c.SaveChangesAsync(It.IsAny<CancellationToken>()))\n    .ThrowsAsync(new DbUpdateException(\"Database error\"));\nvar repository = new SqlLearningSpaceRepository(mockContext.Object);\nvar learningSpace = new LearningSpace(\"Classroom\", 3.0f, 8.0f, 10.0f);\n\n// Act & Assert\nvar ex = Assert.ThrowsAsync<DbUpdateException>(async () => \n    await repository.AddAsync(learningSpace));\nAssert.That(ex.Message, Does.Contain(\"Database error\"));",
+      "acceptanceCriteria": "Create a new learning space with all specifications and internal ID (error handling)",
+      "testType": "Negative",
+      "status": "confirmed"
+    },
+    {
+      "id": "Infrastructure-004",
+      "layer": "Infrastructure",
+      "targetClass": "SqlLearningSpaceRepository",
+      "methodUnderTest": "AddAsync",
+      "scenario": "Verify that sequential internal IDs are generated correctly when adding multiple learning spaces",
+      "assertionCode": "// Arrange\nvar options = new DbContextOptionsBuilder<UCRDatabaseContext>()\n    .UseInMemoryDatabase(databaseName: \"TestDb_Sequential\")\n    .Options;\nusing var context = new UCRDatabaseContext(options);\nvar repository = new SqlLearningSpaceRepository(context);\nvar space1 = new LearningSpace(\"Classroom\", 3.0f, 8.0f, 10.0f);\nvar space2 = new LearningSpace(\"Laboratory\", 3.5f, 12.0f, 15.0f);\n\n// Act\nawait repository.AddAsync(space1);\nawait repository.AddAsync(space2);\n\n// Assert\nvar spaces = await context.LearningSpaces.OrderBy(ls => ls.LearningSpaceId).ToListAsync();\nAssert.That(spaces.Count, Is.EqualTo(2));\nAssert.That(spaces[1].LearningSpaceId, Is.GreaterThan(spaces[0].LearningSpaceId));",
+      "acceptanceCriteria": "Create a new learning space with all specifications and internal ID",
+      "testType": "Positive",
+      "status": "confirmed"
+    },
+    {
+      "id": "Presentation-001",
+      "layer": "Presentation",
+      "targetClass": "CreateLearningSpaceHandler",
+      "methodUnderTest": "HandleAsync",
+      "scenario": "Verify that the handler successfully creates a learning space and returns 201 Created with the created resource",
+      "assertionCode": "// Arrange\nvar mockService = new Mock<ILearningSpaceCreateService>();\nvar createdSpace = new LearningSpace(\"Classroom\", 3.0f, 8.0f, 10.0f);\nmockService.Setup(s => s.CreateLearningSpaceAsync(\"Classroom\", 3.0f, 8.0f, 10.0f))\n    .ReturnsAsync(createdSpace);\nvar dto = new CreateLearningSpaceDto(\"Classroom\", 3.0f, 8.0f, 10.0f);\n\n// Act\nvar result = await CreateLearningSpaceHandler.HandleAsync(mockService.Object, dto);\n\n// Assert\nAssert.That(result.Result, Is.InstanceOf<Created<LearningSpaceResponse>>());\nvar createdResult = (Created<LearningSpaceResponse>)result.Result;\nAssert.That(createdResult.Value.LearningSpaceId, Is.GreaterThan(0));",
+      "acceptanceCriteria": "Create a new learning space with all specifications and internal ID",
+      "testType": "Positive",
+      "status": "confirmed"
+    },
+    {
+      "id": "Presentation-002",
+      "layer": "Presentation",
+      "targetClass": "CreateLearningSpaceHandler",
+      "methodUnderTest": "HandleAsync",
+      "scenario": "Verify that the handler returns 400 Bad Request when service throws ArgumentException for invalid type",
+      "assertionCode": "// Arrange\nvar mockService = new Mock<ILearningSpaceCreateService>();\nmockService.Setup(s => s.CreateLearningSpaceAsync(\"InvalidType\", 3.0f, 8.0f, 10.0f))\n    .ThrowsAsync(new ArgumentException(\"Type must be Classroom, Auditorium, or Laboratory\"));\nvar dto = new CreateLearningSpaceDto(\"InvalidType\", 3.0f, 8.0f, 10.0f);\n\n// Act\nvar result = await CreateLearningSpaceHandler.HandleAsync(mockService.Object, dto);\n\n// Assert\nAssert.That(result.Result, Is.InstanceOf<BadRequest<string>>());\nvar badRequestResult = (BadRequest<string>)result.Result;\nAssert.That(badRequestResult.Value, Does.Contain(\"Type must be Classroom\"));",
+      "acceptanceCriteria": "Missing required fields when creating a learning space",
+      "testType": "Negative",
+      "status": "confirmed"
+    },
+    {
+      "id": "Presentation-003",
+      "layer": "Presentation",
+      "targetClass": "CreateLearningSpaceHandler",
+      "methodUnderTest": "HandleAsync",
+      "scenario": "Verify that the handler returns 400 Bad Request when service throws ArgumentException for zero dimension",
+      "assertionCode": "// Arrange\nvar mockService = new Mock<ILearningSpaceCreateService>();\nmockService.Setup(s => s.CreateLearningSpaceAsync(\"Classroom\", 0.0f, 8.0f, 10.0f))\n    .ThrowsAsync(new ArgumentException(\"Height must be positive and non-zero\"));\nvar dto = new CreateLearningSpaceDto(\"Classroom\", 0.0f, 8.0f, 10.0f);\n\n// Act\nvar result = await CreateLearningSpaceHandler.HandleAsync(mockService.Object, dto);\n\n// Assert\nAssert.That(result.Result, Is.InstanceOf<BadRequest<string>>());\nvar badRequestResult = (BadRequest<string>)result.Result;\nAssert.That(badRequestResult.Value, Does.Contain(\"Height must be positive\"));",
+      "acceptanceCriteria": "Missing required fields when creating a learning space",
+      "testType": "Negative",
+      "status": "confirmed"
+    },
+    {
+      "id": "Presentation-004",
+      "layer": "Presentation",
+      "targetClass": "CreateLearningSpaceHandler",
+      "methodUnderTest": "HandleAsync",
+      "scenario": "Verify that the handler returns 400 Bad Request when service throws ArgumentException for negative dimension",
+      "assertionCode": "// Arrange\nvar mockService = new Mock<ILearningSpaceCreateService>();\nmockService.Setup(s => s.CreateLearningSpaceAsync(\"Classroom\", 3.0f, -8.0f, 10.0f))\n    .ThrowsAsync(new ArgumentException(\"Width must be positive and non-zero\"));\nvar dto = new CreateLearningSpaceDto(\"Classroom\", 3.0f, -8.0f, 10.0f);\n\n// Act\nvar result = await CreateLearningSpaceHandler.HandleAsync(mockService.Object, dto);\n\n// Assert\nAssert.That(result.Result, Is.InstanceOf<BadRequest<string>>());\nvar badRequestResult = (BadRequest<string>)result.Result;\nAssert.That(badRequestResult.Value, Does.Contain(\"Width must be positive\"));",
+      "acceptanceCriteria": "Missing required fields when creating a learning space",
+      "testType": "Negative",
+      "status": "confirmed"
+    },
+    {
+      "id": "Presentation-005",
+      "layer": "Presentation",
+      "targetClass": "CreateLearningSpaceHandler",
+      "methodUnderTest": "HandleAsync",
+      "scenario": "Verify that the handler returns 500 Internal Server Error when service throws unexpected exception",
+      "assertionCode": "// Arrange\nvar mockService = new Mock<ILearningSpaceCreateService>();\nmockService.Setup(s => s.CreateLearningSpaceAsync(\"Classroom\", 3.0f, 8.0f, 10.0f))\n    .ThrowsAsync(new InvalidOperationException(\"Database connection failed\"));\nvar dto = new CreateLearningSpaceDto(\"Classroom\", 3.0f, 8.0f, 10.0f);\n\n// Act\nvar result = await CreateLearningSpaceHandler.HandleAsync(mockService.Object, dto);\n\n// Assert\nAssert.That(result.Result, Is.InstanceOf<ProblemHttpResult>());",
+      "acceptanceCriteria": "Create a new learning space with all specifications and internal ID (error handling)",
+      "testType": "Negative",
+      "status": "confirmed"
+    }
+  ]
+}
