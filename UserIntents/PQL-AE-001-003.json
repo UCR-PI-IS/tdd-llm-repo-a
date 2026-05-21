@@ -1,0 +1,150 @@
+{
+  "storyId": "PQL-AE-001-003",
+  "source": "UserStories/PQL-AE-001-003.md",
+  "generatedAt": "2026-05-21T00:00:00Z",
+  "intents": [
+    {
+      "id": "Domain-001",
+      "layer": "Domain",
+      "targetClass": "University",
+      "methodUnderTest": "Constructor",
+      "scenario": "Verify that a University entity can be created with valid name and country",
+      "assertionCode": "var university = new University(\"Universidad de Costa Rica\", \"Costa Rica\");\nAssert.That(university.Name, Is.EqualTo(\"Universidad de Costa Rica\"));\nAssert.That(university.Country, Is.EqualTo(\"Costa Rica\"));",
+      "acceptanceCriteria": "Scenario 1 - Successful adding of the new university",
+      "testType": "Positive",
+      "status": "confirmed"
+    },
+    {
+      "id": "Domain-002",
+      "layer": "Domain",
+      "targetClass": "University",
+      "methodUnderTest": "Constructor",
+      "scenario": "Verify that creating a University with null or empty name throws ArgumentException",
+      "assertionCode": "var ex = Assert.Throws<ArgumentException>(() => new University(\"\", \"Costa Rica\"));\nAssert.That(ex.Message, Does.Contain(\"Name\"));",
+      "acceptanceCriteria": "Scenario 2 - Prevent addition with incorrect property format",
+      "testType": "Negative",
+      "status": "confirmed"
+    },
+    {
+      "id": "Domain-003",
+      "layer": "Domain",
+      "targetClass": "University",
+      "methodUnderTest": "Constructor",
+      "scenario": "Verify that creating a University with null or empty country throws ArgumentException",
+      "assertionCode": "var ex = Assert.Throws<ArgumentException>(() => new University(\"Universidad de Costa Rica\", \"\"));\nAssert.That(ex.Message, Does.Contain(\"Country\"));",
+      "acceptanceCriteria": "Scenario 2 - Prevent addition with incorrect property format",
+      "testType": "Negative",
+      "status": "confirmed"
+    },
+    {
+      "id": "Application-001",
+      "layer": "Application",
+      "targetClass": "UniversityService",
+      "methodUnderTest": "AddUniversityAsync",
+      "scenario": "Verify that a valid university is successfully added through the service",
+      "assertionCode": "var mockRepo = new Mock<IUniversityRepository>();\nmockRepo.Setup(r => r.ExistsByNameAsync(\"UCR\")).ReturnsAsync(false);\nvar service = new UniversityService(mockRepo.Object);\nvar result = await service.AddUniversityAsync(\"Universidad de Costa Rica\", \"Costa Rica\");\nAssert.That(result.IsSuccess, Is.True);\nmockRepo.Verify(r => r.AddAsync(It.Is<University>(u => u.Name == \"Universidad de Costa Rica\" && u.Country == \"Costa Rica\")), Times.Once);",
+      "acceptanceCriteria": "Scenario 1 - Successful adding of the new university",
+      "testType": "Positive",
+      "status": "confirmed"
+    },
+    {
+      "id": "Application-002",
+      "layer": "Application",
+      "targetClass": "UniversityService",
+      "methodUnderTest": "AddUniversityAsync",
+      "scenario": "Verify that adding a university with an existing name returns failure",
+      "assertionCode": "var mockRepo = new Mock<IUniversityRepository>();\nmockRepo.Setup(r => r.ExistsByNameAsync(\"UCR\")).ReturnsAsync(true);\nvar service = new UniversityService(mockRepo.Object);\nvar result = await service.AddUniversityAsync(\"UCR\", \"Costa Rica\");\nAssert.That(result.IsSuccess, Is.False);\nAssert.That(result.ErrorMessage, Does.Contain(\"already exists\"));\nmockRepo.Verify(r => r.AddAsync(It.IsAny<University>()), Times.Never);",
+      "acceptanceCriteria": "Scenario 3 - Prevent duplicate university registration",
+      "testType": "Negative",
+      "status": "confirmed"
+    },
+    {
+      "id": "Application-003",
+      "layer": "Application",
+      "targetClass": "UniversityService",
+      "methodUnderTest": "AddUniversityAsync",
+      "scenario": "Verify that adding a university with null or empty name returns validation failure",
+      "assertionCode": "var mockRepo = new Mock<IUniversityRepository>();\nvar service = new UniversityService(mockRepo.Object);\nvar result = await service.AddUniversityAsync(\"\", \"Costa Rica\");\nAssert.That(result.IsSuccess, Is.False);\nAssert.That(result.ErrorMessage, Does.Contain(\"Name\"));\nmockRepo.Verify(r => r.AddAsync(It.IsAny<University>()), Times.Never);",
+      "acceptanceCriteria": "Scenario 2 - Prevent addition with incorrect property format",
+      "testType": "Negative",
+      "status": "confirmed"
+    },
+    {
+      "id": "Application-004",
+      "layer": "Application",
+      "targetClass": "UniversityService",
+      "methodUnderTest": "AddUniversityAsync",
+      "scenario": "Verify that adding a university with null or empty country returns validation failure",
+      "assertionCode": "var mockRepo = new Mock<IUniversityRepository>();\nvar service = new UniversityService(mockRepo.Object);\nvar result = await service.AddUniversityAsync(\"Universidad de Costa Rica\", \"\");\nAssert.That(result.IsSuccess, Is.False);\nAssert.That(result.ErrorMessage, Does.Contain(\"Country\"));\nmockRepo.Verify(r => r.AddAsync(It.IsAny<University>()), Times.Never);",
+      "acceptanceCriteria": "Scenario 2 - Prevent addition with incorrect property format",
+      "testType": "Negative",
+      "status": "confirmed"
+    },
+    {
+      "id": "Infrastructure-001",
+      "layer": "Infrastructure",
+      "targetClass": "SqlUniversityRepository",
+      "methodUnderTest": "AddAsync",
+      "scenario": "Verify that a valid university entity is persisted to the database",
+      "assertionCode": "var mockDbContext = new Mock<UCRDatabaseContext>();\nvar mockDbSet = new Mock<DbSet<University>>();\nmockDbContext.Setup(c => c.Universities).Returns(mockDbSet.Object);\nvar repository = new SqlUniversityRepository(mockDbContext.Object);\nvar university = new University(\"UCR\", \"Costa Rica\");\nawait repository.AddAsync(university);\nmockDbSet.Verify(d => d.AddAsync(university, It.IsAny<CancellationToken>()), Times.Once);\nmockDbContext.Verify(c => c.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Once);",
+      "acceptanceCriteria": "Scenario 1 - Successful adding of the new university",
+      "testType": "Positive",
+      "status": "confirmed"
+    },
+    {
+      "id": "Infrastructure-002",
+      "layer": "Infrastructure",
+      "targetClass": "SqlUniversityRepository",
+      "methodUnderTest": "ExistsByNameAsync",
+      "scenario": "Verify that ExistsByNameAsync returns true when university with given name exists",
+      "assertionCode": "var mockDbContext = new Mock<UCRDatabaseContext>();\nvar universities = new List<University> { new University(\"UCR\", \"Costa Rica\") }.AsQueryable();\nvar mockDbSet = new Mock<DbSet<University>>();\nmockDbSet.As<IQueryable<University>>().Setup(m => m.Provider).Returns(universities.Provider);\nmockDbSet.As<IQueryable<University>>().Setup(m => m.Expression).Returns(universities.Expression);\nmockDbSet.As<IQueryable<University>>().Setup(m => m.ElementType).Returns(universities.ElementType);\nmockDbSet.As<IQueryable<University>>().Setup(m => m.GetEnumerator()).Returns(universities.GetEnumerator());\nmockDbContext.Setup(c => c.Universities).Returns(mockDbSet.Object);\nvar repository = new SqlUniversityRepository(mockDbContext.Object);\nvar result = await repository.ExistsByNameAsync(\"UCR\");\nAssert.That(result, Is.True);",
+      "acceptanceCriteria": "Scenario 3 - Prevent duplicate university registration",
+      "testType": "Positive",
+      "status": "confirmed"
+    },
+    {
+      "id": "Infrastructure-003",
+      "layer": "Infrastructure",
+      "targetClass": "SqlUniversityRepository",
+      "methodUnderTest": "ExistsByNameAsync",
+      "scenario": "Verify that ExistsByNameAsync returns false when university with given name does not exist",
+      "assertionCode": "var mockDbContext = new Mock<UCRDatabaseContext>();\nvar universities = new List<University>().AsQueryable();\nvar mockDbSet = new Mock<DbSet<University>>();\nmockDbSet.As<IQueryable<University>>().Setup(m => m.Provider).Returns(universities.Provider);\nmockDbSet.As<IQueryable<University>>().Setup(m => m.Expression).Returns(universities.Expression);\nmockDbSet.As<IQueryable<University>>().Setup(m => m.ElementType).Returns(universities.ElementType);\nmockDbSet.As<IQueryable<University>>().Setup(m => m.GetEnumerator()).Returns(universities.GetEnumerator());\nmockDbContext.Setup(c => c.Universities).Returns(mockDbSet.Object);\nvar repository = new SqlUniversityRepository(mockDbContext.Object);\nvar result = await repository.ExistsByNameAsync(\"UCR\");\nAssert.That(result, Is.False);",
+      "acceptanceCriteria": "Scenario 3 - Prevent duplicate university registration",
+      "testType": "Negative",
+      "status": "confirmed"
+    },
+    {
+      "id": "Presentation-001",
+      "layer": "Presentation",
+      "targetClass": "AddUniversityHandler",
+      "methodUnderTest": "HandleAsync",
+      "scenario": "Verify that successful university creation returns 200 OK with success message",
+      "assertionCode": "var mockService = new Mock<IUniversityService>();\nmockService.Setup(s => s.AddUniversityAsync(\"UCR\", \"Costa Rica\")).ReturnsAsync(Result.Success());\nvar handler = new AddUniversityHandler(mockService.Object);\nvar result = await handler.HandleAsync(\"UCR\", \"Costa Rica\");\nAssert.That(result.Result, Is.TypeOf<Ok<AddUniversityResponse>>());\nvar okResult = result.Result as Ok<AddUniversityResponse>;\nAssert.That(okResult.Value.Message, Is.EqualTo(\"University added successfully\"));",
+      "acceptanceCriteria": "Scenario 1 - Successful adding of the new university",
+      "testType": "Positive",
+      "status": "confirmed"
+    },
+    {
+      "id": "Presentation-002",
+      "layer": "Presentation",
+      "targetClass": "AddUniversityHandler",
+      "methodUnderTest": "HandleAsync",
+      "scenario": "Verify that duplicate university registration returns 400 BadRequest with error message",
+      "assertionCode": "var mockService = new Mock<IUniversityService>();\nmockService.Setup(s => s.AddUniversityAsync(\"UCR\", \"Costa Rica\")).ReturnsAsync(Result.Failure(\"University with name 'UCR' already exists\"));\nvar handler = new AddUniversityHandler(mockService.Object);\nvar result = await handler.HandleAsync(\"UCR\", \"Costa Rica\");\nAssert.That(result.Result, Is.TypeOf<BadRequest<string>>());\nvar badRequestResult = result.Result as BadRequest<string>;\nAssert.That(badRequestResult.Value, Does.Contain(\"already exists\"));",
+      "acceptanceCriteria": "Scenario 3 - Prevent duplicate university registration",
+      "testType": "Negative",
+      "status": "confirmed"
+    },
+    {
+      "id": "Presentation-003",
+      "layer": "Presentation",
+      "targetClass": "AddUniversityHandler",
+      "methodUnderTest": "HandleAsync",
+      "scenario": "Verify that invalid property format returns 400 BadRequest with validation error message",
+      "assertionCode": "var mockService = new Mock<IUniversityService>();\nmockService.Setup(s => s.AddUniversityAsync(\"\", \"Costa Rica\")).ReturnsAsync(Result.Failure(\"Name is required\"));\nvar handler = new AddUniversityHandler(mockService.Object);\nvar result = await handler.HandleAsync(\"\", \"Costa Rica\");\nAssert.That(result.Result, Is.TypeOf<BadRequest<string>>());\nvar badRequestResult = result.Result as BadRequest<string>;\nAssert.That(badRequestResult.Value, Does.Contain(\"required\"));",
+      "acceptanceCriteria": "Scenario 2 - Prevent addition with incorrect property format",
+      "testType": "Negative",
+      "status": "confirmed"
+    }
+  ]
+}
