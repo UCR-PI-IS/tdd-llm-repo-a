@@ -1,0 +1,128 @@
+{
+  "storyId": "PQL-LB-002-001",
+  "source": "UserStories/PQL-LB-002-001.md",
+  "generatedAt": "2026-05-21T00:00:00Z",
+  "intents": [
+    {
+      "id": "Domain-001",
+      "layer": "Domain",
+      "targetClass": "Building",
+      "methodUnderTest": "Constructor",
+      "scenario": "Verify that a Building entity is correctly instantiated with all required properties",
+      "assertionCode": "var internalId = 1;\nvar name = \"Engineering Building\";\nvar color = \"Red\";\nvar height = 20.5f;\nvar length = 50.0f;\nvar width = 30.0f;\nvar x = 100.0f;\nvar y = 200.0f;\nvar z = 0.0f;\n\nvar building = new Building(internalId, name, color, height, length, width, x, y, z);\n\nAssert.That(building.InternalId, Is.EqualTo(internalId));\nAssert.That(building.Name, Is.EqualTo(name));\nAssert.That(building.Color, Is.EqualTo(color));\nAssert.That(building.Height, Is.EqualTo(height));\nAssert.That(building.Length, Is.EqualTo(length));\nAssert.That(building.Width, Is.EqualTo(width));\nAssert.That(building.X, Is.EqualTo(x));\nAssert.That(building.Y, Is.EqualTo(y));\nAssert.That(building.Z, Is.EqualTo(z));",
+      "acceptanceCriteria": "Display all registered buildings",
+      "testType": "Positive",
+      "status": "confirmed"
+    },
+    {
+      "id": "Domain-002",
+      "layer": "Domain",
+      "targetClass": "IBuildingListRepository",
+      "methodUnderTest": "Interface contract definition",
+      "scenario": "Verify repository interface defines GetAllBuildingsAsync method returning Task<List<Building>>",
+      "assertionCode": "var method = typeof(IBuildingListRepository).GetMethod(\"GetAllBuildingsAsync\");\n\nAssert.That(method, Is.Not.Null);\nAssert.That(method.ReturnType, Is.EqualTo(typeof(Task<List<Building>>)));\nAssert.That(method.GetParameters(), Is.Empty);",
+      "acceptanceCriteria": "Display all registered buildings, No buildings registered in the system",
+      "testType": "Positive",
+      "status": "confirmed"
+    },
+    {
+      "id": "Application-001",
+      "layer": "Application",
+      "targetClass": "IBuildingListService",
+      "methodUnderTest": "Interface contract - GetAllBuildingsAsync",
+      "scenario": "Verify service interface defines GetAllBuildingsAsync method that returns Task<List<Building>>",
+      "assertionCode": "var method = typeof(IBuildingListService).GetMethod(\"GetAllBuildingsAsync\");\n\nAssert.That(method, Is.Not.Null);\nAssert.That(method.ReturnType, Is.EqualTo(typeof(Task<List<Building>>)));\nAssert.That(method.GetParameters(), Is.Empty);",
+      "acceptanceCriteria": "Display all registered buildings, No buildings registered in the system",
+      "testType": "Positive",
+      "status": "confirmed"
+    },
+    {
+      "id": "Application-002",
+      "layer": "Application",
+      "targetClass": "BuildingListService",
+      "methodUnderTest": "GetAllBuildingsAsync",
+      "scenario": "Verify service returns all buildings from repository when buildings exist",
+      "assertionCode": "var mockRepository = new Mock<IBuildingListRepository>();\nvar expectedBuildings = new List<Building>\n{\n    new Building(1, \"Engineering Building\", \"Red\", 20.5f, 50.0f, 30.0f, 100.0f, 200.0f, 0.0f),\n    new Building(2, \"Science Building\", \"Blue\", 25.0f, 60.0f, 40.0f, 150.0f, 250.0f, 0.0f)\n};\nmockRepository.Setup(r => r.GetAllBuildingsAsync()).ReturnsAsync(expectedBuildings);\n\nvar service = new BuildingListService(mockRepository.Object);\n\nvar result = await service.GetAllBuildingsAsync();\n\nAssert.That(result, Is.EqualTo(expectedBuildings));\nAssert.That(result.Count, Is.EqualTo(2));\nmockRepository.Verify(r => r.GetAllBuildingsAsync(), Times.Once);",
+      "acceptanceCriteria": "Display all registered buildings",
+      "testType": "Positive",
+      "status": "confirmed"
+    },
+    {
+      "id": "Application-003",
+      "layer": "Application",
+      "targetClass": "BuildingListService",
+      "methodUnderTest": "GetAllBuildingsAsync",
+      "scenario": "Verify service returns empty list when no buildings exist in repository",
+      "assertionCode": "var mockRepository = new Mock<IBuildingListRepository>();\nvar emptyBuildings = new List<Building>();\nmockRepository.Setup(r => r.GetAllBuildingsAsync()).ReturnsAsync(emptyBuildings);\n\nvar service = new BuildingListService(mockRepository.Object);\n\nvar result = await service.GetAllBuildingsAsync();\n\nAssert.That(result, Is.Not.Null);\nAssert.That(result, Is.Empty);\nAssert.That(result.Count, Is.EqualTo(0));\nmockRepository.Verify(r => r.GetAllBuildingsAsync(), Times.Once);",
+      "acceptanceCriteria": "No buildings registered in the system",
+      "testType": "Edge case",
+      "status": "confirmed"
+    },
+    {
+      "id": "Infrastructure-001",
+      "layer": "Infrastructure",
+      "targetClass": "SqlBuildingListRepository",
+      "methodUnderTest": "GetAllBuildingsAsync",
+      "scenario": "Verify repository returns all buildings from database context when buildings exist",
+      "assertionCode": "var mockDbContext = new Mock<UCRDatabaseContext>();\nvar mockDbSet = new Mock<DbSet<Building>>();\n\nvar expectedBuildings = new List<Building>\n{\n    new Building(1, \"Engineering Building\", \"Red\", 20.5f, 50.0f, 30.0f, 100.0f, 200.0f, 0.0f),\n    new Building(2, \"Science Building\", \"Blue\", 25.0f, 60.0f, 40.0f, 150.0f, 250.0f, 0.0f)\n}.AsQueryable();\n\nmockDbSet.As<IQueryable<Building>>().Setup(m => m.Provider).Returns(expectedBuildings.Provider);\nmockDbSet.As<IQueryable<Building>>().Setup(m => m.Expression).Returns(expectedBuildings.Expression);\nmockDbSet.As<IQueryable<Building>>().Setup(m => m.ElementType).Returns(expectedBuildings.ElementType);\nmockDbSet.As<IQueryable<Building>>().Setup(m => m.GetEnumerator()).Returns(expectedBuildings.GetEnumerator());\n\nmockDbContext.Setup(c => c.Buildings).Returns(mockDbSet.Object);\n\nvar repository = new SqlBuildingListRepository(mockDbContext.Object);\n\nvar result = await repository.GetAllBuildingsAsync();\n\nAssert.That(result, Is.Not.Null);\nAssert.That(result.Count, Is.EqualTo(2));\nAssert.That(result[0].Name, Is.EqualTo(\"Engineering Building\"));\nAssert.That(result[1].Name, Is.EqualTo(\"Science Building\"));",
+      "acceptanceCriteria": "Display all registered buildings",
+      "testType": "Positive",
+      "status": "confirmed"
+    },
+    {
+      "id": "Infrastructure-002",
+      "layer": "Infrastructure",
+      "targetClass": "SqlBuildingListRepository",
+      "methodUnderTest": "GetAllBuildingsAsync",
+      "scenario": "Verify repository returns empty list when database contains no buildings",
+      "assertionCode": "var mockDbContext = new Mock<UCRDatabaseContext>();\nvar mockDbSet = new Mock<DbSet<Building>>();\n\nvar emptyBuildings = new List<Building>().AsQueryable();\n\nmockDbSet.As<IQueryable<Building>>().Setup(m => m.Provider).Returns(emptyBuildings.Provider);\nmockDbSet.As<IQueryable<Building>>().Setup(m => m.Expression).Returns(emptyBuildings.Expression);\nmockDbSet.As<IQueryable<Building>>().Setup(m => m.ElementType).Returns(emptyBuildings.ElementType);\nmockDbSet.As<IQueryable<Building>>().Setup(m => m.GetEnumerator()).Returns(emptyBuildings.GetEnumerator());\n\nmockDbContext.Setup(c => c.Buildings).Returns(mockDbSet.Object);\n\nvar repository = new SqlBuildingListRepository(mockDbContext.Object);\n\nvar result = await repository.GetAllBuildingsAsync();\n\nAssert.That(result, Is.Not.Null);\nAssert.That(result, Is.Empty);\nAssert.That(result.Count, Is.EqualTo(0));",
+      "acceptanceCriteria": "No buildings registered in the system",
+      "testType": "Edge case",
+      "status": "confirmed"
+    },
+    {
+      "id": "Presentation-001",
+      "layer": "Presentation",
+      "targetClass": "BuildingDto",
+      "methodUnderTest": "Record constructor",
+      "scenario": "Verify BuildingDto record is correctly instantiated with Id and Name properties",
+      "assertionCode": "var id = 1;\nvar name = \"Engineering Building\";\n\nvar dto = new BuildingDto(id, name);\n\nAssert.That(dto.Id, Is.EqualTo(id));\nAssert.That(dto.Name, Is.EqualTo(name));",
+      "acceptanceCriteria": "Display all registered buildings",
+      "testType": "Positive",
+      "status": "confirmed"
+    },
+    {
+      "id": "Presentation-002",
+      "layer": "Presentation",
+      "targetClass": "GetBuildingListResponse",
+      "methodUnderTest": "Record constructor",
+      "scenario": "Verify GetBuildingListResponse record correctly encapsulates list of BuildingDto objects",
+      "assertionCode": "var buildings = new List<BuildingDto>\n{\n    new BuildingDto(1, \"Engineering Building\"),\n    new BuildingDto(2, \"Science Building\")\n};\n\nvar response = new GetBuildingListResponse(buildings);\n\nAssert.That(response.Buildings, Is.EqualTo(buildings));\nAssert.That(response.Buildings.Count, Is.EqualTo(2));",
+      "acceptanceCriteria": "Display all registered buildings, No buildings registered in the system",
+      "testType": "Positive",
+      "status": "confirmed"
+    },
+    {
+      "id": "Presentation-003",
+      "layer": "Presentation",
+      "targetClass": "GetBuildingListHandler",
+      "methodUnderTest": "HandleAsync",
+      "scenario": "Verify handler returns OK response with list of buildings when service returns multiple buildings",
+      "assertionCode": "var mockService = new Mock<IBuildingListService>();\nvar buildings = new List<Building>\n{\n    new Building(1, \"Engineering Building\", \"Red\", 20.5f, 50.0f, 30.0f, 100.0f, 200.0f, 0.0f),\n    new Building(2, \"Science Building\", \"Blue\", 25.0f, 60.0f, 40.0f, 150.0f, 250.0f, 0.0f)\n};\nmockService.Setup(s => s.GetAllBuildingsAsync()).ReturnsAsync(buildings);\n\nvar result = await GetBuildingListHandler.HandleAsync(mockService.Object);\n\nAssert.That(result, Is.TypeOf<Ok<GetBuildingListResponse>>());\nvar okResult = result as Ok<GetBuildingListResponse>;\nAssert.That(okResult.Value.Buildings.Count, Is.EqualTo(2));\nAssert.That(okResult.Value.Buildings[0].Id, Is.EqualTo(1));\nAssert.That(okResult.Value.Buildings[0].Name, Is.EqualTo(\"Engineering Building\"));\nAssert.That(okResult.Value.Buildings[1].Id, Is.EqualTo(2));\nAssert.That(okResult.Value.Buildings[1].Name, Is.EqualTo(\"Science Building\"));",
+      "acceptanceCriteria": "Display all registered buildings",
+      "testType": "Positive",
+      "status": "confirmed"
+    },
+    {
+      "id": "Presentation-004",
+      "layer": "Presentation",
+      "targetClass": "GetBuildingListHandler",
+      "methodUnderTest": "HandleAsync",
+      "scenario": "Verify handler returns OK response with empty list when service returns no buildings",
+      "assertionCode": "var mockService = new Mock<IBuildingListService>();\nvar emptyBuildings = new List<Building>();\nmockService.Setup(s => s.GetAllBuildingsAsync()).ReturnsAsync(emptyBuildings);\n\nvar result = await GetBuildingListHandler.HandleAsync(mockService.Object);\n\nAssert.That(result, Is.TypeOf<Ok<GetBuildingListResponse>>());\nvar okResult = result as Ok<GetBuildingListResponse>;\nAssert.That(okResult.Value.Buildings, Is.Not.Null);\nAssert.That(okResult.Value.Buildings, Is.Empty);\nAssert.That(okResult.Value.Buildings.Count, Is.EqualTo(0));",
+      "acceptanceCriteria": "No buildings registered in the system",
+      "testType": "Edge case",
+      "status": "confirmed"
+    }
+  ]
+}
