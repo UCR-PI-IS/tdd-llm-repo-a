@@ -1,0 +1,183 @@
+{
+  "storyId": "PQL-AE-001-002",
+  "source": "UserStories/PQL-AE-001-002.md",
+  "generatedAt": "2026-05-21T00:00:00Z",
+  "intents": [
+    {
+      "id": "Domain-001",
+      "layer": "Domain",
+      "targetClass": "Building",
+      "methodUnderTest": "Constructor",
+      "scenario": "Verify that a Building can be created/updated with all valid properties",
+      "assertionCode": "var building = new Building(1, \"Engineering Building\", \"Blue\", 10.5f, 20.0f, 15.0f, 100.0f, 0.0f, 200.0f);\nAssert.That(building.Name, Is.EqualTo(\"Engineering Building\"));\nAssert.That(building.Color, Is.EqualTo(\"Blue\"));",
+      "acceptanceCriteria": "Edit all the building information - successful update path",
+      "testType": "Positive",
+      "status": "confirmed"
+    },
+    {
+      "id": "Domain-002",
+      "layer": "Domain",
+      "targetClass": "Building",
+      "methodUnderTest": "Constructor",
+      "scenario": "Verify that creating/updating a Building with null or empty name throws ArgumentException",
+      "assertionCode": "var ex = Assert.Throws<ArgumentException>(() => \n    new Building(1, \"\", \"Blue\", 10.5f, 20.0f, 15.0f, 100.0f, 0.0f, 200.0f));\nAssert.That(ex.ParamName, Is.EqualTo(\"name\"));",
+      "acceptanceCriteria": "Edit the information of a building with invalid or missing information - empty name validation",
+      "testType": "Negative",
+      "status": "confirmed"
+    },
+    {
+      "id": "Domain-003",
+      "layer": "Domain",
+      "targetClass": "Building",
+      "methodUnderTest": "Constructor",
+      "scenario": "Verify that creating/updating a Building with null or empty color throws ArgumentException",
+      "assertionCode": "var ex = Assert.Throws<ArgumentException>(() => \n    new Building(1, \"Engineering Building\", \"\", 10.5f, 20.0f, 15.0f, 100.0f, 0.0f, 200.0f));\nAssert.That(ex.ParamName, Is.EqualTo(\"color\"));",
+      "acceptanceCriteria": "Edit the information of a building with invalid or missing information - empty color validation",
+      "testType": "Negative",
+      "status": "confirmed"
+    },
+    {
+      "id": "Domain-004",
+      "layer": "Domain",
+      "targetClass": "Building",
+      "methodUnderTest": "Constructor",
+      "scenario": "Verify that creating/updating a Building with zero or negative height throws ArgumentException",
+      "assertionCode": "var ex = Assert.Throws<ArgumentException>(() => \n    new Building(1, \"Engineering Building\", \"Blue\", 0f, 20.0f, 15.0f, 100.0f, 0.0f, 200.0f));\nAssert.That(ex.ParamName, Is.EqualTo(\"height\"));",
+      "acceptanceCriteria": "Edit the information of a building with invalid or missing information - invalid height validation",
+      "testType": "Negative",
+      "status": "confirmed"
+    },
+    {
+      "id": "Domain-005",
+      "layer": "Domain",
+      "targetClass": "Building",
+      "methodUnderTest": "Constructor",
+      "scenario": "Verify that creating/updating a Building with zero or negative length throws ArgumentException",
+      "assertionCode": "var ex = Assert.Throws<ArgumentException>(() => \n    new Building(1, \"Engineering Building\", \"Blue\", 10.5f, -5.0f, 15.0f, 100.0f, 0.0f, 200.0f));\nAssert.That(ex.ParamName, Is.EqualTo(\"length\"));",
+      "acceptanceCriteria": "Edit the information of a building with invalid or missing information - invalid length validation",
+      "testType": "Negative",
+      "status": "confirmed"
+    },
+    {
+      "id": "Domain-006",
+      "layer": "Domain",
+      "targetClass": "Building",
+      "methodUnderTest": "Constructor",
+      "scenario": "Verify that creating/updating a Building with zero or negative width throws ArgumentException",
+      "assertionCode": "var ex = Assert.Throws<ArgumentException>(() => \n    new Building(1, \"Engineering Building\", \"Blue\", 10.5f, 20.0f, 0f, 100.0f, 0.0f, 200.0f));\nAssert.That(ex.ParamName, Is.EqualTo(\"width\"));",
+      "acceptanceCriteria": "Edit the information of a building with invalid or missing information - invalid width validation",
+      "testType": "Negative",
+      "status": "confirmed"
+    },
+    {
+      "id": "Domain-007",
+      "layer": "Domain",
+      "targetClass": "Building",
+      "methodUnderTest": "Update",
+      "scenario": "Verify that updating an existing Building with valid new properties updates all fields correctly",
+      "assertionCode": "var building = new Building(1, \"Old Name\", \"Red\", 10.0f, 20.0f, 15.0f, 0f, 0f, 0f);\nbuilding.Update(\"Updated Building\", \"Blue\", 12.5f, 25.0f, 18.0f, 100.0f, 5.0f, 200.0f);\nAssert.That(building.Name, Is.EqualTo(\"Updated Building\"));\nAssert.That(building.Color, Is.EqualTo(\"Blue\"));",
+      "acceptanceCriteria": "Edit all the building information - successful update of existing building",
+      "testType": "Positive",
+      "status": "confirmed"
+    },
+    {
+      "id": "Application-001",
+      "layer": "Application",
+      "targetClass": "BuildingService",
+      "methodUnderTest": "UpdateBuildingAsync",
+      "scenario": "Verify that updating an existing building with valid data succeeds",
+      "assertionCode": "mockRepo.Setup(r => r.GetByIdAsync(1)).ReturnsAsync(existingBuilding);\nawait service.UpdateBuildingAsync(1, updateDto);\nmockRepo.Verify(r => r.UpdateAsync(It.Is<Building>(b => b.Name == \"New Name\")), Times.Once);",
+      "acceptanceCriteria": "Edit all the building information - successful update path",
+      "testType": "Positive",
+      "status": "confirmed"
+    },
+    {
+      "id": "Application-002",
+      "layer": "Application",
+      "targetClass": "BuildingService",
+      "methodUnderTest": "UpdateBuildingAsync",
+      "scenario": "Verify that updating a non-existing building throws BuildingNotFoundException",
+      "assertionCode": "mockRepo.Setup(r => r.GetByIdAsync(999)).ReturnsAsync((Building?)null);\nvar ex = Assert.ThrowsAsync<BuildingNotFoundException>(() => \n    service.UpdateBuildingAsync(999, updateDto));\nAssert.That(ex.BuildingId, Is.EqualTo(999));",
+      "acceptanceCriteria": "Edit the information of a non-existing building - building not found error",
+      "testType": "Negative",
+      "status": "confirmed"
+    },
+    {
+      "id": "Application-003",
+      "layer": "Application",
+      "targetClass": "BuildingService",
+      "methodUnderTest": "UpdateBuildingAsync",
+      "scenario": "Verify that updating a building with invalid data propagates the domain validation exception",
+      "assertionCode": "mockRepo.Setup(r => r.GetByIdAsync(1)).ReturnsAsync(existingBuilding);\nvar ex = Assert.ThrowsAsync<ArgumentException>(() => \n    service.UpdateBuildingAsync(1, invalidDto));\nAssert.That(ex.ParamName, Is.EqualTo(\"name\"));\nmockRepo.Verify(r => r.UpdateAsync(It.IsAny<Building>()), Times.Never);",
+      "acceptanceCriteria": "Edit the information of a building with invalid or missing information - validation error propagation",
+      "testType": "Negative",
+      "status": "confirmed"
+    },
+    {
+      "id": "Infrastructure-001",
+      "layer": "Infrastructure",
+      "targetClass": "SqlBuildingRepository",
+      "methodUnderTest": "GetByIdAsync",
+      "scenario": "Verify that repository retrieves an existing building from the database",
+      "assertionCode": "mockDbSet.Setup(d => d.FindAsync(1)).ReturnsAsync(expectedBuilding);\nvar result = await repository.GetByIdAsync(1);\nAssert.That(result, Is.Not.Null);\nAssert.That(result.InternalId, Is.EqualTo(1));",
+      "acceptanceCriteria": "Edit all the building information - retrieve building for update",
+      "testType": "Positive",
+      "status": "confirmed"
+    },
+    {
+      "id": "Infrastructure-002",
+      "layer": "Infrastructure",
+      "targetClass": "SqlBuildingRepository",
+      "methodUnderTest": "GetByIdAsync",
+      "scenario": "Verify that repository returns null when building ID does not exist in database",
+      "assertionCode": "mockDbSet.Setup(d => d.FindAsync(999)).ReturnsAsync((Building?)null);\nvar result = await repository.GetByIdAsync(999);\nAssert.That(result, Is.Null);",
+      "acceptanceCriteria": "Edit the information of a non-existing building - repository returns null for non-existing ID",
+      "testType": "Negative",
+      "status": "confirmed"
+    },
+    {
+      "id": "Infrastructure-003",
+      "layer": "Infrastructure",
+      "targetClass": "SqlBuildingRepository",
+      "methodUnderTest": "UpdateAsync",
+      "scenario": "Verify that repository successfully updates an existing building in the database",
+      "assertionCode": "mockContext.Setup(c => c.SaveChangesAsync(It.IsAny<CancellationToken>())).ReturnsAsync(1);\nawait repository.UpdateAsync(buildingToUpdate);\nmockDbSet.Verify(d => d.Update(It.Is<Building>(b => b.InternalId == 1)), Times.Once);\nmockContext.Verify(c => c.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Once);",
+      "acceptanceCriteria": "Edit all the building information - persist updated building to database",
+      "testType": "Positive",
+      "status": "confirmed"
+    },
+    {
+      "id": "Presentation-001",
+      "layer": "Presentation",
+      "targetClass": "UpdateBuildingHandler",
+      "methodUnderTest": "HandleAsync",
+      "scenario": "Verify that updating a building with valid data returns 200 OK with success response",
+      "assertionCode": "mockService.Setup(s => s.UpdateBuildingAsync(1, It.IsAny<UpdateBuildingDto>())).Returns(Task.CompletedTask);\nvar result = await UpdateBuildingHandler.HandleAsync(1, updateDto, mockService.Object);\nAssert.That(result, Is.InstanceOf<Ok<UpdateBuildingResponse>>());",
+      "acceptanceCriteria": "Edit all the building information - successful update returns confirmation",
+      "testType": "Positive",
+      "status": "confirmed"
+    },
+    {
+      "id": "Presentation-002",
+      "layer": "Presentation",
+      "targetClass": "UpdateBuildingHandler",
+      "methodUnderTest": "HandleAsync",
+      "scenario": "Verify that updating a building with invalid data returns 400 Bad Request with error message",
+      "assertionCode": "mockService.Setup(s => s.UpdateBuildingAsync(1, It.IsAny<UpdateBuildingDto>())).ThrowsAsync(new ArgumentException(\"Name cannot be empty\", \"name\"));\nvar result = await UpdateBuildingHandler.HandleAsync(1, invalidDto, mockService.Object);\nAssert.That(result, Is.InstanceOf<BadRequest<string>>());",
+      "acceptanceCriteria": "Edit the information of a building with invalid or missing information - validation error response",
+      "testType": "Negative",
+      "status": "confirmed"
+    },
+    {
+      "id": "Presentation-003",
+      "layer": "Presentation",
+      "targetClass": "UpdateBuildingHandler",
+      "methodUnderTest": "HandleAsync",
+      "scenario": "Verify that updating a non-existing building returns 404 Not Found with error message",
+      "assertionCode": "mockService.Setup(s => s.UpdateBuildingAsync(999, It.IsAny<UpdateBuildingDto>())).ThrowsAsync(new BuildingNotFoundException(999));\nvar result = await UpdateBuildingHandler.HandleAsync(999, updateDto, mockService.Object);\nAssert.That(result, Is.InstanceOf<NotFound<string>>());",
+      "acceptanceCriteria": "Edit the information of a non-existing building - not found error response",
+      "testType": "Negative",
+      "status": "confirmed"
+    }
+  ]
+}
