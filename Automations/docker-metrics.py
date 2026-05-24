@@ -3,8 +3,10 @@
 
 Runs Microsoft Code Metrics via a cross-platform Roslyn-based calculator.
 Results stored per user story with timestamped directories.
-Usage: ./docker-metrics.py <STORY-ID>
-Example: ./docker-metrics.py CPD-LC-001-001
+Usage: ./docker-metrics.py <STORY-ID> <MODEL> <ITERATION>
+Example: ./docker-metrics.py CPD-LC-001-001 Kimi-K2.5 1
+
+Output: MetricsResults/<STORY-ID>/<MODEL>/<ITERATION>/<timestamp>/
 """
 
 import sys
@@ -224,6 +226,8 @@ summary = {
     'status': 'success' if $METRICS_FAILED == 0 else 'failure',
     'timestamp': datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ'),
     'storyId': os.environ.get('STORY_ID', ''),
+    'model': os.environ.get('MODEL', ''),
+    'iteration': os.environ.get('ITERATION', ''),
     'projects': projects
 }
 with open('/output/metrics-summary.json', 'w') as f:
@@ -245,20 +249,24 @@ echo "=== Code Metrics Analysis Complete ==="
 
 
 def main():
-    if len(sys.argv) < 2:
-        du.cprint("Error: STORY-ID is required", "RED")
-        print("Usage: ./docker-metrics.py <STORY-ID>")
-        print("Example: ./docker-metrics.py CPD-LC-001-001")
+    if len(sys.argv) < 4:
+        du.cprint("Error: STORY-ID, MODEL, and ITERATION are required", "RED")
+        print("Usage: ./docker-metrics.py <STORY-ID> <MODEL> <ITERATION>")
+        print("Example: ./docker-metrics.py CPD-LC-001-001 Kimi-K2.5 1")
         sys.exit(1)
 
     story_id = sys.argv[1]
+    model = du.sanitize_path_component(sys.argv[2])
+    iteration = du.sanitize_path_component(sys.argv[3])
     timestamp = du.generate_timestamp()
-    output_dir = Path("MetricsResults") / story_id / timestamp
+    output_dir = Path("MetricsResults") / story_id / model / iteration / timestamp
     output_dir.mkdir(parents=True, exist_ok=True)
     ws = du.get_workspace_root()
 
     du.print_banner("Docker Metrics Script", timestamp, str(output_dir))
     print(f"Story ID: {story_id}")
+    print(f"Model: {model}")
+    print(f"Iteration: {iteration}")
     print()
 
     du.build_docker_image("themepark-dotnet-metrics", "Automations/Dockerfile.metrics")
@@ -271,7 +279,7 @@ def main():
     exit_code = du.run_docker_container(
         "themepark-dotnet-metrics", ws, output_dir,
         "/output/metrics-script.sh", "metrics.log",
-        env_vars={"STORY_ID": story_id},
+        env_vars={"STORY_ID": story_id, "MODEL": model, "ITERATION": iteration},
     )
 
     du.print_result(exit_code == 0, str(output_dir), "metrics.log")

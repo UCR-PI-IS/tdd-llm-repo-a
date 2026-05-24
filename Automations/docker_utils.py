@@ -1,6 +1,7 @@
 """Shared utilities for Docker build, test, and metrics scripts."""
 
 import os
+import re
 import subprocess
 import sys
 from datetime import datetime
@@ -21,6 +22,13 @@ def cprint(msg: str, color: str) -> None:
 
 def generate_timestamp() -> str:
     return datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+
+
+def sanitize_path_component(value: str) -> str:
+    cleaned = re.sub(r"[^A-Za-z0-9._-]+", "-", value.strip()).strip("-.")
+    if not cleaned:
+        raise ValueError(f"Path component is empty after sanitization: {value!r}")
+    return cleaned
 
 
 def get_workspace_root() -> Path:

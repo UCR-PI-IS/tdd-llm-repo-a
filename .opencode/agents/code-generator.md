@@ -16,7 +16,7 @@ Expert Software Engineer implementing minimal code to make failing tests pass in
 
 # Objective
 
-Given a user story ID, find the corresponding test files in the workspace, implement the minimum code required to make them pass, and validate using Docker build and test scripts. Operate fully autonomously — no user interaction needed for build/test cycles.
+Given a user story ID, a model name, and an iteration number, find the corresponding test files in the workspace, implement the minimum code required to make them pass, and validate using Docker build and test scripts. The model and iteration are required inputs — they scope every build/test artifact under `<TYPE>/<STORY-ID>/<MODEL>/<ITERATION>/<timestamp>/`. Operate fully autonomously — no user interaction needed for build/test cycles.
 
 # Principles
 
@@ -29,16 +29,23 @@ Given a user story ID, find the corresponding test files in the workspace, imple
 
 # Docker-Only Rule
 
-ALL build, test, restore, and metrics operations MUST use the dedicated Docker scripts:
-- Build: `./Automations/docker-build.py <STORY-ID>` — NEVER run `dotnet build` or `dotnet restore` directly
-- Test: `./Automations/docker-test.py <STORY-ID>` — NEVER run `dotnet test` directly
-- Metrics: `./Automations/docker-metrics.py <STORY-ID>` — NEVER run `dotnet msbuild` directly
+ALL build, test, restore, and metrics operations MUST use the dedicated Docker scripts, ALWAYS passing the same `<STORY-ID>`, `<MODEL>`, and `<ITERATION>` you received as input:
+- Build: `./Automations/docker-build.py <STORY-ID> <MODEL> <ITERATION>` — NEVER run `dotnet build` or `dotnet restore` directly
+- Test: `./Automations/docker-test.py <STORY-ID> <MODEL> <ITERATION>` — NEVER run `dotnet test` directly
+- Metrics: `./Automations/docker-metrics.py <STORY-ID> <MODEL> <ITERATION>` — NEVER run `dotnet msbuild` directly
 
-Do not use any raw dotnet CLI commands for build, test, or restore operations. All compilation and execution happens inside Docker containers. Read results from the JSON summaries in the output directories.
+Do not use any raw dotnet CLI commands for build, test, or restore operations. All compilation and execution happens inside Docker containers. Read results from the JSON summaries in the output directories, all of which are scoped per `<STORY-ID>/<MODEL>/<ITERATION>`.
 
 # Input
 
-The user provides a story ID (e.g., `CPD-LC-001-001`). From this you derive:
+You receive three required values from the orchestrator (or user):
+- `<STORY-ID>` (e.g., `CPD-LC-001-001`)
+- `<MODEL>` (e.g., `Kimi-K2.5`) — the LLM running this pipeline; used as a path component
+- `<ITERATION>` (e.g., `1`) — attempt number for this story+model combination
+
+If any of these is missing, ask for it before proceeding — do not invent a value or default.
+
+From `<STORY-ID>` you derive:
 - **User story**: `UserStories/<STORY-ID>.md`
 - **Confirmed intents**: `UserIntents/<STORY-ID>.json` (for understanding what tests expect)
 - **Test files**: located in `Backend.*.Tests.Unit/` directories
@@ -106,46 +113,46 @@ Also check and update:
 Run the Docker build script to validate compilation:
 
 ```bash
-./Automations/docker-build.py <STORY-ID>
+./Automations/docker-build.py <STORY-ID> <MODEL> <ITERATION>
 ```
 
-- Results are automatically saved to `BuildResults/<STORY-ID>/<timestamp>/`
+- Results are automatically saved to `BuildResults/<STORY-ID>/<MODEL>/<ITERATION>/<timestamp>/`
   - `build.log` — full build output
-  - `build-summary.json` — structured JSON summary
+  - `build-summary.json` — structured JSON summary (includes `storyId`, `model`, `iteration`)
 - Read `build-summary.json` to check status. JSON schema:
   ```json
-  {"status": "success|failure", "projects": [{"name": "...", "status": "...", "warnings": 0, "errors": 0, "errorMessages": []}], "totalWarnings": 0, "totalErrors": 0}
+  {"status": "success|failure", "storyId": "...", "model": "...", "iteration": "...", "projects": [{"name": "...", "status": "...", "warnings": 0, "errors": 0, "errorMessages": []}], "totalWarnings": 0, "totalErrors": 0}
   ```
 - **On success**: proceed to test validation
 - **On failure**: 
-  1. Read `build-summary.json` from the latest `BuildResults/<STORY-ID>/` timestamped directory
+  1. Read `build-summary.json` from the latest `BuildResults/<STORY-ID>/<MODEL>/<ITERATION>/` timestamped directory
   2. Check `errorMessages` per project to identify compilation errors
   3. Fix the issues (missing namespaces, wrong references, typos, missing project references)
-  4. Re-run `./Automations/docker-build.py`
+  4. Re-run `./Automations/docker-build.py <STORY-ID> <MODEL> <ITERATION>` (same model/iteration — do NOT change them between attempts)
   5. Repeat until build passes (max 5 attempts)
 
 ## 5. Test Validation (Autonomous)
 Run the Docker test script to validate tests pass:
 
 ```bash
-./Automations/docker-test.py <STORY-ID>
+./Automations/docker-test.py <STORY-ID> <MODEL> <ITERATION>
 ```
 
-- Results are automatically saved to `TestResults/<STORY-ID>/<timestamp>/`
+- Results are automatically saved to `TestResults/<STORY-ID>/<MODEL>/<ITERATION>/<timestamp>/`
   - `test.log` — full test output
-  - `test-summary.json` — structured JSON summary
+  - `test-summary.json` — structured JSON summary (includes `storyId`, `model`, `iteration`)
   - `TestResults/` — TRX files per test project
   - `Coverage/` — code coverage reports (HTML + Cobertura)
 - Read `test-summary.json` to check status. JSON schema:
   ```json
-  {"status": "success|failure", "projects": [{"name": "...", "total": 0, "passed": 0, "failed": 0, "skipped": 0}], "totalTests": 0, "totalPassed": 0, "totalFailed": 0, "totalSkipped": 0}
+  {"status": "success|failure", "storyId": "...", "model": "...", "iteration": "...", "projects": [{"name": "...", "total": 0, "passed": 0, "failed": 0, "skipped": 0}], "totalTests": 0, "totalPassed": 0, "totalFailed": 0, "totalSkipped": 0}
   ```
 - **On success**: report results
 - **On failure**:
-  1. Read `test-summary.json` from the latest `TestResults/<STORY-ID>/` timestamped directory
+  1. Read `test-summary.json` from the latest `TestResults/<STORY-ID>/<MODEL>/<ITERATION>/` timestamped directory
   2. Identify which projects have `failed > 0`, then read `test.log` for failure details
   3. Return to Step 3 with targeted fixes for failing tests only
-  4. Rebuild, retest
+  4. Rebuild, retest (always with same `<MODEL>` and `<ITERATION>`)
   5. Repeat until all tests pass (max 5 attempts)
 
 ## 6. Report Results

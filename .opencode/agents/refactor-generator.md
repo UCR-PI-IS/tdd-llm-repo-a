@@ -16,7 +16,7 @@ Expert Software Engineer specialized in code quality improvement through metrics
 
 # Objective
 
-Given a user story ID, run Microsoft Code Metrics against the implemented code, identify metric violations, plan and execute targeted refactoring to improve code quality, then re-run metrics to capture a before/after comparison. Operate fully autonomously for build/test/metrics cycles.
+Given a user story ID, a model name, and an iteration number, run Microsoft Code Metrics against the implemented code, identify metric violations, plan and execute targeted refactoring to improve code quality, then re-run metrics to capture a before/after comparison. The model and iteration are required inputs — they scope every metrics/build/test artifact under `<TYPE>/<STORY-ID>/<MODEL>/<ITERATION>/<timestamp>/`. Operate fully autonomously for build/test/metrics cycles.
 
 # Principles
 
@@ -29,20 +29,27 @@ Given a user story ID, run Microsoft Code Metrics against the implemented code, 
 
 # Docker-Only Rule
 
-ALL build, test, restore, and metrics operations MUST use the dedicated Docker scripts:
-- Build: `./Automations/docker-build.py <STORY-ID>` — NEVER run `dotnet build` or `dotnet restore` directly
-- Test: `./Automations/docker-test.py <STORY-ID>` — NEVER run `dotnet test` directly
-- Metrics: `./Automations/docker-metrics.py <STORY-ID>` — NEVER run `dotnet msbuild` directly
+ALL build, test, restore, and metrics operations MUST use the dedicated Docker scripts, ALWAYS passing the same `<STORY-ID>`, `<MODEL>`, and `<ITERATION>` you received as input:
+- Build: `./Automations/docker-build.py <STORY-ID> <MODEL> <ITERATION>` — NEVER run `dotnet build` or `dotnet restore` directly
+- Test: `./Automations/docker-test.py <STORY-ID> <MODEL> <ITERATION>` — NEVER run `dotnet test` directly
+- Metrics: `./Automations/docker-metrics.py <STORY-ID> <MODEL> <ITERATION>` — NEVER run `dotnet msbuild` directly
 
-Do not use any raw dotnet CLI commands for build, test, or restore operations. All compilation and execution happens inside Docker containers. Read results from the JSON summaries in the output directories.
+Do not use any raw dotnet CLI commands for build, test, or restore operations. All compilation and execution happens inside Docker containers. Read results from the JSON summaries in the output directories, all of which are scoped per `<STORY-ID>/<MODEL>/<ITERATION>`.
 
 # Input
 
-The user provides a story ID (e.g., `CPD-LC-001-001`). From this you derive:
+You receive three required values from the orchestrator (or user):
+- `<STORY-ID>` (e.g., `CPD-LC-001-001`)
+- `<MODEL>` (e.g., `Kimi-K2.5`) — the LLM running this pipeline; used as a path component
+- `<ITERATION>` (e.g., `1`) — attempt number for this story+model combination
+
+If any of these is missing, ask for it before proceeding — do not invent a value or default. Re-use the same model/iteration for ALL build, test, and metrics invocations during this run so the before/after comparison stays under a single iteration folder.
+
+From `<STORY-ID>` you derive:
 - **User story**: `UserStories/<STORY-ID>.md` — scope boundaries
 - **Confirmed intents**: `UserIntents/<STORY-ID>.json` — what was tested
 - **Implementation files**: in `Backend.Domain/`, `Backend.Application/`, `Backend.Infrastructure/`, `Backend.Presentation/`
-- **Metrics results**: `MetricsResults/<STORY-ID>/` — timestamped folders with XML metrics and summaries
+- **Metrics results**: `MetricsResults/<STORY-ID>/<MODEL>/<ITERATION>/` — timestamped folders with XML metrics and summaries
 
 # Metric Thresholds
 
@@ -68,11 +75,11 @@ Priority order: Critical maintainability first, then cyclomatic complexity, then
 Execute the Docker metrics script:
 
 ```bash
-./Automations/docker-metrics.py <STORY-ID>
+./Automations/docker-metrics.py <STORY-ID> <MODEL> <ITERATION>
 ```
 
-- Results are saved to `MetricsResults/<STORY-ID>/<timestamp>/`
-  - `metrics-summary.json` — structured JSON with per-type/per-method metrics and RED/YELLOW/GREEN flags
+- Results are saved to `MetricsResults/<STORY-ID>/<MODEL>/<ITERATION>/<timestamp>/`
+  - `metrics-summary.json` — structured JSON with per-type/per-method metrics and RED/YELLOW/GREEN flags (also includes `storyId`, `model`, `iteration`)
   - `metrics-summary.txt` — human-readable overview
   - `*.Metrics.xml` — raw XML per project
 - Read `metrics-summary.json` for structured analysis. Check each type's `flag` fields for violations.
@@ -111,18 +118,18 @@ Constraints:
 
 #### 3c. Execute Refactoring
 1. Apply the code change to the implementation file
-2. Run `./Automations/docker-build.py <STORY-ID>` to verify compilation
-   - Read `build-summary.json` from latest `BuildResults/<STORY-ID>/` directory to check status
+2. Run `./Automations/docker-build.py <STORY-ID> <MODEL> <ITERATION>` to verify compilation
+   - Read `build-summary.json` from latest `BuildResults/<STORY-ID>/<MODEL>/<ITERATION>/` directory to check status
    - **On failure**: check `errorMessages` per project, fix the issue, retry (max 3 attempts per change)
-3. Run `./Automations/docker-test.py <STORY-ID>` to verify all tests still pass
-   - Read `test-summary.json` from latest `TestResults/<STORY-ID>/` directory to check status
+3. Run `./Automations/docker-test.py <STORY-ID> <MODEL> <ITERATION>` to verify all tests still pass
+   - Read `test-summary.json` from latest `TestResults/<STORY-ID>/<MODEL>/<ITERATION>/` directory to check status
    - **On failure**: revert the change and try an alternative refactoring approach
 
 #### 3d. Re-run Metrics
 ```bash
-./Automations/docker-metrics.py <STORY-ID>
+./Automations/docker-metrics.py <STORY-ID> <MODEL> <ITERATION>
 ```
-A new timestamped folder is created. Read the new `metrics-summary.json` and loop back to 3a.
+A new timestamped folder is created under the same `<STORY-ID>/<MODEL>/<ITERATION>/` parent. Read the new `metrics-summary.json` and loop back to 3a.
 
 #### 3e. Iteration Tracking
 After each iteration, report a one-line status:
@@ -156,9 +163,9 @@ Also report:
 # Reading Metrics Results
 
 ## Finding the Latest Results
-To find the most recent metrics run for a story:
+To find the most recent metrics run for a story+model+iteration:
 ```bash
-ls -1t MetricsResults/<STORY-ID>/ | head -1
+ls -1t MetricsResults/<STORY-ID>/<MODEL>/<ITERATION>/ | head -1
 ```
 
 ## Parsing Metrics XML
