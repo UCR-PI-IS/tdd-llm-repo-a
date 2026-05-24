@@ -24,10 +24,21 @@ Each `<STORY-ID>/<MODEL>/<ITERATION>` combination is a fully independent run. Ne
 
 # Docker-Only Rule
 
-ALL build, test, restore, and metrics operations MUST use the dedicated Docker scripts, and they MUST be invoked with the same `<STORY-ID>`, `<MODEL>`, and `<ITERATION>` values gathered in step 1:
-- Build: `./Automations/docker-build.py <STORY-ID> <MODEL> <ITERATION>` — NEVER run `dotnet build` or `dotnet restore` directly
-- Test: `./Automations/docker-test.py <STORY-ID> <MODEL> <ITERATION>` — NEVER run `dotnet test` directly
-- Metrics: `./Automations/docker-metrics.py <STORY-ID> <MODEL> <ITERATION>` — NEVER run `dotnet msbuild` directly
+ALL build, test, restore, and metrics operations MUST use the dedicated Docker scripts, and they MUST be invoked with the same `<STORY-ID>`, `<MODEL>`, and `<ITERATION>` values gathered in step 1.
+
+**Cross-platform invocation.** Always invoke the Automations scripts via a Python launcher rather than the Unix shebang form. The agent definition pre-approves every supported launcher, so the call goes through without a permission prompt on macOS, Linux, or Windows. Pick the first launcher that exists on the host (the agent has `allow` permission for all of them):
+1. `python Automations/docker-build.py <args>` — works on Windows (python.org installer) and most Linux/macOS environments where `python` is Python 3.
+2. `python3 Automations/docker-build.py <args>` — fallback on macOS/Linux where only `python3` is on PATH.
+3. `py Automations/docker-build.py <args>` or `py -3 Automations/docker-build.py <args>` — fallback on Windows when the Python launcher (`py.exe`) is installed instead of `python`.
+
+Use forward slashes in paths even on Windows; Python accepts them on every OS.
+
+Commands:
+- Build: `python Automations/docker-build.py <STORY-ID> <MODEL> <ITERATION>` — NEVER run `dotnet build` or `dotnet restore` directly
+- Test: `python Automations/docker-test.py <STORY-ID> <MODEL> <ITERATION>` — NEVER run `dotnet test` directly
+- Metrics: `python Automations/docker-metrics.py <STORY-ID> <MODEL> <ITERATION>` — NEVER run `dotnet msbuild` directly
+
+If the first launcher reports "not found," retry with the next launcher in the list above without asking the user. All launcher variants are pre-approved, so no prompt should appear.
 
 Results land under:
 - `BuildResults/<STORY-ID>/<MODEL>/<ITERATION>/<timestamp>/`
@@ -83,7 +94,7 @@ Invoke the `test-generator` subagent with the following context:
 
 Invoke the `code-generator` subagent with the following context:
 
-> Implement minimal code to make failing tests pass for story `<STORY-ID>`, model `<MODEL>`, iteration `<ITERATION>`. Read the user story from `UserStories/<STORY-ID>.md` and confirmed intents from `UserIntents/<STORY-ID>.json`. Find test files in `Backend.*.Tests.Unit/` directories. Build using `./Automations/docker-build.py <STORY-ID> <MODEL> <ITERATION>` and test using `./Automations/docker-test.py <STORY-ID> <MODEL> <ITERATION>`. All result artifacts are written under `BuildResults/<STORY-ID>/<MODEL>/<ITERATION>/<timestamp>/` and `TestResults/<STORY-ID>/<MODEL>/<ITERATION>/<timestamp>/` — read summaries from there only. Keep all changes in the local workspace.
+> Implement minimal code to make failing tests pass for story `<STORY-ID>`, model `<MODEL>`, iteration `<ITERATION>`. Read the user story from `UserStories/<STORY-ID>.md` and confirmed intents from `UserIntents/<STORY-ID>.json`. Find test files in `Backend.*.Tests.Unit/` directories. Build using `python Automations/docker-build.py <STORY-ID> <MODEL> <ITERATION>` and test using `python Automations/docker-test.py <STORY-ID> <MODEL> <ITERATION>`. All result artifacts are written under `BuildResults/<STORY-ID>/<MODEL>/<ITERATION>/<timestamp>/` and `TestResults/<STORY-ID>/<MODEL>/<ITERATION>/<timestamp>/` — read summaries from there only. Keep all changes in the local workspace.
 
 **After completion:**
 - Read `pipeline-stage-result.json` from the latest `TestResults/<STORY-ID>/<MODEL>/<ITERATION>/<timestamp>/` directory (primary source of truth). Fall back to combining `build-summary.json` + `test-summary.json` only if the stage-result file is missing.
@@ -94,7 +105,7 @@ Invoke the `code-generator` subagent with the following context:
 
 Invoke the `refactor-generator` subagent with the following context:
 
-> Run code metrics and refactor for story `<STORY-ID>`, model `<MODEL>`, iteration `<ITERATION>`. Execute `./Automations/docker-metrics.py <STORY-ID> <MODEL> <ITERATION>` to get baseline metrics. Analyze violations against thresholds (MI: 0-9 RED, 10-19 YELLOW; CC: >25 RED, 11-25 YELLOW; Coupling: >40 RED, 10-40 YELLOW; DIT: >=6 RED). Refactor only code related to this story. Re-run metrics after refactoring (re-using the same `<MODEL>` and `<ITERATION>` so all artifacts stay grouped). Build/test validations during refactoring must also pass `<MODEL>` and `<ITERATION>` to the docker scripts. Keep all changes in the local workspace.
+> Run code metrics and refactor for story `<STORY-ID>`, model `<MODEL>`, iteration `<ITERATION>`. Execute `python Automations/docker-metrics.py <STORY-ID> <MODEL> <ITERATION>` to get baseline metrics. Analyze violations against thresholds (MI: 0-9 RED, 10-19 YELLOW; CC: >25 RED, 11-25 YELLOW; Coupling: >40 RED, 10-40 YELLOW; DIT: >=6 RED). Refactor only code related to this story. Re-run metrics after refactoring (re-using the same `<MODEL>` and `<ITERATION>` so all artifacts stay grouped). Build/test validations during refactoring must also pass `<MODEL>` and `<ITERATION>` to the docker scripts. Keep all changes in the local workspace.
 
 **After completion:**
 - Read `pipeline-stage-result.json` from the latest `MetricsResults/<STORY-ID>/<MODEL>/<ITERATION>/<timestamp>/` directory (primary source of truth). Fall back to reading `metrics-summary.json` before/after only if the stage-result file is missing.

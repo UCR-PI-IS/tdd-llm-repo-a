@@ -29,10 +29,19 @@ Given a user story ID, a model name, and an iteration number, find the correspon
 
 # Docker-Only Rule
 
-ALL build, test, restore, and metrics operations MUST use the dedicated Docker scripts, ALWAYS passing the same `<STORY-ID>`, `<MODEL>`, and `<ITERATION>` you received as input:
-- Build: `./Automations/docker-build.py <STORY-ID> <MODEL> <ITERATION>` — NEVER run `dotnet build` or `dotnet restore` directly
-- Test: `./Automations/docker-test.py <STORY-ID> <MODEL> <ITERATION>` — NEVER run `dotnet test` directly
-- Metrics: `./Automations/docker-metrics.py <STORY-ID> <MODEL> <ITERATION>` — NEVER run `dotnet msbuild` directly
+ALL build, test, restore, and metrics operations MUST use the dedicated Docker scripts, ALWAYS passing the same `<STORY-ID>`, `<MODEL>`, and `<ITERATION>` you received as input.
+
+**Cross-platform invocation.** Always invoke the Automations scripts via a Python launcher rather than the Unix shebang form. The agent definition pre-approves every supported launcher, so the call goes through without a permission prompt on macOS, Linux, or Windows. Pick the first launcher that exists on the host (all variants are pre-approved):
+1. `python Automations/docker-build.py <args>` — works on Windows (python.org installer) and most Linux/macOS environments where `python` is Python 3.
+2. `python3 Automations/docker-build.py <args>` — fallback on macOS/Linux where only `python3` is on PATH.
+3. `py Automations/docker-build.py <args>` or `py -3 Automations/docker-build.py <args>` — fallback on Windows when the Python launcher (`py.exe`) is installed instead of `python`.
+
+Use forward slashes in paths even on Windows; Python accepts them on every OS. If the first launcher reports "not found," retry with the next launcher in the list above without asking the user.
+
+Commands:
+- Build: `python Automations/docker-build.py <STORY-ID> <MODEL> <ITERATION>` — NEVER run `dotnet build` or `dotnet restore` directly
+- Test: `python Automations/docker-test.py <STORY-ID> <MODEL> <ITERATION>` — NEVER run `dotnet test` directly
+- Metrics: `python Automations/docker-metrics.py <STORY-ID> <MODEL> <ITERATION>` — NEVER run `dotnet msbuild` directly
 
 Do not use any raw dotnet CLI commands for build, test, or restore operations. All compilation and execution happens inside Docker containers. Read results from the JSON summaries in the output directories, all of which are scoped per `<STORY-ID>/<MODEL>/<ITERATION>`.
 
@@ -115,7 +124,7 @@ Also check and update:
 Run the Docker build script to validate compilation:
 
 ```bash
-./Automations/docker-build.py <STORY-ID> <MODEL> <ITERATION>
+python Automations/docker-build.py <STORY-ID> <MODEL> <ITERATION>
 ```
 
 - Results are automatically saved to `BuildResults/<STORY-ID>/<MODEL>/<ITERATION>/<timestamp>/`
@@ -130,14 +139,14 @@ Run the Docker build script to validate compilation:
   1. Read `build-summary.json` from the latest `BuildResults/<STORY-ID>/<MODEL>/<ITERATION>/` timestamped directory
   2. Check `errorMessages` per project to identify compilation errors
   3. Fix the issues (missing namespaces, wrong references, typos, missing project references)
-  4. Re-run `./Automations/docker-build.py <STORY-ID> <MODEL> <ITERATION>` (same model/iteration — do NOT change them between attempts)
+  4. Re-run `python Automations/docker-build.py <STORY-ID> <MODEL> <ITERATION>` (same model/iteration — do NOT change them between attempts)
   5. Repeat until build passes (max 5 attempts)
 
 ## 5. Test Validation (Autonomous)
 Run the Docker test script to validate tests pass:
 
 ```bash
-./Automations/docker-test.py <STORY-ID> <MODEL> <ITERATION>
+python Automations/docker-test.py <STORY-ID> <MODEL> <ITERATION>
 ```
 
 - Results are automatically saved to `TestResults/<STORY-ID>/<MODEL>/<ITERATION>/<timestamp>/`
