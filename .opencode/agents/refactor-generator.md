@@ -71,6 +71,8 @@ Priority order: Critical maintainability first, then cyclomatic complexity, then
 - List implementation files in `Backend.Domain/`, `Backend.Application/`, `Backend.Infrastructure/`, `Backend.Presentation/` that are related to this story
 - Read `UserIntents/<STORY-ID>.json` to understand what behaviors are tested
 
+**Each `<STORY-ID>/<MODEL>/<ITERATION>` run is independent.** Do NOT read artifacts from any other story, model, or iteration folder. Only read metrics/build/test outputs produced inside the current iteration's folder. Treat every invocation as a fresh start.
+
 ## 2. Run Baseline Metrics (Before)
 Execute the Docker metrics script:
 
@@ -85,21 +87,35 @@ Execute the Docker metrics script:
 - Read `metrics-summary.json` for structured analysis. Check each type's `flag` fields for violations.
 - Record the timestamp folder path as the **baseline**
 
-## 3. Iterative Refactoring Loop
+## 3. Static-Smell Pass (runs before the metric-driven loop)
+
+Metric thresholds catch threshold violations but miss textbook smells. Before entering the iterative loop, scan the story's production files for the following and address them as targeted refactors (still gated by build + tests passing):
+
+| Smell | Detection rule | Refactoring |
+|-------|----------------|-------------|
+| **Block duplication** | The same sequence of 3+ statements appears more than once within a method, across sibling methods, or in adjacent files in the same layer | Extract a private method or shared helper |
+| **Dead private members** | A `private` field, method, or property is declared but has no references anywhere in the assembly | Delete it |
+| **Unreferenced public/internal members** | A `public` or `internal` member exists on a production class but is referenced by neither another production type nor any test in `Backend.*.Tests.Unit/` | Delete it (it is speculative code; if a future story needs it, re-add it then) |
+| **Unused constructors / overloads** | Two or more constructors or method overloads exist and at least one is referenced nowhere | Delete the unused overload |
+| **Repeated guard clauses** | The same `if (... ) throw new ArgumentException(...)` pattern repeats 3+ times in one method | Extract a `Guard.Against...` helper or a single parameterized validation routine |
+
+For each smell found, record `{file, smell, action}` and treat the fix as an iteration-0 refactor. If a fix breaks tests, revert and skip. This pass does NOT count against the 10-iteration cap.
+
+## 4. Iterative Refactoring Loop
 
 **Target**: ALL metrics flags GREEN for code related to this user story.
 **Maximum iterations**: 10 (stop and report if target not reached).
 
 ### For each iteration (1 through 10):
 
-#### 3a. Analyze Violations
+#### 4a. Analyze Violations
 - Parse the latest `metrics-summary.json`
 - Filter to only types/methods related to the user story (ignore unrelated code)
 - Check if ALL flags are GREEN for the story's code
-- **If all GREEN**: target achieved — go to Step 4 (Report)
-- **If violations remain**: continue to 3b
+- **If all GREEN**: target achieved — go to Step 5 (Report)
+- **If violations remain**: continue to 4b
 
-#### 3b. Plan Refactoring
+#### 4b. Plan Refactoring
 Pick the highest-priority violation and plan a targeted refactoring:
 
 | Violation | Refactoring Technique |
@@ -116,7 +132,7 @@ Constraints:
 - Maintain all DDD layer boundaries
 - Do not introduce new dependencies unless absolutely necessary
 
-#### 3c. Execute Refactoring
+#### 4c. Execute Refactoring
 1. Apply the code change to the implementation file
 2. Run `./Automations/docker-build.py <STORY-ID> <MODEL> <ITERATION>` to verify compilation
    - Read `build-summary.json` from latest `BuildResults/<STORY-ID>/<MODEL>/<ITERATION>/` directory to check status
@@ -125,24 +141,59 @@ Constraints:
    - Read `test-summary.json` from latest `TestResults/<STORY-ID>/<MODEL>/<ITERATION>/` directory to check status
    - **On failure**: revert the change and try an alternative refactoring approach
 
-#### 3d. Re-run Metrics
+#### 4d. Re-run Metrics
 ```bash
 ./Automations/docker-metrics.py <STORY-ID> <MODEL> <ITERATION>
 ```
-A new timestamped folder is created under the same `<STORY-ID>/<MODEL>/<ITERATION>/` parent. Read the new `metrics-summary.json` and loop back to 3a.
+A new timestamped folder is created under the same `<STORY-ID>/<MODEL>/<ITERATION>/` parent. Read the new `metrics-summary.json` and loop back to 4a.
 
-#### 3e. Iteration Tracking
+#### 4e. Iteration Tracking
 After each iteration, report a one-line status:
 ```
 Iteration X/10: Y violations remaining (Z RED, W YELLOW)
 ```
 
 ### Stop Conditions
-- **Success**: All flags GREEN for the story's code — proceed to Step 4
-- **Max iterations**: 10 iterations reached without all-GREEN — proceed to Step 4 with remaining violations noted
+- **Success**: All flags GREEN for the story's code — proceed to Step 5
+- **Max iterations**: 10 iterations reached without all-GREEN — proceed to Step 5 with remaining violations noted
 - **Stuck**: If the same violation cannot be improved after 3 consecutive attempts, skip it and move to the next
 
-## 4. Report Results
+## 5. Report Results
+
+### 5a. Machine-readable handoff (required)
+Write a `pipeline-stage-result.json` alongside the FINAL metrics run output for the current iteration:
+`MetricsResults/<STORY-ID>/<MODEL>/<ITERATION>/<latest-timestamp>/pipeline-stage-result.json`
+
+The `baseline` is the FIRST metrics run inside the current iteration's folder; the `final` is the LAST. This file is scoped to the current iteration and is NEVER read by any agent in a different iteration.
+
+Schema (emit ALL keys; use empty arrays/strings rather than omitting):
+```json
+{
+  "stage": "refactoring",
+  "storyId": "<STORY-ID>",
+  "model": "<MODEL>",
+  "iteration": "<ITERATION>",
+  "status": "success|failure|partial",
+  "filesCreated": [],
+  "filesModified": ["relative/path/to/File.cs", "..."],
+  "metrics": {
+    "loopIterationsPerformed": 0,
+    "maxLoopIterations": 10,
+    "allGreenAchieved": false,
+    "baseline": { "minMI": 0, "maxCC": 0, "maxCoupling": 0, "maxDIT": 0 },
+    "final":    { "minMI": 0, "maxCC": 0, "maxCoupling": 0, "maxDIT": 0 },
+    "remainingViolations": [
+      { "type": "FullyQualifiedType", "metric": "MI|CC|Coupling|DIT", "value": 0, "flag": "YELLOW|RED" }
+    ]
+  },
+  "warnings": ["refactorings that were reverted because tests failed; skipped violations"],
+  "notes": "free-form, one short paragraph max"
+}
+```
+
+Note: `loopIterationsPerformed` refers to inner refactor-loop passes within this run, NOT the outer pipeline `<ITERATION>` argument — those are unrelated.
+
+### 5b. Human summary
 Display a comparison table (baseline vs final):
 
 ```

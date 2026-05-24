@@ -76,7 +76,13 @@ Generate the test files, report what was created, and stop. Building, testing, a
 - For numeric inputs, include both positive and negative values
 
 ## Assertions and Quality
-- One assertion per test (test engineering heuristic)
+- **Single logical assertion per test** — enforced as follows:
+  - Default: at most one `Assert.That(...)` (or equivalent) call per test method.
+  - When a test must verify multiple properties of the same object (e.g., a constructor or factory), use ONE of these patterns instead of N separate asserts:
+    1. `Assert.Multiple(() => { Assert.That(x.A, Is.EqualTo(...)); Assert.That(x.B, Is.EqualTo(...)); ... });` — counts as one logical assertion.
+    2. Construct an `expected` object/record and assert `Assert.That(actual, Is.EqualTo(expected));` — preferred when the type supports value equality.
+  - Never write a test with multiple top-level `Assert.That` calls outside an `Assert.Multiple` block.
+- Self-check before emitting a test: count the top-level assertion statements. If > 1 and not wrapped in `Assert.Multiple`, rewrite the test.
 - Include short, comprehensive descriptions using the `Description` property in `[Test]`, `[TestCase]`, or `[TestCaseSource]`
 - All objects must be fully and correctly initialized
 - Follow Clean Code principles
@@ -110,4 +116,30 @@ Process intents layer by layer in DDD order:
 2. **Application** — mock repository interfaces via Moq
 3. **Infrastructure** — mock DbContext or use in-memory provider via Moq
 4. **Presentation** — mock services, test handler responses and DTOs
+
+# Stage Handoff
+
+Before stopping, write a `pipeline-stage-result.json` so the orchestrator can read your results deterministically. Path: `TestResults/<STORY-ID>/<MODEL>/<ITERATION>/test-generator/pipeline-stage-result.json` (create directories as needed; you may emit this file even though you do not run tests). This file is scoped to the current iteration and is NEVER read by any agent in a different iteration.
+
+Schema (emit ALL keys; use empty arrays/strings rather than omitting):
+```json
+{
+  "stage": "test-generation",
+  "storyId": "<STORY-ID>",
+  "model": "<MODEL>",
+  "iteration": "<ITERATION>",
+  "status": "success|failure|partial",
+  "filesCreated": ["Backend.Domain.Tests.Unit/...", "..."],
+  "filesModified": [],
+  "metrics": {
+    "intentsConfirmed": 0,
+    "testMethodsEmitted": 0,
+    "byLayer": { "Domain": 0, "Application": 0, "Infrastructure": 0, "Presentation": 0 }
+  },
+  "warnings": ["intents skipped or assumptions made"],
+  "notes": "free-form, one short paragraph max"
+}
+```
+
+If `<MODEL>` and `<ITERATION>` were not provided, write the file under `TestResults/<STORY-ID>/test-generator/` instead and set those fields to `"unknown"`.
 

@@ -87,6 +87,8 @@ Read the following from the workspace:
 - `Docs/Guidelines/CA-GUIDELINES.md` — layer responsibilities
 - List files in all `Backend.*.Tests.Unit/` directories to find test files for this story
 
+**Each `<STORY-ID>/<MODEL>/<ITERATION>` run is independent.** Do NOT read artifacts from any other story, model, or iteration folder. Treat every invocation as a fresh start.
+
 ## 2. Analyze Failing Tests
 - Read all test files related to this user story
 - From test code, infer what implementation files/classes are needed
@@ -156,8 +158,42 @@ Run the Docker test script to validate tests pass:
   5. Repeat until all tests pass (max 5 attempts)
 
 ## 6. Report Results
-Once all tests pass:
-- Summarize: number of files created/modified, tests passing, coverage percentage (if available from reports)
+
+### 6a. Machine-readable handoff (required)
+Write a `pipeline-stage-result.json` alongside the latest test run output for the current iteration:
+`TestResults/<STORY-ID>/<MODEL>/<ITERATION>/<latest-timestamp>/pipeline-stage-result.json`
+
+This file is scoped to the current iteration and is NEVER read by any agent in a different iteration.
+
+Schema (emit ALL keys; use empty arrays/strings rather than omitting):
+```json
+{
+  "stage": "code-generation",
+  "storyId": "<STORY-ID>",
+  "model": "<MODEL>",
+  "iteration": "<ITERATION>",
+  "status": "success|failure|partial",
+  "filesCreated": ["relative/path/to/File.cs", "..."],
+  "filesModified": ["relative/path/to/File.cs", "..."],
+  "metrics": {
+    "buildErrors": 0,
+    "buildWarnings": 0,
+    "testsTotal": 0,
+    "testsPassed": 0,
+    "testsFailed": 0,
+    "testsSkipped": 0,
+    "lineCoverage": null,
+    "branchCoverage": null
+  },
+  "warnings": ["string descriptions of any non-fatal issues encountered"],
+  "notes": "free-form, one short paragraph max"
+}
+```
+
+Populate `lineCoverage`/`branchCoverage` from `Coverage/Combined/Cobertura.xml` (`line-rate`, `branch-rate` attributes on the root `<coverage>` element, as floats in [0,1]). Leave `null` if the file is absent.
+
+### 6b. Human summary
+Print a 3–5 line summary to the user: files created/modified count, build status, tests passed/failed, and coverage percent.
 
 # Guardrails
 

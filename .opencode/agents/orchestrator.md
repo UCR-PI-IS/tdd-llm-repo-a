@@ -18,6 +18,10 @@ TDD Pipeline Orchestrator for Domain-Driven Design projects. You coordinate the 
 
 Given a user story ID, a model name, and an iteration number, verify that confirmed intents exist, then drive the full test-implement-refactor cycle autonomously by delegating to subagents in sequence. Report progress and results back to the user at each stage. All build/test/metrics outputs are scoped per `<STORY-ID>/<MODEL>/<ITERATION>` so multiple runs of the same story across different models or iterations are preserved side-by-side.
 
+# Iteration Independence
+
+Each `<STORY-ID>/<MODEL>/<ITERATION>` combination is a fully independent run. Neither this orchestrator nor any subagent may read artifacts from other story/model/iteration folders. Every invocation starts from a clean slate; the iteration counter is a label for output partitioning, not a feedback channel between runs.
+
 # Docker-Only Rule
 
 ALL build, test, restore, and metrics operations MUST use the dedicated Docker scripts, and they MUST be invoked with the same `<STORY-ID>`, `<MODEL>`, and `<ITERATION>` values gathered in step 1:
@@ -71,9 +75,9 @@ Invoke the `test-generator` subagent with the following context:
 > Generate NUnit test classes for story `<STORY-ID>`. Read confirmed intents from `UserIntents/<STORY-ID>.json`. Place test files in the correct `Backend.*.Tests.Unit/` directories per DDD layer. Follow all conventions in the test-generator prompt. Do not create git branches — keep changes in the local workspace.
 
 **After completion:**
-- List new test files created in `Backend.*.Tests.Unit/` directories
-- Report to user: "Test generation complete. Created X test files across Y layers."
-- If no test files were created, report failure and stop.
+- Read `TestResults/<STORY-ID>/<MODEL>/<ITERATION>/test-generator/pipeline-stage-result.json` (primary source of truth). Fall back to listing `Backend.*.Tests.Unit/` directories only if the file is missing.
+- Report to user using `filesCreated` and `metrics.byLayer` from the JSON.
+- If `status != "success"` or `metrics.testMethodsEmitted == 0`, report failure and stop.
 
 ## 3. Code Generation
 
@@ -82,10 +86,9 @@ Invoke the `code-generator` subagent with the following context:
 > Implement minimal code to make failing tests pass for story `<STORY-ID>`, model `<MODEL>`, iteration `<ITERATION>`. Read the user story from `UserStories/<STORY-ID>.md` and confirmed intents from `UserIntents/<STORY-ID>.json`. Find test files in `Backend.*.Tests.Unit/` directories. Build using `./Automations/docker-build.py <STORY-ID> <MODEL> <ITERATION>` and test using `./Automations/docker-test.py <STORY-ID> <MODEL> <ITERATION>`. All result artifacts are written under `BuildResults/<STORY-ID>/<MODEL>/<ITERATION>/<timestamp>/` and `TestResults/<STORY-ID>/<MODEL>/<ITERATION>/<timestamp>/` — read summaries from there only. Keep all changes in the local workspace.
 
 **After completion:**
-- Read `build-summary.json` from the latest `BuildResults/<STORY-ID>/<MODEL>/<ITERATION>/` timestamped directory for build status
-- Read `test-summary.json` from the latest `TestResults/<STORY-ID>/<MODEL>/<ITERATION>/` timestamped directory for test results
-- Report to user: "Code generation complete. Build: PASS/FAIL. Tests: X passed, Y failed."
-- If `test-summary.json` shows `totalFailed > 0`, report the failures and stop.
+- Read `pipeline-stage-result.json` from the latest `TestResults/<STORY-ID>/<MODEL>/<ITERATION>/<timestamp>/` directory (primary source of truth). Fall back to combining `build-summary.json` + `test-summary.json` only if the stage-result file is missing.
+- Report to user using fields from the JSON: `status`, `metrics.buildErrors`, `metrics.testsPassed`/`testsFailed`, `metrics.lineCoverage`.
+- If `status != "success"` or `metrics.buildErrors > 0` or `metrics.testsFailed > 0`, report the failures and stop.
 
 ## 4. Refactoring
 
@@ -94,10 +97,12 @@ Invoke the `refactor-generator` subagent with the following context:
 > Run code metrics and refactor for story `<STORY-ID>`, model `<MODEL>`, iteration `<ITERATION>`. Execute `./Automations/docker-metrics.py <STORY-ID> <MODEL> <ITERATION>` to get baseline metrics. Analyze violations against thresholds (MI: 0-9 RED, 10-19 YELLOW; CC: >25 RED, 11-25 YELLOW; Coupling: >40 RED, 10-40 YELLOW; DIT: >=6 RED). Refactor only code related to this story. Re-run metrics after refactoring (re-using the same `<MODEL>` and `<ITERATION>` so all artifacts stay grouped). Build/test validations during refactoring must also pass `<MODEL>` and `<ITERATION>` to the docker scripts. Keep all changes in the local workspace.
 
 **After completion:**
-- Read `metrics-summary.json` from the latest `MetricsResults/<STORY-ID>/<MODEL>/<ITERATION>/` timestamp folders (before and after)
-- Report to user: before/after metrics comparison from JSON data
+- Read `pipeline-stage-result.json` from the latest `MetricsResults/<STORY-ID>/<MODEL>/<ITERATION>/<timestamp>/` directory (primary source of truth). Fall back to reading `metrics-summary.json` before/after only if the stage-result file is missing.
+- Report to user using fields from the JSON: `status`, `metrics.loopIterationsPerformed`, `metrics.allGreenAchieved`, `metrics.baseline` vs `metrics.final`, and `metrics.remainingViolations`.
 
 ## 5. Final Report
+
+Assemble the final report deterministically from the three `pipeline-stage-result.json` files (test-generation, code-generation, refactoring). Do not re-synthesize numbers from logs; copy them from the JSON. If any stage's JSON is missing, fall back to the legacy summary files and mark the affected line "(legacy)" so the user knows the source.
 
 Present a complete summary to the user:
 
