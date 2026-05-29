@@ -1,0 +1,46 @@
+{
+  "stage": "refactoring",
+  "storyId": "CPD-LC-001-001",
+  "model": "DeepSeek-V4-Pro",
+  "iteration": "1",
+  "status": "partial",
+  "filesCreated": [
+    "Backend.Presentation/Mappers/LearningComponentMapper.cs",
+    "Backend.Presentation/Handlers/LearningSpaceExistenceChecker.cs",
+    "Backend.Presentation/Handlers/LearningComponentResponseBuilder.cs"
+  ],
+  "filesModified": [
+    "Backend.Domain/Entities/LearningComponent.cs",
+    "Backend.Presentation/Handlers/GetLearningComponentsHandler.cs"
+  ],
+  "metrics": {
+    "loopIterationsPerformed": 6,
+    "maxLoopIterations": 10,
+    "allGreenAchieved": false,
+    "baseline": {
+      "minMI": 54,
+      "maxCC": 9,
+      "maxCoupling": 18,
+      "maxDIT": 0
+    },
+    "final": {
+      "minMI": 54,
+      "maxCC": 5,
+      "maxCoupling": 13,
+      "maxDIT": 0
+    },
+    "remainingViolations": [
+      {
+        "type": "LearningComponentResponseBuilder",
+        "metric": "Coupling",
+        "value": 13,
+        "flag": "YELLOW"
+      }
+    ]
+  },
+  "warnings": [
+    "LearningComponentResponseBuilder (new helper) has Coupling=13 (YELLOW) - inherent to HTTP response building role",
+    "GetLearningSpaceListHandler Coupling=15 (YELLOW) - not part of this story, left untouched"
+  ],
+  "notes": "Reduced GetLearningComponentsHandler coupling from 18 (YELLOW) to 8 (GREEN) by extracting DTO mapping, existence checking, and response building into focused helper classes. Also extracted repeated guard clauses in LearningComponent constructor into a shared GuardAgainstNegative method. All 24 tests pass. The new LearningComponentResponseBuilder helper has Coupling=13 (YELLOW) due to necessary HTTP response types, but the primary handler is now clean."
+}
