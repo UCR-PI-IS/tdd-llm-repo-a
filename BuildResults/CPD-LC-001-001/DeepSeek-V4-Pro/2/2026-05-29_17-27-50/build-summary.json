@@ -1,0 +1,35 @@
+{
+  "status": "failure",
+  "timestamp": "2026-05-29_17-27-50",
+  "storyId": "CPD-LC-001-001",
+  "model": "DeepSeek-V4-Pro",
+  "iteration": "2",
+  "projects": [
+    {
+      "name": "UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit",
+      "status": "success",
+      "warnings": 0,
+      "errors": 0,
+      "errorMessages": []
+    },
+    {
+      "name": "UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit",
+      "status": "success",
+      "warnings": 0,
+      "errors": 0,
+      "errorMessages": []
+    },
+    {
+      "name": "UCR.ECCI.PI.ThemePark.Backend.Api",
+      "status": "failure",
+      "warnings": 0,
+      "errors": 2,
+      "errorMessages": [
+        "CS0051: Inconsistent accessibility: parameter type 'UCRDatabaseContext' is less accessible than method 'SqlLearningComponentRepository.SqlLearningComponentRepository(UCRDatabaseContext)'",
+        "CS0051: Inconsistent accessibility: parameter type 'UCRDatabaseContext' is less accessible than method 'SqlLearningComponentRepository.SqlLearningComponentRepository(UCRDatabaseContext)'"
+      ]
+    }
+  ],
+  "totalWarnings": 0,
+  "totalErrors": 2
+}
