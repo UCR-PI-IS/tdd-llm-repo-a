@@ -1,0 +1,47 @@
+{
+  "stage": "refactoring",
+  "storyId": "CPD-LC-001-001",
+  "model": "DeepSeek-V4-Pro",
+  "iteration": "5",
+  "status": "partial",
+  "filesCreated": [
+    "Backend.Presentation/Api/Handlers/LearningComponentResponseFactory.cs"
+  ],
+  "filesModified": [
+    "Backend.Domain/Entities/LearningComponent.cs",
+    "Backend.Presentation/Api/Handlers/GetLearningComponentsHandler.cs"
+  ],
+  "filesDeleted": [
+    "Backend.Presentation/Api/Mappers/LearningComponentMapper.cs"
+  ],
+  "metrics": {
+    "loopIterationsPerformed": 4,
+    "maxLoopIterations": 10,
+    "allGreenAchieved": false,
+    "baseline": {
+      "minMI": 54,
+      "maxCC": 9,
+      "maxCoupling": 17,
+      "maxDIT": 0
+    },
+    "final": {
+      "minMI": 54,
+      "maxCC": 9,
+      "maxCoupling": 11,
+      "maxDIT": 0
+    },
+    "remainingViolations": [
+      {
+        "type": "UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Handlers.GetLearningComponentsHandler",
+        "metric": "Coupling",
+        "value": 11,
+        "flag": "YELLOW"
+      }
+    ]
+  },
+  "warnings": [
+    "GetLearningComponentsHandler class coupling reduced from 17 to 11 but could not reach GREEN threshold of 9. Remaining coupling is from framework types (IResult, Task, string, List<T>, LINQ extensions) and the single helper class LearningComponentResponseFactory. Further reduction would require architectural changes beyond simple refactoring (e.g., MediatR pipeline).",
+    "GetLearningSpaceListHandler (Coupling=15 YELLOW) is NOT part of this story (CPD-LC-001-001) and was not refactored."
+  ],
+  "notes": "Static-smell pass extracted repeated guard clauses in LearningComponent constructor into a GuardNonNegative helper. Metric-driven loop performed 4 iterations: (1) extracted LearningComponentMapper to reduce coupling 17->16, (2) extracted LearningComponentResponseFactory to reduce coupling 16->12, (3) added OkEmpty() to remove List<LearningComponentDto> reference 12->12, (4) merged mapper into factory and deleted separate mapper file 12->11. All 24 tests pass after every change. The handler is now clean with single responsibility: orchestration only, delegating mapping and response creation to the factory."
+}
