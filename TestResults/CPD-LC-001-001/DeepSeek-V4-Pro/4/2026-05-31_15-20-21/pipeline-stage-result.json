@@ -1,0 +1,35 @@
+{
+  "stage": "test-generation",
+  "storyId": "CPD-LC-001-001",
+  "model": "DeepSeek-V4-Pro",
+  "iteration": "4",
+  "status": "partial",
+  "filesCreated": [
+    "Backend.Domain.Tests.Unit/LearningComponentTests.cs",
+    "Backend.Application.Tests.Unit/LearningComponentServiceTests.cs",
+    "Backend.Infrastructure.Tests.Unit/SqlLearningComponentRepositoryTests.cs",
+    "Backend.Presentation.Tests.Unit/GetLearningComponentsHandlerTests.cs"
+  ],
+  "filesModified": [
+    "Backend.Domain.Tests.Unit/UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.csproj",
+    "Backend.Application.Tests.Unit/UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.csproj",
+    "Backend.Infrastructure.Tests.Unit/UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.csproj",
+    "Backend.Presentation.Tests.Unit/UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.csproj"
+  ],
+  "metrics": {
+    "intentsConfirmed": 21,
+    "testMethodsEmitted": 21,
+    "byLayer": {
+      "Domain": 10,
+      "Application": 4,
+      "Infrastructure": 3,
+      "Presentation": 4
+    }
+  },
+  "warnings": [
+    "Build fails because production types (LearningComponent, ILearningComponentRepository, LearningComponentService, ILearningComponentService, SqlLearningComponentRepository, UCRDatabaseContext, GetLearningComponentsHandler, GetLearningComponentsResponse, LearningComponentDto, ErrorResponse) do not exist yet. This is expected in TDD - tests are written before implementation.",
+    "Docker build stops on first failure (Presentation test project) due to set -e in build script. Other test projects were not built but would also fail due to missing production types.",
+    "Added explicit 'using NUnit.Framework;' to all test files because the 'Using Include=NUnit' in csproj was not being picked up in the Docker build environment for the Presentation test project."
+  ],
+  "notes": "Generated 21 test methods across 4 test classes covering all 21 confirmed intents. Domain tests (10 methods) cover LearningComponent constructor with valid parameters, valid orientations (North/South/East/West), zero-value boundary test, and negative validation for width, height, depth, X, Y, Z, and orientation. Application tests (4 methods) cover LearningComponentService.GetComponentsByLearningSpaceIdAsync with components present, empty list, empty ID, and null ID. Infrastructure tests (3 methods) cover SqlLearningComponentRepository with valid ID, no components, and non-existent ID. Presentation tests (4 methods) cover GetLearningComponentsHandler with components present, empty list, invalid ID (BadRequest), and non-existent ID (NotFound). All test project csproj files were updated to add ProjectReference to their respective source projects."
+}
