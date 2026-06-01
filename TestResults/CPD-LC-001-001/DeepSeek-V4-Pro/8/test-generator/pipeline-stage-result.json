@@ -1,0 +1,35 @@
+{
+  "stage": "test-generation",
+  "storyId": "CPD-LC-001-001",
+  "model": "DeepSeek-V4-Pro",
+  "iteration": "8",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Domain.Tests.Unit/LearningComponentTests.cs",
+    "Backend.Application.Tests.Unit/LearningComponentServiceTests.cs",
+    "Backend.Infrastructure.Tests.Unit/SqlLearningComponentRepositoryTests.cs",
+    "Backend.Presentation.Tests.Unit/GetLearningComponentsHandlerTests.cs"
+  ],
+  "filesModified": [
+    "Backend.Domain.Tests.Unit/UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.csproj",
+    "Backend.Application.Tests.Unit/UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.csproj",
+    "Backend.Infrastructure.Tests.Unit/UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.csproj",
+    "Backend.Presentation.Tests.Unit/UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.csproj"
+  ],
+  "metrics": {
+    "intentsConfirmed": 18,
+    "testMethodsEmitted": 18,
+    "byLayer": {
+      "Domain": 10,
+      "Application": 4,
+      "Infrastructure": 3,
+      "Presentation": 4
+    }
+  },
+  "warnings": [
+    "Build and test both fail as expected because production types (LearningComponent, ILearningComponentService, ILearningComponentRepository, GetLearningComponentsHandler, etc.) do not exist yet. This is correct TDD red phase behavior.",
+    "Build script uses set -e and stops at first failure (Presentation test project). Domain, Application, and Infrastructure test projects would also fail with similar 'type not found' errors if built independently.",
+    "All four test .csproj files were modified to add project references to their respective production projects and to change <Using Include=\"NUnit\" /> to <Using Include=\"NUnit.Framework\" /> for correct NUnit attribute resolution."
+  ],
+  "notes": "Generated 18 test methods across 4 DDD layers from 18 confirmed intents. Domain layer: 10 tests (1 positive constructor, 1 parameterized orientation, 1 zero-values boundary, 7 negative validation). Application layer: 4 tests (2 positive, 2 negative). Infrastructure layer: 3 tests (2 positive, 1 negative). Presentation layer: 4 tests (2 positive, 2 negative). All tests follow AAA pattern with single logical assertions using Assert.Multiple where needed. Tests are expected to fail at compilation because the production code has not been implemented yet, which is the correct TDD red phase."
+}

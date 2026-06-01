@@ -1,0 +1,49 @@
+{
+  "stage": "refactoring",
+  "storyId": "CPD-LC-001-001",
+  "model": "DeepSeek-V4-Pro",
+  "iteration": "8",
+  "status": "partial",
+  "filesCreated": [
+    "Backend.Presentation/Mappers/LearningComponentMapper.cs",
+    "Backend.Infrastructure/Repositories/LearningComponentQuery.cs",
+    "Backend.Presentation/Handlers/HandlerResponses.cs"
+  ],
+  "filesModified": [
+    "Backend.Domain/Entities/LearningComponent.cs",
+    "Backend.Presentation/Dtos/LearningComponentDto.cs",
+    "Backend.Presentation/Handlers/GetLearningComponentsHandler.cs",
+    "Backend.Infrastructure/Repositories/SqlLearningComponentRepository.cs"
+  ],
+  "metrics": {
+    "loopIterationsPerformed": 5,
+    "maxLoopIterations": 10,
+    "allGreenAchieved": false,
+    "baseline": {
+      "minMI": 55,
+      "maxCC": 8,
+      "maxCoupling": 17,
+      "maxDIT": 0
+    },
+    "final": {
+      "minMI": 56,
+      "maxCC": 8,
+      "maxCoupling": 10,
+      "maxDIT": 0
+    },
+    "remainingViolations": [
+      {
+        "type": "UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Handlers.GetLearningComponentsHandler",
+        "metric": "Coupling",
+        "value": 10,
+        "flag": "YELLOW"
+      }
+    ]
+  },
+  "warnings": [
+    "GetLearningComponentsHandler coupling reduced from 17 to 10 but remains at YELLOW threshold (10). Further reduction would require architectural changes beyond the scope of this story.",
+    "SqlLearningComponentRepository coupling resolved from 11 YELLOW to below threshold (GREEN).",
+    "Static smells fixed: removed unused using in LearningComponentDto.cs, extracted GuardNonNegative helper in LearningComponent.cs to eliminate repeated guard clauses."
+  ],
+  "notes": "Performed 5 refactoring iterations. SqlLearningComponentRepository coupling resolved by extracting LearningComponentQuery. GetLearningComponentsHandler coupling reduced from 17 to 10 by extracting LearningComponentMapper, HandlerResponses, and removing Microsoft.AspNetCore.Http using directive. The remaining coupling of 10 is at the exact YELLOW threshold and is inherent to the ASP.NET Core handler pattern (IResult, ILearningComponentService, Task<T>, List<T>, string, and framework types). All 24 tests pass after every refactoring step."
+}
