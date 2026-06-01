@@ -1,5 +1,5 @@
 ---
-model: azure-foundry-base-models/Kimi-K2.5
+model: azure-foundry-base-models/DeepSeek-V4-Pro
 temperature: 1.0
 top_p: 0.1
 description: "Generates NUnit test classes from confirmed intents in UserIntents/ JSON files, following Clean Architecture layer conventions."
