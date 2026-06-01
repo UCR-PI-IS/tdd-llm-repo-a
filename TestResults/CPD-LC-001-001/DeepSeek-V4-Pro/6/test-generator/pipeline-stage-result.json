@@ -1,0 +1,30 @@
+{
+  "stage": "test-generation",
+  "storyId": "CPD-LC-001-001",
+  "model": "DeepSeek-V4-Pro",
+  "iteration": "6",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Domain.Tests.Unit/LearningComponentTests.cs",
+    "Backend.Application.Tests.Unit/LearningComponentServiceTests.cs",
+    "Backend.Infrastructure.Tests.Unit/SqlLearningComponentRepositoryTests.cs",
+    "Backend.Presentation.Tests.Unit/GetLearningComponentsHandlerTests.cs"
+  ],
+  "filesModified": [],
+  "metrics": {
+    "intentsConfirmed": 21,
+    "testMethodsEmitted": 21,
+    "byLayer": {
+      "Domain": 10,
+      "Application": 4,
+      "Infrastructure": 3,
+      "Presentation": 4
+    }
+  },
+  "warnings": [
+    "Production classes (LearningComponent, LearningComponentService, ILearningComponentRepository, SqlLearningComponentRepository, GetLearningComponentsHandler, ILearningComponentService, GetLearningComponentsResponse, ErrorResponse) do not yet exist in the codebase. Tests are written against expected interfaces and will fail to compile until implementations are created.",
+    "Infrastructure test uses Moq to mock DbSet and DbContext with an in-memory database provider. The TestAsyncEnumerator helper class is included in the test file to support async EF Core operations.",
+    "Presentation test references ErrorResponse type which is expected to exist in the Presentation layer but has not been found in the current codebase."
+  ],
+  "notes": "Generated 21 test methods across 4 test classes covering all 21 confirmed intents for story CPD-LC-001-001. Domain layer: 10 tests (1 positive constructor, 1 parameterized orientation test, 1 zero-values boundary test, 6 negative dimension/coordinate tests, 1 invalid orientation test). Application layer: 4 tests (2 positive, 2 negative for null/empty learningSpaceId). Infrastructure layer: 3 tests (2 positive, 1 negative for non-existent ID). Presentation layer: 4 tests (2 positive OK responses, 1 BadRequest, 1 NotFound). All tests follow AAA pattern with single logical assertions using Assert.Multiple where multiple property checks are needed."
+}
