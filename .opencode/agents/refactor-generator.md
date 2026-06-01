@@ -1,5 +1,5 @@
 ---
-model: azure-foundry-base-models/Kimi-K2.5
+model: azure-foundry-base-models/DeepSeek-V4-Pro
 temperature: 1.0
 top_p: 0.1
 description: "Completes the TDD cycle by running Microsoft Code Metrics, analyzing violations, executing targeted refactoring, and storing before/after comparisons per user story."
