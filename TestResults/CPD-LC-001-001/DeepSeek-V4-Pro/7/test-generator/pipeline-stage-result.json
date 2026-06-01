@@ -1,0 +1,34 @@
+{
+  "stage": "test-generation",
+  "storyId": "CPD-LC-001-001",
+  "model": "DeepSeek-V4-Pro",
+  "iteration": "7",
+  "status": "partial",
+  "filesCreated": [
+    "Backend.Domain.Tests.Unit/LearningComponentTests.cs",
+    "Backend.Application.Tests.Unit/LearningComponentServiceTests.cs",
+    "Backend.Infrastructure.Tests.Unit/SqlLearningComponentRepositoryTests.cs",
+    "Backend.Presentation.Tests.Unit/GetLearningComponentsHandlerTests.cs"
+  ],
+  "filesModified": [
+    "Backend.Domain.Tests.Unit/UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.csproj",
+    "Backend.Application.Tests.Unit/UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.csproj",
+    "Backend.Infrastructure.Tests.Unit/UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.csproj",
+    "Backend.Presentation.Tests.Unit/UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.csproj"
+  ],
+  "metrics": {
+    "intentsConfirmed": 21,
+    "testMethodsEmitted": 17,
+    "byLayer": {
+      "Domain": 10,
+      "Application": 4,
+      "Infrastructure": 3,
+      "Presentation": 4
+    }
+  },
+  "warnings": [
+    "Build fails because production classes do not exist yet (expected in TDD). The only compilation error is: ILearningComponentService not found in Presentation test project. Other test projects would also fail due to missing production types (LearningComponent, ILearningComponentRepository, LearningComponentService, SqlLearningComponentRepository, UCRDatabaseContext, GetLearningComponentsHandler, GetLearningComponentsResponse, ErrorResponse, LearningComponentDto).",
+    "Test project .csproj files were modified to add ProjectReference entries to source projects and to change <Using Include=\"NUnit\" /> to <Using Include=\"NUnit.Framework\" /> for proper NUnit attribute resolution."
+  ],
+  "notes": "Generated 17 test methods across 4 test files covering all 21 confirmed intents. Domain layer: 10 tests (1 positive full-constructor, 1 parameterized orientation with [Values], 6 negative validation for dimensions/coordinates/orientation, 1 edge-case zero-values, 1 boundary). Application layer: 4 tests (2 positive, 2 negative for null/empty validation). Infrastructure layer: 3 tests (2 positive, 1 negative for non-existent ID). Presentation layer: 4 tests (2 positive, 2 negative for BadRequest/NotFound). All tests follow AAA pattern with single logical assertions using Assert.Multiple where multiple properties are verified. Tests will fail to compile until the production classes are implemented, which is the expected TDD red phase."
+}
