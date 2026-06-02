@@ -1,0 +1,61 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "db: start SQL Server (Docker)",
+      "detail": "Ensure the themepark-sql container is running so the backend can connect.",
+      "type": "shell",
+      "command": "docker start themepark-sql",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "silent",
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "backend: run",
+      "detail": "Run the ThemePark backend API (Development) connected to the Docker SQL Server.",
+      "type": "process",
+      "command": "dotnet",
+      "args": [
+        "run",
+        "--project",
+        "${workspaceFolder}/Backend.Api/UCR.ECCI.PI.ThemePark.Backend.Api.csproj"
+      ],
+      "options": {
+        "env": {
+          "ASPNETCORE_ENVIRONMENT": "Development",
+          "ASPNETCORE_URLS": "http://localhost:5239"
+        }
+      },
+      "dependsOn": "db: start SQL Server (Docker)",
+      "isBackground": true,
+      "problemMatcher": {
+        "owner": "dotnet",
+        "pattern": {
+          "regexp": "^\\s*(.*)\\((\\d+),(\\d+)\\):\\s+(error|warning)\\s+(\\w+):\\s+(.*)$",
+          "file": 1,
+          "line": 2,
+          "column": 3,
+          "severity": 4,
+          "code": 5,
+          "message": 6
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "^.*Building\\.\\.\\..*$",
+          "endsPattern": "^.*Now listening on:.*$"
+        }
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": true
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    }
+  ]
+}
