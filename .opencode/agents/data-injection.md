@@ -1,6 +1,5 @@
 ---
-model: azure-foundry-base-models/Kimi-K2.5
-# model: azure-foundry-base-models/grok-4-20-reasoning
+model: openrouter/moonshotai/kimi-k2
 temperature: 1.0
 top_p: 0.1
 description: "Seeds the Dockerized ThemePark SQL database with sample rows. Discovers the backend entities dynamically, derives each table's schema from the entity implementation, and runs the generated SQL through Automations/insert-sample-data.sh."
