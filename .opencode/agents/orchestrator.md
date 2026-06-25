@@ -1,5 +1,5 @@
 ---
-model: openrouter/moonshotai/kimi-k2
+model: openrouter/moonshotai/kimi-k2.5
 temperature: 1.0
 top_p: 0.1
 description: "Orchestrates the TDD pipeline: test generation, code generation, and refactoring for a given user story. Coordinates subagents autonomously."
