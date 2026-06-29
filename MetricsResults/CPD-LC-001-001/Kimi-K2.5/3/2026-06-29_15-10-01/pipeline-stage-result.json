@@ -1,0 +1,24 @@
+{
+  "stage": "refactoring",
+  "storyId": "CPD-LC-001-001",
+  "model": "Kimi-K2.5",
+  "iteration": "3",
+  "status": "success",
+  "filesCreated": ["Backend.Presentation/Handlers/LearningComponentResponseBuilder.cs"],
+  "filesModified": [
+    "Backend.Domain/Entities/LearningComponent.cs",
+    "Backend.Infrastructure/Repositories/SqlLearningComponentRepository.cs",
+    "Backend.Presentation/Handlers/GetLearningComponentsHandler.cs",
+    "Backend.Presentation/Responses/GetLearningComponentsResponse.cs"
+  ],
+  "metrics": {
+    "loopIterationsPerformed": 5,
+    "maxLoopIterations": 10,
+    "allGreenAchieved": true,
+    "baseline": { "minMI": 55, "maxCC": 11, "maxCoupling": 20, "maxDIT": 0 },
+    "final":    { "minMI": 55, "maxCC": 8,  "maxCoupling": 9,  "maxDIT": 0 },
+    "remainingViolations": []
+  },
+  "warnings": [],
+  "notes": "All story-related metrics achieved GREEN. LearningComponent CC reduced from 11 to 8 by extracting validation helpers. GetLearningComponentsHandler coupling reduced from 20 to 9 by extracting response-building logic and flattening return types. SqlLearningComponentRepository coupling reduced from 11 to 9 by replacing LINQ chain with foreach. GetLearningSpaceListHandler (coupling=15) is not story-related and was intentionally left untouched."
+}
