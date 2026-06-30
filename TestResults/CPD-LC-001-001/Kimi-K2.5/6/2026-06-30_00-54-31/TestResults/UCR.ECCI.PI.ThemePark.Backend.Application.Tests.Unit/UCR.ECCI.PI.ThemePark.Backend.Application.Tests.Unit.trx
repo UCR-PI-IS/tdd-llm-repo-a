@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="c9cb7241-6962-47fc-b4e0-ddb55bf681ee" name="@78023e0c734b 2026-06-30 06:54:40" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-06-30T06:54:40.0167878+00:00" queuing="2026-06-30T06:54:40.0167879+00:00" start="2026-06-30T06:54:39.3559617+00:00" finish="2026-06-30T06:54:40.0203219+00:00" />
+  <TestSettings name="default" id="0ca52fd9-7ebe-49d7-a39c-506b3598a4a7">
+    <Deployment runDeploymentRoot="_78023e0c734b_2026-06-30_06_54_40" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="c5cd361c-2aeb-4ce6-a827-7d5caf557bbe" testId="78d3602e-cfb8-b8fd-e574-15c07c53693e" testName="GetComponentsByLearningSpaceIdAsync_SpaceHasNoComponents_ReturnsEmptyList" computerName="78023e0c734b" duration="00:00:00.0009100" startTime="2026-06-30T06:54:39.8712719+00:00" endTime="2026-06-30T06:54:39.8721816+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c5cd361c-2aeb-4ce6-a827-7d5caf557bbe" />
+    <UnitTestResult executionId="f1fa7a1a-5207-4e55-b801-1a620212e16e" testId="e9578fb2-d5a6-be63-f1c9-f3ecf34e7944" testName="GetComponentsByLearningSpaceIdAsync_NullId_ThrowsArgumentException" computerName="78023e0c734b" duration="00:00:00.0005480" startTime="2026-06-30T06:54:39.8567850+00:00" endTime="2026-06-30T06:54:39.8573335+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f1fa7a1a-5207-4e55-b801-1a620212e16e" />
+    <UnitTestResult executionId="021c4fac-d354-4735-879c-e6dbc6c6498e" testId="3ae43976-563f-e5b8-aaea-bda296a1c98e" testName="GetComponentsByLearningSpaceIdAsync_SpaceHasComponents_ReturnsList" computerName="78023e0c734b" duration="00:00:00.0139110" startTime="2026-06-30T06:54:39.8573434+00:00" endTime="2026-06-30T06:54:39.8712543+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="021c4fac-d354-4735-879c-e6dbc6c6498e" />
+    <UnitTestResult executionId="3edc4bd1-216f-4228-98a3-ac568b9f06b3" testId="1d05945e-22de-7113-cfbf-eea1e7e9767b" testName="GetComponentsByLearningSpaceIdAsync_EmptyId_ThrowsArgumentException" computerName="78023e0c734b" duration="00:00:00.0264060" startTime="2026-06-30T06:54:39.8297391+00:00" endTime="2026-06-30T06:54:39.8561159+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3edc4bd1-216f-4228-98a3-ac568b9f06b3" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="GetComponentsByLearningSpaceIdAsync_SpaceHasNoComponents_ReturnsEmptyList" storage="/workspace/backend.application.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.application.tests.unit.dll" id="78d3602e-cfb8-b8fd-e574-15c07c53693e">
+      <Execution id="c5cd361c-2aeb-4ce6-a827-7d5caf557bbe" />
+      <TestMethod codeBase="/workspace/Backend.Application.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.LearningComponentServiceTests" name="GetComponentsByLearningSpaceIdAsync_SpaceHasNoComponents_ReturnsEmptyList" />
+    </UnitTest>
+    <UnitTest name="GetComponentsByLearningSpaceIdAsync_EmptyId_ThrowsArgumentException" storage="/workspace/backend.application.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.application.tests.unit.dll" id="1d05945e-22de-7113-cfbf-eea1e7e9767b">
+      <Execution id="3edc4bd1-216f-4228-98a3-ac568b9f06b3" />
+      <TestMethod codeBase="/workspace/Backend.Application.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.LearningComponentServiceTests" name="GetComponentsByLearningSpaceIdAsync_EmptyId_ThrowsArgumentException" />
+    </UnitTest>
+    <UnitTest name="GetComponentsByLearningSpaceIdAsync_SpaceHasComponents_ReturnsList" storage="/workspace/backend.application.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.application.tests.unit.dll" id="3ae43976-563f-e5b8-aaea-bda296a1c98e">
+      <Execution id="021c4fac-d354-4735-879c-e6dbc6c6498e" />
+      <TestMethod codeBase="/workspace/Backend.Application.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.LearningComponentServiceTests" name="GetComponentsByLearningSpaceIdAsync_SpaceHasComponents_ReturnsList" />
+    </UnitTest>
+    <UnitTest name="GetComponentsByLearningSpaceIdAsync_NullId_ThrowsArgumentException" storage="/workspace/backend.application.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.application.tests.unit.dll" id="e9578fb2-d5a6-be63-f1c9-f3ecf34e7944">
+      <Execution id="f1fa7a1a-5207-4e55-b801-1a620212e16e" />
+      <TestMethod codeBase="/workspace/Backend.Application.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.LearningComponentServiceTests" name="GetComponentsByLearningSpaceIdAsync_NullId_ThrowsArgumentException" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="78d3602e-cfb8-b8fd-e574-15c07c53693e" executionId="c5cd361c-2aeb-4ce6-a827-7d5caf557bbe" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e9578fb2-d5a6-be63-f1c9-f3ecf34e7944" executionId="f1fa7a1a-5207-4e55-b801-1a620212e16e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="3ae43976-563f-e5b8-aaea-bda296a1c98e" executionId="021c4fac-d354-4735-879c-e6dbc6c6498e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1d05945e-22de-7113-cfbf-eea1e7e9767b" executionId="3edc4bd1-216f-4228-98a3-ac568b9f06b3" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="4" executed="4" passed="4" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>NUnit Adapter 4.6.0.0: Test execution started
+Running all tests in /workspace/Backend.Application.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.dll
+   NUnit3TestExecutor discovered 4 of 4 NUnit test cases using Current Discovery mode, Non-Explicit run
+NUnit Adapter 4.6.0.0: Test execution complete
+</StdOut>
+    </Output>
+    <CollectorDataEntries>
+      <Collector agentName="78023e0c734b" uri="datacollector://microsoft/CoverletCodeCoverage/1.0" collectorDisplayName="XPlat code coverage">
+        <UriAttachments>
+          <UriAttachment>
+            <A href="78023e0c734b/coverage.cobertura.xml"></A>
+          </UriAttachment>
+        </UriAttachments>
+      </Collector>
+    </CollectorDataEntries>
+  </ResultSummary>
+</TestRun>

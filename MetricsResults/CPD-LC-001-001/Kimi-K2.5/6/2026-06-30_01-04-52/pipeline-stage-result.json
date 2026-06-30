@@ -1,0 +1,47 @@
+{
+  "stage": "refactoring",
+  "storyId": "CPD-LC-001-001",
+  "model": "Kimi-K2.5",
+  "iteration": "6",
+  "status": "partial",
+  "filesCreated": [],
+  "filesModified": [
+    "Backend.Presentation/Handlers/GetLearningComponentsHandler.cs",
+    "Backend.Presentation/Handlers/GetLearningSpaceListHandler.cs"
+  ],
+  "metrics": {
+    "loopIterationsPerformed": 1,
+    "maxLoopIterations": 10,
+    "allGreenAchieved": false,
+    "baseline": {
+      "minMI": 63,
+      "maxCC": 3,
+      "maxCoupling": 21,
+      "maxDIT": 0
+    },
+    "final": {
+      "minMI": 64,
+      "maxCC": 3,
+      "maxCoupling": 21,
+      "maxDIT": 0
+    },
+    "remainingViolations": [
+      {
+        "type": "GetLearningComponentsHandler",
+        "metric": "Coupling",
+        "value": 21,
+        "flag": "YELLOW"
+      },
+      {
+        "type": "GetLearningSpaceListHandler",
+        "metric": "Coupling",
+        "value": 15,
+        "flag": "YELLOW"
+      }
+    ]
+  },
+  "warnings": [
+    "Class coupling remains in YELLOW range due to minimal API pattern requirements. The handlers inherently require multiple ASP.NET Core types (TypedResults, IResult, FromServices, etc.) and application-specific types (DTOs, Services, Responses)."
+  ],
+  "notes": "Refactoring improved Maintainability Index (GetLearningSpaceListHandler: 66→72, GetLearningComponentsHandler: 63→64) by removing commented code and simplifying documentation. Class coupling could not be reduced below YELLOW threshold without significant architectural changes that would compromise the minimal API pattern. All other metrics (MI, CC, DIT) are GREEN."
+}
