@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="b5d81aa0-bc47-4daa-a8be-e398d30f5a18" name="@78023e0c734b 2026-06-30 06:54:42" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-06-30T06:54:42.3666935+00:00" queuing="2026-06-30T06:54:42.3666935+00:00" start="2026-06-30T06:54:41.6274617+00:00" finish="2026-06-30T06:54:42.3706380+00:00" />
+  <TestSettings name="default" id="ba2f6c3c-7b85-457a-baa8-6b81497879c9">
+    <Deployment runDeploymentRoot="_78023e0c734b_2026-06-30_06_54_42" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="33bdb97a-3e80-43ff-83c9-e8e3dfc8f225" testId="d2938e8c-288a-25e5-c698-c8e8753a2445" testName="GetComponentsByLearningSpaceIdAsync_NoComponents_ReturnsEmptyList" computerName="78023e0c734b" duration="00:00:00.0159210" startTime="2026-06-30T06:54:42.1413654+00:00" endTime="2026-06-30T06:54:42.1572409+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="33bdb97a-3e80-43ff-83c9-e8e3dfc8f225">
+      <Output>
+        <ErrorInfo>
+          <Message>System.ArgumentException : Can not create proxy for type UCR.ECCI.PI.ThemePark.Backend.Infrastructure.UCRDatabaseContext because it is not accessible. Make it public, or internal and mark your assembly with [assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")] attribute, because assembly UCR.ECCI.PI.ThemePark.Backend.Infrastructure is not strong-named. (Parameter 'classToProxy')</Message>
+          <StackTrace>   at Castle.DynamicProxy.DefaultProxyBuilder.AssertValidTypeForTarget(Type type, Type target, String paramName)
+   at Castle.DynamicProxy.DefaultProxyBuilder.AssertValidType(Type target, String paramName)
+   at Castle.DynamicProxy.DefaultProxyBuilder.CreateClassProxyType(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyType(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options, Object[] constructorArguments, IInterceptor[] interceptors)
+   at Moq.CastleProxyFactory.CreateProxy(Type mockType, IInterceptor interceptor, Type[] interfaces, Object[] arguments) in /_/src/Moq/Interception/CastleProxyFactory.cs:line 62
+   at Moq.Mock`1.InitializeInstance() in /_/src/Moq/Mock`1.cs:line 309
+   at Moq.Mock`1.OnGetObject() in /_/src/Moq/Mock`1.cs:line 323
+   at Moq.Mock.get_Object() in /_/src/Moq/Mock.cs:line 181
+   at Moq.Mock`1.get_Object() in /_/src/Moq/Mock`1.cs:line 281
+   at UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.SqlLearningComponentRepositoryTests.SetUp() in /workspace/Backend.Infrastructure.Tests.Unit/SqlLearningComponentRepositoryTests.cs:line 26
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="48826bd0-1f1c-43f7-9629-839cbc0bb345" testId="f35c6831-dbbc-d088-e744-bd7adc50330c" testName="GetComponentsByLearningSpaceIdAsync_NonExistentId_ReturnsEmptyList" computerName="78023e0c734b" duration="00:00:00.0003579" startTime="2026-06-30T06:54:42.1580738+00:00" endTime="2026-06-30T06:54:42.1584317+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="48826bd0-1f1c-43f7-9629-839cbc0bb345">
+      <Output>
+        <ErrorInfo>
+          <Message>System.ArgumentException : Can not create proxy for type UCR.ECCI.PI.ThemePark.Backend.Infrastructure.UCRDatabaseContext because it is not accessible. Make it public, or internal and mark your assembly with [assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")] attribute, because assembly UCR.ECCI.PI.ThemePark.Backend.Infrastructure is not strong-named. (Parameter 'classToProxy')</Message>
+          <StackTrace>   at Castle.DynamicProxy.DefaultProxyBuilder.AssertValidTypeForTarget(Type type, Type target, String paramName)
+   at Castle.DynamicProxy.DefaultProxyBuilder.AssertValidType(Type target, String paramName)
+   at Castle.DynamicProxy.DefaultProxyBuilder.CreateClassProxyType(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyType(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options, Object[] constructorArguments, IInterceptor[] interceptors)
+   at Moq.CastleProxyFactory.CreateProxy(Type mockType, IInterceptor interceptor, Type[] interfaces, Object[] arguments) in /_/src/Moq/Interception/CastleProxyFactory.cs:line 62
+   at Moq.Mock`1.InitializeInstance() in /_/src/Moq/Mock`1.cs:line 309
+   at Moq.Mock`1.OnGetObject() in /_/src/Moq/Mock`1.cs:line 323
+   at Moq.Mock.get_Object() in /_/src/Moq/Mock.cs:line 181
+   at Moq.Mock`1.get_Object() in /_/src/Moq/Mock`1.cs:line 281
+   at UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.SqlLearningComponentRepositoryTests.SetUp() in /workspace/Backend.Infrastructure.Tests.Unit/SqlLearningComponentRepositoryTests.cs:line 26
+   at InvokeStub_SqlLearningComponentRepositoryTests.SetUp(Object, Object, IntPtr*)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="6f360e49-9a3c-4c63-b073-13ffe424ec98" testId="c51afa3a-4163-8a27-9b3c-3888ebb3866f" testName="GetComponentsByLearningSpaceIdAsync_ValidId_ReturnsComponents" computerName="78023e0c734b" duration="00:00:00.0001330" startTime="2026-06-30T06:54:42.1584409+00:00" endTime="2026-06-30T06:54:42.1585743+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="6f360e49-9a3c-4c63-b073-13ffe424ec98">
+      <Output>
+        <ErrorInfo>
+          <Message>System.ArgumentException : Can not create proxy for type UCR.ECCI.PI.ThemePark.Backend.Infrastructure.UCRDatabaseContext because it is not accessible. Make it public, or internal and mark your assembly with [assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")] attribute, because assembly UCR.ECCI.PI.ThemePark.Backend.Infrastructure is not strong-named. (Parameter 'classToProxy')</Message>
+          <StackTrace>   at Castle.DynamicProxy.DefaultProxyBuilder.AssertValidTypeForTarget(Type type, Type target, String paramName)
+   at Castle.DynamicProxy.DefaultProxyBuilder.AssertValidType(Type target, String paramName)
+   at Castle.DynamicProxy.DefaultProxyBuilder.CreateClassProxyType(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyType(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options, Object[] constructorArguments, IInterceptor[] interceptors)
+   at Moq.CastleProxyFactory.CreateProxy(Type mockType, IInterceptor interceptor, Type[] interfaces, Object[] arguments) in /_/src/Moq/Interception/CastleProxyFactory.cs:line 62
+   at Moq.Mock`1.InitializeInstance() in /_/src/Moq/Mock`1.cs:line 309
+   at Moq.Mock`1.OnGetObject() in /_/src/Moq/Mock`1.cs:line 323
+   at Moq.Mock.get_Object() in /_/src/Moq/Mock.cs:line 181
+   at Moq.Mock`1.get_Object() in /_/src/Moq/Mock`1.cs:line 281
+   at UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.SqlLearningComponentRepositoryTests.SetUp() in /workspace/Backend.Infrastructure.Tests.Unit/SqlLearningComponentRepositoryTests.cs:line 26
+   at InvokeStub_SqlLearningComponentRepositoryTests.SetUp(Object, Object, IntPtr*)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="GetComponentsByLearningSpaceIdAsync_ValidId_ReturnsComponents" storage="/workspace/backend.infrastructure.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.infrastructure.tests.unit.dll" id="c51afa3a-4163-8a27-9b3c-3888ebb3866f">
+      <Execution id="6f360e49-9a3c-4c63-b073-13ffe424ec98" />
+      <TestMethod codeBase="/workspace/Backend.Infrastructure.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.SqlLearningComponentRepositoryTests" name="GetComponentsByLearningSpaceIdAsync_ValidId_ReturnsComponents" />
+    </UnitTest>
+    <UnitTest name="GetComponentsByLearningSpaceIdAsync_NonExistentId_ReturnsEmptyList" storage="/workspace/backend.infrastructure.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.infrastructure.tests.unit.dll" id="f35c6831-dbbc-d088-e744-bd7adc50330c">
+      <Execution id="48826bd0-1f1c-43f7-9629-839cbc0bb345" />
+      <TestMethod codeBase="/workspace/Backend.Infrastructure.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.SqlLearningComponentRepositoryTests" name="GetComponentsByLearningSpaceIdAsync_NonExistentId_ReturnsEmptyList" />
+    </UnitTest>
+    <UnitTest name="GetComponentsByLearningSpaceIdAsync_NoComponents_ReturnsEmptyList" storage="/workspace/backend.infrastructure.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.infrastructure.tests.unit.dll" id="d2938e8c-288a-25e5-c698-c8e8753a2445">
+      <Execution id="33bdb97a-3e80-43ff-83c9-e8e3dfc8f225" />
+      <TestMethod codeBase="/workspace/Backend.Infrastructure.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.SqlLearningComponentRepositoryTests" name="GetComponentsByLearningSpaceIdAsync_NoComponents_ReturnsEmptyList" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="d2938e8c-288a-25e5-c698-c8e8753a2445" executionId="33bdb97a-3e80-43ff-83c9-e8e3dfc8f225" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f35c6831-dbbc-d088-e744-bd7adc50330c" executionId="48826bd0-1f1c-43f7-9629-839cbc0bb345" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="c51afa3a-4163-8a27-9b3c-3888ebb3866f" executionId="6f360e49-9a3c-4c63-b073-13ffe424ec98" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="3" executed="3" passed="0" failed="3" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>NUnit Adapter 4.6.0.0: Test execution started
+Running all tests in /workspace/Backend.Infrastructure.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.dll
+   NUnit3TestExecutor discovered 3 of 3 NUnit test cases using Current Discovery mode, Non-Explicit run
+NUnit Adapter 4.6.0.0: Test execution complete
+</StdOut>
+    </Output>
+    <CollectorDataEntries>
+      <Collector agentName="78023e0c734b" uri="datacollector://microsoft/CoverletCodeCoverage/1.0" collectorDisplayName="XPlat code coverage">
+        <UriAttachments>
+          <UriAttachment>
+            <A href="78023e0c734b/coverage.cobertura.xml"></A>
+          </UriAttachment>
+        </UriAttachments>
+      </Collector>
+    </CollectorDataEntries>
+  </ResultSummary>
+</TestRun>
