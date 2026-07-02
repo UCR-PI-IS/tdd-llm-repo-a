@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="433f1905-d672-4369-b4a9-365c7124c867" name="@59bb23bda3ee 2026-07-02 20:55:53" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-07-02T20:55:53.5786435+00:00" queuing="2026-07-02T20:55:53.5786435+00:00" start="2026-07-02T20:55:52.8191034+00:00" finish="2026-07-02T20:55:53.5822517+00:00" />
+  <TestSettings name="default" id="594b1fde-e19f-458d-85dc-32592e8a60b5">
+    <Deployment runDeploymentRoot="_59bb23bda3ee_2026-07-02_20_55_53" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="052d20e5-3478-4464-abc6-d4b3de0b92bf" testId="62dc2d16-5c94-3a48-e902-aa5eb7ed11ba" testName="GetComponentsByLearningSpaceIdAsync_WithNonExistentLearningSpaceId_ReturnsEmptyList" computerName="59bb23bda3ee" duration="00:00:00.0006250" startTime="2026-07-02T20:55:53.3816973+00:00" endTime="2026-07-02T20:55:53.3823220+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="052d20e5-3478-4464-abc6-d4b3de0b92bf">
+      <Output>
+        <ErrorInfo>
+          <Message>System.Reflection.TargetInvocationException : Exception has been thrown by the target of an invocation.
+  ----&gt; System.NullReferenceException : Object reference not set to an instance of an object.</Message>
+          <StackTrace>   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options, Object[] constructorArguments, IInterceptor[] interceptors)
+   at Moq.CastleProxyFactory.CreateProxy(Type mockType, IInterceptor interceptor, Type[] interfaces, Object[] arguments) in /_/src/Moq/Interception/CastleProxyFactory.cs:line 62
+   at Moq.Mock`1.InitializeInstance() in /_/src/Moq/Mock`1.cs:line 309
+   at Moq.Mock`1.OnGetObject() in /_/src/Moq/Mock`1.cs:line 323
+   at Moq.Mock.get_Object() in /_/src/Moq/Mock.cs:line 181
+   at Moq.Mock`1.get_Object() in /_/src/Moq/Mock`1.cs:line 281
+   at UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.Repositories.SqlLearningComponentRepositoryTests.SetUp() in /workspace/Backend.Infrastructure.Tests.Unit/Repositories/SqlLearningComponentRepositoryTests.cs:line 30
+   at InvokeStub_SqlLearningComponentRepositoryTests.SetUp(Object, Object, IntPtr*)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+--NullReferenceException
+   at Microsoft.EntityFrameworkCore.DbContext..ctor(DbContextOptions options)
+   at UCR.ECCI.PI.ThemePark.Backend.Infrastructure.UCRDatabaseContext..ctor(DbContextOptions`1 options) in /workspace/Backend.Infrastructure/UCRDatabaseContext.cs:line 18
+   at Castle.Proxies.UCRDatabaseContextProxy..ctor(IInterceptor[], DbContextOptions`1 options)
+   at InvokeStub_UCRDatabaseContextProxy..ctor(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="fc590664-9025-4217-b8f3-7b0b8cf1fe33" testId="41c1c673-b105-4302-e6a9-92aef6bf6131" testName="GetComponentsByLearningSpaceIdAsync_WithValidLearningSpaceId_ReturnsComponentList" computerName="59bb23bda3ee" duration="00:00:00.0002960" startTime="2026-07-02T20:55:53.3823324+00:00" endTime="2026-07-02T20:55:53.3826283+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="fc590664-9025-4217-b8f3-7b0b8cf1fe33">
+      <Output>
+        <ErrorInfo>
+          <Message>System.Reflection.TargetInvocationException : Exception has been thrown by the target of an invocation.
+  ----&gt; System.NullReferenceException : Object reference not set to an instance of an object.</Message>
+          <StackTrace>   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options, Object[] constructorArguments, IInterceptor[] interceptors)
+   at Moq.CastleProxyFactory.CreateProxy(Type mockType, IInterceptor interceptor, Type[] interfaces, Object[] arguments) in /_/src/Moq/Interception/CastleProxyFactory.cs:line 62
+   at Moq.Mock`1.InitializeInstance() in /_/src/Moq/Mock`1.cs:line 309
+   at Moq.Mock`1.OnGetObject() in /_/src/Moq/Mock`1.cs:line 323
+   at Moq.Mock.get_Object() in /_/src/Moq/Mock.cs:line 181
+   at Moq.Mock`1.get_Object() in /_/src/Moq/Mock`1.cs:line 281
+   at UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.Repositories.SqlLearningComponentRepositoryTests.SetUp() in /workspace/Backend.Infrastructure.Tests.Unit/Repositories/SqlLearningComponentRepositoryTests.cs:line 30
+   at InvokeStub_SqlLearningComponentRepositoryTests.SetUp(Object, Object, IntPtr*)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+--NullReferenceException
+   at Microsoft.EntityFrameworkCore.DbContext..ctor(DbContextOptions options)
+   at UCR.ECCI.PI.ThemePark.Backend.Infrastructure.UCRDatabaseContext..ctor(DbContextOptions`1 options) in /workspace/Backend.Infrastructure/UCRDatabaseContext.cs:line 18
+   at Castle.Proxies.UCRDatabaseContextProxy..ctor(IInterceptor[], DbContextOptions`1 options)
+   at InvokeStub_UCRDatabaseContextProxy..ctor(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="d281fc47-119a-46e6-9a68-1e2b624c169d" testId="f681f13f-5d66-4257-e0ed-c836696b36a3" testName="GetComponentsByLearningSpaceIdAsync_WithNoComponents_ReturnsEmptyList" computerName="59bb23bda3ee" duration="00:00:00.0625640" startTime="2026-07-02T20:55:53.3183955+00:00" endTime="2026-07-02T20:55:53.3809211+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d281fc47-119a-46e6-9a68-1e2b624c169d">
+      <Output>
+        <ErrorInfo>
+          <Message>System.Reflection.TargetInvocationException : Exception has been thrown by the target of an invocation.
+  ----&gt; System.NullReferenceException : Object reference not set to an instance of an object.</Message>
+          <StackTrace>   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options, Object[] constructorArguments, IInterceptor[] interceptors)
+   at Moq.CastleProxyFactory.CreateProxy(Type mockType, IInterceptor interceptor, Type[] interfaces, Object[] arguments) in /_/src/Moq/Interception/CastleProxyFactory.cs:line 62
+   at Moq.Mock`1.InitializeInstance() in /_/src/Moq/Mock`1.cs:line 309
+   at Moq.Mock`1.OnGetObject() in /_/src/Moq/Mock`1.cs:line 323
+   at Moq.Mock.get_Object() in /_/src/Moq/Mock.cs:line 181
+   at Moq.Mock`1.get_Object() in /_/src/Moq/Mock`1.cs:line 281
+   at UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.Repositories.SqlLearningComponentRepositoryTests.SetUp() in /workspace/Backend.Infrastructure.Tests.Unit/Repositories/SqlLearningComponentRepositoryTests.cs:line 30
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+--NullReferenceException
+   at Microsoft.EntityFrameworkCore.DbContext..ctor(DbContextOptions options)
+   at UCR.ECCI.PI.ThemePark.Backend.Infrastructure.UCRDatabaseContext..ctor(DbContextOptions`1 options) in /workspace/Backend.Infrastructure/UCRDatabaseContext.cs:line 18
+   at Castle.Proxies.UCRDatabaseContextProxy..ctor(IInterceptor[], DbContextOptions`1 options)
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="GetComponentsByLearningSpaceIdAsync_WithValidLearningSpaceId_ReturnsComponentList" storage="/workspace/backend.infrastructure.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.infrastructure.tests.unit.dll" id="41c1c673-b105-4302-e6a9-92aef6bf6131">
+      <Execution id="fc590664-9025-4217-b8f3-7b0b8cf1fe33" />
+      <TestMethod codeBase="/workspace/Backend.Infrastructure.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.Repositories.SqlLearningComponentRepositoryTests" name="GetComponentsByLearningSpaceIdAsync_WithValidLearningSpaceId_ReturnsComponentList" />
+    </UnitTest>
+    <UnitTest name="GetComponentsByLearningSpaceIdAsync_WithNonExistentLearningSpaceId_ReturnsEmptyList" storage="/workspace/backend.infrastructure.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.infrastructure.tests.unit.dll" id="62dc2d16-5c94-3a48-e902-aa5eb7ed11ba">
+      <Execution id="052d20e5-3478-4464-abc6-d4b3de0b92bf" />
+      <TestMethod codeBase="/workspace/Backend.Infrastructure.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.Repositories.SqlLearningComponentRepositoryTests" name="GetComponentsByLearningSpaceIdAsync_WithNonExistentLearningSpaceId_ReturnsEmptyList" />
+    </UnitTest>
+    <UnitTest name="GetComponentsByLearningSpaceIdAsync_WithNoComponents_ReturnsEmptyList" storage="/workspace/backend.infrastructure.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.infrastructure.tests.unit.dll" id="f681f13f-5d66-4257-e0ed-c836696b36a3">
+      <Execution id="d281fc47-119a-46e6-9a68-1e2b624c169d" />
+      <TestMethod codeBase="/workspace/Backend.Infrastructure.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.Repositories.SqlLearningComponentRepositoryTests" name="GetComponentsByLearningSpaceIdAsync_WithNoComponents_ReturnsEmptyList" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="62dc2d16-5c94-3a48-e902-aa5eb7ed11ba" executionId="052d20e5-3478-4464-abc6-d4b3de0b92bf" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="41c1c673-b105-4302-e6a9-92aef6bf6131" executionId="fc590664-9025-4217-b8f3-7b0b8cf1fe33" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f681f13f-5d66-4257-e0ed-c836696b36a3" executionId="d281fc47-119a-46e6-9a68-1e2b624c169d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="3" executed="3" passed="0" failed="3" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>NUnit Adapter 4.6.0.0: Test execution started
+Running all tests in /workspace/Backend.Infrastructure.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.dll
+   NUnit3TestExecutor discovered 3 of 3 NUnit test cases using Current Discovery mode, Non-Explicit run
+NUnit Adapter 4.6.0.0: Test execution complete
+</StdOut>
+    </Output>
+    <CollectorDataEntries>
+      <Collector agentName="59bb23bda3ee" uri="datacollector://microsoft/CoverletCodeCoverage/1.0" collectorDisplayName="XPlat code coverage">
+        <UriAttachments>
+          <UriAttachment>
+            <A href="59bb23bda3ee/coverage.cobertura.xml"></A>
+          </UriAttachment>
+        </UriAttachments>
+      </Collector>
+    </CollectorDataEntries>
+  </ResultSummary>
+</TestRun>
