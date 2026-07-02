@@ -1,0 +1,30 @@
+{
+  "stage": "test-generation",
+  "storyId": "CPD-LC-001-001",
+  "model": "unknown",
+  "iteration": "unknown",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Domain.Tests.Unit/LearningComponentTests.cs",
+    "Backend.Application.Tests.Unit/LearningComponentServiceTests.cs",
+    "Backend.Infrastructure.Tests.Unit/SqlLearningComponentRepositoryTests.cs",
+    "Backend.Presentation.Tests.Unit/GetLearningComponentsHandlerTests.cs"
+  ],
+  "filesModified": [],
+  "metrics": {
+    "intentsConfirmed": 21,
+    "testMethodsEmitted": 21,
+    "byLayer": {
+      "Domain": 10,
+      "Application": 4,
+      "Infrastructure": 3,
+      "Presentation": 4
+    }
+  },
+  "warnings": [
+    "Production ErrorResponse currently exists in test namespace UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.Handlers; tests assume it will be moved to UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Responses to match handler imports.",
+    "Domain-008 (invalid orientation) assumes null orientation throws ArgumentException; current production code only validates null.",
+    "Infrastructure tests use custom async DbSet mocking helpers since in-memory EF Core provider is not referenced."
+  ],
+  "notes": "Generated 21 NUnit test methods across 4 test classes covering all 21 confirmed intents for story CPD-LC-001-001. Tests follow AAA pattern, use Assert.Multiple for multi-property assertions, and employ Moq for dependency mocking in Application, Infrastructure, and Presentation layers."
+}
