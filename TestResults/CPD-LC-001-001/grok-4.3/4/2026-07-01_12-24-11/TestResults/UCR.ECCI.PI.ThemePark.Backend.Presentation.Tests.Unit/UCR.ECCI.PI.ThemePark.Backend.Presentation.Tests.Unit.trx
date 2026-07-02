@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="bedba212-bbf2-4e50-b5e5-07164d30b6c6" name="@316fd18f0798 2026-07-01 18:24:19" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-07-01T18:24:19.8408193+00:00" queuing="2026-07-01T18:24:19.8408197+00:00" start="2026-07-01T18:24:19.0731800+00:00" finish="2026-07-01T18:24:19.8451291+00:00" />
+  <TestSettings name="default" id="7f902556-c2c9-4c55-a841-35ef16932863">
+    <Deployment runDeploymentRoot="_316fd18f0798_2026-07-01_18_24_19" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="623f20d1-47cd-4dd0-9f00-72906327286f" testId="c1d7bccd-598c-f6ab-3a7f-e1911e16b9e8" testName="HandleAsync_WithInvalidId_ReturnsBadRequest(null)" computerName="316fd18f0798" duration="00:00:00.0004510" startTime="2026-07-01T18:24:19.6617090+00:00" endTime="2026-07-01T18:24:19.6621601+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="623f20d1-47cd-4dd0-9f00-72906327286f">
+      <Output>
+        <ErrorInfo>
+          <Message>  Result should be BadRequest&lt;ErrorResponse&gt;
+  Expected: &lt;Microsoft.AspNetCore.Http.HttpResults.BadRequest`1[UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.Handlers.ErrorResponse]&gt;
+  But was:  &lt;Microsoft.AspNetCore.Http.HttpResults.BadRequest`1[UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.Handlers.ErrorResponse]&gt;
+</Message>
+          <StackTrace>   at UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.Handlers.GetLearningComponentsHandlerTests.HandleAsync_WithInvalidId_ReturnsBadRequest(String invalidLearningSpaceId) in /workspace/Backend.Presentation.Tests.Unit/Handlers/GetLearningComponentsHandlerTests.cs:line 97
+   at NUnit.Framework.Internal.TaskAwaitAdapter.GenericAdapter`1.GetResult()
+   at NUnit.Framework.Internal.AsyncToSyncAdapter.Await(Func`1 invoke)
+   at NUnit.Framework.Internal.Commands.TestMethodCommand.RunTestMethod(TestExecutionContext context)
+   at NUnit.Framework.Internal.Commands.TestMethodCommand.Execute(TestExecutionContext context)
+   at NUnit.Framework.Internal.Commands.BeforeAndAfterTestCommand.&lt;&gt;c__DisplayClass1_0.&lt;Execute&gt;b__0()
+   at NUnit.Framework.Internal.Commands.DelegatingTestCommand.RunTestMethodInThreadAbortSafeZone(TestExecutionContext context, Action action)
+
+1)    at UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.Handlers.GetLearningComponentsHandlerTests.HandleAsync_WithInvalidId_ReturnsBadRequest(String invalidLearningSpaceId) in /workspace/Backend.Presentation.Tests.Unit/Handlers/GetLearningComponentsHandlerTests.cs:line 97
+   at System.Runtime.CompilerServices.AsyncMethodBuilderCore.Start[TStateMachine](TStateMachine&amp; stateMachine)
+   at UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.Handlers.GetLearningComponentsHandlerTests.HandleAsync_WithInvalidId_ReturnsBadRequest(String invalidLearningSpaceId)
+   at InvokeStub_GetLearningComponentsHandlerTests.HandleAsync_WithInvalidId_ReturnsBadRequest(Object, Span`1)
+
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="2c49e1ee-35ea-4271-b235-c9df5ad9a43e" testId="55efae97-67f2-8356-a87e-31ba5b59a853" testName="HandleAsync_WithInvalidId_ReturnsBadRequest(&quot;   &quot;)" computerName="316fd18f0798" duration="00:00:00.0006830" startTime="2026-07-01T18:24:19.6610075+00:00" endTime="2026-07-01T18:24:19.6616908+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2c49e1ee-35ea-4271-b235-c9df5ad9a43e">
+      <Output>
+        <ErrorInfo>
+          <Message>  Result should be BadRequest&lt;ErrorResponse&gt;
+  Expected: &lt;Microsoft.AspNetCore.Http.HttpResults.BadRequest`1[UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.Handlers.ErrorResponse]&gt;
+  But was:  &lt;Microsoft.AspNetCore.Http.HttpResults.BadRequest`1[UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.Handlers.ErrorResponse]&gt;
+</Message>
+          <StackTrace>   at UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.Handlers.GetLearningComponentsHandlerTests.HandleAsync_WithInvalidId_ReturnsBadRequest(String invalidLearningSpaceId) in /workspace/Backend.Presentation.Tests.Unit/Handlers/GetLearningComponentsHandlerTests.cs:line 97
+   at NUnit.Framework.Internal.TaskAwaitAdapter.GenericAdapter`1.GetResult()
+   at NUnit.Framework.Internal.AsyncToSyncAdapter.Await(Func`1 invoke)
+   at NUnit.Framework.Internal.Commands.TestMethodCommand.RunTestMethod(TestExecutionContext context)
+   at NUnit.Framework.Internal.Commands.TestMethodCommand.Execute(TestExecutionContext context)
+   at NUnit.Framework.Internal.Commands.BeforeAndAfterTestCommand.&lt;&gt;c__DisplayClass1_0.&lt;Execute&gt;b__0()
+   at NUnit.Framework.Internal.Commands.DelegatingTestCommand.RunTestMethodInThreadAbortSafeZone(TestExecutionContext context, Action action)
+
+1)    at UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.Handlers.GetLearningComponentsHandlerTests.HandleAsync_WithInvalidId_ReturnsBadRequest(String invalidLearningSpaceId) in /workspace/Backend.Presentation.Tests.Unit/Handlers/GetLearningComponentsHandlerTests.cs:line 97
+   at System.Runtime.CompilerServices.AsyncMethodBuilderCore.Start[TStateMachine](TStateMachine&amp; stateMachine)
+   at UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.Handlers.GetLearningComponentsHandlerTests.HandleAsync_WithInvalidId_ReturnsBadRequest(String invalidLearningSpaceId)
+   at InvokeStub_GetLearningComponentsHandlerTests.HandleAsync_WithInvalidId_ReturnsBadRequest(Object, Span`1)
+
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="78d59d99-aa53-425e-9f0b-5c88ec9a4143" testId="d5cb5f5d-376b-93b9-4917-c39149ee9322" testName="HandleAsync_NoComponents_ReturnsOkWithEmptyList" computerName="316fd18f0798" duration="00:00:00.0397580" startTime="2026-07-01T18:24:19.6008847+00:00" endTime="2026-07-01T18:24:19.6406140+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="78d59d99-aa53-425e-9f0b-5c88ec9a4143" />
+    <UnitTestResult executionId="31981cfb-e37f-4615-9041-76546f1f0979" testId="ed62a01d-db4e-2b0f-8645-6b7e1312a444" testName="HandleAsync_NonExistentSpace_ReturnsNotFound" computerName="316fd18f0798" duration="00:00:00.0173740" startTime="2026-07-01T18:24:19.6413775+00:00" endTime="2026-07-01T18:24:19.6587511+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="31981cfb-e37f-4615-9041-76546f1f0979">
+      <Output>
+        <ErrorInfo>
+          <Message>  Result should be NotFound&lt;ErrorResponse&gt;
+  Expected: &lt;Microsoft.AspNetCore.Http.HttpResults.NotFound`1[UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.Handlers.ErrorResponse]&gt;
+  But was:  &lt;Microsoft.AspNetCore.Http.HttpResults.NotFound`1[UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.Handlers.ErrorResponse]&gt;
+</Message>
+          <StackTrace>   at UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.Handlers.GetLearningComponentsHandlerTests.HandleAsync_NonExistentSpace_ReturnsNotFound() in /workspace/Backend.Presentation.Tests.Unit/Handlers/GetLearningComponentsHandlerTests.cs:line 116
+   at NUnit.Framework.Internal.TaskAwaitAdapter.GenericAdapter`1.GetResult()
+   at NUnit.Framework.Internal.AsyncToSyncAdapter.Await(Func`1 invoke)
+   at NUnit.Framework.Internal.Commands.TestMethodCommand.RunTestMethod(TestExecutionContext context)
+   at NUnit.Framework.Internal.Commands.TestMethodCommand.Execute(TestExecutionContext context)
+   at NUnit.Framework.Internal.Commands.BeforeAndAfterTestCommand.&lt;&gt;c__DisplayClass1_0.&lt;Execute&gt;b__0()
+   at NUnit.Framework.Internal.Commands.DelegatingTestCommand.RunTestMethodInThreadAbortSafeZone(TestExecutionContext context, Action action)
+
+1)    at UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.Handlers.GetLearningComponentsHandlerTests.HandleAsync_NonExistentSpace_ReturnsNotFound() in /workspace/Backend.Presentation.Tests.Unit/Handlers/GetLearningComponentsHandlerTests.cs:line 116
+   at System.Runtime.CompilerServices.AsyncMethodBuilderCore.Start[TStateMachine](TStateMachine&amp; stateMachine)
+   at UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.Handlers.GetLearningComponentsHandlerTests.HandleAsync_NonExistentSpace_ReturnsNotFound()
+
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="ba1c68de-ac79-48b2-849f-982fa6209a41" testId="d06737fb-6efd-be45-80cb-a0c271c123f1" testName="HandleAsync_WithInvalidId_ReturnsBadRequest(&quot;&quot;)" computerName="316fd18f0798" duration="00:00:00.0008390" startTime="2026-07-01T18:24:19.6601552+00:00" endTime="2026-07-01T18:24:19.6609941+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ba1c68de-ac79-48b2-849f-982fa6209a41">
+      <Output>
+        <ErrorInfo>
+          <Message>  Result should be BadRequest&lt;ErrorResponse&gt;
+  Expected: &lt;Microsoft.AspNetCore.Http.HttpResults.BadRequest`1[UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.Handlers.ErrorResponse]&gt;
+  But was:  &lt;Microsoft.AspNetCore.Http.HttpResults.BadRequest`1[UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.Handlers.ErrorResponse]&gt;
+</Message>
+          <StackTrace>   at UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.Handlers.GetLearningComponentsHandlerTests.HandleAsync_WithInvalidId_ReturnsBadRequest(String invalidLearningSpaceId) in /workspace/Backend.Presentation.Tests.Unit/Handlers/GetLearningComponentsHandlerTests.cs:line 97
+   at NUnit.Framework.Internal.TaskAwaitAdapter.GenericAdapter`1.GetResult()
+   at NUnit.Framework.Internal.AsyncToSyncAdapter.Await(Func`1 invoke)
+   at NUnit.Framework.Internal.Commands.TestMethodCommand.RunTestMethod(TestExecutionContext context)
+   at NUnit.Framework.Internal.Commands.TestMethodCommand.Execute(TestExecutionContext context)
+   at NUnit.Framework.Internal.Commands.BeforeAndAfterTestCommand.&lt;&gt;c__DisplayClass1_0.&lt;Execute&gt;b__0()
+   at NUnit.Framework.Internal.Commands.DelegatingTestCommand.RunTestMethodInThreadAbortSafeZone(TestExecutionContext context, Action action)
+
+1)    at UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.Handlers.GetLearningComponentsHandlerTests.HandleAsync_WithInvalidId_ReturnsBadRequest(String invalidLearningSpaceId) in /workspace/Backend.Presentation.Tests.Unit/Handlers/GetLearningComponentsHandlerTests.cs:line 97
+   at System.Runtime.CompilerServices.AsyncMethodBuilderCore.Start[TStateMachine](TStateMachine&amp; stateMachine)
+   at UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.Handlers.GetLearningComponentsHandlerTests.HandleAsync_WithInvalidId_ReturnsBadRequest(String invalidLearningSpaceId)
+
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="1d41aed1-5f45-4352-b2d7-f5c364f85651" testId="76ec7dbb-de72-c767-391d-fd12ab679a2a" testName="HandleAsync_WithComponents_ReturnsOkWithComponentList" computerName="316fd18f0798" duration="00:00:00.0012930" startTime="2026-07-01T18:24:19.6588139+00:00" endTime="2026-07-01T18:24:19.6601065+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="1d41aed1-5f45-4352-b2d7-f5c364f85651" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="HandleAsync_NoComponents_ReturnsOkWithEmptyList" storage="/workspace/backend.presentation.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.presentation.tests.unit.dll" id="d5cb5f5d-376b-93b9-4917-c39149ee9322">
+      <Execution id="78d59d99-aa53-425e-9f0b-5c88ec9a4143" />
+      <TestMethod codeBase="/workspace/Backend.Presentation.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.Handlers.GetLearningComponentsHandlerTests" name="HandleAsync_NoComponents_ReturnsOkWithEmptyList" />
+    </UnitTest>
+    <UnitTest name="HandleAsync_WithInvalidId_ReturnsBadRequest(null)" storage="/workspace/backend.presentation.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.presentation.tests.unit.dll" id="c1d7bccd-598c-f6ab-3a7f-e1911e16b9e8">
+      <Execution id="623f20d1-47cd-4dd0-9f00-72906327286f" />
+      <TestMethod codeBase="/workspace/Backend.Presentation.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.Handlers.GetLearningComponentsHandlerTests" name="HandleAsync_WithInvalidId_ReturnsBadRequest(null)" />
+    </UnitTest>
+    <UnitTest name="HandleAsync_WithInvalidId_ReturnsBadRequest(&quot;&quot;)" storage="/workspace/backend.presentation.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.presentation.tests.unit.dll" id="d06737fb-6efd-be45-80cb-a0c271c123f1">
+      <Execution id="ba1c68de-ac79-48b2-849f-982fa6209a41" />
+      <TestMethod codeBase="/workspace/Backend.Presentation.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.Handlers.GetLearningComponentsHandlerTests" name="HandleAsync_WithInvalidId_ReturnsBadRequest(&quot;&quot;)" />
+    </UnitTest>
+    <UnitTest name="HandleAsync_WithComponents_ReturnsOkWithComponentList" storage="/workspace/backend.presentation.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.presentation.tests.unit.dll" id="76ec7dbb-de72-c767-391d-fd12ab679a2a">
+      <Execution id="1d41aed1-5f45-4352-b2d7-f5c364f85651" />
+      <TestMethod codeBase="/workspace/Backend.Presentation.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.Handlers.GetLearningComponentsHandlerTests" name="HandleAsync_WithComponents_ReturnsOkWithComponentList" />
+    </UnitTest>
+    <UnitTest name="HandleAsync_NonExistentSpace_ReturnsNotFound" storage="/workspace/backend.presentation.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.presentation.tests.unit.dll" id="ed62a01d-db4e-2b0f-8645-6b7e1312a444">
+      <Execution id="31981cfb-e37f-4615-9041-76546f1f0979" />
+      <TestMethod codeBase="/workspace/Backend.Presentation.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.Handlers.GetLearningComponentsHandlerTests" name="HandleAsync_NonExistentSpace_ReturnsNotFound" />
+    </UnitTest>
+    <UnitTest name="HandleAsync_WithInvalidId_ReturnsBadRequest(&quot;   &quot;)" storage="/workspace/backend.presentation.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.presentation.tests.unit.dll" id="55efae97-67f2-8356-a87e-31ba5b59a853">
+      <Execution id="2c49e1ee-35ea-4271-b235-c9df5ad9a43e" />
+      <TestMethod codeBase="/workspace/Backend.Presentation.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.Handlers.GetLearningComponentsHandlerTests" name="HandleAsync_WithInvalidId_ReturnsBadRequest(&quot;   &quot;)" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="c1d7bccd-598c-f6ab-3a7f-e1911e16b9e8" executionId="623f20d1-47cd-4dd0-9f00-72906327286f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="55efae97-67f2-8356-a87e-31ba5b59a853" executionId="2c49e1ee-35ea-4271-b235-c9df5ad9a43e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="d5cb5f5d-376b-93b9-4917-c39149ee9322" executionId="78d59d99-aa53-425e-9f0b-5c88ec9a4143" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ed62a01d-db4e-2b0f-8645-6b7e1312a444" executionId="31981cfb-e37f-4615-9041-76546f1f0979" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="d06737fb-6efd-be45-80cb-a0c271c123f1" executionId="ba1c68de-ac79-48b2-849f-982fa6209a41" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="76ec7dbb-de72-c767-391d-fd12ab679a2a" executionId="1d41aed1-5f45-4352-b2d7-f5c364f85651" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="6" executed="6" passed="2" failed="4" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>NUnit Adapter 4.6.0.0: Test execution started
+Running all tests in /workspace/Backend.Presentation.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.dll
+   NUnit3TestExecutor discovered 6 of 6 NUnit test cases using Current Discovery mode, Non-Explicit run
+NUnit Adapter 4.6.0.0: Test execution complete
+</StdOut>
+    </Output>
+    <CollectorDataEntries>
+      <Collector agentName="316fd18f0798" uri="datacollector://microsoft/CoverletCodeCoverage/1.0" collectorDisplayName="XPlat code coverage">
+        <UriAttachments>
+          <UriAttachment>
+            <A href="316fd18f0798/coverage.cobertura.xml"></A>
+          </UriAttachment>
+        </UriAttachments>
+      </Collector>
+    </CollectorDataEntries>
+  </ResultSummary>
+</TestRun>
