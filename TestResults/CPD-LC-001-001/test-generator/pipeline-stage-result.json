@@ -1,0 +1,32 @@
+{
+  "stage": "test-generation",
+  "storyId": "CPD-LC-001-001",
+  "model": "unknown",
+  "iteration": "unknown",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Domain.Tests.Unit/LearningComponentTests.cs",
+    "Backend.Application.Tests.Unit/LearningComponentServiceTests.cs",
+    "Backend.Infrastructure.Tests.Unit/SqlLearningComponentRepositoryTests.cs",
+    "Backend.Presentation.Tests.Unit/GetLearningComponentsHandlerTests.cs"
+  ],
+  "filesModified": [],
+  "metrics": {
+    "intentsConfirmed": 21,
+    "testMethodsEmitted": 21,
+    "byLayer": {
+      "Domain": 10,
+      "Application": 4,
+      "Infrastructure": 3,
+      "Presentation": 4
+    }
+  },
+  "warnings": [
+    "Assumed LearningComponent entity constructor signature and property names match test intent specifications",
+    "Assumed ILearningComponentRepository and ILearningComponentService interfaces exist with expected method signatures",
+    "Assumed ErrorResponse and GetLearningComponentsResponse types exist in Presentation layer",
+    "Used KeyNotFoundException as the trigger for NotFound response in Presentation layer tests",
+    "Infrastructure tests include EF Core mocking helper classes (TestAsyncQueryProvider, TestAsyncEnumerable, TestAsyncEnumerator) within the test file"
+  ],
+  "notes": "Generated 21 test methods across 4 test classes covering all 21 confirmed intents. Domain tests validate entity construction and boundary conditions. Application tests mock repository interface. Infrastructure tests mock DbContext with async query support. Presentation tests mock service and verify handler response types."
+}

@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using UCR.ECCI.PI.ThemePark.Backend.Application.Services;
 using UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Dtos;
@@ -12,21 +11,6 @@ namespace UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Handlers
     /// </summary>
     public static class GetLearningSpaceListHandler
     {
-        
-        /*
-        public static async Task<Ok<GetLearningSpaceListResponse>> HandleAsync([FromServices] ILearningSpaceListService learningSpaceList)
-        {
-            // Fetches a single learning space by its id
-            var learningSpace = await learningSpaceList.GetCurrentLearningSpaceListAsync();
-
-            // Creates a response with the data of the fetched learning space
-            var response = new GetLearningSpaceListResponse(new LearningSpaceDto(learningSpace.id, learningSpace.type));
-
-            // Returns the response with status 200 OK
-            return TypedResults.Ok(response);
-        }
-        */
-
         /// <summary>
         /// Handles the asynchronous request to fetch all learning spaces.
         /// </summary>
@@ -43,7 +27,7 @@ namespace UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Handlers
             );
 
             // Returns the response with status 200 OK
-            return TypedResults.Ok(response);
+            return Microsoft.AspNetCore.Http.TypedResults.Ok(response);
         }
     }
 }
