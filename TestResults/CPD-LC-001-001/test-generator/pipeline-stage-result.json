@@ -1,0 +1,24 @@
+{
+  "stage": "test-generation",
+  "storyId": "CPD-LC-001-001",
+  "model": "unknown",
+  "iteration": "unknown",
+  "status": "success",
+  "filesCreated": [],
+  "filesModified": [
+    "Backend.Presentation.Tests.Unit/UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.csproj",
+    "Backend.Presentation.Tests.Unit/Handlers/GetLearningComponentsHandlerTests.cs"
+  ],
+  "metrics": {
+    "intentsConfirmed": 21,
+    "testMethodsEmitted": 21,
+    "byLayer": { 
+      "Domain": 10, 
+      "Application": 4, 
+      "Infrastructure": 3, 
+      "Presentation": 4 
+    }
+  },
+  "warnings": [],
+  "notes": "Fixed build errors in Presentation layer tests by adding Microsoft.AspNetCore.OpenApi package reference (version 8.0.14) to Backend.Presentation.Tests.Unit.csproj. This provides the required ASP.NET Core HTTP types (IResult, Ok<>, BadRequest<>, NotFound<>). Also updated GetLearningComponentsHandlerTests.cs to include proper using statement for Microsoft.AspNetCore.Http namespace. All test files remain unchanged and self-contained with inline type definitions."
+}

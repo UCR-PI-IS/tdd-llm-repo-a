@@ -2,6 +2,7 @@
 using System.Reflection;
 using UCR.ECCI.PI.ThemePark.Backend.Infrastructure.EntityConfigurations;
 using UCR.ECCI.PI.ThemePark.Backend.Domain.Entities;
+using UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Entities;
 
 namespace UCR.ECCI.PI.ThemePark.Backend.Infrastructure;
 
@@ -23,6 +24,11 @@ internal class UCRDatabaseContext : DbContext
     /// Gets or sets the collection of learning spaces in the database.
     /// </summary>
     public virtual DbSet<LearningSpace> LearningSpaces { get; set; } = null!;
+
+    /// <summary>
+    /// Gets or sets the collection of learning components in the database.
+    /// </summary>
+    public virtual DbSet<LearningComponentEntity> LearningComponents { get; set; } = null!;
 
     /// <summary>
     /// Configures the model relationships and entity mappings when the model for a context is being created.
