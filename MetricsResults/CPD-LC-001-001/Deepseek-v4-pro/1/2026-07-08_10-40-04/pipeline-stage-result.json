@@ -1,0 +1,24 @@
+{
+  "stage": "refactoring",
+  "storyId": "CPD-LC-001-001",
+  "model": "Deepseek-v4-pro",
+  "iteration": "1",
+  "status": "success",
+  "filesCreated": [],
+  "filesModified": [
+    "Backend.Domain/Entities/LearningComponent.cs",
+    "Backend.Presentation/Handlers/GetLearningComponentsHandler.cs",
+    "Backend.Presentation/Responses/GetLearningComponentsResponse.cs",
+    "Backend.Presentation/Responses/ErrorResponse.cs"
+  ],
+  "metrics": {
+    "loopIterationsPerformed": 1,
+    "maxLoopIterations": 10,
+    "allGreenAchieved": true,
+    "baseline": { "minMI": 56, "maxCC": 11, "maxCoupling": 20, "maxDIT": 0 },
+    "final": { "minMI": 57, "maxCC": 4, "maxCoupling": 9, "maxDIT": 0 },
+    "remainingViolations": []
+  },
+  "warnings": [],
+  "notes": "Refactored LearningComponent constructor to extract ValidateNonNegative helper and simplified orientation check, reducing CC from 11 to 4. Refactored GetLearningComponentsHandler to extract mapping into GetLearningComponentsResponse.FromEntities and error handling into ErrorResponse.FromException, reducing class coupling from 20 to 9. All story-related metrics are now GREEN."
+}
