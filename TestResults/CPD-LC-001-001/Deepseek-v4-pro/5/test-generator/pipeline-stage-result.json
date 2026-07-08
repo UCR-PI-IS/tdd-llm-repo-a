@@ -1,0 +1,26 @@
+{
+  "stage": "test-generation",
+  "storyId": "CPD-LC-001-001",
+  "model": "Deepseek-v4-pro",
+  "iteration": "5",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Domain.Tests.Unit/Entities/LearningComponentTests.cs",
+    "Backend.Application.Tests.Unit/Services/LearningComponentServiceTests.cs",
+    "Backend.Infrastructure.Tests.Unit/Repositories/SqlLearningComponentRepositoryTests.cs",
+    "Backend.Presentation.Tests.Unit/Handlers/GetLearningComponentsHandlerTests.cs"
+  ],
+  "filesModified": [],
+  "metrics": {
+    "intentsConfirmed": 20,
+    "testMethodsEmitted": 20,
+    "byLayer": {
+      "Domain": 10,
+      "Application": 4,
+      "Infrastructure": 3,
+      "Presentation": 4
+    }
+  },
+  "warnings": [],
+  "notes": "Generated 20 NUnit test methods across 4 test files covering all confirmed intents for story CPD-LC-001-001. Domain tests include constructor validation, orientation handling, and boundary value testing. Application and Infrastructure tests use Moq for repository mocking. Presentation tests verify handler responses (OK, BadRequest, NotFound). All tests follow AAA pattern and use Assert.Multiple for multiple assertions on the same object."
+}
