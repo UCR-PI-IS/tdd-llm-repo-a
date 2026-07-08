@@ -9,7 +9,7 @@ namespace UCR.ECCI.PI.ThemePark.Backend.Infrastructure;
 /// Represents the database context for the Theme Park system.
 /// It handles the database operations and mappings for entity configurations.
 /// </summary>
-internal class UCRDatabaseContext : DbContext
+public class UCRDatabaseContext : DbContext
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="UCRDatabaseContext"/> class with specified options.
@@ -22,7 +22,12 @@ internal class UCRDatabaseContext : DbContext
     /// <summary>
     /// Gets or sets the collection of learning spaces in the database.
     /// </summary>
-    public virtual DbSet<LearningSpace> LearningSpaces { get; set; } = null!;
+    public virtual DbSet<LearningSpace> LearningSpaces => Set<LearningSpace>();
+
+    /// <summary>
+    /// Gets or sets the collection of learning components in the database.
+    /// </summary>
+    public virtual DbSet<LearningComponent> LearningComponents => Set<LearningComponent>();
 
     /// <summary>
     /// Configures the model relationships and entity mappings when the model for a context is being created.
