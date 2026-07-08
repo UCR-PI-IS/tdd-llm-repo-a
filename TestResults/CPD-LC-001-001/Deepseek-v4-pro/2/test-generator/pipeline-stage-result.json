@@ -1,0 +1,38 @@
+{
+  "stage": "test-generation",
+  "storyId": "CPD-LC-001-001",
+  "model": "Deepseek-v4-pro",
+  "iteration": "2",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Domain.Tests.Unit/Entities/LearningComponentTests.cs",
+    "Backend.Application.Tests.Unit/Services/LearningComponentServiceTests.cs",
+    "Backend.Infrastructure.Tests.Unit/Repositories/SqlLearningComponentRepositoryTests.cs",
+    "Backend.Presentation.Tests.Unit/Handlers/GetLearningComponentsHandlerTests.cs"
+  ],
+  "filesModified": [],
+  "metrics": {
+    "intentsConfirmed": 21,
+    "testMethodsEmitted": 21,
+    "byLayer": {
+      "Domain": {
+        "count": 10,
+        "files": ["Backend.Domain.Tests.Unit/Entities/LearningComponentTests.cs"]
+      },
+      "Application": {
+        "count": 4,
+        "files": ["Backend.Application.Tests.Unit/Services/LearningComponentServiceTests.cs"]
+      },
+      "Infrastructure": {
+        "count": 3,
+        "files": ["Backend.Infrastructure.Tests.Unit/Repositories/SqlLearningComponentRepositoryTests.cs"]
+      },
+      "Presentation": {
+        "count": 4,
+        "files": ["Backend.Presentation.Tests.Unit/Handlers/GetLearningComponentsHandlerTests.cs"]
+      }
+    }
+  },
+  "warnings": [],
+  "notes": "Generated 21 test methods across 4 test files for story CPD-LC-001-001. Tests cover LearningComponent entity validation (Domain), service logic (Application), repository data access (Infrastructure), and API handler responses (Presentation). All tests follow the established project conventions with proper NUnit attributes, Moq for mocking, and Assert.Multiple for grouped assertions."
+}
