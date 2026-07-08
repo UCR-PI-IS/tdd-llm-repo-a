@@ -1,0 +1,38 @@
+{
+  "stage": "refactoring",
+  "storyId": "CPD-LC-001-001",
+  "model": "Deepseek-v4-pro",
+  "iteration": "6",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Infrastructure/Repositories/LearningComponentListBuilder.cs",
+    "Backend.Infrastructure/Entities/LearningComponentEntity.ToDomain() method",
+    "Backend.Presentation/Dtos/LearningComponentDto.FromDomain() method",
+    "Backend.Presentation/Responses/GetLearningComponentsResponse.FromDomain() method",
+    "Backend.Presentation/Responses/GetLearningComponentsResponse.OkResult() method",
+    "Backend.Presentation/Responses/ErrorResponse.BadRequestResult() method",
+    "Backend.Presentation/Responses/ErrorResponse.NotFoundResult() method"
+  ],
+  "filesModified": [
+    "Backend.Domain/Entities/LearningComponent.cs",
+    "Backend.Infrastructure/Entities/LearningComponentEntity.cs",
+    "Backend.Infrastructure/Repositories/SqlLearningComponentRepository.cs",
+    "Backend.Presentation/Dtos/LearningComponentDto.cs",
+    "Backend.Presentation/Handlers/GetLearningComponentsHandler.cs",
+    "Backend.Presentation/Responses/ErrorResponse.cs",
+    "Backend.Presentation/Responses/GetLearningComponentsResponse.cs"
+  ],
+  "filesDeleted": [
+    "Backend.Presentation/Handlers/LearningComponentHandlerCore.cs"
+  ],
+  "metrics": {
+    "loopIterationsPerformed": 4,
+    "maxLoopIterations": 10,
+    "allGreenAchieved": true,
+    "baseline": { "minMI": 56, "maxCC": 8, "maxCoupling": 19, "maxDIT": 0 },
+    "final":    { "minMI": 56, "maxCC": 4, "maxCoupling": 9, "maxDIT": 0 },
+    "remainingViolations": []
+  },
+  "warnings": [],
+  "notes": "All story-related code now has GREEN metrics. The two original YELLOW coupling violations (SqlLearningComponentRepository: 15→6, GetLearningComponentsHandler: 19→9) were resolved through targeted refactorings: extracted validation helper in LearningComponent, extracted ToDomain() method in LearningComponentEntity, extracted static factory methods in DTO/Response classes, extracted LearningComponentListBuilder for repository logic, and simplified handler by inlining core logic with AggregateException catch."
+}
