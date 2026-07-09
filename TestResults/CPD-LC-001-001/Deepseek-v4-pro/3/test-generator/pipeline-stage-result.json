@@ -1,0 +1,26 @@
+{
+  "stage": "test-generation",
+  "storyId": "CPD-LC-001-001",
+  "model": "Deepseek-v4-pro",
+  "iteration": "3",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Domain.Tests.Unit/Entities/LearningComponentTests.cs",
+    "Backend.Application.Tests.Unit/Services/LearningComponentServiceTests.cs",
+    "Backend.Infrastructure.Tests.Unit/Repositories/SqlLearningComponentRepositoryTests.cs",
+    "Backend.Presentation.Tests.Unit/Handlers/GetLearningComponentsHandlerTests.cs"
+  ],
+  "filesModified": [],
+  "metrics": {
+    "intentsConfirmed": 21,
+    "testMethodsEmitted": 21,
+    "byLayer": {
+      "Domain": 10,
+      "Application": 4,
+      "Infrastructure": 3,
+      "Presentation": 4
+    }
+  },
+  "warnings": [],
+  "notes": "Generated 21 NUnit test methods across 4 DDD layers following Clean Architecture principles. All tests use AAA pattern with proper assertions, follow naming conventions, and include appropriate NUnit attributes. Tests reference expected production classes (LearningComponent, LearningComponentService, SqlLearningComponentRepository, GetLearningComponentsHandler) that are not yet implemented."
+}

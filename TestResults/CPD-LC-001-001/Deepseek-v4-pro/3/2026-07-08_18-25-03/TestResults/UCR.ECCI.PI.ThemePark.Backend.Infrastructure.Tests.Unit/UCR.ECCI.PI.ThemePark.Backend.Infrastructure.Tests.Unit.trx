@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="ff2eb68f-3273-4a3e-ae68-edfab12a94d3" name="@00e20864a882 2026-07-09 00:25:18" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-07-09T00:25:18.1784393+00:00" queuing="2026-07-09T00:25:18.1784394+00:00" start="2026-07-09T00:25:17.3956289+00:00" finish="2026-07-09T00:25:18.1828480+00:00" />
+  <TestSettings name="default" id="86256143-3007-4436-8d52-107e5776241c">
+    <Deployment runDeploymentRoot="_00e20864a882_2026-07-09_00_25_18" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="eedd0a1c-bf6c-4e3d-a02b-8e3186a1e441" testId="8444d03f-b668-0617-f482-dc790d746db4" testName="GetComponentsByLearningSpaceIdAsync_ValidLearningSpaceId_ReturnsComponents" computerName="00e20864a882" duration="00:00:00.0010660" startTime="2026-07-09T00:25:17.9898934+00:00" endTime="2026-07-09T00:25:17.9909593+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="eedd0a1c-bf6c-4e3d-a02b-8e3186a1e441">
+      <Output>
+        <ErrorInfo>
+          <Message>System.NotSupportedException : Specified method is not supported.</Message>
+          <StackTrace>   at Microsoft.EntityFrameworkCore.DbSet`1.System.Linq.IQueryable.get_Provider()
+   at System.Linq.Queryable.Where[TSource](IQueryable`1 source, Expression`1 predicate)
+   at UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Repositories.SqlLearningComponentRepository.GetComponentsByLearningSpaceIdAsync(String learningSpaceId) in /workspace/Backend.Infrastructure/Repositories/SqlLearningComponentRepository.cs:line 31
+   at UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.Repositories.SqlLearningComponentRepositoryTests.GetComponentsByLearningSpaceIdAsync_ValidLearningSpaceId_ReturnsComponents() in /workspace/Backend.Infrastructure.Tests.Unit/Repositories/SqlLearningComponentRepositoryTests.cs:line 70
+   at NUnit.Framework.Internal.TaskAwaitAdapter.GenericAdapter`1.GetResult()
+   at NUnit.Framework.Internal.AsyncToSyncAdapter.Await(Func`1 invoke)
+   at NUnit.Framework.Internal.Commands.TestMethodCommand.RunTestMethod(TestExecutionContext context)
+   at NUnit.Framework.Internal.Commands.TestMethodCommand.Execute(TestExecutionContext context)
+   at NUnit.Framework.Internal.Commands.BeforeAndAfterTestCommand.&lt;&gt;c__DisplayClass1_0.&lt;Execute&gt;b__0()
+   at NUnit.Framework.Internal.Commands.DelegatingTestCommand.RunTestMethodInThreadAbortSafeZone(TestExecutionContext context, Action action)
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="9ed8189c-a297-461b-a5c2-16ce0c7cc5c1" testId="abaae795-dc66-011f-d3db-cd9293281ed5" testName="GetComponentsByLearningSpaceIdAsync_NonExistentLearningSpaceId_ReturnsEmptyList" computerName="00e20864a882" duration="00:00:00.0022020" startTime="2026-07-09T00:25:17.9876767+00:00" endTime="2026-07-09T00:25:17.9898789+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9ed8189c-a297-461b-a5c2-16ce0c7cc5c1">
+      <Output>
+        <ErrorInfo>
+          <Message>System.NotSupportedException : Specified method is not supported.</Message>
+          <StackTrace>   at Microsoft.EntityFrameworkCore.DbSet`1.System.Linq.IQueryable.get_Provider()
+   at System.Linq.Queryable.Where[TSource](IQueryable`1 source, Expression`1 predicate)
+   at UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Repositories.SqlLearningComponentRepository.GetComponentsByLearningSpaceIdAsync(String learningSpaceId) in /workspace/Backend.Infrastructure/Repositories/SqlLearningComponentRepository.cs:line 31
+   at UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.Repositories.SqlLearningComponentRepositoryTests.GetComponentsByLearningSpaceIdAsync_NonExistentLearningSpaceId_ReturnsEmptyList() in /workspace/Backend.Infrastructure.Tests.Unit/Repositories/SqlLearningComponentRepositoryTests.cs:line 120
+   at NUnit.Framework.Internal.TaskAwaitAdapter.GenericAdapter`1.GetResult()
+   at NUnit.Framework.Internal.AsyncToSyncAdapter.Await(Func`1 invoke)
+   at NUnit.Framework.Internal.Commands.TestMethodCommand.RunTestMethod(TestExecutionContext context)
+   at NUnit.Framework.Internal.Commands.TestMethodCommand.Execute(TestExecutionContext context)
+   at NUnit.Framework.Internal.Commands.BeforeAndAfterTestCommand.&lt;&gt;c__DisplayClass1_0.&lt;Execute&gt;b__0()
+   at NUnit.Framework.Internal.Commands.DelegatingTestCommand.RunTestMethodInThreadAbortSafeZone(TestExecutionContext context, Action action)
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="c729e9b3-9339-448c-95a7-09f505241e89" testId="9f3ad30c-0b87-5b12-6d73-81d1e38dbe7f" testName="GetComponentsByLearningSpaceIdAsync_LearningSpaceHasNoComponents_ReturnsEmptyList" computerName="00e20864a882" duration="00:00:00.0893460" startTime="2026-07-09T00:25:17.8975195+00:00" endTime="2026-07-09T00:25:17.9868283+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c729e9b3-9339-448c-95a7-09f505241e89">
+      <Output>
+        <ErrorInfo>
+          <Message>System.NotSupportedException : Specified method is not supported.</Message>
+          <StackTrace>   at Microsoft.EntityFrameworkCore.DbSet`1.System.Linq.IQueryable.get_Provider()
+   at System.Linq.Queryable.Where[TSource](IQueryable`1 source, Expression`1 predicate)
+   at UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Repositories.SqlLearningComponentRepository.GetComponentsByLearningSpaceIdAsync(String learningSpaceId) in /workspace/Backend.Infrastructure/Repositories/SqlLearningComponentRepository.cs:line 31
+   at UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.Repositories.SqlLearningComponentRepositoryTests.GetComponentsByLearningSpaceIdAsync_LearningSpaceHasNoComponents_ReturnsEmptyList() in /workspace/Backend.Infrastructure.Tests.Unit/Repositories/SqlLearningComponentRepositoryTests.cs:line 95
+   at NUnit.Framework.Internal.TaskAwaitAdapter.GenericAdapter`1.GetResult()
+   at NUnit.Framework.Internal.AsyncToSyncAdapter.Await(Func`1 invoke)
+   at NUnit.Framework.Internal.Commands.TestMethodCommand.RunTestMethod(TestExecutionContext context)
+   at NUnit.Framework.Internal.Commands.TestMethodCommand.Execute(TestExecutionContext context)
+   at NUnit.Framework.Internal.Commands.BeforeAndAfterTestCommand.&lt;&gt;c__DisplayClass1_0.&lt;Execute&gt;b__0()
+   at NUnit.Framework.Internal.Commands.DelegatingTestCommand.RunTestMethodInThreadAbortSafeZone(TestExecutionContext context, Action action)
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="GetComponentsByLearningSpaceIdAsync_LearningSpaceHasNoComponents_ReturnsEmptyList" storage="/workspace/backend.infrastructure.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.infrastructure.tests.unit.dll" id="9f3ad30c-0b87-5b12-6d73-81d1e38dbe7f">
+      <Execution id="c729e9b3-9339-448c-95a7-09f505241e89" />
+      <TestMethod codeBase="/workspace/Backend.Infrastructure.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.Repositories.SqlLearningComponentRepositoryTests" name="GetComponentsByLearningSpaceIdAsync_LearningSpaceHasNoComponents_ReturnsEmptyList" />
+    </UnitTest>
+    <UnitTest name="GetComponentsByLearningSpaceIdAsync_ValidLearningSpaceId_ReturnsComponents" storage="/workspace/backend.infrastructure.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.infrastructure.tests.unit.dll" id="8444d03f-b668-0617-f482-dc790d746db4">
+      <Execution id="eedd0a1c-bf6c-4e3d-a02b-8e3186a1e441" />
+      <TestMethod codeBase="/workspace/Backend.Infrastructure.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.Repositories.SqlLearningComponentRepositoryTests" name="GetComponentsByLearningSpaceIdAsync_ValidLearningSpaceId_ReturnsComponents" />
+    </UnitTest>
+    <UnitTest name="GetComponentsByLearningSpaceIdAsync_NonExistentLearningSpaceId_ReturnsEmptyList" storage="/workspace/backend.infrastructure.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.infrastructure.tests.unit.dll" id="abaae795-dc66-011f-d3db-cd9293281ed5">
+      <Execution id="9ed8189c-a297-461b-a5c2-16ce0c7cc5c1" />
+      <TestMethod codeBase="/workspace/Backend.Infrastructure.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.Repositories.SqlLearningComponentRepositoryTests" name="GetComponentsByLearningSpaceIdAsync_NonExistentLearningSpaceId_ReturnsEmptyList" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="8444d03f-b668-0617-f482-dc790d746db4" executionId="eedd0a1c-bf6c-4e3d-a02b-8e3186a1e441" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="abaae795-dc66-011f-d3db-cd9293281ed5" executionId="9ed8189c-a297-461b-a5c2-16ce0c7cc5c1" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="9f3ad30c-0b87-5b12-6d73-81d1e38dbe7f" executionId="c729e9b3-9339-448c-95a7-09f505241e89" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="3" executed="3" passed="0" failed="3" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>NUnit Adapter 4.6.0.0: Test execution started
+Running all tests in /workspace/Backend.Infrastructure.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.dll
+   NUnit3TestExecutor discovered 3 of 3 NUnit test cases using Current Discovery mode, Non-Explicit run
+NUnit Adapter 4.6.0.0: Test execution complete
+</StdOut>
+    </Output>
+    <CollectorDataEntries>
+      <Collector agentName="00e20864a882" uri="datacollector://microsoft/CoverletCodeCoverage/1.0" collectorDisplayName="XPlat code coverage">
+        <UriAttachments>
+          <UriAttachment>
+            <A href="00e20864a882/coverage.cobertura.xml"></A>
+          </UriAttachment>
+        </UriAttachments>
+      </Collector>
+    </CollectorDataEntries>
+  </ResultSummary>
+</TestRun>
