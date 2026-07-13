@@ -8,27 +8,34 @@ public class LearningSpace
     /// <summary>
     /// Unique identifier for the learning space.
     /// </summary>
-    public String id { get; }
+    public String id { get; private set; } = null!;
 
     /// <summary>
     /// Type of the learning space (e.g., classroom, lab and auditorium).
     /// </summary>
-    public String type { get; }
+    public String type { get; private set; } = null!;
 
     /// <summary>
     /// Height of the learning space in meters.
     /// </summary>
-    public float height { get; }
+    public float height { get; private set; }
 
     /// <summary>
     /// Width of the learning space in meters.
     /// </summary>
-    public float width { get; }
+    public float width { get; private set; }
 
     /// <summary>
     /// Length of the learning space in meters.
     /// </summary>
-    public float length { get; }
+    public float length { get; private set; }
+
+    /// <summary>
+    /// Private parameterless constructor for Entity Framework.
+    /// </summary>
+    private LearningSpace()
+    {
+    }
 
     /// <summary>
     /// Constructor for the LearningSpace class.
