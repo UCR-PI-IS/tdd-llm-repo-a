@@ -19,8 +19,9 @@ public static class DependencyInjection
     /// <returns>The modified <see cref="IServiceCollection"/> with infrastructure services registered.</returns>
     public static IServiceCollection AddInfrastructureLayerServices(this IServiceCollection services, IConfiguration configuration)
     {
-        // Register repository implementation
+        // Register repository implementations
         services.AddTransient<ILearningSpaceListRepository, SqlLearningSpaceListRepository>();
+        services.AddTransient<ILearningComponentRepository, SqlLearningComponentRepository>();
 
         // Register EF Core DbContext with SQL Server provider
         services.AddDbContext<UCRDatabaseContext>(options =>
