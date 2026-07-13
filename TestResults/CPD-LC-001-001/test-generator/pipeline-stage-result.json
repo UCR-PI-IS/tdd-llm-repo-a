@@ -1,0 +1,26 @@
+{
+  "stage": "test-generation",
+  "storyId": "CPD-LC-001-001",
+  "model": "unknown",
+  "iteration": "unknown",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Domain.Tests.Unit/LearningComponentTests.cs",
+    "Backend.Application.Tests.Unit/LearningComponentServiceTests.cs",
+    "Backend.Infrastructure.Tests.Unit/SqlLearningComponentRepositoryTests.cs",
+    "Backend.Presentation.Tests.Unit/GetLearningComponentsHandlerTests.cs"
+  ],
+  "filesModified": [],
+  "metrics": {
+    "intentsConfirmed": 21,
+    "testMethodsEmitted": 21,
+    "byLayer": {
+      "Domain": 10,
+      "Application": 4,
+      "Infrastructure": 3,
+      "Presentation": 4
+    }
+  },
+  "warnings": [],
+  "notes": "Generated 21 NUnit test methods covering all 21 confirmed intents across all four DDD layers. Domain layer tests cover entity constructor validation including positive/negative cases and boundary conditions. Application layer tests cover service behavior with mocked repository. Infrastructure layer tests cover repository with mocked DbContext including async query provider helpers. Presentation layer tests cover handler with mocked service and various HTTP response types."
+}
