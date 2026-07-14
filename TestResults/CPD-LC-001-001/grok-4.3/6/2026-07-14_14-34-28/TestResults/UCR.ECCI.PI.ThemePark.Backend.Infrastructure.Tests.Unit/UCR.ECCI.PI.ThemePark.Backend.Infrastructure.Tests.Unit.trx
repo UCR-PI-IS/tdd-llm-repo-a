@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="e524e260-cacc-469f-8429-0baea26024d7" name="@7c206c81ac07 2026-07-14 20:34:41" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-07-14T20:34:41.8410576+00:00" queuing="2026-07-14T20:34:41.8410577+00:00" start="2026-07-14T20:34:41.0930118+00:00" finish="2026-07-14T20:34:41.8449323+00:00" />
+  <TestSettings name="default" id="04cf9411-7192-4f99-9aac-b4c8cdbbc9f0">
+    <Deployment runDeploymentRoot="_7c206c81ac07_2026-07-14_20_34_41" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="f08f587d-59f4-4d9d-9ab2-e66d1147365f" testId="e9e0436b-8430-5d14-bba4-333ce586d99f" testName="GetComponentsByLearningSpaceIdAsync_SpaceHasNoComponents_ReturnsEmptyList" computerName="7c206c81ac07" duration="00:00:00.0003880" startTime="2026-07-14T20:34:41.6595572+00:00" endTime="2026-07-14T20:34:41.6599453+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f08f587d-59f4-4d9d-9ab2-e66d1147365f">
+      <Output>
+        <ErrorInfo>
+          <Message>System.ArgumentException : Can not instantiate proxy of class: UCR.ECCI.PI.ThemePark.Backend.Infrastructure.UCRDatabaseContext.
+Could not find a parameterless constructor. (Parameter 'constructorArguments')
+  ----&gt; System.MissingMethodException : Constructor on type 'Castle.Proxies.UCRDatabaseContextProxy' not found.</Message>
+          <StackTrace>   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options, Object[] constructorArguments, IInterceptor[] interceptors)
+   at Moq.CastleProxyFactory.CreateProxy(Type mockType, IInterceptor interceptor, Type[] interfaces, Object[] arguments) in /_/src/Moq/Interception/CastleProxyFactory.cs:line 62
+   at Moq.Mock`1.InitializeInstance() in /_/src/Moq/Mock`1.cs:line 309
+   at Moq.Mock`1.OnGetObject() in /_/src/Moq/Mock`1.cs:line 323
+   at Moq.Mock.get_Object() in /_/src/Moq/Mock.cs:line 181
+   at Moq.Mock`1.get_Object() in /_/src/Moq/Mock`1.cs:line 281
+   at UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.SqlLearningComponentRepositoryTests.SetUp() in /workspace/Backend.Infrastructure.Tests.Unit/SqlLearningComponentRepositoryTests.cs:line 22
+   at InvokeStub_SqlLearningComponentRepositoryTests.SetUp(Object, Object, IntPtr*)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+--MissingMethodException
+   at System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="ab4eef0a-99f2-4c05-a14d-1c835ed967a5" testId="b4c7b8d6-4b1b-e875-ba79-a26bfb98362a" testName="GetComponentsByLearningSpaceIdAsync_NonExistentLearningSpaceId_ReturnsEmptyList" computerName="7c206c81ac07" duration="00:00:00.0475510" startTime="2026-07-14T20:34:41.6112789+00:00" endTime="2026-07-14T20:34:41.6587957+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ab4eef0a-99f2-4c05-a14d-1c835ed967a5">
+      <Output>
+        <ErrorInfo>
+          <Message>System.ArgumentException : Can not instantiate proxy of class: UCR.ECCI.PI.ThemePark.Backend.Infrastructure.UCRDatabaseContext.
+Could not find a parameterless constructor. (Parameter 'constructorArguments')
+  ----&gt; System.MissingMethodException : Constructor on type 'Castle.Proxies.UCRDatabaseContextProxy' not found.</Message>
+          <StackTrace>   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options, Object[] constructorArguments, IInterceptor[] interceptors)
+   at Moq.CastleProxyFactory.CreateProxy(Type mockType, IInterceptor interceptor, Type[] interfaces, Object[] arguments) in /_/src/Moq/Interception/CastleProxyFactory.cs:line 62
+   at Moq.Mock`1.InitializeInstance() in /_/src/Moq/Mock`1.cs:line 309
+   at Moq.Mock`1.OnGetObject() in /_/src/Moq/Mock`1.cs:line 323
+   at Moq.Mock.get_Object() in /_/src/Moq/Mock.cs:line 181
+   at Moq.Mock`1.get_Object() in /_/src/Moq/Mock`1.cs:line 281
+   at UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.SqlLearningComponentRepositoryTests.SetUp() in /workspace/Backend.Infrastructure.Tests.Unit/SqlLearningComponentRepositoryTests.cs:line 22
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+--MissingMethodException
+   at System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="e3d16db6-317a-418d-b5df-05100a0c66a8" testId="f27de538-e090-b1d3-f32a-04629dbe3765" testName="GetComponentsByLearningSpaceIdAsync_ValidLearningSpaceId_ReturnsListOfComponents" computerName="7c206c81ac07" duration="00:00:00.0001750" startTime="2026-07-14T20:34:41.6599551+00:00" endTime="2026-07-14T20:34:41.6601297+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e3d16db6-317a-418d-b5df-05100a0c66a8">
+      <Output>
+        <ErrorInfo>
+          <Message>System.ArgumentException : Can not instantiate proxy of class: UCR.ECCI.PI.ThemePark.Backend.Infrastructure.UCRDatabaseContext.
+Could not find a parameterless constructor. (Parameter 'constructorArguments')
+  ----&gt; System.MissingMethodException : Constructor on type 'Castle.Proxies.UCRDatabaseContextProxy' not found.</Message>
+          <StackTrace>   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options, Object[] constructorArguments, IInterceptor[] interceptors)
+   at Moq.CastleProxyFactory.CreateProxy(Type mockType, IInterceptor interceptor, Type[] interfaces, Object[] arguments) in /_/src/Moq/Interception/CastleProxyFactory.cs:line 62
+   at Moq.Mock`1.InitializeInstance() in /_/src/Moq/Mock`1.cs:line 309
+   at Moq.Mock`1.OnGetObject() in /_/src/Moq/Mock`1.cs:line 323
+   at Moq.Mock.get_Object() in /_/src/Moq/Mock.cs:line 181
+   at Moq.Mock`1.get_Object() in /_/src/Moq/Mock`1.cs:line 281
+   at UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.SqlLearningComponentRepositoryTests.SetUp() in /workspace/Backend.Infrastructure.Tests.Unit/SqlLearningComponentRepositoryTests.cs:line 22
+   at InvokeStub_SqlLearningComponentRepositoryTests.SetUp(Object, Object, IntPtr*)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+--MissingMethodException
+   at System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="GetComponentsByLearningSpaceIdAsync_SpaceHasNoComponents_ReturnsEmptyList" storage="/workspace/backend.infrastructure.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.infrastructure.tests.unit.dll" id="e9e0436b-8430-5d14-bba4-333ce586d99f">
+      <Execution id="f08f587d-59f4-4d9d-9ab2-e66d1147365f" />
+      <TestMethod codeBase="/workspace/Backend.Infrastructure.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.SqlLearningComponentRepositoryTests" name="GetComponentsByLearningSpaceIdAsync_SpaceHasNoComponents_ReturnsEmptyList" />
+    </UnitTest>
+    <UnitTest name="GetComponentsByLearningSpaceIdAsync_ValidLearningSpaceId_ReturnsListOfComponents" storage="/workspace/backend.infrastructure.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.infrastructure.tests.unit.dll" id="f27de538-e090-b1d3-f32a-04629dbe3765">
+      <Execution id="e3d16db6-317a-418d-b5df-05100a0c66a8" />
+      <TestMethod codeBase="/workspace/Backend.Infrastructure.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.SqlLearningComponentRepositoryTests" name="GetComponentsByLearningSpaceIdAsync_ValidLearningSpaceId_ReturnsListOfComponents" />
+    </UnitTest>
+    <UnitTest name="GetComponentsByLearningSpaceIdAsync_NonExistentLearningSpaceId_ReturnsEmptyList" storage="/workspace/backend.infrastructure.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.infrastructure.tests.unit.dll" id="b4c7b8d6-4b1b-e875-ba79-a26bfb98362a">
+      <Execution id="ab4eef0a-99f2-4c05-a14d-1c835ed967a5" />
+      <TestMethod codeBase="/workspace/Backend.Infrastructure.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.SqlLearningComponentRepositoryTests" name="GetComponentsByLearningSpaceIdAsync_NonExistentLearningSpaceId_ReturnsEmptyList" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="e9e0436b-8430-5d14-bba4-333ce586d99f" executionId="f08f587d-59f4-4d9d-9ab2-e66d1147365f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b4c7b8d6-4b1b-e875-ba79-a26bfb98362a" executionId="ab4eef0a-99f2-4c05-a14d-1c835ed967a5" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f27de538-e090-b1d3-f32a-04629dbe3765" executionId="e3d16db6-317a-418d-b5df-05100a0c66a8" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="3" executed="3" passed="0" failed="3" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>NUnit Adapter 4.6.0.0: Test execution started
+Running all tests in /workspace/Backend.Infrastructure.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.dll
+   NUnit3TestExecutor discovered 3 of 3 NUnit test cases using Current Discovery mode, Non-Explicit run
+NUnit Adapter 4.6.0.0: Test execution complete
+</StdOut>
+    </Output>
+    <CollectorDataEntries>
+      <Collector agentName="7c206c81ac07" uri="datacollector://microsoft/CoverletCodeCoverage/1.0" collectorDisplayName="XPlat code coverage">
+        <UriAttachments>
+          <UriAttachment>
+            <A href="7c206c81ac07/coverage.cobertura.xml"></A>
+          </UriAttachment>
+        </UriAttachments>
+      </Collector>
+    </CollectorDataEntries>
+  </ResultSummary>
+</TestRun>
