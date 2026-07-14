@@ -8,15 +8,15 @@ namespace UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Repositories;
 /// SQL-based implementation of <see cref="ILearningSpaceListRepository"/>.
 /// Provides access to learning space data stored in the database.
 /// </summary>
-internal class SqlLearningSpaceListRepository : ILearningSpaceListRepository
+public class SqlLearningSpaceListRepository : ILearningSpaceListRepository
 {
-    private readonly UCRDatabaseContext _dbContext;
+    private readonly ApplicationDbContext _dbContext;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="SqlLearningSpaceListRepository"/> class.
     /// </summary>
     /// <param name="dbContext">The database context used for data access.</param>
-    public SqlLearningSpaceListRepository(UCRDatabaseContext dbContext)
+    public SqlLearningSpaceListRepository(ApplicationDbContext dbContext)
     {
         _dbContext = dbContext;
     }

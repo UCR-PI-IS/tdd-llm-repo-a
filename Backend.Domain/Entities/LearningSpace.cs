@@ -8,27 +8,34 @@ public class LearningSpace
     /// <summary>
     /// Unique identifier for the learning space.
     /// </summary>
-    public String id { get; }
+    public string id { get; private set; } = string.Empty;
 
     /// <summary>
     /// Type of the learning space (e.g., classroom, lab and auditorium).
     /// </summary>
-    public String type { get; }
+    public string type { get; private set; } = string.Empty;
 
     /// <summary>
     /// Height of the learning space in meters.
     /// </summary>
-    public float height { get; }
+    public float height { get; private set; }
 
     /// <summary>
     /// Width of the learning space in meters.
     /// </summary>
-    public float width { get; }
+    public float width { get; private set; }
 
     /// <summary>
     /// Length of the learning space in meters.
     /// </summary>
-    public float length { get; }
+    public float length { get; private set; }
+
+    /// <summary>
+    /// Private parameterless constructor for EF Core.
+    /// </summary>
+    private LearningSpace()
+    {
+    }
 
     /// <summary>
     /// Constructor for the LearningSpace class.
@@ -38,7 +45,7 @@ public class LearningSpace
     /// <param name="height">Height of the learning space in meters</param>
     /// <param name="width">Width of the learning space in meters</param>
     /// <param name="length">Length of the learning space in meters</param>
-    public LearningSpace(String id, String type, float height, float width, float length)
+    public LearningSpace(string id, string type, float height, float width, float length)
     {
         this.id = id;
         this.type = type;

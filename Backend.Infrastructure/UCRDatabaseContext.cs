@@ -9,13 +9,13 @@ namespace UCR.ECCI.PI.ThemePark.Backend.Infrastructure;
 /// Represents the database context for the Theme Park system.
 /// It handles the database operations and mappings for entity configurations.
 /// </summary>
-internal class UCRDatabaseContext : DbContext
+public class ApplicationDbContext : DbContext
 {
     /// <summary>
-    /// Initializes a new instance of the <see cref="UCRDatabaseContext"/> class with specified options.
+    /// Initializes a new instance of the <see cref="ApplicationDbContext"/> class with specified options.
     /// </summary>
     /// <param name="options">The options to be used by a <see cref="DbContext"/>.</param>
-    public UCRDatabaseContext(DbContextOptions<UCRDatabaseContext> options) : base(options)
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
     {
     }
 
@@ -23,6 +23,11 @@ internal class UCRDatabaseContext : DbContext
     /// Gets or sets the collection of learning spaces in the database.
     /// </summary>
     public virtual DbSet<LearningSpace> LearningSpaces { get; set; } = null!;
+
+    /// <summary>
+    /// Gets or sets the collection of learning components in the database.
+    /// </summary>
+    public virtual DbSet<LearningComponent> LearningComponents { get; set; } = null!;
 
     /// <summary>
     /// Configures the model relationships and entity mappings when the model for a context is being created.
@@ -33,7 +38,25 @@ internal class UCRDatabaseContext : DbContext
         // Apply the LearningSpace entity configuration
         modelBuilder.ApplyConfiguration(new LearningSpaceEntityConfiguration());
 
+        // Apply the LearningComponent entity configuration
+        modelBuilder.ApplyConfiguration(new LearningComponentEntityConfiguration());
+
         // Alternatively, you can apply all configurations from the assembly
         // modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+    }
+}
+
+/// <summary>
+/// Alias for ApplicationDbContext for backward compatibility.
+/// </summary>
+public class UCRDatabaseContext : ApplicationDbContext
+{
+    /// <summary>
+    /// Initializes a new instance of the <see cref="UCRDatabaseContext"/> class with specified options.
+    /// </summary>
+    /// <param name="options">The options to be used by a <see cref="DbContext"/>.</param>
+    public UCRDatabaseContext(DbContextOptions<UCRDatabaseContext> options) 
+        : base(new DbContextOptions<ApplicationDbContext>())
+    {
     }
 }
