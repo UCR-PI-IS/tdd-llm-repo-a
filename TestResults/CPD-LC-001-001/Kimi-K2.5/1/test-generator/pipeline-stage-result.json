@@ -1,0 +1,39 @@
+{
+  "stage": "test-generation",
+  "storyId": "CPD-LC-001-001",
+  "model": "Kimi-K2.5",
+  "iteration": "1",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Domain.Tests.Unit/Entities/LearningComponentTests.cs",
+    "Backend.Application.Tests.Unit/Services/LearningComponentServiceTests.cs",
+    "Backend.Infrastructure.Tests.Unit/Repositories/SqlLearningComponentRepositoryTests.cs",
+    "Backend.Presentation.Tests.Unit/Handlers/GetLearningComponentsHandlerTests.cs"
+  ],
+  "filesModified": [],
+  "metrics": {
+    "intentsConfirmed": 21,
+    "testMethodsEmitted": 21,
+    "byLayer": {
+      "Domain": 10,
+      "Application": 4,
+      "Infrastructure": 3,
+      "Presentation": 4
+    }
+  },
+  "warnings": [
+    "Production classes (LearningComponent, LearningComponentService, SqlLearningComponentRepository, GetLearningComponentsHandler, ILearningComponentRepository, ILearningComponentService, ErrorResponse, GetLearningComponentsResponse) do not exist yet - tests reference expected production code structure"
+  ],
+  "notes": "Generated 21 NUnit test methods covering all 21 confirmed intents from CPD-LC-001-001. Tests follow Clean Architecture patterns with proper AAA structure, Assert.Multiple for multiple assertions, and Moq for dependency mocking. All test methods use the naming convention [MethodName]_[Scenario]_[ExpectedResult].",
+  "reconciliation": {
+    "actions": [
+      "recovered-from-run-branch",
+      "model-normalized",
+      "iteration-normalized"
+    ],
+    "date": "2026-07-19",
+    "tool": "Automations/reconcile-results.py",
+    "recoveredFrom": "runs/wave-1/CPD-LC-001-001/Kimi-K2.5/1:TestResults/CPD-LC-001-001/test-generator/pipeline-stage-result.json",
+    "blob": "686c249354c2a3a33b4b634e09b66a9d67cb107a"
+  }
+}

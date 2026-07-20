@@ -10,11 +10,28 @@
     "loopIterationsPerformed": 0,
     "maxLoopIterations": 10,
     "allGreenAchieved": true,
-    "baseline": { "minMI": 55, "maxCC": 8, "maxCoupling": 16, "maxDIT": 0 },
-    "final": { "minMI": 55, "maxCC": 8, "maxCoupling": 16, "maxDIT": 0 },
+    "baseline": {
+      "minMI": 55,
+      "maxCC": 8,
+      "maxCoupling": 16,
+      "maxDIT": 0
+    },
+    "final": {
+      "minMI": 55,
+      "maxCC": 8,
+      "maxCoupling": 16,
+      "maxDIT": 0
+    },
     "remainingViolations": []
   },
   "warnings": [],
-  "notes": "No refactoring required. All critical metrics (MI, CC, DIT) are GREEN for story-related code. Class coupling shows YELLOW (11-16) in infrastructure/presentation layer classes, which is acceptable due to required framework dependencies (EF Core, ASP.NET Core). These values are well below RED threshold (>40) and represent normal architectural patterns. All 24 tests pass."
+  "notes": "No refactoring required. All critical metrics (MI, CC, DIT) are GREEN for story-related code. Class coupling shows YELLOW (11-16) in infrastructure/presentation layer classes, which is acceptable due to required framework dependencies (EF Core, ASP.NET Core). These values are well below RED threshold (>40) and represent normal architectural patterns. All 24 tests pass.",
+  "reconciliation": {
+    "actions": [
+      "trailing-artifacts-stripped"
+    ],
+    "date": "2026-07-19",
+    "tool": "Automations/reconcile-results.py",
+    "trailingGarbage": "</function>"
+  }
 }
-</function>

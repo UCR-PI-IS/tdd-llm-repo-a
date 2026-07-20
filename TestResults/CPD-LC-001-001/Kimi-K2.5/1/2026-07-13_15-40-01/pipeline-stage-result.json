@@ -43,50 +43,13 @@
     "branchCoverage": 0.9
   },
   "warnings": [],
-  "notes": "Successfully implemented all required components for story CPD-LC-001-001. All 24 tests passing across Domain (13), Application (4), Infrastructure (3), and Presentation (4) layers. Code coverage at 65.22% line rate and 90% branch rate."
+  "notes": "Successfully implemented all required components for story CPD-LC-001-001. All 24 tests passing across Domain (13), Application (4), Infrastructure (3), and Presentation (4) layers. Code coverage at 65.22% line rate and 90% branch rate.",
+  "reconciliation": {
+    "actions": [
+      "trailing-artifacts-stripped"
+    ],
+    "date": "2026-07-19",
+    "tool": "Automations/reconcile-results.py",
+    "trailingGarbage": "</function>\n\n## Summary\n\nI have successfully implemented the"
+  }
 }
-</function>
-
-## Summary
-
-I have successfully implemented the minimal code required to make all failing tests pass for story CPD-LC-001-001, model Kimi-K2.5, iteration 1. Here's what was accomplished:
-
-### Files Created (10):
-1. **Domain Layer**:
-   - `LearningComponent.cs` - Entity with validation for dimensions, coordinates, and orientation
-   - `ILearningComponentRepository.cs` - Repository interface
-
-2. **Application Layer**:
-   - `ILearningComponentService.cs` - Service interface
-   - `LearningComponentService.cs` - Service implementation with validation
-
-3. **Infrastructure Layer**:
-   - `SqlLearningComponentRepository.cs` - SQL repository implementation
-   - `LearningComponentEntityConfiguration.cs` - EF Core entity configuration
-
-4. **Presentation Layer**:
-   - `LearningComponentDto.cs` - Data transfer object
-   - `ErrorResponse.cs` - Error response DTO
-   - `GetLearningComponentsResponse.cs` - Response DTO
-   - `GetLearningComponentsHandler.cs` - Handler for GET endpoint
-
-### Files Modified (14):
-- Added project references to all test projects
-- Updated `UCRDatabaseContext.cs` to include `LearningComponents` DbSet and apply configuration
-- Updated dependency injection registrations
-- Added ASP.NET Core framework reference to Presentation project
-- Added `InternalsVisibleTo` for test and mocking assemblies
-- Added `Microsoft.EntityFrameworkCore.InMemory` package for testing
-- Updated existing `LearningSpace` entity for EF Core compatibility
-- Added using statements to test files
-
-### Test Results:
-- **Total Tests**: 24
-- **Passed**: 24
-- **Failed**: 0
-- **Skipped**: 0
-- **Line Coverage**: 65.22%
-- **Branch Coverage**: 90%
-
-### Pipeline Result File:
-`/Users/camillelamblot/Documents/internship/tdd-llm-repo-a/TestResults/CPD-LC-001-001/Kimi-K2.5/1/2026-07-13_15-40-01/pipeline-stage-result.json`

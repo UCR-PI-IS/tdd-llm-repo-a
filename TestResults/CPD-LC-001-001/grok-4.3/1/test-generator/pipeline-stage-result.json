@@ -1,0 +1,40 @@
+{
+  "stage": "test-generation",
+  "storyId": "CPD-LC-001-001",
+  "model": "grok-4.3",
+  "iteration": "1",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Domain.Tests.Unit/LearningComponentTests.cs",
+    "Backend.Application.Tests.Unit/LearningComponentServiceTests.cs",
+    "Backend.Infrastructure.Tests.Unit/SqlLearningComponentRepositoryTests.cs",
+    "Backend.Presentation.Tests.Unit/GetLearningComponentsHandlerTests.cs"
+  ],
+  "filesModified": [],
+  "metrics": {
+    "intentsConfirmed": 20,
+    "testMethodsEmitted": 21,
+    "byLayer": {
+      "Domain": 10,
+      "Application": 4,
+      "Infrastructure": 3,
+      "Presentation": 4
+    }
+  },
+  "warnings": [
+    "Using TestCase attribute for Domain-009 (valid orientations) to reduce code duplication across multiple similar test cases"
+  ],
+  "notes": "Generated 4 test classes with 21 test methods covering all 20 confirmed intents for story CPD-LC-001-001. All test methods follow NUnit conventions with AAA pattern, proper assertions, and descriptive attributes. Tests reference expected types (LearningComponent, LearningComponentService, SqlLearningComponentRepository, GetLearningComponentsHandler) that will be implemented by the code generator.",
+  "reconciliation": {
+    "actions": [
+      "recovered-from-run-branch",
+      "trailing-artifacts-stripped",
+      "model-normalized",
+      "iteration-normalized"
+    ],
+    "date": "2026-07-19",
+    "tool": "Automations/reconcile-results.py",
+    "recoveredFrom": "runs/wave-1/CPD-LC-001-001/grok-4.3/1:TestResults/CPD-LC-001-001/test-generator/pipeline-stage-result.json",
+    "blob": "8155e49839112d426aebfcc391e83d6bd75ed523"
+  }
+}
