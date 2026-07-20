@@ -24,7 +24,7 @@ Then launch JupyterLab and open any notebook (they are pinned to the
 
 | Notebook | Question it answers |
 |---|---|
-| `00_overview_scorecard.ipynb` | **Which model wins overall?** Effort (retries), pipeline stage outcomes, refactoring success, and a KPI scorecard heatmap across all dimensions. Start here. |
+| `00_overview_scorecard.ipynb` | **Which model wins overall?** Effort (retries), pipeline stage outcomes, refactoring success, a KPI scorecard heatmap across all dimensions, and a best-run ranking of every (model, iteration) from best to worst. Start here. |
 | `10_build.ipynb` | How reliably does each model produce a compiling build, how many errors does it fight through, and where does it fail? |
 | `20_tests_coverage.ipynb` | Pass rates, convergence to green, test methods vs story intents, line/branch coverage, test durations. |
 | `30_code_metrics.ipynb` | Maintainability, complexity, coupling, inheritance and size of the produced code, against the documented GREEN/YELLOW/RED thresholds. |
