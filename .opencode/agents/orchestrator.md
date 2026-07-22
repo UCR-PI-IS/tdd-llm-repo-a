@@ -97,10 +97,11 @@ Use the same sanitized form for `<MODEL>` and `<ITERATION>` that the docker scri
 
 Invoke the `test-generator` subagent with the following context:
 
-> Generate NUnit test classes for story `<STORY-ID>`. Read confirmed intents from `UserIntents/<STORY-ID>.json`. Place test files in the correct `Backend.*.Tests.Unit/` directories per DDD layer. Follow all conventions in the test-generator prompt. Do not create git branches — keep changes in the local workspace.
+> Generate NUnit test classes for story `<STORY-ID>`, model `<MODEL>`, iteration `<ITERATION>`. Read confirmed intents from `UserIntents/<STORY-ID>.json`. Place test files in the correct `Backend.*.Tests.Unit/` directories per DDD layer. Write your stage result to `TestResults/<STORY-ID>/<MODEL>/<ITERATION>/test-generator/pipeline-stage-result.json` using exactly these MODEL and ITERATION values (the same sanitized forms used for the run branch and docker scripts), never your own underlying LLM model id. Follow all conventions in the test-generator prompt. Do not create git branches — keep changes in the local workspace.
 
 **After completion:**
-- Read `TestResults/<STORY-ID>/<MODEL>/<ITERATION>/test-generator/pipeline-stage-result.json` (primary source of truth). Fall back to listing `Backend.*.Tests.Unit/` directories only if the file is missing.
+- Read `TestResults/<STORY-ID>/<MODEL>/<ITERATION>/test-generator/pipeline-stage-result.json` (primary source of truth). If the file does not exist at exactly this path, treat test generation as FAILED — do not fall back to listing `Backend.*.Tests.Unit/` directories, do not search other locations, and never accept a result file found anywhere else (e.g. `TestResults/<STORY-ID>/test-generator/` or a path containing the subagent's raw LLM id). Report the missing/misplaced file and stop (see Error Handling).
+- Verify the JSON's `storyId`, `model`, and `iteration` fields match this run's `<STORY-ID>`, `<MODEL>`, `<ITERATION>` exactly; on any mismatch, treat test generation as FAILED, report, and stop.
 - Report to user using `filesCreated` and `metrics.byLayer` from the JSON.
 - If `status != "success"` or `metrics.testMethodsEmitted == 0`, report failure and stop.
 
@@ -145,6 +146,7 @@ git commit -m "chore(run): build/test/metrics results for <STORY-ID> wave-<WAVE>
 Do not use `git add -A` or `git add .` for this commit — those would pick up the source/test changes that belong in Commit B. If any of the three directories does not exist (e.g., a stage produced no artifacts), drop it from the `git add` argument list rather than failing.
 
 **Commit B — everything else (generated tests, implementation, refactor edits).** After Commit A succeeds, stage all remaining changes on the branch:
+
 
 ```
 git add -A

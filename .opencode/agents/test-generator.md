@@ -19,7 +19,13 @@ Given a user story ID, read the confirmed intents from `UserIntents/<STORY-ID>.j
 
 # Input
 
-You receive a story ID (e.g., `CPD-LC-001-001`). The confirmed intents are in `UserIntents/<STORY-ID>.json`. This file is produced by the intent-generator agent or an orchestrator. Only generate tests for intents where `"status": "confirmed"`.
+You receive three REQUIRED values from the caller:
+
+1. **Story ID** (e.g., `CPD-LC-001-001`) — the confirmed intents are in `UserIntents/<STORY-ID>.json`. This file is produced by the intent-generator agent or an orchestrator. Only generate tests for intents where `"status": "confirmed"`.
+2. **Model** (e.g., `Kimi-K2.5`) — the pipeline's label for the LLM driving this run, used to scope the stage-result path. This is NOT your own underlying model id; never substitute your own id for it.
+3. **Iteration** (e.g., `3`) — the run's iteration number, used to scope the stage-result path.
+
+If MODEL or ITERATION is missing from your invocation context, stop immediately and report failure to the caller — do not guess or invent values (see Stage Handoff).
 
 # Context Loading
 
@@ -119,7 +125,7 @@ Process intents layer by layer in DDD order:
 
 # Stage Handoff
 
-Before stopping, write a `pipeline-stage-result.json` so the orchestrator can read your results deterministically. Path: `TestResults/<STORY-ID>/<MODEL>/<ITERATION>/test-generator/pipeline-stage-result.json` (create directories as needed; you may emit this file even though you do not run tests). This file is scoped to the current iteration and is NEVER read by any agent in a different iteration.
+Before stopping, write a `pipeline-stage-result.json` so the orchestrator can read your results deterministically. Path: `TestResults/<STORY-ID>/<MODEL>/<ITERATION>/test-generator/pipeline-stage-result.json` (create directories as needed; you may emit this file even though you do not run tests). `<MODEL>` and `<ITERATION>` are exactly the values passed by the caller — the same sanitized labels used for the run branch and docker scripts (e.g. `grok-4.3`, `3`), never your own underlying LLM model id (e.g. `x-ai/grok-4.3`). The ONLY directory you may create under `TestResults/` is exactly `TestResults/<STORY-ID>/<MODEL>/<ITERATION>/test-generator/`. Writing `TestResults/<STORY-ID>/test-generator/...` (model/iteration segments omitted) or any other variant is a critical error: if you cannot construct the full canonical path from the caller-provided values, write nothing and fail as described below. This file is scoped to the current iteration and is NEVER read by any agent in a different iteration.
 
 Schema (emit ALL keys; use empty arrays/strings rather than omitting):
 ```json
@@ -141,5 +147,5 @@ Schema (emit ALL keys; use empty arrays/strings rather than omitting):
 }
 ```
 
-If `<MODEL>` and `<ITERATION>` were not provided, write the file under `TestResults/<STORY-ID>/test-generator/` instead and set those fields to `"unknown"`.
+`<MODEL>` and `<ITERATION>` are REQUIRED. If either was not provided, write NO stage-result file at all — not at this path, not at any fallback path — and do NOT invent values (never use your own LLM model id, never default the iteration). Instead, report failure to the caller stating that MODEL/ITERATION were missing so it can re-invoke you with the full context, then stop.
 
