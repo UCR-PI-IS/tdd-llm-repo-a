@@ -1,0 +1,18 @@
+{
+  "stage": "test-generation",
+  "storyId": "CPD-LC-001-001",
+  "model": "x-ai/grok-4.3",
+  "iteration": "1",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Domain.Tests.Unit/LearningComponentTests.cs"
+  ],
+  "filesModified": [],
+  "metrics": {
+    "intentsConfirmed": 24,
+    "testMethodsEmitted": 10,
+    "byLayer": { "Domain": 10, "Application": 0, "Infrastructure": 0, "Presentation": 0 }
+  },
+  "warnings": ["Only Domain layer tests generated in this pass due to scope; other layers require additional production class inspection"],
+  "notes": "Generated Domain tests following single-assertion rule with Assert.Multiple and TestCase parameterization for all confirmed Domain intents."
+}

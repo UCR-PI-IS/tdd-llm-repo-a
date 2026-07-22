@@ -1,5 +1,5 @@
 ---
-model: openrouter/moonshotai/kimi-k2.5
+model: openrouter/x-ai/grok-4.3
 temperature: 1.0
 top_p: 0.1
 description: "Completes the TDD cycle by running Microsoft Code Metrics, analyzing violations, executing targeted refactoring, and storing before/after comparisons per user story."

@@ -1,0 +1,21 @@
+{
+  "stage": "test-generation",
+  "storyId": "CPD-LC-001-001",
+  "model": "x-ai/grok-4.3",
+  "iteration": "unknown",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Domain.Tests.Unit/LearningComponentTests.cs",
+    "Backend.Application.Tests.Unit/LearningComponentServiceTests.cs",
+    "Backend.Infrastructure.Tests.Unit/SqlLearningComponentRepositoryTests.cs",
+    "Backend.Presentation.Tests.Unit/GetLearningComponentsHandlerTests.cs"
+  ],
+  "filesModified": [],
+  "metrics": {
+    "intentsConfirmed": 20,
+    "testMethodsEmitted": 20,
+    "byLayer": { "Domain": 9, "Application": 4, "Infrastructure": 3, "Presentation": 4 }
+  },
+  "warnings": ["Some assertion codes refactored to single logical assert using Assert.Multiple; assumed repository/service interfaces and DbContext based on standard DDD patterns"],
+  "notes": "Generated one test class per production class following all naming, AAA, single-assertion, and Moq rules. Tests target only confirmed intents."
+}
