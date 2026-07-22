@@ -1,0 +1,41 @@
+{
+  "stage": "code-generation",
+  "storyId": "CPD-LC-001-001",
+  "model": "grok-4.3",
+  "iteration": "3",
+  "status": "partial",
+  "filesCreated": [
+    "Backend.Domain/Entities/LearningComponent.cs",
+    "Backend.Domain/Repositories/ILearningComponentRepository.cs",
+    "Backend.Application/Services/ILearningComponentService.cs",
+    "Backend.Application/Services/LearningComponentService.cs",
+    "Backend.Infrastructure/Repositories/SqlLearningComponentRepository.cs",
+    "Backend.Infrastructure/Data/ThemeParkDbContext.cs",
+    "Backend.Presentation/Dtos/GetLearningComponentsResponse.cs",
+    "Backend.Presentation/Dtos/LearningComponentDto.cs",
+    "Backend.Presentation/Responses/ErrorResponse.cs",
+    "Backend.Presentation/Handlers/GetLearningComponentsHandler.cs"
+  ],
+  "filesModified": [
+    "Backend.Presentation.Tests.Unit/UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.csproj",
+    "Backend.Application.Tests.Unit/UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.csproj",
+    "Backend.Infrastructure.Tests.Unit/UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.csproj",
+    "Backend.Domain.Tests.Unit/UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.csproj",
+    "Backend.Presentation/UCR.ECCI.PI.ThemePark.Backend.Presentation.csproj",
+    "Backend.Presentation/Handlers/GetLearningComponentsHandler.cs",
+    "Backend.Application/Services/LearningComponentService.cs",
+    "Backend.Infrastructure/Repositories/SqlLearningComponentRepository.cs"
+  ],
+  "metrics": {
+    "buildErrors": 0,
+    "buildWarnings": 8,
+    "testsTotal": 21,
+    "testsPassed": 16,
+    "testsFailed": 5,
+    "testsSkipped": 0,
+    "lineCoverage": null,
+    "branchCoverage": null
+  },
+  "warnings": ["Handler return type causes test mismatch on Results vs specific result; repo impl returns empty always"],
+  "notes": "Build succeeded after adding refs and stubs. Domain+Application tests pass fully. Presentation and Infra have 5 failing tests due to handler return type and repo query logic."
+}
