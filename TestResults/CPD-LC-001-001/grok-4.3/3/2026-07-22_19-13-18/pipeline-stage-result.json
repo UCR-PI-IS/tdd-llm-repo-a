@@ -1,0 +1,38 @@
+{
+  "stage": "code-generation",
+  "storyId": "CPD-LC-001-001",
+  "model": "grok-4.3",
+  "iteration": "3",
+  "status": "partial",
+  "filesCreated": [
+    "Backend.Application/Services/ILearningComponentService.cs",
+    "Backend.Domain/Repositories/ILearningComponentRepository.cs",
+    "Backend.Application/Services/Implementations/LearningComponentService.cs",
+    "Backend.Infrastructure/Repositories/SqlLearningComponentRepository.cs",
+    "Backend.Presentation/Dtos/GetLearningComponentsResponse.cs",
+    "Backend.Presentation/Dtos/ErrorResponse.cs",
+    "Backend.Presentation/Handlers/GetLearningComponentsHandler.cs"
+  ],
+  "filesModified": [
+    "Backend.Infrastructure/UCRDatabaseContext.cs",
+    "Backend.Presentation.Tests.Unit/UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.csproj",
+    "Backend.Application.Tests.Unit/UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.csproj",
+    "Backend.Infrastructure.Tests.Unit/UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.csproj",
+    "Backend.Domain.Tests.Unit/UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.csproj",
+    "Backend.Presentation/Handlers/GetLearningComponentsHandler.cs",
+    "Backend.Application/Services/Implementations/LearningComponentService.cs",
+    "Backend.Infrastructure/Repositories/SqlLearningComponentRepository.cs"
+  ],
+  "metrics": {
+    "buildErrors": 0,
+    "buildWarnings": 0,
+    "testsTotal": 25,
+    "testsPassed": 24,
+    "testsFailed": 1,
+    "testsSkipped": 0,
+    "lineCoverage": null,
+    "branchCoverage": null
+  },
+  "warnings": ["Infrastructure repo tests partially pass due to mock setup mismatch in tests for DbSet"],
+  "notes": "Implemented minimal DDD layers for listing learning components. Domain, Application, Presentation tests pass fully; 2/3 infra tests pass."
+}

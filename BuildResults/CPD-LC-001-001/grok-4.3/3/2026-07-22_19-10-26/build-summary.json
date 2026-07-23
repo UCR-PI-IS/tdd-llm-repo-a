@@ -1,0 +1,35 @@
+{
+  "status": "failure",
+  "timestamp": "2026-07-22_19-10-26",
+  "storyId": "CPD-LC-001-001",
+  "model": "grok-4.3",
+  "iteration": "3",
+  "projects": [
+    {
+      "name": "UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit",
+      "status": "success",
+      "warnings": 6,
+      "errors": 0,
+      "errorMessages": []
+    },
+    {
+      "name": "UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit",
+      "status": "success",
+      "warnings": 12,
+      "errors": 0,
+      "errorMessages": []
+    },
+    {
+      "name": "UCR.ECCI.PI.ThemePark.Backend.Api",
+      "status": "failure",
+      "warnings": 0,
+      "errors": 2,
+      "errorMessages": [
+        "CS0051: Inconsistent accessibility: parameter type 'UCRDatabaseContext' is less accessible than method 'SqlLearningComponentRepository.SqlLearningComponentRepository(UCRDatabaseContext)'",
+        "CS0051: Inconsistent accessibility: parameter type 'UCRDatabaseContext' is less accessible than method 'SqlLearningComponentRepository.SqlLearningComponentRepository(UCRDatabaseContext)'"
+      ]
+    }
+  ],
+  "totalWarnings": 18,
+  "totalErrors": 2
+}
