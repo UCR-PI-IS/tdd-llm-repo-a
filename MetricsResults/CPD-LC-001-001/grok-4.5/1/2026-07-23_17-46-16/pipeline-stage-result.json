@@ -1,0 +1,41 @@
+{
+  "stage": "refactoring",
+  "storyId": "CPD-LC-001-001",
+  "model": "grok-4.5",
+  "iteration": "1",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Infrastructure/Repositories/LearningComponentQueryFallback.cs",
+    "Backend.Infrastructure/Repositories/LearningComponentEfQuery.cs",
+    "Backend.Presentation/Mappers/LearningComponentDtoMapper.cs",
+    "Backend.Presentation/Handlers/LearningSpaceIdValidator.cs",
+    "Backend.Presentation/Handlers/LearningComponentsErrorFactory.cs",
+    "Backend.Presentation/Handlers/LearningComponentsOkFactory.cs"
+  ],
+  "filesModified": [
+    "Backend.Domain/Entities/LearningComponent.cs",
+    "Backend.Application/Services/Implementations/LearningComponentService.cs",
+    "Backend.Infrastructure/Repositories/SqlLearningComponentRepository.cs",
+    "Backend.Presentation/Handlers/GetLearningComponentsHandler.cs"
+  ],
+  "metrics": {
+    "loopIterationsPerformed": 4,
+    "maxLoopIterations": 10,
+    "allGreenAchieved": true,
+    "baseline": {
+      "minMI": 61,
+      "maxCC": 10,
+      "maxCoupling": 19,
+      "maxDIT": 0
+    },
+    "final": {
+      "minMI": 63,
+      "maxCC": 9,
+      "maxCoupling": 9,
+      "maxDIT": 0
+    },
+    "remainingViolations": []
+  },
+  "warnings": [],
+  "notes": "Reduced class coupling on SqlLearningComponentRepository (18→9) and GetLearningComponentsHandler (19→7) via extract-class/helpers; static-smell pass extracted repeated LearningComponent guards. All story-related metrics GREEN; unrelated GetLearningSpaceListHandler coupling left untouched."
+}
