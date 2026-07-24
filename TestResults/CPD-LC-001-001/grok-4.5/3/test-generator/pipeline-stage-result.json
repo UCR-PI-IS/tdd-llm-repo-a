@@ -1,0 +1,30 @@
+{
+  "stage": "test-generation",
+  "storyId": "CPD-LC-001-001",
+  "model": "grok-4.5",
+  "iteration": "3",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Domain.Tests.Unit/LearningComponentTests.cs",
+    "Backend.Application.Tests.Unit/LearningComponentServiceTests.cs",
+    "Backend.Infrastructure.Tests.Unit/SqlLearningComponentRepositoryTests.cs",
+    "Backend.Infrastructure.Tests.Unit/TestAsyncQueryProvider.cs",
+    "Backend.Presentation.Tests.Unit/GetLearningComponentsHandlerTests.cs"
+  ],
+  "filesModified": [],
+  "metrics": {
+    "intentsConfirmed": 21,
+    "testMethodsEmitted": 21,
+    "byLayer": {
+      "Domain": 10,
+      "Application": 4,
+      "Infrastructure": 3,
+      "Presentation": 4
+    }
+  },
+  "warnings": [
+    "Production types (LearningComponent, LearningComponentService, ILearningComponentRepository, SqlLearningComponentRepository, GetLearningComponentsHandler, DTOs/responses) are not implemented yet; tests reference expected APIs from confirmed intents.",
+    "Infrastructure tests include TestAsyncQueryProvider helper for EF Core async DbSet mocking; EF Core package/project references are expected to be wired by later pipeline stages."
+  ],
+  "notes": "Generated NUnit tests for all 21 confirmed intents across Domain, Application, Infrastructure, and Presentation. Domain orientation coverage uses [TestCase] for North/South/East/West. Multi-property checks use Assert.Multiple. No builds or tests were executed."
+}
