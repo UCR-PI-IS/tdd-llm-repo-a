@@ -1,0 +1,36 @@
+{
+  "stage": "refactoring",
+  "storyId": "CPD-LC-001-001",
+  "model": "grok-4.5",
+  "iteration": "5",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Presentation/Mappers/LearningComponentMapper.cs",
+    "Backend.Presentation/Handlers/LearningComponentHttpResults.cs",
+    "Backend.Presentation/Handlers/LearningComponentQueryExecutor.cs"
+  ],
+  "filesModified": [
+    "Backend.Domain/Entities/LearningComponent.cs",
+    "Backend.Presentation/Handlers/GetLearningComponentsHandler.cs"
+  ],
+  "metrics": {
+    "loopIterationsPerformed": 2,
+    "maxLoopIterations": 10,
+    "allGreenAchieved": true,
+    "baseline": {
+      "minMI": 53,
+      "maxCC": 9,
+      "maxCoupling": 19,
+      "maxDIT": 0
+    },
+    "final": {
+      "minMI": 55,
+      "maxCC": 6,
+      "maxCoupling": 9,
+      "maxDIT": 0
+    },
+    "remainingViolations": []
+  },
+  "warnings": [],
+  "notes": "Reduced GetLearningComponentsHandler class coupling from 19 (YELLOW) to 6 (GREEN) by extracting mapper, HTTP results helper, and query executor. Also extracted repeated non-negative/orientation guards on LearningComponent (MI 53→55, CC 9→6). GetLearningSpaceListHandler coupling remains YELLOW but is out of story scope."
+}
