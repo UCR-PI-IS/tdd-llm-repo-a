@@ -1,0 +1,30 @@
+{
+  "stage": "test-generation",
+  "storyId": "CPD-LC-001-001",
+  "model": "grok-4.5",
+  "iteration": "2",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Domain.Tests.Unit/LearningComponentTests.cs",
+    "Backend.Application.Tests.Unit/LearningComponentServiceTests.cs",
+    "Backend.Infrastructure.Tests.Unit/SqlLearningComponentRepositoryTests.cs",
+    "Backend.Infrastructure.Tests.Unit/TestAsyncQueryProvider.cs",
+    "Backend.Presentation.Tests.Unit/GetLearningComponentsHandlerTests.cs"
+  ],
+  "filesModified": [],
+  "metrics": {
+    "intentsConfirmed": 21,
+    "testMethodsEmitted": 21,
+    "byLayer": {
+      "Domain": 10,
+      "Application": 4,
+      "Infrastructure": 3,
+      "Presentation": 4
+    }
+  },
+  "warnings": [
+    "Production types (LearningComponent, LearningComponentService, SqlLearningComponentRepository, GetLearningComponentsHandler, etc.) are not implemented yet; tests target expected APIs from confirmed intents and existing CA patterns.",
+    "Infrastructure tests include TestAsyncQueryProvider helpers for EF Core async DbSet mocking; project references/packages may need wiring by later pipeline stages."
+  ],
+  "notes": "Generated NUnit tests for all 21 confirmed intents across Domain, Application, Infrastructure, and Presentation. Used string IDs aligned with LearningSpace, UCRDatabaseContext/LearningComponents for infrastructure, and Presentation.Api namespaces matching existing handlers/DTOs."
+}
