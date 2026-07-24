@@ -1,5 +1,5 @@
 ---
-model: openrouter/moonshotai/kimi-k2.5
+model: openrouter/x-ai/grok-4.5
 temperature: 1.0
 top_p: 0.1
 description: "Analyzes user stories from UserStories/ and proposes TDD test intents per Clean Architecture layer via interactive YES/NO/UNKNOWN confirmation loop."
