@@ -1,0 +1,29 @@
+{
+  "stage": "refactoring",
+  "storyId": "CPD-LC-001-001",
+  "model": "grok-4.5",
+  "iteration": "2",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Presentation/Handlers/LearningComponentDtoFactory.cs",
+    "Backend.Presentation/Handlers/LearningComponentsErrorResults.cs",
+    "Backend.Presentation/Handlers/LearningComponentsOkResult.cs",
+    "Backend.Presentation/Handlers/LearningComponentsQuery.cs"
+  ],
+  "filesModified": [
+    "Backend.Domain/Entities/LearningComponent.cs",
+    "Backend.Presentation/Handlers/GetLearningComponentsHandler.cs"
+  ],
+  "metrics": {
+    "loopIterationsPerformed": 6,
+    "maxLoopIterations": 10,
+    "allGreenAchieved": true,
+    "baseline": { "minMI": 53, "maxCC": 9, "maxCoupling": 19, "maxDIT": 0 },
+    "final":    { "minMI": 54, "maxCC": 6, "maxCoupling": 9, "maxDIT": 0 },
+    "remainingViolations": []
+  },
+  "warnings": [
+    "GetLearningSpaceListHandler Coupling=15 YELLOW is out of story scope and was not modified."
+  ],
+  "notes": "Extracted repeated LearningComponent guards; split presentation handler into DTO factory, OK/error result builders, and query orchestrator to bring story-related class coupling from 19 to <=9. All story-related metrics are GREEN; tests passed after each change."
+}
