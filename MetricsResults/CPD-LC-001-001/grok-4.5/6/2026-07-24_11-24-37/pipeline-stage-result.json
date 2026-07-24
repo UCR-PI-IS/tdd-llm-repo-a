@@ -1,0 +1,41 @@
+{
+  "stage": "refactoring",
+  "storyId": "CPD-LC-001-001",
+  "model": "grok-4.5",
+  "iteration": "6",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Presentation/Mappers/LearningComponentBadRequestResult.cs",
+    "Backend.Presentation/Mappers/LearningComponentNotFoundResult.cs",
+    "Backend.Presentation/Mappers/LearningComponentOkResult.cs",
+    "Backend.Presentation/Mappers/LearningComponentQueryExecutor.cs",
+    "Backend.Presentation/Mappers/LearningComponentListLoader.cs",
+    "Backend.Presentation/Mappers/LearningComponentDtoMapper.cs"
+  ],
+  "filesModified": [
+    "Backend.Domain/Entities/LearningComponent.cs",
+    "Backend.Presentation/Handlers/GetLearningComponentsHandler.cs"
+  ],
+  "metrics": {
+    "loopIterationsPerformed": 7,
+    "maxLoopIterations": 10,
+    "allGreenAchieved": true,
+    "baseline": {
+      "minMI": 53,
+      "maxCC": 9,
+      "maxCoupling": 20,
+      "maxDIT": 0
+    },
+    "final": {
+      "minMI": 54,
+      "maxCC": 6,
+      "maxCoupling": 9,
+      "maxDIT": 0
+    },
+    "remainingViolations": []
+  },
+  "warnings": [
+    "GetLearningSpaceListHandler Coupling=15 YELLOW is out of story scope and was not modified."
+  ],
+  "notes": "Extracted repeated LearningComponent constructor guards; decomposed GetLearningComponentsHandler (Coupling 20→GREEN) into focused mapper/result helpers so every story-related type is GREEN. All tests passed after each change."
+}
