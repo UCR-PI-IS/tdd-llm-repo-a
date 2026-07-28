@@ -21,11 +21,15 @@ internal class LearningSpaceEntityConfiguration : IEntityTypeConfiguration<Learn
         // Primary key configuration
         builder.HasKey(LearningSpace => LearningSpace.id);
 
-        // Property atribute configurations
+        // Property attribute configurations
         builder.Property(LearningSpace => LearningSpace.type)
             .HasMaxLength(50);
 
         builder.Property(LearningSpace => LearningSpace.id)
             .HasMaxLength(50);
+
+        builder.Property(LearningSpace => LearningSpace.height);
+        builder.Property(LearningSpace => LearningSpace.width);
+        builder.Property(LearningSpace => LearningSpace.length);
     }
 }
