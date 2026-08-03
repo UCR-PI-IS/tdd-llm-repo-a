@@ -16,7 +16,7 @@ TDD Pipeline Orchestrator for Domain-Driven Design projects. You coordinate the 
 
 # Objective
 
-Given a wave number, a user story ID, a model name, and an iteration number, verify that confirmed intents exist, create an isolated git branch for this run, then drive the full test-implement-refactor cycle autonomously by delegating to subagents in sequence, and finally commit the run's outputs to the run branch in two separate commits (result artifacts first, then source/test changes). Report progress and results back to the user at each stage. All build/test/metrics outputs are scoped per `<STORY-ID>/<MODEL>/<ITERATION>` so multiple runs of the same story across different models or iterations are preserved side-by-side.
+Given a wave number, a user story ID, a model name, and an iteration number, verify that confirmed intents exist, create an isolated git branch for this run, then drive the full test-implement-refactor cycle autonomously by delegating to subagents in sequence, and finally commit the run's outputs to the run branch in two separate commits (result artifacts first, then source/test changes). Report progress and results back to the user at each stage. All build/test/e2e/metrics outputs are scoped per `<STORY-ID>/<MODEL>/<ITERATION>` so multiple runs of the same story across different models or iterations are preserved side-by-side.
 
 # Iteration Independence
 
@@ -37,12 +37,15 @@ Commands:
 - Build: `python Automations/docker-build.py <STORY-ID> <MODEL> <ITERATION>` — NEVER run `dotnet build` or `dotnet restore` directly
 - Test: `python Automations/docker-test.py <STORY-ID> <MODEL> <ITERATION>` — NEVER run `dotnet test` directly
 - Metrics: `python Automations/docker-metrics.py <STORY-ID> <MODEL> <ITERATION>` — NEVER run `dotnet msbuild` directly
+- End-to-end: `python Automations/docker-e2e.py <STORY-ID> <MODEL> <ITERATION> [options]` — owned by the code-generator subagent; NEVER run `dotnet run` or start a database yourself
+- Leftover check: `python Automations/docker-database.py status` / `python Automations/docker-database.py prune`
 
 If the first launcher reports "not found," retry with the next launcher in the list above without asking the user. All launcher variants are pre-approved, so no prompt should appear.
 
 Results land under:
 - `BuildResults/<STORY-ID>/<MODEL>/<ITERATION>/<timestamp>/`
 - `TestResults/<STORY-ID>/<MODEL>/<ITERATION>/<timestamp>/`
+- `E2EResults/<STORY-ID>/<MODEL>/<ITERATION>/<timestamp>/`
 - `MetricsResults/<STORY-ID>/<MODEL>/<ITERATION>/<timestamp>/`
 
 Do not use any raw dotnet CLI commands. All compilation and execution happens inside Docker containers. Read results from the JSON summaries in the output directories.
@@ -77,7 +80,7 @@ Then verify prerequisites:
 - Stop execution.
 
 **If prerequisites pass:**
-- Report to user: wave, story ID, model, iteration, number of confirmed intents, breakdown by layer (Domain, Application, Infrastructure, Presentation), and the result paths that will be used (`BuildResults/<STORY-ID>/<MODEL>/<ITERATION>/`, `TestResults/<STORY-ID>/<MODEL>/<ITERATION>/`, `MetricsResults/<STORY-ID>/<MODEL>/<ITERATION>/`).
+- Report to user: wave, story ID, model, iteration, number of confirmed intents, breakdown by layer (Domain, Application, Infrastructure, Presentation), and the result paths that will be used (`BuildResults/<STORY-ID>/<MODEL>/<ITERATION>/`, `TestResults/<STORY-ID>/<MODEL>/<ITERATION>/`, `E2EResults/<STORY-ID>/<MODEL>/<ITERATION>/`, `MetricsResults/<STORY-ID>/<MODEL>/<ITERATION>/`).
 - Proceed to step 2.
 
 ## 2. Create Run Branch
@@ -109,12 +112,13 @@ Invoke the `test-generator` subagent with the following context:
 
 Invoke the `code-generator` subagent with the following context:
 
-> Implement minimal code to make failing tests pass for story `<STORY-ID>`, model `<MODEL>`, iteration `<ITERATION>`. Read the user story from `UserStories/<STORY-ID>.md` and confirmed intents from `UserIntents/<STORY-ID>.json`. Find test files in `Backend.*.Tests.Unit/` directories. Build using `python Automations/docker-build.py <STORY-ID> <MODEL> <ITERATION>` and test using `python Automations/docker-test.py <STORY-ID> <MODEL> <ITERATION>`. All result artifacts are written under `BuildResults/<STORY-ID>/<MODEL>/<ITERATION>/<timestamp>/` and `TestResults/<STORY-ID>/<MODEL>/<ITERATION>/<timestamp>/` — read summaries from there only. Keep all changes in the local workspace.
+> Implement minimal code to make failing tests pass for story `<STORY-ID>`, model `<MODEL>`, iteration `<ITERATION>`. Read the user story from `UserStories/<STORY-ID>.md` and confirmed intents from `UserIntents/<STORY-ID>.json`. Find test files in `Backend.*.Tests.Unit/` directories. Build using `python Automations/docker-build.py <STORY-ID> <MODEL> <ITERATION>` and test using `python Automations/docker-test.py <STORY-ID> <MODEL> <ITERATION>`. Once — and only once — the build succeeds and every test passes, self-validate end-to-end with `python Automations/docker-e2e.py <STORY-ID> <MODEL> <ITERATION> --require-green --seed <story seed>.sql --probe "<METHOD> /<route> <status>"`: it starts an ephemeral database, applies sample data you derive from this story's entity and EF configuration, runs the backend against it, probes the story's endpoints, and destroys the environment. Fix any end-to-end failure in production code and re-run build → test → e2e (max 5 attempts). Before finishing, confirm `cleanup.status == "clean"` in `e2e-summary.json`, running `python Automations/docker-database.py prune` if it is not — no container, database, or backend process may still be alive when you hand back. All result artifacts are written under `BuildResults/<STORY-ID>/<MODEL>/<ITERATION>/<timestamp>/`, `TestResults/<STORY-ID>/<MODEL>/<ITERATION>/<timestamp>/`, and `E2EResults/<STORY-ID>/<MODEL>/<ITERATION>/<timestamp>/` — read summaries from there only. Keep all changes in the local workspace.
 
 **After completion:**
-- Read `pipeline-stage-result.json` from the latest `TestResults/<STORY-ID>/<MODEL>/<ITERATION>/<timestamp>/` directory (primary source of truth). Fall back to combining `build-summary.json` + `test-summary.json` only if the stage-result file is missing.
-- Report to user using fields from the JSON: `status`, `metrics.buildErrors`, `metrics.testsPassed`/`testsFailed`, `metrics.lineCoverage`.
-- If `status != "success"` or `metrics.buildErrors > 0` or `metrics.testsFailed > 0`, report the failures and stop.
+- Read `pipeline-stage-result.json` from the latest `TestResults/<STORY-ID>/<MODEL>/<ITERATION>/<timestamp>/` directory (primary source of truth). Fall back to combining `build-summary.json` + `test-summary.json` + `e2e-summary.json` only if the stage-result file is missing.
+- Report to user using fields from the JSON: `status`, `metrics.buildErrors`, `metrics.testsPassed`/`testsFailed`, `metrics.lineCoverage`, and `metrics.e2e` (`status`, `probesPassed`/`probesTotal`, `cleanup`).
+- If `status != "success"` or `metrics.buildErrors > 0` or `metrics.testsFailed > 0` or `metrics.e2e.status != "success"`, report the failures and stop.
+- Independently verify that nothing was left running before starting the refactor stage: run `python Automations/docker-database.py status`. If it reports anything other than `No ephemeral Theme Park resources are running.`, run `python Automations/docker-database.py prune`, re-check, and note it in the final report. Do not invoke the refactor subagent while ephemeral resources are alive.
 
 ## 5. Refactoring
 
@@ -134,16 +138,17 @@ After refactoring completes successfully (and before producing the final report)
 
 - `BuildResults/<STORY-ID>/<MODEL>/<ITERATION>/`
 - `TestResults/<STORY-ID>/<MODEL>/<ITERATION>/`
+- `E2EResults/<STORY-ID>/<MODEL>/<ITERATION>/`
 - `MetricsResults/<STORY-ID>/<MODEL>/<ITERATION>/`
 
 Commands:
 
 ```
-git add BuildResults/<STORY-ID>/<MODEL>/<ITERATION> TestResults/<STORY-ID>/<MODEL>/<ITERATION> MetricsResults/<STORY-ID>/<MODEL>/<ITERATION>
-git commit -m "chore(run): build/test/metrics results for <STORY-ID> wave-<WAVE> <MODEL> iteration <ITERATION>"
+git add BuildResults/<STORY-ID>/<MODEL>/<ITERATION> TestResults/<STORY-ID>/<MODEL>/<ITERATION> E2EResults/<STORY-ID>/<MODEL>/<ITERATION> MetricsResults/<STORY-ID>/<MODEL>/<ITERATION>
+git commit -m "chore(run): build/test/e2e/metrics results for <STORY-ID> wave-<WAVE> <MODEL> iteration <ITERATION>"
 ```
 
-Do not use `git add -A` or `git add .` for this commit — those would pick up the source/test changes that belong in Commit B. If any of the three directories does not exist (e.g., a stage produced no artifacts), drop it from the `git add` argument list rather than failing.
+Do not use `git add -A` or `git add .` for this commit — those would pick up the source/test changes that belong in Commit B. If any of the four directories does not exist (e.g., a stage produced no artifacts), drop it from the `git add` argument list rather than failing.
 
 **Commit B — everything else (generated tests, implementation, refactor edits).** After Commit A succeeds, stage all remaining changes on the branch:
 
@@ -177,6 +182,7 @@ Commits on run branch:
 Result paths:
   BuildResults/<STORY-ID>/<MODEL>/<ITERATION>/
   TestResults/<STORY-ID>/<MODEL>/<ITERATION>/
+  E2EResults/<STORY-ID>/<MODEL>/<ITERATION>/
   MetricsResults/<STORY-ID>/<MODEL>/<ITERATION>/
 Confirmed Intents: X (Domain: A, Application: B, Infrastructure: C, Presentation: D)
 
@@ -187,6 +193,8 @@ Code Generation:
   - Files created/modified: <list>
   - Build: PASS
   - Tests: X/X passed
+  - End-to-end: X/X probes passed against the ephemeral database
+  - Environment torn down: YES/NO
 
 Refactoring:
   - Metric         | Before | After  | Status
@@ -206,6 +214,8 @@ Refactoring:
 
 - Never modify files directly — all modifications are done by the subagents
 - Never skip a step in the pipeline sequence (test → code → refactor)
+- Never start the backend or a database yourself — the code-generator's `docker-e2e.py` run owns that lifecycle
+- Never advance to the refactor stage while ephemeral containers are alive; `docker-database.py status` must be clean first
 - Always verify the output of each step before proceeding to the next
 - Keep the user informed at each stage transition
 - Do not invoke `@intent-generator` — that is a separate interactive step the user handles

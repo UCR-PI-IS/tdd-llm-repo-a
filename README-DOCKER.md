@@ -1,6 +1,15 @@
-# Docker Build & Test Automation
+# Docker Build, Test & End-to-End Automation
 
-This directory contains Docker-based automation scripts to run builds and tests in isolated, ephemeral containers. These scripts are designed for agent automation with full output capture and historical run preservation.
+This directory contains Docker-based automation scripts to run builds, tests, and full end-to-end validation in isolated, ephemeral containers. These scripts are designed for agent automation with full output capture and historical run preservation.
+
+| Script | Purpose |
+|--------|---------|
+| `docker-build.py` | Compile every project |
+| `docker-test.py` | Run unit tests with coverage |
+| `docker-metrics.py` | Run Microsoft Code Metrics |
+| `docker-database.py` | Start/stop a throwaway SQL Server the solution can connect to |
+| `docker-e2e.py` | Seed a throwaway database, run the backend against it, probe the endpoints, tear it all down |
+| `insert-sample-data.sh` | Execute caller-supplied SQL inside a running SQL container |
 
 ## Prerequisites
 
@@ -47,6 +56,81 @@ BuildResults/
     ├── build.log
     └── build-script.sh
 ```
+
+### `docker-database.py`
+
+Runs a throwaway SQL Server container the solution can connect to. Nothing is reused between runs and nothing survives a `down`.
+
+```bash
+python Automations/docker-database.py up --port 14330            # start + create the ThemePark DB
+python Automations/docker-database.py up --seed /tmp/seed.sql    # ...and apply sample data
+python Automations/docker-database.py exec --file /tmp/more.sql  # run more SQL
+python Automations/docker-database.py exec --sql "SELECT 1"
+python Automations/docker-database.py status                     # what is currently alive
+python Automations/docker-database.py down                       # remove it
+python Automations/docker-database.py prune                      # remove leftovers from a crashed run
+```
+
+**What `up` does:**
+1. Starts `mcr.microsoft.com/mssql/server:2022-latest` as `themepark-sql-e2e` (adding `--platform linux/amd64` automatically on Apple Silicon)
+2. Waits until SQL Server accepts connections, then creates the `ThemePark` database
+3. Applies the table scripts in `UCR.ECCI.PI.ThemePark.Database/Tables/` (skip with `--no-base-schema`)
+4. Applies every `--seed` file, in order
+5. Prints the connection string to drop into `ConnectionStrings__DefaultConnection`
+
+**Safety:** every container, network, and volume it creates carries the `themepark-e2e=1` Docker label, and only labelled resources are ever removed. A hand-started `themepark-sql` container is never touched — if you point `--name` at an unlabelled container, the script refuses rather than deleting it.
+
+**Environment overrides:** `THEMEPARK_SQL_IMAGE`, `THEMEPARK_SQL_PASSWORD`, `THEMEPARK_SQL_DATABASE`, `THEMEPARK_SQL_CONTAINER`, `THEMEPARK_SQL_READY_TIMEOUT`, `THEMEPARK_SQL_PLATFORM`.
+
+The existing `insert-sample-data.sh` can target the ephemeral container instead of the manual one:
+
+```bash
+SQL_CONTAINER=themepark-sql-e2e ./Automations/insert-sample-data.sh --file /tmp/seed.sql
+```
+
+### `docker-e2e.py`
+
+Proves the solution actually runs, not just that it compiles and its unit tests pass. One command does the full round trip and always cleans up.
+
+```bash
+python Automations/docker-e2e.py <STORY-ID> <MODEL> <ITERATION> \
+    --require-green \
+    --seed /tmp/seed-learningspace.sql \
+    --probe "GET /LearningSpaceList 200"
+```
+
+**`--require-green`** makes the script read the newest `build-summary.json` and `test-summary.json` for the same `<STORY-ID>/<MODEL>/<ITERATION>` and refuse to start anything (exit 2) unless both are green. Use it in the TDD pipeline so end-to-end validation can only ever run on code that compiles and passes its tests.
+
+**What it does:**
+1. Starts an ephemeral SQL Server container on a private Docker network
+2. Applies the base table scripts plus the sample data you pass in (`--seed FILE`, `--seed-sql "..."`)
+3. Publishes `Backend.Api` into a Docker volume and starts it in a container wired to that database
+4. Waits for readiness (`--ready-path`, default `/swagger/v1/swagger.json`), then runs the HTTP probes
+5. Stops the backend and deletes the container, the database container, the network, and the volume
+
+Step 5 runs on every exit path — success, failure, `Ctrl-C`, `SIGTERM`, or an unexpected exception — so no container or process is left behind. `--keep-up` opts out for manual debugging and is the only way to leave anything running.
+
+**Probes.** Simple form: `--probe "METHOD /path [STATUS]"` (repeatable, status defaults to 200). Richer assertions via `--probes <file.json>`:
+
+```json
+{"probes": [{"name": "list includes seeded space", "method": "GET", "path": "/LearningSpaceList",
+             "expectStatus": 200, "expectBodyContains": ["IF-0103"]}]}
+```
+
+**Output structure:**
+```
+E2EResults/SQL-LS-001-007/Kimi-K2.5/1/2026-07-27_22-08-30/
+├── e2e.log            # full run output
+├── publish.log        # dotnet publish output
+├── api.log            # everything the running backend logged
+├── seeds/             # the sample data that was applied
+├── publish-script.sh  # generated publish script
+└── e2e-summary.json   # structured summary (probes, cleanup, warnings, errors)
+```
+
+**Exit codes:** `0` validated, `1` validation failure (probe/seed/startup), `2` environment problem (Docker unreachable).
+
+**Failure signals to read from `e2e-summary.json`:** `backend.publishStatus`, `backend.started`, `backend.errorLines` (unhandled exceptions logged while serving), `probes[].actualStatus`, `probes[].missingContent`, and `cleanup.status` (must be `clean`).
 
 ### `docker-test.sh`
 
@@ -208,16 +292,20 @@ Source code is mounted as a volume (not copied), making iteration instant:
 
 ## Ephemeral Containers
 
-Containers are automatically removed after execution with the `--rm` flag:
+Build, test, and metrics containers are removed after execution with the `--rm` flag:
 
 ```bash
 docker run --rm ...
 ```
 
-Verify no stopped containers remain:
+The database and backend containers created by `docker-database.py` and `docker-e2e.py` are long-lived by nature, so they are labelled `themepark-e2e=1` and removed explicitly during teardown. `docker-e2e.py` tears down on every exit path, including `Ctrl-C` and unexpected exceptions.
+
+Verify nothing remains:
 
 ```bash
-docker ps -a  # Should show no themepark containers
+python Automations/docker-database.py status   # "No ephemeral Theme Park resources are running."
+python Automations/docker-database.py prune    # remove leftovers from a crashed run
+docker ps -a                                   # should show no themepark containers
 ```
 
 ## Troubleshooting

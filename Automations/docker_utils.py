@@ -78,6 +78,7 @@ def run_docker_container(
     inner_script: str,
     log_file: str,
     env_vars: dict[str, str] | None = None,
+    extra_volumes: list[str] | None = None,
 ) -> int:
     cmd = [
         "docker", "run", "--rm",
@@ -86,6 +87,8 @@ def run_docker_container(
         "-v", f"{Path.home() / '.nuget/packages'}:/root/.nuget/packages",
         "-w", "/workspace",
     ]
+    for volume in extra_volumes or []:
+        cmd.extend(["-v", volume])
     if env_vars:
         for k, v in env_vars.items():
             cmd.extend(["-e", f"{k}={v}"])
