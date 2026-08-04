@@ -1,0 +1,51 @@
+{
+  "stage": "refactoring",
+  "storyId": "CPD-LC-001-001",
+  "model": "Kimi-K2.5",
+  "iteration": "10",
+  "status": "partial",
+  "filesCreated": [
+    "Backend.Presentation/Mappers/LearningComponentMapper.cs",
+    "Backend.Presentation/Mappers/LearningSpaceMapper.cs",
+    "Backend.Presentation/Responses/ErrorResponseHelper.cs"
+  ],
+  "filesModified": [
+    "Backend.Presentation/Handlers/GetLearningComponentsHandler.cs",
+    "Backend.Presentation/Handlers/GetLearningSpaceListHandler.cs"
+  ],
+  "metrics": {
+    "loopIterationsPerformed": 2,
+    "maxLoopIterations": 10,
+    "allGreenAchieved": false,
+    "baseline": {
+      "minMI": 55,
+      "maxCC": 8,
+      "maxCoupling": 22,
+      "maxDIT": 1
+    },
+    "final": {
+      "minMI": 55,
+      "maxCC": 8,
+      "maxCoupling": 19,
+      "maxDIT": 1
+    },
+    "remainingViolations": [
+      {
+        "type": "GetLearningComponentsHandler",
+        "metric": "Coupling",
+        "value": 19,
+        "flag": "YELLOW"
+      },
+      {
+        "type": "GetLearningSpaceListHandler",
+        "metric": "Coupling",
+        "value": 12,
+        "flag": "YELLOW"
+      }
+    ]
+  },
+  "warnings": [
+    "Handler classes have inherent coupling to ASP.NET Core framework types (IResult, TypedResults, etc.) which cannot be further reduced without breaking functionality"
+  ],
+  "notes": "Refactoring extracted mapping logic into dedicated mapper classes (LearningComponentMapper, LearningSpaceMapper) and error handling into ErrorResponseHelper. This reduced class coupling in GetLearningComponentsHandler from 22 to 19 (-3) and GetLearningSpaceListHandler from 15 to 12 (-3). Remaining YELLOW violations are acceptable as handlers inherently require ASP.NET Core dependencies for HTTP processing. All tests pass and build succeeds."
+}
