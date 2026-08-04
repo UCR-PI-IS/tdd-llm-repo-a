@@ -78,7 +78,7 @@ fi
 # ---------------------------------------------------------------------------
 if ! docker ps --format '{{.Names}}' | grep -qx "$SQL_CONTAINER"; then
   echo "ERROR: Docker container '$SQL_CONTAINER' is not running." >&2
-  echo "       Start it with: docker start $SQL_CONTAINER" >&2
+  echo "       Start it with: ./Automations/dev-database.sh up" >&2
   exit 1
 fi
 

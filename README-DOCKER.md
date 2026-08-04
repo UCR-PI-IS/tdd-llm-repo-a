@@ -8,8 +8,10 @@ This directory contains Docker-based automation scripts to run builds, tests, an
 | `docker-test.py` | Run unit tests with coverage |
 | `docker-metrics.py` | Run Microsoft Code Metrics |
 | `docker-database.py` | Start/stop a throwaway SQL Server the solution can connect to |
+| `dev-database.sh` | Ensure the long-lived local dev SQL Server (`themepark-sql`) is up, creating it if missing |
 | `docker-e2e.py` | Seed a throwaway database, run the backend against it, probe the endpoints, tear it all down |
 | `insert-sample-data.sh` | Execute caller-supplied SQL inside a running SQL container |
+| `seeds/dev-sample-data.sql` | Sample rows for every table the backend reads, ready to feed to `insert-sample-data.sh` |
 
 ## Prerequisites
 
@@ -56,6 +58,46 @@ BuildResults/
     ├── build.log
     └── build-script.sh
 ```
+
+### `dev-database.sh`
+
+Manages the long-lived **development** database container (`themepark-sql`) that `appsettings.Development.json` points at — the one the `db: start SQL Server (Docker)` VS Code task depends on. Unlike `docker-database.py`, this container is meant to survive between runs.
+
+```bash
+./Automations/dev-database.sh            # ensure it is ready (same as `up`)
+./Automations/dev-database.sh status     # report state, change nothing
+./Automations/dev-database.sh down       # stop and remove it
+./Automations/dev-database.sh recreate   # remove it, then build a fresh one
+```
+
+`up` handles every state, which is why the VS Code task calls it instead of `docker start themepark-sql` (that fails with `No such container` whenever the container has been removed):
+
+| State | What happens |
+|-------|--------------|
+| missing | creates the container, waits for SQL Server, creates the `ThemePark` database, applies the table scripts |
+| stopped | starts the container and waits for SQL Server |
+| running | verifies it answers queries, then does nothing |
+
+The container is created with `--restart unless-stopped` and labelled `themepark-dev=1`, so `docker-database.py prune` (which only removes `themepark-e2e=1` resources) never touches it. `down`/`recreate` refuse to delete a container carrying the e2e label.
+
+Only `Course.sql` and `Semester.sql` are checked in under `UCR.ECCI.PI.ThemePark.Database/Tables/`, so a freshly created database has no entity tables — load those with `insert-sample-data.sh` as usual. A failed table script is reported as a warning rather than a hard failure, so the backend can still start.
+
+**Options:** `--port <n>`, `--timeout <sec>`, `--no-schema`.
+
+**Environment overrides:** `SQL_CONTAINER`, `SQL_IMAGE`, `SQL_DATABASE`, `SQL_USER`, `SQL_PASSWORD`, `SQL_PORT`, `SQL_PLATFORM`, `SQL_READY_TIMEOUT` — the same names `insert-sample-data.sh` uses.
+
+### `seeds/dev-sample-data.sql`
+
+Sample data for the two tables the backend actually reads — `LearningSpace` and `LearningComponent` — so the endpoints return something. Neither table has a script under `UCR.ECCI.PI.ThemePark.Database/Tables/`, so this file creates them when missing; the schema is derived from the EF Core mappings in `Backend.Infrastructure/EntityConfigurations/`.
+
+```bash
+./Automations/dev-database.sh up                                            # database first
+./Automations/insert-sample-data.sh --file Automations/seeds/dev-sample-data.sql
+```
+
+Four learning spaces and seven components: `IF-0103` (4 components, one per orientation), `IF-0104` (2), `IF-0201` (1), and `IF-0301` with none, so the empty-list path is testable. `IF-0103` has to exist because `SqlLearningSpaceListRepository.GetCurrentLearningSpaceListAsync` looks it up with `FirstAsync`. Re-running replaces only these rows, so anything you inserted by hand survives.
+
+Two rules the database cannot enforce, both from the domain constructors: every float must be `>= 0`, and `Orientation` must be exactly `North`, `South`, `East`, or `West`. Break either and EF throws while materialising the row — the endpoint answers 500 even though the INSERT succeeded.
 
 ### `docker-database.py`
 
