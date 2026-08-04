@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using UCR.ECCI.PI.ThemePark.Backend.Application.Services;
-using UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Dtos;
+using UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Mappers;
 using UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Responses;
 
 namespace UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Handlers
@@ -39,7 +39,7 @@ namespace UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Handlers
 
             // Creates a response containing a list of all learning spaces, mapped to DTOs
             var response = new GetLearningSpaceListResponse(
-                spaces.Select(space => new LearningSpaceDto(space.id, space.type)).ToList()
+                LearningSpaceMapper.ToDtoList(spaces)
             );
 
             // Returns the response with status 200 OK
