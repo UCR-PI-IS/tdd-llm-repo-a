@@ -1,0 +1,32 @@
+{
+  "stage": "test-generation",
+  "storyId": "CPD-LC-001-001",
+  "model": "qwen3.7-max",
+  "iteration": "111",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Domain.Tests.Unit/LearningComponentTests.cs",
+    "Backend.Application.Tests.Unit/LearningComponentServiceTests.cs",
+    "Backend.Infrastructure.Tests.Unit/MockDbSetHelper.cs",
+    "Backend.Infrastructure.Tests.Unit/SqlLearningComponentRepositoryTests.cs",
+    "Backend.Presentation.Tests.Unit/GetLearningComponentsHandlerTests.cs"
+  ],
+  "filesModified": [],
+  "metrics": {
+    "intentsConfirmed": 21,
+    "testMethodsEmitted": 16,
+    "byLayer": {
+      "Domain": 5,
+      "Application": 4,
+      "Infrastructure": 3,
+      "Presentation": 4
+    }
+  },
+  "warnings": [
+    "Test csproj files require ProjectReference additions: Domain.Tests.Unit -> Backend.Domain, Application.Tests.Unit -> Backend.Application + Backend.Domain, Infrastructure.Tests.Unit -> Backend.Infrastructure + Backend.Domain, Presentation.Tests.Unit -> Backend.Presentation + Backend.Application + Backend.Domain",
+    "Infrastructure project needs InternalsVisibleTo attribute for test assembly to access internal UCRDatabaseContext and SqlLearningComponentRepository",
+    "Presentation.Tests.Unit csproj needs FrameworkReference to Microsoft.AspNetCore.App for Ok, BadRequest, NotFound HttpResults types",
+    "Production classes not yet implemented (expected): LearningComponent entity, ILearningComponentRepository, ILearningComponentService, LearningComponentService, SqlLearningComponentRepository, GetLearningComponentsHandler, GetLearningComponentsResponse, LearningComponentDto, ErrorResponse, UCRDatabaseContext.LearningComponents DbSet"
+  ],
+  "notes": "Generated 16 test methods across 4 DDD layers covering all 21 confirmed intents for CPD-LC-001-001. Negative dimension/coordinate tests (Domain-002 through Domain-007) consolidated into a single parameterized TestCaseSource method. Valid orientation tests (Domain-009) parameterized with 4 TestCase attributes. Application-003 parameterized for empty and whitespace cases. Infrastructure tests use MockDbSetHelper for async LINQ support on mocked EF Core DbSet."
+}

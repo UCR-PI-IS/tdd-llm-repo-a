@@ -1,0 +1,85 @@
+{
+  "stage": "e2e-validation",
+  "status": "success",
+  "timestamp": "2026-08-04_11-44-13",
+  "storyId": "CPD-LC-001-001",
+  "model": "qwen3.7-max",
+  "iteration": "111",
+  "database": {
+    "container": "themepark-sql-e2e-cpd-lc-001-001-qwen3-7-max-111-114413",
+    "image": "mcr.microsoft.com/mssql/server:2022-latest",
+    "network": "themepark-e2e-cpd-lc-001-001-qwen3-7-max-111-114413",
+    "database": "ThemePark",
+    "readySeconds": 12.2,
+    "baseSchemaApplied": [
+      "Semester.sql",
+      "Course.sql"
+    ],
+    "seedsApplied": [
+      "seed-CPD-LC-001-001.sql"
+    ]
+  },
+  "backend": {
+    "container": "themepark-api-e2e-cpd-lc-001-001-qwen3-7-max-111-114413",
+    "project": "Backend.Api/UCR.ECCI.PI.ThemePark.Backend.Api.csproj",
+    "publishStatus": "success",
+    "started": true,
+    "url": "http://127.0.0.1:55000",
+    "readySeconds": 2.3,
+    "errorLines": []
+  },
+  "probes": [
+    {
+      "name": "list components for LS-001",
+      "method": "GET",
+      "path": "/LearningComponents/LS-001",
+      "expectedStatus": 200,
+      "actualStatus": 200,
+      "passed": true,
+      "missingContent": [],
+      "error": null,
+      "bodySnippet": "{\"components\":[{\"componentId\":\"COMP-001\",\"learningSpaceId\":\"LS-001\",\"width\":2,\"height\":3,\"depth\":1,\"x\":5,\"y\":10,\"z\":0,\"orientation\":\"North\"},{\"componentId\":\"COMP-002\",\"learningSpaceId\":\"LS-001\",\"width\":1,\"height\":2,\"depth\":0.5,\"x\":8,\"y\":12,\"z\":0,\"orientation\":\"South\"}]}"
+    },
+    {
+      "name": "list components for LS-002",
+      "method": "GET",
+      "path": "/LearningComponents/LS-002",
+      "expectedStatus": 200,
+      "actualStatus": 200,
+      "passed": true,
+      "missingContent": [],
+      "error": null,
+      "bodySnippet": "{\"components\":[{\"componentId\":\"COMP-003\",\"learningSpaceId\":\"LS-002\",\"width\":1.5,\"height\":1.5,\"depth\":0.8,\"x\":3,\"y\":7,\"z\":1,\"orientation\":\"East\"}]}"
+    },
+    {
+      "name": "empty list for non-existent space",
+      "method": "GET",
+      "path": "/LearningComponents/NON-EXISTENT",
+      "expectedStatus": 200,
+      "actualStatus": 200,
+      "passed": true,
+      "missingContent": [],
+      "error": null,
+      "bodySnippet": "{\"components\":[]}"
+    }
+  ],
+  "totalProbes": 3,
+  "probesPassed": 3,
+  "probesFailed": 0,
+  "cleanup": {
+    "status": "clean",
+    "removedContainers": [
+      "themepark-api-e2e-cpd-lc-001-001-qwen3-7-max-111-114413",
+      "themepark-sql-e2e-cpd-lc-001-001-qwen3-7-max-111-114413"
+    ],
+    "removedNetworks": [
+      "themepark-e2e-cpd-lc-001-001-qwen3-7-max-111-114413"
+    ],
+    "removedVolumes": [
+      "themepark-app-e2e-cpd-lc-001-001-qwen3-7-max-111-114413"
+    ],
+    "leftovers": []
+  },
+  "warnings": [],
+  "errors": []
+}

@@ -1,0 +1,29 @@
+{
+  "stage": "refactoring",
+  "storyId": "CPD-LC-001-001",
+  "model": "qwen3.7-max",
+  "iteration": "111",
+  "status": "partial",
+  "filesCreated": [],
+  "filesModified": [
+    "Backend.Domain/Entities/LearningComponent.cs",
+    "Backend.Presentation/Dtos/LearningComponentDto.cs",
+    "Backend.Presentation/Handlers/GetLearningComponentsHandler.cs"
+  ],
+  "metrics": {
+    "loopIterationsPerformed": 2,
+    "maxLoopIterations": 10,
+    "allGreenAchieved": false,
+    "baseline": { "minMI": 56, "maxCC": 8, "maxCoupling": 20, "maxDIT": 0 },
+    "final":    { "minMI": 56, "maxCC": 5, "maxCoupling": 19, "maxDIT": 0 },
+    "remainingViolations": [
+      { "type": "UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Handlers.GetLearningComponentsHandler", "metric": "Coupling", "value": 19, "flag": "YELLOW" },
+      { "type": "UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Endpoints.LearningComponentEndpoints", "metric": "Coupling", "value": 10, "flag": "YELLOW" }
+    ]
+  },
+  "warnings": [
+    "Private method extraction in GetLearningComponentsHandler increased coupling from 19 to 20 (reverted)",
+    "Class coupling in handler (19) and endpoints (10) are inherent to ASP.NET Core minimal API pattern and cannot be reduced below 10 without removing framework-required type references"
+  ],
+  "notes": "Extracted 6 repeated guard clauses from LearningComponent constructor into ThrowIfNegative/ThrowIfInvalidOrientation helpers (CC 8->5, constructor CC 8->1). Added FromDomain factory to LearningComponentDto and simplified handler LINQ (coupling 20->19, MI 65->69). Remaining YELLOW coupling violations are structural to the ASP.NET Core minimal API handler pattern."
+}
