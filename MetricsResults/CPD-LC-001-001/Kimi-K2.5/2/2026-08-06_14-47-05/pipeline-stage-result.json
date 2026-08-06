@@ -1,0 +1,34 @@
+{
+  "stage": "refactoring",
+  "storyId": "CPD-LC-001-001",
+  "model": "Kimi-k2.5",
+  "iteration": "2",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Presentation/Mappers/LearningComponentMapper.cs"
+  ],
+  "filesModified": [
+    "Backend.Domain/Entities/LearningComponent.cs",
+    "Backend.Presentation/Handlers/GetLearningComponentsHandler.cs"
+  ],
+  "metrics": {
+    "loopIterationsPerformed": 3,
+    "maxLoopIterations": 10,
+    "allGreenAchieved": true,
+    "baseline": {
+      "minMI": 55,
+      "maxCC": 8,
+      "maxCoupling": 21,
+      "maxDIT": 0
+    },
+    "final": {
+      "minMI": 55,
+      "maxCC": 5,
+      "maxCoupling": 17,
+      "maxDIT": 0
+    },
+    "remainingViolations": []
+  },
+  "warnings": [],
+  "notes": "All RED violations eliminated. Refactoring completed successfully with 3 iterations: (1) Extracted validation helpers in LearningComponent constructor reducing CC from 8 to 5, (2) Extracted mapping logic within handler, (3) Created separate LearningComponentMapper class reducing GetLearningComponentsHandler coupling from 21 to 17. All story-related code now has GREEN or acceptable YELLOW metrics. Class coupling of 17 is within acceptable range (threshold 40). All 24 tests pass."
+}

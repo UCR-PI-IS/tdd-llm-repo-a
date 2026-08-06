@@ -17,6 +17,7 @@ public static class DependencyInjection
     public static IServiceCollection AddApplicationLayerServices(this IServiceCollection services)
     {
         services.AddScoped<ILearningSpaceListService, LearningSpaceListService>();
+        services.AddScoped<ILearningComponentService, LearningComponentService>();
         return services;
     }
 }
