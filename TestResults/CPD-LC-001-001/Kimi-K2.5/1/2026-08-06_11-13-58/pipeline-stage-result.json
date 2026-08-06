@@ -1,0 +1,52 @@
+{
+  "stage": "code-generation",
+  "storyId": "CPD-LC-001-001",
+  "model": "Kimi-k2.5",
+  "iteration": "1",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Domain/Entities/LearningComponent.cs",
+    "Backend.Domain/Repositories/ILearningComponentRepository.cs",
+    "Backend.Application/Services/ILearningComponentService.cs",
+    "Backend.Application/Services/Implementations/LearningComponentService.cs",
+    "Backend.Infrastructure/EntityConfigurations/LearningComponentEntityConfiguration.cs",
+    "Backend.Infrastructure/Repositories/SqlLearningComponentRepository.cs",
+    "Backend.Presentation/Dtos/LearningComponentDto.cs",
+    "Backend.Presentation/Responses/GetLearningComponentsResponse.cs",
+    "Backend.Presentation/Responses/ErrorResponse.cs",
+    "Backend.Presentation/Handlers/GetLearningComponentsHandler.cs",
+    "Backend.Presentation/Endpoints/LearningComponentEndpoints.cs"
+  ],
+  "filesModified": [
+    "Backend.Infrastructure/UCRDatabaseContext.cs",
+    "Backend.Application/DependencyInjection.cs",
+    "Backend.Infrastructure/DependecyInjection.cs",
+    "Backend.Api/Program.cs",
+    "Backend.Domain.Tests.Unit/UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.csproj",
+    "Backend.Application.Tests.Unit/UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.csproj",
+    "Backend.Infrastructure.Tests.Unit/UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.csproj",
+    "Backend.Application.Tests.Unit/LearningComponentServiceTests.cs",
+    "Backend.Infrastructure.Tests.Unit/SqlLearningComponentRepositoryTests.cs"
+  ],
+  "metrics": {
+    "buildErrors": 0,
+    "buildWarnings": 0,
+    "testsTotal": 26,
+    "testsPassed": 26,
+    "testsFailed": 0,
+    "testsSkipped": 0,
+    "lineCoverage": 0.4819277108433735,
+    "branchCoverage": 0.8,
+    "e2e": {
+      "status": "success",
+      "probesTotal": 1,
+      "probesPassed": 1,
+      "probesFailed": 0,
+      "seedsApplied": ["seed-learning-components.sql"],
+      "resultPath": "E2EResults/CPD-LC-001-001/Kimi-k2.5/1/2026-08-06_12-53-37/",
+      "cleanup": "clean"
+    }
+  },
+  "warnings": [],
+  "notes": "Successfully implemented the Learning Component listing feature for story CPD-LC-001-001. All 26 unit tests pass across Domain (13), Application (5), Infrastructure (3), and Presentation (5) layers. End-to-end validation confirmed the endpoint /api/learningspaces/{learningSpaceId}/components returns the expected 200 response with component data."
+}
