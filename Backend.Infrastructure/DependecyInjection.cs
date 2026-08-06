@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using UCR.ECCI.PI.ThemePark.Backend.Domain.Repositories;
 using UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Repositories;
+using UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Data;
 
 namespace UCR.ECCI.PI.ThemePark.Backend.Infrastructure;
 
@@ -19,11 +20,16 @@ public static class DependencyInjection
     /// <returns>The modified <see cref="IServiceCollection"/> with infrastructure services registered.</returns>
     public static IServiceCollection AddInfrastructureLayerServices(this IServiceCollection services, IConfiguration configuration)
     {
-        // Register repository implementation
+        // Register repository implementations
         services.AddTransient<ILearningSpaceListRepository, SqlLearningSpaceListRepository>();
+        services.AddTransient<ILearningComponentRepository, SqlLearningComponentRepository>();
 
         // Register EF Core DbContext with SQL Server provider
         services.AddDbContext<UCRDatabaseContext>(options =>
+            options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+
+        // Register AppDbContext for testing
+        services.AddDbContext<AppDbContext>(options =>
             options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
         return services;
