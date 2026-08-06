@@ -1,0 +1,40 @@
+{
+  "stage": "e2e-validation",
+  "status": "failure",
+  "timestamp": "2026-08-06_14-34-05",
+  "storyId": "CPD-LC-001-001",
+  "model": "Kimi-k2.5",
+  "iteration": "2",
+  "database": {
+    "container": "themepark-sql-e2e-cpd-lc-001-001-kimi-k2-5-2-143405",
+    "image": "mcr.microsoft.com/mssql/server:2022-latest",
+    "network": "themepark-e2e-cpd-lc-001-001-kimi-k2-5-2-143405",
+    "database": "ThemePark",
+    "readySeconds": 8.7,
+    "baseSchemaApplied": [
+      "Semester.sql",
+      "Course.sql"
+    ],
+    "seedsApplied": []
+  },
+  "backend": {},
+  "probes": [],
+  "totalProbes": 0,
+  "probesPassed": 0,
+  "probesFailed": 0,
+  "cleanup": {
+    "status": "clean",
+    "removedContainers": [
+      "themepark-sql-e2e-cpd-lc-001-001-kimi-k2-5-2-143405"
+    ],
+    "removedNetworks": [
+      "themepark-e2e-cpd-lc-001-001-kimi-k2-5-2-143405"
+    ],
+    "removedVolumes": [],
+    "leftovers": []
+  },
+  "warnings": [],
+  "errors": [
+    "seed CPD-LC-001-001.sql: Msg 208, Level 16, State 1, Server 18cd04a83c66, Line 5\nInvalid object name 'LearningSpace'."
+  ]
+}
