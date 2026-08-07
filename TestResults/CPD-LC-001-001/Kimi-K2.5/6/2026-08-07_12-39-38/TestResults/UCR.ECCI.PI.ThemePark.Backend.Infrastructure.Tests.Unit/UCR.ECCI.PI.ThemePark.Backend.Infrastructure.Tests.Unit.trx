@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="7fa150ed-b18e-4aa1-90b9-9417f6c3ec0c" name="@1a5544adc21b 2026-08-07 18:39:55" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-08-07T18:39:55.0585857+00:00" queuing="2026-08-07T18:39:55.0585857+00:00" start="2026-08-07T18:39:54.2822683+00:00" finish="2026-08-07T18:39:55.0626789+00:00" />
+  <TestSettings name="default" id="a4b7e324-fa63-4493-8e76-49d4c10dd5f3">
+    <Deployment runDeploymentRoot="_1a5544adc21b_2026-08-07_18_39_55" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="6954941a-21a8-4c7d-83bb-badf59d0e52d" testId="5514e34e-0781-2f45-914f-79acd79563ba" testName="GetComponentsByLearningSpaceIdAsync_WithNonExistentId_ReturnsEmptyList" computerName="1a5544adc21b" duration="00:00:00.0007090" startTime="2026-08-07T18:39:54.8756057+00:00" endTime="2026-08-07T18:39:54.8763149+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="6954941a-21a8-4c7d-83bb-badf59d0e52d">
+      <Output>
+        <ErrorInfo>
+          <Message>System.InvalidOperationException : The source 'IQueryable' doesn't implement 'IAsyncEnumerable&lt;UCR.ECCI.PI.ThemePark.Backend.Domain.Entities.LearningComponent&gt;'. Only sources that implement 'IAsyncEnumerable' can be used for Entity Framework asynchronous operations.</Message>
+          <StackTrace>   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.AsAsyncEnumerable[TSource](IQueryable`1 source)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.SqlLearningComponentRepositoryTests.GetComponentsByLearningSpaceIdAsync_WithNonExistentId_ReturnsEmptyList() in /workspace/Backend.Infrastructure.Tests.Unit/SqlLearningComponentRepositoryTests.cs:line 117
+   at NUnit.Framework.Internal.TaskAwaitAdapter.GenericAdapter`1.GetResult()
+   at NUnit.Framework.Internal.AsyncToSyncAdapter.Await(Func`1 invoke)
+   at NUnit.Framework.Internal.Commands.TestMethodCommand.RunTestMethod(TestExecutionContext context)
+   at NUnit.Framework.Internal.Commands.TestMethodCommand.Execute(TestExecutionContext context)
+   at NUnit.Framework.Internal.Commands.BeforeAndAfterTestCommand.&lt;&gt;c__DisplayClass1_0.&lt;Execute&gt;b__0()
+   at NUnit.Framework.Internal.Commands.DelegatingTestCommand.RunTestMethodInThreadAbortSafeZone(TestExecutionContext context, Action action)
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="708a18cf-dab1-4c24-893e-78cf19784e9c" testId="181592bb-1548-fb6d-5309-7d0dd8d734f1" testName="GetComponentsByLearningSpaceIdAsync_WithComponents_ReturnsList" computerName="1a5544adc21b" duration="00:00:00.0901810" startTime="2026-08-07T18:39:54.7811325+00:00" endTime="2026-08-07T18:39:54.8727477+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="708a18cf-dab1-4c24-893e-78cf19784e9c">
+      <Output>
+        <ErrorInfo>
+          <Message>System.InvalidOperationException : The source 'IQueryable' doesn't implement 'IAsyncEnumerable&lt;UCR.ECCI.PI.ThemePark.Backend.Domain.Entities.LearningComponent&gt;'. Only sources that implement 'IAsyncEnumerable' can be used for Entity Framework asynchronous operations.</Message>
+          <StackTrace>   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.AsAsyncEnumerable[TSource](IQueryable`1 source)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.SqlLearningComponentRepositoryTests.GetComponentsByLearningSpaceIdAsync_WithComponents_ReturnsList() in /workspace/Backend.Infrastructure.Tests.Unit/SqlLearningComponentRepositoryTests.cs:line 54
+   at NUnit.Framework.Internal.TaskAwaitAdapter.GenericAdapter`1.GetResult()
+   at NUnit.Framework.Internal.AsyncToSyncAdapter.Await(Func`1 invoke)
+   at NUnit.Framework.Internal.Commands.TestMethodCommand.RunTestMethod(TestExecutionContext context)
+   at NUnit.Framework.Internal.Commands.TestMethodCommand.Execute(TestExecutionContext context)
+   at NUnit.Framework.Internal.Commands.BeforeAndAfterTestCommand.&lt;&gt;c__DisplayClass1_0.&lt;Execute&gt;b__0()
+   at NUnit.Framework.Internal.Commands.DelegatingTestCommand.RunTestMethodInThreadAbortSafeZone(TestExecutionContext context, Action action)
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="94f1ccf0-fca4-44d6-9fef-8ca70a3326df" testId="2d15576f-1ad0-4a06-e3ba-81fd9571a9ad" testName="GetComponentsByLearningSpaceIdAsync_WithNoComponents_ReturnsEmptyList" computerName="1a5544adc21b" duration="00:00:00.0020060" startTime="2026-08-07T18:39:54.8735794+00:00" endTime="2026-08-07T18:39:54.8755858+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="94f1ccf0-fca4-44d6-9fef-8ca70a3326df">
+      <Output>
+        <ErrorInfo>
+          <Message>System.InvalidOperationException : The source 'IQueryable' doesn't implement 'IAsyncEnumerable&lt;UCR.ECCI.PI.ThemePark.Backend.Domain.Entities.LearningComponent&gt;'. Only sources that implement 'IAsyncEnumerable' can be used for Entity Framework asynchronous operations.</Message>
+          <StackTrace>   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.AsAsyncEnumerable[TSource](IQueryable`1 source)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.SqlLearningComponentRepositoryTests.GetComponentsByLearningSpaceIdAsync_WithNoComponents_ReturnsEmptyList() in /workspace/Backend.Infrastructure.Tests.Unit/SqlLearningComponentRepositoryTests.cs:line 84
+   at NUnit.Framework.Internal.TaskAwaitAdapter.GenericAdapter`1.GetResult()
+   at NUnit.Framework.Internal.AsyncToSyncAdapter.Await(Func`1 invoke)
+   at NUnit.Framework.Internal.Commands.TestMethodCommand.RunTestMethod(TestExecutionContext context)
+   at NUnit.Framework.Internal.Commands.TestMethodCommand.Execute(TestExecutionContext context)
+   at NUnit.Framework.Internal.Commands.BeforeAndAfterTestCommand.&lt;&gt;c__DisplayClass1_0.&lt;Execute&gt;b__0()
+   at NUnit.Framework.Internal.Commands.DelegatingTestCommand.RunTestMethodInThreadAbortSafeZone(TestExecutionContext context, Action action)
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="GetComponentsByLearningSpaceIdAsync_WithNonExistentId_ReturnsEmptyList" storage="/workspace/backend.infrastructure.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.infrastructure.tests.unit.dll" id="5514e34e-0781-2f45-914f-79acd79563ba">
+      <Execution id="6954941a-21a8-4c7d-83bb-badf59d0e52d" />
+      <TestMethod codeBase="/workspace/Backend.Infrastructure.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.SqlLearningComponentRepositoryTests" name="GetComponentsByLearningSpaceIdAsync_WithNonExistentId_ReturnsEmptyList" />
+    </UnitTest>
+    <UnitTest name="GetComponentsByLearningSpaceIdAsync_WithComponents_ReturnsList" storage="/workspace/backend.infrastructure.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.infrastructure.tests.unit.dll" id="181592bb-1548-fb6d-5309-7d0dd8d734f1">
+      <Execution id="708a18cf-dab1-4c24-893e-78cf19784e9c" />
+      <TestMethod codeBase="/workspace/Backend.Infrastructure.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.SqlLearningComponentRepositoryTests" name="GetComponentsByLearningSpaceIdAsync_WithComponents_ReturnsList" />
+    </UnitTest>
+    <UnitTest name="GetComponentsByLearningSpaceIdAsync_WithNoComponents_ReturnsEmptyList" storage="/workspace/backend.infrastructure.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.infrastructure.tests.unit.dll" id="2d15576f-1ad0-4a06-e3ba-81fd9571a9ad">
+      <Execution id="94f1ccf0-fca4-44d6-9fef-8ca70a3326df" />
+      <TestMethod codeBase="/workspace/Backend.Infrastructure.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.SqlLearningComponentRepositoryTests" name="GetComponentsByLearningSpaceIdAsync_WithNoComponents_ReturnsEmptyList" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="5514e34e-0781-2f45-914f-79acd79563ba" executionId="6954941a-21a8-4c7d-83bb-badf59d0e52d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="181592bb-1548-fb6d-5309-7d0dd8d734f1" executionId="708a18cf-dab1-4c24-893e-78cf19784e9c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="2d15576f-1ad0-4a06-e3ba-81fd9571a9ad" executionId="94f1ccf0-fca4-44d6-9fef-8ca70a3326df" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="3" executed="3" passed="0" failed="3" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>NUnit Adapter 4.6.0.0: Test execution started
+Running all tests in /workspace/Backend.Infrastructure.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.dll
+   NUnit3TestExecutor discovered 3 of 3 NUnit test cases using Current Discovery mode, Non-Explicit run
+NUnit Adapter 4.6.0.0: Test execution complete
+</StdOut>
+    </Output>
+    <CollectorDataEntries>
+      <Collector agentName="1a5544adc21b" uri="datacollector://microsoft/CoverletCodeCoverage/1.0" collectorDisplayName="XPlat code coverage">
+        <UriAttachments>
+          <UriAttachment>
+            <A href="1a5544adc21b/coverage.cobertura.xml"></A>
+          </UriAttachment>
+        </UriAttachments>
+      </Collector>
+    </CollectorDataEntries>
+  </ResultSummary>
+</TestRun>

@@ -1,0 +1,46 @@
+{
+  "stage": "refactoring",
+  "storyId": "CPD-LC-001-001",
+  "model": "Kimi-k2.5",
+  "iteration": "6",
+  "status": "success",
+  "filesCreated": [],
+  "filesModified": [
+    "Backend.Domain/Entities/LearningComponent.cs"
+  ],
+  "metrics": {
+    "loopIterationsPerformed": 1,
+    "maxLoopIterations": 10,
+    "allGreenAchieved": false,
+    "baseline": {
+      "minMI": 56,
+      "maxCC": 8,
+      "maxCoupling": 21,
+      "maxDIT": 0
+    },
+    "final": {
+      "minMI": 56,
+      "maxCC": 4,
+      "maxCoupling": 21,
+      "maxDIT": 0
+    },
+    "remainingViolations": [
+      {
+        "type": "SqlLearningComponentRepository",
+        "metric": "Coupling",
+        "value": 11,
+        "flag": "YELLOW"
+      },
+      {
+        "type": "GetLearningComponentsHandler",
+        "metric": "Coupling",
+        "value": 21,
+        "flag": "YELLOW"
+      }
+    ]
+  },
+  "warnings": [
+    "Class Coupling YELLOW violations remain in SqlLearningComponentRepository (11) and GetLearningComponentsHandler (21). These are due to necessary framework dependencies (EF Core, ASP.NET Core) and are within acceptable YELLOW thresholds (10-40). Reducing them further would require significant architectural changes not justified for YELLOW-level violations."
+  ],
+  "notes": "Successfully refactored LearningComponent entity by extracting repeated validation logic into a private ValidateNonNegative method, reducing cyclomatic complexity by 50% (from 8 to 4). All 29 tests pass. The remaining YELLOW coupling violations are from necessary framework imports and are acceptable."
+}
