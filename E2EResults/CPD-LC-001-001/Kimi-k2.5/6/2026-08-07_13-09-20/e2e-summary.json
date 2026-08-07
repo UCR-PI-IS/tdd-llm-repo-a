@@ -1,0 +1,70 @@
+{
+  "stage": "e2e-validation",
+  "status": "failure",
+  "timestamp": "2026-08-07_13-09-20",
+  "storyId": "CPD-LC-001-001",
+  "model": "Kimi-k2.5",
+  "iteration": "6",
+  "database": {
+    "container": "themepark-sql-e2e-cpd-lc-001-001-kimi-k2-5-6-130920",
+    "image": "mcr.microsoft.com/mssql/server:2022-latest",
+    "network": "themepark-e2e-cpd-lc-001-001-kimi-k2-5-6-130920",
+    "database": "ThemePark",
+    "readySeconds": 8.6,
+    "baseSchemaApplied": [
+      "Semester.sql",
+      "Course.sql"
+    ],
+    "seedsApplied": [
+      "CPD-LC-001-001.sql"
+    ]
+  },
+  "backend": {
+    "container": "themepark-api-e2e-cpd-lc-001-001-kimi-k2-5-6-130920",
+    "project": "Backend.Api/UCR.ECCI.PI.ThemePark.Backend.Api.csproj",
+    "publishStatus": "success",
+    "started": true,
+    "url": "http://127.0.0.1:55001",
+    "readySeconds": 2.3,
+    "errorLines": [
+      "fail: Microsoft.EntityFrameworkCore.Database.Command[20102]",
+      "fail: Microsoft.EntityFrameworkCore.Query[10100]",
+      "fail: Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware[1]",
+      "An unhandled exception has occurred while executing the request."
+    ]
+  },
+  "probes": [
+    {
+      "name": "GET /api/learningspaces/LS-001/components",
+      "method": "GET",
+      "path": "/api/learningspaces/LS-001/components",
+      "expectedStatus": 200,
+      "actualStatus": 500,
+      "passed": false,
+      "missingContent": [],
+      "error": null,
+      "bodySnippet": "Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid object name 'LearningComponent'.\n   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)\n   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)\n   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean a"
+    }
+  ],
+  "totalProbes": 1,
+  "probesPassed": 0,
+  "probesFailed": 1,
+  "cleanup": {
+    "status": "clean",
+    "removedContainers": [
+      "themepark-api-e2e-cpd-lc-001-001-kimi-k2-5-6-130920",
+      "themepark-sql-e2e-cpd-lc-001-001-kimi-k2-5-6-130920"
+    ],
+    "removedNetworks": [
+      "themepark-e2e-cpd-lc-001-001-kimi-k2-5-6-130920"
+    ],
+    "removedVolumes": [
+      "themepark-app-e2e-cpd-lc-001-001-kimi-k2-5-6-130920"
+    ],
+    "leftovers": []
+  },
+  "warnings": [],
+  "errors": [
+    "1 probe(s) failed."
+  ]
+}
