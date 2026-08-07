@@ -1,0 +1,702 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
+<coverage line-rate="0.4880952380952381" branch-rate="0.7777777777777778" lines-covered="82" lines-valid="168" branches-covered="14" branches-valid="18" complexity="68" version="0" timestamp="1786057694">
+  <sources>
+    <source>/workspace/</source>
+    <source>/workspace/Backend.Domain/Entities/</source>
+  </sources>
+  <packages>
+    <package name="UCR.ECCI.PI.ThemePark.Backend.Application" line-rate="0.5" branch-rate="1" complexity="7">
+      <classes>
+        <class name="UCR.ECCI.PI.ThemePark.Backend.Application.DependencyInjection" filename="/workspace/Backend.Application/DependencyInjection.cs" line-rate="0" branch-rate="1" complexity="1">
+          <methods>
+            <method name="AddApplicationLayerServices" signature="(Microsoft.Extensions.DependencyInjection.IServiceCollection)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="19" hits="0" branch="false" />
+                <line number="20" hits="0" branch="false" />
+                <line number="21" hits="0" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="19" hits="0" branch="false" />
+            <line number="20" hits="0" branch="false" />
+            <line number="21" hits="0" branch="false" />
+          </lines>
+        </class>
+        <class name="UCR.ECCI.PI.ThemePark.Backend.Application.Services.Implementations.LearningSpaceListService" filename="/workspace/Backend.Application/Services/Implementations/LearningSpaceListService.cs" line-rate="0" branch-rate="1" complexity="3">
+          <methods>
+            <method name="GetCurrentLearningSpaceListAsync" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="28" hits="0" branch="false" />
+              </lines>
+            </method>
+            <method name="GetAllLearningSpacesAsync" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="37" hits="0" branch="false" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="(UCR.ECCI.PI.ThemePark.Backend.Domain.Repositories.ILearningSpaceListRepository)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="17" hits="0" branch="false" />
+                <line number="19" hits="0" branch="false" />
+                <line number="20" hits="0" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="17" hits="0" branch="false" />
+            <line number="19" hits="0" branch="false" />
+            <line number="20" hits="0" branch="false" />
+            <line number="28" hits="0" branch="false" />
+            <line number="37" hits="0" branch="false" />
+          </lines>
+        </class>
+        <class name="UCR.ECCI.PI.ThemePark.Backend.Application.Services.LearningComponentService" filename="/workspace/Backend.Application/Services/Implementations/LearningComponentService.cs" line-rate="1" branch-rate="1" complexity="3">
+          <methods>
+            <method name=".ctor" signature="(UCR.ECCI.PI.ThemePark.Backend.Domain.Repositories.ILearningComponentRepository)" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="17" hits="10" branch="false" />
+                <line number="19" hits="10" branch="false" />
+                <line number="20" hits="10" branch="false" />
+              </lines>
+            </method>
+            <method name="GetComponentsByLearningSpaceIdAsync" signature="()" line-rate="1" branch-rate="1" complexity="2">
+              <lines>
+                <line number="31" hits="10" branch="true" condition-coverage="100% (2/2)" />
+                <line number="33" hits="6" branch="false" />
+                <line number="36" hits="4" branch="false" />
+                <line number="43" hits="4" branch="false" />
+                <line number="44" hits="4" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="17" hits="10" branch="false" />
+            <line number="19" hits="10" branch="false" />
+            <line number="20" hits="10" branch="false" />
+            <line number="31" hits="10" branch="true" condition-coverage="100% (2/2)" />
+            <line number="33" hits="6" branch="false" />
+            <line number="36" hits="4" branch="false" />
+            <line number="43" hits="4" branch="false" />
+            <line number="44" hits="4" branch="false" />
+          </lines>
+        </class>
+      </classes>
+    </package>
+    <package name="UCR.ECCI.PI.ThemePark.Backend.Domain" line-rate="0.7818181818181819" branch-rate="1" complexity="28">
+      <classes>
+        <class name="UCR.ECCI.PI.ThemePark.Backend.Domain.Entities.LearningComponent" filename="/workspace/Backend.Domain/Entities/LearningComponent.cs" line-rate="1" branch-rate="1" complexity="22">
+          <methods>
+            <method name="get_ComponentId" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="11" hits="6" branch="false" />
+              </lines>
+            </method>
+            <method name="get_LearningSpaceId" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="16" hits="22" branch="false" />
+              </lines>
+            </method>
+            <method name="get_Width" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="21" hits="8" branch="false" />
+              </lines>
+            </method>
+            <method name="get_Height" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="26" hits="8" branch="false" />
+              </lines>
+            </method>
+            <method name="get_Depth" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="31" hits="8" branch="false" />
+              </lines>
+            </method>
+            <method name="get_X" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="36" hits="8" branch="false" />
+              </lines>
+            </method>
+            <method name="get_Y" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="41" hits="8" branch="false" />
+              </lines>
+            </method>
+            <method name="get_Z" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="46" hits="8" branch="false" />
+              </lines>
+            </method>
+            <method name="get_Orientation" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="51" hits="14" branch="false" />
+              </lines>
+            </method>
+            <method name="ValidateNonNegative" signature="(System.Single,System.String,System.String)" line-rate="1" branch-rate="1" complexity="2">
+              <lines>
+                <line number="105" hits="258" branch="true" condition-coverage="100% (2/2)" />
+                <line number="106" hits="12" branch="false" />
+                <line number="107" hits="246" branch="false" />
+              </lines>
+            </method>
+            <method name="ValidateOrientation" signature="(System.String)" line-rate="1" branch-rate="1" complexity="10">
+              <lines>
+                <line number="116" hits="36" branch="true" condition-coverage="100% (10/10)" />
+                <line number="117" hits="36" branch="false" />
+                <line number="118" hits="8" branch="false" />
+                <line number="119" hits="28" branch="false" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="(System.String,System.String,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.String)" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="66" hits="48" branch="false" />
+                <line number="67" hits="48" branch="false" />
+                <line number="68" hits="48" branch="false" />
+                <line number="69" hits="48" branch="false" />
+                <line number="70" hits="48" branch="false" />
+                <line number="71" hits="48" branch="false" />
+                <line number="72" hits="48" branch="false" />
+                <line number="73" hits="48" branch="false" />
+                <line number="74" hits="48" branch="false" />
+                <line number="75" hits="48" branch="false" />
+                <line number="77" hits="48" branch="false" />
+                <line number="78" hits="46" branch="false" />
+                <line number="79" hits="44" branch="false" />
+                <line number="80" hits="42" branch="false" />
+                <line number="81" hits="40" branch="false" />
+                <line number="82" hits="38" branch="false" />
+                <line number="83" hits="36" branch="false" />
+                <line number="85" hits="28" branch="false" />
+                <line number="86" hits="28" branch="false" />
+                <line number="87" hits="28" branch="false" />
+                <line number="88" hits="28" branch="false" />
+                <line number="89" hits="28" branch="false" />
+                <line number="90" hits="28" branch="false" />
+                <line number="91" hits="28" branch="false" />
+                <line number="92" hits="28" branch="false" />
+                <line number="93" hits="28" branch="false" />
+                <line number="94" hits="28" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="11" hits="6" branch="false" />
+            <line number="16" hits="22" branch="false" />
+            <line number="21" hits="8" branch="false" />
+            <line number="26" hits="8" branch="false" />
+            <line number="31" hits="8" branch="false" />
+            <line number="36" hits="8" branch="false" />
+            <line number="41" hits="8" branch="false" />
+            <line number="46" hits="8" branch="false" />
+            <line number="51" hits="14" branch="false" />
+            <line number="66" hits="48" branch="false" />
+            <line number="67" hits="48" branch="false" />
+            <line number="68" hits="48" branch="false" />
+            <line number="69" hits="48" branch="false" />
+            <line number="70" hits="48" branch="false" />
+            <line number="71" hits="48" branch="false" />
+            <line number="72" hits="48" branch="false" />
+            <line number="73" hits="48" branch="false" />
+            <line number="74" hits="48" branch="false" />
+            <line number="75" hits="48" branch="false" />
+            <line number="77" hits="48" branch="false" />
+            <line number="78" hits="46" branch="false" />
+            <line number="79" hits="44" branch="false" />
+            <line number="80" hits="42" branch="false" />
+            <line number="81" hits="40" branch="false" />
+            <line number="82" hits="38" branch="false" />
+            <line number="83" hits="36" branch="false" />
+            <line number="85" hits="28" branch="false" />
+            <line number="86" hits="28" branch="false" />
+            <line number="87" hits="28" branch="false" />
+            <line number="88" hits="28" branch="false" />
+            <line number="89" hits="28" branch="false" />
+            <line number="90" hits="28" branch="false" />
+            <line number="91" hits="28" branch="false" />
+            <line number="92" hits="28" branch="false" />
+            <line number="93" hits="28" branch="false" />
+            <line number="94" hits="28" branch="false" />
+            <line number="105" hits="258" branch="true" condition-coverage="100% (2/2)" />
+            <line number="106" hits="12" branch="false" />
+            <line number="107" hits="246" branch="false" />
+            <line number="116" hits="36" branch="true" condition-coverage="100% (10/10)" />
+            <line number="117" hits="36" branch="false" />
+            <line number="118" hits="8" branch="false" />
+            <line number="119" hits="28" branch="false" />
+          </lines>
+        </class>
+        <class name="UCR.ECCI.PI.ThemePark.Backend.Domain.Entities.LearningSpace" filename="/workspace/Backend.Domain/Entities/LearningSpace.cs" line-rate="0" branch-rate="1" complexity="6">
+          <methods>
+            <method name="get_id" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="11" hits="0" branch="false" />
+              </lines>
+            </method>
+            <method name="get_type" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="16" hits="0" branch="false" />
+              </lines>
+            </method>
+            <method name="get_height" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="21" hits="0" branch="false" />
+              </lines>
+            </method>
+            <method name="get_width" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="26" hits="0" branch="false" />
+              </lines>
+            </method>
+            <method name="get_length" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="31" hits="0" branch="false" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="(System.String,System.String,System.Single,System.Single,System.Single)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="41" hits="0" branch="false" />
+                <line number="43" hits="0" branch="false" />
+                <line number="44" hits="0" branch="false" />
+                <line number="45" hits="0" branch="false" />
+                <line number="46" hits="0" branch="false" />
+                <line number="47" hits="0" branch="false" />
+                <line number="48" hits="0" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="11" hits="0" branch="false" />
+            <line number="16" hits="0" branch="false" />
+            <line number="21" hits="0" branch="false" />
+            <line number="26" hits="0" branch="false" />
+            <line number="31" hits="0" branch="false" />
+            <line number="41" hits="0" branch="false" />
+            <line number="43" hits="0" branch="false" />
+            <line number="44" hits="0" branch="false" />
+            <line number="45" hits="0" branch="false" />
+            <line number="46" hits="0" branch="false" />
+            <line number="47" hits="0" branch="false" />
+            <line number="48" hits="0" branch="false" />
+          </lines>
+        </class>
+      </classes>
+    </package>
+    <package name="UCR.ECCI.PI.ThemePark.Backend.Infrastructure" line-rate="0.1568627450980392" branch-rate="1" complexity="13">
+      <classes>
+        <class name="UCR.ECCI.PI.ThemePark.Backend.Infrastructure.DependencyInjection" filename="/workspace/Backend.Infrastructure/DependecyInjection.cs" line-rate="0" branch-rate="1" complexity="1">
+          <methods>
+            <method name="AddInfrastructureLayerServices" signature="(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="23" hits="0" branch="false" />
+                <line number="24" hits="0" branch="false" />
+                <line number="27" hits="0" branch="false" />
+                <line number="28" hits="0" branch="false" />
+                <line number="30" hits="0" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="23" hits="0" branch="false" />
+            <line number="24" hits="0" branch="false" />
+            <line number="27" hits="0" branch="false" />
+            <line number="28" hits="0" branch="false" />
+            <line number="30" hits="0" branch="false" />
+          </lines>
+        </class>
+        <class name="UCR.ECCI.PI.ThemePark.Backend.Infrastructure.EntityConfigurations.LearningComponentEntityConfiguration" filename="/workspace/Backend.Infrastructure/EntityConfigurations/LearningComponentEntityConfiguration.cs" line-rate="0" branch-rate="1" complexity="1">
+          <methods>
+            <method name="Configure" signature="(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder`1&lt;UCR.ECCI.PI.ThemePark.Backend.Domain.Entities.LearningComponent&gt;)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="19" hits="0" branch="false" />
+                <line number="22" hits="0" branch="false" />
+                <line number="25" hits="0" branch="false" />
+                <line number="26" hits="0" branch="false" />
+                <line number="28" hits="0" branch="false" />
+                <line number="29" hits="0" branch="false" />
+                <line number="31" hits="0" branch="false" />
+                <line number="32" hits="0" branch="false" />
+                <line number="34" hits="0" branch="false" />
+                <line number="35" hits="0" branch="false" />
+                <line number="36" hits="0" branch="false" />
+                <line number="37" hits="0" branch="false" />
+                <line number="38" hits="0" branch="false" />
+                <line number="39" hits="0" branch="false" />
+                <line number="40" hits="0" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="19" hits="0" branch="false" />
+            <line number="22" hits="0" branch="false" />
+            <line number="25" hits="0" branch="false" />
+            <line number="26" hits="0" branch="false" />
+            <line number="28" hits="0" branch="false" />
+            <line number="29" hits="0" branch="false" />
+            <line number="31" hits="0" branch="false" />
+            <line number="32" hits="0" branch="false" />
+            <line number="34" hits="0" branch="false" />
+            <line number="35" hits="0" branch="false" />
+            <line number="36" hits="0" branch="false" />
+            <line number="37" hits="0" branch="false" />
+            <line number="38" hits="0" branch="false" />
+            <line number="39" hits="0" branch="false" />
+            <line number="40" hits="0" branch="false" />
+          </lines>
+        </class>
+        <class name="UCR.ECCI.PI.ThemePark.Backend.Infrastructure.EntityConfigurations.LearningSpaceEntityConfiguration" filename="/workspace/Backend.Infrastructure/EntityConfigurations/LearningSpaceEntityConfiguration.cs" line-rate="0" branch-rate="1" complexity="1">
+          <methods>
+            <method name="Configure" signature="(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder`1&lt;UCR.ECCI.PI.ThemePark.Backend.Domain.Entities.LearningSpace&gt;)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="19" hits="0" branch="false" />
+                <line number="22" hits="0" branch="false" />
+                <line number="25" hits="0" branch="false" />
+                <line number="26" hits="0" branch="false" />
+                <line number="28" hits="0" branch="false" />
+                <line number="29" hits="0" branch="false" />
+                <line number="31" hits="0" branch="false" />
+                <line number="32" hits="0" branch="false" />
+                <line number="33" hits="0" branch="false" />
+                <line number="34" hits="0" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="19" hits="0" branch="false" />
+            <line number="22" hits="0" branch="false" />
+            <line number="25" hits="0" branch="false" />
+            <line number="26" hits="0" branch="false" />
+            <line number="28" hits="0" branch="false" />
+            <line number="29" hits="0" branch="false" />
+            <line number="31" hits="0" branch="false" />
+            <line number="32" hits="0" branch="false" />
+            <line number="33" hits="0" branch="false" />
+            <line number="34" hits="0" branch="false" />
+          </lines>
+        </class>
+        <class name="UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Repositories.SqlLearningComponentRepository" filename="/workspace/Backend.Infrastructure/Repositories/SqlLearningComponentRepository.cs" line-rate="1" branch-rate="1" complexity="2">
+          <methods>
+            <method name="GetComponentsByLearningSpaceIdAsync" signature="(System.String)" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="31" hits="6" branch="false" />
+                <line number="32" hits="6" branch="false" />
+                <line number="33" hits="6" branch="false" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="(UCR.ECCI.PI.ThemePark.Backend.Infrastructure.UCRDatabaseContext)" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="19" hits="6" branch="false" />
+                <line number="21" hits="6" branch="false" />
+                <line number="22" hits="6" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="19" hits="6" branch="false" />
+            <line number="21" hits="6" branch="false" />
+            <line number="22" hits="6" branch="false" />
+            <line number="31" hits="6" branch="false" />
+            <line number="32" hits="6" branch="false" />
+            <line number="33" hits="6" branch="false" />
+          </lines>
+        </class>
+        <class name="UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Repositories.SqlLearningSpaceListRepository" filename="/workspace/Backend.Infrastructure/Repositories/SqlLearningSpaceListRepository.cs" line-rate="0" branch-rate="1" complexity="3">
+          <methods>
+            <method name="GetCurrentLearningSpaceListAsync" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="30" hits="0" branch="false" />
+                <line number="31" hits="0" branch="false" />
+              </lines>
+            </method>
+            <method name="GetAllLearningSpacesAsync" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="40" hits="0" branch="false" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="(UCR.ECCI.PI.ThemePark.Backend.Infrastructure.UCRDatabaseContext)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="19" hits="0" branch="false" />
+                <line number="21" hits="0" branch="false" />
+                <line number="22" hits="0" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="19" hits="0" branch="false" />
+            <line number="21" hits="0" branch="false" />
+            <line number="22" hits="0" branch="false" />
+            <line number="30" hits="0" branch="false" />
+            <line number="31" hits="0" branch="false" />
+            <line number="40" hits="0" branch="false" />
+          </lines>
+        </class>
+        <class name="UCR.ECCI.PI.ThemePark.Backend.Infrastructure.UCRDatabaseContext" filename="/workspace/Backend.Infrastructure/UCRDatabaseContext.cs" line-rate="0.2222222222222222" branch-rate="1" complexity="5">
+          <methods>
+            <method name="get_LearningSpaces" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="32" hits="0" branch="false" />
+              </lines>
+            </method>
+            <method name="get_LearningComponents" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="37" hits="0" branch="false" />
+              </lines>
+            </method>
+            <method name="OnModelCreating" signature="(Microsoft.EntityFrameworkCore.ModelBuilder)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="46" hits="0" branch="false" />
+                <line number="49" hits="0" branch="false" />
+                <line number="53" hits="0" branch="false" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="(Microsoft.EntityFrameworkCore.DbContextOptions`1&lt;UCR.ECCI.PI.ThemePark.Backend.Infrastructure.UCRDatabaseContext&gt;)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="18" hits="0" branch="false" />
+                <line number="20" hits="0" branch="false" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="25" hits="6" branch="false" />
+                <line number="27" hits="6" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="18" hits="0" branch="false" />
+            <line number="20" hits="0" branch="false" />
+            <line number="25" hits="6" branch="false" />
+            <line number="27" hits="6" branch="false" />
+            <line number="32" hits="0" branch="false" />
+            <line number="37" hits="0" branch="false" />
+            <line number="46" hits="0" branch="false" />
+            <line number="49" hits="0" branch="false" />
+            <line number="53" hits="0" branch="false" />
+          </lines>
+        </class>
+      </classes>
+    </package>
+    <package name="UCR.ECCI.PI.ThemePark.Backend.Presentation" line-rate="0.5" branch-rate="0" complexity="20">
+      <classes>
+        <class name="UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Dtos.LearningComponentDto" filename="/workspace/Backend.Presentation/Dtos/LearningComponentDto.cs" line-rate="0.3" branch-rate="1" complexity="10">
+          <methods>
+            <method name="get_ComponentId" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="16" hits="0" branch="false" />
+              </lines>
+            </method>
+            <method name="get_LearningSpaceId" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="17" hits="2" branch="false" />
+              </lines>
+            </method>
+            <method name="get_Width" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="18" hits="0" branch="false" />
+              </lines>
+            </method>
+            <method name="get_Height" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="19" hits="0" branch="false" />
+              </lines>
+            </method>
+            <method name="get_Depth" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="20" hits="0" branch="false" />
+              </lines>
+            </method>
+            <method name="get_X" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="21" hits="0" branch="false" />
+              </lines>
+            </method>
+            <method name="get_Y" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="22" hits="0" branch="false" />
+              </lines>
+            </method>
+            <method name="get_Z" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="23" hits="0" branch="false" />
+              </lines>
+            </method>
+            <method name="get_Orientation" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="24" hits="4" branch="false" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="(System.String,System.String,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.String)" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="15" hits="4" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="15" hits="4" branch="false" />
+            <line number="16" hits="0" branch="false" />
+            <line number="17" hits="2" branch="false" />
+            <line number="18" hits="0" branch="false" />
+            <line number="19" hits="0" branch="false" />
+            <line number="20" hits="0" branch="false" />
+            <line number="21" hits="0" branch="false" />
+            <line number="22" hits="0" branch="false" />
+            <line number="23" hits="0" branch="false" />
+            <line number="24" hits="4" branch="false" />
+          </lines>
+        </class>
+        <class name="UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Dtos.LearningSpaceDto" filename="/workspace/Backend.Presentation/Dtos/LearningSpaceDto.cs" line-rate="0" branch-rate="1" complexity="1">
+          <methods>
+            <method name="get_Id" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="8" hits="0" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="8" hits="0" branch="false" />
+          </lines>
+        </class>
+        <class name="UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Endpoints.LearningComponentEndpoints" filename="/workspace/Backend.Presentation/Endpoints/LearningComponentEndpoints.cs" line-rate="0" branch-rate="0" complexity="2">
+          <methods>
+            <method name="MapLearningComponentEndpoints" signature="(Microsoft.AspNetCore.Routing.IEndpointRouteBuilder)" line-rate="0" branch-rate="0" complexity="2">
+              <lines>
+                <line number="19" hits="0" branch="true" condition-coverage="0% (0/2)" />
+                <line number="20" hits="0" branch="false" />
+                <line number="21" hits="0" branch="false" />
+                <line number="23" hits="0" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="19" hits="0" branch="true" condition-coverage="0% (0/2)" />
+            <line number="20" hits="0" branch="false" />
+            <line number="21" hits="0" branch="false" />
+            <line number="23" hits="0" branch="false" />
+          </lines>
+        </class>
+        <class name="UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Endpoints.LearningSpaceListEndpoints" filename="/workspace/Backend.Presentation/Endpoints/LearningSpaceListEndpoints.cs" line-rate="0" branch-rate="0" complexity="2">
+          <methods>
+            <method name="MapLearningSpaceEndpoints" signature="(Microsoft.AspNetCore.Routing.IEndpointRouteBuilder)" line-rate="0" branch-rate="0" complexity="2">
+              <lines>
+                <line number="19" hits="0" branch="true" condition-coverage="0% (0/2)" />
+                <line number="20" hits="0" branch="false" />
+                <line number="21" hits="0" branch="false" />
+                <line number="23" hits="0" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="19" hits="0" branch="true" condition-coverage="0% (0/2)" />
+            <line number="20" hits="0" branch="false" />
+            <line number="21" hits="0" branch="false" />
+            <line number="23" hits="0" branch="false" />
+          </lines>
+        </class>
+        <class name="UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Handlers.GetLearningComponentsHandler" filename="/workspace/Backend.Presentation/Handlers/GetLearningComponentsHandler.cs" line-rate="1" branch-rate="1" complexity="1">
+          <methods>
+            <method name="HandleAsync" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="28" hits="10" branch="false" />
+                <line number="31" hits="8" branch="false" />
+                <line number="32" hits="8" branch="false" />
+                <line number="33" hits="8" branch="false" />
+                <line number="34" hits="8" branch="false" />
+                <line number="35" hits="8" branch="false" />
+                <line number="36" hits="8" branch="false" />
+                <line number="37" hits="8" branch="false" />
+                <line number="38" hits="8" branch="false" />
+                <line number="39" hits="8" branch="false" />
+                <line number="40" hits="8" branch="false" />
+                <line number="41" hits="8" branch="false" />
+                <line number="44" hits="4" branch="false" />
+                <line number="47" hits="4" branch="false" />
+                <line number="49" hits="4" branch="false" />
+                <line number="52" hits="4" branch="false" />
+                <line number="57" hits="2" branch="false" />
+                <line number="59" hits="10" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="28" hits="10" branch="false" />
+            <line number="31" hits="8" branch="false" />
+            <line number="32" hits="8" branch="false" />
+            <line number="33" hits="8" branch="false" />
+            <line number="34" hits="8" branch="false" />
+            <line number="35" hits="8" branch="false" />
+            <line number="36" hits="8" branch="false" />
+            <line number="37" hits="8" branch="false" />
+            <line number="38" hits="8" branch="false" />
+            <line number="39" hits="8" branch="false" />
+            <line number="40" hits="8" branch="false" />
+            <line number="41" hits="8" branch="false" />
+            <line number="44" hits="4" branch="false" />
+            <line number="47" hits="4" branch="false" />
+            <line number="49" hits="4" branch="false" />
+            <line number="52" hits="4" branch="false" />
+            <line number="57" hits="2" branch="false" />
+            <line number="59" hits="10" branch="false" />
+          </lines>
+        </class>
+        <class name="UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Handlers.GetLearningSpaceListHandler" filename="/workspace/Backend.Presentation/Handlers/GetLearningSpaceListHandler.cs" line-rate="0" branch-rate="1" complexity="1">
+          <methods>
+            <method name="HandleAsync" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="38" hits="0" branch="false" />
+                <line number="41" hits="0" branch="false" />
+                <line number="42" hits="0" branch="false" />
+                <line number="43" hits="0" branch="false" />
+                <line number="46" hits="0" branch="false" />
+                <line number="47" hits="0" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="38" hits="0" branch="false" />
+            <line number="41" hits="0" branch="false" />
+            <line number="42" hits="0" branch="false" />
+            <line number="43" hits="0" branch="false" />
+            <line number="46" hits="0" branch="false" />
+            <line number="47" hits="0" branch="false" />
+          </lines>
+        </class>
+        <class name="UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Responses.ErrorResponse" filename="/workspace/Backend.Presentation/Responses/ErrorResponse.cs" line-rate="1" branch-rate="1" complexity="1">
+          <methods>
+            <method name="get_Message" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="7" hits="12" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="7" hits="12" branch="false" />
+          </lines>
+        </class>
+        <class name="UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Responses.GetLearningComponentsResponse" filename="/workspace/Backend.Presentation/Responses/GetLearningComponentsResponse.cs" line-rate="1" branch-rate="1" complexity="1">
+          <methods>
+            <method name="get_Components" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="8" hits="12" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="8" hits="12" branch="false" />
+          </lines>
+        </class>
+        <class name="UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Responses.GetLearningSpaceListResponse" filename="/workspace/Backend.Presentation/Responses/GetLearningSpaceListResponse.cs" line-rate="0" branch-rate="1" complexity="1">
+          <methods>
+            <method name="get_LearningSpaces" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="8" hits="0" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="8" hits="0" branch="false" />
+          </lines>
+        </class>
+      </classes>
+    </package>
+  </packages>
+</coverage>
