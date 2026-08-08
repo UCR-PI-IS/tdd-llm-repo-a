@@ -1,8 +1,14 @@
-﻿namespace UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Dtos;
+﻿using UCR.ECCI.PI.ThemePark.Backend.Domain.Entities;
+
+namespace UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Dtos;
 
 /// <summary>
 /// Represents the data transfer object for a learning space.
 /// </summary>
 /// <param name="Id">The unique identifier of the learning space.</param>
 /// <param name="Type">The type or category of the learning space.</param>
-public record class LearningSpaceDto(string Id, string Type);
+public record class LearningSpaceDto(string Id, string Type)
+{
+    public static LearningSpaceDto FromDomain(LearningSpace space) =>
+        new(space.id, space.type);
+}
