@@ -1,0 +1,39 @@
+{
+  "stage": "test-generation",
+  "storyId": "CPD-LC-001-001",
+  "model": "Qwen3.7-max",
+  "iteration": "2",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Domain.Tests.Unit/LearningComponentTests.cs",
+    "Backend.Application.Tests.Unit/LearningComponentServiceTests.cs",
+    "Backend.Infrastructure.Tests.Unit/SqlLearningComponentRepositoryTests.cs",
+    "Backend.Infrastructure.Tests.Unit/TestHelpers/AsyncQueryableTestHelpers.cs",
+    "Backend.Presentation.Tests.Unit/GetLearningComponentsHandlerTests.cs"
+  ],
+  "filesModified": [
+    "Backend.Domain.Tests.Unit/UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.csproj",
+    "Backend.Application.Tests.Unit/UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.csproj",
+    "Backend.Infrastructure.Tests.Unit/UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.csproj",
+    "Backend.Presentation.Tests.Unit/UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.csproj",
+    "Backend.Application/UCR.ECCI.PI.ThemePark.Backend.Application.csproj",
+    "Backend.Infrastructure/UCR.ECCI.PI.ThemePark.Backend.Infrastructure.csproj"
+  ],
+  "metrics": {
+    "intentsConfirmed": 21,
+    "testMethodsEmitted": 15,
+    "byLayer": {
+      "Domain": 5,
+      "Application": 3,
+      "Infrastructure": 3,
+      "Presentation": 4
+    }
+  },
+  "warnings": [
+    "Infrastructure tests require InternalsVisibleTo on Backend.Infrastructure for UCRDatabaseContext and SqlLearningComponentRepository access (added to csproj).",
+    "Application tests require InternalsVisibleTo on Backend.Application for LearningComponentService access (added to csproj).",
+    "Presentation tests require FrameworkReference to Microsoft.AspNetCore.App for HttpResults types (added to test csproj).",
+    "Production classes (LearningComponent, ILearningComponentListRepository, ILearningComponentService, LearningComponentService, SqlLearningComponentRepository, GetLearningComponentsHandler, LearningComponentDto, GetLearningComponentsResponse, ErrorResponse) do not exist yet and must be implemented for tests to compile."
+  ],
+  "notes": "Generated 15 test methods (some parameterized with TestCase/TestCaseSource) covering all 21 confirmed intents across 4 DDD layers. Domain tests use pure unit testing with Assert.Multiple for multi-property checks and single-assertion Throws constraints for validation. Application tests mock the repository interface via Moq. Infrastructure tests mock the EF Core DbSet with async queryable helpers. Presentation tests mock the service interface and verify typed HTTP result responses."
+}

@@ -1,0 +1,29 @@
+{
+  "stage": "refactoring",
+  "storyId": "CPD-LC-001-001",
+  "model": "Qwen3.7-max",
+  "iteration": "2",
+  "status": "partial",
+  "filesCreated": [
+    "Backend.Presentation/Mappers/LearningComponentMapper.cs",
+    "Backend.Presentation/Handlers/HandlerErrorMapper.cs",
+    "Backend.Presentation/Handlers/LearningComponentResponseBuilder.cs"
+  ],
+  "filesModified": [
+    "Backend.Presentation/Handlers/GetLearningComponentsHandler.cs"
+  ],
+  "metrics": {
+    "loopIterationsPerformed": 4,
+    "maxLoopIterations": 10,
+    "allGreenAchieved": false,
+    "baseline": { "minMI": 55, "maxCC": 5, "maxCoupling": 20, "maxDIT": 0 },
+    "final":    { "minMI": 55, "maxCC": 5, "maxCoupling": 12, "maxDIT": 0 },
+    "remainingViolations": [
+      { "type": "GetLearningComponentsHandler", "metric": "Coupling", "value": 12, "flag": "YELLOW" }
+    ]
+  },
+  "warnings": [
+    "GetLearningComponentsHandler coupling reduced from 20 to 12 but remains YELLOW (threshold ≤9 for GREEN). Further reduction requires changing the ASP.NET Core minimal API handler pattern (Task<IResult>, TypedResults, exception catch clauses) which would break existing tests."
+  ],
+  "notes": "Extracted DTO mapping, error-to-HTTP response mapping, and success response building into separate classes. Coupling reduced by 40% (20→12). All 24 tests pass after every refactoring step. The remaining coupling of 12 is inherent to the ASP.NET Core handler pattern (framework types: Task, IResult, TypedResults, exception types)."
+}

@@ -1,0 +1,55 @@
+{
+  "stage": "code-generation",
+  "storyId": "CPD-LC-001-001",
+  "model": "Qwen3.7-max",
+  "iteration": "2",
+  "status": "partial",
+  "filesCreated": [
+    "Backend.Domain/Entities/LearningComponent.cs",
+    "Backend.Domain/Repositories/ILearningComponentListRepository.cs",
+    "Backend.Application/Services/ILearningComponentService.cs",
+    "Backend.Application/Services/Implementations/LearningComponentService.cs",
+    "Backend.Infrastructure/Repositories/SqlLearningComponentRepository.cs",
+    "Backend.Infrastructure/EntityConfigurations/LearningComponentEntityConfiguration.cs",
+    "Backend.Presentation/Dtos/LearningComponentDto.cs",
+    "Backend.Presentation/Responses/GetLearningComponentsResponse.cs",
+    "Backend.Presentation/Responses/ErrorResponse.cs",
+    "Backend.Presentation/Handlers/GetLearningComponentsHandler.cs",
+    "Backend.Presentation/Endpoints/LearningComponentEndpoints.cs"
+  ],
+  "filesModified": [
+    "Backend.Infrastructure/UCRDatabaseContext.cs",
+    "Backend.Application/DependencyInjection.cs",
+    "Backend.Infrastructure/DependecyInjection.cs",
+    "Backend.Api/Program.cs",
+    "Backend.Infrastructure/UCR.ECCI.PI.ThemePark.Backend.Infrastructure.csproj",
+    "Backend.Domain.Tests.Unit/UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.csproj",
+    "Backend.Application.Tests.Unit/UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.csproj",
+    "Backend.Infrastructure.Tests.Unit/UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.csproj",
+    "Backend.Presentation.Tests.Unit/UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.csproj"
+  ],
+  "metrics": {
+    "buildErrors": 0,
+    "buildWarnings": 0,
+    "testsTotal": 24,
+    "testsPassed": 21,
+    "testsFailed": 3,
+    "testsSkipped": 0,
+    "lineCoverage": null,
+    "branchCoverage": null,
+    "e2e": {
+      "status": "skipped",
+      "probesTotal": 0,
+      "probesPassed": 0,
+      "probesFailed": 0,
+      "seedsApplied": [],
+      "resultPath": "",
+      "cleanup": "skipped"
+    }
+  },
+  "warnings": [
+    "3 infrastructure tests fail due to test infrastructure bug: SqlLearningComponentRepositoryTests.SetUp() accesses _mockDbSet.Object (line 29) before SetupMockDbSet() calls .As<IAsyncEnumerable<T>>() (line 130). Moq requires .As<>() to be called before .Object is accessed. This is a known Moq limitation that cannot be worked around without modifying the test file.",
+    "End-to-end validation skipped because not all tests pass (entry gate requires totalFailed == 0)."
+  ],
+  "notes": "Successfully implemented LearningComponent entity with validation, repository, service, handler, and endpoint following DDD/Clean Architecture patterns. 21/24 tests pass (Domain: 13/13, Application: 4/4, Presentation: 4/4). The 3 failing infrastructure tests have a test setup bug where Moq's .As<IAsyncEnumerable<T>>() is called after .Object was already accessed, which Moq does not allow. This cannot be fixed in production code."
+}

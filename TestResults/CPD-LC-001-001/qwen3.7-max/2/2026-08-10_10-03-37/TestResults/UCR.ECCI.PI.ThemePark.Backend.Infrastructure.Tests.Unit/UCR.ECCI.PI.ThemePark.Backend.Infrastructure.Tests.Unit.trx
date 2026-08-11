@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="8018c811-1c77-4cf7-ad60-601944e4bf97" name="@30b6d6de5f80 2026-08-10 16:03:52" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-08-10T16:03:52.5788035+00:00" queuing="2026-08-10T16:03:52.5788035+00:00" start="2026-08-10T16:03:51.7684727+00:00" finish="2026-08-10T16:03:52.5825632+00:00" />
+  <TestSettings name="default" id="822f2322-98f2-49b7-a0a4-0ee46048a223">
+    <Deployment runDeploymentRoot="_30b6d6de5f80_2026-08-10_16_03_52" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="aef2830d-9778-4699-9c43-782609100b92" testId="173b2521-aca0-abe4-eec7-ddfa80e6a214" testName="GetComponentsByLearningSpaceIdAsync_LearningSpaceHasNoComponents_ReturnsEmptyList" computerName="30b6d6de5f80" duration="00:00:00.0891100" startTime="2026-08-10T16:03:52.2983695+00:00" endTime="2026-08-10T16:03:52.3874485+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="aef2830d-9778-4699-9c43-782609100b92">
+      <Output>
+        <ErrorInfo>
+          <Message>System.InvalidOperationException : Mock type has already been initialized by accessing its Object property. Adding interfaces must be done before that.</Message>
+          <StackTrace>   at Moq.Mock`1.As[TInterface]() in C:\projects\moq4\src\Moq\Mock`1.cs:line 392
+   at UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.SqlLearningComponentRepositoryTests.SetupMockDbSet(IQueryable`1 data) in /workspace/Backend.Infrastructure.Tests.Unit/SqlLearningComponentRepositoryTests.cs:line 130
+   at UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.SqlLearningComponentRepositoryTests.GetComponentsByLearningSpaceIdAsync_LearningSpaceHasNoComponents_ReturnsEmptyList() in /workspace/Backend.Infrastructure.Tests.Unit/SqlLearningComponentRepositoryTests.cs:line 76
+   at NUnit.Framework.Internal.TaskAwaitAdapter.GenericAdapter`1.GetResult()
+   at NUnit.Framework.Internal.AsyncToSyncAdapter.Await(Func`1 invoke)
+   at NUnit.Framework.Internal.Commands.TestMethodCommand.RunTestMethod(TestExecutionContext context)
+   at NUnit.Framework.Internal.Commands.TestMethodCommand.Execute(TestExecutionContext context)
+   at NUnit.Framework.Internal.Commands.BeforeAndAfterTestCommand.&lt;&gt;c__DisplayClass1_0.&lt;Execute&gt;b__0()
+   at NUnit.Framework.Internal.Commands.DelegatingTestCommand.RunTestMethodInThreadAbortSafeZone(TestExecutionContext context, Action action)
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="284c357b-9b8a-4930-8a2c-da2ad47dde00" testId="b4c7b8d6-4b1b-e875-ba79-a26bfb98362a" testName="GetComponentsByLearningSpaceIdAsync_NonExistentLearningSpaceId_ReturnsEmptyList" computerName="30b6d6de5f80" duration="00:00:00.0016260" startTime="2026-08-10T16:03:52.3881742+00:00" endTime="2026-08-10T16:03:52.3898005+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="284c357b-9b8a-4930-8a2c-da2ad47dde00">
+      <Output>
+        <ErrorInfo>
+          <Message>System.InvalidOperationException : Mock type has already been initialized by accessing its Object property. Adding interfaces must be done before that.</Message>
+          <StackTrace>   at Moq.Mock`1.As[TInterface]() in C:\projects\moq4\src\Moq\Mock`1.cs:line 392
+   at UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.SqlLearningComponentRepositoryTests.SetupMockDbSet(IQueryable`1 data) in /workspace/Backend.Infrastructure.Tests.Unit/SqlLearningComponentRepositoryTests.cs:line 130
+   at UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.SqlLearningComponentRepositoryTests.GetComponentsByLearningSpaceIdAsync_NonExistentLearningSpaceId_ReturnsEmptyList() in /workspace/Backend.Infrastructure.Tests.Unit/SqlLearningComponentRepositoryTests.cs:line 100
+   at NUnit.Framework.Internal.TaskAwaitAdapter.GenericAdapter`1.GetResult()
+   at NUnit.Framework.Internal.AsyncToSyncAdapter.Await(Func`1 invoke)
+   at NUnit.Framework.Internal.Commands.TestMethodCommand.RunTestMethod(TestExecutionContext context)
+   at NUnit.Framework.Internal.Commands.TestMethodCommand.Execute(TestExecutionContext context)
+   at NUnit.Framework.Internal.Commands.BeforeAndAfterTestCommand.&lt;&gt;c__DisplayClass1_0.&lt;Execute&gt;b__0()
+   at NUnit.Framework.Internal.Commands.DelegatingTestCommand.RunTestMethodInThreadAbortSafeZone(TestExecutionContext context, Action action)
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="45ea1cbd-4a83-47e8-b05b-058055d686fd" testId="e67c86e4-70a2-1e06-c55b-e0cc6371a6e6" testName="GetComponentsByLearningSpaceIdAsync_ValidLearningSpaceId_ReturnsComponentList" computerName="30b6d6de5f80" duration="00:00:00.0003990" startTime="2026-08-10T16:03:52.3898138+00:00" endTime="2026-08-10T16:03:52.3902131+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="45ea1cbd-4a83-47e8-b05b-058055d686fd">
+      <Output>
+        <ErrorInfo>
+          <Message>System.InvalidOperationException : Mock type has already been initialized by accessing its Object property. Adding interfaces must be done before that.</Message>
+          <StackTrace>   at Moq.Mock`1.As[TInterface]() in C:\projects\moq4\src\Moq\Mock`1.cs:line 392
+   at UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.SqlLearningComponentRepositoryTests.SetupMockDbSet(IQueryable`1 data) in /workspace/Backend.Infrastructure.Tests.Unit/SqlLearningComponentRepositoryTests.cs:line 130
+   at UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.SqlLearningComponentRepositoryTests.GetComponentsByLearningSpaceIdAsync_ValidLearningSpaceId_ReturnsComponentList() in /workspace/Backend.Infrastructure.Tests.Unit/SqlLearningComponentRepositoryTests.cs:line 48
+   at NUnit.Framework.Internal.TaskAwaitAdapter.GenericAdapter`1.GetResult()
+   at NUnit.Framework.Internal.AsyncToSyncAdapter.Await(Func`1 invoke)
+   at NUnit.Framework.Internal.Commands.TestMethodCommand.RunTestMethod(TestExecutionContext context)
+   at NUnit.Framework.Internal.Commands.TestMethodCommand.Execute(TestExecutionContext context)
+   at NUnit.Framework.Internal.Commands.BeforeAndAfterTestCommand.&lt;&gt;c__DisplayClass1_0.&lt;Execute&gt;b__0()
+   at NUnit.Framework.Internal.Commands.DelegatingTestCommand.RunTestMethodInThreadAbortSafeZone(TestExecutionContext context, Action action)
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="GetComponentsByLearningSpaceIdAsync_NonExistentLearningSpaceId_ReturnsEmptyList" storage="/workspace/backend.infrastructure.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.infrastructure.tests.unit.dll" id="b4c7b8d6-4b1b-e875-ba79-a26bfb98362a">
+      <Execution id="284c357b-9b8a-4930-8a2c-da2ad47dde00" />
+      <TestMethod codeBase="/workspace/Backend.Infrastructure.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.SqlLearningComponentRepositoryTests" name="GetComponentsByLearningSpaceIdAsync_NonExistentLearningSpaceId_ReturnsEmptyList" />
+    </UnitTest>
+    <UnitTest name="GetComponentsByLearningSpaceIdAsync_ValidLearningSpaceId_ReturnsComponentList" storage="/workspace/backend.infrastructure.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.infrastructure.tests.unit.dll" id="e67c86e4-70a2-1e06-c55b-e0cc6371a6e6">
+      <Execution id="45ea1cbd-4a83-47e8-b05b-058055d686fd" />
+      <TestMethod codeBase="/workspace/Backend.Infrastructure.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.SqlLearningComponentRepositoryTests" name="GetComponentsByLearningSpaceIdAsync_ValidLearningSpaceId_ReturnsComponentList" />
+    </UnitTest>
+    <UnitTest name="GetComponentsByLearningSpaceIdAsync_LearningSpaceHasNoComponents_ReturnsEmptyList" storage="/workspace/backend.infrastructure.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.infrastructure.tests.unit.dll" id="173b2521-aca0-abe4-eec7-ddfa80e6a214">
+      <Execution id="aef2830d-9778-4699-9c43-782609100b92" />
+      <TestMethod codeBase="/workspace/Backend.Infrastructure.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.SqlLearningComponentRepositoryTests" name="GetComponentsByLearningSpaceIdAsync_LearningSpaceHasNoComponents_ReturnsEmptyList" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="173b2521-aca0-abe4-eec7-ddfa80e6a214" executionId="aef2830d-9778-4699-9c43-782609100b92" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b4c7b8d6-4b1b-e875-ba79-a26bfb98362a" executionId="284c357b-9b8a-4930-8a2c-da2ad47dde00" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e67c86e4-70a2-1e06-c55b-e0cc6371a6e6" executionId="45ea1cbd-4a83-47e8-b05b-058055d686fd" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="3" executed="3" passed="0" failed="3" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>NUnit Adapter 4.6.0.0: Test execution started
+Running all tests in /workspace/Backend.Infrastructure.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.dll
+   NUnit3TestExecutor discovered 3 of 3 NUnit test cases using Current Discovery mode, Non-Explicit run
+NUnit Adapter 4.6.0.0: Test execution complete
+</StdOut>
+    </Output>
+    <CollectorDataEntries>
+      <Collector agentName="30b6d6de5f80" uri="datacollector://microsoft/CoverletCodeCoverage/1.0" collectorDisplayName="XPlat code coverage">
+        <UriAttachments>
+          <UriAttachment>
+            <A href="30b6d6de5f80/coverage.cobertura.xml"></A>
+          </UriAttachment>
+        </UriAttachments>
+      </Collector>
+    </CollectorDataEntries>
+  </ResultSummary>
+</TestRun>
