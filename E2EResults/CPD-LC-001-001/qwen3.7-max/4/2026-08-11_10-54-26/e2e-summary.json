@@ -1,0 +1,53 @@
+{
+  "stage": "e2e-validation",
+  "status": "failure",
+  "timestamp": "2026-08-11_10-54-26",
+  "storyId": "CPD-LC-001-001",
+  "model": "Qwen3.7-max",
+  "iteration": "4",
+  "database": {
+    "container": "themepark-sql-e2e-cpd-lc-001-001-qwen3-7-max-4-105426",
+    "image": "mcr.microsoft.com/mssql/server:2022-latest",
+    "network": "themepark-e2e-cpd-lc-001-001-qwen3-7-max-4-105426",
+    "database": "ThemePark",
+    "readySeconds": 9.2,
+    "baseSchemaApplied": [
+      "Semester.sql",
+      "Course.sql"
+    ],
+    "seedsApplied": [
+      "seed-CPD-LC-001-001.sql"
+    ]
+  },
+  "backend": {
+    "container": "themepark-api-e2e-cpd-lc-001-001-qwen3-7-max-4-105426",
+    "project": "Backend.Api/UCR.ECCI.PI.ThemePark.Backend.Api.csproj",
+    "publishStatus": "success",
+    "started": true,
+    "url": "http://127.0.0.1:55000",
+    "readySeconds": null,
+    "errorLines": []
+  },
+  "probes": [],
+  "totalProbes": 0,
+  "probesPassed": 0,
+  "probesFailed": 0,
+  "cleanup": {
+    "status": "clean",
+    "removedContainers": [
+      "themepark-api-e2e-cpd-lc-001-001-qwen3-7-max-4-105426",
+      "themepark-sql-e2e-cpd-lc-001-001-qwen3-7-max-4-105426"
+    ],
+    "removedNetworks": [
+      "themepark-e2e-cpd-lc-001-001-qwen3-7-max-4-105426"
+    ],
+    "removedVolumes": [
+      "themepark-app-e2e-cpd-lc-001-001-qwen3-7-max-4-105426"
+    ],
+    "leftovers": []
+  },
+  "warnings": [],
+  "errors": [
+    "RuntimeError: The backend container exited during startup.\n--- backend logs ---\nUnhandled exception. System.AggregateException: Some services are not able to be constructed (Error while validating the service descriptor 'ServiceType: UCR.ECCI.PI.ThemePark.Backend.Application.Services.ILearningComponentListService Lifetime: Scoped ImplementationType: UCR.ECCI.PI.ThemePark.Backend.Application.Services.Implementations.LearningComponentService': A suitable constructor for type 'UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Repositories.SqlLearningComponentRepository' could not be located. Ensure the type is concrete and services are registered for all parameters of a public constructor.) (Error while validating the service descriptor 'ServiceType: UCR.ECCI.PI.ThemePark.Backend.Domain.Repositories.ILearningComponentListRepository Lifetime: Transient ImplementationType: UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Repositories.SqlLearningComponentRepository': A suitable constructor for type 'UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Repositories.SqlLearningComponentRepository' could not be located. Ensure the type is concrete and services are registered for all parameters of a public constructor.)\n ---> System.InvalidOperationException: Error while validating the service descriptor 'ServiceType: UCR.ECCI.PI.ThemePark.Backend.Application.Services.ILearningComponentListService Lifetime: Scoped ImplementationType: UCR.ECCI.PI.ThemePark.Backend.Application.Services.Implementations.LearningComponentService': A suitable constructor for type 'UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Repositories.SqlLearningComponentRepository' could not be located. Ensure the type is concrete and services are registered for all parameters of a public constructor.\n ---> System.InvalidOperationException: A suitable constructor for type 'UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Repositories.SqlLearningComponentRepository' could not be located. Ensure the type is concrete and services are registered for all parameters of a public constructor.\n   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(ResultCache lifetime, ServiceIdentifier serviceIdentifier, Type implementationType, CallSiteChain callSiteChain)\n   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(ServiceDescriptor descriptor, ServiceIdentifier serviceIdentifier, CallSiteChain callSiteChain, Int32 slot)\n   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(ServiceIdentifier serviceIdentifier, CallSiteChain callSiteChain)\n   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateCallSite(ServiceIdentifier serviceIdentifier, CallSiteChain callSiteChain)\n   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(ServiceIdentifier serviceIdentifier, Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)\n   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(ResultCache lifetime, ServiceIdentifier serviceIdentifier, Type implementationType, CallSiteChain callSiteChain)\n   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(ServiceDescriptor descriptor, ServiceIdentifier serviceIdentifier, CallSiteChain callSiteChain, Int32 slot)\n   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.GetCallSite(ServiceDescriptor serviceDescriptor, CallSiteChain callSiteChain)\n   at Microsoft.Extensions.DependencyInjection.ServiceProvider.ValidateService(ServiceDescriptor descriptor)\n   --- End of inner exception stack trace ---\n   at Microsoft.Extensions.DependencyInjection.ServiceProvider.ValidateService(ServiceDescriptor descriptor)\n   at Microsoft.Extensions.DependencyInjection.ServiceProvider..ctor(ICollection`1 serviceDescriptors, ServiceProviderOptions options)\n   --- End of inner exception stack trace ---\n   at Microsoft.Extensions.DependencyInjection.ServiceProvider..ctor(ICollection`1 serviceDescriptors, ServiceProviderOptions options)\n   at Microsoft.Extensions.DependencyInjection.ServiceCollectionContainerBuilderExtensions.BuildServiceProvider(IServiceCollection services, ServiceProviderOptions options)\n   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()\n   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()\n   at Program.<Main>$(String[] args) in /workspace/Backend.Api/Program.cs:line 17\n ---> (Inner Exception #1) System.InvalidOperationException: Error while validating the service descriptor 'ServiceType: UCR.ECCI.PI.ThemePark.Backend.Domain.Repositories.ILearningComponentListRepository Lifetime: Transient ImplementationType: UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Repositories.SqlLearningComponentRepository': A suitable constructor for type 'UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Repositories.SqlLearningComponentRepository' could not be located. Ensure the type is concrete and services are registered for all parameters of a public constructor.\n ---> System.InvalidOperationException: A suitable constructor for type 'UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Repositories.SqlLearningComponentRepository' could not be located. Ensure the type is concrete and services are registered for all parameters of a public constructor.\n   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(ResultCache lifetime, ServiceIdentifier serviceIdentifier, Type implementationType, CallSiteChain callSiteChain)\n   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(ServiceDescriptor descriptor, ServiceIdentifier serviceIdentifier, CallSiteChain callSiteChain, Int32 slot)\n   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.GetCallSite(ServiceDescriptor serviceDescriptor, CallSiteChain callSiteChain)\n   at Microsoft.Extensions.DependencyInjection.ServiceProvider.ValidateService(ServiceDescriptor descriptor)\n   --- End of inner exception stack trace ---\n   at Microsoft.Extensions.DependencyInjection.ServiceProvider.ValidateService(ServiceDescriptor descriptor)\n   at Microsoft.Extensions.DependencyInjection.ServiceProvider..ctor(ICollection`1 serviceDescriptors, ServiceProviderOptions options)<---\n\n"
+  ]
+}

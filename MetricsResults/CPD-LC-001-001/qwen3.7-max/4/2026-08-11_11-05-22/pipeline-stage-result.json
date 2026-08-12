@@ -1,0 +1,41 @@
+{
+  "stage": "refactoring",
+  "storyId": "CPD-LC-001-001",
+  "model": "Qwen3.7-max",
+  "iteration": "4",
+  "status": "partial",
+  "filesCreated": [],
+  "filesModified": [
+    "Backend.Domain/Entities/LearningComponent.cs",
+    "Backend.Presentation/Dtos/LearningComponentDto.cs",
+    "Backend.Presentation/Handlers/GetLearningComponentsHandler.cs",
+    "Backend.Presentation/Endpoints/LearningComponentEndpoints.cs"
+  ],
+  "metrics": {
+    "loopIterationsPerformed": 2,
+    "maxLoopIterations": 10,
+    "allGreenAchieved": false,
+    "baseline": {
+      "minMI": 56,
+      "maxCC": 8,
+      "maxCoupling": 20,
+      "maxDIT": 0
+    },
+    "final": {
+      "minMI": 55,
+      "maxCC": 8,
+      "maxCoupling": 18,
+      "maxDIT": 0
+    },
+    "remainingViolations": [
+      {
+        "type": "GetLearningComponentsHandler",
+        "metric": "Coupling",
+        "value": 18,
+        "flag": "YELLOW"
+      }
+    ]
+  },
+  "warnings": [],
+  "notes": "Reduced GetLearningComponentsHandler coupling from 20 to 18 by extracting entity-to-DTO mapping to LearningComponentDto.FromDomain factory method. Eliminated LearningComponentEndpoints coupling violation (10 to 9, now GREEN) by simplifying endpoint lambda and removing async wrapper. Extracted repeated guard clauses in LearningComponent constructor to private validation methods (ValidateNonNegative and ValidateOrientation). Remaining coupling=18 on GetLearningComponentsHandler is inherent to its coordinator role between service, DTOs, responses, and HTTP result types; further reduction would require architectural changes beyond simple refactoring scope."
+}
