@@ -1,0 +1,48 @@
+{
+  "stage": "refactoring",
+  "storyId": "CPD-LC-001-001",
+  "model": "Qwen3.7-max",
+  "iteration": "5",
+  "status": "partial",
+  "filesCreated": [
+    "Backend.Presentation/Mappers/LearningComponentMapper.cs",
+    "Backend.Presentation/Mappers/HandlerResultHelper.cs"
+  ],
+  "filesModified": [
+    "Backend.Domain/Entities/LearningComponent.cs",
+    "Backend.Presentation/Handlers/GetLearningComponentsHandler.cs"
+  ],
+  "metrics": {
+    "loopIterationsPerformed": 2,
+    "maxLoopIterations": 10,
+    "allGreenAchieved": false,
+    "baseline": {
+      "minMI": 55,
+      "maxCC": 8,
+      "maxCoupling": 20,
+      "maxDIT": 0
+    },
+    "final": {
+      "minMI": 55,
+      "maxCC": 8,
+      "maxCoupling": 11,
+      "maxDIT": 0
+    },
+    "remainingViolations": [
+      {
+        "type": "GetLearningComponentsHandler",
+        "metric": "Coupling",
+        "value": 11,
+        "flag": "YELLOW"
+      },
+      {
+        "type": "HandlerResultHelper",
+        "metric": "Coupling",
+        "value": 10,
+        "flag": "YELLOW"
+      }
+    ]
+  },
+  "warnings": [],
+  "notes": "Reduced GetLearningComponentsHandler coupling from 20 to 11 by extracting mapper and error handling helpers. Extracted repeated guard clauses in LearningComponent constructor. Remaining YELLOW violations (coupling 10-11) are just above GREEN threshold and would require architectural compromises to resolve further."
+}
