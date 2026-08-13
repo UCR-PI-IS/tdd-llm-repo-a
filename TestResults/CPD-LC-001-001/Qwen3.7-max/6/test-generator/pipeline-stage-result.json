@@ -1,0 +1,31 @@
+{
+  "stage": "test-generation",
+  "storyId": "CPD-LC-001-001",
+  "model": "Qwen3.7-max",
+  "iteration": "6",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Domain.Tests.Unit/Entities/LearningComponentTests.cs",
+    "Backend.Application.Tests.Unit/Services/LearningComponentServiceTests.cs",
+    "Backend.Infrastructure.Tests.Unit/Repositories/SqlLearningComponentRepositoryTests.cs",
+    "Backend.Presentation.Tests.Unit/Handlers/GetLearningComponentsHandlerTests.cs"
+  ],
+  "filesModified": [],
+  "metrics": {
+    "intentsConfirmed": 20,
+    "testMethodsEmitted": 21,
+    "byLayer": {
+      "Domain": 10,
+      "Application": 4,
+      "Infrastructure": 3,
+      "Presentation": 4
+    }
+  },
+  "warnings": [
+    "Test projects require ProjectReference additions to their .csproj files to reference the corresponding production projects (Backend.Domain, Backend.Application, Backend.Infrastructure, Backend.Presentation).",
+    "Backend.Infrastructure and Backend.Application projects need [assembly: InternalsVisibleTo(...)] attributes for their respective test projects, since SqlLearningComponentRepository, UCRDatabaseContext, and LearningComponentService are expected to be internal following existing codebase patterns.",
+    "Backend.Presentation.Tests.Unit requires a ProjectReference to Backend.Presentation and transitive access to Microsoft.AspNetCore.Http.HttpResults types.",
+    "Infrastructure tests include async query helper classes (TestAsyncQueryProvider, TestAsyncEnumerable, TestAsyncEnumerator) to support EF Core ToListAsync mocking; these are self-contained in the test file."
+  ],
+  "notes": "Generated 21 test methods across 4 test files covering all 20 confirmed intents for story CPD-LC-001-001 (Learning Components listing). Domain tests cover entity construction and validation (10 methods including parameterized tests for orientations and invalid values). Application tests cover service logic with mocked repository (4 methods). Infrastructure tests cover repository data access with mocked DbContext/DbSet (3 methods). Presentation tests cover handler response mapping with mocked service (4 methods including parameterized BadRequest test). All tests follow AAA pattern, single logical assertion rule with Assert.Multiple, and NUnit conventions."
+}
