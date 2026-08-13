@@ -1,0 +1,26 @@
+{
+  "stage": "refactoring",
+  "storyId": "CPD-LC-001-001",
+  "model": "Qwen3.7-max",
+  "iteration": "6",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Presentation/Helpers/RequestHandler.cs",
+    "Backend.Presentation/Helpers/ErrorResponseMapper.cs"
+  ],
+  "filesModified": [
+    "Backend.Presentation/Handlers/GetLearningComponentsHandler.cs",
+    "Backend.Presentation/Endpoints/LearningComponentEndpoints.cs",
+    "Backend.Presentation/Mappers/LearningComponentMapper.cs"
+  ],
+  "metrics": {
+    "loopIterationsPerformed": 3,
+    "maxLoopIterations": 10,
+    "allGreenAchieved": true,
+    "baseline": { "minMI": 55, "maxCC": 5, "maxCoupling": 14, "maxDIT": 0 },
+    "final":    { "minMI": 55, "maxCC": 5, "maxCoupling": 9, "maxDIT": 0 },
+    "remainingViolations": []
+  },
+  "warnings": [],
+  "notes": "Extracted error-handling pattern into RequestHandler and ErrorResponseMapper helpers, reducing GetLearningComponentsHandler coupling from 14 to 7 and LearningComponentEndpoints coupling from 10 to 9. All story-related types now GREEN across all metrics."
+}
