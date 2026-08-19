@@ -1,0 +1,606 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Stage-by-stage walkthrough of how 00_overview_scorecard turns 20 measurements into one composite score and picks the best iteration.">
+<title>Anatomy of the Composite Score</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+
+<style>
+/* Minimal reset — the Artifact host supplies one; a standalone file needs its own. */
+html{-webkit-text-size-adjust:100%}
+img,svg{display:block;max-width:100%}
+table{border-collapse:collapse}
+
+/* Palette inherited from tdd_results.py — the same ink, rules, accent and
+   model colors the notebook's own charts use, so figures map onto charts. */
+:root{
+  --ground:#ffffff; --sunk:#f6f5f1; --raised:#ffffff;
+  --ink:#0b0b0b; --ink-2:#52514e; --ink-3:#898781;
+  --rule:#e1e0d9; --rule-strong:#c3c2b7;
+  --accent:#2a78d6;              /* CATEGORICAL_SLOTS[0] — Kimi-K2.5 */
+  --accent-2:#1baf7a;            /* CATEGORICAL_SLOTS[1] — qwen3.7-max */
+  --accent-soft:#eaf1fb; --accent2-soft:#e6f6ef;
+  --ok:#0ca30c; --warn:#fab219; --bad:#d03b3b;
+  --ok-soft:#e8f5e8; --warn-soft:#fdf3de; --bad-soft:#fbeaea;
+  --display:"Newsreader",Georgia,serif;
+  --body:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  --measure:69ch; --wide:min(1080px,94vw);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ground:#121311; --sunk:#191a17; --raised:#1d1e1a;
+    --ink:#f2f1ec; --ink-2:#b6b4ab; --ink-3:#8b8980;
+    --rule:#32332e; --rule-strong:#4a4b44;
+    --accent:#79aeee; --accent-2:#4fcb9b;
+    --accent-soft:#1b2735; --accent2-soft:#152b23;
+    --ok:#4cc44c; --warn:#f0bf55; --bad:#eb7070;
+    --ok-soft:#182a18; --warn-soft:#2c2415; --bad-soft:#2e1c1c;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#121311; --sunk:#191a17; --raised:#1d1e1a;
+  --ink:#f2f1ec; --ink-2:#b6b4ab; --ink-3:#8b8980;
+  --rule:#32332e; --rule-strong:#4a4b44;
+  --accent:#79aeee; --accent-2:#4fcb9b;
+  --accent-soft:#1b2735; --accent2-soft:#152b23;
+  --ok:#4cc44c; --warn:#f0bf55; --bad:#eb7070;
+  --ok-soft:#182a18; --warn-soft:#2c2415; --bad-soft:#2e1c1c;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--body);
+     font-size:16.5px;line-height:1.62;-webkit-font-smoothing:antialiased}
+.page{display:flex;flex-direction:column;align-items:center}
+.col{width:var(--measure);max-width:94vw}
+.bleed{width:var(--wide);max-width:94vw}
+
+header.mast{width:100%;border-bottom:1px solid var(--rule);background:var(--sunk);
+  display:flex;flex-direction:column;align-items:center;padding:clamp(2.4rem,6vw,4rem) 0 0}
+.mast-inner{width:var(--wide);max-width:94vw;display:flex;flex-direction:column;gap:1.3rem}
+.eyebrow{font-family:var(--mono);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-3);display:flex;flex-wrap:wrap;gap:.5rem 1.1rem}
+h1{font-family:var(--display);font-size:clamp(2.4rem,6vw,3.9rem);font-weight:500;
+   line-height:1.03;letter-spacing:-.022em;margin:0;text-wrap:balance}
+.standfirst{font-family:var(--display);font-size:clamp(1.05rem,2vw,1.28rem);font-weight:400;
+  line-height:1.5;color:var(--ink-2);max-width:64ch;margin:0}
+.standfirst em{color:var(--ink);font-style:italic}
+.formula{font-family:var(--mono);font-size:.92rem;background:var(--raised);
+  border:1px solid var(--rule);padding:.85rem 1.1rem;margin-top:.4rem;overflow-x:auto;
+  color:var(--ink-2);white-space:nowrap}
+.formula b{color:var(--ink)}
+.figures{display:grid;gap:1px;background:var(--rule);border-top:1px solid var(--rule);
+  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));margin-top:1rem}
+.fig-stat{background:var(--sunk);padding:1.05rem 1.1rem 1.25rem;display:flex;flex-direction:column;gap:.25rem}
+.fig-stat b{font-family:var(--mono);font-size:1.9rem;font-weight:500;line-height:1;
+  letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.fig-stat span{font-size:.82rem;color:var(--ink-2);line-height:1.35}
+
+main{width:100%;display:flex;flex-direction:column;align-items:center}
+section{width:100%;display:flex;flex-direction:column;align-items:center;gap:1.3rem;
+  padding:clamp(2.4rem,5vw,3.6rem) 0;border-bottom:1px solid var(--rule)}
+section:last-of-type{border-bottom:none}
+.sec-head{width:var(--wide);max-width:94vw;display:flex;flex-direction:column;gap:.5rem}
+.step{font-family:var(--mono);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--accent);font-weight:600}
+h2{font-family:var(--display);font-size:clamp(1.7rem,3.2vw,2.25rem);font-weight:500;
+   line-height:1.13;letter-spacing:-.017em;margin:0;text-wrap:balance}
+h3{font-family:var(--display);font-size:1.22rem;font-weight:600;line-height:1.25;margin:0}
+p{margin:0}
+.col p + p{margin-top:.9rem}
+code{font-family:var(--mono);font-size:.855em;background:var(--sunk);
+  border:1px solid var(--rule);padding:.05em .33em;border-radius:3px}
+a{color:var(--accent)}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+figure{width:var(--wide);max-width:94vw;margin:0;background:var(--raised);
+  border:1px solid var(--rule);padding:1.2rem 1.2rem 1rem;display:flex;
+  flex-direction:column;gap:.85rem;overflow-x:auto}
+figure svg{max-width:100%;height:auto;display:block;color:var(--ink)}
+figcaption{font-size:.85rem;color:var(--ink-2);line-height:1.5;max-width:78ch}
+figcaption b{color:var(--ink)}
+
+.tw{width:var(--wide);max-width:94vw;overflow-x:auto;border:1px solid var(--rule);background:var(--raised)}
+table{border-collapse:collapse;width:100%;font-size:.85rem}
+th,td{padding:.5rem .75rem;text-align:left;border-bottom:1px solid var(--rule)}
+thead th{font-family:var(--mono);font-size:.65rem;font-weight:600;letter-spacing:.09em;
+  text-transform:uppercase;color:var(--ink-3);background:var(--sunk);white-space:nowrap}
+tbody tr:last-child td{border-bottom:none}
+td.num,th.num{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+td.mono{font-family:var(--mono);font-size:.85em}
+tr.group td{background:var(--sunk);font-family:var(--mono);font-size:.68rem;
+  letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);font-weight:600}
+.tag{font-family:var(--mono);font-size:.64rem;font-weight:600;letter-spacing:.06em;
+  padding:.16em .42em;border-radius:2px;text-transform:uppercase;white-space:nowrap}
+.tag.abs{background:var(--accent-soft);color:var(--accent)}
+.tag.rel{background:var(--warn-soft);color:var(--warn)}
+.bar{display:inline-block;height:.55em;background:var(--accent-2);border-radius:1px;vertical-align:middle}
+
+.callout{width:var(--wide);max-width:94vw;background:var(--sunk);
+  border-left:3px solid var(--accent);padding:1rem 1.2rem;display:flex;flex-direction:column;gap:.6rem}
+.callout.warn{border-left-color:var(--warn)}
+.callout h3{font-size:1.05rem}
+.callout p{font-size:.92rem;color:var(--ink-2);max-width:76ch}
+ul.tight{margin:0;padding-left:1.15rem;display:flex;flex-direction:column;gap:.4rem}
+ul.tight li{color:var(--ink-2)}
+ul.tight li b{color:var(--ink)}
+footer{width:100%;display:flex;justify-content:center;padding:2rem 0 3rem;
+  border-top:1px solid var(--rule);background:var(--sunk)}
+footer .col{color:var(--ink-3);font-size:.84rem}
+</style>
+</head>
+<body>
+<div class="page">
+<header class="mast">
+  <div class="mast-inner">
+    <div class="eyebrow"><span>00_overview_scorecard.ipynb</span><span>“Best run” cell</span><span>CPD-LC-001-001</span><span>12 runs</span></div>
+    <h1>Anatomy of the Composite Score</h1>
+    <p class="standfirst">Every (model, iteration) pair is reduced to one number between 0 and 1, and the run with the highest number is called best. The whole calculation is two nested averages with a normalisation step in front — <em>no weights are fitted, nothing is learned from the data.</em> This traces it end to end on the real numbers.</p>
+    <div class="formula"><b>composite</b> = Σ<sub>p</sub> w<sub>p</sub> · mean( score(c) for c in pillar p ) ⁄ Σ<sub>p</sub> w<sub>p</sub>&nbsp;&nbsp;&nbsp;with all w<sub>p</sub> = 1.0</div>
+    <div class="figures">
+      <div class="fig-stat"><b>20</b><span>components measured per run</span></div>
+      <div class="fig-stat"><b>4</b><span>pillars, equally weighted</span></div>
+      <div class="fig-stat"><b>12&nbsp;+&nbsp;8</b><span>absolute anchors + cohort-relative</span></div>
+      <div class="fig-stat"><b>455</b><span>weightings tested for robustness</span></div>
+      <div class="fig-stat"><b>0.836</b><span>winning composite (qwen3.7-max it 3)</span></div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<section>
+  <div class="sec-head"><span class="step">The shape of it</span><h2>Five stages, one number</h2></div>
+  <div class="col"><p>The score is a funnel. Sixty measured columns are narrowed to twenty scoring components, each mapped onto a 0–1 scale; those are averaged within four pillars, and the pillars are averaged into the composite. Two further passes never touch the composite — they test whether the ranking would survive different weights.</p></div>
+
+  <figure>
+    <svg viewBox="0 0 1000 330" role="img" aria-label="Five-stage funnel: four result trees load into a 60-column master table, 20 components are normalised to 0 to 1, averaged into 4 pillars, then averaged into one composite that is sorted into ranks; the pillar scores also branch into two robustness checks.">
+      <defs>
+        <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 z" fill="currentColor"/>
+        </marker>
+        <marker id="ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 z" fill="var(--ink-3)"/>
+        </marker>
+      </defs>
+
+      <!-- stage boxes -->
+      <g font-family="IBM Plex Sans, sans-serif">
+        <rect x="20" y="44" width="150" height="70" rx="3" fill="var(--sunk)" stroke="currentColor" stroke-width="1"/>
+        <text x="95" y="70" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">4 result trees</text>
+        <text x="95" y="88" text-anchor="middle" font-size="10.5" fill="var(--ink-2)">build · test · metrics</text>
+        <text x="95" y="102" text-anchor="middle" font-size="10.5" fill="var(--ink-2)">· e2e</text>
+
+        <rect x="216" y="44" width="150" height="70" rx="3" fill="var(--sunk)" stroke="currentColor"/>
+        <text x="291" y="70" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">master table</text>
+        <text x="291" y="88" text-anchor="middle" font-size="10.5" fill="var(--ink-2)">12 runs × 60 cols</text>
+        <text x="291" y="102" text-anchor="middle" font-size="10.5" fill="var(--ink-3)">iteration_summary</text>
+
+        <rect x="412" y="44" width="150" height="70" rx="3" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.6"/>
+        <text x="487" y="70" text-anchor="middle" font-size="13" font-weight="600" fill="var(--accent)">20 components</text>
+        <text x="487" y="88" text-anchor="middle" font-size="10.5" fill="var(--ink-2)">each mapped to 0–1</text>
+        <text x="487" y="102" text-anchor="middle" font-size="10.5" fill="var(--ink-2)">12 abs · 8 rel</text>
+
+        <rect x="608" y="44" width="150" height="70" rx="3" fill="var(--sunk)" stroke="currentColor"/>
+        <text x="683" y="70" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor">4 pillars</text>
+        <text x="683" y="88" text-anchor="middle" font-size="10.5" fill="var(--ink-2)">build · tests · quality</text>
+        <text x="683" y="102" text-anchor="middle" font-size="10.5" fill="var(--ink-2)">· behaviour</text>
+
+        <rect x="804" y="44" width="150" height="70" rx="3" fill="var(--accent2-soft)" stroke="var(--accent-2)" stroke-width="1.6"/>
+        <text x="879" y="70" text-anchor="middle" font-size="13" font-weight="600" fill="var(--accent-2)">composite</text>
+        <text x="879" y="88" text-anchor="middle" font-size="10.5" fill="var(--ink-2)">one number, 0–1</text>
+        <text x="879" y="102" text-anchor="middle" font-size="10.5" fill="var(--ink-2)">sorted → rank</text>
+
+        <!-- arrows + labels -->
+        <line x1="170" y1="79" x2="210" y2="79" stroke="currentColor" stroke-width="1.4" marker-end="url(#ar)"/>
+        <text x="190" y="34" text-anchor="middle" font-size="9.5" fill="var(--ink-3)">join on</text>
+        <text x="190" y="132" text-anchor="middle" font-size="9.5" fill="var(--ink-3)">(model, iter)</text>
+
+        <line x1="366" y1="79" x2="406" y2="79" stroke="currentColor" stroke-width="1.4" marker-end="url(#ar)"/>
+        <text x="386" y="34" text-anchor="middle" font-size="9.5" fill="var(--ink-3)">select</text>
+        <text x="386" y="132" text-anchor="middle" font-size="9.5" fill="var(--ink-3)">+ normalise</text>
+
+        <line x1="562" y1="79" x2="602" y2="79" stroke="currentColor" stroke-width="1.4" marker-end="url(#ar)"/>
+        <text x="582" y="34" text-anchor="middle" font-size="9.5" fill="var(--ink-3)">mean</text>
+        <text x="582" y="132" text-anchor="middle" font-size="9.5" fill="var(--ink-3)">within pillar</text>
+
+        <line x1="758" y1="79" x2="798" y2="79" stroke="currentColor" stroke-width="1.4" marker-end="url(#ar)"/>
+        <text x="778" y="34" text-anchor="middle" font-size="9.5" fill="var(--ink-3)">weighted</text>
+        <text x="778" y="132" text-anchor="middle" font-size="9.5" fill="var(--ink-3)">mean</text>
+
+        <!-- robustness branch -->
+        <path d="M683,114 L683,178" stroke="var(--ink-3)" stroke-width="1.2" stroke-dasharray="4 3" fill="none" marker-end="url(#ar2)"/>
+        <text x="695" y="150" font-size="9.5" fill="var(--ink-3)">pillar scores only</text>
+
+        <rect x="470" y="182" width="196" height="58" rx="3" fill="var(--ground)" stroke="var(--ink-3)" stroke-dasharray="4 3"/>
+        <text x="568" y="204" text-anchor="middle" font-size="12" font-weight="600" fill="currentColor">Pareto front</text>
+        <text x="568" y="222" text-anchor="middle" font-size="10" fill="var(--ink-2)">who is undominated</text>
+
+        <rect x="700" y="182" width="196" height="58" rx="3" fill="var(--ground)" stroke="var(--ink-3)" stroke-dasharray="4 3"/>
+        <text x="798" y="204" text-anchor="middle" font-size="12" font-weight="600" fill="currentColor">455 weightings</text>
+        <text x="798" y="222" text-anchor="middle" font-size="10" fill="var(--ink-2)">rank range · top-1 share</text>
+
+        <line x1="666" y1="211" x2="694" y2="211" stroke="var(--ink-3)" stroke-width="1"/>
+        <text x="568" y="268" text-anchor="middle" font-size="10" fill="var(--ink-3)">these do not change the composite —</text>
+        <text x="568" y="284" text-anchor="middle" font-size="10" fill="var(--ink-3)">they say how much to trust its ordering</text>
+
+        <path d="M470,211 L360,211 L360,120" stroke="var(--ink-3)" stroke-width="1" fill="none" opacity="0"/>
+        <text x="95" y="200" font-size="10" fill="var(--ink-3)">raw evidence</text>
+        <text x="95" y="216" font-size="10" fill="var(--ink-3)">stays in the</text>
+        <text x="95" y="232" font-size="10" fill="var(--ink-3)">detail table</text>
+        <line x1="95" y1="114" x2="95" y2="186" stroke="var(--ink-3)" stroke-width="1" stroke-dasharray="3 3" marker-end="url(#ar2)"/>
+      </g>
+    </svg>
+    <figcaption><b>The composite is decided entirely by the top row.</b> The dashed branch matters for interpretation but never feeds back: Pareto status and rank range are computed <em>from</em> the four pillar scores after the fact, to test whether the equal-weight choice is doing the work.</figcaption>
+  </figure>
+</section>
+
+<section>
+  <div class="sec-head"><span class="step">Stage 1</span><h2>Two ways a raw value becomes a score</h2></div>
+  <div class="col">
+    <p>Every component must land on 0–1 before it can be averaged with the others, and there are exactly two ways that happens. Which one applies is a deliberate, per-component choice, marked <span class="tag abs">abs</span> or <span class="tag rel">rel</span> in the code.</p>
+    <p>The distinction matters for reading results across stories: an <span class="tag abs">abs</span> score means the same thing next month, while a <span class="tag rel">rel</span> score is defined only against the eleven other runs it was computed with.</p>
+  </div>
+
+  <figure>
+    <svg viewBox="0 0 1000 300" role="img" aria-label="Two normalisation modes. Absolute: a value already on a 0 to 1 scale passes through unchanged, clipped at the ends, and missing evidence becomes zero. Relative: the cohort minimum maps to 0 and the maximum to 1, then the scale is flipped for lower-is-better components.">
+      <g font-family="IBM Plex Sans, sans-serif">
+        <!-- ABS panel -->
+        <rect x="16" y="16" width="466" height="268" rx="3" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.2" opacity="0.55"/>
+        <text x="40" y="46" font-size="14" font-weight="600" fill="var(--accent)">abs — absolute anchor</text>
+        <text x="40" y="66" font-size="11" fill="var(--ink-2)">the raw value is already a 0–1 rate. It is the score.</text>
+        <text x="40" y="82" font-size="11" fill="var(--ink-2)">Clipped at the ends; never rescaled to the cohort.</text>
+
+        <line x1="60" y1="132" x2="440" y2="132" stroke="currentColor" stroke-width="1.4"/>
+        <line x1="60" y1="126" x2="60" y2="138" stroke="currentColor" stroke-width="1.4"/>
+        <line x1="440" y1="126" x2="440" y2="138" stroke="currentColor" stroke-width="1.4"/>
+        <text x="60" y="154" text-anchor="middle" font-size="10.5" fill="var(--ink-3)">0.0</text>
+        <text x="440" y="154" text-anchor="middle" font-size="10.5" fill="var(--ink-3)">1.0</text>
+
+        <circle cx="252" cy="132" r="5.5" fill="var(--accent)"/>
+        <line x1="252" y1="132" x2="252" y2="106" stroke="var(--accent)" stroke-width="1.2"/>
+        <text x="252" y="100" text-anchor="middle" font-size="11" font-weight="600" fill="var(--accent)">line coverage 0.506</text>
+        <text x="252" y="180" text-anchor="middle" font-size="12" font-family="IBM Plex Mono, monospace" fill="currentColor">score = 0.506</text>
+        <text x="252" y="198" text-anchor="middle" font-size="10" fill="var(--ink-3)">identity — no cohort involved</text>
+
+        <rect x="60" y="222" width="380" height="44" rx="2" fill="var(--ground)" stroke="var(--rule-strong)"/>
+        <text x="76" y="240" font-size="10.5" fill="var(--ink-2)">missing evidence (NaN)</text>
+        <text x="424" y="240" text-anchor="end" font-size="11" font-family="IBM Plex Mono, monospace" fill="var(--bad)">→ 0.0</text>
+        <text x="76" y="256" font-size="10" fill="var(--ink-3)">producing no result counts as the worst result</text>
+
+        <!-- REL panel -->
+        <rect x="518" y="16" width="466" height="268" rx="3" fill="var(--warn-soft)" stroke="var(--warn)" stroke-width="1.2" opacity="0.55"/>
+        <text x="542" y="46" font-size="14" font-weight="600" fill="var(--warn)">rel — cohort min–max</text>
+        <text x="542" y="66" font-size="11" fill="var(--ink-2)">an open-ended count with no natural ceiling.</text>
+        <text x="542" y="82" font-size="11" fill="var(--ink-2)">Best run in this cohort → 1.0, worst → 0.0.</text>
+
+        <line x1="562" y1="132" x2="942" y2="132" stroke="currentColor" stroke-width="1.4"/>
+        <line x1="562" y1="126" x2="562" y2="138" stroke="currentColor" stroke-width="1.4"/>
+        <line x1="942" y1="126" x2="942" y2="138" stroke="currentColor" stroke-width="1.4"/>
+        <text x="562" y="154" text-anchor="middle" font-size="10.5" fill="var(--ink-3)">2 errors</text>
+        <text x="942" y="154" text-anchor="middle" font-size="10.5" fill="var(--ink-3)">228 errors</text>
+        <text x="562" y="168" text-anchor="middle" font-size="9.5" fill="var(--ink-3)">cohort min</text>
+        <text x="942" y="168" text-anchor="middle" font-size="9.5" fill="var(--ink-3)">cohort max</text>
+
+        <circle cx="562" cy="132" r="5.5" fill="var(--accent-2)"/>
+        <text x="562" y="112" text-anchor="middle" font-size="11" font-weight="600" fill="var(--accent-2)">qwen it3</text>
+        <circle cx="629" cy="132" r="4.5" fill="var(--ink-3)"/>
+        <text x="640" y="112" text-anchor="middle" font-size="10" fill="var(--ink-3)">qwen it6 · 42</text>
+        <circle cx="942" cy="132" r="5.5" fill="var(--accent)"/>
+        <text x="930" y="112" text-anchor="middle" font-size="11" font-weight="600" fill="var(--accent)">Kimi it6</text>
+
+        <text x="752" y="200" text-anchor="middle" font-size="11" fill="var(--ink-2)">then flipped, because fewer errors is better (↓)</text>
+        <text x="752" y="222" text-anchor="middle" font-size="12" font-family="IBM Plex Mono, monospace" fill="currentColor">2 → 1.000&#160;&#160;&#160;42 → 0.823&#160;&#160;&#160;228 → 0.000</text>
+        <text x="752" y="248" text-anchor="middle" font-size="10" fill="var(--ink-3)">if every run tied, all would score 0.5 — a flat column</text>
+        <text x="752" y="264" text-anchor="middle" font-size="10" fill="var(--ink-3)">cannot separate anyone, so it separates no one</text>
+      </g>
+    </svg>
+    <figcaption><b>A <span class="tag rel">rel</span> score is a rank statement, not a quality statement.</b> Kimi it 6 scoring 0.000 on “errors burned” does not mean it was infinitely bad — it means it was the worst of these twelve. Re-run the notebook with a thirteenth run that burns 400 errors and every one of these numbers moves.</figcaption>
+  </figure>
+</section>
+
+<section>
+  <div class="sec-head"><span class="step">Stage 2</span><h2>The twenty components</h2></div>
+  <div class="col"><p>Below is every component, with the winning run’s raw value and the score it produced. <code>build efficiency</code>, <code>green efficiency</code> and <code>e2e efficiency</code> are <code>1/(attempts)</code> transforms — a bounded 0–1 anchor built from an unbounded count, so they stay comparable across stories without min–max.</p></div>
+
+  <div class="tw">
+    <table>
+      <thead><tr><th>Component</th><th>Mode</th><th class="num">Raw (qwen it 3)</th><th class="num">Score</th><th class="num">Cohort min → max</th><th>Score bar</th></tr></thead>
+      <tbody>
+        <tr class="group"><td colspan="6">build — 4 components, each worth 6.25% of the composite</td></tr>
+        <tr><td class="mono">build efficiency</td><td><span class="tag abs">abs</span></td><td class="num">0.500</td><td class="num">0.500</td><td class="num">0.045 → 0.500</td><td><span class="bar" style="width:50%"></span></td></tr>
+        <tr><td class="mono">errors burned ↓</td><td><span class="tag rel">rel</span></td><td class="num">2</td><td class="num">1.000</td><td class="num">2 → 228</td><td><span class="bar" style="width:100%"></span></td></tr>
+        <tr><td class="mono">peak errors ↓</td><td><span class="tag rel">rel</span></td><td class="num">2</td><td class="num">1.000</td><td class="num">2 → 82</td><td><span class="bar" style="width:100%"></span></td></tr>
+        <tr><td class="mono">build warnings ↓</td><td><span class="tag rel">rel</span></td><td class="num">0</td><td class="num">1.000</td><td class="num">0 → 10</td><td><span class="bar" style="width:100%"></span></td></tr>
+        <tr class="group"><td colspan="6">tests &amp; coverage — 6 components, each worth 4.17%</td></tr>
+        <tr><td class="mono">green efficiency</td><td><span class="tag abs">abs</span></td><td class="num">0.500</td><td class="num">0.500</td><td class="num">0.167 → 1.000</td><td><span class="bar" style="width:50%"></span></td></tr>
+        <tr><td class="mono">red-first discipline</td><td><span class="tag abs">abs</span></td><td class="num">1.0</td><td class="num">1.000</td><td class="num">0 → 1</td><td><span class="bar" style="width:100%"></span></td></tr>
+        <tr><td class="mono">line coverage</td><td><span class="tag abs">abs</span></td><td class="num">0.506</td><td class="num">0.506</td><td class="num">0.432 → 0.677</td><td><span class="bar" style="width:50.6%"></span></td></tr>
+        <tr><td class="mono">branch coverage</td><td><span class="tag abs">abs</span></td><td class="num">0.800</td><td class="num">0.800</td><td class="num">0.462 → 0.833</td><td><span class="bar" style="width:80%"></span></td></tr>
+        <tr><td class="mono">layer balance</td><td><span class="tag abs">abs</span></td><td class="num">0.812</td><td class="num">0.812</td><td class="num">0.650 → 0.925</td><td><span class="bar" style="width:81.2%"></span></td></tr>
+        <tr><td class="mono">failures burned ↓</td><td><span class="tag rel">rel</span></td><td class="num">3</td><td class="num">0.800</td><td class="num">0 → 15</td><td><span class="bar" style="width:80%"></span></td></tr>
+        <tr class="group"><td colspan="6">refactoring &amp; quality — 7 components, each worth 3.57%</td></tr>
+        <tr><td class="mono">% all-GREEN types</td><td><span class="tag abs">abs</span></td><td class="num">0.926</td><td class="num">0.926</td><td class="num">0.880 → 0.960</td><td><span class="bar" style="width:92.6%"></span></td></tr>
+        <tr><td class="mono">median MI ÷ 100</td><td><span class="tag abs">abs</span></td><td class="num">0.710</td><td class="num">0.710</td><td class="num">0.710 → 0.740</td><td><span class="bar" style="width:71%"></span></td></tr>
+        <tr><td class="mono">worst-type MI ÷ 100</td><td><span class="tag abs">abs</span></td><td class="num">0.550</td><td class="num">0.550</td><td class="num">0.530 → 0.560</td><td><span class="bar" style="width:55%"></span></td></tr>
+        <tr><td class="mono">worst-type flags</td><td><span class="tag abs">abs</span></td><td class="num">0.875</td><td class="num">0.875</td><td class="num">0.750 → 0.875</td><td><span class="bar" style="width:87.5%"></span></td></tr>
+        <tr><td class="mono">worst coupling ↓</td><td><span class="tag rel">rel</span></td><td class="num">15</td><td class="num">0.750</td><td class="num">13 → 21</td><td><span class="bar" style="width:75%"></span></td></tr>
+        <tr><td class="mono">coupling reduced</td><td><span class="tag rel">rel</span></td><td class="num">4</td><td class="num">0.667</td><td class="num">0 → 6</td><td><span class="bar" style="width:66.7%"></span></td></tr>
+        <tr><td class="mono">green share gained</td><td><span class="tag rel">rel</span></td><td class="num">0.046</td><td class="num">0.644</td><td class="num">−0.031 → 0.089</td><td><span class="bar" style="width:64.4%"></span></td></tr>
+        <tr class="group"><td colspan="6">behaviour — 3 components, each worth 8.33%</td></tr>
+        <tr><td class="mono">e2e efficiency</td><td><span class="tag abs">abs</span></td><td class="num">1.000</td><td class="num">1.000</td><td class="num">0.200 → 1.000</td><td><span class="bar" style="width:100%"></span></td></tr>
+        <tr><td class="mono">e2e probe pass rate</td><td><span class="tag abs">abs</span></td><td class="num">1.000</td><td class="num">1.000</td><td class="num">1.000 → 1.000</td><td><span class="bar" style="width:100%"></span></td></tr>
+        <tr><td class="mono">e2e infra failures ↓</td><td><span class="tag rel">rel</span></td><td class="num">0</td><td class="num">1.000</td><td class="num">0 → 2</td><td><span class="bar" style="width:100%"></span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout warn">
+    <h3>The pillar sizes are unequal, so the components are too</h3>
+    <p>Each pillar contributes exactly a quarter of the composite regardless of how many components it holds. A pillar with three components therefore gives each of them <b>8.33%</b> of the final score; a pillar with seven gives each <b>3.57%</b> — a 2.3× difference in leverage that comes from nothing but how the components were grouped. Moving <code>e2e infra failures</code> from 0 to 1 shifts the composite more than doubling <code>green share gained</code> does. If that is not what you want, the fix is to change <code>PILLAR_WEIGHTS</code> or rebalance the groups, not the normalisation.</p>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="step">Stage 3</span><h2>Two averages, and the winner falls out</h2></div>
+  <div class="col"><p>Once every component is a number between 0 and 1, the rest is arithmetic. Nothing is weighted inside a pillar; nothing is weighted between pillars.</p></div>
+
+  <figure>
+    <svg viewBox="0 0 1000 360" role="img" aria-label="The winning run's twenty component scores average within four pillars to 0.875, 0.736, 0.732 and 1.000, and those four averages then average to a composite of 0.836.">
+      <g font-family="IBM Plex Sans, sans-serif">
+        <text x="20" y="28" font-size="13" font-weight="600" fill="currentColor">qwen3.7-max · iteration 3</text>
+        <text x="200" y="28" font-size="11" fill="var(--ink-3)">— rank 1 of 12</text>
+
+        <!-- four pillar columns -->
+        <g>
+          <rect x="20" y="48" width="220" height="150" rx="3" fill="var(--sunk)" stroke="var(--rule-strong)"/>
+          <text x="130" y="70" text-anchor="middle" font-size="12" font-weight="600" fill="currentColor">build</text>
+          <text x="130" y="88" text-anchor="middle" font-size="10" fill="var(--ink-3)">4 component scores</text>
+          <text x="130" y="112" text-anchor="middle" font-size="11.5" font-family="IBM Plex Mono, monospace" fill="var(--ink-2)">0.500 · 1.000</text>
+          <text x="130" y="130" text-anchor="middle" font-size="11.5" font-family="IBM Plex Mono, monospace" fill="var(--ink-2)">1.000 · 1.000</text>
+          <line x1="60" y1="146" x2="200" y2="146" stroke="var(--rule-strong)"/>
+          <text x="130" y="172" text-anchor="middle" font-size="20" font-family="IBM Plex Mono, monospace" font-weight="500" fill="currentColor">0.875</text>
+          <text x="130" y="189" text-anchor="middle" font-size="9.5" fill="var(--ink-3)">mean</text>
+        </g>
+        <g>
+          <rect x="260" y="48" width="220" height="150" rx="3" fill="var(--sunk)" stroke="var(--rule-strong)"/>
+          <text x="370" y="70" text-anchor="middle" font-size="12" font-weight="600" fill="currentColor">tests &amp; coverage</text>
+          <text x="370" y="88" text-anchor="middle" font-size="10" fill="var(--ink-3)">6 component scores</text>
+          <text x="370" y="112" text-anchor="middle" font-size="11.5" font-family="IBM Plex Mono, monospace" fill="var(--ink-2)">0.500 · 1.000 · 0.506</text>
+          <text x="370" y="130" text-anchor="middle" font-size="11.5" font-family="IBM Plex Mono, monospace" fill="var(--ink-2)">0.800 · 0.812 · 0.800</text>
+          <line x1="300" y1="146" x2="440" y2="146" stroke="var(--rule-strong)"/>
+          <text x="370" y="172" text-anchor="middle" font-size="20" font-family="IBM Plex Mono, monospace" font-weight="500" fill="currentColor">0.736</text>
+          <text x="370" y="189" text-anchor="middle" font-size="9.5" fill="var(--ink-3)">mean</text>
+        </g>
+        <g>
+          <rect x="500" y="48" width="220" height="150" rx="3" fill="var(--sunk)" stroke="var(--rule-strong)"/>
+          <text x="610" y="70" text-anchor="middle" font-size="12" font-weight="600" fill="currentColor">refactoring &amp; quality</text>
+          <text x="610" y="88" text-anchor="middle" font-size="10" fill="var(--ink-3)">7 component scores</text>
+          <text x="610" y="112" text-anchor="middle" font-size="11.5" font-family="IBM Plex Mono, monospace" fill="var(--ink-2)">0.926 · 0.710 · 0.550</text>
+          <text x="610" y="130" text-anchor="middle" font-size="11.5" font-family="IBM Plex Mono, monospace" fill="var(--ink-2)">0.875 · 0.750 · 0.667 · 0.644</text>
+          <line x1="540" y1="146" x2="680" y2="146" stroke="var(--rule-strong)"/>
+          <text x="610" y="172" text-anchor="middle" font-size="20" font-family="IBM Plex Mono, monospace" font-weight="500" fill="currentColor">0.732</text>
+          <text x="610" y="189" text-anchor="middle" font-size="9.5" fill="var(--ink-3)">mean</text>
+        </g>
+        <g>
+          <rect x="740" y="48" width="220" height="150" rx="3" fill="var(--accent2-soft)" stroke="var(--accent-2)"/>
+          <text x="850" y="70" text-anchor="middle" font-size="12" font-weight="600" fill="var(--accent-2)">behaviour</text>
+          <text x="850" y="88" text-anchor="middle" font-size="10" fill="var(--ink-3)">3 component scores</text>
+          <text x="850" y="121" text-anchor="middle" font-size="11.5" font-family="IBM Plex Mono, monospace" fill="var(--ink-2)">1.000 · 1.000 · 1.000</text>
+          <line x1="780" y1="146" x2="920" y2="146" stroke="var(--accent-2)"/>
+          <text x="850" y="172" text-anchor="middle" font-size="20" font-family="IBM Plex Mono, monospace" font-weight="500" fill="var(--accent-2)">1.000</text>
+          <text x="850" y="189" text-anchor="middle" font-size="9.5" fill="var(--ink-3)">mean</text>
+        </g>
+
+        <!-- converging arrows -->
+        <path d="M130,198 L130,238 L500,238" fill="none" stroke="currentColor" stroke-width="1.3"/>
+        <path d="M370,198 L370,238" fill="none" stroke="currentColor" stroke-width="1.3"/>
+        <path d="M610,198 L610,238" fill="none" stroke="currentColor" stroke-width="1.3"/>
+        <path d="M850,198 L850,238 L500,238" fill="none" stroke="currentColor" stroke-width="1.3"/>
+        <line x1="500" y1="238" x2="500" y2="266" stroke="currentColor" stroke-width="1.3" marker-end="url(#ar)"/>
+        <text x="516" y="232" font-size="10" fill="var(--ink-3)">× weight 1.0 each</text>
+
+        <rect x="330" y="270" width="340" height="64" rx="3" fill="var(--accent2-soft)" stroke="var(--accent-2)" stroke-width="1.6"/>
+        <text x="500" y="294" text-anchor="middle" font-size="11" fill="var(--ink-2)">(0.875 + 0.736 + 0.732 + 1.000) ⁄ 4</text>
+        <text x="500" y="322" text-anchor="middle" font-size="22" font-family="IBM Plex Mono, monospace" font-weight="600" fill="var(--accent-2)">composite = 0.836</text>
+      </g>
+    </svg>
+    <figcaption><b>A perfect behaviour pillar is what puts this run first.</b> Its coverage is mid-pack (0.506 line coverage, barely above the cohort floor of 0.432) and its median MI is the lowest of all twelve — but three flawless behaviour components carry a full quarter of the score on their own.</figcaption>
+  </figure>
+</section>
+
+<section>
+  <div class="sec-head"><span class="step">Stage 4</span><h2>Would a different weighting change the winner?</h2></div>
+  <div class="col">
+    <p>Equal pillar weights are a choice, not a fact, so the notebook tests the ordering against every other reasonable choice. A run is <b>Pareto-optimal</b> when no other run beats or matches it on all four pillars at once — only such runs can ever place first under <em>any</em> positive weighting. Three of the twelve qualify.</p>
+  </div>
+
+  <figure>
+    <svg viewBox="0 0 1000 380" role="img" aria-label="Parallel coordinates of the four pillar scores for all twelve runs. Three runs are highlighted as Pareto-optimal: qwen iteration 3 leads build and behaviour, qwen iteration 1 leads refactoring and quality, and Kimi iteration 2 leads tests and coverage.">
+      <g font-family="IBM Plex Sans, sans-serif">
+        <!-- axes at x = 150, 400, 650, 900 ; y: 1.0 -> 60, 0.0 -> 300 -->
+        <g stroke="var(--rule-strong)" stroke-width="1">
+          <line x1="150" y1="56" x2="150" y2="304"/>
+          <line x1="400" y1="56" x2="400" y2="304"/>
+          <line x1="650" y1="56" x2="650" y2="304"/>
+          <line x1="900" y1="56" x2="900" y2="304"/>
+        </g>
+        <g font-size="11" font-weight="600" fill="currentColor" text-anchor="middle">
+          <text x="150" y="40">build</text>
+          <text x="400" y="40">tests &amp; coverage</text>
+          <text x="650" y="40">refactoring &amp; quality</text>
+          <text x="900" y="40">behaviour</text>
+        </g>
+        <g font-size="9.5" fill="var(--ink-3)" text-anchor="end">
+          <text x="140" y="63">1.0</text><text x="140" y="307">0.0</text>
+        </g>
+
+        <!-- dominated runs, faint -->
+        <g fill="none" stroke="var(--ink-3)" stroke-width="1.1" opacity="0.42">
+          <polyline points="150,112.2 400,128.3 650,141.7 900,60.0"/>
+          <polyline points="150,128.6 400,162.4 650,128.8 900,60.0"/>
+          <polyline points="150,112.2 400,130.0 650,150.6 900,100.0"/>
+          <polyline points="150,138.1 400,183.4 650,127.3 900,60.0"/>
+          <polyline points="150,143.5 400,130.4 650,158.5 900,113.3"/>
+          <polyline points="150,128.4 400,144.7 650,176.3 900,100.0"/>
+          <polyline points="150,131.6 400,156.6 650,186.7 900,100.0"/>
+          <polyline points="150,190.3 400,125.0 650,179.4 900,113.3"/>
+          <polyline points="150,233.3 400,172.1 650,186.3 900,164.0"/>
+        </g>
+
+        <!-- Pareto-optimal runs -->
+        <polyline points="150,90.0 400,123.3 650,124.4 900,60.0" fill="none" stroke="var(--accent-2)" stroke-width="2.6"/>
+        <polyline points="150,190.4 400,132.3 650,92.1 900,60.0" fill="none" stroke="var(--accent-2)" stroke-width="2.6" stroke-dasharray="7 4"/>
+        <polyline points="150,199.4 400,119.9 650,144.8 900,200.0" fill="none" stroke="var(--accent)" stroke-width="2.6"/>
+
+        <g>
+          <circle cx="150" cy="90.0" r="4.5" fill="var(--accent-2)"/>
+          <circle cx="900" cy="60.0" r="4.5" fill="var(--accent-2)"/>
+          <circle cx="650" cy="92.1" r="4.5" fill="var(--accent-2)"/>
+          <circle cx="400" cy="119.9" r="4.5" fill="var(--accent)"/>
+          <circle cx="900" cy="200.0" r="4.5" fill="var(--accent)"/>
+        </g>
+
+        <text x="162" y="86" font-size="10" font-weight="600" fill="var(--accent-2)">qwen it3 — best build 0.875</text>
+        <text x="662" y="86" font-size="10" font-weight="600" fill="var(--accent-2)">qwen it1 — best quality 0.866</text>
+        <text x="392" y="112" font-size="10" font-weight="600" fill="var(--accent)" text-anchor="end">Kimi it2 — best tests 0.750</text>
+        <text x="890" y="56" font-size="10" font-weight="600" fill="var(--accent-2)" text-anchor="end">behaviour 1.000</text>
+        <text x="890" y="216" font-size="10" font-weight="600" fill="var(--accent)" text-anchor="end">but behaviour 0.417 — 11th overall</text>
+
+        <!-- legend -->
+        <g transform="translate(150,326)">
+          <line x1="0" y1="0" x2="26" y2="0" stroke="var(--accent-2)" stroke-width="2.6"/>
+          <text x="34" y="4" font-size="10" fill="var(--ink-2)">Pareto-optimal (★ in the notebook)</text>
+          <line x1="300" y1="0" x2="326" y2="0" stroke="var(--ink-3)" stroke-width="1.1" opacity="0.42"/>
+          <text x="334" y="4" font-size="10" fill="var(--ink-2)">dominated — beaten on every pillar by someone</text>
+        </g>
+        <text x="150" y="360" font-size="10" fill="var(--ink-3)">A run is undominated when it owns at least one axis, or trades a loss on one for a win on another.</text>
+      </g>
+    </svg>
+    <figcaption><b>Owning one axis is enough to be undominated — it is not enough to win.</b> Kimi it 2 has the highest tests &amp; coverage score of any run, which is why nothing dominates it, yet it ranks 11th overall because its build (0.419) and behaviour (0.417) are near the bottom.</figcaption>
+  </figure>
+
+  <div class="callout">
+    <h3>“Pareto-optimal” is a much weaker guarantee than it sounds</h3>
+    <p>It says only that <em>some</em> weighting exists under which the run wins — possibly an absurd one. Kimi it 2 needs <b>97% of the weight on tests &amp; coverage</b>, with the remaining 3% split across build, quality and behaviour, before it overtakes qwen it 3. That is why the notebook also reports <code>top1_share</code>: the fraction of 455 sensible weightings under which a run actually places first. Kimi it 2’s is <b>0.000</b>.</p>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="step">Stage 5</span><h2>How much the ranking really moves</h2></div>
+  <div class="col"><p>The grid sweeps every combination of the four pillar weights from 0.10 to 0.70 in 0.05 steps that sums to 1.0 — 455 weightings. Each is scored, each produces a full ranking, and the notebook records the best and worst rank each run ever reaches.</p></div>
+
+  <figure>
+    <svg viewBox="0 0 1000 470" role="img" aria-label="Rank range for each of the twelve runs across 455 weightings. qwen iteration 3 never falls below rank 2 and wins 92.5 percent of weightings; qwen iteration 1 spans ranks 1 to 9; Kimi iteration 6 never rises above rank 11.">
+      <g font-family="IBM Plex Sans, sans-serif">
+        <!-- x scale: rank 1 at x=250, rank 12 at x=930 ; step = 61.8 -->
+        <g stroke="var(--rule)" stroke-width="1">
+          <line x1="250" y1="52" x2="250" y2="430"/><line x1="311.8" y1="52" x2="311.8" y2="430"/>
+          <line x1="373.6" y1="52" x2="373.6" y2="430"/><line x1="435.5" y1="52" x2="435.5" y2="430"/>
+          <line x1="497.3" y1="52" x2="497.3" y2="430"/><line x1="559.1" y1="52" x2="559.1" y2="430"/>
+          <line x1="620.9" y1="52" x2="620.9" y2="430"/><line x1="682.7" y1="52" x2="682.7" y2="430"/>
+          <line x1="744.5" y1="52" x2="744.5" y2="430"/><line x1="806.4" y1="52" x2="806.4" y2="430"/>
+          <line x1="868.2" y1="52" x2="868.2" y2="430"/><line x1="930" y1="52" x2="930" y2="430"/>
+        </g>
+        <g font-size="10" fill="var(--ink-3)" text-anchor="middle">
+          <text x="250" y="44">1</text><text x="311.8" y="44">2</text><text x="373.6" y="44">3</text>
+          <text x="435.5" y="44">4</text><text x="497.3" y="44">5</text><text x="559.1" y="44">6</text>
+          <text x="620.9" y="44">7</text><text x="682.7" y="44">8</text><text x="744.5" y="44">9</text>
+          <text x="806.4" y="44">10</text><text x="868.2" y="44">11</text><text x="930" y="44">12</text>
+        </g>
+        <text x="590" y="24" text-anchor="middle" font-size="11" font-weight="600" fill="currentColor">rank reached across 455 weightings</text>
+
+        <!-- rows: y = 72 + i*30 -->
+        <g font-size="10.5">
+          <!-- 1 qwen it3 : 1-2, top1 .925 -->
+          <text x="240" y="76" text-anchor="end" font-family="IBM Plex Mono, monospace" fill="currentColor">qwen it3</text>
+          <line x1="250" y1="72" x2="311.8" y2="72" stroke="var(--accent-2)" stroke-width="7" stroke-linecap="round"/>
+          <circle cx="250" cy="72" r="4" fill="var(--ground)" stroke="var(--accent-2)" stroke-width="2"/>
+          <text x="330" y="76" font-size="10" fill="var(--ink-2)">wins 92.5% of weightings</text>
+
+          <text x="240" y="106" text-anchor="end" font-family="IBM Plex Mono, monospace" fill="currentColor">qwen it5</text>
+          <line x1="311.8" y1="102" x2="497.3" y2="102" stroke="var(--ink-3)" stroke-width="7" stroke-linecap="round" opacity="0.5"/>
+          <circle cx="311.8" cy="102" r="4" fill="var(--ground)" stroke="var(--ink-3)" stroke-width="2"/>
+
+          <text x="240" y="136" text-anchor="end" font-family="IBM Plex Mono, monospace" fill="currentColor">qwen it1</text>
+          <line x1="250" y1="132" x2="744.5" y2="132" stroke="var(--accent-2)" stroke-width="7" stroke-linecap="round" opacity="0.75"/>
+          <circle cx="373.6" cy="132" r="4" fill="var(--ground)" stroke="var(--accent-2)" stroke-width="2"/>
+          <text x="762" y="136" font-size="10" fill="var(--ink-2)">wins 7.5% — the only other winner</text>
+
+          <text x="240" y="166" text-anchor="end" font-family="IBM Plex Mono, monospace" fill="currentColor">qwen it2</text>
+          <line x1="373.6" y1="162" x2="744.5" y2="162" stroke="var(--ink-3)" stroke-width="7" stroke-linecap="round" opacity="0.5"/>
+          <circle cx="435.5" cy="162" r="4" fill="var(--ground)" stroke="var(--ink-3)" stroke-width="2"/>
+
+          <text x="240" y="196" text-anchor="end" font-family="IBM Plex Mono, monospace" fill="currentColor">qwen it4</text>
+          <line x1="373.6" y1="192" x2="559.1" y2="192" stroke="var(--ink-3)" stroke-width="7" stroke-linecap="round" opacity="0.5"/>
+          <circle cx="497.3" cy="192" r="4" fill="var(--ground)" stroke="var(--ink-3)" stroke-width="2"/>
+
+          <text x="240" y="226" text-anchor="end" font-family="IBM Plex Mono, monospace" fill="currentColor">qwen it6</text>
+          <line x1="435.5" y1="222" x2="868.2" y2="222" stroke="var(--ink-3)" stroke-width="7" stroke-linecap="round" opacity="0.5"/>
+          <circle cx="559.1" cy="222" r="4" fill="var(--ground)" stroke="var(--ink-3)" stroke-width="2"/>
+
+          <text x="240" y="256" text-anchor="end" font-family="IBM Plex Mono, monospace" fill="currentColor">Kimi it5</text>
+          <line x1="435.5" y1="252" x2="744.5" y2="252" stroke="var(--accent)" stroke-width="7" stroke-linecap="round" opacity="0.5"/>
+          <circle cx="620.9" cy="252" r="4" fill="var(--ground)" stroke="var(--accent)" stroke-width="2"/>
+
+          <text x="240" y="286" text-anchor="end" font-family="IBM Plex Mono, monospace" fill="currentColor">Kimi it1</text>
+          <line x1="497.3" y1="282" x2="806.4" y2="282" stroke="var(--accent)" stroke-width="7" stroke-linecap="round" opacity="0.5"/>
+          <circle cx="682.7" cy="282" r="4" fill="var(--ground)" stroke="var(--accent)" stroke-width="2"/>
+
+          <text x="240" y="316" text-anchor="end" font-family="IBM Plex Mono, monospace" fill="currentColor">Kimi it3</text>
+          <line x1="620.9" y1="312" x2="868.2" y2="312" stroke="var(--accent)" stroke-width="7" stroke-linecap="round" opacity="0.5"/>
+          <circle cx="744.5" cy="312" r="4" fill="var(--ground)" stroke="var(--accent)" stroke-width="2"/>
+
+          <text x="240" y="346" text-anchor="end" font-family="IBM Plex Mono, monospace" fill="currentColor">Kimi it4</text>
+          <line x1="559.1" y1="342" x2="868.2" y2="342" stroke="var(--accent)" stroke-width="7" stroke-linecap="round" opacity="0.5"/>
+          <circle cx="806.4" cy="342" r="4" fill="var(--ground)" stroke="var(--accent)" stroke-width="2"/>
+
+          <text x="240" y="376" text-anchor="end" font-family="IBM Plex Mono, monospace" fill="currentColor">Kimi it2</text>
+          <line x1="559.1" y1="372" x2="930" y2="372" stroke="var(--accent)" stroke-width="7" stroke-linecap="round" opacity="0.7"/>
+          <circle cx="868.2" cy="372" r="4" fill="var(--ground)" stroke="var(--accent)" stroke-width="2"/>
+          <text x="250" y="376" font-size="10" fill="var(--ink-2)">Pareto-optimal, yet never first</text>
+
+          <text x="240" y="406" text-anchor="end" font-family="IBM Plex Mono, monospace" fill="currentColor">Kimi it6</text>
+          <line x1="868.2" y1="402" x2="930" y2="402" stroke="var(--accent)" stroke-width="7" stroke-linecap="round" opacity="0.5"/>
+          <circle cx="930" cy="402" r="4" fill="var(--ground)" stroke="var(--accent)" stroke-width="2"/>
+          <text x="250" y="406" font-size="10" fill="var(--ink-2)">last or second-to-last under every weighting</text>
+        </g>
+
+        <g transform="translate(250,444)">
+          <circle cx="6" cy="0" r="4" fill="var(--ground)" stroke="currentColor" stroke-width="2"/>
+          <text x="20" y="4" font-size="10" fill="var(--ink-2)">rank under equal weights (the published ranking)</text>
+          <line x1="360" y1="0" x2="392" y2="0" stroke="var(--ink-3)" stroke-width="7" stroke-linecap="round" opacity="0.5"/>
+          <text x="402" y="4" font-size="10" fill="var(--ink-2)">full span of ranks reached across the grid</text>
+        </g>
+      </g>
+    </svg>
+    <figcaption><b>Only the top and bottom of this ranking are stable.</b> Rank 1 and rank 12 barely move, but the middle eight runs span five to eight rank positions each — qwen it 6 is anywhere from 4th to 11th depending on weights. Treat the published order as three tiers, not twelve positions.</figcaption>
+  </figure>
+</section>
+
+<section>
+  <div class="sec-head"><span class="step">Reading it</span><h2>What the number does and does not say</h2></div>
+  <div class="col">
+    <ul class="tight">
+      <li><b>It is a within-cohort comparison, not a grade.</b> Eight of twenty components are min–max scaled against the other eleven runs. A composite of 0.836 does not mean “83.6% good”; it means “best of these twelve, by this weighting”.</li>
+      <li><b>Adding or removing a run changes everyone’s score.</b> Any new iteration that sets a new cohort min or max rescales every <span class="tag rel">rel</span> component for every run. Scores are only comparable within one execution of the notebook.</li>
+      <li><b>Missing evidence scores zero, not neutral.</b> A run with no e2e results loses its whole behaviour pillar — a quarter of the composite — which reads identically to a run that tried and failed. Check <code>evidence_completeness</code> in the integrity gate before trusting a low score.</li>
+      <li><b>Nothing self-reported is scored.</b> Every component traces to a build log, a <code>.trx</code>, a Cobertura report, a metrics snapshot or an e2e probe result. The agent’s own claims are displayed beside the score, never inside it.</li>
+      <li><b>The gaps at the top are small.</b> Rank 1 to rank 2 is 0.047; rank 2 to rank 3 is 0.034. With eight components rescaled per cohort, differences of that size are not a reliable basis for declaring one iteration better than another — the rank range in stage 5 is the honest read.</li>
+    </ul>
+  </div>
+  <div class="callout">
+    <h3>If you want to change what “best” means</h3>
+    <p>Edit <code>PILLAR_WEIGHTS</code> in the ranking cell — it is a plain dict, and the grid and Pareto machinery adapt to whatever pillars exist. To change what counts rather than how much it counts, edit the <code>PILLARS</code> dict: each entry is <code>(label, "abs" | "rel", series)</code>, and a label ending in ↓ is automatically inverted. Keep pillars similar in size, or accept the leverage asymmetry from stage 2.</p>
+  </div>
+</section>
+
+</main>
+
+<footer><div class="col">All values traced from the notebook’s own scoring cell · story CPD-LC-001-001 · 12 runs · 455 weightings · 18 August 2026</div></footer>
+</div>
+</body>
+</html>

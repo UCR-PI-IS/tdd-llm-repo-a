@@ -1,0 +1,32 @@
+{
+  "stage": "test-generation",
+  "storyId": "CPD-LC-001-001",
+  "model": "Qwen3.7-max",
+  "iteration": "4",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Domain.Tests.Unit/Entities/LearningComponentTests.cs",
+    "Backend.Application.Tests.Unit/Services/LearningComponentServiceTests.cs",
+    "Backend.Infrastructure.Tests.Unit/TestHelpers/MockDbSetHelper.cs",
+    "Backend.Infrastructure.Tests.Unit/Repositories/SqlLearningComponentRepositoryTests.cs",
+    "Backend.Presentation.Tests.Unit/Handlers/GetLearningComponentsHandlerTests.cs"
+  ],
+  "filesModified": [],
+  "metrics": {
+    "intentsConfirmed": 21,
+    "testMethodsEmitted": 15,
+    "byLayer": {
+      "Domain": 5,
+      "Application": 3,
+      "Infrastructure": 3,
+      "Presentation": 4
+    }
+  },
+  "warnings": [
+    "Infrastructure tests require InternalsVisibleTo for UCRDatabaseContext and SqlLearningComponentRepository (both internal). Implementation agent must add [assembly: InternalsVisibleTo] or make types accessible.",
+    "Test project .csproj files need ProjectReference entries to their respective production projects (Backend.Domain, Backend.Application, Backend.Infrastructure, Backend.Presentation) to compile.",
+    "Infrastructure.Tests.Unit.csproj needs a PackageReference to Microsoft.EntityFrameworkCore to access DbSet<T> and DbContextOptions<T> for mocking.",
+    "Presentation.Tests.Unit.csproj needs a PackageReference to Microsoft.AspNetCore.App framework reference to access TypedResults, Ok<T>, BadRequest<T>, NotFound<T>, and IResult types."
+  ],
+  "notes": "Generated 15 test methods across 4 DDD layers covering all 21 confirmed intents for story CPD-LC-001-001 (List learning components of a learning space). Domain tests use parameterized TestCaseSource for negative dimension/coordinate validation (6 cases in 1 method) and TestCase for valid orientations (4 cases in 1 method). Application tests combine null and empty string validation into a single parameterized method. Infrastructure tests use a MockDbSetHelper with async query provider support for EF Core ToListAsync mocking. Presentation tests cover Ok, BadRequest, and NotFound result types with mocked service."
+}

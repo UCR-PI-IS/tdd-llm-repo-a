@@ -1,0 +1,32 @@
+{
+  "stage": "test-generation",
+  "storyId": "CPD-LC-001-001",
+  "model": "Qwen3.7-max",
+  "iteration": "5",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Domain.Tests.Unit/Entities/LearningComponentTests.cs",
+    "Backend.Application.Tests.Unit/Services/LearningComponentServiceTests.cs",
+    "Backend.Infrastructure.Tests.Unit/Repositories/SqlLearningComponentRepositoryTests.cs",
+    "Backend.Presentation.Tests.Unit/Handlers/GetLearningComponentsHandlerTests.cs"
+  ],
+  "filesModified": [],
+  "metrics": {
+    "intentsConfirmed": 21,
+    "testMethodsEmitted": 15,
+    "byLayer": {
+      "Domain": 5,
+      "Application": 3,
+      "Infrastructure": 3,
+      "Presentation": 4
+    }
+  },
+  "warnings": [
+    "Test projects need ProjectReference entries to their respective production projects (Backend.Domain, Backend.Application, Backend.Infrastructure, Backend.Presentation).",
+    "Infrastructure test project needs transitive access to Microsoft.EntityFrameworkCore types via the Infrastructure project reference.",
+    "Internal production classes (SqlLearningComponentRepository, UCRDatabaseContext, LearningComponentService) require InternalsVisibleTo attributes for their corresponding test assemblies.",
+    "Presentation handler GetLearningComponentsHandler.HandleAsync must return IResult (not Results<T1,T2,T3>) for NUnit Is.TypeOf checks to resolve the concrete result type at runtime.",
+    "New production types expected but not yet implemented: LearningComponent entity, ILearningComponentRepository, ILearningComponentService, LearningComponentService, SqlLearningComponentRepository, GetLearningComponentsHandler, GetLearningComponentsResponse, LearningComponentDto, ErrorResponse."
+  ],
+  "notes": "Generated 15 test methods across 4 test classes covering all 21 confirmed intents for story CPD-LC-001-001. Domain tests use parameterized TestCaseSource for negative validation (6 cases in 1 method) and TestCase for valid orientations (4 cases in 1 method). Application tests combine null and empty string validation into a single parameterized method. Infrastructure tests include async LINQ helper classes (TestAsyncEnumerable, TestAsyncQueryProvider, TestAsyncEnumerator) to support mocked DbSet with ToListAsync. All tests follow AAA pattern with Assert.Multiple for multi-property assertions."
+}
