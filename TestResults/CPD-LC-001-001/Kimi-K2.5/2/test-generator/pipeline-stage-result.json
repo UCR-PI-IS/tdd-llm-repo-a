@@ -1,0 +1,26 @@
+{
+  "stage": "test-generation",
+  "storyId": "CPD-LC-001-001",
+  "model": "Kimi-k2.5",
+  "iteration": "2",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Domain.Tests.Unit/LearningComponentTests.cs",
+    "Backend.Application.Tests.Unit/LearningComponentServiceTests.cs",
+    "Backend.Infrastructure.Tests.Unit/SqlLearningComponentRepositoryTests.cs",
+    "Backend.Presentation.Tests.Unit/GetLearningComponentsHandlerTests.cs"
+  ],
+  "filesModified": [],
+  "metrics": {
+    "intentsConfirmed": 22,
+    "testMethodsEmitted": 22,
+    "byLayer": {
+      "Domain": 10,
+      "Application": 4,
+      "Infrastructure": 3,
+      "Presentation": 4
+    }
+  },
+  "warnings": [],
+  "notes": "Generated 22 test methods covering all 22 confirmed intents for story CPD-LC-001-001. Domain layer tests cover LearningComponent entity constructor with validation (positive, negative, and edge cases). Application layer tests cover LearningComponentService with mocked repository. Infrastructure layer tests cover SqlLearningComponentRepository with mocked DbContext. Presentation layer tests cover GetLearningComponentsHandler with mocked service and proper HTTP response types."
+}

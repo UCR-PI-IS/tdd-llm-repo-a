@@ -1,0 +1,63 @@
+{
+  "stage": "e2e-validation",
+  "status": "success",
+  "timestamp": "2026-08-06_15-07-57",
+  "storyId": "CPD-LC-001-001",
+  "model": "Kimi-k2.5",
+  "iteration": "3",
+  "database": {
+    "container": "themepark-sql-e2e-cpd-lc-001-001-kimi-k2-5-3-150757",
+    "image": "mcr.microsoft.com/mssql/server:2022-latest",
+    "network": "themepark-e2e-cpd-lc-001-001-kimi-k2-5-3-150757",
+    "database": "ThemePark",
+    "readySeconds": 8.6,
+    "baseSchemaApplied": [
+      "Semester.sql",
+      "Course.sql"
+    ],
+    "seedsApplied": [
+      "seed-CPD-LC-001-001.sql"
+    ]
+  },
+  "backend": {
+    "container": "themepark-api-e2e-cpd-lc-001-001-kimi-k2-5-3-150757",
+    "project": "Backend.Api/UCR.ECCI.PI.ThemePark.Backend.Api.csproj",
+    "publishStatus": "success",
+    "started": true,
+    "url": "http://127.0.0.1:55001",
+    "readySeconds": 2.2,
+    "errorLines": []
+  },
+  "probes": [
+    {
+      "name": "GET /api/learningspaces/space-001/components",
+      "method": "GET",
+      "path": "/api/learningspaces/space-001/components",
+      "expectedStatus": 200,
+      "actualStatus": 200,
+      "passed": true,
+      "missingContent": [],
+      "error": null,
+      "bodySnippet": "{\"components\":[{\"componentId\":\"comp-001\",\"learningSpaceId\":\"space-001\",\"width\":2,\"height\":3,\"depth\":1,\"x\":10,\"y\":5,\"z\":0,\"orientation\":\"North\"},{\"componentId\":\"comp-002\",\"learningSpaceId\":\"space-001\",\"width\":1.5,\"height\":2.5,\"depth\":1,\"x\":15,\"y\":8,\"z\":0,\"orientation\":\"South\"}]}"
+    }
+  ],
+  "totalProbes": 1,
+  "probesPassed": 1,
+  "probesFailed": 0,
+  "cleanup": {
+    "status": "clean",
+    "removedContainers": [
+      "themepark-api-e2e-cpd-lc-001-001-kimi-k2-5-3-150757",
+      "themepark-sql-e2e-cpd-lc-001-001-kimi-k2-5-3-150757"
+    ],
+    "removedNetworks": [
+      "themepark-e2e-cpd-lc-001-001-kimi-k2-5-3-150757"
+    ],
+    "removedVolumes": [
+      "themepark-app-e2e-cpd-lc-001-001-kimi-k2-5-3-150757"
+    ],
+    "leftovers": []
+  },
+  "warnings": [],
+  "errors": []
+}

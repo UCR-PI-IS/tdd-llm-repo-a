@@ -1,0 +1,63 @@
+{
+  "stage": "e2e-validation",
+  "status": "success",
+  "timestamp": "2026-08-10_10-14-42",
+  "storyId": "CPD-LC-001-001",
+  "model": "Qwen3.7-max",
+  "iteration": "2",
+  "database": {
+    "container": "themepark-sql-e2e-cpd-lc-001-001-qwen3-7-max-2-101442",
+    "image": "mcr.microsoft.com/mssql/server:2022-latest",
+    "network": "themepark-e2e-cpd-lc-001-001-qwen3-7-max-2-101442",
+    "database": "ThemePark",
+    "readySeconds": 8.8,
+    "baseSchemaApplied": [
+      "Semester.sql",
+      "Course.sql"
+    ],
+    "seedsApplied": [
+      "seed-CPD-LC-001-001.sql"
+    ]
+  },
+  "backend": {
+    "container": "themepark-api-e2e-cpd-lc-001-001-qwen3-7-max-2-101442",
+    "project": "Backend.Api/UCR.ECCI.PI.ThemePark.Backend.Api.csproj",
+    "publishStatus": "success",
+    "started": true,
+    "url": "http://127.0.0.1:55000",
+    "readySeconds": 2.2,
+    "errorLines": []
+  },
+  "probes": [
+    {
+      "name": "GET /LearningComponents/ls-001",
+      "method": "GET",
+      "path": "/LearningComponents/ls-001",
+      "expectedStatus": 200,
+      "actualStatus": 200,
+      "passed": true,
+      "missingContent": [],
+      "error": null,
+      "bodySnippet": "{\"components\":[{\"componentId\":\"comp-001\",\"learningSpaceId\":\"ls-001\",\"width\":2,\"height\":3,\"depth\":1.5,\"x\":10,\"y\":20,\"z\":0,\"orientation\":\"North\"},{\"componentId\":\"comp-002\",\"learningSpaceId\":\"ls-001\",\"width\":1,\"height\":2,\"depth\":1,\"x\":5,\"y\":10,\"z\":0,\"orientation\":\"South\"}]}"
+    }
+  ],
+  "totalProbes": 1,
+  "probesPassed": 1,
+  "probesFailed": 0,
+  "cleanup": {
+    "status": "clean",
+    "removedContainers": [
+      "themepark-api-e2e-cpd-lc-001-001-qwen3-7-max-2-101442",
+      "themepark-sql-e2e-cpd-lc-001-001-qwen3-7-max-2-101442"
+    ],
+    "removedNetworks": [
+      "themepark-e2e-cpd-lc-001-001-qwen3-7-max-2-101442"
+    ],
+    "removedVolumes": [
+      "themepark-app-e2e-cpd-lc-001-001-qwen3-7-max-2-101442"
+    ],
+    "leftovers": []
+  },
+  "warnings": [],
+  "errors": []
+}

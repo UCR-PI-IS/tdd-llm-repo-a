@@ -1,0 +1,27 @@
+{
+  "stage": "refactoring",
+  "storyId": "CPD-LC-001-001",
+  "model": "Kimi-k2.5",
+  "iteration": "1",
+  "status": "partial",
+  "filesCreated": [],
+  "filesModified": [
+    "Backend.Domain/Entities/LearningComponent.cs",
+    "Backend.Presentation/Dtos/LearningComponentDto.cs",
+    "Backend.Presentation/Handlers/GetLearningComponentsHandler.cs"
+  ],
+  "metrics": {
+    "loopIterationsPerformed": 2,
+    "maxLoopIterations": 10,
+    "allGreenAchieved": false,
+    "baseline": { "minMI": 55, "maxCC": 8, "maxCoupling": 21, "maxDIT": 0 },
+    "final":    { "minMI": 55, "maxCC": 5, "maxCoupling": 20, "maxDIT": 0 },
+    "remainingViolations": [
+      { "type": "GetLearningComponentsHandler", "metric": "Coupling", "value": 20, "flag": "YELLOW" }
+    ]
+  },
+  "warnings": [
+    "GetLearningComponentsHandler class coupling remains at 20 (YELLOW). This is acceptable for a Presentation layer handler that orchestrates between HTTP concerns (IResult, TypedResults) and application services (ILearningComponentService). Further reduction would compromise the handler's core responsibility."
+  ],
+  "notes": "Refactoring improved LearningComponent constructor cyclomatic complexity from 8 to 1 by extracting validation methods. GetLearningComponentsHandler maintainability improved from MI=63 to MI=65 and coupling reduced from 21 to 20. All critical metrics (MI, CC, DIT) are GREEN. Only remaining issue is YELLOW class coupling in the handler, which is inherent to its orchestration role in the Presentation layer."
+}

@@ -1,0 +1,63 @@
+{
+  "stage": "e2e-validation",
+  "status": "success",
+  "timestamp": "2026-08-06_15-48-56",
+  "storyId": "CPD-LC-001-001",
+  "model": "Kimi-k2.5",
+  "iteration": "4",
+  "database": {
+    "container": "themepark-sql-e2e-cpd-lc-001-001-kimi-k2-5-4-154856",
+    "image": "mcr.microsoft.com/mssql/server:2022-latest",
+    "network": "themepark-e2e-cpd-lc-001-001-kimi-k2-5-4-154856",
+    "database": "ThemePark",
+    "readySeconds": 8.7,
+    "baseSchemaApplied": [
+      "Semester.sql",
+      "Course.sql"
+    ],
+    "seedsApplied": [
+      "seed-CPD-LC-001-001.sql"
+    ]
+  },
+  "backend": {
+    "container": "themepark-api-e2e-cpd-lc-001-001-kimi-k2-5-4-154856",
+    "project": "Backend.Api/UCR.ECCI.PI.ThemePark.Backend.Api.csproj",
+    "publishStatus": "success",
+    "started": true,
+    "url": "http://127.0.0.1:55002",
+    "readySeconds": 2.2,
+    "errorLines": []
+  },
+  "probes": [
+    {
+      "name": "GET /api/learningspaces/space-001/components",
+      "method": "GET",
+      "path": "/api/learningspaces/space-001/components",
+      "expectedStatus": 200,
+      "actualStatus": 200,
+      "passed": true,
+      "missingContent": [],
+      "error": null,
+      "bodySnippet": "{\"components\":[{\"componentId\":\"comp-001\",\"learningSpaceId\":\"space-001\",\"width\":2.5,\"height\":3,\"depth\":2,\"x\":1,\"y\":0.5,\"z\":2,\"orientation\":\"North\"},{\"componentId\":\"comp-002\",\"learningSpaceId\":\"space-001\",\"width\":1.5,\"height\":2,\"depth\":1.5,\"x\":3,\"y\":0.5,\"z\":4,\"orientation\":\"South\"},{\"componentId\":\"comp-003\",\"learningSpaceId\":\"space-001\",\"width\":2,\"height\":2.5,\"depth\":1,\"x\":5,\"y\":0.5,\"z\":2,\"orientation\":\"East\"}]}"
+    }
+  ],
+  "totalProbes": 1,
+  "probesPassed": 1,
+  "probesFailed": 0,
+  "cleanup": {
+    "status": "clean",
+    "removedContainers": [
+      "themepark-api-e2e-cpd-lc-001-001-kimi-k2-5-4-154856",
+      "themepark-sql-e2e-cpd-lc-001-001-kimi-k2-5-4-154856"
+    ],
+    "removedNetworks": [
+      "themepark-e2e-cpd-lc-001-001-kimi-k2-5-4-154856"
+    ],
+    "removedVolumes": [
+      "themepark-app-e2e-cpd-lc-001-001-kimi-k2-5-4-154856"
+    ],
+    "leftovers": []
+  },
+  "warnings": [],
+  "errors": []
+}

@@ -1,0 +1,56 @@
+{
+  "stage": "code-generation",
+  "storyId": "CPD-LC-001-001",
+  "model": "Kimi-k2.5",
+  "iteration": "3",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Domain/Entities/LearningComponent.cs",
+    "Backend.Domain/Repositories/ILearningComponentRepository.cs",
+    "Backend.Application/Services/ILearningComponentService.cs",
+    "Backend.Application/Services/Implementations/LearningComponentService.cs",
+    "Backend.Application/Properties/AssemblyInfo.cs",
+    "Backend.Infrastructure/Repositories/SqlLearningComponentRepository.cs",
+    "Backend.Infrastructure/EntityConfigurations/LearningComponentEntityConfiguration.cs",
+    "Backend.Infrastructure/Data/AppDbContext.cs",
+    "Backend.Infrastructure/Properties/AssemblyInfo.cs",
+    "Backend.Presentation/Dtos/LearningComponentDto.cs",
+    "Backend.Presentation/Responses/GetLearningComponentsResponse.cs",
+    "Backend.Presentation/Responses/ErrorResponse.cs",
+    "Backend.Presentation/Handlers/GetLearningComponentsHandler.cs",
+    "Backend.Presentation/Endpoints/LearningComponentsEndpoints.cs"
+  ],
+  "filesModified": [
+    "Backend.Infrastructure/UCRDatabaseContext.cs",
+    "Backend.Infrastructure/DependecyInjection.cs",
+    "Backend.Application/DependencyInjection.cs",
+    "Backend.Api/Program.cs",
+    "Backend.Presentation/UCR.ECCI.PI.ThemePark.Backend.Presentation.csproj",
+    "Backend.Presentation.Tests.Unit/UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.csproj",
+    "Backend.Application.Tests.Unit/UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.csproj",
+    "Backend.Infrastructure.Tests.Unit/UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.csproj",
+    "Backend.Domain.Tests.Unit/UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.csproj",
+    "Backend.Application.Tests.Unit/LearningComponentServiceTests.cs"
+  ],
+  "metrics": {
+    "buildErrors": 0,
+    "buildWarnings": 0,
+    "testsTotal": 24,
+    "testsPassed": 24,
+    "testsFailed": 0,
+    "testsSkipped": 0,
+    "lineCoverage": 0.48554913294797686,
+    "branchCoverage": 0.7727272727272727,
+    "e2e": {
+      "status": "success",
+      "probesTotal": 1,
+      "probesPassed": 1,
+      "probesFailed": 0,
+      "seedsApplied": ["seed-CPD-LC-001-001.sql"],
+      "resultPath": "E2EResults/CPD-LC-001-001/Kimi-k2.5/3/2026-08-06_15-07-57/",
+      "cleanup": "clean"
+    }
+  },
+  "warnings": [],
+  "notes": "All 24 unit tests passed (13 Domain, 4 Application, 3 Infrastructure, 4 Presentation). End-to-end validation succeeded with GET /api/learningspaces/{learningSpaceId}/components endpoint returning 200 with seeded data. All Docker resources cleaned up successfully."
+}

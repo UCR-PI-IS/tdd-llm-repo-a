@@ -1,0 +1,32 @@
+{
+  "stage": "refactoring",
+  "storyId": "CPD-LC-001-001",
+  "model": "Qwen3.7-max",
+  "iteration": "1",
+  "status": "partial",
+  "filesCreated": [],
+  "filesModified": [
+    "Backend.Domain/Entities/LearningComponent.cs",
+    "Backend.Presentation/Handlers/GetLearningSpaceListHandler.cs",
+    "Backend.Presentation/Dtos/LearningComponentDto.cs",
+    "Backend.Presentation/Dtos/LearningSpaceDto.cs",
+    "Backend.Presentation/Handlers/GetLearningComponentsHandler.cs",
+    "Backend.Presentation/Endpoints/LearningComponentsEndpoints.cs",
+    "Backend.Presentation/Responses/GetLearningComponentsResponse.cs",
+    "Backend.Presentation/Responses/GetLearningSpaceListResponse.cs"
+  ],
+  "metrics": {
+    "loopIterationsPerformed": 2,
+    "maxLoopIterations": 10,
+    "allGreenAchieved": false,
+    "baseline": { "minMI": 56, "maxCC": 8, "maxCoupling": 19, "maxDIT": 1 },
+    "final":    { "minMI": 56, "maxCC": 8, "maxCoupling": 13, "maxDIT": 1 },
+    "remainingViolations": [
+      { "type": "GetLearningComponentsHandler", "metric": "Coupling", "value": 13, "flag": "YELLOW" }
+    ]
+  },
+  "warnings": [
+    "Results<T1,T2,T3> return type change was reverted because it would break test Is.TypeOf assertions against the handler"
+  ],
+  "notes": "Reduced Class Coupling from 19→13 (GetLearningComponentsHandler), 15→GREEN (GetLearningSpaceListHandler), and 10→GREEN (LearningComponentsEndpoints) through mapping extraction (FromDomain factories on DTOs and response types) and endpoint lambda simplification. Also extracted repeated guard clauses in LearningComponent constructor and removed dead commented code. The remaining Coupling=13 on GetLearningComponentsHandler is the practical minimum given its HTTP handler role requiring IResult, TypedResults, service interface, response types, exception handling, and async primitives."
+}

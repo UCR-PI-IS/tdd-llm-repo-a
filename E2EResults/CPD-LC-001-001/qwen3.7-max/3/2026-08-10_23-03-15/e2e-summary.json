@@ -1,0 +1,74 @@
+{
+  "stage": "e2e-validation",
+  "status": "success",
+  "timestamp": "2026-08-10_23-03-15",
+  "storyId": "CPD-LC-001-001",
+  "model": "Qwen3.7-max",
+  "iteration": "3",
+  "database": {
+    "container": "themepark-sql-e2e-cpd-lc-001-001-qwen3-7-max-3-230315",
+    "image": "mcr.microsoft.com/mssql/server:2022-latest",
+    "network": "themepark-e2e-cpd-lc-001-001-qwen3-7-max-3-230315",
+    "database": "ThemePark",
+    "readySeconds": 9.1,
+    "baseSchemaApplied": [
+      "Semester.sql",
+      "Course.sql"
+    ],
+    "seedsApplied": [
+      "seed-CPD-LC-001-001.sql"
+    ]
+  },
+  "backend": {
+    "container": "themepark-api-e2e-cpd-lc-001-001-qwen3-7-max-3-230315",
+    "project": "Backend.Api/UCR.ECCI.PI.ThemePark.Backend.Api.csproj",
+    "publishStatus": "success",
+    "started": true,
+    "url": "http://127.0.0.1:55000",
+    "readySeconds": 2.2,
+    "errorLines": []
+  },
+  "probes": [
+    {
+      "name": "Get components for learning space IF-0103",
+      "method": "GET",
+      "path": "/LearningComponents/IF-0103",
+      "expectedStatus": 200,
+      "actualStatus": 200,
+      "passed": true,
+      "missingContent": [],
+      "error": null,
+      "bodySnippet": "{\"components\":[{\"componentId\":\"LC-001\",\"learningSpaceId\":\"IF-0103\",\"width\":2.5,\"height\":1.5,\"depth\":0.5,\"x\":10,\"y\":20,\"z\":0,\"orientation\":\"North\"},{\"componentId\":\"LC-002\",\"learningSpaceId\":\"IF-0103\",\"width\":3,\"height\":2,\"depth\":1,\"x\":15,\"y\":25,\"z\":0,\"orientation\":\"South\"},{\"componentId\":\"LC-003\",\"learningSpaceId\":\"IF-0103\",\"width\":1.8,\"height\":1.2,\"depth\":0.3,\"x\":5,\"y\":10,\"z\":0,\"orientation\":\"East\"}]}"
+    },
+    {
+      "name": "Get components for non-existent learning space returns empty list",
+      "method": "GET",
+      "path": "/LearningComponents/NON-EXISTENT-999",
+      "expectedStatus": 200,
+      "actualStatus": 200,
+      "passed": true,
+      "missingContent": [],
+      "error": null,
+      "bodySnippet": "{\"components\":[]}"
+    }
+  ],
+  "totalProbes": 2,
+  "probesPassed": 2,
+  "probesFailed": 0,
+  "cleanup": {
+    "status": "clean",
+    "removedContainers": [
+      "themepark-api-e2e-cpd-lc-001-001-qwen3-7-max-3-230315",
+      "themepark-sql-e2e-cpd-lc-001-001-qwen3-7-max-3-230315"
+    ],
+    "removedNetworks": [
+      "themepark-e2e-cpd-lc-001-001-qwen3-7-max-3-230315"
+    ],
+    "removedVolumes": [
+      "themepark-app-e2e-cpd-lc-001-001-qwen3-7-max-3-230315"
+    ],
+    "leftovers": []
+  },
+  "warnings": [],
+  "errors": []
+}
