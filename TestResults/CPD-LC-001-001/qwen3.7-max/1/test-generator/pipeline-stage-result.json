@@ -1,0 +1,31 @@
+{
+  "stage": "test-generation",
+  "storyId": "CPD-LC-001-001",
+  "model": "Qwen3.7-max",
+  "iteration": "1",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Domain.Tests.Unit/LearningComponentTests.cs",
+    "Backend.Application.Tests.Unit/LearningComponentServiceTests.cs",
+    "Backend.Infrastructure.Tests.Unit/SqlLearningComponentRepositoryTests.cs",
+    "Backend.Presentation.Tests.Unit/GetLearningComponentsHandlerTests.cs"
+  ],
+  "filesModified": [],
+  "metrics": {
+    "intentsConfirmed": 20,
+    "testMethodsEmitted": 15,
+    "byLayer": {
+      "Domain": 5,
+      "Application": 3,
+      "Infrastructure": 3,
+      "Presentation": 4
+    }
+  },
+  "warnings": [
+    "Test project csproj files were NOT modified (per scope constraint). Each test project needs a ProjectReference to its corresponding production project(s) to compile: Domain.Tests.Unit → Backend.Domain; Application.Tests.Unit → Backend.Domain + Backend.Application; Infrastructure.Tests.Unit → Backend.Domain + Backend.Infrastructure; Presentation.Tests.Unit → Backend.Domain + Backend.Application + Backend.Presentation.",
+    "Production classes SqlLearningComponentRepository, LearningComponentService, and UCRDatabaseContext are internal. The production projects need [assembly: InternalsVisibleTo(...)] attributes for the corresponding test assemblies, or the classes must be made public.",
+    "The following production types are referenced by tests but do not yet exist (expected in TDD): LearningComponent entity, ILearningComponentListRepository, ILearningComponentService, LearningComponentService, SqlLearningComponentRepository, GetLearningComponentsHandler, GetLearningComponentsResponse, LearningComponentDto, ErrorResponse.",
+    "UCRDatabaseContext needs a new DbSet<LearningComponent> LearningComponents property for the Infrastructure repository to compile."
+  ],
+  "notes": "Generated 15 test methods across 4 test classes covering all 20 confirmed intents for story CPD-LC-001-001 (List learning components of a learning space). Tests follow NUnit 3.14 + Moq 4.20 patterns, use Assert.Multiple for multi-property assertions, TestCaseSource/TestCase for parameterized negative and boundary tests, and include async-queryable helpers for EF Core DbSet mocking in the Infrastructure layer."
+}

@@ -1,0 +1,63 @@
+{
+  "stage": "code-generation",
+  "storyId": "CPD-LC-001-001",
+  "model": "Kimi-k2.5",
+  "iteration": "6",
+  "status": "partial",
+  "filesCreated": [
+    "Backend.Domain/Entities/LearningComponent.cs",
+    "Backend.Domain/Repositories/ILearningComponentRepository.cs",
+    "Backend.Application/Services/ILearningComponentService.cs",
+    "Backend.Application/Services/Implementations/LearningComponentService.cs",
+    "Backend.Infrastructure/Repositories/SqlLearningComponentRepository.cs",
+    "Backend.Infrastructure/EntityConfigurations/LearningComponentEntityConfiguration.cs",
+    "Backend.Presentation/Dtos/LearningComponentDto.cs",
+    "Backend.Presentation/Responses/GetLearningComponentsResponse.cs",
+    "Backend.Presentation/Responses/ErrorResponse.cs",
+    "Backend.Presentation/Handlers/GetLearningComponentsHandler.cs",
+    "Backend.Presentation/Endpoints/LearningComponentEndpoints.cs",
+    "CPD-LC-001-001.sql"
+  ],
+  "filesModified": [
+    "Backend.Infrastructure/UCRDatabaseContext.cs",
+    "Backend.Infrastructure/DependecyInjection.cs",
+    "Backend.Application/DependencyInjection.cs",
+    "Backend.Api/Program.cs",
+    "Backend.Domain.Tests.Unit/UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.csproj",
+    "Backend.Application.Tests.Unit/UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.csproj",
+    "Backend.Infrastructure.Tests.Unit/UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.csproj",
+    "Backend.Presentation.Tests.Unit/UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.csproj",
+    "Backend.Domain.Tests.Unit/LearningComponentTests.cs",
+    "Backend.Domain.Tests.Unit/ILearningComponentRepositoryTests.cs",
+    "Backend.Application.Tests.Unit/LearningComponentServiceTests.cs",
+    "Backend.Application.Tests.Unit/ILearningComponentServiceTests.cs",
+    "Backend.Infrastructure.Tests.Unit/SqlLearningComponentRepositoryTests.cs",
+    "Backend.Presentation.Tests.Unit/GetLearningComponentsHandlerTests.cs",
+    "Backend.Presentation.Tests.Unit/LearningComponentDtoTests.cs",
+    "Backend.Presentation.Tests.Unit/GetLearningComponentsResponseTests.cs"
+  ],
+  "metrics": {
+    "buildErrors": 0,
+    "buildWarnings": 0,
+    "testsTotal": 29,
+    "testsPassed": 27,
+    "testsFailed": 2,
+    "testsSkipped": 0,
+    "lineCoverage": 0.44366197183098594,
+    "branchCoverage": 0.8181818181818182,
+    "e2e": {
+      "status": "skipped",
+      "probesTotal": 0,
+      "probesPassed": 0,
+      "probesFailed": 0,
+      "seedsApplied": [],
+      "resultPath": "E2EResults/CPD-LC-001-001/Kimi-k2.5/6/2026-08-07_12-42-39/",
+      "cleanup": "clean"
+    }
+  },
+  "warnings": [
+    "2 unit tests failed due to test design issues (interface contract tests call methods then verify Times.Never)",
+    "End-to-end validation skipped because unit tests are not all green (require-green flag enforced)"
+  ],
+  "notes": "Implementation complete across all layers (Domain, Application, Infrastructure, Presentation). 27 of 29 tests pass. The 2 failing tests (ILearningComponentRepositoryTests and ILearningComponentServiceTests MethodExists) have logical contradictions in their assertions that cannot be fixed by changing implementation. Repository implementation uses synchronous ToList() wrapped in Task.FromResult to support Moq mocking limitations."
+}
