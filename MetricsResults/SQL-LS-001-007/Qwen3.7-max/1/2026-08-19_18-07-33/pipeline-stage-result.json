@@ -1,0 +1,31 @@
+{
+  "stage": "refactoring",
+  "storyId": "SQL-LS-001-007",
+  "model": "Qwen3.7-max",
+  "iteration": "1",
+  "status": "partial",
+  "filesCreated": [
+    "Backend.Presentation/Handlers/CreateLearningSpaceExecutor.cs",
+    "Backend.Presentation/Handlers/LearningSpaceResponseMapper.cs"
+  ],
+  "filesModified": [
+    "Backend.Domain/Entities/LearningSpace.cs",
+    "Backend.Presentation/Handlers/CreateLearningSpaceHandler.cs"
+  ],
+  "metrics": {
+    "loopIterationsPerformed": 2,
+    "maxLoopIterations": 10,
+    "allGreenAchieved": false,
+    "baseline": { "minMI": 56, "maxCC": 10, "maxCoupling": 14, "maxDIT": 0 },
+    "final":    { "minMI": 58, "maxCC": 10, "maxCoupling": 13, "maxDIT": 0 },
+    "remainingViolations": [
+      { "type": "CreateLearningSpaceExecutor", "metric": "Coupling", "value": 13, "flag": "YELLOW" },
+      { "type": "CreateLearningSpaceEndpoints", "metric": "Coupling", "value": 10, "flag": "YELLOW" }
+    ]
+  },
+  "warnings": [
+    "CreateLearningSpaceExecutor coupling=13 is structural: the ASP.NET Core Results<,,> return type alone references 6 types, making <=9 unreachable without changing the API contract (which would break tests)",
+    "CreateLearningSpaceEndpoints coupling=10 is structural: minimal API endpoint mapping inherently requires references to route builder, handler, service, and DTO types"
+  ],
+  "notes": "Extracted repeated guard clauses in LearningSpace entity (3 validate methods -> 1 parameterized method), decomposed CreateLearningSpaceHandler into a thin facade delegating to CreateLearningSpaceExecutor and LearningSpaceResponseMapper. Handler coupling reduced from 14 to GREEN. Remaining coupling violations in executor and endpoints are structural to the ASP.NET Core minimal API pattern and cannot be reduced below 10 without breaking the typed-results API contract."
+}
