@@ -1,0 +1,81 @@
+{
+  "stage": "e2e-validation",
+  "status": "failure",
+  "timestamp": "2026-08-19_21-32-49",
+  "storyId": "SQL-LS-001-007",
+  "model": "Qwen3.7-max",
+  "iteration": "2",
+  "database": {
+    "container": "themepark-sql-e2e-sql-ls-001-007-qwen3-7-max-2-213249",
+    "image": "mcr.microsoft.com/mssql/server:2022-latest",
+    "network": "themepark-e2e-sql-ls-001-007-qwen3-7-max-2-213249",
+    "database": "ThemePark",
+    "readySeconds": 9.3,
+    "baseSchemaApplied": [
+      "Semester.sql",
+      "Course.sql"
+    ],
+    "seedsApplied": [
+      "seed-SQL-LS-001-007.sql"
+    ]
+  },
+  "backend": {
+    "container": "themepark-api-e2e-sql-ls-001-007-qwen3-7-max-2-213249",
+    "project": "Backend.Api/UCR.ECCI.PI.ThemePark.Backend.Api.csproj",
+    "publishStatus": "success",
+    "started": true,
+    "url": "http://127.0.0.1:55000",
+    "readySeconds": 2.3,
+    "errorLines": [
+      "fail: Microsoft.EntityFrameworkCore.Database.Command[20102]",
+      "fail: Microsoft.EntityFrameworkCore.Update[10000]"
+    ]
+  },
+  "probes": [
+    {
+      "name": "GET LearningSpaceList returns seeded spaces",
+      "method": "GET",
+      "path": "/LearningSpaceList",
+      "expectedStatus": 200,
+      "actualStatus": 200,
+      "passed": true,
+      "missingContent": [],
+      "error": null,
+      "bodySnippet": "{\"learningSpaces\":[{\"id\":\"1\",\"type\":\"Classroom\"},{\"id\":\"2\",\"type\":\"Auditorium\"},{\"id\":\"3\",\"type\":\"Laboratory\"}]}"
+    },
+    {
+      "name": "POST LearningSpace creates a new space",
+      "method": "POST",
+      "path": "/LearningSpace",
+      "expectedStatus": 201,
+      "actualStatus": 500,
+      "passed": false,
+      "missingContent": [
+        "Classroom"
+      ],
+      "error": null,
+      "bodySnippet": "{\"type\":\"https://tools.ietf.org/html/rfc9110#section-15.6.1\",\"title\":\"An error occurred while processing your request.\",\"status\":500,\"detail\":\"An error occurred while saving the entity changes. See the inner exception for details.\"}"
+    }
+  ],
+  "totalProbes": 2,
+  "probesPassed": 1,
+  "probesFailed": 1,
+  "cleanup": {
+    "status": "clean",
+    "removedContainers": [
+      "themepark-api-e2e-sql-ls-001-007-qwen3-7-max-2-213249",
+      "themepark-sql-e2e-sql-ls-001-007-qwen3-7-max-2-213249"
+    ],
+    "removedNetworks": [
+      "themepark-e2e-sql-ls-001-007-qwen3-7-max-2-213249"
+    ],
+    "removedVolumes": [
+      "themepark-app-e2e-sql-ls-001-007-qwen3-7-max-2-213249"
+    ],
+    "leftovers": []
+  },
+  "warnings": [],
+  "errors": [
+    "1 probe(s) failed."
+  ]
+}
