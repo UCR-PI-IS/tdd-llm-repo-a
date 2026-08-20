@@ -39,7 +39,7 @@ namespace UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Handlers
 
             // Creates a response containing a list of all learning spaces, mapped to DTOs
             var response = new GetLearningSpaceListResponse(
-                spaces.Select(space => new LearningSpaceDto(space.id, space.type)).ToList()
+                spaces.Select(space => new LearningSpaceDto(space.LearningSpaceId.ToString(), space.Type)).ToList()
             );
 
             // Returns the response with status 200 OK
