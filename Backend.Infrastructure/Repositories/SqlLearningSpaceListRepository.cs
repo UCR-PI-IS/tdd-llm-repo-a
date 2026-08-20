@@ -28,7 +28,7 @@ internal class SqlLearningSpaceListRepository : ILearningSpaceListRepository
     public Task<LearningSpace> GetCurrentLearningSpaceListAsync()
     {
         return _dbContext.LearningSpaces
-            .FirstAsync(LearningSpaces => LearningSpaces.id == "IF-0103");
+            .FirstAsync(ls => ls.Type == "IF-0103");
     }
 
     /// <summary>

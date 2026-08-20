@@ -20,6 +20,10 @@ namespace UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Endpoints
                 .WithName("GetLearningSpaceList")
                 .WithOpenApi();
 
+            builder.MapPost("/LearningSpace", CreateLearningSpaceHandler.HandleAsync)
+                .WithName("CreateLearningSpace")
+                .WithOpenApi();
+
             return builder;
         }
     }
