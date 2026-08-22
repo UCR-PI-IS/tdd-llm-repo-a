@@ -1,0 +1,29 @@
+{
+  "stage": "test-generation",
+  "storyId": "SQL-LS-001-007",
+  "model": "Qwen3.7-max",
+  "iteration": "4",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Domain.Tests.Unit/LearningSpaceTests.cs",
+    "Backend.Application.Tests.Unit/LearningSpaceCreateServiceTests.cs",
+    "Backend.Infrastructure.Tests.Unit/SqlLearningSpaceRepositoryTests.cs",
+    "Backend.Presentation.Tests.Unit/CreateLearningSpaceHandlerTests.cs"
+  ],
+  "filesModified": [],
+  "metrics": {
+    "intentsConfirmed": 26,
+    "testMethodsEmitted": 13,
+    "byLayer": {
+      "Domain": 4,
+      "Application": 3,
+      "Infrastructure": 3,
+      "Presentation": 3
+    }
+  },
+  "warnings": [
+    "Infrastructure tests use mocks instead of InMemoryDatabase because Microsoft.EntityFrameworkCore.InMemory package is not in the test project dependencies",
+    "Tests reference classes not yet implemented (LearningSpaceCreateService, SqlLearningSpaceRepository, CreateLearningSpaceHandler, ILearningSpaceRepository, ILearningSpaceCreateService, CreateLearningSpaceDto, LearningSpaceResponse) — expected in TDD workflow"
+  ],
+  "notes": "Generated 13 test methods across 4 test files covering all 26 confirmed intents for story SQL-LS-001-007. Tests are consolidated using NUnit TestCase parameterization to minimize method count while achieving full decision coverage. Domain tests cover constructor validation (valid types, invalid types, zero/negative dimensions, null/empty type). Application tests cover service orchestration with repository mocking. Infrastructure tests use Moq-based DbContext/DbSet mocking. Presentation tests cover handler response mapping for success, validation errors, and unexpected exceptions."
+}

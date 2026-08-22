@@ -1,0 +1,29 @@
+{
+  "stage": "refactoring",
+  "storyId": "SQL-LS-001-007",
+  "model": "Qwen3.7-max",
+  "iteration": "4",
+  "status": "partial",
+  "filesCreated": [],
+  "filesModified": [
+    "Backend.Domain/Entities/LearningSpace.cs",
+    "Backend.Presentation/Handlers/CreateLearningSpaceHandler.cs",
+    "Backend.Presentation/Endpoints/LearningSpaceListEndpoints.cs",
+    "Backend.Infrastructure/EntityConfigurations/LearningSpaceEntityConfiguration.cs"
+  ],
+  "metrics": {
+    "loopIterationsPerformed": 3,
+    "maxLoopIterations": 10,
+    "allGreenAchieved": false,
+    "baseline": { "minMI": 59, "maxCC": 7, "maxCoupling": 15, "maxDIT": 0 },
+    "final":    { "minMI": 59, "maxCC": 6, "maxCoupling": 14, "maxDIT": 0 },
+    "remainingViolations": [
+      { "type": "CreateLearningSpaceHandler", "metric": "Coupling", "value": 14, "flag": "YELLOW" }
+    ]
+  },
+  "warnings": [
+    "CreateLearningSpaceHandler coupling=14 is structural: the Results<Created<T>, BadRequest<T>, ProblemHttpResult> return type inherently requires 10+ type references. Mapper extraction increased coupling; removing using Microsoft.AspNetCore.Http broke compilation. Skipped after 3 attempts.",
+    "TypedResults requires using Microsoft.AspNetCore.Http — cannot be removed without build failure."
+  ],
+  "notes": "Reduced 3 of 4 story-related YELLOW violations to GREEN. LearningSpaceEntityConfiguration coupling dropped 12→7 by removing redundant SetBeforeSaveBehavior and no-op property configs. LearningSpaceListEndpoints coupling dropped 11→7 by replacing lambda with method group and removing unused usings. CreateLearningSpaceHandler coupling dropped 15→14 via TypedResults; further reduction blocked by structural return type constraints. Static smell fix extracted repeated guard clauses in LearningSpace constructor."
+}
