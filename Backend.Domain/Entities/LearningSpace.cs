@@ -5,45 +5,73 @@
 /// </summary>
 public class LearningSpace
 {
-    /// <summary>
-    /// Unique identifier for the learning space.
-    /// </summary>
-    public String id { get; }
+    private static int _nextId = 0;
+
+    private static readonly HashSet<string> ValidTypes = new()
+    {
+        "Classroom", "Auditorium", "Laboratory"
+    };
 
     /// <summary>
-    /// Type of the learning space (e.g., classroom, lab and auditorium).
+    /// Unique internal identifier for the learning space.
     /// </summary>
-    public String type { get; }
+    public int LearningSpaceId { get; private set; }
+
+    /// <summary>
+    /// Type of the learning space (e.g., Classroom, Auditorium, Laboratory).
+    /// </summary>
+    public string Type { get; private set; } = string.Empty;
 
     /// <summary>
     /// Height of the learning space in meters.
     /// </summary>
-    public float height { get; }
+    public float Height { get; private set; }
 
     /// <summary>
     /// Width of the learning space in meters.
     /// </summary>
-    public float width { get; }
+    public float Width { get; private set; }
 
     /// <summary>
     /// Length of the learning space in meters.
     /// </summary>
-    public float length { get; }
+    public float Length { get; private set; }
 
     /// <summary>
-    /// Constructor for the LearningSpace class.
+    /// Parameterless constructor for EF Core.
     /// </summary>
-    /// <param name="id">Unique identifier for the learning space</param>
-    /// <param name="type">Type of the learning space</param>
-    /// <param name="height">Height of the learning space in meters</param>
-    /// <param name="width">Width of the learning space in meters</param>
-    /// <param name="length">Length of the learning space in meters</param>
-    public LearningSpace(String id, String type, float height, float width, float length)
+    private LearningSpace() { }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="LearningSpace"/> class with validation.
+    /// </summary>
+    /// <param name="type">Type of the learning space (Classroom, Auditorium, or Laboratory).</param>
+    /// <param name="height">Height of the learning space in meters.</param>
+    /// <param name="width">Width of the learning space in meters.</param>
+    /// <param name="length">Length of the learning space in meters.</param>
+    /// <exception cref="ArgumentException">Thrown when any parameter is invalid.</exception>
+    public LearningSpace(string type, float height, float width, float length)
     {
-        this.id = id;
-        this.type = type;
-        this.height = height;
-        this.width = width;
-        this.length = length;
+        if (string.IsNullOrEmpty(type))
+            throw new ArgumentException("Type is required", nameof(type));
+
+        if (!ValidTypes.Contains(type))
+            throw new ArgumentException("Type must be Classroom, Auditorium, or Laboratory", nameof(type));
+
+        ThrowIfNotPositive(height, "Height");
+        ThrowIfNotPositive(width, "Width");
+        ThrowIfNotPositive(length, "Length");
+
+        LearningSpaceId = Interlocked.Increment(ref _nextId);
+        Type = type;
+        Height = height;
+        Width = width;
+        Length = length;
+    }
+
+    private static void ThrowIfNotPositive(float value, string displayName)
+    {
+        if (value <= 0f)
+            throw new ArgumentException($"{displayName} must be positive and non-zero", displayName);
     }
 }
