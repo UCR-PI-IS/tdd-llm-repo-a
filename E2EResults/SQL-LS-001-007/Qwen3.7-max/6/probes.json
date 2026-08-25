@@ -1,0 +1,19 @@
+{
+  "probes": [
+    {
+      "name": "create learning space",
+      "method": "POST",
+      "path": "/LearningSpaces",
+      "expectStatus": 201,
+      "body": {
+        "type": "Classroom",
+        "height": 3.0,
+        "width": 8.0,
+        "length": 10.0
+      },
+      "headers": {
+        "Content-Type": "application/json"
+      }
+    }
+  ]
+}

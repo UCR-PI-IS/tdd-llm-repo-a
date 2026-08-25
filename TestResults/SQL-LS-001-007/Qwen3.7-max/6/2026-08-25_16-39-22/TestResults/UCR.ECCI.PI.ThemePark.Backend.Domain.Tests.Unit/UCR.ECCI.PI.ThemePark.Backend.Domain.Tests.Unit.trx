@@ -1,0 +1,245 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="fbc0f5f5-fd55-44bb-b9f1-eff9c36a4beb" name="@ba8461d692e4 2026-08-25 22:39:36" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-08-25T22:39:36.0428837+00:00" queuing="2026-08-25T22:39:36.0428837+00:00" start="2026-08-25T22:39:35.4787572+00:00" finish="2026-08-25T22:39:36.1728638+00:00" />
+  <TestSettings name="default" id="b5743ea6-796d-4e0a-964c-a614262206a3">
+    <Deployment runDeploymentRoot="_ba8461d692e4_2026-08-25_22_39_36" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="55fc0b21-27c6-47e7-987f-bd62ba4f3fc8" testId="dfb80764-2f25-1887-4b4f-12c139394882" testName="Constructor_ValidType_Succeeds(&quot;Auditorium&quot;,5.0f,15.0f,20.0f)" computerName="ba8461d692e4" duration="00:00:00.0004160" startTime="2026-08-25T22:39:36.0099681+00:00" endTime="2026-08-25T22:39:36.0103844+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="55fc0b21-27c6-47e7-987f-bd62ba4f3fc8">
+      <Output>
+        <ErrorInfo>
+          <Message>  Expected: greater than 0
+  But was:  0
+</Message>
+          <StackTrace>   at UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.LearningSpaceTests.Constructor_ValidType_Succeeds(String type, Single height, Single width, Single length) in /workspace/Backend.Domain.Tests.Unit/LearningSpaceTests.cs:line 61
+
+1)    at UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.LearningSpaceTests.&lt;&gt;c__DisplayClass5_0.&lt;Constructor_ValidType_Succeeds&gt;b__0() in /workspace/Backend.Domain.Tests.Unit/LearningSpaceTests.cs:line 64
+   at NUnit.Framework.Assert.Multiple(TestDelegate testDelegate)
+   at UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.LearningSpaceTests.Constructor_ValidType_Succeeds(String type, Single height, Single width, Single length) in /workspace/Backend.Domain.Tests.Unit/LearningSpaceTests.cs:line 61
+
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="9ace1882-9625-45cb-92ec-c4b271b0a100" testId="9ff1b0c0-9467-5a74-d038-39671ca6eb6d" testName="Constructor_NegativeDimensionOrCoordinate_ThrowsArgumentException(2.5f,1.5f,0.5f,10.0f,-1.0f,0.0f,&quot;y&quot;)" computerName="ba8461d692e4" duration="00:00:00.0000220" startTime="2026-08-25T22:39:35.9881807+00:00" endTime="2026-08-25T22:39:35.9882024+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9ace1882-9625-45cb-92ec-c4b271b0a100" />
+    <UnitTestResult executionId="b079bc98-a60a-46dd-b62c-4d48c822f8ab" testId="e351c04e-1839-4318-2e0c-f961759510a6" testName="Constructor_ZeroDimension_ThrowsArgumentException(0.0f,8.0f,10.0f,&quot;Height must be positive and non-zero&quot;)" computerName="ba8461d692e4" duration="00:00:00.0001410" startTime="2026-08-25T22:39:36.0107709+00:00" endTime="2026-08-25T22:39:36.0109115+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b079bc98-a60a-46dd-b62c-4d48c822f8ab" />
+    <UnitTestResult executionId="23603708-0b54-4c2b-ba02-b1d2c17067ab" testId="bf35cbad-6450-575c-8d8e-e3af31520c7b" testName="Constructor_ZeroValues_AllPropertiesSetCorrectly" computerName="ba8461d692e4" duration="00:00:00.0001770" startTime="2026-08-25T22:39:35.9933899+00:00" endTime="2026-08-25T22:39:35.9935672+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="23603708-0b54-4c2b-ba02-b1d2c17067ab" />
+    <UnitTestResult executionId="c40b40a6-b755-47a4-8e52-b00e0a46dd6e" testId="93d82a5b-0a0d-2a04-6e26-77b1e60103da" testName="Constructor_NegativeDimensionOrCoordinate_ThrowsArgumentException(2.5f,-1.0f,0.5f,10.0f,20.0f,0.0f,&quot;height&quot;)" computerName="ba8461d692e4" duration="00:00:00.0001970" startTime="2026-08-25T22:39:35.9878682+00:00" endTime="2026-08-25T22:39:35.9880655+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c40b40a6-b755-47a4-8e52-b00e0a46dd6e" />
+    <UnitTestResult executionId="1f5a3eb8-5de4-4af6-83b2-c7b476263149" testId="8014a743-d0e0-a94b-6695-8195b596b639" testName="Constructor_NegativeDimensionOrCoordinate_ThrowsArgumentException(2.5f,1.5f,-1.0f,10.0f,20.0f,0.0f,&quot;depth&quot;)" computerName="ba8461d692e4" duration="00:00:00.0000210" startTime="2026-08-25T22:39:35.9880701+00:00" endTime="2026-08-25T22:39:35.9880912+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="1f5a3eb8-5de4-4af6-83b2-c7b476263149" />
+    <UnitTestResult executionId="7bc2ffd1-8f3f-4b39-8a0d-b357d74e93ff" testId="5c1f4304-575c-f17a-5da4-a2438aa453fb" testName="Constructor_InvalidOrientation_ThrowsArgumentException(&quot;Northeast&quot;)" computerName="ba8461d692e4" duration="00:00:00.0046270" startTime="2026-08-25T22:39:35.9808446+00:00" endTime="2026-08-25T22:39:35.9854420+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="7bc2ffd1-8f3f-4b39-8a0d-b357d74e93ff" />
+    <UnitTestResult executionId="f5c07f80-de11-41b2-aaba-329cc28dbd30" testId="ef76fe1d-a64d-3b24-c1e0-9229c61ba659" testName="Constructor_InvalidOrientation_ThrowsArgumentException(&quot;&quot;)" computerName="ba8461d692e4" duration="00:00:00.0000250" startTime="2026-08-25T22:39:35.9862964+00:00" endTime="2026-08-25T22:39:35.9863218+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f5c07f80-de11-41b2-aaba-329cc28dbd30" />
+    <UnitTestResult executionId="7b7c854c-ad3d-4ca7-85cd-f47d4ab6053d" testId="b730176d-1f02-9ef6-4747-8a2b1f2fcee1" testName="Constructor_NullType_ThrowsArgumentException" computerName="ba8461d692e4" duration="00:00:00.0000890" startTime="2026-08-25T22:39:35.9951768+00:00" endTime="2026-08-25T22:39:35.9952662+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="7b7c854c-ad3d-4ca7-85cd-f47d4ab6053d" />
+    <UnitTestResult executionId="a3dc99b1-adaf-42df-9eaa-ef993deebbef" testId="17c4050b-65da-be31-39cb-a1d573f09cae" testName="Constructor_NegativeDimensionOrCoordinate_ThrowsArgumentException(2.5f,1.5f,0.5f,10.0f,20.0f,-1.0f,&quot;z&quot;)" computerName="ba8461d692e4" duration="00:00:00.0000220" startTime="2026-08-25T22:39:35.9882065+00:00" endTime="2026-08-25T22:39:35.9882283+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a3dc99b1-adaf-42df-9eaa-ef993deebbef" />
+    <UnitTestResult executionId="a9862034-c1e3-4fb2-8def-41216a4dc306" testId="66e20d4f-da87-34dc-f9b3-f9c8ab20213c" testName="Constructor_ValidOrientation_Succeeds(&quot;South&quot;)" computerName="ba8461d692e4" duration="00:00:00.0000620" startTime="2026-08-25T22:39:35.9883433+00:00" endTime="2026-08-25T22:39:35.9884057+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a9862034-c1e3-4fb2-8def-41216a4dc306" />
+    <UnitTestResult executionId="14c29b77-3555-46f7-ae12-0a259e8ca32d" testId="0b73bda6-e64e-af5d-bb00-2f6fee0375c6" testName="Constructor_ValidOrientation_Succeeds(&quot;East&quot;)" computerName="ba8461d692e4" duration="00:00:00.0000040" startTime="2026-08-25T22:39:35.9884090+00:00" endTime="2026-08-25T22:39:35.9884132+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="14c29b77-3555-46f7-ae12-0a259e8ca32d" />
+    <UnitTestResult executionId="aadae605-bd59-4ef3-8880-bb76a105a610" testId="712e75c1-4f44-d03d-3bd6-74588a0ec907" testName="Constructor_ValidOrientation_Succeeds(&quot;North&quot;)" computerName="ba8461d692e4" duration="00:00:00.0000649" startTime="2026-08-25T22:39:35.9882677+00:00" endTime="2026-08-25T22:39:35.9883329+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="aadae605-bd59-4ef3-8880-bb76a105a610" />
+    <UnitTestResult executionId="712d9326-7f44-4077-b3d4-5d154b2e632e" testId="f4d287aa-3470-6747-e5b8-8b09d16e3d1e" testName="Constructor_InvalidOrientation_ThrowsArgumentException(&quot;Up&quot;)" computerName="ba8461d692e4" duration="00:00:00.0001550" startTime="2026-08-25T22:39:35.9861275+00:00" endTime="2026-08-25T22:39:35.9862825+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="712d9326-7f44-4077-b3d4-5d154b2e632e" />
+    <UnitTestResult executionId="76fe570c-acea-4088-983e-0fe6a1047f44" testId="367818f4-889c-084b-a898-830baf601176" testName="Constructor_ValidClassroomParameters_AllPropertiesSetCorrectly" computerName="ba8461d692e4" duration="00:00:00.0146420" startTime="2026-08-25T22:39:35.9952693+00:00" endTime="2026-08-25T22:39:36.0099116+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="76fe570c-acea-4088-983e-0fe6a1047f44">
+      <Output>
+        <ErrorInfo>
+          <Message>  Expected: greater than 0
+  But was:  0
+</Message>
+          <StackTrace>   at UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.LearningSpaceTests.Constructor_ValidClassroomParameters_AllPropertiesSetCorrectly() in /workspace/Backend.Domain.Tests.Unit/LearningSpaceTests.cs:line 37
+
+1)    at UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.LearningSpaceTests.&lt;&gt;c__DisplayClass4_0.&lt;Constructor_ValidClassroomParameters_AllPropertiesSetCorrectly&gt;b__0() in /workspace/Backend.Domain.Tests.Unit/LearningSpaceTests.cs:line 43
+   at NUnit.Framework.Assert.Multiple(TestDelegate testDelegate)
+   at UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.LearningSpaceTests.Constructor_ValidClassroomParameters_AllPropertiesSetCorrectly() in /workspace/Backend.Domain.Tests.Unit/LearningSpaceTests.cs:line 37
+
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="057fcddb-7b38-4d6e-9995-0a9d374b4201" testId="dcb3609b-e444-dcef-6a93-71f2446b5d10" testName="Constructor_ValidOrientation_Succeeds(&quot;West&quot;)" computerName="ba8461d692e4" duration="00:00:00.0000040" startTime="2026-08-25T22:39:35.9884157+00:00" endTime="2026-08-25T22:39:35.9884194+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="057fcddb-7b38-4d6e-9995-0a9d374b4201" />
+    <UnitTestResult executionId="88664e37-29b4-4596-af87-e98705d46942" testId="895ad975-8c65-da8a-ac90-2809c14b52ab" testName="Constructor_ZeroDimension_ThrowsArgumentException(3.0f,8.0f,0.0f,&quot;Length must be positive and non-zero&quot;)" computerName="ba8461d692e4" duration="00:00:00.0000210" startTime="2026-08-25T22:39:36.0110283+00:00" endTime="2026-08-25T22:39:36.0110488+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="88664e37-29b4-4596-af87-e98705d46942" />
+    <UnitTestResult executionId="818b8a5c-4b7a-455b-9818-9b6af796f1fd" testId="da5b7d07-1d09-5025-84d3-a52d897345a5" testName="Constructor_NegativeDimensionOrCoordinate_ThrowsArgumentException(2.5f,1.5f,0.5f,-1.0f,20.0f,0.0f,&quot;x&quot;)" computerName="ba8461d692e4" duration="00:00:00.0000660" startTime="2026-08-25T22:39:35.9881055+00:00" endTime="2026-08-25T22:39:35.9881715+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="818b8a5c-4b7a-455b-9818-9b6af796f1fd" />
+    <UnitTestResult executionId="cf8a58b8-ffdc-4769-80be-412cedad45ce" testId="49e6f4bf-eddc-46d7-9159-124249aa29fb" testName="Constructor_ValidParameters_AllPropertiesSetCorrectly" computerName="ba8461d692e4" duration="00:00:00.0049420" startTime="2026-08-25T22:39:35.9884272+00:00" endTime="2026-08-25T22:39:35.9933693+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="cf8a58b8-ffdc-4769-80be-412cedad45ce" />
+    <UnitTestResult executionId="dff00ef1-69ff-46af-9b35-69a93db1411f" testId="8675791d-2624-8d97-8902-338bd41bce36" testName="Constructor_EmptyType_ThrowsArgumentException" computerName="ba8461d692e4" duration="00:00:00.0007069" startTime="2026-08-25T22:39:35.9940327+00:00" endTime="2026-08-25T22:39:35.9947401+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="dff00ef1-69ff-46af-9b35-69a93db1411f" />
+    <UnitTestResult executionId="55c27938-612c-40d2-b770-c1640b8be119" testId="f651b6d6-12fc-f652-ee29-2eae0a9a41bb" testName="Constructor_NegativeDimension_ThrowsArgumentException(3.0f,-8.0f,10.0f,&quot;Width must be positive and non-zero&quot;)" computerName="ba8461d692e4" duration="00:00:00.0001160" startTime="2026-08-25T22:39:35.9950300+00:00" endTime="2026-08-25T22:39:35.9951457+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="55c27938-612c-40d2-b770-c1640b8be119" />
+    <UnitTestResult executionId="9b844b21-00c3-4354-8790-34fd6f41ca6d" testId="37a23d08-b33a-f05c-59d4-2d08ee23ebaf" testName="Constructor_InvalidType_ThrowsArgumentException" computerName="ba8461d692e4" duration="00:00:00.0001710" startTime="2026-08-25T22:39:35.9947461+00:00" endTime="2026-08-25T22:39:35.9949172+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9b844b21-00c3-4354-8790-34fd6f41ca6d" />
+    <UnitTestResult executionId="2c3e208e-1bbf-4bb5-85f1-b48daafa878a" testId="afb720de-303b-f168-0b12-fd7b7a38c711" testName="Constructor_NegativeDimension_ThrowsArgumentException(-3.0f,8.0f,10.0f,&quot;Height must be positive and non-zero&quot;)" computerName="ba8461d692e4" duration="00:00:00.0000970" startTime="2026-08-25T22:39:35.9949297+00:00" endTime="2026-08-25T22:39:35.9950264+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2c3e208e-1bbf-4bb5-85f1-b48daafa878a" />
+    <UnitTestResult executionId="83a6d79e-1dc7-495d-b8f1-1d92fc83fd62" testId="da123bdf-686d-042c-4c1f-9d772647c785" testName="Constructor_ZeroDimension_ThrowsArgumentException(3.0f,0.0f,10.0f,&quot;Width must be positive and non-zero&quot;)" computerName="ba8461d692e4" duration="00:00:00.0001090" startTime="2026-08-25T22:39:36.0109153+00:00" endTime="2026-08-25T22:39:36.0110248+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="83a6d79e-1dc7-495d-b8f1-1d92fc83fd62" />
+    <UnitTestResult executionId="5a8c216d-7536-4585-b28e-531ebfaf4ba2" testId="1f00af66-bd53-c4db-487e-ca6448d4bcc4" testName="Constructor_NegativeDimension_ThrowsArgumentException(3.0f,8.0f,-10.0f,&quot;Length must be positive and non-zero&quot;)" computerName="ba8461d692e4" duration="00:00:00.0000180" startTime="2026-08-25T22:39:35.9951493+00:00" endTime="2026-08-25T22:39:35.9951674+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="5a8c216d-7536-4585-b28e-531ebfaf4ba2" />
+    <UnitTestResult executionId="c9104df8-97eb-4e74-8b96-a5e8e64eb258" testId="ca23c2cb-0bc5-f6e0-5734-9add528710b4" testName="Constructor_ValidType_Succeeds(&quot;Laboratory&quot;,3.5f,12.0f,15.0f)" computerName="ba8461d692e4" duration="00:00:00.0003620" startTime="2026-08-25T22:39:36.0103905+00:00" endTime="2026-08-25T22:39:36.0107524+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c9104df8-97eb-4e74-8b96-a5e8e64eb258">
+      <Output>
+        <ErrorInfo>
+          <Message>  Expected: greater than 0
+  But was:  0
+</Message>
+          <StackTrace>   at UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.LearningSpaceTests.Constructor_ValidType_Succeeds(String type, Single height, Single width, Single length) in /workspace/Backend.Domain.Tests.Unit/LearningSpaceTests.cs:line 61
+   at InvokeStub_LearningSpaceTests.Constructor_ValidType_Succeeds(Object, Span`1)
+
+1)    at UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.LearningSpaceTests.&lt;&gt;c__DisplayClass5_0.&lt;Constructor_ValidType_Succeeds&gt;b__0() in /workspace/Backend.Domain.Tests.Unit/LearningSpaceTests.cs:line 64
+   at NUnit.Framework.Assert.Multiple(TestDelegate testDelegate)
+   at UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.LearningSpaceTests.Constructor_ValidType_Succeeds(String type, Single height, Single width, Single length) in /workspace/Backend.Domain.Tests.Unit/LearningSpaceTests.cs:line 61
+   at InvokeStub_LearningSpaceTests.Constructor_ValidType_Succeeds(Object, Span`1)
+
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="11600a72-71e4-4c83-b3b2-8b9fd0f134b3" testId="eeaeae93-b0fc-cef0-680a-08324043fed9" testName="Constructor_NegativeDimensionOrCoordinate_ThrowsArgumentException(-1.0f,1.5f,0.5f,10.0f,20.0f,0.0f,&quot;width&quot;)" computerName="ba8461d692e4" duration="00:00:00.0009400" startTime="2026-08-25T22:39:35.9869206+00:00" endTime="2026-08-25T22:39:35.9878607+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="11600a72-71e4-4c83-b3b2-8b9fd0f134b3" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="Constructor_ZeroDimension_ThrowsArgumentException(3.0f,0.0f,10.0f,&quot;Width must be positive and non-zero&quot;)" storage="/workspace/backend.domain.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.domain.tests.unit.dll" id="da123bdf-686d-042c-4c1f-9d772647c785">
+      <Execution id="83a6d79e-1dc7-495d-b8f1-1d92fc83fd62" />
+      <TestMethod codeBase="/workspace/Backend.Domain.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.LearningSpaceTests" name="Constructor_ZeroDimension_ThrowsArgumentException(3.0f,0.0f,10.0f,&quot;Width must be positive and non-zero&quot;)" />
+    </UnitTest>
+    <UnitTest name="Constructor_ValidType_Succeeds(&quot;Laboratory&quot;,3.5f,12.0f,15.0f)" storage="/workspace/backend.domain.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.domain.tests.unit.dll" id="ca23c2cb-0bc5-f6e0-5734-9add528710b4">
+      <Execution id="c9104df8-97eb-4e74-8b96-a5e8e64eb258" />
+      <TestMethod codeBase="/workspace/Backend.Domain.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.LearningSpaceTests" name="Constructor_ValidType_Succeeds(&quot;Laboratory&quot;,3.5f,12.0f,15.0f)" />
+    </UnitTest>
+    <UnitTest name="Constructor_NegativeDimension_ThrowsArgumentException(-3.0f,8.0f,10.0f,&quot;Height must be positive and non-zero&quot;)" storage="/workspace/backend.domain.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.domain.tests.unit.dll" id="afb720de-303b-f168-0b12-fd7b7a38c711">
+      <Execution id="2c3e208e-1bbf-4bb5-85f1-b48daafa878a" />
+      <TestMethod codeBase="/workspace/Backend.Domain.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.LearningSpaceTests" name="Constructor_NegativeDimension_ThrowsArgumentException(-3.0f,8.0f,10.0f,&quot;Height must be positive and non-zero&quot;)" />
+    </UnitTest>
+    <UnitTest name="Constructor_ValidType_Succeeds(&quot;Auditorium&quot;,5.0f,15.0f,20.0f)" storage="/workspace/backend.domain.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.domain.tests.unit.dll" id="dfb80764-2f25-1887-4b4f-12c139394882">
+      <Execution id="55fc0b21-27c6-47e7-987f-bd62ba4f3fc8" />
+      <TestMethod codeBase="/workspace/Backend.Domain.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.LearningSpaceTests" name="Constructor_ValidType_Succeeds(&quot;Auditorium&quot;,5.0f,15.0f,20.0f)" />
+    </UnitTest>
+    <UnitTest name="Constructor_NegativeDimensionOrCoordinate_ThrowsArgumentException(2.5f,1.5f,0.5f,-1.0f,20.0f,0.0f,&quot;x&quot;)" storage="/workspace/backend.domain.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.domain.tests.unit.dll" id="da5b7d07-1d09-5025-84d3-a52d897345a5">
+      <Execution id="818b8a5c-4b7a-455b-9818-9b6af796f1fd" />
+      <TestMethod codeBase="/workspace/Backend.Domain.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.LearningComponentTests" name="Constructor_NegativeDimensionOrCoordinate_ThrowsArgumentException(2.5f,1.5f,0.5f,-1.0f,20.0f,0.0f,&quot;x&quot;)" />
+    </UnitTest>
+    <UnitTest name="Constructor_NegativeDimension_ThrowsArgumentException(3.0f,-8.0f,10.0f,&quot;Width must be positive and non-zero&quot;)" storage="/workspace/backend.domain.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.domain.tests.unit.dll" id="f651b6d6-12fc-f652-ee29-2eae0a9a41bb">
+      <Execution id="55c27938-612c-40d2-b770-c1640b8be119" />
+      <TestMethod codeBase="/workspace/Backend.Domain.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.LearningSpaceTests" name="Constructor_NegativeDimension_ThrowsArgumentException(3.0f,-8.0f,10.0f,&quot;Width must be positive and non-zero&quot;)" />
+    </UnitTest>
+    <UnitTest name="Constructor_ValidClassroomParameters_AllPropertiesSetCorrectly" storage="/workspace/backend.domain.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.domain.tests.unit.dll" id="367818f4-889c-084b-a898-830baf601176">
+      <Execution id="76fe570c-acea-4088-983e-0fe6a1047f44" />
+      <TestMethod codeBase="/workspace/Backend.Domain.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.LearningSpaceTests" name="Constructor_ValidClassroomParameters_AllPropertiesSetCorrectly" />
+    </UnitTest>
+    <UnitTest name="Constructor_InvalidOrientation_ThrowsArgumentException(&quot;Northeast&quot;)" storage="/workspace/backend.domain.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.domain.tests.unit.dll" id="5c1f4304-575c-f17a-5da4-a2438aa453fb">
+      <Execution id="7bc2ffd1-8f3f-4b39-8a0d-b357d74e93ff" />
+      <TestMethod codeBase="/workspace/Backend.Domain.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.LearningComponentTests" name="Constructor_InvalidOrientation_ThrowsArgumentException(&quot;Northeast&quot;)" />
+    </UnitTest>
+    <UnitTest name="Constructor_NegativeDimensionOrCoordinate_ThrowsArgumentException(2.5f,1.5f,-1.0f,10.0f,20.0f,0.0f,&quot;depth&quot;)" storage="/workspace/backend.domain.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.domain.tests.unit.dll" id="8014a743-d0e0-a94b-6695-8195b596b639">
+      <Execution id="1f5a3eb8-5de4-4af6-83b2-c7b476263149" />
+      <TestMethod codeBase="/workspace/Backend.Domain.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.LearningComponentTests" name="Constructor_NegativeDimensionOrCoordinate_ThrowsArgumentException(2.5f,1.5f,-1.0f,10.0f,20.0f,0.0f,&quot;depth&quot;)" />
+    </UnitTest>
+    <UnitTest name="Constructor_ZeroValues_AllPropertiesSetCorrectly" storage="/workspace/backend.domain.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.domain.tests.unit.dll" id="bf35cbad-6450-575c-8d8e-e3af31520c7b">
+      <Execution id="23603708-0b54-4c2b-ba02-b1d2c17067ab" />
+      <TestMethod codeBase="/workspace/Backend.Domain.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.LearningComponentTests" name="Constructor_ZeroValues_AllPropertiesSetCorrectly" />
+    </UnitTest>
+    <UnitTest name="Constructor_NegativeDimensionOrCoordinate_ThrowsArgumentException(2.5f,-1.0f,0.5f,10.0f,20.0f,0.0f,&quot;height&quot;)" storage="/workspace/backend.domain.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.domain.tests.unit.dll" id="93d82a5b-0a0d-2a04-6e26-77b1e60103da">
+      <Execution id="c40b40a6-b755-47a4-8e52-b00e0a46dd6e" />
+      <TestMethod codeBase="/workspace/Backend.Domain.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.LearningComponentTests" name="Constructor_NegativeDimensionOrCoordinate_ThrowsArgumentException(2.5f,-1.0f,0.5f,10.0f,20.0f,0.0f,&quot;height&quot;)" />
+    </UnitTest>
+    <UnitTest name="Constructor_ValidOrientation_Succeeds(&quot;South&quot;)" storage="/workspace/backend.domain.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.domain.tests.unit.dll" id="66e20d4f-da87-34dc-f9b3-f9c8ab20213c">
+      <Execution id="a9862034-c1e3-4fb2-8def-41216a4dc306" />
+      <TestMethod codeBase="/workspace/Backend.Domain.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.LearningComponentTests" name="Constructor_ValidOrientation_Succeeds(&quot;South&quot;)" />
+    </UnitTest>
+    <UnitTest name="Constructor_ValidOrientation_Succeeds(&quot;East&quot;)" storage="/workspace/backend.domain.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.domain.tests.unit.dll" id="0b73bda6-e64e-af5d-bb00-2f6fee0375c6">
+      <Execution id="14c29b77-3555-46f7-ae12-0a259e8ca32d" />
+      <TestMethod codeBase="/workspace/Backend.Domain.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.LearningComponentTests" name="Constructor_ValidOrientation_Succeeds(&quot;East&quot;)" />
+    </UnitTest>
+    <UnitTest name="Constructor_NegativeDimensionOrCoordinate_ThrowsArgumentException(-1.0f,1.5f,0.5f,10.0f,20.0f,0.0f,&quot;width&quot;)" storage="/workspace/backend.domain.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.domain.tests.unit.dll" id="eeaeae93-b0fc-cef0-680a-08324043fed9">
+      <Execution id="11600a72-71e4-4c83-b3b2-8b9fd0f134b3" />
+      <TestMethod codeBase="/workspace/Backend.Domain.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.LearningComponentTests" name="Constructor_NegativeDimensionOrCoordinate_ThrowsArgumentException(-1.0f,1.5f,0.5f,10.0f,20.0f,0.0f,&quot;width&quot;)" />
+    </UnitTest>
+    <UnitTest name="Constructor_NegativeDimension_ThrowsArgumentException(3.0f,8.0f,-10.0f,&quot;Length must be positive and non-zero&quot;)" storage="/workspace/backend.domain.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.domain.tests.unit.dll" id="1f00af66-bd53-c4db-487e-ca6448d4bcc4">
+      <Execution id="5a8c216d-7536-4585-b28e-531ebfaf4ba2" />
+      <TestMethod codeBase="/workspace/Backend.Domain.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.LearningSpaceTests" name="Constructor_NegativeDimension_ThrowsArgumentException(3.0f,8.0f,-10.0f,&quot;Length must be positive and non-zero&quot;)" />
+    </UnitTest>
+    <UnitTest name="Constructor_ZeroDimension_ThrowsArgumentException(0.0f,8.0f,10.0f,&quot;Height must be positive and non-zero&quot;)" storage="/workspace/backend.domain.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.domain.tests.unit.dll" id="e351c04e-1839-4318-2e0c-f961759510a6">
+      <Execution id="b079bc98-a60a-46dd-b62c-4d48c822f8ab" />
+      <TestMethod codeBase="/workspace/Backend.Domain.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.LearningSpaceTests" name="Constructor_ZeroDimension_ThrowsArgumentException(0.0f,8.0f,10.0f,&quot;Height must be positive and non-zero&quot;)" />
+    </UnitTest>
+    <UnitTest name="Constructor_ValidOrientation_Succeeds(&quot;North&quot;)" storage="/workspace/backend.domain.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.domain.tests.unit.dll" id="712e75c1-4f44-d03d-3bd6-74588a0ec907">
+      <Execution id="aadae605-bd59-4ef3-8880-bb76a105a610" />
+      <TestMethod codeBase="/workspace/Backend.Domain.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.LearningComponentTests" name="Constructor_ValidOrientation_Succeeds(&quot;North&quot;)" />
+    </UnitTest>
+    <UnitTest name="Constructor_NullType_ThrowsArgumentException" storage="/workspace/backend.domain.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.domain.tests.unit.dll" id="b730176d-1f02-9ef6-4747-8a2b1f2fcee1">
+      <Execution id="7b7c854c-ad3d-4ca7-85cd-f47d4ab6053d" />
+      <TestMethod codeBase="/workspace/Backend.Domain.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.LearningSpaceTests" name="Constructor_NullType_ThrowsArgumentException" />
+    </UnitTest>
+    <UnitTest name="Constructor_InvalidOrientation_ThrowsArgumentException(&quot;Up&quot;)" storage="/workspace/backend.domain.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.domain.tests.unit.dll" id="f4d287aa-3470-6747-e5b8-8b09d16e3d1e">
+      <Execution id="712d9326-7f44-4077-b3d4-5d154b2e632e" />
+      <TestMethod codeBase="/workspace/Backend.Domain.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.LearningComponentTests" name="Constructor_InvalidOrientation_ThrowsArgumentException(&quot;Up&quot;)" />
+    </UnitTest>
+    <UnitTest name="Constructor_NegativeDimensionOrCoordinate_ThrowsArgumentException(2.5f,1.5f,0.5f,10.0f,-1.0f,0.0f,&quot;y&quot;)" storage="/workspace/backend.domain.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.domain.tests.unit.dll" id="9ff1b0c0-9467-5a74-d038-39671ca6eb6d">
+      <Execution id="9ace1882-9625-45cb-92ec-c4b271b0a100" />
+      <TestMethod codeBase="/workspace/Backend.Domain.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.LearningComponentTests" name="Constructor_NegativeDimensionOrCoordinate_ThrowsArgumentException(2.5f,1.5f,0.5f,10.0f,-1.0f,0.0f,&quot;y&quot;)" />
+    </UnitTest>
+    <UnitTest name="Constructor_EmptyType_ThrowsArgumentException" storage="/workspace/backend.domain.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.domain.tests.unit.dll" id="8675791d-2624-8d97-8902-338bd41bce36">
+      <Execution id="dff00ef1-69ff-46af-9b35-69a93db1411f" />
+      <TestMethod codeBase="/workspace/Backend.Domain.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.LearningSpaceTests" name="Constructor_EmptyType_ThrowsArgumentException" />
+    </UnitTest>
+    <UnitTest name="Constructor_ZeroDimension_ThrowsArgumentException(3.0f,8.0f,0.0f,&quot;Length must be positive and non-zero&quot;)" storage="/workspace/backend.domain.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.domain.tests.unit.dll" id="895ad975-8c65-da8a-ac90-2809c14b52ab">
+      <Execution id="88664e37-29b4-4596-af87-e98705d46942" />
+      <TestMethod codeBase="/workspace/Backend.Domain.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.LearningSpaceTests" name="Constructor_ZeroDimension_ThrowsArgumentException(3.0f,8.0f,0.0f,&quot;Length must be positive and non-zero&quot;)" />
+    </UnitTest>
+    <UnitTest name="Constructor_ValidOrientation_Succeeds(&quot;West&quot;)" storage="/workspace/backend.domain.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.domain.tests.unit.dll" id="dcb3609b-e444-dcef-6a93-71f2446b5d10">
+      <Execution id="057fcddb-7b38-4d6e-9995-0a9d374b4201" />
+      <TestMethod codeBase="/workspace/Backend.Domain.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.LearningComponentTests" name="Constructor_ValidOrientation_Succeeds(&quot;West&quot;)" />
+    </UnitTest>
+    <UnitTest name="Constructor_NegativeDimensionOrCoordinate_ThrowsArgumentException(2.5f,1.5f,0.5f,10.0f,20.0f,-1.0f,&quot;z&quot;)" storage="/workspace/backend.domain.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.domain.tests.unit.dll" id="17c4050b-65da-be31-39cb-a1d573f09cae">
+      <Execution id="a3dc99b1-adaf-42df-9eaa-ef993deebbef" />
+      <TestMethod codeBase="/workspace/Backend.Domain.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.LearningComponentTests" name="Constructor_NegativeDimensionOrCoordinate_ThrowsArgumentException(2.5f,1.5f,0.5f,10.0f,20.0f,-1.0f,&quot;z&quot;)" />
+    </UnitTest>
+    <UnitTest name="Constructor_InvalidOrientation_ThrowsArgumentException(&quot;&quot;)" storage="/workspace/backend.domain.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.domain.tests.unit.dll" id="ef76fe1d-a64d-3b24-c1e0-9229c61ba659">
+      <Execution id="f5c07f80-de11-41b2-aaba-329cc28dbd30" />
+      <TestMethod codeBase="/workspace/Backend.Domain.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.LearningComponentTests" name="Constructor_InvalidOrientation_ThrowsArgumentException(&quot;&quot;)" />
+    </UnitTest>
+    <UnitTest name="Constructor_ValidParameters_AllPropertiesSetCorrectly" storage="/workspace/backend.domain.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.domain.tests.unit.dll" id="49e6f4bf-eddc-46d7-9159-124249aa29fb">
+      <Execution id="cf8a58b8-ffdc-4769-80be-412cedad45ce" />
+      <TestMethod codeBase="/workspace/Backend.Domain.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.LearningComponentTests" name="Constructor_ValidParameters_AllPropertiesSetCorrectly" />
+    </UnitTest>
+    <UnitTest name="Constructor_InvalidType_ThrowsArgumentException" storage="/workspace/backend.domain.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.domain.tests.unit.dll" id="37a23d08-b33a-f05c-59d4-2d08ee23ebaf">
+      <Execution id="9b844b21-00c3-4354-8790-34fd6f41ca6d" />
+      <TestMethod codeBase="/workspace/Backend.Domain.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.LearningSpaceTests" name="Constructor_InvalidType_ThrowsArgumentException" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="dfb80764-2f25-1887-4b4f-12c139394882" executionId="55fc0b21-27c6-47e7-987f-bd62ba4f3fc8" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="9ff1b0c0-9467-5a74-d038-39671ca6eb6d" executionId="9ace1882-9625-45cb-92ec-c4b271b0a100" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e351c04e-1839-4318-2e0c-f961759510a6" executionId="b079bc98-a60a-46dd-b62c-4d48c822f8ab" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="bf35cbad-6450-575c-8d8e-e3af31520c7b" executionId="23603708-0b54-4c2b-ba02-b1d2c17067ab" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="93d82a5b-0a0d-2a04-6e26-77b1e60103da" executionId="c40b40a6-b755-47a4-8e52-b00e0a46dd6e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="8014a743-d0e0-a94b-6695-8195b596b639" executionId="1f5a3eb8-5de4-4af6-83b2-c7b476263149" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="5c1f4304-575c-f17a-5da4-a2438aa453fb" executionId="7bc2ffd1-8f3f-4b39-8a0d-b357d74e93ff" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ef76fe1d-a64d-3b24-c1e0-9229c61ba659" executionId="f5c07f80-de11-41b2-aaba-329cc28dbd30" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b730176d-1f02-9ef6-4747-8a2b1f2fcee1" executionId="7b7c854c-ad3d-4ca7-85cd-f47d4ab6053d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="17c4050b-65da-be31-39cb-a1d573f09cae" executionId="a3dc99b1-adaf-42df-9eaa-ef993deebbef" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="66e20d4f-da87-34dc-f9b3-f9c8ab20213c" executionId="a9862034-c1e3-4fb2-8def-41216a4dc306" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="0b73bda6-e64e-af5d-bb00-2f6fee0375c6" executionId="14c29b77-3555-46f7-ae12-0a259e8ca32d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="712e75c1-4f44-d03d-3bd6-74588a0ec907" executionId="aadae605-bd59-4ef3-8880-bb76a105a610" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f4d287aa-3470-6747-e5b8-8b09d16e3d1e" executionId="712d9326-7f44-4077-b3d4-5d154b2e632e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="367818f4-889c-084b-a898-830baf601176" executionId="76fe570c-acea-4088-983e-0fe6a1047f44" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="dcb3609b-e444-dcef-6a93-71f2446b5d10" executionId="057fcddb-7b38-4d6e-9995-0a9d374b4201" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="895ad975-8c65-da8a-ac90-2809c14b52ab" executionId="88664e37-29b4-4596-af87-e98705d46942" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="da5b7d07-1d09-5025-84d3-a52d897345a5" executionId="818b8a5c-4b7a-455b-9818-9b6af796f1fd" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="49e6f4bf-eddc-46d7-9159-124249aa29fb" executionId="cf8a58b8-ffdc-4769-80be-412cedad45ce" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="8675791d-2624-8d97-8902-338bd41bce36" executionId="dff00ef1-69ff-46af-9b35-69a93db1411f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f651b6d6-12fc-f652-ee29-2eae0a9a41bb" executionId="55c27938-612c-40d2-b770-c1640b8be119" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="37a23d08-b33a-f05c-59d4-2d08ee23ebaf" executionId="9b844b21-00c3-4354-8790-34fd6f41ca6d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="afb720de-303b-f168-0b12-fd7b7a38c711" executionId="2c3e208e-1bbf-4bb5-85f1-b48daafa878a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="da123bdf-686d-042c-4c1f-9d772647c785" executionId="83a6d79e-1dc7-495d-b8f1-1d92fc83fd62" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1f00af66-bd53-c4db-487e-ca6448d4bcc4" executionId="5a8c216d-7536-4585-b28e-531ebfaf4ba2" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ca23c2cb-0bc5-f6e0-5734-9add528710b4" executionId="c9104df8-97eb-4e74-8b96-a5e8e64eb258" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="eeaeae93-b0fc-cef0-680a-08324043fed9" executionId="11600a72-71e4-4c83-b3b2-8b9fd0f134b3" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="27" executed="27" passed="24" failed="3" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>NUnit Adapter 4.6.0.0: Test execution started
+Running all tests in /workspace/Backend.Domain.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.dll
+   NUnit3TestExecutor discovered 27 of 27 NUnit test cases using Current Discovery mode, Non-Explicit run
+NUnit Adapter 4.6.0.0: Test execution complete
+</StdOut>
+    </Output>
+    <CollectorDataEntries>
+      <Collector agentName="ba8461d692e4" uri="datacollector://microsoft/CoverletCodeCoverage/1.0" collectorDisplayName="XPlat code coverage">
+        <UriAttachments>
+          <UriAttachment>
+            <A href="ba8461d692e4/coverage.cobertura.xml"></A>
+          </UriAttachment>
+        </UriAttachments>
+      </Collector>
+    </CollectorDataEntries>
+  </ResultSummary>
+</TestRun>
