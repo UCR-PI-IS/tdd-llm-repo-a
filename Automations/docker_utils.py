@@ -57,6 +57,15 @@ def print_result(success: bool, output_dir: str, log_file: str = "") -> None:
 
 def build_docker_image(image_name: str, dockerfile: str) -> None:
     cprint("Building Docker image...", "YELLOW")
+    # Check if image already exists locally — skip build to avoid network pulls
+    check = subprocess.run(
+        ["docker", "image", "inspect", image_name],
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+    )
+    if check.returncode == 0:
+        cprint(f"Image '{image_name}' already exists locally, skipping build.", "GREEN")
+        return
     subprocess.run(
         ["docker", "build", "-t", image_name, "-f", dockerfile, "."],
         check=True,

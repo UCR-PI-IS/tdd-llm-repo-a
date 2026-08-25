@@ -10,14 +10,18 @@ namespace UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Endpoints
     public static class LearningSpaceListEndpoints
     {
         /// <summary>
-        /// Maps the GET endpoint for fetching the list of learning spaces.
+        /// Maps the GET and POST endpoints for the learning space API.
         /// </summary>
         /// <param name="builder">The <see cref="IEndpointRouteBuilder"/> used to map the endpoint.</param>
-        /// <returns>The updated <see cref="IEndpointRouteBuilder"/> with the new route.</returns>
+        /// <returns>The updated <see cref="IEndpointRouteBuilder"/> with the new routes.</returns>
         public static IEndpointRouteBuilder MapLearningSpaceEndpoints(this IEndpointRouteBuilder builder)
         {
             builder.MapGet("/LearningSpaceList", GetLearningSpaceListHandler.HandleAsync)
                 .WithName("GetLearningSpaceList")
+                .WithOpenApi();
+
+            builder.MapPost("/LearningSpaces", CreateLearningSpaceHandler.HandleAsync)
+                .WithName("CreateLearningSpace")
                 .WithOpenApi();
 
             return builder;
