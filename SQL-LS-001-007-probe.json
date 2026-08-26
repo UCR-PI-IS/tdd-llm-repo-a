@@ -1,0 +1,20 @@
+{
+  "probes": [
+    {
+      "name": "Create learning space with valid data",
+      "method": "POST",
+      "path": "/api/learningspaces",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "id": "IF-TEST01",
+        "type": "Classroom",
+        "height": 3.0,
+        "width": 8.0,
+        "length": 10.0
+      },
+      "expectStatus": 201
+    }
+  ]
+}

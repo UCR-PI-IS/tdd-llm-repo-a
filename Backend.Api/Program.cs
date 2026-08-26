@@ -34,6 +34,11 @@ app.UseHttpsRedirection();
 app.MapLearningSpaceEndpoints();
 
 /// <summary>
+/// Maps the Learning Spaces endpoints (create, etc.) to the application.
+/// </summary>
+app.MapLearningSpacesEndpoints();
+
+/// <summary>
 /// Maps the Learning Components endpoints to the application.
 /// </summary>
 app.MapLearningComponentsEndpoints();
