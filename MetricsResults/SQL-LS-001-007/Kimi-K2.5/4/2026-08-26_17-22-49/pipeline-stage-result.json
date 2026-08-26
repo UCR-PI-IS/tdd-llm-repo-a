@@ -1,0 +1,46 @@
+{
+  "stage": "refactoring",
+  "storyId": "SQL-LS-001-007",
+  "model": "Kimi-K2.5",
+  "iteration": "4",
+  "status": "success",
+  "filesCreated": [],
+  "filesModified": [
+    "Backend.Domain/Entities/LearningSpace.cs"
+  ],
+  "metrics": {
+    "loopIterationsPerformed": 1,
+    "maxLoopIterations": 10,
+    "allGreenAchieved": false,
+    "baseline": {
+      "minMI": 58,
+      "maxCC": 6,
+      "maxCoupling": 14,
+      "maxDIT": 0
+    },
+    "final": {
+      "minMI": 59,
+      "maxCC": 6,
+      "maxCoupling": 14,
+      "maxDIT": 0
+    },
+    "remainingViolations": [
+      {
+        "type": "LearningSpacesEndpoints",
+        "metric": "Coupling",
+        "value": 14,
+        "flag": "YELLOW"
+      },
+      {
+        "type": "CreateLearningSpaceHandler",
+        "metric": "Coupling",
+        "value": 14,
+        "flag": "YELLOW"
+      }
+    ]
+  },
+  "warnings": [
+    "Class coupling in LearningSpacesEndpoints (14) and CreateLearningSpaceHandler (14) remains at YELLOW level. This is inherent to the ASP.NET Core minimal API pattern and Clean Architecture - these files must reference framework types and application layer types. The coupling is within acceptable YELLOW range (10-40)."
+  ],
+  "notes": "Refactored LearningSpace.cs to improve maintainability: extracted validation logic into ValidateType() and ValidatePositiveDimension() methods, made AllowedTypes array static readonly. Constructor maintainability improved from 64 to 76, cyclomatic complexity reduced from 6 to 1. All 53 tests pass."
+}
