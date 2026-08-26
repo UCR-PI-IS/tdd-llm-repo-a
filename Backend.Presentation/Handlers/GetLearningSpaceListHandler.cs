@@ -20,7 +20,7 @@ namespace UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Handlers
             var learningSpace = await learningSpaceList.GetCurrentLearningSpaceListAsync();
 
             // Creates a response with the data of the fetched learning space
-            var response = new GetLearningSpaceListResponse(new LearningSpaceDto(learningSpace.id, learningSpace.type));
+            var response = new GetLearningSpaceListResponse(new LearningSpaceDto(learningSpace.LearningSpaceId.ToString(), learningSpace.Type));
 
             // Returns the response with status 200 OK
             return TypedResults.Ok(response);
@@ -39,7 +39,7 @@ namespace UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Handlers
 
             // Creates a response containing a list of all learning spaces, mapped to DTOs
             var response = new GetLearningSpaceListResponse(
-                spaces.Select(space => new LearningSpaceDto(space.id, space.type)).ToList()
+                spaces.Select(space => new LearningSpaceDto(space.LearningSpaceId.ToString(), space.Type)).ToList()
             );
 
             // Returns the response with status 200 OK

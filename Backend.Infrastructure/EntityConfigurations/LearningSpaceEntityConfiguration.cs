@@ -18,18 +18,26 @@ internal class LearningSpaceEntityConfiguration : IEntityTypeConfiguration<Learn
     {
         builder.ToTable("LearningSpace");
 
-        // Primary key configuration
-        builder.HasKey(LearningSpace => LearningSpace.id);
+        // Primary key configuration - ID is database-generated
+        builder.HasKey(ls => ls.LearningSpaceId);
+        
+        // Configure ID to be database-generated identity
+        builder.Property(ls => ls.LearningSpaceId)
+            .ValueGeneratedOnAdd()
+            .UseIdentityColumn();
 
         // Property attribute configurations
-        builder.Property(LearningSpace => LearningSpace.type)
-            .HasMaxLength(50);
+        builder.Property(ls => ls.Type)
+            .HasMaxLength(50)
+            .IsRequired();
 
-        builder.Property(LearningSpace => LearningSpace.id)
-            .HasMaxLength(50);
+        builder.Property(ls => ls.Height)
+            .IsRequired();
 
-        builder.Property(LearningSpace => LearningSpace.height);
-        builder.Property(LearningSpace => LearningSpace.width);
-        builder.Property(LearningSpace => LearningSpace.length);
+        builder.Property(ls => ls.Width)
+            .IsRequired();
+
+        builder.Property(ls => ls.Length)
+            .IsRequired();
     }
 }

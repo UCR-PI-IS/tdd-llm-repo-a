@@ -22,13 +22,13 @@ internal class SqlLearningSpaceListRepository : ILearningSpaceListRepository
     }
 
     /// <summary>
-    /// Retrieves a predefined learning space with ID "IF-0103".
+    /// Retrieves the first learning space from the database.
     /// </summary>
-    /// <returns>A task that represents the asynchronous operation. The task result contains the matching <see cref="LearningSpace"/>.</returns>
+    /// <returns>A task that represents the asynchronous operation. The task result contains the first <see cref="LearningSpace"/>.</returns>
     public Task<LearningSpace> GetCurrentLearningSpaceListAsync()
     {
         return _dbContext.LearningSpaces
-            .FirstAsync(LearningSpaces => LearningSpaces.id == "IF-0103");
+            .FirstAsync();
     }
 
     /// <summary>
