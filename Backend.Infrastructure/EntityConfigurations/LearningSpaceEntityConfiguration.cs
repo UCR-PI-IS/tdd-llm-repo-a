@@ -19,17 +19,15 @@ internal class LearningSpaceEntityConfiguration : IEntityTypeConfiguration<Learn
         builder.ToTable("LearningSpace");
 
         // Primary key configuration
-        builder.HasKey(LearningSpace => LearningSpace.id);
+        builder.HasKey(learningSpace => learningSpace.LearningSpaceId);
 
         // Property attribute configurations
-        builder.Property(LearningSpace => LearningSpace.type)
-            .HasMaxLength(50);
+        builder.Property(learningSpace => learningSpace.Type)
+            .HasMaxLength(50)
+            .IsRequired();
 
-        builder.Property(LearningSpace => LearningSpace.id)
-            .HasMaxLength(50);
-
-        builder.Property(LearningSpace => LearningSpace.height);
-        builder.Property(LearningSpace => LearningSpace.width);
-        builder.Property(LearningSpace => LearningSpace.length);
+        builder.Property(learningSpace => learningSpace.Height);
+        builder.Property(learningSpace => learningSpace.Width);
+        builder.Property(learningSpace => learningSpace.Length);
     }
 }

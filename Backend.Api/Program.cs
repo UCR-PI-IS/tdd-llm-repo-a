@@ -29,9 +29,14 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 /// <summary>
-/// Maps the Learning Space endpoints to the application.
+/// Maps the Learning Space list endpoints to the application.
 /// </summary>
 app.MapLearningSpaceEndpoints();
+
+/// <summary>
+/// Maps the Create Learning Space endpoint to the application.
+/// </summary>
+app.MapCreateLearningSpaceEndpoints();
 
 /// <summary>
 /// Maps the Learning Components endpoints to the application.
