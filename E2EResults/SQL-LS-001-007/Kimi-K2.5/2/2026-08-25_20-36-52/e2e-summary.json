@@ -1,0 +1,69 @@
+{
+  "stage": "e2e-validation",
+  "status": "failure",
+  "timestamp": "2026-08-25_20-36-52",
+  "storyId": "SQL-LS-001-007",
+  "model": "Kimi-K2.5",
+  "iteration": "2",
+  "database": {
+    "container": "themepark-sql-e2e-sql-ls-001-007-kimi-k2-5-2-203652",
+    "image": "mcr.microsoft.com/mssql/server:2022-latest",
+    "network": "themepark-e2e-sql-ls-001-007-kimi-k2-5-2-203652",
+    "database": "ThemePark",
+    "readySeconds": 18.9,
+    "baseSchemaApplied": [
+      "LearningSpace.sql",
+      "Semester.sql",
+      "Course.sql"
+    ],
+    "seedsApplied": [
+      "seed-SQL-LS-001-007.sql"
+    ]
+  },
+  "backend": {
+    "container": "themepark-api-e2e-sql-ls-001-007-kimi-k2-5-2-203652",
+    "project": "Backend.Api/UCR.ECCI.PI.ThemePark.Backend.Api.csproj",
+    "publishStatus": "success",
+    "started": true,
+    "url": "http://127.0.0.1:55001",
+    "readySeconds": 2.3,
+    "errorLines": [
+      "fail: Microsoft.EntityFrameworkCore.Database.Command[20102]",
+      "fail: Microsoft.EntityFrameworkCore.Update[10000]"
+    ]
+  },
+  "probes": [
+    {
+      "name": "Create learning space with valid data",
+      "method": "POST",
+      "path": "/api/learningspaces",
+      "expectedStatus": 201,
+      "actualStatus": 500,
+      "passed": false,
+      "missingContent": [],
+      "error": null,
+      "bodySnippet": "{\"type\":\"https://tools.ietf.org/html/rfc9110#section-15.6.1\",\"title\":\"An error occurred while processing your request.\",\"status\":500,\"detail\":\"An unexpected error occurred while creating the learning space.\"}"
+    }
+  ],
+  "totalProbes": 1,
+  "probesPassed": 0,
+  "probesFailed": 1,
+  "cleanup": {
+    "status": "clean",
+    "removedContainers": [
+      "themepark-api-e2e-sql-ls-001-007-kimi-k2-5-2-203652",
+      "themepark-sql-e2e-sql-ls-001-007-kimi-k2-5-2-203652"
+    ],
+    "removedNetworks": [
+      "themepark-e2e-sql-ls-001-007-kimi-k2-5-2-203652"
+    ],
+    "removedVolumes": [
+      "themepark-app-e2e-sql-ls-001-007-kimi-k2-5-2-203652"
+    ],
+    "leftovers": []
+  },
+  "warnings": [],
+  "errors": [
+    "1 probe(s) failed."
+  ]
+}

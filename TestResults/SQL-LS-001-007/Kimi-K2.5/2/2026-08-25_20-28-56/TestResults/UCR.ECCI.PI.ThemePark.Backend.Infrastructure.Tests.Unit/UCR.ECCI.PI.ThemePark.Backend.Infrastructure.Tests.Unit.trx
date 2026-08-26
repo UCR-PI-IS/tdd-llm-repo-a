@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="35b54b2d-a926-43c5-8a29-ca41da9afa85" name="@f61959d440e9 2026-08-26 02:29:26" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-08-26T02:29:26.6296593+00:00" queuing="2026-08-26T02:29:26.6296594+00:00" start="2026-08-26T02:29:25.5834164+00:00" finish="2026-08-26T02:29:26.6334288+00:00" />
+  <TestSettings name="default" id="0ac9d0e0-8ffb-4820-a4ad-6ff1fcd67eb2">
+    <Deployment runDeploymentRoot="_f61959d440e9_2026-08-26_02_29_26" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="42456617-db12-4905-9ea9-f317cc0c2393" testId="20bce922-6b11-3dd0-7e7c-75e0fa3a35c9" testName="GetComponentsByLearningSpaceIdAsync_ValidIdWithComponents_ReturnsList" computerName="f61959d440e9" duration="00:00:00.0011700" startTime="2026-08-26T02:29:26.1992184+00:00" endTime="2026-08-26T02:29:26.2003887+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="42456617-db12-4905-9ea9-f317cc0c2393" />
+    <UnitTestResult executionId="1aac73ab-31fa-4437-953e-9a03e5b7f503" testId="ad84ea5f-b587-47d5-f27c-acd6e5e546ae" testName="AddAsync_ValidLearningSpace_SavesToDatabaseWithGeneratedId" computerName="f61959d440e9" duration="00:00:00.0130060" startTime="2026-08-26T02:29:26.4373412+00:00" endTime="2026-08-26T02:29:26.4503467+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="1aac73ab-31fa-4437-953e-9a03e5b7f503" />
+    <UnitTestResult executionId="c8076435-f5eb-4e79-ac7f-1d69679e7bce" testId="945135ee-37e3-f663-935b-9ede7d4f1979" testName="AddAsync_MultipleLearningSpaces_GeneratesSequentialIds" computerName="f61959d440e9" duration="00:00:00.2196260" startTime="2026-08-26T02:29:26.2159562+00:00" endTime="2026-08-26T02:29:26.4355821+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c8076435-f5eb-4e79-ac7f-1d69679e7bce" />
+    <UnitTestResult executionId="d9b2eabe-c2ba-4106-8153-a7937309735b" testId="9ffc2094-e646-f086-5b17-f0ee665bb725" testName="AddAsync_DatabaseException_PropagatesException" computerName="f61959d440e9" duration="00:00:00.0151220" startTime="2026-08-26T02:29:26.2007760+00:00" endTime="2026-08-26T02:29:26.2158973+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d9b2eabe-c2ba-4106-8153-a7937309735b">
+      <Output>
+        <ErrorInfo>
+          <Message>System.Reflection.TargetInvocationException : Exception has been thrown by the target of an invocation.
+  ----&gt; Moq.MockException : UCRDatabaseContext.LearningComponents = InternalDbSet&lt;LearningComponent&gt; invocation failed with mock behavior Strict.
+All invocations on the mock must have a corresponding setup.</Message>
+          <StackTrace>   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyInstance(Type proxyType, List`1 proxyArguments, Type classToProxy, Object[] constructorArguments)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options, Object[] constructorArguments, IInterceptor[] interceptors)
+   at Moq.CastleProxyFactory.CreateProxy(Type mockType, IInterceptor interceptor, Type[] interfaces, Object[] arguments) in /_/src/Moq/Interception/CastleProxyFactory.cs:line 62
+   at Moq.Mock`1.InitializeInstance() in /_/src/Moq/Mock`1.cs:line 309
+   at Moq.Mock`1.OnGetObject() in /_/src/Moq/Mock`1.cs:line 323
+   at Moq.Mock.get_Object() in /_/src/Moq/Mock.cs:line 181
+   at Moq.Mock`1.get_Object() in /_/src/Moq/Mock`1.cs:line 281
+   at UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.SqlLearningSpaceRepositoryTests.AddAsync_DatabaseException_PropagatesException() in /workspace/Backend.Infrastructure.Tests.Unit/SqlLearningSpaceRepositoryTests.cs:line 88
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+--MockException
+   at Moq.FailForStrictMock.Handle(Invocation invocation, Mock mock) in /_/src/Moq/Interception/InterceptionAspects.cs:line 182
+   at Moq.Mock.Moq.IInterceptor.Intercept(Invocation invocation) in /_/src/Moq/Interception/Mock.cs:line 27
+   at Moq.CastleProxyFactory.Interceptor.Intercept(IInvocation underlying) in /_/src/Moq/Interception/CastleProxyFactory.cs:line 107
+   at Castle.DynamicProxy.AbstractInvocation.Proceed()
+   at Castle.Proxies.UCRDatabaseContextProxy.set_LearningComponents(DbSet`1 value)
+   at Microsoft.EntityFrameworkCore.Internal.DbSetInitializer.InitializeSets(DbContext context)
+   at Microsoft.EntityFrameworkCore.DbContext..ctor(DbContextOptions options)
+   at UCR.ECCI.PI.ThemePark.Backend.Infrastructure.UCRDatabaseContext..ctor(DbContextOptions`1 options) in /workspace/Backend.Infrastructure/UCRDatabaseContext.cs:line 18
+   at Castle.Proxies.UCRDatabaseContextProxy..ctor(IInterceptor[], DbContextOptions`1 options)
+   at InvokeStub_UCRDatabaseContextProxy..ctor(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="adf87314-7a0e-415c-ae97-a5518ea54f7e" testId="03ae0261-f544-d9e0-bfcc-c301017c7897" testName="GetComponentsByLearningSpaceIdAsync_NoMatchingComponents_ReturnsEmptyList(&quot;IF-0103&quot;)" computerName="f61959d440e9" duration="00:00:00.1023710" startTime="2026-08-26T02:29:26.0935153+00:00" endTime="2026-08-26T02:29:26.1958570+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="adf87314-7a0e-415c-ae97-a5518ea54f7e" />
+    <UnitTestResult executionId="5236757e-5347-4104-abaa-d25e54d32a9e" testId="bfc31793-94fa-a4b2-22c6-e0389203936b" testName="AddAsync_ValidLearningSpace_CallsSaveChanges" computerName="f61959d440e9" duration="00:00:00.0017040" startTime="2026-08-26T02:29:26.4356175+00:00" endTime="2026-08-26T02:29:26.4373208+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="5236757e-5347-4104-abaa-d25e54d32a9e">
+      <Output>
+        <ErrorInfo>
+          <Message>Moq.MockException : UCRDatabaseContext.LearningComponents = InternalDbSet&lt;LearningComponent&gt; invocation failed with mock behavior Strict.
+All invocations on the mock must have a corresponding setup.</Message>
+          <StackTrace>   at Moq.FailForStrictMock.Handle(Invocation invocation, Mock mock) in /_/src/Moq/Interception/InterceptionAspects.cs:line 182
+   at Moq.Mock.Moq.IInterceptor.Intercept(Invocation invocation) in /_/src/Moq/Interception/Mock.cs:line 27
+   at Moq.CastleProxyFactory.Interceptor.Intercept(IInvocation underlying) in /_/src/Moq/Interception/CastleProxyFactory.cs:line 107
+   at Castle.DynamicProxy.AbstractInvocation.Proceed()
+   at Castle.Proxies.UCRDatabaseContextProxy.set_LearningComponents(DbSet`1 value)
+   at Microsoft.EntityFrameworkCore.Internal.DbSetInitializer.InitializeSets(DbContext context)
+   at Microsoft.EntityFrameworkCore.DbContext..ctor(DbContextOptions options)
+   at UCR.ECCI.PI.ThemePark.Backend.Infrastructure.UCRDatabaseContext..ctor(DbContextOptions`1 options) in /workspace/Backend.Infrastructure/UCRDatabaseContext.cs:line 18
+   at Castle.Proxies.UCRDatabaseContextProxy..ctor(IInterceptor[], DbContextOptions`1 options)
+   at InvokeStub_UCRDatabaseContextProxy..ctor(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="a2297d64-22fb-4eee-9cc9-98ebdb5f8a1f" testId="5979b915-3030-7596-88a6-06fe246113af" testName="GetComponentsByLearningSpaceIdAsync_NoMatchingComponents_ReturnsEmptyList(&quot;NON-EXISTENT-999&quot;)" computerName="f61959d440e9" duration="00:00:00.0020950" startTime="2026-08-26T02:29:26.1965406+00:00" endTime="2026-08-26T02:29:26.1986356+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a2297d64-22fb-4eee-9cc9-98ebdb5f8a1f" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="AddAsync_ValidLearningSpace_CallsSaveChanges" storage="/workspace/backend.infrastructure.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.infrastructure.tests.unit.dll" id="bfc31793-94fa-a4b2-22c6-e0389203936b">
+      <Execution id="5236757e-5347-4104-abaa-d25e54d32a9e" />
+      <TestMethod codeBase="/workspace/Backend.Infrastructure.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.SqlLearningSpaceRepositoryTests" name="AddAsync_ValidLearningSpace_CallsSaveChanges" />
+    </UnitTest>
+    <UnitTest name="AddAsync_DatabaseException_PropagatesException" storage="/workspace/backend.infrastructure.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.infrastructure.tests.unit.dll" id="9ffc2094-e646-f086-5b17-f0ee665bb725">
+      <Execution id="d9b2eabe-c2ba-4106-8153-a7937309735b" />
+      <TestMethod codeBase="/workspace/Backend.Infrastructure.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.SqlLearningSpaceRepositoryTests" name="AddAsync_DatabaseException_PropagatesException" />
+    </UnitTest>
+    <UnitTest name="AddAsync_ValidLearningSpace_SavesToDatabaseWithGeneratedId" storage="/workspace/backend.infrastructure.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.infrastructure.tests.unit.dll" id="ad84ea5f-b587-47d5-f27c-acd6e5e546ae">
+      <Execution id="1aac73ab-31fa-4437-953e-9a03e5b7f503" />
+      <TestMethod codeBase="/workspace/Backend.Infrastructure.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.SqlLearningSpaceRepositoryTests" name="AddAsync_ValidLearningSpace_SavesToDatabaseWithGeneratedId" />
+    </UnitTest>
+    <UnitTest name="GetComponentsByLearningSpaceIdAsync_NoMatchingComponents_ReturnsEmptyList(&quot;IF-0103&quot;)" storage="/workspace/backend.infrastructure.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.infrastructure.tests.unit.dll" id="03ae0261-f544-d9e0-bfcc-c301017c7897">
+      <Execution id="adf87314-7a0e-415c-ae97-a5518ea54f7e" />
+      <TestMethod codeBase="/workspace/Backend.Infrastructure.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.SqlLearningComponentRepositoryTests" name="GetComponentsByLearningSpaceIdAsync_NoMatchingComponents_ReturnsEmptyList(&quot;IF-0103&quot;)" />
+    </UnitTest>
+    <UnitTest name="AddAsync_MultipleLearningSpaces_GeneratesSequentialIds" storage="/workspace/backend.infrastructure.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.infrastructure.tests.unit.dll" id="945135ee-37e3-f663-935b-9ede7d4f1979">
+      <Execution id="c8076435-f5eb-4e79-ac7f-1d69679e7bce" />
+      <TestMethod codeBase="/workspace/Backend.Infrastructure.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.SqlLearningSpaceRepositoryTests" name="AddAsync_MultipleLearningSpaces_GeneratesSequentialIds" />
+    </UnitTest>
+    <UnitTest name="GetComponentsByLearningSpaceIdAsync_ValidIdWithComponents_ReturnsList" storage="/workspace/backend.infrastructure.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.infrastructure.tests.unit.dll" id="20bce922-6b11-3dd0-7e7c-75e0fa3a35c9">
+      <Execution id="42456617-db12-4905-9ea9-f317cc0c2393" />
+      <TestMethod codeBase="/workspace/Backend.Infrastructure.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.SqlLearningComponentRepositoryTests" name="GetComponentsByLearningSpaceIdAsync_ValidIdWithComponents_ReturnsList" />
+    </UnitTest>
+    <UnitTest name="GetComponentsByLearningSpaceIdAsync_NoMatchingComponents_ReturnsEmptyList(&quot;NON-EXISTENT-999&quot;)" storage="/workspace/backend.infrastructure.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.infrastructure.tests.unit.dll" id="5979b915-3030-7596-88a6-06fe246113af">
+      <Execution id="a2297d64-22fb-4eee-9cc9-98ebdb5f8a1f" />
+      <TestMethod codeBase="/workspace/Backend.Infrastructure.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.SqlLearningComponentRepositoryTests" name="GetComponentsByLearningSpaceIdAsync_NoMatchingComponents_ReturnsEmptyList(&quot;NON-EXISTENT-999&quot;)" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="20bce922-6b11-3dd0-7e7c-75e0fa3a35c9" executionId="42456617-db12-4905-9ea9-f317cc0c2393" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ad84ea5f-b587-47d5-f27c-acd6e5e546ae" executionId="1aac73ab-31fa-4437-953e-9a03e5b7f503" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="945135ee-37e3-f663-935b-9ede7d4f1979" executionId="c8076435-f5eb-4e79-ac7f-1d69679e7bce" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="9ffc2094-e646-f086-5b17-f0ee665bb725" executionId="d9b2eabe-c2ba-4106-8153-a7937309735b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="03ae0261-f544-d9e0-bfcc-c301017c7897" executionId="adf87314-7a0e-415c-ae97-a5518ea54f7e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="bfc31793-94fa-a4b2-22c6-e0389203936b" executionId="5236757e-5347-4104-abaa-d25e54d32a9e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="5979b915-3030-7596-88a6-06fe246113af" executionId="a2297d64-22fb-4eee-9cc9-98ebdb5f8a1f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="7" executed="7" passed="5" failed="2" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>NUnit Adapter 4.6.0.0: Test execution started
+Running all tests in /workspace/Backend.Infrastructure.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.dll
+   NUnit3TestExecutor discovered 7 of 7 NUnit test cases using Current Discovery mode, Non-Explicit run
+NUnit Adapter 4.6.0.0: Test execution complete
+</StdOut>
+    </Output>
+    <CollectorDataEntries>
+      <Collector agentName="f61959d440e9" uri="datacollector://microsoft/CoverletCodeCoverage/1.0" collectorDisplayName="XPlat code coverage">
+        <UriAttachments>
+          <UriAttachment>
+            <A href="f61959d440e9/coverage.cobertura.xml"></A>
+          </UriAttachment>
+        </UriAttachments>
+      </Collector>
+    </CollectorDataEntries>
+  </ResultSummary>
+</TestRun>
