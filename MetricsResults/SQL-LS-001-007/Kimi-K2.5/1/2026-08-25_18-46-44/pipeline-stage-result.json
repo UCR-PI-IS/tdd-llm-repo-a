@@ -1,0 +1,43 @@
+{
+  "stage": "refactoring",
+  "storyId": "SQL-LS-001-007",
+  "model": "Kimi-K2.5",
+  "iteration": "1",
+  "status": "partial",
+  "filesCreated": [
+    "Backend.Presentation/Handlers/CreateLearningSpaceResult.cs"
+  ],
+  "filesModified": [
+    "Backend.Presentation/Endpoints/LearningSpaceCreateEndpoints.cs",
+    "Backend.Presentation/Handlers/CreateLearningSpaceHandler.cs"
+  ],
+  "metrics": {
+    "loopIterationsPerformed": 4,
+    "maxLoopIterations": 10,
+    "allGreenAchieved": false,
+    "baseline": {
+      "minMI": 66,
+      "maxCC": 3,
+      "maxCoupling": 14,
+      "maxDIT": 0
+    },
+    "final": {
+      "minMI": 63,
+      "maxCC": 5,
+      "maxCoupling": 10,
+      "maxDIT": 0
+    },
+    "remainingViolations": [
+      {
+        "type": "CreateLearningSpaceHandler",
+        "metric": "Coupling",
+        "value": 10,
+        "flag": "YELLOW"
+      }
+    ]
+  },
+  "warnings": [
+    "CreateLearningSpaceHandler class coupling increased to 10 (YELLOW) after moving response creation from wrapper to handler. The LearningSpaceResponse dependency must exist in either handler or wrapper to satisfy test assertions on Created<LearningSpaceResponse> type."
+  ],
+  "notes": "Refactored LearningSpaceCreateEndpoints from coupling=14 to 6 (GREEN) by removing attribute-heavy lambda and using method group dispatch. Created CreateLearningSpaceResult wrapper to decouple handler from framework union types, reducing handler coupling from 14 to 10 (only 1 over threshold). Wrapper achieves coupling=8 (GREEN). Attempted to extract validation helpers in LearningSpace entity but reverted due to test dependency on exact error message strings. Overall: 2 YELLOW violations reduced to 1 YELLOW at 10 (4-point improvement on handler, 8-point improvement on endpoints). All tests pass."
+}

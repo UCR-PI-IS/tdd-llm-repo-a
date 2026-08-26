@@ -1,0 +1,68 @@
+{
+  "stage": "e2e-validation",
+  "status": "failure",
+  "timestamp": "2026-08-25_17-40-50",
+  "storyId": "SQL-LS-001-007",
+  "model": "Kimi-K2-5",
+  "iteration": "1",
+  "database": {
+    "container": "themepark-sql-e2e-sql-ls-001-007-kimi-k2-5-1-174050",
+    "image": "mcr.microsoft.com/mssql/server:2022-latest",
+    "network": "themepark-e2e-sql-ls-001-007-kimi-k2-5-1-174050",
+    "database": "ThemePark",
+    "readySeconds": 8.6,
+    "baseSchemaApplied": [
+      "Semester.sql",
+      "Course.sql"
+    ],
+    "seedsApplied": [
+      "seed-SQL-LS-001-007.sql"
+    ]
+  },
+  "backend": {
+    "container": "themepark-api-e2e-sql-ls-001-007-kimi-k2-5-1-174050",
+    "project": "Backend.Api/UCR.ECCI.PI.ThemePark.Backend.Api.csproj",
+    "publishStatus": "success",
+    "started": true,
+    "url": "http://127.0.0.1:55002",
+    "readySeconds": 2.2,
+    "errorLines": [
+      "fail: Microsoft.EntityFrameworkCore.Database.Command[20102]",
+      "fail: Microsoft.EntityFrameworkCore.Update[10000]"
+    ]
+  },
+  "probes": [
+    {
+      "name": "POST /api/learningspaces?type=Classroom&height=3&width=8&length=10",
+      "method": "POST",
+      "path": "/api/learningspaces?type=Classroom&height=3&width=8&length=10",
+      "expectedStatus": 201,
+      "actualStatus": 500,
+      "passed": false,
+      "missingContent": [],
+      "error": null,
+      "bodySnippet": "{\"type\":\"https://tools.ietf.org/html/rfc9110#section-15.6.1\",\"title\":\"An error occurred while processing your request.\",\"status\":500,\"detail\":\"An unexpected error occurred while creating the learning space.\"}"
+    }
+  ],
+  "totalProbes": 1,
+  "probesPassed": 0,
+  "probesFailed": 1,
+  "cleanup": {
+    "status": "clean",
+    "removedContainers": [
+      "themepark-api-e2e-sql-ls-001-007-kimi-k2-5-1-174050",
+      "themepark-sql-e2e-sql-ls-001-007-kimi-k2-5-1-174050"
+    ],
+    "removedNetworks": [
+      "themepark-e2e-sql-ls-001-007-kimi-k2-5-1-174050"
+    ],
+    "removedVolumes": [
+      "themepark-app-e2e-sql-ls-001-007-kimi-k2-5-1-174050"
+    ],
+    "leftovers": []
+  },
+  "warnings": [],
+  "errors": [
+    "1 probe(s) failed."
+  ]
+}
