@@ -14,7 +14,7 @@ namespace UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Endpoints
         /// </summary>
         /// <param name="builder">The <see cref="IEndpointRouteBuilder"/> used to map the endpoint.</param>
         /// <returns>The updated <see cref="IEndpointRouteBuilder"/> with the new route.</returns>
-        public static IEndpointRouteBuilder MapLearningSpaceEndpoints(this IEndpointRouteBuilder builder)
+        public static IEndpointRouteBuilder MapLearningSpaceListEndpoints(this IEndpointRouteBuilder builder)
         {
             builder.MapGet("/LearningSpaceList", GetLearningSpaceListHandler.HandleAsync)
                 .WithName("GetLearningSpaceList")

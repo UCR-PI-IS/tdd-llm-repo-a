@@ -9,7 +9,7 @@ namespace UCR.ECCI.PI.ThemePark.Backend.Infrastructure;
 /// Represents the database context for the Theme Park system.
 /// It handles the database operations and mappings for entity configurations.
 /// </summary>
-internal class UCRDatabaseContext : DbContext
+public class UCRDatabaseContext : DbContext
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="UCRDatabaseContext"/> class with specified options.
