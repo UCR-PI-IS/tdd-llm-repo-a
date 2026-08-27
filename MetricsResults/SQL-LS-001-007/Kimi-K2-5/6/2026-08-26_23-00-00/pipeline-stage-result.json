@@ -1,0 +1,55 @@
+{
+  "stage": "refactoring",
+  "storyId": "SQL-LS-001-007",
+  "model": "Kimi-K2-5",
+  "iteration": "6",
+  "status": "success",
+  "filesCreated": [],
+  "filesModified": [
+    "Backend.Domain/UCR.ECCI.PI.ThemePark.Backend.Domain.csproj",
+    "Backend.Application/UCR.ECCI.PI.ThemePark.Backend.Application.csproj",
+    "Backend.Infrastructure/UCR.ECCI.PI.ThemePark.Backend.Infrastructure.csproj",
+    "Backend.Presentation/UCR.ECCI.PI.ThemePark.Backend.Presentation.csproj",
+    "Backend.Domain.Tests.Unit/UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit.csproj",
+    "Backend.Application.Tests.Unit/UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.csproj",
+    "Backend.Infrastructure.Tests.Unit/UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.csproj",
+    "Backend.Presentation.Tests.Unit/UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.csproj",
+    "tools/MetricsCalculator/MetricsCalculator.csproj"
+  ],
+  "metrics": {
+    "loopIterationsPerformed": 1,
+    "maxLoopIterations": 10,
+    "allGreenAchieved": false,
+    "baseline": {
+      "minMI": 56,
+      "maxCC": 8,
+      "maxCoupling": 14,
+      "maxDIT": 0
+    },
+    "final": {
+      "minMI": 56,
+      "maxCC": 8,
+      "maxCoupling": 14,
+      "maxDIT": 0
+    },
+    "remainingViolations": [
+      {
+        "type": "UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Handlers.CreateLearningSpaceHandler",
+        "metric": "Coupling",
+        "value": 14,
+        "flag": "YELLOW"
+      },
+      {
+        "type": "UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Endpoints.LearningSpaceCreateEndpoints",
+        "metric": "Coupling",
+        "value": 10,
+        "flag": "YELLOW"
+      }
+    ]
+  },
+  "warnings": [
+    "Attempted to reduce coupling in CreateLearningSpaceHandler by changing return type from Results<T> to IResult, but this broke tests that rely on .Result property",
+    "Class coupling in presentation layer handlers is primarily due to legitimate ASP.NET Core framework dependencies"
+  ],
+  "notes": "Baseline code quality is excellent with no RED violations. Only 2 YELLOW Class Coupling violations exist in the presentation layer (CreateLearningSpaceHandler: 14, LearningSpaceCreateEndpoints: 10). These violations stem from necessary dependencies on ASP.NET Core types (Results<T>, TypedResults, IEndpointRouteBuilder) which are expected in the presentation layer. Attempting to reduce coupling further would require breaking changes to the API contract or test modifications, which is not permitted. All 32 tests pass successfully."
+}

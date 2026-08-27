@@ -1,0 +1,92 @@
+================================================================
+  CODE METRICS SUMMARY
+  Generated: 2026-08-26 23:00:00 UTC
+================================================================
+
+----------------------------------------------------------------
+  Project: UCR.ECCI.PI.ThemePark.Backend.Domain
+----------------------------------------------------------------
+
+  Types:
+    LearningSpace
+    ILearningSpaceRepository
+
+  Maintainability Index by type:
+    LearningSpace: MI=56
+    ILearningSpaceRepository: MI=80
+
+  Cyclomatic Complexity by method (>10 shown):
+    (none above threshold)
+
+  Class Coupling by type (>9 shown):
+    (none above threshold)
+
+----------------------------------------------------------------
+  Project: UCR.ECCI.PI.ThemePark.Backend.Application
+----------------------------------------------------------------
+
+  Types:
+    LearningSpaceCreateService
+    ILearningSpaceCreateService
+
+  Maintainability Index by type:
+    LearningSpaceCreateService: MI=67
+    ILearningSpaceCreateService: MI=76
+
+  Cyclomatic Complexity by method (>10 shown):
+    (none above threshold)
+
+  Class Coupling by type (>9 shown):
+    (none above threshold)
+
+----------------------------------------------------------------
+  Project: UCR.ECCI.PI.ThemePark.Backend.Infrastructure
+----------------------------------------------------------------
+
+  Types:
+    SqlLearningSpaceRepository
+
+  Maintainability Index by type:
+    SqlLearningSpaceRepository: MI=70
+
+  Cyclomatic Complexity by method (>10 shown):
+    (none above threshold)
+
+  Class Coupling by type (>9 shown):
+    (none above threshold)
+
+----------------------------------------------------------------
+  Project: UCR.ECCI.PI.ThemePark.Backend.Presentation
+----------------------------------------------------------------
+
+  Types:
+    CreateLearningSpaceHandler
+    LearningSpaceCreateEndpoints
+    CreateLearningSpaceDto
+    LearningSpaceResponse
+
+  Maintainability Index by type:
+    CreateLearningSpaceHandler: MI=66
+    LearningSpaceCreateEndpoints: MI=71
+    CreateLearningSpaceDto: MI=100
+    LearningSpaceResponse: MI=100
+
+  Cyclomatic Complexity by method (>10 shown):
+    (none above threshold)
+
+  Class Coupling by type (>9 shown):
+    CreateLearningSpaceHandler: Coupling=14 [YELLOW]
+    LearningSpaceCreateEndpoints: Coupling=10 [YELLOW]
+
+================================================================
+  THRESHOLD REFERENCE (Microsoft Visual Studio / Industry)
+  Maintainability Index: 0-9 RED, 10-19 YELLOW, 20-100 GREEN
+  Cyclomatic Complexity: 1-10 GREEN, 11-25 YELLOW, >25 RED
+  Class Coupling: 0-9 GREEN, 10-40 YELLOW, >40 RED
+  Depth of Inheritance: 0-4 GREEN, 5 YELLOW, >=6 RED
+  Lines per Method: 5-20 GREEN, 21-50 YELLOW, >50 RED
+================================================================
+
+VIOLATIONS SUMMARY:
+- CreateLearningSpaceHandler: ClassCoupling=14 [YELLOW]
+- LearningSpaceCreateEndpoints: ClassCoupling=10 [YELLOW]

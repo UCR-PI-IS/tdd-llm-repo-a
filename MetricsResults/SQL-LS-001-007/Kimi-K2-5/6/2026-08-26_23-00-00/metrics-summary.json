@@ -1,0 +1,137 @@
+{
+  "status": "success",
+  "timestamp": "2026-08-26T23:00:00Z",
+  "storyId": "SQL-LS-001-007",
+  "model": "Kimi-K2-5",
+  "iteration": "6",
+  "projects": [
+    {
+      "name": "UCR.ECCI.PI.ThemePark.Backend.Domain",
+      "types": [
+        {
+          "name": "LearningSpace",
+          "maintainabilityIndex": {"value": 56, "flag": "GREEN"},
+          "cyclomaticComplexity": {"value": 8, "flag": "GREEN"},
+          "classCoupling": {"value": 2, "flag": "GREEN"},
+          "depthOfInheritance": {"value": 0, "flag": "GREEN"},
+          "sourceLines": 89,
+          "executableLines": 18,
+          "methods": [
+            {"name": ".ctor()", "maintainabilityIndex": {"value": 87, "flag": "GREEN"}, "cyclomaticComplexity": {"value": 1, "flag": "GREEN"}, "sourceLines": 4, "executableLines": 1},
+            {"name": ".ctor(string,float,float,float)", "maintainabilityIndex": {"value": 65, "flag": "GREEN"}, "cyclomaticComplexity": {"value": 6, "flag": "GREEN"}, "sourceLines": 36, "executableLines": 16},
+            {"name": "ResetIdCounter()", "maintainabilityIndex": {"value": 87, "flag": "GREEN"}, "cyclomaticComplexity": {"value": 1, "flag": "GREEN"}, "sourceLines": 4, "executableLines": 1}
+          ]
+        },
+        {
+          "name": "ILearningSpaceRepository",
+          "maintainabilityIndex": {"value": 80, "flag": "GREEN"},
+          "cyclomaticComplexity": {"value": 1, "flag": "GREEN"},
+          "classCoupling": {"value": 0, "flag": "GREEN"},
+          "depthOfInheritance": {"value": 0, "flag": "GREEN"},
+          "sourceLines": 8,
+          "executableLines": 0,
+          "methods": [
+            {"name": "AddAsync(LearningSpace)", "maintainabilityIndex": {"value": 100, "flag": "GREEN"}, "cyclomaticComplexity": {"value": 1, "flag": "GREEN"}, "sourceLines": 1, "executableLines": 0}
+          ]
+        }
+      ]
+    },
+    {
+      "name": "UCR.ECCI.PI.ThemePark.Backend.Application",
+      "types": [
+        {
+          "name": "ILearningSpaceCreateService",
+          "maintainabilityIndex": {"value": 76, "flag": "GREEN"},
+          "cyclomaticComplexity": {"value": 1, "flag": "GREEN"},
+          "classCoupling": {"value": 1, "flag": "GREEN"},
+          "depthOfInheritance": {"value": 0, "flag": "GREEN"},
+          "sourceLines": 12,
+          "executableLines": 0,
+          "methods": [
+            {"name": "CreateLearningSpaceAsync(string,float,float,float)", "maintainabilityIndex": {"value": 100, "flag": "GREEN"}, "cyclomaticComplexity": {"value": 1, "flag": "GREEN"}, "sourceLines": 1, "executableLines": 0}
+          ]
+        },
+        {
+          "name": "LearningSpaceCreateService",
+          "maintainabilityIndex": {"value": 67, "flag": "GREEN"},
+          "cyclomaticComplexity": {"value": 2, "flag": "GREEN"},
+          "classCoupling": {"value": 6, "flag": "GREEN"},
+          "depthOfInheritance": {"value": 0, "flag": "GREEN"},
+          "sourceLines": 31,
+          "executableLines": 4,
+          "methods": [
+            {"name": ".ctor(ILearningSpaceRepository)", "maintainabilityIndex": {"value": 87, "flag": "GREEN"}, "cyclomaticComplexity": {"value": 1, "flag": "GREEN"}, "sourceLines": 4, "executableLines": 1},
+            {"name": "CreateLearningSpaceAsync(string,float,float,float)", "maintainabilityIndex": {"value": 79, "flag": "GREEN"}, "cyclomaticComplexity": {"value": 1, "flag": "GREEN"}, "sourceLines": 9, "executableLines": 3}
+          ]
+        }
+      ]
+    },
+    {
+      "name": "UCR.ECCI.PI.ThemePark.Backend.Infrastructure",
+      "types": [
+        {
+          "name": "SqlLearningSpaceRepository",
+          "maintainabilityIndex": {"value": 70, "flag": "GREEN"},
+          "cyclomaticComplexity": {"value": 2, "flag": "GREEN"},
+          "classCoupling": {"value": 7, "flag": "GREEN"},
+          "depthOfInheritance": {"value": 0, "flag": "GREEN"},
+          "sourceLines": 23,
+          "executableLines": 3,
+          "methods": [
+            {"name": ".ctor(UCRDatabaseContext)", "maintainabilityIndex": {"value": 87, "flag": "GREEN"}, "cyclomaticComplexity": {"value": 1, "flag": "GREEN"}, "sourceLines": 4, "executableLines": 1},
+            {"name": "AddAsync(LearningSpace)", "maintainabilityIndex": {"value": 85, "flag": "GREEN"}, "cyclomaticComplexity": {"value": 1, "flag": "GREEN"}, "sourceLines": 5, "executableLines": 2}
+          ]
+        }
+      ]
+    },
+    {
+      "name": "UCR.ECCI.PI.ThemePark.Backend.Presentation",
+      "types": [
+        {
+          "name": "CreateLearningSpaceHandler",
+          "maintainabilityIndex": {"value": 66, "flag": "GREEN"},
+          "cyclomaticComplexity": {"value": 3, "flag": "GREEN"},
+          "classCoupling": {"value": 14, "flag": "YELLOW"},
+          "depthOfInheritance": {"value": 0, "flag": "GREEN"},
+          "sourceLines": 35,
+          "executableLines": 6,
+          "methods": [
+            {"name": "HandleAsync(ILearningSpaceCreateService,CreateLearningSpaceDto)", "maintainabilityIndex": {"value": 69, "flag": "GREEN"}, "cyclomaticComplexity": {"value": 3, "flag": "GREEN"}, "sourceLines": 26, "executableLines": 6}
+          ]
+        },
+        {
+          "name": "LearningSpaceCreateEndpoints",
+          "maintainabilityIndex": {"value": 71, "flag": "GREEN"},
+          "cyclomaticComplexity": {"value": 1, "flag": "GREEN"},
+          "classCoupling": {"value": 10, "flag": "YELLOW"},
+          "depthOfInheritance": {"value": 0, "flag": "GREEN"},
+          "sourceLines": 21,
+          "executableLines": 3,
+          "methods": [
+            {"name": "MapLearningSpaceCreateEndpoints(IEndpointRouteBuilder)", "maintainabilityIndex": {"value": 76, "flag": "GREEN"}, "cyclomaticComplexity": {"value": 1, "flag": "GREEN"}, "sourceLines": 13, "executableLines": 3}
+          ]
+        },
+        {
+          "name": "CreateLearningSpaceDto",
+          "maintainabilityIndex": {"value": 100, "flag": "GREEN"},
+          "cyclomaticComplexity": {"value": 0, "flag": "GREEN"},
+          "classCoupling": {"value": 0, "flag": "GREEN"},
+          "depthOfInheritance": {"value": 0, "flag": "GREEN"},
+          "sourceLines": 1,
+          "executableLines": 0,
+          "methods": []
+        },
+        {
+          "name": "LearningSpaceResponse",
+          "maintainabilityIndex": {"value": 100, "flag": "GREEN"},
+          "cyclomaticComplexity": {"value": 0, "flag": "GREEN"},
+          "classCoupling": {"value": 0, "flag": "GREEN"},
+          "depthOfInheritance": {"value": 0, "flag": "GREEN"},
+          "sourceLines": 1,
+          "executableLines": 0,
+          "methods": []
+        }
+      ]
+    }
+  ]
+}
