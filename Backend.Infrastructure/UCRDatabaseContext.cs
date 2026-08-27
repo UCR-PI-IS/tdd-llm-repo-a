@@ -20,6 +20,13 @@ internal class UCRDatabaseContext : DbContext
     }
 
     /// <summary>
+    /// Protected parameterless constructor for Moq proxy creation.
+    /// </summary>
+    protected UCRDatabaseContext()
+    {
+    }
+
+    /// <summary>
     /// Gets or sets the collection of learning spaces in the database.
     /// </summary>
     public virtual DbSet<LearningSpace> LearningSpaces { get; set; } = null!;
