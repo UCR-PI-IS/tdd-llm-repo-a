@@ -1,0 +1,29 @@
+{
+  "stage": "test-generation",
+  "storyId": "SQL-LS-001-007",
+  "model": "Qwen3.7-max",
+  "iteration": "6",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Domain.Tests.Unit/LearningSpaceTests.cs",
+    "Backend.Application.Tests.Unit/LearningSpaceCreateServiceTests.cs",
+    "Backend.Infrastructure.Tests.Unit/SqlLearningSpaceRepositoryTests.cs",
+    "Backend.Presentation.Tests.Unit/CreateLearningSpaceHandlerTests.cs"
+  ],
+  "filesModified": [],
+  "metrics": {
+    "intentsConfirmed": 26,
+    "testMethodsEmitted": 21,
+    "byLayer": {
+      "Domain": 7,
+      "Application": 5,
+      "Infrastructure": 4,
+      "Presentation": 5
+    }
+  },
+  "warnings": [
+    "Infrastructure-001 and Infrastructure-004 intents specified in-memory database testing but Microsoft.EntityFrameworkCore.InMemory is not in the csproj; adapted to use mock DbContext following existing project patterns",
+    "LearningSpace entity constructor signature in tests (4-param with auto-generated ID) differs from existing entity (5-param with explicit id); tests target the new expected signature per story intents"
+  ],
+  "notes": "Generated 21 test methods across 4 test classes covering all 26 confirmed intents for story SQL-LS-001-007 (Create Learning Space). Domain tests use parameterized TestCases to consolidate zero/negative dimension and valid type scenarios. Infrastructure tests adapted from in-memory DB to mock DbContext since Microsoft.EntityFrameworkCore.InMemory is not available in the test project dependencies."
+}
