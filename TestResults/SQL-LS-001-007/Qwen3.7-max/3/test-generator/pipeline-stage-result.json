@@ -1,0 +1,29 @@
+{
+  "stage": "test-generation",
+  "storyId": "SQL-LS-001-007",
+  "model": "Qwen3.7-max",
+  "iteration": "3",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Domain.Tests.Unit/LearningSpaceTests.cs",
+    "Backend.Application.Tests.Unit/LearningSpaceCreateServiceTests.cs",
+    "Backend.Infrastructure.Tests.Unit/SqlLearningSpaceRepositoryTests.cs",
+    "Backend.Presentation.Tests.Unit/CreateLearningSpaceHandlerTests.cs"
+  ],
+  "filesModified": [],
+  "metrics": {
+    "intentsConfirmed": 26,
+    "testMethodsEmitted": 21,
+    "byLayer": {
+      "Domain": 7,
+      "Application": 5,
+      "Infrastructure": 4,
+      "Presentation": 5
+    }
+  },
+  "warnings": [
+    "Infrastructure-001 and Infrastructure-004 adapted from in-memory database approach to mock-based approach because Microsoft.EntityFrameworkCore.InMemory package is not available in the test project csproj",
+    "Infrastructure-001 and Infrastructure-002 have overlapping verification logic since both test AddAsync with mock DbContext; kept as separate methods to maintain 1:1 intent-to-test traceability"
+  ],
+  "notes": "Generated 21 test methods across 4 test classes covering all 26 confirmed intents for story SQL-LS-001-007 (LearningSpace creation). Domain tests use parameterized TestCases to consolidate zero/negative dimension checks. Application tests mock ILearningSpaceRepository. Infrastructure tests use mock DbContext since InMemory provider is unavailable. Presentation tests mock ILearningSpaceCreateService and verify HTTP result types."
+}
