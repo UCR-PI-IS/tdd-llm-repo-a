@@ -1,0 +1,68 @@
+{
+  "stage": "e2e-validation",
+  "status": "failure",
+  "timestamp": "2026-08-25_16-32-41",
+  "storyId": "SQL-LS-001-007",
+  "model": "Qwen3.7-max",
+  "iteration": "6",
+  "database": {
+    "container": "themepark-sql-e2e-sql-ls-001-007-qwen3-7-max-6-163241",
+    "image": "mcr.microsoft.com/mssql/server:2022-latest",
+    "network": "themepark-e2e-sql-ls-001-007-qwen3-7-max-6-163241",
+    "database": "ThemePark",
+    "readySeconds": 8.7,
+    "baseSchemaApplied": [
+      "Semester.sql",
+      "Course.sql"
+    ],
+    "seedsApplied": []
+  },
+  "backend": {
+    "container": "themepark-api-e2e-sql-ls-001-007-qwen3-7-max-6-163241",
+    "project": "Backend.Api/UCR.ECCI.PI.ThemePark.Backend.Api.csproj",
+    "publishStatus": "success",
+    "started": true,
+    "url": "http://127.0.0.1:55000",
+    "readySeconds": 2.2,
+    "errorLines": [
+      "fail: Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware[1]",
+      "An unhandled exception has occurred while executing the request."
+    ]
+  },
+  "probes": [
+    {
+      "name": "POST /LearningSpaces",
+      "method": "POST",
+      "path": "/LearningSpaces",
+      "expectedStatus": 201,
+      "actualStatus": 400,
+      "passed": false,
+      "missingContent": [],
+      "error": null,
+      "bodySnippet": "Microsoft.AspNetCore.Http.BadHttpRequestException: Implicit body inferred for parameter \"dto\" but no body was provided. Did you mean to use a Service instead?\n   at Microsoft.AspNetCore.Http.RequestDelegateFactory.Log.ImplicitBodyNotProvided(HttpContext httpContext, String parameterName, Boolean shouldThrow)\n   at lambda_method3(Closure, Object, HttpContext, Object)\n   at Microsoft.AspNetCore.Http.RequestDelegateFactory.<>c__DisplayClass102_2.<<HandleRequestBodyAndCompileRequestDelegateForJson>b"
+    }
+  ],
+  "totalProbes": 1,
+  "probesPassed": 0,
+  "probesFailed": 1,
+  "cleanup": {
+    "status": "clean",
+    "removedContainers": [
+      "themepark-api-e2e-sql-ls-001-007-qwen3-7-max-6-163241",
+      "themepark-sql-e2e-sql-ls-001-007-qwen3-7-max-6-163241"
+    ],
+    "removedNetworks": [
+      "themepark-e2e-sql-ls-001-007-qwen3-7-max-6-163241"
+    ],
+    "removedVolumes": [
+      "themepark-app-e2e-sql-ls-001-007-qwen3-7-max-6-163241"
+    ],
+    "leftovers": []
+  },
+  "warnings": [
+    "No sample data supplied (--seed/--seed-sql). The backend was validated against an empty database, which cannot prove the story's read paths work."
+  ],
+  "errors": [
+    "1 probe(s) failed."
+  ]
+}

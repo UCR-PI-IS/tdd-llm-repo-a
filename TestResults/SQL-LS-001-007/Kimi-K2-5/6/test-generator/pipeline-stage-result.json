@@ -1,0 +1,26 @@
+{
+  "stage": "test-generation",
+  "storyId": "SQL-LS-001-007",
+  "model": "Kimi-K2-5",
+  "iteration": "6",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Domain.Tests.Unit/LearningSpaceTests.cs",
+    "Backend.Application.Tests.Unit/LearningSpaceCreateServiceTests.cs",
+    "Backend.Infrastructure.Tests.Unit/SqlLearningSpaceRepositoryTests.cs",
+    "Backend.Presentation.Tests.Unit/CreateLearningSpaceHandlerTests.cs"
+  ],
+  "filesModified": [],
+  "metrics": {
+    "intentsConfirmed": 26,
+    "testMethodsEmitted": 26,
+    "byLayer": {
+      "Domain": 12,
+      "Application": 5,
+      "Infrastructure": 4,
+      "Presentation": 5
+    }
+  },
+  "warnings": [],
+  "notes": "Generated 26 test methods covering all confirmed intents for story SQL-LS-001-007. Tests follow NUnit 3.14.0 conventions with Moq 4.20.72 for mocking. All tests use AAA pattern with Assert.Multiple for multiple property assertions. Domain tests cover entity constructor validation (valid/invalid types, zero/negative dimensions, null/empty values). Application tests cover service creation and exception propagation. Infrastructure tests cover repository AddAsync with in-memory database and mocking. Presentation tests cover handler responses (201 Created, 400 Bad Request, 500 Internal Server Error)."
+}

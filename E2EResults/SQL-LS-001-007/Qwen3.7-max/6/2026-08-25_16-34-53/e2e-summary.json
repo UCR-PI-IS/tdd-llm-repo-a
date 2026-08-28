@@ -1,0 +1,68 @@
+{
+  "stage": "e2e-validation",
+  "status": "failure",
+  "timestamp": "2026-08-25_16-34-53",
+  "storyId": "SQL-LS-001-007",
+  "model": "Qwen3.7-max",
+  "iteration": "6",
+  "database": {
+    "container": "themepark-sql-e2e-sql-ls-001-007-qwen3-7-max-6-163453",
+    "image": "mcr.microsoft.com/mssql/server:2022-latest",
+    "network": "themepark-e2e-sql-ls-001-007-qwen3-7-max-6-163453",
+    "database": "ThemePark",
+    "readySeconds": 8.6,
+    "baseSchemaApplied": [
+      "Semester.sql",
+      "Course.sql"
+    ],
+    "seedsApplied": []
+  },
+  "backend": {
+    "container": "themepark-api-e2e-sql-ls-001-007-qwen3-7-max-6-163453",
+    "project": "Backend.Api/UCR.ECCI.PI.ThemePark.Backend.Api.csproj",
+    "publishStatus": "success",
+    "started": true,
+    "url": "http://127.0.0.1:55001",
+    "readySeconds": 2.2,
+    "errorLines": [
+      "fail: Microsoft.EntityFrameworkCore.Database.Command[20102]",
+      "fail: Microsoft.EntityFrameworkCore.Update[10000]"
+    ]
+  },
+  "probes": [
+    {
+      "name": "create learning space",
+      "method": "POST",
+      "path": "/LearningSpaces",
+      "expectedStatus": 201,
+      "actualStatus": 500,
+      "passed": false,
+      "missingContent": [],
+      "error": null,
+      "bodySnippet": "{\"type\":\"https://tools.ietf.org/html/rfc9110#section-15.6.1\",\"title\":\"An error occurred while processing your request.\",\"status\":500,\"detail\":\"An unexpected error occurred while creating the learning space.\"}"
+    }
+  ],
+  "totalProbes": 1,
+  "probesPassed": 0,
+  "probesFailed": 1,
+  "cleanup": {
+    "status": "clean",
+    "removedContainers": [
+      "themepark-api-e2e-sql-ls-001-007-qwen3-7-max-6-163453",
+      "themepark-sql-e2e-sql-ls-001-007-qwen3-7-max-6-163453"
+    ],
+    "removedNetworks": [
+      "themepark-e2e-sql-ls-001-007-qwen3-7-max-6-163453"
+    ],
+    "removedVolumes": [
+      "themepark-app-e2e-sql-ls-001-007-qwen3-7-max-6-163453"
+    ],
+    "leftovers": []
+  },
+  "warnings": [
+    "No sample data supplied (--seed/--seed-sql). The backend was validated against an empty database, which cannot prove the story's read paths work."
+  ],
+  "errors": [
+    "1 probe(s) failed."
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "stage": "e2e-validation",
+  "status": "failure",
+  "timestamp": "2026-08-24_16-14-17",
+  "storyId": "SQL-LS-001-007",
+  "model": "Qwen3.7-max",
+  "iteration": "5",
+  "database": {
+    "container": "themepark-sql-e2e-sql-ls-001-007-qwen3-7-max-5-161417",
+    "image": "mcr.microsoft.com/mssql/server:2022-latest",
+    "network": "themepark-e2e-sql-ls-001-007-qwen3-7-max-5-161417",
+    "database": "ThemePark",
+    "readySeconds": 8.7,
+    "baseSchemaApplied": [
+      "Semester.sql",
+      "Course.sql"
+    ],
+    "seedsApplied": [
+      "seed-SQL-LS-001-007.sql"
+    ]
+  },
+  "backend": {
+    "container": "themepark-api-e2e-sql-ls-001-007-qwen3-7-max-5-161417",
+    "project": "Backend.Api/UCR.ECCI.PI.ThemePark.Backend.Api.csproj",
+    "publishStatus": "success",
+    "started": true,
+    "url": "http://127.0.0.1:55000",
+    "readySeconds": 2.2,
+    "errorLines": []
+  },
+  "probes": [
+    {
+      "name": "GET LearningSpaceList returns seeded spaces",
+      "method": "GET",
+      "path": "/LearningSpaceList",
+      "expectedStatus": 200,
+      "actualStatus": 200,
+      "passed": true,
+      "missingContent": [],
+      "error": null,
+      "bodySnippet": "{\"learningSpaces\":[{\"id\":\"1\",\"type\":\"Classroom\"},{\"id\":\"2\",\"type\":\"Auditorium\"},{\"id\":\"3\",\"type\":\"Laboratory\"}]}"
+    },
+    {
+      "name": "POST LearningSpaces creates a new space",
+      "method": "POST",
+      "path": "/LearningSpaces",
+      "expectedStatus": 201,
+      "actualStatus": 415,
+      "passed": false,
+      "missingContent": [
+        "Classroom"
+      ],
+      "error": null,
+      "bodySnippet": ""
+    }
+  ],
+  "totalProbes": 2,
+  "probesPassed": 1,
+  "probesFailed": 1,
+  "cleanup": {
+    "status": "clean",
+    "removedContainers": [
+      "themepark-api-e2e-sql-ls-001-007-qwen3-7-max-5-161417",
+      "themepark-sql-e2e-sql-ls-001-007-qwen3-7-max-5-161417"
+    ],
+    "removedNetworks": [
+      "themepark-e2e-sql-ls-001-007-qwen3-7-max-5-161417"
+    ],
+    "removedVolumes": [
+      "themepark-app-e2e-sql-ls-001-007-qwen3-7-max-5-161417"
+    ],
+    "leftovers": []
+  },
+  "warnings": [],
+  "errors": [
+    "1 probe(s) failed."
+  ]
+}

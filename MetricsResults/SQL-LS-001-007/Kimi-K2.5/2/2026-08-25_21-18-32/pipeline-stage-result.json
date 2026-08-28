@@ -1,0 +1,29 @@
+{
+  "stage": "refactoring",
+  "storyId": "SQL-LS-001-007",
+  "model": "Kimi-K2.5",
+  "iteration": "2",
+  "status": "partial",
+  "filesCreated": [
+    "Backend.Presentation/Endpoints/CreateLearningSpaceEndpoints.cs"
+  ],
+  "filesModified": [
+    "Backend.Domain/Entities/LearningSpace.cs",
+    "Backend.Presentation/Endpoints/LearningSpaceListEndpoints.cs",
+    "Backend.Api/Program.cs"
+  ],
+  "metrics": {
+    "loopIterationsPerformed": 2,
+    "maxLoopIterations": 10,
+    "allGreenAchieved": false,
+    "baseline": { "minMI": 58, "maxCC": 6, "maxCoupling": 14, "maxDIT": 0 },
+    "final":    { "minMI": 59, "maxCC": 6, "maxCoupling": 14, "maxDIT": 0 },
+    "remainingViolations": [
+      { "type": "CreateLearningSpaceHandler", "metric": "Coupling", "value": 14, "flag": "YELLOW" }
+    ]
+  },
+  "warnings": [
+    "CreateLearningSpaceHandler coupling remains at 14 (YELLOW). This is a minimal API handler that inherently requires multiple type references (ASP.NET Core result types, service interfaces, domain entities, DTOs). Reducing below 10 would require significant architectural changes that would break existing tests."
+  ],
+  "notes": "Refactored LearningSpace entity to extract validation helpers, improving constructor MI from 65 to 76 and reducing CC from 6 to 1. Split LearningSpaceListEndpoints to separate concerns, reducing coupling from 11 to 7 (now GREEN). Created CreateLearningSpaceEndpoints with method group syntax, achieving coupling of 7 (GREEN). All story-related code now GREEN except CreateLearningSpaceHandler which remains YELLOW due to inherent minimal API handler complexity."
+}

@@ -1,0 +1,29 @@
+{
+  "stage": "refactoring",
+  "storyId": "SQL-LS-001-007",
+  "model": "Qwen3.7-max",
+  "iteration": "2",
+  "status": "partial",
+  "filesCreated": [
+    "Backend.Presentation/Mappers/LearningSpaceResponseMapper.cs",
+    "Backend.Presentation/Handlers/CreateLearningSpaceExecutor.cs"
+  ],
+  "filesModified": [
+    "Backend.Domain/Entities/LearningSpace.cs",
+    "Backend.Presentation/Handlers/CreateLearningSpaceHandler.cs"
+  ],
+  "metrics": {
+    "loopIterationsPerformed": 2,
+    "maxLoopIterations": 10,
+    "allGreenAchieved": false,
+    "baseline": { "minMI": 57, "maxCC": 10, "maxCoupling": 16, "maxDIT": 0 },
+    "final":    { "minMI": 58, "maxCC": 3, "maxCoupling": 14, "maxDIT": 0 },
+    "remainingViolations": [
+      { "type": "CreateLearningSpaceExecutor", "metric": "Coupling", "value": 14, "flag": "YELLOW" }
+    ]
+  },
+  "warnings": [
+    "CreateLearningSpaceExecutor coupling=14 cannot be reduced below 10 without changing the Results<Created<>, BadRequest<>, ProblemHttpResult> return type required by existing tests"
+  ],
+  "notes": "Original CreateLearningSpaceHandler coupling=16 was resolved (now 8, GREEN) by extracting logic into CreateLearningSpaceExecutor and LearningSpaceResponseMapper. The executor absorbed the coupling at a lower level (14 vs 16). LearningSpace guard clauses were consolidated (CC 10→6). The remaining executor coupling is inherent to the typed-results return type mandated by test assertions."
+}

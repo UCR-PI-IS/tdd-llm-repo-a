@@ -1,0 +1,74 @@
+{
+  "stage": "e2e-validation",
+  "status": "success",
+  "timestamp": "2026-08-24_16-16-59",
+  "storyId": "SQL-LS-001-007",
+  "model": "Qwen3.7-max",
+  "iteration": "5",
+  "database": {
+    "container": "themepark-sql-e2e-sql-ls-001-007-qwen3-7-max-5-161659",
+    "image": "mcr.microsoft.com/mssql/server:2022-latest",
+    "network": "themepark-e2e-sql-ls-001-007-qwen3-7-max-5-161659",
+    "database": "ThemePark",
+    "readySeconds": 8.6,
+    "baseSchemaApplied": [
+      "Semester.sql",
+      "Course.sql"
+    ],
+    "seedsApplied": [
+      "seed-SQL-LS-001-007.sql"
+    ]
+  },
+  "backend": {
+    "container": "themepark-api-e2e-sql-ls-001-007-qwen3-7-max-5-161659",
+    "project": "Backend.Api/UCR.ECCI.PI.ThemePark.Backend.Api.csproj",
+    "publishStatus": "success",
+    "started": true,
+    "url": "http://127.0.0.1:55001",
+    "readySeconds": 2.2,
+    "errorLines": []
+  },
+  "probes": [
+    {
+      "name": "GET LearningSpaceList returns seeded spaces",
+      "method": "GET",
+      "path": "/LearningSpaceList",
+      "expectedStatus": 200,
+      "actualStatus": 200,
+      "passed": true,
+      "missingContent": [],
+      "error": null,
+      "bodySnippet": "{\"learningSpaces\":[{\"id\":\"1\",\"type\":\"Classroom\"},{\"id\":\"2\",\"type\":\"Auditorium\"},{\"id\":\"3\",\"type\":\"Laboratory\"}]}"
+    },
+    {
+      "name": "POST LearningSpaces creates a new space",
+      "method": "POST",
+      "path": "/LearningSpaces",
+      "expectedStatus": 201,
+      "actualStatus": 201,
+      "passed": true,
+      "missingContent": [],
+      "error": null,
+      "bodySnippet": "{\"learningSpaceId\":4,\"type\":\"Classroom\",\"height\":4,\"width\":9,\"length\":12}"
+    }
+  ],
+  "totalProbes": 2,
+  "probesPassed": 2,
+  "probesFailed": 0,
+  "cleanup": {
+    "status": "clean",
+    "removedContainers": [
+      "themepark-api-e2e-sql-ls-001-007-qwen3-7-max-5-161659",
+      "themepark-sql-e2e-sql-ls-001-007-qwen3-7-max-5-161659"
+    ],
+    "removedNetworks": [
+      "themepark-e2e-sql-ls-001-007-qwen3-7-max-5-161659"
+    ],
+    "removedVolumes": [
+      "themepark-app-e2e-sql-ls-001-007-qwen3-7-max-5-161659"
+    ],
+    "leftovers": []
+  },
+  "warnings": [],
+  "errors": []
+}

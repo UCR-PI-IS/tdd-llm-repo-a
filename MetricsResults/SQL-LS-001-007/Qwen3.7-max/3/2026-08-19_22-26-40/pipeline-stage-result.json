@@ -1,0 +1,30 @@
+{
+  "stage": "refactoring",
+  "storyId": "SQL-LS-001-007",
+  "model": "Qwen3.7-max",
+  "iteration": "3",
+  "status": "partial",
+  "filesCreated": [
+    "Backend.Presentation/Endpoints/CreateLearningSpaceEndpoints.cs",
+    "Backend.Presentation/Mappers/LearningSpaceResponseMapper.cs"
+  ],
+  "filesModified": [
+    "Backend.Presentation/Endpoints/LearningSpaceListEndpoints.cs",
+    "Backend.Presentation/Handlers/CreateLearningSpaceHandler.cs",
+    "Backend.Api/Program.cs"
+  ],
+  "metrics": {
+    "loopIterationsPerformed": 2,
+    "maxLoopIterations": 10,
+    "allGreenAchieved": false,
+    "baseline": { "minMI": 58, "maxCC": 6, "maxCoupling": 14, "maxDIT": 0 },
+    "final":    { "minMI": 58, "maxCC": 6, "maxCoupling": 14, "maxDIT": 0 },
+    "remainingViolations": [
+      { "type": "CreateLearningSpaceHandler", "metric": "Coupling", "value": 14, "flag": "YELLOW" }
+    ]
+  },
+  "warnings": [
+    "CreateLearningSpaceHandler coupling=14 is structurally constrained by the test-required return type Results<Created<LearningSpaceResponse>, BadRequest<string>, ProblemHttpResult> which accounts for 8+ type references; cannot reduce below 10 without breaking tests"
+  ],
+  "notes": "Split LearningSpaceListEndpoints (coupling 12→6 GREEN) by extracting POST endpoint into CreateLearningSpaceEndpoints (coupling 6 GREEN). Extracted LearningSpaceResponseMapper to improve CreateLearningSpaceHandler MI (66→68) and HandleAsync MI (69→72). One YELLOW remains: CreateLearningSpaceHandler coupling=14, driven by the Results<> return type signature required by unit tests."
+}

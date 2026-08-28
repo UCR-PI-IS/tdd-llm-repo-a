@@ -1,0 +1,64 @@
+{
+  "stage": "e2e-validation",
+  "status": "success",
+  "timestamp": "2026-08-25_16-45-17",
+  "storyId": "SQL-LS-001-007",
+  "model": "Qwen3.7-max",
+  "iteration": "6",
+  "database": {
+    "container": "themepark-sql-e2e-sql-ls-001-007-qwen3-7-max-6-164517",
+    "image": "mcr.microsoft.com/mssql/server:2022-latest",
+    "network": "themepark-e2e-sql-ls-001-007-qwen3-7-max-6-164517",
+    "database": "ThemePark",
+    "readySeconds": 8.6,
+    "baseSchemaApplied": [
+      "LearningSpace.sql",
+      "Semester.sql",
+      "Course.sql"
+    ],
+    "seedsApplied": []
+  },
+  "backend": {
+    "container": "themepark-api-e2e-sql-ls-001-007-qwen3-7-max-6-164517",
+    "project": "Backend.Api/UCR.ECCI.PI.ThemePark.Backend.Api.csproj",
+    "publishStatus": "success",
+    "started": true,
+    "url": "http://127.0.0.1:55003",
+    "readySeconds": 2.2,
+    "errorLines": []
+  },
+  "probes": [
+    {
+      "name": "create learning space",
+      "method": "POST",
+      "path": "/LearningSpaces",
+      "expectedStatus": 201,
+      "actualStatus": 201,
+      "passed": true,
+      "missingContent": [],
+      "error": null,
+      "bodySnippet": "{\"learningSpaceId\":1,\"type\":\"Classroom\",\"height\":3,\"width\":8,\"length\":10}"
+    }
+  ],
+  "totalProbes": 1,
+  "probesPassed": 1,
+  "probesFailed": 0,
+  "cleanup": {
+    "status": "clean",
+    "removedContainers": [
+      "themepark-api-e2e-sql-ls-001-007-qwen3-7-max-6-164517",
+      "themepark-sql-e2e-sql-ls-001-007-qwen3-7-max-6-164517"
+    ],
+    "removedNetworks": [
+      "themepark-e2e-sql-ls-001-007-qwen3-7-max-6-164517"
+    ],
+    "removedVolumes": [
+      "themepark-app-e2e-sql-ls-001-007-qwen3-7-max-6-164517"
+    ],
+    "leftovers": []
+  },
+  "warnings": [
+    "No sample data supplied (--seed/--seed-sql). The backend was validated against an empty database, which cannot prove the story's read paths work."
+  ],
+  "errors": []
+}

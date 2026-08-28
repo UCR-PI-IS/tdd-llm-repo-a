@@ -1,0 +1,89 @@
+{
+  "stage": "e2e-validation",
+  "status": "failure",
+  "timestamp": "2026-08-21_23-19-12",
+  "storyId": "SQL-LS-001-007",
+  "model": "Qwen3.7-max",
+  "iteration": "4",
+  "database": {
+    "container": "themepark-sql-e2e-sql-ls-001-007-qwen3-7-max-4-231912",
+    "image": "mcr.microsoft.com/mssql/server:2022-latest",
+    "network": "themepark-e2e-sql-ls-001-007-qwen3-7-max-4-231912",
+    "database": "ThemePark",
+    "readySeconds": 8.6,
+    "baseSchemaApplied": [
+      "Semester.sql",
+      "Course.sql"
+    ],
+    "seedsApplied": [
+      "seed-SQL-LS-001-007.sql"
+    ]
+  },
+  "backend": {
+    "container": "themepark-api-e2e-sql-ls-001-007-qwen3-7-max-4-231912",
+    "project": "Backend.Api/UCR.ECCI.PI.ThemePark.Backend.Api.csproj",
+    "publishStatus": "success",
+    "started": true,
+    "url": "http://127.0.0.1:55001",
+    "readySeconds": 2.2,
+    "errorLines": []
+  },
+  "probes": [
+    {
+      "name": "POST /LearningSpaces creates a new learning space",
+      "method": "POST",
+      "path": "/LearningSpaces",
+      "expectedStatus": 201,
+      "actualStatus": 201,
+      "passed": false,
+      "missingContent": [
+        "LearningSpaceId"
+      ],
+      "error": null,
+      "bodySnippet": "{\"learningSpaceId\":4,\"type\":\"Classroom\",\"height\":4,\"width\":9,\"length\":12}"
+    },
+    {
+      "name": "POST /LearningSpaces with invalid type returns 400",
+      "method": "POST",
+      "path": "/LearningSpaces",
+      "expectedStatus": 400,
+      "actualStatus": 400,
+      "passed": true,
+      "missingContent": [],
+      "error": null,
+      "bodySnippet": "\"Type must be Classroom, Auditorium, or Laboratory (Parameter 'type')\""
+    },
+    {
+      "name": "GET /LearningSpaceList returns seeded spaces",
+      "method": "GET",
+      "path": "/LearningSpaceList",
+      "expectedStatus": 200,
+      "actualStatus": 200,
+      "passed": true,
+      "missingContent": [],
+      "error": null,
+      "bodySnippet": "{\"learningSpaces\":[{\"id\":\"1\",\"type\":\"Classroom\"},{\"id\":\"2\",\"type\":\"Auditorium\"},{\"id\":\"3\",\"type\":\"Laboratory\"},{\"id\":\"4\",\"type\":\"Classroom\"}]}"
+    }
+  ],
+  "totalProbes": 3,
+  "probesPassed": 2,
+  "probesFailed": 1,
+  "cleanup": {
+    "status": "clean",
+    "removedContainers": [
+      "themepark-api-e2e-sql-ls-001-007-qwen3-7-max-4-231912",
+      "themepark-sql-e2e-sql-ls-001-007-qwen3-7-max-4-231912"
+    ],
+    "removedNetworks": [
+      "themepark-e2e-sql-ls-001-007-qwen3-7-max-4-231912"
+    ],
+    "removedVolumes": [
+      "themepark-app-e2e-sql-ls-001-007-qwen3-7-max-4-231912"
+    ],
+    "leftovers": []
+  },
+  "warnings": [],
+  "errors": [
+    "1 probe(s) failed."
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "stage": "e2e-validation",
+  "status": "failure",
+  "timestamp": "2026-08-25_20-41-51",
+  "storyId": "SQL-LS-001-007",
+  "model": "Kimi-K2.5",
+  "iteration": "2",
+  "database": {
+    "container": "themepark-sql-e2e-sql-ls-001-007-kimi-k2-5-2-204151",
+    "image": "mcr.microsoft.com/mssql/server:2022-latest",
+    "network": "themepark-e2e-sql-ls-001-007-kimi-k2-5-2-204151",
+    "database": "ThemePark",
+    "readySeconds": 26.1,
+    "baseSchemaApplied": [
+      "LearningSpace.sql",
+      "Semester.sql",
+      "Course.sql"
+    ],
+    "seedsApplied": []
+  },
+  "backend": {},
+  "probes": [],
+  "totalProbes": 0,
+  "probesPassed": 0,
+  "probesFailed": 0,
+  "cleanup": {
+    "status": "clean",
+    "removedContainers": [
+      "themepark-sql-e2e-sql-ls-001-007-kimi-k2-5-2-204151"
+    ],
+    "removedNetworks": [
+      "themepark-e2e-sql-ls-001-007-kimi-k2-5-2-204151"
+    ],
+    "removedVolumes": [],
+    "leftovers": []
+  },
+  "warnings": [],
+  "errors": [
+    "seed seed-SQL-LS-001-007.sql: Msg 8106, Level 16, State 1, Server da2f6ffd2325, Line 6\nTable 'dbo.LearningSpace' does not have the identity property. Cannot perform SET operation."
+  ]
+}

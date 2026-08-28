@@ -1,0 +1,68 @@
+{
+  "stage": "e2e-validation",
+  "status": "failure",
+  "timestamp": "2026-08-25_17-38-19",
+  "storyId": "SQL-LS-001-007",
+  "model": "Kimi-K2-5",
+  "iteration": "1",
+  "database": {
+    "container": "themepark-sql-e2e-sql-ls-001-007-kimi-k2-5-1-173819",
+    "image": "mcr.microsoft.com/mssql/server:2022-latest",
+    "network": "themepark-e2e-sql-ls-001-007-kimi-k2-5-1-173819",
+    "database": "ThemePark",
+    "readySeconds": 8.6,
+    "baseSchemaApplied": [
+      "Semester.sql",
+      "Course.sql"
+    ],
+    "seedsApplied": [
+      "seed-SQL-LS-001-007.sql"
+    ]
+  },
+  "backend": {
+    "container": "themepark-api-e2e-sql-ls-001-007-kimi-k2-5-1-173819",
+    "project": "Backend.Api/UCR.ECCI.PI.ThemePark.Backend.Api.csproj",
+    "publishStatus": "success",
+    "started": true,
+    "url": "http://127.0.0.1:55001",
+    "readySeconds": 2.2,
+    "errorLines": [
+      "fail: Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware[1]",
+      "An unhandled exception has occurred while executing the request."
+    ]
+  },
+  "probes": [
+    {
+      "name": "POST /api/learningspaces",
+      "method": "POST",
+      "path": "/api/learningspaces",
+      "expectedStatus": 201,
+      "actualStatus": 400,
+      "passed": false,
+      "missingContent": [],
+      "error": null,
+      "bodySnippet": "Microsoft.AspNetCore.Http.BadHttpRequestException: Implicit body inferred for parameter \"dto\" but no body was provided. Did you mean to use a Service instead?\n   at Microsoft.AspNetCore.Http.RequestDelegateFactory.Log.ImplicitBodyNotProvided(HttpContext httpContext, String parameterName, Boolean shouldThrow)\n   at lambda_method3(Closure, Object, HttpContext, Object)\n   at Microsoft.AspNetCore.Http.RequestDelegateFactory.<>c__DisplayClass102_2.<<HandleRequestBodyAndCompileRequestDelegateForJson>b"
+    }
+  ],
+  "totalProbes": 1,
+  "probesPassed": 0,
+  "probesFailed": 1,
+  "cleanup": {
+    "status": "clean",
+    "removedContainers": [
+      "themepark-api-e2e-sql-ls-001-007-kimi-k2-5-1-173819",
+      "themepark-sql-e2e-sql-ls-001-007-kimi-k2-5-1-173819"
+    ],
+    "removedNetworks": [
+      "themepark-e2e-sql-ls-001-007-kimi-k2-5-1-173819"
+    ],
+    "removedVolumes": [
+      "themepark-app-e2e-sql-ls-001-007-kimi-k2-5-1-173819"
+    ],
+    "leftovers": []
+  },
+  "warnings": [],
+  "errors": [
+    "1 probe(s) failed."
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "stage": "test-generation",
+  "storyId": "SQL-LS-001-007",
+  "model": "Kimi-K2.5",
+  "iteration": "1",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Domain.Tests.Unit/LearningSpaceTests.cs",
+    "Backend.Application.Tests.Unit/LearningSpaceCreateServiceTests.cs",
+    "Backend.Infrastructure.Tests.Unit/SqlLearningSpaceRepositoryTests.cs",
+    "Backend.Presentation.Tests.Unit/CreateLearningSpaceHandlerTests.cs"
+  ],
+  "filesModified": [],
+  "metrics": {
+    "intentsConfirmed": 26,
+    "testMethodsEmitted": 19,
+    "byLayer": {
+      "Domain": 6,
+      "Application": 5,
+      "Infrastructure": 3,
+      "Presentation": 5
+    }
+  },
+  "warnings": [
+    "Infrastructure intents Infrastructure-001 and Infrastructure-004 originally specified in-memory database usage; adapted to use Moq-based unit tests since Microsoft.EntityFrameworkCore.InMemory is not referenced in the test project.",
+    "All 26 confirmed intents were processed. No intents were skipped."
+  ],
+  "notes": "Generated 19 test methods across 4 test classes covering all 26 confirmed intents for story SQL-LS-001-007. Domain tests use parameterized TestCase attributes to minimize method count while covering all validation scenarios. Infrastructure tests were adapted to use mocking instead of in-memory database to respect existing dependency constraints."
+}
