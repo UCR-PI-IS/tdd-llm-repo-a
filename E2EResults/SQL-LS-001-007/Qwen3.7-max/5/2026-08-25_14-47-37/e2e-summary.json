@@ -1,0 +1,84 @@
+{
+  "stage": "e2e-validation",
+  "status": "failure",
+  "timestamp": "2026-08-25_14-47-37",
+  "storyId": "SQL-LS-001-007",
+  "model": "Qwen3.7-max",
+  "iteration": "5",
+  "database": {
+    "container": "themepark-sql-e2e-sql-ls-001-007-qwen3-7-max-5-144737",
+    "image": "mcr.microsoft.com/mssql/server:2022-latest",
+    "network": "themepark-e2e-sql-ls-001-007-qwen3-7-max-5-144737",
+    "database": "ThemePark",
+    "readySeconds": 8.8,
+    "baseSchemaApplied": [
+      "Semester.sql",
+      "Course.sql"
+    ],
+    "seedsApplied": [
+      "seed-SQL-LS-001-007.sql"
+    ]
+  },
+  "backend": {
+    "container": "themepark-api-e2e-sql-ls-001-007-qwen3-7-max-5-144737",
+    "project": "Backend.Api/UCR.ECCI.PI.ThemePark.Backend.Api.csproj",
+    "publishStatus": "success",
+    "started": true,
+    "url": "http://127.0.0.1:55000",
+    "readySeconds": 2.3,
+    "errorLines": [
+      "fail: Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware[1]",
+      "An unhandled exception has occurred while executing the request.",
+      "System.InvalidOperationException: No suitable constructor was found for entity type 'LearningSpace'. The following constructors had parameters that could not be bound to properties of the entity type:"
+    ]
+  },
+  "probes": [
+    {
+      "name": "list includes seeded spaces",
+      "method": "GET",
+      "path": "/LearningSpaceList",
+      "expectedStatus": 200,
+      "actualStatus": 500,
+      "passed": false,
+      "missingContent": [
+        "Classroom"
+      ],
+      "error": null,
+      "bodySnippet": "System.InvalidOperationException: No suitable constructor was found for entity type 'LearningSpace'. The following constructors had parameters that could not be bound to properties of the entity type: \n    Cannot bind 'height', 'width', 'length' in 'LearningSpace(string type, float height, float width, float length)'\nNote that only mapped properties can be bound to constructor parameters. Navigations to related entities, including references to owned types, cannot be bound.\n   at Microsoft.Entit"
+    },
+    {
+      "name": "create a new learning space",
+      "method": "POST",
+      "path": "/LearningSpaces",
+      "expectedStatus": 201,
+      "actualStatus": 415,
+      "passed": false,
+      "missingContent": [
+        "Classroom"
+      ],
+      "error": null,
+      "bodySnippet": ""
+    }
+  ],
+  "totalProbes": 2,
+  "probesPassed": 0,
+  "probesFailed": 2,
+  "cleanup": {
+    "status": "clean",
+    "removedContainers": [
+      "themepark-api-e2e-sql-ls-001-007-qwen3-7-max-5-144737",
+      "themepark-sql-e2e-sql-ls-001-007-qwen3-7-max-5-144737"
+    ],
+    "removedNetworks": [
+      "themepark-e2e-sql-ls-001-007-qwen3-7-max-5-144737"
+    ],
+    "removedVolumes": [
+      "themepark-app-e2e-sql-ls-001-007-qwen3-7-max-5-144737"
+    ],
+    "leftovers": []
+  },
+  "warnings": [],
+  "errors": [
+    "2 probe(s) failed."
+  ]
+}
