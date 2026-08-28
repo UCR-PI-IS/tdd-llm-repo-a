@@ -1,0 +1,46 @@
+{
+  "stage": "code-generation",
+  "storyId": "SQL-LS-001-007",
+  "model": "Qwen3.7-max",
+  "iteration": "3",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Domain/Repositories/ILearningSpaceRepository.cs",
+    "Backend.Application/Services/ILearningSpaceCreateService.cs",
+    "Backend.Application/Services/Implementations/LearningSpaceCreateService.cs",
+    "Backend.Infrastructure/Repositories/SqlLearningSpaceRepository.cs",
+    "Backend.Presentation/Dtos/CreateLearningSpaceDto.cs",
+    "Backend.Presentation/Responses/LearningSpaceResponse.cs",
+    "Backend.Presentation/Handlers/CreateLearningSpaceHandler.cs"
+  ],
+  "filesModified": [
+    "Backend.Domain/Entities/LearningSpace.cs",
+    "Backend.Infrastructure/EntityConfigurations/LearningSpaceEntityConfiguration.cs",
+    "Backend.Infrastructure/Repositories/SqlLearningSpaceListRepository.cs",
+    "Backend.Infrastructure/DependecyInjection.cs",
+    "Backend.Application/DependencyInjection.cs",
+    "Backend.Presentation/Handlers/GetLearningSpaceListHandler.cs",
+    "Backend.Presentation/Endpoints/LearningSpaceListEndpoints.cs"
+  ],
+  "metrics": {
+    "buildErrors": 0,
+    "buildWarnings": 0,
+    "testsTotal": 53,
+    "testsPassed": 53,
+    "testsFailed": 0,
+    "testsSkipped": 0,
+    "lineCoverage": 0.6608,
+    "branchCoverage": 0.875,
+    "e2e": {
+      "status": "success",
+      "probesTotal": 2,
+      "probesPassed": 2,
+      "probesFailed": 0,
+      "seedsApplied": ["seed-SQL-LS-001-007.sql"],
+      "resultPath": "E2EResults/SQL-LS-001-007/Qwen3.7-max/3/2026-08-19_22-15-45/",
+      "cleanup": "clean"
+    }
+  },
+  "warnings": [],
+  "notes": "Refactored LearningSpace entity from string-id/5-param constructor to int-id/4-param constructor with domain validation. Added full create pipeline across all DDD layers (domain entity, repository interface/impl, application service, presentation handler/DTO/response, POST endpoint). All 53 unit tests pass and both e2e probes (GET list, POST create) succeed against ephemeral SQL Server."
+}

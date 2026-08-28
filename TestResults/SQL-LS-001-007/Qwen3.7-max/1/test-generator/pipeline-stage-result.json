@@ -1,0 +1,29 @@
+{
+  "stage": "test-generation",
+  "storyId": "SQL-LS-001-007",
+  "model": "Qwen3.7-max",
+  "iteration": "1",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Domain.Tests.Unit/LearningSpaceTests.cs",
+    "Backend.Application.Tests.Unit/LearningSpaceCreateServiceTests.cs",
+    "Backend.Infrastructure.Tests.Unit/SqlLearningSpaceRepositoryTests.cs",
+    "Backend.Presentation.Tests.Unit/CreateLearningSpaceHandlerTests.cs"
+  ],
+  "filesModified": [],
+  "metrics": {
+    "intentsConfirmed": 26,
+    "testMethodsEmitted": 14,
+    "byLayer": {
+      "Domain": 4,
+      "Application": 3,
+      "Infrastructure": 4,
+      "Presentation": 3
+    }
+  },
+  "warnings": [
+    "Infrastructure tests adapted from InMemory database to mock-based testing because Microsoft.EntityFrameworkCore.InMemory is not available in the Infrastructure test csproj",
+    "Infrastructure-004 sequential ID verification relies on entity constructor auto-generation rather than database-assigned IDs since InMemory provider is unavailable"
+  ],
+  "notes": "Generated 14 test methods across 4 test classes covering all 26 confirmed intents for story SQL-LS-001-007. Tests use parameterized TestCase attributes to consolidate related scenarios (e.g., zero/negative dimensions, valid types, null/empty type). Infrastructure tests use Moq-based DbContext mocking instead of InMemory database since the InMemory provider package is not in the test csproj dependencies."
+}

@@ -1,0 +1,29 @@
+{
+  "stage": "test-generation",
+  "storyId": "SQL-LS-001-007",
+  "model": "Qwen3.7-max",
+  "iteration": "2",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Domain.Tests.Unit/LearningSpaceTests.cs",
+    "Backend.Application.Tests.Unit/LearningSpaceCreateServiceTests.cs",
+    "Backend.Infrastructure.Tests.Unit/SqlLearningSpaceRepositoryTests.cs",
+    "Backend.Presentation.Tests.Unit/CreateLearningSpaceHandlerTests.cs"
+  ],
+  "filesModified": [],
+  "metrics": {
+    "intentsConfirmed": 26,
+    "testMethodsEmitted": 21,
+    "byLayer": {
+      "Domain": 7,
+      "Application": 5,
+      "Infrastructure": 4,
+      "Presentation": 5
+    }
+  },
+  "warnings": [
+    "Infrastructure-001 and Infrastructure-004 adapted from InMemoryDatabase to mock DbContext pattern because Microsoft.EntityFrameworkCore.InMemory is not listed in the Infrastructure test project dependencies",
+    "Application tests for negative scenarios use .Wait() with AggregateException unwrapping to handle synchronous domain validation exceptions thrown before the first await"
+  ],
+  "notes": "Generated 21 test methods across 4 test classes covering all 26 confirmed intents for story SQL-LS-001-007 (Create Learning Space). Domain tests consolidate 12 intents into 7 methods using TestCase parameterization. All tests follow the single logical assertion rule with Assert.Multiple for multi-property verification. Tests reference new classes (LearningSpaceCreateService, SqlLearningSpaceRepository, CreateLearningSpaceHandler, ILearningSpaceRepository, ILearningSpaceCreateService, CreateLearningSpaceDto, LearningSpaceResponse) that do not yet exist as the story is unimplemented."
+}
