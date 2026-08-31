@@ -16,4 +16,11 @@ public interface ILearningSpaceListRepository
     /// Retrieves all learning spaces.
     /// </summary>
     Task<List<LearningSpace>> GetAllLearningSpacesAsync();
+
+    /// <summary>
+    /// Retrieves a learning space by its identifier.
+    /// </summary>
+    /// <param name="id">The identifier of the learning space.</param>
+    /// <returns>The learning space if found; otherwise, null.</returns>
+    Task<LearningSpace?> GetByIdAsync(string id);
 }

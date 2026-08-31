@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using UCR.ECCI.PI.ThemePark.Backend.Application.Services;
+using UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Dtos;
 using UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Handlers;
 
 namespace UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Endpoints;
@@ -12,10 +13,10 @@ namespace UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Endpoints;
 public static class LearningComponentsEndpoints
 {
     /// <summary>
-    /// Maps the GET endpoint for fetching the list of learning components for a learning space.
+    /// Maps the GET and POST endpoints for learning components.
     /// </summary>
     /// <param name="builder">The <see cref="IEndpointRouteBuilder"/> used to map the endpoint.</param>
-    /// <returns>The updated <see cref="IEndpointRouteBuilder"/> with the new route.</returns>
+    /// <returns>The updated <see cref="IEndpointRouteBuilder"/> with the new routes.</returns>
     public static IEndpointRouteBuilder MapLearningComponentsEndpoints(this IEndpointRouteBuilder builder)
     {
         builder.MapGet("/LearningComponents/{learningSpaceId}",
@@ -25,6 +26,15 @@ public static class LearningComponentsEndpoints
                     learningComponentService, learningSpaceId);
             })
             .WithName("GetLearningComponents")
+            .WithOpenApi();
+
+        builder.MapPost("/Whiteboards",
+            (IWhiteboardCreateService whiteboardCreateService, CreateWhiteboardDto dto) =>
+            {
+                return CreateWhiteboardHandler.HandleAsync(
+                    whiteboardCreateService, dto);
+            })
+            .WithName("CreateWhiteboard")
             .WithOpenApi();
 
         return builder;

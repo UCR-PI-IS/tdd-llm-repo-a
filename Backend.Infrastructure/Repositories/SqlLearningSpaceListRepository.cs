@@ -39,4 +39,15 @@ internal class SqlLearningSpaceListRepository : ILearningSpaceListRepository
     {
         return _dbContext.LearningSpaces.ToListAsync();
     }
+
+    /// <summary>
+    /// Retrieves a learning space by its identifier.
+    /// </summary>
+    /// <param name="id">The identifier of the learning space.</param>
+    /// <returns>The learning space if found; otherwise, null.</returns>
+    public async Task<LearningSpace?> GetByIdAsync(string id)
+    {
+        return await _dbContext.LearningSpaces
+            .FirstOrDefaultAsync(ls => ls.LearningSpaceId.ToString() == id);
+    }
 }
