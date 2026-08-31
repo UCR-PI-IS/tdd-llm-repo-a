@@ -1,0 +1,32 @@
+{
+  "stage": "refactoring",
+  "storyId": "CPD-LC-001-003",
+  "model": "Qwen3.7-max",
+  "iteration": "1",
+  "status": "partial",
+  "filesCreated": [
+    "Backend.Presentation/Handlers/WhiteboardResponseFactory.cs"
+  ],
+  "filesModified": [
+    "Backend.Presentation/Handlers/CreateWhiteboardHandler.cs"
+  ],
+  "metrics": {
+    "loopIterationsPerformed": 2,
+    "maxLoopIterations": 10,
+    "allGreenAchieved": false,
+    "baseline": { "minMI": 51, "maxCC": 10, "maxCoupling": 21, "maxDIT": 0 },
+    "final":    { "minMI": 51, "maxCC": 10, "maxCoupling": 21, "maxDIT": 0 },
+    "remainingViolations": [
+      { "type": "WhiteboardResponseFactory", "metric": "Coupling", "value": 21, "flag": "YELLOW" },
+      { "type": "WhiteboardService", "metric": "Coupling", "value": 14, "flag": "YELLOW" },
+      { "type": "SqlWhiteboardRepository", "metric": "Coupling", "value": 11, "flag": "YELLOW" }
+    ]
+  },
+  "warnings": [
+    "Delegate pattern (Func<Task<Whiteboard>>) was attempted to reduce factory coupling but made handler YELLOW (12) — reverted",
+    "WhiteboardResponseFactory coupling=21 is structural: return type Results<Ok<>,BadRequest<>,NotFound<>,ProblemHttpResult> alone references 7 types, plus 4 exception types, TypedResults, mapper, DTO, service, and response types",
+    "WhiteboardService coupling=14 is structural: service pattern requires 2 repository interfaces, entity, request, 2 exception types, LearningSpace, Task, and string references",
+    "SqlWhiteboardRepository coupling=11 is structural: EF Core repository pattern requires DbContext, entity, DatabaseException, DbUpdateException, DbSet, Task, and CancellationToken references"
+  ],
+  "notes": "Extracted WhiteboardResponseFactory following the existing codebase pattern (LearningSpaceResponseFactory). This reduced CreateWhiteboardHandler coupling from 21 (YELLOW) to 8 (GREEN) and improved its MI from 64 to 71 and CC from 5 to 1. The remaining 3 YELLOW coupling violations are structural — they are inherent to the handler/service/repository patterns and cannot be reduced below 10 without breaking the API contract (Results<> return type), DDD layer boundaries, or test expectations."
+}
