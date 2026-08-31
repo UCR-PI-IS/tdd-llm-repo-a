@@ -19,6 +19,7 @@ public static class DependencyInjection
         services.AddScoped<ILearningSpaceListService, LearningSpaceListService>();
         services.AddScoped<ILearningComponentService, LearningComponentService>();
         services.AddScoped<ILearningSpaceCreateService, LearningSpaceCreateService>();
+        services.AddScoped<IWhiteboardService, WhiteboardService>();
         return services;
     }
 }

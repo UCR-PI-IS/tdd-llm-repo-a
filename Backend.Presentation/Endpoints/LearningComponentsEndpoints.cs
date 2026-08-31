@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using UCR.ECCI.PI.ThemePark.Backend.Application.Services;
+using UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Dtos;
 using UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Handlers;
 
 namespace UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Endpoints;
@@ -25,6 +26,10 @@ public static class LearningComponentsEndpoints
                     learningComponentService, learningSpaceId);
             })
             .WithName("GetLearningComponents")
+            .WithOpenApi();
+
+        builder.MapPost("/Whiteboards", CreateWhiteboardHandler.HandleAsync)
+            .WithName("CreateWhiteboard")
             .WithOpenApi();
 
         return builder;
