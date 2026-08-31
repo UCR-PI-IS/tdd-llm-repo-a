@@ -1,0 +1,26 @@
+{
+  "stage": "refactoring",
+  "storyId": "CPD-LC-001-003",
+  "model": "Qwen3.7-max",
+  "iteration": "3",
+  "status": "partial",
+  "filesCreated": [],
+  "filesModified": ["Backend.Domain/Entities/Whiteboard.cs"],
+  "metrics": {
+    "loopIterationsPerformed": 2,
+    "maxLoopIterations": 10,
+    "allGreenAchieved": false,
+    "baseline": { "minMI": 51, "maxCC": 14, "maxCoupling": 20, "maxDIT": 0 },
+    "final":    { "minMI": 52, "maxCC": 10, "maxCoupling": 20, "maxDIT": 0 },
+    "remainingViolations": [
+      { "type": "WhiteboardService", "metric": "Coupling", "value": 14, "flag": "YELLOW" },
+      { "type": "SqlWhiteboardRepository", "metric": "Coupling", "value": 11, "flag": "YELLOW" },
+      { "type": "CreateWhiteboardHandler", "metric": "Coupling", "value": 20, "flag": "YELLOW" }
+    ]
+  },
+  "warnings": [
+    "Mapper extraction for CreateWhiteboardHandler was reverted: it increased coupling from 20 to 21 because var-inferred types still appear in IL. The handler's coupling is inherent to its role as a presentation-layer adapter bridging DTOs, domain entities, service interfaces, exception types, and HTTP result types.",
+    "WhiteboardService coupling=14 and SqlWhiteboardRepository coupling=11 are inherent to their roles and cannot be reduced without introducing unnecessary abstractions."
+  ],
+  "notes": "Simplified Whiteboard.FitsInSpace from 6 sequential if-return-false checks to 3 combined conditions (CC 14→10, GREEN). The simplification is logically equivalent because the constructor enforces X,Y,Z ≥ 0, making standalone dimension checks redundant when position checks pass. Three coupling YELLOW violations remain as they represent natural dependencies of service/repository/handler roles in Clean Architecture."
+}
