@@ -1,0 +1,37 @@
+{
+  "stage": "test-generation",
+  "storyId": "CPD-LC-001-003",
+  "model": "Qwen3.7-max",
+  "iteration": "3",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Domain.Tests.Unit/WhiteboardTests.cs",
+    "Backend.Application.Tests.Unit/WhiteboardServiceTests.cs",
+    "Backend.Infrastructure.Tests.Unit/SqlWhiteboardRepositoryTests.cs",
+    "Backend.Presentation.Tests.Unit/CreateWhiteboardHandlerTests.cs"
+  ],
+  "filesModified": [],
+  "metrics": {
+    "intentsConfirmed": 30,
+    "testMethodsEmitted": 25,
+    "byLayer": {
+      "Domain": 14,
+      "Application": 4,
+      "Infrastructure": 2,
+      "Presentation": 5
+    }
+  },
+  "warnings": [
+    "Application tests assume ILearningSpaceListRepository will be extended with GetByIdAsync(string) method",
+    "Application tests assume IWhiteboardRepository interface will be created in Domain.Repositories",
+    "Application tests assume CreateWhiteboardRequest record will be created in Application.Services",
+    "Application tests assume custom exceptions (NotFoundException, ValidationException, DatabaseException) will be created in Application.Exceptions",
+    "Infrastructure tests assume UCRDatabaseContext will be extended with DbSet<Whiteboard> Whiteboards property",
+    "Infrastructure tests assume SqlWhiteboardRepository wraps DbUpdateException in DatabaseException",
+    "Presentation tests assume IWhiteboardCreateService interface will be created in Application.Services",
+    "Presentation tests assume CreateWhiteboardDto record will be created in Presentation.Api.Dtos",
+    "Presentation tests assume CreateWhiteboardResponse record will be created in Presentation.Api.Responses",
+    "Presentation tests assume CreateWhiteboardHandler static class will be created in Presentation.Api.Handlers"
+  ],
+  "notes": "Generated 25 test methods across 4 test files covering all 30 confirmed intents for story CPD-LC-001-003 (Create whiteboard in a learning space). Domain tests cover Whiteboard constructor validation (19 intents) and FitsInSpace method. Application tests cover WhiteboardService.CreateWhiteboardAsync with success, not-found, validation, and database-error scenarios. Infrastructure tests cover SqlWhiteboardRepository.AddAsync success and failure. Presentation tests cover CreateWhiteboardHandler.HandleAsync with OK, BadRequest, NotFound, and ProblemHttpResult responses."
+}

@@ -1,0 +1,74 @@
+{
+  "stage": "e2e-validation",
+  "status": "success",
+  "timestamp": "2026-08-31_15-32-44",
+  "storyId": "CPD-LC-001-003",
+  "model": "Qwen3.7-max",
+  "iteration": "3",
+  "database": {
+    "container": "themepark-sql-e2e-cpd-lc-001-003-qwen3-7-max-3-153244",
+    "image": "mcr.microsoft.com/mssql/server:2022-latest",
+    "network": "themepark-e2e-cpd-lc-001-003-qwen3-7-max-3-153244",
+    "database": "ThemePark",
+    "readySeconds": 8.6,
+    "baseSchemaApplied": [
+      "Semester.sql",
+      "Course.sql"
+    ],
+    "seedsApplied": [
+      "seed-CPD-LC-001-003.sql"
+    ]
+  },
+  "backend": {
+    "container": "themepark-api-e2e-cpd-lc-001-003-qwen3-7-max-3-153244",
+    "project": "Backend.Api/UCR.ECCI.PI.ThemePark.Backend.Api.csproj",
+    "publishStatus": "success",
+    "started": true,
+    "url": "http://127.0.0.1:55002",
+    "readySeconds": 2.2,
+    "errorLines": []
+  },
+  "probes": [
+    {
+      "name": "GET learning components for space 1 returns seeded components",
+      "method": "GET",
+      "path": "/LearningComponents/1",
+      "expectedStatus": 200,
+      "actualStatus": 200,
+      "passed": true,
+      "missingContent": [],
+      "error": null,
+      "bodySnippet": "{\"components\":[{\"componentId\":\"LC-001\",\"learningSpaceId\":\"1\",\"width\":2.5,\"height\":1.5,\"depth\":0.5,\"x\":1,\"y\":0,\"z\":1,\"orientation\":\"North\"},{\"componentId\":\"LC-002\",\"learningSpaceId\":\"1\",\"width\":3,\"height\":2,\"depth\":1,\"x\":5,\"y\":0,\"z\":2,\"orientation\":\"South\"}]}"
+    },
+    {
+      "name": "GET learning components for space 3 returns empty list",
+      "method": "GET",
+      "path": "/LearningComponents/3",
+      "expectedStatus": 200,
+      "actualStatus": 200,
+      "passed": true,
+      "missingContent": [],
+      "error": null,
+      "bodySnippet": "{\"components\":[]}"
+    }
+  ],
+  "totalProbes": 2,
+  "probesPassed": 2,
+  "probesFailed": 0,
+  "cleanup": {
+    "status": "clean",
+    "removedContainers": [
+      "themepark-api-e2e-cpd-lc-001-003-qwen3-7-max-3-153244",
+      "themepark-sql-e2e-cpd-lc-001-003-qwen3-7-max-3-153244"
+    ],
+    "removedNetworks": [
+      "themepark-e2e-cpd-lc-001-003-qwen3-7-max-3-153244"
+    ],
+    "removedVolumes": [
+      "themepark-app-e2e-cpd-lc-001-003-qwen3-7-max-3-153244"
+    ],
+    "leftovers": []
+  },
+  "warnings": [],
+  "errors": []
+}
