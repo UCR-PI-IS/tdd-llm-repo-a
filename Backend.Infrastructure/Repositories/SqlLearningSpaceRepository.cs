@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using UCR.ECCI.PI.ThemePark.Backend.Domain.Entities;
 using UCR.ECCI.PI.ThemePark.Backend.Domain.Repositories;
 
@@ -5,9 +6,9 @@ namespace UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Repositories;
 
 /// <summary>
 /// SQL-based implementation of <see cref="ILearningSpaceRepository"/>.
-/// Provides creation operations for learning space data in the database.
+/// Provides creation and retrieval operations for learning space data in the database.
 /// </summary>
-internal class SqlLearningSpaceRepository : ILearningSpaceRepository
+internal partial class SqlLearningSpaceRepository : ILearningSpaceRepository
 {
     private readonly UCRDatabaseContext _dbContext;
 
@@ -29,5 +30,20 @@ internal class SqlLearningSpaceRepository : ILearningSpaceRepository
     {
         _dbContext.LearningSpaces.Add(learningSpace);
         await _dbContext.SaveChangesAsync();
+    }
+
+    /// <summary>
+    /// Retrieves a learning space by its identifier.
+    /// </summary>
+    /// <param name="id">The identifier of the learning space.</param>
+    /// <returns>The learning space if found; otherwise, null.</returns>
+    public async Task<LearningSpace?> GetByIdAsync(string id)
+    {
+        if (int.TryParse(id, out var intId))
+        {
+            return await _dbContext.LearningSpaces
+                .FirstOrDefaultAsync(ls => ls.LearningSpaceId == intId);
+        }
+        return null;
     }
 }
