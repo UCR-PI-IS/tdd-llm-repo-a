@@ -1,0 +1,63 @@
+{
+  "stage": "refactoring",
+  "storyId": "CPD-LC-001-003",
+  "model": "Qwen3.7-max",
+  "iteration": "4",
+  "status": "partial",
+  "filesCreated": [
+    "Backend.Presentation/Handlers/WhiteboardErrorHandler.cs"
+  ],
+  "filesModified": [
+    "Backend.Presentation/Handlers/CreateWhiteboardHandler.cs"
+  ],
+  "metrics": {
+    "loopIterationsPerformed": 2,
+    "maxLoopIterations": 10,
+    "allGreenAchieved": false,
+    "baseline": {
+      "minMI": 52,
+      "maxCC": 10,
+      "maxCoupling": 21,
+      "maxDIT": 1
+    },
+    "final": {
+      "minMI": 52,
+      "maxCC": 10,
+      "maxCoupling": 18,
+      "maxDIT": 1
+    },
+    "remainingViolations": [
+      {
+        "type": "UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Handlers.CreateWhiteboardHandler",
+        "metric": "Coupling",
+        "value": 18,
+        "flag": "YELLOW"
+      },
+      {
+        "type": "UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Handlers.WhiteboardErrorHandler",
+        "metric": "Coupling",
+        "value": 10,
+        "flag": "YELLOW"
+      },
+      {
+        "type": "UCR.ECCI.PI.ThemePark.Backend.Application.Services.Implementations.WhiteboardService",
+        "metric": "Coupling",
+        "value": 14,
+        "flag": "YELLOW"
+      },
+      {
+        "type": "UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Repositories.SqlWhiteboardRepository",
+        "metric": "Coupling",
+        "value": 11,
+        "flag": "YELLOW"
+      }
+    ]
+  },
+  "warnings": [
+    "SqlWhiteboardRepository: Attempted to change AddAsync to synchronous Add to reduce coupling, but reverted because test expects AddAsync to be called on DbSet mock",
+    "CreateWhiteboardHandler: Coupling of 18 is inherent to the Results<Ok<...>, BadRequest<...>, NotFound<...>, ProblemHttpResult> return type signature required by tests",
+    "WhiteboardService: Coupling of 14 is inherent to the two repository dependencies needed for business logic (IWhiteboardRepository + ILearningSpaceReadRepository)",
+    "SqlWhiteboardRepository: Coupling of 11 is inherent to the EF Core repository pattern (UCRDatabaseContext, DbSet, DbUpdateException, etc.)"
+  ],
+  "notes": "Extracted WhiteboardErrorHandler to reduce CreateWhiteboardHandler coupling from 21 to 18. Remaining YELLOW violations are architectural constraints: the handler's Results<> return type requires 6+ type references, the service needs two repositories for validation logic, and the EF Core repository has inherent coupling. Further reduction would require changing test expectations or architecture."
+}
