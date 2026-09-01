@@ -30,4 +30,18 @@ internal class SqlLearningSpaceRepository : ILearningSpaceRepository
         _dbContext.LearningSpaces.Add(learningSpace);
         await _dbContext.SaveChangesAsync();
     }
+
+    /// <summary>
+    /// Retrieves a learning space by its identifier.
+    /// </summary>
+    /// <param name="learningSpaceId">The identifier of the learning space.</param>
+    /// <returns>The learning space if found; otherwise, null.</returns>
+    public async Task<LearningSpace?> GetByIdAsync(string learningSpaceId)
+    {
+        if (int.TryParse(learningSpaceId, out int id))
+        {
+            return await _dbContext.LearningSpaces.FindAsync(id);
+        }
+        return null;
+    }
 }
