@@ -1,0 +1,59 @@
+{
+  "stage": "refactoring",
+  "storyId": "CPD-LC-001-003",
+  "model": "Qwen3.7-max",
+  "iteration": "5",
+  "status": "partial",
+  "filesCreated": [],
+  "filesModified": [
+    "Backend.Presentation/Handlers/CreateWhiteboardHandler.cs"
+  ],
+  "metrics": {
+    "loopIterationsPerformed": 2,
+    "maxLoopIterations": 10,
+    "allGreenAchieved": false,
+    "baseline": {
+      "minMI": 52,
+      "maxCC": 10,
+      "maxCoupling": 20,
+      "maxDIT": 0
+    },
+    "final": {
+      "minMI": 52,
+      "maxCC": 10,
+      "maxCoupling": 19,
+      "maxDIT": 0
+    },
+    "remainingViolations": [
+      {
+        "type": "UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Handlers.CreateWhiteboardHandler",
+        "metric": "Coupling",
+        "value": 19,
+        "flag": "YELLOW"
+      },
+      {
+        "type": "UCR.ECCI.PI.ThemePark.Backend.Application.Services.Implementations.WhiteboardService",
+        "metric": "Coupling",
+        "value": 14,
+        "flag": "YELLOW"
+      },
+      {
+        "type": "UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Repositories.SqlWhiteboardRepository",
+        "metric": "Coupling",
+        "value": 11,
+        "flag": "YELLOW"
+      },
+      {
+        "type": "UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Endpoints.WhiteboardEndpoints",
+        "metric": "Coupling",
+        "value": 10,
+        "flag": "YELLOW"
+      }
+    ]
+  },
+  "warnings": [
+    "WhiteboardMapper extraction was attempted but increased CreateWhiteboardHandler coupling from 20 to 21 (added mapper reference without removing enough others); reverted.",
+    "Remaining coupling violations are structural: ASP.NET Core typed-results pattern requires 5+ result types in handler return signature; DDD layer boundaries require repositories, entities, and exceptions in service/repository classes."
+  ],
+  "notes": "Combined two BadRequest catch blocks (ArgumentException and ValidationException) into a single exception filter clause, reducing CreateWhiteboardHandler coupling from 20 to 19 and improving MI from 62 to 63. All remaining YELLOW violations (coupling 10-19) represent structural coupling inherent to the typed-results API pattern and DDD architecture; further reduction would require major architectural changes that could violate SOLID principles."
+}
