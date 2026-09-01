@@ -56,6 +56,16 @@ def print_result(success: bool, output_dir: str, log_file: str = "") -> None:
 
 
 def build_docker_image(image_name: str, dockerfile: str) -> None:
+    # Check if image already exists; skip build to avoid flaky export failures
+    result = subprocess.run(
+        ["docker", "images", "-q", image_name],
+        capture_output=True,
+        text=True,
+        cwd=get_workspace_root(),
+    )
+    if result.stdout.strip():
+        cprint(f"Docker image '{image_name}' already exists. Skipping build.", "GREEN")
+        return
     cprint("Building Docker image...", "YELLOW")
     subprocess.run(
         ["docker", "build", "-t", image_name, "-f", dockerfile, "."],

@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using UCR.ECCI.PI.ThemePark.Backend.Domain.Entities;
 using UCR.ECCI.PI.ThemePark.Backend.Domain.Repositories;
 
@@ -29,5 +30,23 @@ internal class SqlLearningSpaceRepository : ILearningSpaceRepository
     {
         _dbContext.LearningSpaces.Add(learningSpace);
         await _dbContext.SaveChangesAsync();
+    }
+
+    /// <summary>
+    /// Gets a learning space by its identifier.
+    /// </summary>
+    /// <param name="id">The identifier of the learning space.</param>
+    /// <returns>The learning space entity, or null if not found.</returns>
+    public async Task<LearningSpace?> GetByIdAsync(string id)
+    {
+        // Try to parse the ID as an integer
+        if (int.TryParse(id, out int learningSpaceId))
+        {
+            return await _dbContext.LearningSpaces
+                .FirstOrDefaultAsync(ls => ls.LearningSpaceId == learningSpaceId);
+        }
+
+        // If not a valid integer, return null
+        return null;
     }
 }

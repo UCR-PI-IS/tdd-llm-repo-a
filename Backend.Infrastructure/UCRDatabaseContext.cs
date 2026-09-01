@@ -30,6 +30,11 @@ internal class UCRDatabaseContext : DbContext
     public virtual DbSet<LearningComponent> LearningComponents { get; set; } = null!;
 
     /// <summary>
+    /// Gets or sets the collection of whiteboards in the database.
+    /// </summary>
+    public virtual DbSet<Whiteboard> Whiteboards { get; set; } = null!;
+
+    /// <summary>
     /// Configures the model relationships and entity mappings when the model for a context is being created.
     /// </summary>
     /// <param name="modelBuilder">The builder being used to construct the model for this context.</param>
@@ -40,6 +45,9 @@ internal class UCRDatabaseContext : DbContext
 
         // Apply the LearningComponent entity configuration
         modelBuilder.ApplyConfiguration(new LearningComponentEntityConfiguration());
+
+        // Apply the Whiteboard entity configuration
+        modelBuilder.ApplyConfiguration(new WhiteboardEntityConfiguration());
 
         // Alternatively, you can apply all configurations from the assembly
         // modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
