@@ -1,0 +1,63 @@
+{
+  "stage": "e2e-validation",
+  "status": "success",
+  "timestamp": "2026-08-31_22-52-07",
+  "storyId": "CPD-LC-001-003",
+  "model": "Qwen3.7-max",
+  "iteration": "6",
+  "database": {
+    "container": "themepark-sql-e2e-cpd-lc-001-003-qwen3-7-max-6-225207",
+    "image": "mcr.microsoft.com/mssql/server:2022-latest",
+    "network": "themepark-e2e-cpd-lc-001-003-qwen3-7-max-6-225207",
+    "database": "ThemePark",
+    "readySeconds": 8.6,
+    "baseSchemaApplied": [
+      "Semester.sql",
+      "Course.sql"
+    ],
+    "seedsApplied": [
+      "seed-CPD-LC-001-003.sql"
+    ]
+  },
+  "backend": {
+    "container": "themepark-api-e2e-cpd-lc-001-003-qwen3-7-max-6-225207",
+    "project": "Backend.Api/UCR.ECCI.PI.ThemePark.Backend.Api.csproj",
+    "publishStatus": "success",
+    "started": true,
+    "url": "http://127.0.0.1:55000",
+    "readySeconds": 2.2,
+    "errorLines": []
+  },
+  "probes": [
+    {
+      "name": "Create whiteboard in learning space 1",
+      "method": "POST",
+      "path": "/Whiteboards",
+      "expectedStatus": 200,
+      "actualStatus": 200,
+      "passed": true,
+      "missingContent": [],
+      "error": null,
+      "bodySnippet": "{\"whiteboard\":{\"componentId\":\"WB-E2E-001\",\"learningSpaceId\":\"1\",\"width\":2,\"height\":1,\"depth\":0.1,\"x\":0,\"y\":0,\"z\":0,\"orientation\":\"South\",\"markerColor\":\"Blue\"}}"
+    }
+  ],
+  "totalProbes": 1,
+  "probesPassed": 1,
+  "probesFailed": 0,
+  "cleanup": {
+    "status": "clean",
+    "removedContainers": [
+      "themepark-api-e2e-cpd-lc-001-003-qwen3-7-max-6-225207",
+      "themepark-sql-e2e-cpd-lc-001-003-qwen3-7-max-6-225207"
+    ],
+    "removedNetworks": [
+      "themepark-e2e-cpd-lc-001-003-qwen3-7-max-6-225207"
+    ],
+    "removedVolumes": [
+      "themepark-app-e2e-cpd-lc-001-003-qwen3-7-max-6-225207"
+    ],
+    "leftovers": []
+  },
+  "warnings": [],
+  "errors": []
+}
