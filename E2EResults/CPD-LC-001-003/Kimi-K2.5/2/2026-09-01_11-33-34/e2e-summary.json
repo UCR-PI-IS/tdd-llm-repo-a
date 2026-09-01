@@ -1,0 +1,25 @@
+{
+  "stage": "e2e-validation",
+  "status": "failure",
+  "timestamp": "2026-09-01_11-33-34",
+  "storyId": "CPD-LC-001-003",
+  "model": "Kimi-K2.5",
+  "iteration": "2",
+  "database": {},
+  "backend": {},
+  "probes": [],
+  "totalProbes": 0,
+  "probesPassed": 0,
+  "probesFailed": 0,
+  "cleanup": {
+    "status": "clean",
+    "removedContainers": [],
+    "removedNetworks": [],
+    "removedVolumes": [],
+    "leftovers": []
+  },
+  "warnings": [],
+  "errors": [
+    "Could not start the database container: Unable to find image 'mcr.microsoft.com/mssql/server:2022-latest' locally\n2022-latest: Pulling from mssql/server\n97b84b17711a: Pulling fs layer\ncb5e374be662: Pulling fs layer\n5c0f317cd3b8: Pulling fs layer\ncb5e374be662: Download complete\ncb5e374be662: Pull complete\n97b84b17711a: Download complete\n5c0f317cd3b8: Download complete\ndocker: failed to extract layer (application/vnd.docker.image.rootfs.diff.tar.gzip sha256:5c0f317cd3b8e5f7bf5af9280a980d441dfc1afde60839b26ab81c7890d45f9b) to overlayfs as \"extract-40882135-H8RW sha256:a284cab4b532198c67a2c5aa31d6af329389045413c8d3a81848977f3c8f4264\": write /var/lib/desktop-containerd/daemon/io.containerd.snapshotter.v1.overlayfs/snapshots/4429/fs/opt/mssql/lib/system.wmi.sfp: read-only file system\n\nRun 'docker run --help' for more information"
+  ]
+}
