@@ -1,0 +1,65 @@
+{
+  "stage": "e2e-validation",
+  "status": "failure",
+  "timestamp": "2026-09-01_15-58-58",
+  "storyId": "CPD-LC-001-003",
+  "model": "Kimi-K2.5",
+  "iteration": "3",
+  "database": {
+    "container": "themepark-sql-e2e-cpd-lc-001-003-kimi-k2-5-3-155858",
+    "image": "mcr.microsoft.com/mssql/server:2022-latest",
+    "network": "themepark-e2e-cpd-lc-001-003-kimi-k2-5-3-155858",
+    "database": "ThemePark",
+    "readySeconds": 8.6,
+    "baseSchemaApplied": [
+      "Semester.sql",
+      "Course.sql"
+    ],
+    "seedsApplied": [
+      "seed-CPD-LC-001-003.sql"
+    ]
+  },
+  "backend": {
+    "container": "themepark-api-e2e-cpd-lc-001-003-kimi-k2-5-3-155858",
+    "project": "Backend.Api/UCR.ECCI.PI.ThemePark.Backend.Api.csproj",
+    "publishStatus": "success",
+    "started": true,
+    "url": "http://127.0.0.1:55000",
+    "readySeconds": 2.2,
+    "errorLines": []
+  },
+  "probes": [
+    {
+      "name": "POST /api/whiteboards",
+      "method": "POST",
+      "path": "/api/whiteboards",
+      "expectedStatus": 201,
+      "actualStatus": 404,
+      "passed": false,
+      "missingContent": [],
+      "error": null,
+      "bodySnippet": ""
+    }
+  ],
+  "totalProbes": 1,
+  "probesPassed": 0,
+  "probesFailed": 1,
+  "cleanup": {
+    "status": "clean",
+    "removedContainers": [
+      "themepark-api-e2e-cpd-lc-001-003-kimi-k2-5-3-155858",
+      "themepark-sql-e2e-cpd-lc-001-003-kimi-k2-5-3-155858"
+    ],
+    "removedNetworks": [
+      "themepark-e2e-cpd-lc-001-003-kimi-k2-5-3-155858"
+    ],
+    "removedVolumes": [
+      "themepark-app-e2e-cpd-lc-001-003-kimi-k2-5-3-155858"
+    ],
+    "leftovers": []
+  },
+  "warnings": [],
+  "errors": [
+    "1 probe(s) failed."
+  ]
+}
