@@ -1,0 +1,63 @@
+{
+  "stage": "e2e-validation",
+  "status": "success",
+  "timestamp": "2026-09-01_10-20-27",
+  "storyId": "CPD-LC-001-003",
+  "model": "Kimi-K2.5",
+  "iteration": "1",
+  "database": {
+    "container": "themepark-sql-e2e-cpd-lc-001-003-kimi-k2-5-1-102027",
+    "image": "mcr.microsoft.com/mssql/server:2022-latest",
+    "network": "themepark-e2e-cpd-lc-001-003-kimi-k2-5-1-102027",
+    "database": "ThemePark",
+    "readySeconds": 8.5,
+    "baseSchemaApplied": [
+      "Semester.sql",
+      "Course.sql"
+    ],
+    "seedsApplied": [
+      "CPD-LC-001-003.sql"
+    ]
+  },
+  "backend": {
+    "container": "themepark-api-e2e-cpd-lc-001-003-kimi-k2-5-1-102027",
+    "project": "Backend.Api/UCR.ECCI.PI.ThemePark.Backend.Api.csproj",
+    "publishStatus": "success",
+    "started": true,
+    "url": "http://127.0.0.1:55002",
+    "readySeconds": 2.2,
+    "errorLines": []
+  },
+  "probes": [
+    {
+      "name": "POST /api/whiteboards",
+      "method": "POST",
+      "path": "/api/whiteboards",
+      "expectedStatus": 201,
+      "actualStatus": 201,
+      "passed": true,
+      "missingContent": [],
+      "error": null,
+      "bodySnippet": "{\"whiteboard\":{\"componentId\":\"WB-E2E-001\",\"learningSpaceId\":\"1\",\"width\":2.5,\"height\":1.5,\"depth\":0.5,\"x\":1,\"y\":0,\"z\":2,\"orientation\":\"North\",\"markerColor\":\"Blue\"}}"
+    }
+  ],
+  "totalProbes": 1,
+  "probesPassed": 1,
+  "probesFailed": 0,
+  "cleanup": {
+    "status": "clean",
+    "removedContainers": [
+      "themepark-api-e2e-cpd-lc-001-003-kimi-k2-5-1-102027",
+      "themepark-sql-e2e-cpd-lc-001-003-kimi-k2-5-1-102027"
+    ],
+    "removedNetworks": [
+      "themepark-e2e-cpd-lc-001-003-kimi-k2-5-1-102027"
+    ],
+    "removedVolumes": [
+      "themepark-app-e2e-cpd-lc-001-003-kimi-k2-5-1-102027"
+    ],
+    "leftovers": []
+  },
+  "warnings": [],
+  "errors": []
+}
