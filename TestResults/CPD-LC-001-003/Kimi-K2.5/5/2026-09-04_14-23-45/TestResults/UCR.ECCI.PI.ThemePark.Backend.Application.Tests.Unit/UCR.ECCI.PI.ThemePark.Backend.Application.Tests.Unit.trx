@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="609410c6-f271-4cdc-a7f1-48b422352d56" name="@d2af2a195080 2026-09-04 20:24:00" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-09-04T20:24:00.5241417+00:00" queuing="2026-09-04T20:24:00.5241418+00:00" start="2026-09-04T20:23:59.4709455+00:00" finish="2026-09-04T20:24:00.7686772+00:00" />
+  <TestSettings name="default" id="b505e55e-3887-45c7-a946-3860d20db35d">
+    <Deployment runDeploymentRoot="_d2af2a195080_2026-09-04_20_24_00" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="af835fcd-f582-4290-b3de-550d90ec40f6" testId="257120ae-8394-bc1e-d01c-7750ecd7653f" testName="GetComponentsByLearningSpaceIdAsync_ValidIdWithNoComponents_ReturnsEmptyList" computerName="d2af2a195080" duration="00:00:00.0023850" startTime="2026-09-04T20:24:00.4519473+00:00" endTime="2026-09-04T20:24:00.4543318+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="af835fcd-f582-4290-b3de-550d90ec40f6" />
+    <UnitTestResult executionId="afce4236-0a9b-4cec-89c0-5eb5646058b5" testId="9f4cd0c8-0b7c-cf27-faa6-b021eb9e43c8" testName="CreateWhiteboardAsync_RepositoryFails_ThrowsDatabaseException" computerName="d2af2a195080" duration="00:00:00.0237580" startTime="2026-09-04T20:24:00.4788450+00:00" endTime="2026-09-04T20:24:00.5026030+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="afce4236-0a9b-4cec-89c0-5eb5646058b5">
+      <Output>
+        <ErrorInfo>
+          <Message>  Expected: String containing "DB error"
+  But was:  "Failed to save whiteboard to database"
+</Message>
+          <StackTrace>   at UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.WhiteboardServiceTests.CreateWhiteboardAsync_RepositoryFails_ThrowsDatabaseException() in /workspace/Backend.Application.Tests.Unit/WhiteboardServiceTests.cs:line 139
+
+1)    at UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.WhiteboardServiceTests.CreateWhiteboardAsync_RepositoryFails_ThrowsDatabaseException() in /workspace/Backend.Application.Tests.Unit/WhiteboardServiceTests.cs:line 139
+
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="b43de2b6-26a9-417c-9bc2-77f7713d23c3" testId="79636165-3d02-e61f-2b73-96d98df8540c" testName="CreateLearningSpaceAsync_DomainValidationFails_ThrowsArgumentException(&quot;Classroom&quot;,3.0f,-8.0f,10.0f,&quot;Width must be positive and non-zero&quot;)" computerName="d2af2a195080" duration="00:00:00.0002180" startTime="2026-09-04T20:24:00.4639734+00:00" endTime="2026-09-04T20:24:00.4641917+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b43de2b6-26a9-417c-9bc2-77f7713d23c3" />
+    <UnitTestResult executionId="78dd56e9-bee3-4290-a5e2-9276a4bb3593" testId="44df089f-79f4-a8f3-dd68-0316771ba5e6" testName="GetComponentsByLearningSpaceIdAsync_InvalidId_ThrowsArgumentException(&quot;&quot;)" computerName="d2af2a195080" duration="00:00:00.0537270" startTime="2026-09-04T20:24:00.3674369+00:00" endTime="2026-09-04T20:24:00.4210881+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="78dd56e9-bee3-4290-a5e2-9276a4bb3593" />
+    <UnitTestResult executionId="ef60b43b-a6ec-4b26-b9c8-477dd4362f9a" testId="f7cb9f37-adac-2c2c-50cc-d4681d37e5cf" testName="CreateWhiteboardAsync_WhiteboardFits_ReturnsCreatedWhiteboard" computerName="d2af2a195080" duration="00:00:00.0017540" startTime="2026-09-04T20:24:00.5040830+00:00" endTime="2026-09-04T20:24:00.5058364+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ef60b43b-a6ec-4b26-b9c8-477dd4362f9a" />
+    <UnitTestResult executionId="19f87824-ccb1-4f23-a320-a97e5adecac0" testId="ada2330f-26e5-8a97-f3a5-965246fd29c5" testName="CreateLearningSpaceAsync_RepositoryFails_PropagatesException" computerName="d2af2a195080" duration="00:00:00.0021770" startTime="2026-09-04T20:24:00.4642136+00:00" endTime="2026-09-04T20:24:00.4663903+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="19f87824-ccb1-4f23-a320-a97e5adecac0" />
+    <UnitTestResult executionId="f16fa049-a787-4b4f-8ed1-313a7a60d9eb" testId="cb70f7b9-42e2-e713-3740-1c3d1712ccf9" testName="GetComponentsByLearningSpaceIdAsync_InvalidId_ThrowsArgumentException(null)" computerName="d2af2a195080" duration="00:00:00.0008890" startTime="2026-09-04T20:24:00.4225471+00:00" endTime="2026-09-04T20:24:00.4234358+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f16fa049-a787-4b4f-8ed1-313a7a60d9eb" />
+    <UnitTestResult executionId="c3e0ad2e-aa85-4c4c-86d6-304d8f5d863e" testId="82cd0b6f-a64d-0d97-4793-2bf0b671e07e" testName="GetComponentsByLearningSpaceIdAsync_ValidIdWithComponents_ReturnsList" computerName="d2af2a195080" duration="00:00:00.0273730" startTime="2026-09-04T20:24:00.4245518+00:00" endTime="2026-09-04T20:24:00.4519243+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c3e0ad2e-aa85-4c4c-86d6-304d8f5d863e" />
+    <UnitTestResult executionId="95ece4fe-89f9-4a3b-9953-e640731febc3" testId="6c8da88e-fb1a-8867-d830-2f6cae96bc27" testName="CreateLearningSpaceAsync_DomainValidationFails_ThrowsArgumentException(&quot;Classroom&quot;,0.0f,8.0f,10.0f,&quot;Height must be positive and non-zero&quot;)" computerName="d2af2a195080" duration="00:00:00.0007800" startTime="2026-09-04T20:24:00.4631764+00:00" endTime="2026-09-04T20:24:00.4639560+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="95ece4fe-89f9-4a3b-9953-e640731febc3" />
+    <UnitTestResult executionId="120ea338-dc79-46da-80d4-5bcfdfe3f621" testId="da7099aa-57aa-a9b4-5a18-5909973549d6" testName="CreateLearningSpaceAsync_DomainValidationFails_ThrowsArgumentException(&quot;InvalidType&quot;,3.0f,8.0f,10.0f,&quot;Type must be Classroom, Auditorium, or Laboratory&quot;)" computerName="d2af2a195080" duration="00:00:00.0079500" startTime="2026-09-04T20:24:00.4552006+00:00" endTime="2026-09-04T20:24:00.4631502+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="120ea338-dc79-46da-80d4-5bcfdfe3f621" />
+    <UnitTestResult executionId="dad862fc-fb06-458f-b1f3-c42d471d07d6" testId="9516a688-8572-3183-96f0-f9155e4bcb96" testName="CreateLearningSpaceAsync_ValidInput_ReturnsCreatedEntity" computerName="d2af2a195080" duration="00:00:00.0051080" startTime="2026-09-04T20:24:00.4664130+00:00" endTime="2026-09-04T20:24:00.4715206+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="dad862fc-fb06-458f-b1f3-c42d471d07d6" />
+    <UnitTestResult executionId="9f285b81-f412-4f88-9d40-f3590ff4e832" testId="847cdb3e-4e6c-a75b-a41f-2960b6907ae3" testName="CreateWhiteboardAsync_LearningSpaceNotFound_ThrowsNotFoundException" computerName="d2af2a195080" duration="00:00:00.0071790" startTime="2026-09-04T20:24:00.4716456+00:00" endTime="2026-09-04T20:24:00.4788240+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9f285b81-f412-4f88-9d40-f3590ff4e832" />
+    <UnitTestResult executionId="9e830b74-89c9-435a-b497-a5f6d6b33970" testId="1c5b9c7f-c99d-16a7-25a0-69f8a03c1bc4" testName="CreateWhiteboardAsync_WhiteboardDoesNotFit_ThrowsValidationException" computerName="d2af2a195080" duration="00:00:00.0013530" startTime="2026-09-04T20:24:00.5027112+00:00" endTime="2026-09-04T20:24:00.5040644+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9e830b74-89c9-435a-b497-a5f6d6b33970" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="CreateLearningSpaceAsync_DomainValidationFails_ThrowsArgumentException(&quot;Classroom&quot;,3.0f,-8.0f,10.0f,&quot;Width must be positive and non-zero&quot;)" storage="/workspace/backend.application.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.application.tests.unit.dll" id="79636165-3d02-e61f-2b73-96d98df8540c">
+      <Execution id="b43de2b6-26a9-417c-9bc2-77f7713d23c3" />
+      <TestMethod codeBase="/workspace/Backend.Application.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.LearningSpaceCreateServiceTests" name="CreateLearningSpaceAsync_DomainValidationFails_ThrowsArgumentException(&quot;Classroom&quot;,3.0f,-8.0f,10.0f,&quot;Width must be positive and non-zero&quot;)" />
+    </UnitTest>
+    <UnitTest name="CreateWhiteboardAsync_RepositoryFails_ThrowsDatabaseException" storage="/workspace/backend.application.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.application.tests.unit.dll" id="9f4cd0c8-0b7c-cf27-faa6-b021eb9e43c8">
+      <Execution id="afce4236-0a9b-4cec-89c0-5eb5646058b5" />
+      <TestMethod codeBase="/workspace/Backend.Application.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.WhiteboardServiceTests" name="CreateWhiteboardAsync_RepositoryFails_ThrowsDatabaseException" />
+    </UnitTest>
+    <UnitTest name="CreateWhiteboardAsync_WhiteboardFits_ReturnsCreatedWhiteboard" storage="/workspace/backend.application.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.application.tests.unit.dll" id="f7cb9f37-adac-2c2c-50cc-d4681d37e5cf">
+      <Execution id="ef60b43b-a6ec-4b26-b9c8-477dd4362f9a" />
+      <TestMethod codeBase="/workspace/Backend.Application.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.WhiteboardServiceTests" name="CreateWhiteboardAsync_WhiteboardFits_ReturnsCreatedWhiteboard" />
+    </UnitTest>
+    <UnitTest name="CreateWhiteboardAsync_LearningSpaceNotFound_ThrowsNotFoundException" storage="/workspace/backend.application.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.application.tests.unit.dll" id="847cdb3e-4e6c-a75b-a41f-2960b6907ae3">
+      <Execution id="9f285b81-f412-4f88-9d40-f3590ff4e832" />
+      <TestMethod codeBase="/workspace/Backend.Application.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.WhiteboardServiceTests" name="CreateWhiteboardAsync_LearningSpaceNotFound_ThrowsNotFoundException" />
+    </UnitTest>
+    <UnitTest name="CreateLearningSpaceAsync_ValidInput_ReturnsCreatedEntity" storage="/workspace/backend.application.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.application.tests.unit.dll" id="9516a688-8572-3183-96f0-f9155e4bcb96">
+      <Execution id="dad862fc-fb06-458f-b1f3-c42d471d07d6" />
+      <TestMethod codeBase="/workspace/Backend.Application.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.LearningSpaceCreateServiceTests" name="CreateLearningSpaceAsync_ValidInput_ReturnsCreatedEntity" />
+    </UnitTest>
+    <UnitTest name="CreateLearningSpaceAsync_DomainValidationFails_ThrowsArgumentException(&quot;InvalidType&quot;,3.0f,8.0f,10.0f,&quot;Type must be Classroom, Auditorium, or Laboratory&quot;)" storage="/workspace/backend.application.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.application.tests.unit.dll" id="da7099aa-57aa-a9b4-5a18-5909973549d6">
+      <Execution id="120ea338-dc79-46da-80d4-5bcfdfe3f621" />
+      <TestMethod codeBase="/workspace/Backend.Application.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.LearningSpaceCreateServiceTests" name="CreateLearningSpaceAsync_DomainValidationFails_ThrowsArgumentException(&quot;InvalidType&quot;,3.0f,8.0f,10.0f,&quot;Type must be Classroom, Auditorium, or Laboratory&quot;)" />
+    </UnitTest>
+    <UnitTest name="GetComponentsByLearningSpaceIdAsync_InvalidId_ThrowsArgumentException(&quot;&quot;)" storage="/workspace/backend.application.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.application.tests.unit.dll" id="44df089f-79f4-a8f3-dd68-0316771ba5e6">
+      <Execution id="78dd56e9-bee3-4290-a5e2-9276a4bb3593" />
+      <TestMethod codeBase="/workspace/Backend.Application.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.LearningComponentServiceTests" name="GetComponentsByLearningSpaceIdAsync_InvalidId_ThrowsArgumentException(&quot;&quot;)" />
+    </UnitTest>
+    <UnitTest name="CreateLearningSpaceAsync_RepositoryFails_PropagatesException" storage="/workspace/backend.application.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.application.tests.unit.dll" id="ada2330f-26e5-8a97-f3a5-965246fd29c5">
+      <Execution id="19f87824-ccb1-4f23-a320-a97e5adecac0" />
+      <TestMethod codeBase="/workspace/Backend.Application.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.LearningSpaceCreateServiceTests" name="CreateLearningSpaceAsync_RepositoryFails_PropagatesException" />
+    </UnitTest>
+    <UnitTest name="CreateWhiteboardAsync_WhiteboardDoesNotFit_ThrowsValidationException" storage="/workspace/backend.application.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.application.tests.unit.dll" id="1c5b9c7f-c99d-16a7-25a0-69f8a03c1bc4">
+      <Execution id="9e830b74-89c9-435a-b497-a5f6d6b33970" />
+      <TestMethod codeBase="/workspace/Backend.Application.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.WhiteboardServiceTests" name="CreateWhiteboardAsync_WhiteboardDoesNotFit_ThrowsValidationException" />
+    </UnitTest>
+    <UnitTest name="GetComponentsByLearningSpaceIdAsync_ValidIdWithNoComponents_ReturnsEmptyList" storage="/workspace/backend.application.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.application.tests.unit.dll" id="257120ae-8394-bc1e-d01c-7750ecd7653f">
+      <Execution id="af835fcd-f582-4290-b3de-550d90ec40f6" />
+      <TestMethod codeBase="/workspace/Backend.Application.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.LearningComponentServiceTests" name="GetComponentsByLearningSpaceIdAsync_ValidIdWithNoComponents_ReturnsEmptyList" />
+    </UnitTest>
+    <UnitTest name="GetComponentsByLearningSpaceIdAsync_ValidIdWithComponents_ReturnsList" storage="/workspace/backend.application.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.application.tests.unit.dll" id="82cd0b6f-a64d-0d97-4793-2bf0b671e07e">
+      <Execution id="c3e0ad2e-aa85-4c4c-86d6-304d8f5d863e" />
+      <TestMethod codeBase="/workspace/Backend.Application.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.LearningComponentServiceTests" name="GetComponentsByLearningSpaceIdAsync_ValidIdWithComponents_ReturnsList" />
+    </UnitTest>
+    <UnitTest name="GetComponentsByLearningSpaceIdAsync_InvalidId_ThrowsArgumentException(null)" storage="/workspace/backend.application.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.application.tests.unit.dll" id="cb70f7b9-42e2-e713-3740-1c3d1712ccf9">
+      <Execution id="f16fa049-a787-4b4f-8ed1-313a7a60d9eb" />
+      <TestMethod codeBase="/workspace/Backend.Application.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.LearningComponentServiceTests" name="GetComponentsByLearningSpaceIdAsync_InvalidId_ThrowsArgumentException(null)" />
+    </UnitTest>
+    <UnitTest name="CreateLearningSpaceAsync_DomainValidationFails_ThrowsArgumentException(&quot;Classroom&quot;,0.0f,8.0f,10.0f,&quot;Height must be positive and non-zero&quot;)" storage="/workspace/backend.application.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.application.tests.unit.dll" id="6c8da88e-fb1a-8867-d830-2f6cae96bc27">
+      <Execution id="95ece4fe-89f9-4a3b-9953-e640731febc3" />
+      <TestMethod codeBase="/workspace/Backend.Application.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.LearningSpaceCreateServiceTests" name="CreateLearningSpaceAsync_DomainValidationFails_ThrowsArgumentException(&quot;Classroom&quot;,0.0f,8.0f,10.0f,&quot;Height must be positive and non-zero&quot;)" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="257120ae-8394-bc1e-d01c-7750ecd7653f" executionId="af835fcd-f582-4290-b3de-550d90ec40f6" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="9f4cd0c8-0b7c-cf27-faa6-b021eb9e43c8" executionId="afce4236-0a9b-4cec-89c0-5eb5646058b5" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="79636165-3d02-e61f-2b73-96d98df8540c" executionId="b43de2b6-26a9-417c-9bc2-77f7713d23c3" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="44df089f-79f4-a8f3-dd68-0316771ba5e6" executionId="78dd56e9-bee3-4290-a5e2-9276a4bb3593" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f7cb9f37-adac-2c2c-50cc-d4681d37e5cf" executionId="ef60b43b-a6ec-4b26-b9c8-477dd4362f9a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ada2330f-26e5-8a97-f3a5-965246fd29c5" executionId="19f87824-ccb1-4f23-a320-a97e5adecac0" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="cb70f7b9-42e2-e713-3740-1c3d1712ccf9" executionId="f16fa049-a787-4b4f-8ed1-313a7a60d9eb" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="82cd0b6f-a64d-0d97-4793-2bf0b671e07e" executionId="c3e0ad2e-aa85-4c4c-86d6-304d8f5d863e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="6c8da88e-fb1a-8867-d830-2f6cae96bc27" executionId="95ece4fe-89f9-4a3b-9953-e640731febc3" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="da7099aa-57aa-a9b4-5a18-5909973549d6" executionId="120ea338-dc79-46da-80d4-5bcfdfe3f621" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="9516a688-8572-3183-96f0-f9155e4bcb96" executionId="dad862fc-fb06-458f-b1f3-c42d471d07d6" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="847cdb3e-4e6c-a75b-a41f-2960b6907ae3" executionId="9f285b81-f412-4f88-9d40-f3590ff4e832" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1c5b9c7f-c99d-16a7-25a0-69f8a03c1bc4" executionId="9e830b74-89c9-435a-b497-a5f6d6b33970" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="13" executed="13" passed="12" failed="1" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>NUnit Adapter 4.6.0.0: Test execution started
+Running all tests in /workspace/Backend.Application.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit.dll
+   NUnit3TestExecutor discovered 13 of 13 NUnit test cases using Current Discovery mode, Non-Explicit run
+NUnit Adapter 4.6.0.0: Test execution complete
+</StdOut>
+    </Output>
+    <CollectorDataEntries>
+      <Collector agentName="d2af2a195080" uri="datacollector://microsoft/CoverletCodeCoverage/1.0" collectorDisplayName="XPlat code coverage">
+        <UriAttachments>
+          <UriAttachment>
+            <A href="d2af2a195080/coverage.cobertura.xml"></A>
+          </UriAttachment>
+        </UriAttachments>
+      </Collector>
+    </CollectorDataEntries>
+  </ResultSummary>
+</TestRun>
