@@ -1,0 +1,212 @@
+================================================================
+  CODE METRICS SUMMARY
+  Generated: 2026-09-04 21:12:19 UTC
+================================================================
+
+----------------------------------------------------------------
+  Project: UCR.ECCI.PI.ThemePark.Backend.Api
+----------------------------------------------------------------
+
+  Types:
+
+  Maintainability Index by type:
+
+  Cyclomatic Complexity by method (>10 shown):
+    (none above threshold)
+
+  Class Coupling by type (>9 shown):
+    (none above threshold)
+
+----------------------------------------------------------------
+  Project: UCR.ECCI.PI.ThemePark.Backend.Application
+----------------------------------------------------------------
+
+  Types:
+    DependencyInjection
+    ILearningComponentService
+    ILearningSpaceCreateService
+    ILearningSpaceListService
+    CreateWhiteboardUseCase
+    LearningSpaceFetcher
+    WhiteboardBuilder
+    WhiteboardPersistence
+    WhiteboardService
+    IWhiteboardService
+    NotFoundException
+    ValidationException
+    DatabaseException
+    LearningComponentService
+    LearningSpaceCreateService
+    LearningSpaceListService
+
+  Maintainability Index by type:
+    DependencyInjection: MI=74
+    ILearningComponentService: MI=78
+    ILearningSpaceCreateService: MI=76
+    ILearningSpaceListService: MI=75
+    CreateWhiteboardUseCase: MI=69
+    LearningSpaceFetcher: MI=72
+    WhiteboardBuilder: MI=68
+    WhiteboardPersistence: MI=72
+    WhiteboardService: MI=68
+    IWhiteboardService: MI=79
+    NotFoundException: MI=87
+    ValidationException: MI=87
+    DatabaseException: MI=87
+    LearningComponentService: MI=68
+    LearningSpaceCreateService: MI=68
+    LearningSpaceListService: MI=67
+
+  Cyclomatic Complexity by method (>10 shown):
+    (none above threshold)
+
+  Class Coupling by type (>9 shown):
+    CreateWhiteboardUseCase: Coupling=15 [YELLOW]
+
+----------------------------------------------------------------
+  Project: UCR.ECCI.PI.ThemePark.Backend.DependencyInjection
+----------------------------------------------------------------
+
+  Types:
+    DependencyInjection
+
+  Maintainability Index by type:
+    DependencyInjection: MI=74
+
+  Cyclomatic Complexity by method (>10 shown):
+    (none above threshold)
+
+  Class Coupling by type (>9 shown):
+    (none above threshold)
+
+----------------------------------------------------------------
+  Project: UCR.ECCI.PI.ThemePark.Backend.Domain
+----------------------------------------------------------------
+
+  Types:
+    CreateWhiteboardRequest
+    LearningComponent
+    LearningSpace
+    Whiteboard
+    ILearningComponentRepository
+    ILearningSpaceListRepository
+    ILearningSpaceRepository
+    IWhiteboardRepository
+
+  Maintainability Index by type:
+    CreateWhiteboardRequest: MI=78
+    LearningComponent: MI=55
+    LearningSpace: MI=57
+    Whiteboard: MI=58
+    ILearningComponentRepository: MI=79
+    ILearningSpaceListRepository: MI=76
+    ILearningSpaceRepository: MI=73
+    IWhiteboardRepository: MI=79
+
+  Cyclomatic Complexity by method (>10 shown):
+    (none above threshold)
+
+  Class Coupling by type (>9 shown):
+    (none above threshold)
+
+----------------------------------------------------------------
+  Project: UCR.ECCI.PI.ThemePark.Backend.Infrastructure
+----------------------------------------------------------------
+
+  Types:
+    DependencyInjection
+    UCRDatabaseContext
+    LearningComponentEntityConfiguration
+    LearningSpaceEntityConfiguration
+    WhiteboardEntityConfiguration
+    SqlLearningComponentRepository
+    SqlLearningSpaceListRepository
+    SqlLearningSpaceRepository
+    SqlWhiteboardRepository
+
+  Maintainability Index by type:
+    DependencyInjection: MI=70
+    UCRDatabaseContext: MI=63
+    LearningComponentEntityConfiguration: MI=67
+    LearningSpaceEntityConfiguration: MI=72
+    WhiteboardEntityConfiguration: MI=67
+    SqlLearningComponentRepository: MI=69
+    SqlLearningSpaceListRepository: MI=67
+    SqlLearningSpaceRepository: MI=66
+    SqlWhiteboardRepository: MI=67
+
+  Cyclomatic Complexity by method (>10 shown):
+    (none above threshold)
+
+  Class Coupling by type (>9 shown):
+    UCRDatabaseContext: Coupling=10 [YELLOW]
+    SqlLearningSpaceRepository: Coupling=10 [YELLOW]
+
+----------------------------------------------------------------
+  Project: UCR.ECCI.PI.ThemePark.Backend.Presentation
+----------------------------------------------------------------
+
+  Types:
+    CreateLearningSpaceDto
+    CreateWhiteboardDto
+    LearningComponentDto
+    LearningSpaceDto
+    LearningComponentsEndpoints
+    LearningSpaceListEndpoints
+    CreateLearningSpaceHandler
+    CreateWhiteboardHandler
+    CreateWhiteboardResponseFactory
+    GetLearningComponentsHandler
+    GetLearningSpaceListHandler
+    LearningComponentResponseFactory
+    LearningSpaceResponseFactory
+    LearningComponentMapper
+    LearningSpaceMapper
+    WhiteboardDto
+    CreateWhiteboardResponse
+    ErrorResponse
+    GetLearningComponentsResponse
+    GetLearningSpaceListResponse
+    LearningSpaceResponse
+
+  Maintainability Index by type:
+    CreateLearningSpaceDto: MI=100
+    CreateWhiteboardDto: MI=78
+    LearningComponentDto: MI=78
+    LearningSpaceDto: MI=100
+    LearningComponentsEndpoints: MI=68
+    LearningSpaceListEndpoints: MI=71
+    CreateLearningSpaceHandler: MI=71
+    CreateWhiteboardHandler: MI=71
+    CreateWhiteboardResponseFactory: MI=61
+    GetLearningComponentsHandler: MI=67
+    GetLearningSpaceListHandler: MI=74
+    LearningComponentResponseFactory: MI=66
+    LearningSpaceResponseFactory: MI=66
+    LearningComponentMapper: MI=71
+    LearningSpaceMapper: MI=79
+    WhiteboardDto: MI=77
+    CreateWhiteboardResponse: MI=100
+    ErrorResponse: MI=100
+    GetLearningComponentsResponse: MI=100
+    GetLearningSpaceListResponse: MI=90
+    LearningSpaceResponse: MI=83
+
+  Cyclomatic Complexity by method (>10 shown):
+    (none above threshold)
+
+  Class Coupling by type (>9 shown):
+    LearningComponentsEndpoints: Coupling=14 [YELLOW]
+    CreateWhiteboardResponseFactory: Coupling=22 [YELLOW]
+    GetLearningSpaceListHandler: Coupling=13 [YELLOW]
+    LearningComponentResponseFactory: Coupling=11 [YELLOW]
+    LearningSpaceResponseFactory: Coupling=13 [YELLOW]
+
+================================================================
+  THRESHOLD REFERENCE (Microsoft Visual Studio / Industry)
+  Maintainability Index: 0-9 RED, 10-19 YELLOW, 20-100 GREEN
+  Cyclomatic Complexity: 1-10 GREEN, 11-25 YELLOW, >25 RED
+  Class Coupling: 0-9 GREEN, 10-40 YELLOW, >40 RED
+  Depth of Inheritance: 0-4 GREEN, 5 YELLOW, >=6 RED
+  Lines per Method: 5-20 GREEN, 21-50 YELLOW, >50 RED
+================================================================
