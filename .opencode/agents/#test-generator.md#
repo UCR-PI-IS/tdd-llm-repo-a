@@ -1,5 +1,5 @@
----
-model: openrouter/moonshotai/kimi-k2.5
+[O---
+model: openrouter/
 temperature: 1.0
 top_p: 0.1
 description: "Generates NUnit test classes from confirmed intents in UserIntents/ JSON files, following Clean Architecture layer conventions."
@@ -44,8 +44,8 @@ Before generating tests, read the following from the repository:
    - `Backend.Infrastructure/Repositories/` — EF Core repository implementations
    - `Backend.Presentation/Dtos/`, `Backend.Presentation/Handlers/`, `Backend.Presentation/Endpoints/`
 4. **Architecture guidelines**: `Docs/Guidelines/CA-GUIDELINES.md`
-
-# Scope Constraint
+# 
+Scope Constraint
 
 Your ONLY job is to generate test `.cs` files and write them to the workspace. You must NOT:
 - Run any build commands (`dotnet build`, `dotnet restore`, or Docker scripts)
