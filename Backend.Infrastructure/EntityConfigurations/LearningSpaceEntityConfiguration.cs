@@ -24,5 +24,14 @@ internal class LearningSpaceEntityConfiguration : IEntityTypeConfiguration<Learn
 
         builder.Property(ls => ls.Type)
             .HasMaxLength(50);
+
+        builder.Property(ls => ls.Height)
+            .HasColumnType("REAL");
+
+        builder.Property(ls => ls.Width)
+            .HasColumnType("REAL");
+
+        builder.Property(ls => ls.Length)
+            .HasColumnType("REAL");
     }
 }

@@ -31,11 +31,17 @@ internal class LearningComponentEntityConfiguration : IEntityTypeConfiguration<L
         builder.Property(lc => lc.Orientation)
             .HasMaxLength(20);
 
-        builder.Property(lc => lc.Width);
-        builder.Property(lc => lc.Height);
-        builder.Property(lc => lc.Depth);
-        builder.Property(lc => lc.X);
-        builder.Property(lc => lc.Y);
-        builder.Property(lc => lc.Z);
+        builder.Property(lc => lc.Width)
+            .HasColumnType("REAL");
+        builder.Property(lc => lc.Height)
+            .HasColumnType("REAL");
+        builder.Property(lc => lc.Depth)
+            .HasColumnType("REAL");
+        builder.Property(lc => lc.X)
+            .HasColumnType("REAL");
+        builder.Property(lc => lc.Y)
+            .HasColumnType("REAL");
+        builder.Property(lc => lc.Z)
+            .HasColumnType("REAL");
     }
 }

@@ -38,4 +38,9 @@ app.MapLearningSpaceEndpoints();
 /// </summary>
 app.MapLearningComponentsEndpoints();
 
+/// <summary>
+/// Maps the Whiteboard endpoints to the application.
+/// </summary>
+app.MapWhiteboardEndpoints();
+
 app.Run();
