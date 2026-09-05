@@ -1,0 +1,28 @@
+{
+  "stage": "test-generation",
+  "storyId": "CPD-LC-001-003",
+  "model": "Kimi-K2.5",
+  "iteration": "1",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Domain.Tests.Unit/WhiteboardTests.cs",
+    "Backend.Application.Tests.Unit/WhiteboardServiceTests.cs",
+    "Backend.Infrastructure.Tests.Unit/SqlWhiteboardRepositoryTests.cs",
+    "Backend.Presentation.Tests.Unit/CreateWhiteboardHandlerTests.cs"
+  ],
+  "filesModified": [],
+  "metrics": {
+    "intentsConfirmed": 30,
+    "testMethodsEmitted": 25,
+    "byLayer": {
+      "Domain": 14,
+      "Application": 4,
+      "Infrastructure": 2,
+      "Presentation": 5
+    }
+  },
+  "warnings": [
+    "Referenced production classes that do not yet exist: Whiteboard, IWhiteboardRepository, IWhiteboardService, WhiteboardService, SqlWhiteboardRepository, CreateWhiteboardRequest, CreateWhiteboardDto, CreateWhiteboardResponse, CreateWhiteboardHandler, NotFoundException, ValidationException, DatabaseException, and UCRDatabaseContext.Whiteboards. This is expected for TDD."
+  ],
+  "notes": "Generated 25 test methods across 4 test classes covering all 30 confirmed intents. Domain layer uses parameterized tests to efficiently cover constructor validation and FitsInSpace logic. Application and Infrastructure layers use Moq for dependency isolation. Presentation layer tests handler response types using ASP.NET Core TypedResults."
+}
