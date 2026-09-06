@@ -1,0 +1,26 @@
+{
+  "stage": "test-generation",
+  "storyId": "CPD-LC-001-003",
+  "model": "Kimi-K2.5",
+  "iteration": "3",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Domain.Tests.Unit/WhiteboardTests.cs",
+    "Backend.Application.Tests.Unit/WhiteboardServiceTests.cs",
+    "Backend.Infrastructure.Tests.Unit/SqlWhiteboardRepositoryTests.cs",
+    "Backend.Presentation.Tests.Unit/CreateWhiteboardHandlerTests.cs"
+  ],
+  "filesModified": [],
+  "metrics": {
+    "intentsConfirmed": 33,
+    "testMethodsEmitted": 25,
+    "byLayer": {
+      "Domain": 14,
+      "Application": 4,
+      "Infrastructure": 2,
+      "Presentation": 5
+    }
+  },
+  "warnings": [],
+  "notes": "Generated 25 test methods across 4 test classes covering all 33 confirmed intents. Domain layer tests cover Whiteboard constructor validation and FitsInSpace logic. Application layer tests cover WhiteboardService.CreateWhiteboardAsync with success, not-found, validation, and database-error paths. Infrastructure layer tests cover SqlWhiteboardRepository.AddAsync with success and failure scenarios. Presentation layer tests cover CreateWhiteboardHandler.HandleAsync returning OK, BadRequest, NotFound, and ProblemHttpResult."
+}
