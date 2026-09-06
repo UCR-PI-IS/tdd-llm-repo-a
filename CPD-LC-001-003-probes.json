@@ -1,0 +1,26 @@
+{
+  "probes": [
+    {
+      "name": "create whiteboard successfully",
+      "method": "POST",
+      "path": "/whiteboards",
+      "expectStatus": 200,
+      "expectBodyContains": ["Blue"],
+      "body": {
+        "componentId": "WB-TEST-001",
+        "learningSpaceId": "1",
+        "width": 2.0,
+        "height": 1.2,
+        "depth": 0.1,
+        "x": 1.0,
+        "y": 0.5,
+        "z": 0.0,
+        "orientation": "North",
+        "markerColor": "Blue"
+      },
+      "headers": {
+        "Content-Type": "application/json"
+      }
+    }
+  ]
+}
