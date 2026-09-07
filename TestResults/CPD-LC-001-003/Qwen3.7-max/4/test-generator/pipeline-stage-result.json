@@ -1,0 +1,31 @@
+{
+  "stage": "test-generation",
+  "storyId": "CPD-LC-001-003",
+  "model": "Qwen3.7-max",
+  "iteration": "4",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Domain.Tests.Unit/WhiteboardTests.cs",
+    "Backend.Application.Tests.Unit/WhiteboardServiceTests.cs",
+    "Backend.Infrastructure.Tests.Unit/SqlWhiteboardRepositoryTests.cs",
+    "Backend.Presentation.Tests.Unit/CreateWhiteboardHandlerTests.cs"
+  ],
+  "filesModified": [],
+  "metrics": {
+    "intentsConfirmed": 30,
+    "testMethodsEmitted": 25,
+    "byLayer": {
+      "Domain": 14,
+      "Application": 4,
+      "Infrastructure": 2,
+      "Presentation": 5
+    }
+  },
+  "warnings": [
+    "Whiteboard entity, WhiteboardService, IWhiteboardCreateService, CreateWhiteboardRequest, IWhiteboardRepository, ILearningSpaceReadRepository, CreateWhiteboardDto, CreateWhiteboardResponse, WhiteboardDto, CreateWhiteboardHandler, SqlWhiteboardRepository, and custom exceptions (NotFoundException, ValidationException, DatabaseException in Domain.Exceptions namespace) do not yet exist and must be implemented for tests to compile.",
+    "Whiteboard valid orientations are assumed to be South, East, West (not North) based on Domain-011 intent stating 'all valid orientations'.",
+    "UCRDatabaseContext will need a DbSet<Whiteboard> Whiteboards property for the Infrastructure tests.",
+    "FitsInSpace method maps coordinates as: X+Width<=Space.Width, Y+Height<=Space.Height, Z+Depth<=Space.Length."
+  ],
+  "notes": "Generated 25 test methods across 4 test files covering all 30 confirmed intents for the Whiteboard creation story. Domain tests cover constructor validation (19 intents) and FitsInSpace logic. Application tests cover service orchestration with mocked repositories. Infrastructure tests cover EF Core persistence with mocked DbContext. Presentation tests cover HTTP result mapping with mocked service. All tests follow existing codebase conventions (AAA pattern, Assert.Multiple for multi-property checks, parameterized TestCase for negative scenarios)."
+}
