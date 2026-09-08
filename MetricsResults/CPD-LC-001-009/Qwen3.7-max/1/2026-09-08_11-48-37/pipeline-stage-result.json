@@ -1,0 +1,68 @@
+{
+  "stage": "refactoring",
+  "storyId": "CPD-LC-001-009",
+  "model": "Qwen3.7-max",
+  "iteration": "1",
+  "status": "partial",
+  "filesCreated": [
+    "Backend.Application/Services/ComponentRequestValidator.cs"
+  ],
+  "filesModified": [
+    "Backend.Application/Services/Implementations/LearningComponentService.cs",
+    "Backend.Presentation/Handlers/LearningComponentResponseFactory.cs",
+    "Backend.Presentation/Mappers/LearningComponentMapper.cs"
+  ],
+  "metrics": {
+    "loopIterationsPerformed": 3,
+    "maxLoopIterations": 10,
+    "allGreenAchieved": false,
+    "baseline": {
+      "minMI": 51,
+      "maxCC": 14,
+      "maxCoupling": 24,
+      "maxDIT": 0
+    },
+    "final": {
+      "minMI": 51,
+      "maxCC": 6,
+      "maxCoupling": 24,
+      "maxDIT": 0
+    },
+    "remainingViolations": [
+      {
+        "type": "UCR.ECCI.PI.ThemePark.Backend.Application.Services.Implementations.LearningComponentService",
+        "metric": "Coupling",
+        "value": 16,
+        "flag": "YELLOW"
+      },
+      {
+        "type": "UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Repositories.SqlLearningComponentRepository",
+        "metric": "Coupling",
+        "value": 15,
+        "flag": "YELLOW"
+      },
+      {
+        "type": "UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Endpoints.LearningComponentsEndpoints",
+        "metric": "Coupling",
+        "value": 24,
+        "flag": "YELLOW"
+      },
+      {
+        "type": "UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Handlers.CreateLearningComponentHandler",
+        "metric": "Coupling",
+        "value": 13,
+        "flag": "YELLOW"
+      },
+      {
+        "type": "UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Handlers.LearningComponentResponseFactory",
+        "metric": "Coupling",
+        "value": 11,
+        "flag": "YELLOW"
+      }
+    ]
+  },
+  "warnings": [
+    "Class Coupling YELLOW violations remain in 5 story-related types. These are structural (endpoint classes contain unrelated whiteboard routes; handlers/factories require DTO/domain/HTTP type references). Reducing to GREEN (0-9) would require removing functionality or breaking Clean Architecture boundaries."
+  ],
+  "notes": "Successfully fixed the Cyclomatic Complexity violation in LearningComponentService (CC=14 YELLOW → CC=6 GREEN) by extracting validation logic to ComponentRequestValidator. All Maintainability Index and Depth of Inheritance metrics are GREEN for story-related code. Only Class Coupling YELLOW violations remain, which are lower priority per the threshold guidelines and difficult to address without invasive architectural changes."
+}

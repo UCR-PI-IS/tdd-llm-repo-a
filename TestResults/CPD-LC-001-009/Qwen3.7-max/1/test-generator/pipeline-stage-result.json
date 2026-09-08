@@ -1,0 +1,34 @@
+{
+  "stage": "test-generation",
+  "storyId": "CPD-LC-001-009",
+  "model": "Qwen3.7-max",
+  "iteration": "1",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Infrastructure.Tests.Unit/ComponentIdGeneratorTests.cs",
+    "Backend.Presentation.Tests.Unit/CreateLearningComponentHandlerTests.cs",
+    "Backend.Presentation.Tests.Unit/LearningComponentsEndpointsTests.cs"
+  ],
+  "filesModified": [
+    "Backend.Domain.Tests.Unit/LearningComponentTests.cs",
+    "Backend.Application.Tests.Unit/LearningComponentServiceTests.cs",
+    "Backend.Infrastructure.Tests.Unit/SqlLearningComponentRepositoryTests.cs"
+  ],
+  "metrics": {
+    "intentsConfirmed": 30,
+    "testMethodsEmitted": 23,
+    "byLayer": {
+      "Domain": 7,
+      "Application": 6,
+      "Infrastructure": 5,
+      "Presentation": 5
+    }
+  },
+  "warnings": [
+    "Domain-004 (zero width throws) conflicts with existing test Constructor_ZeroValues_AllPropertiesSetCorrectly from a prior story which asserts zero values succeed. The new validation rule supersedes the old boundary test; the prior test will need removal or update once the implementation changes.",
+    "Application layer tests assume LearningComponentService constructor will be updated to accept IComponentIdGenerator as a second parameter. Existing GetComponentsByLearningSpaceIdAsync tests will not compile until the constructor signature is updated in the implementation.",
+    "Presentation-005 endpoint test mocks IEndpointRouteBuilder.MapPost which is an extension method in ASP.NET Core. The implementation may need to expose a testable wrapper or use a different testing approach.",
+    "CreateLearningComponentHandler, CreateLearningComponentDto, CreateLearningComponentResponse, CreateComponentRequest, IComponentIdGenerator, DuplicateIdException, and ComponentIdGenerator classes do not yet exist and must be implemented for tests to compile."
+  ],
+  "notes": "Generated 23 test methods across 6 files (3 new, 3 modified) covering all 30 confirmed intents for CPD-LC-001-009. Tests follow existing project patterns with NUnit 3.14.0, Moq 4.20.72, AAA pattern, and Assert.Multiple for multi-property assertions. Parameterized tests minimize method count while achieving full decision coverage."
+}
