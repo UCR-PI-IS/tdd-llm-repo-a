@@ -31,11 +31,18 @@ internal class LearningComponentEntityConfiguration : IEntityTypeConfiguration<L
         builder.Property(lc => lc.Orientation)
             .HasMaxLength(20);
 
-        builder.Property(lc => lc.Width);
-        builder.Property(lc => lc.Height);
-        builder.Property(lc => lc.Depth);
-        builder.Property(lc => lc.X);
-        builder.Property(lc => lc.Y);
-        builder.Property(lc => lc.Z);
+        // Use REAL for float properties (SQL Server REAL is 4-byte float)
+        builder.Property(lc => lc.Width)
+            .HasColumnType("real");
+        builder.Property(lc => lc.Height)
+            .HasColumnType("real");
+        builder.Property(lc => lc.Depth)
+            .HasColumnType("real");
+        builder.Property(lc => lc.X)
+            .HasColumnType("real");
+        builder.Property(lc => lc.Y)
+            .HasColumnType("real");
+        builder.Property(lc => lc.Z)
+            .HasColumnType("real");
     }
 }

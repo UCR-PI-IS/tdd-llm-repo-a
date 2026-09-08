@@ -13,7 +13,7 @@ internal static class LearningComponentMapper
     /// </summary>
     /// <param name="components">The domain entities to map.</param>
     /// <returns>A list of DTOs corresponding to the input entities.</returns>
-    public static List<LearningComponentDto> ToDtoList(List<LearningComponent> components)
+    public static List<LearningComponentDto> ToDtoList(IEnumerable<LearningComponent> components)
     {
         return components.Select(c => new LearningComponentDto(
             c.ComponentId,

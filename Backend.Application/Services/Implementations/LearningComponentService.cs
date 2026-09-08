@@ -1,22 +1,28 @@
 using UCR.ECCI.PI.ThemePark.Backend.Domain.Entities;
+using UCR.ECCI.PI.ThemePark.Backend.Domain.Exceptions;
 using UCR.ECCI.PI.ThemePark.Backend.Domain.Repositories;
 
 namespace UCR.ECCI.PI.ThemePark.Backend.Application.Services.Implementations;
 
 /// <summary>
-/// Service implementation for retrieving learning component data.
+/// Service implementation for managing learning component data.
 /// </summary>
 internal class LearningComponentService : ILearningComponentService
 {
     private readonly ILearningComponentRepository _learningComponentRepository;
+    private readonly IComponentIdGenerator _componentIdGenerator;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="LearningComponentService"/> class.
     /// </summary>
     /// <param name="learningComponentRepository">The learning component repository dependency.</param>
-    public LearningComponentService(ILearningComponentRepository learningComponentRepository)
+    /// <param name="componentIdGenerator">The component ID generator dependency.</param>
+    public LearningComponentService(
+        ILearningComponentRepository learningComponentRepository,
+        IComponentIdGenerator componentIdGenerator)
     {
         _learningComponentRepository = learningComponentRepository;
+        _componentIdGenerator = componentIdGenerator;
     }
 
     /// <summary>
@@ -32,4 +38,47 @@ internal class LearningComponentService : ILearningComponentService
 
         return _learningComponentRepository.GetComponentsByLearningSpaceIdAsync(learningSpaceId);
     }
+
+    /// <summary>
+    /// Creates a new learning component. If no ID is provided, a unique ID is auto-generated.
+    /// </summary>
+    /// <param name="request">The request containing the component data.</param>
+    /// <returns>The created learning component entity.</returns>
+    /// <exception cref="ValidationException">Thrown when the request data is invalid.</exception>
+    /// <exception cref="DuplicateIdException">Thrown when an explicit ID already exists.</exception>
+    public async Task<LearningComponent> CreateComponentAsync(CreateComponentRequest request)
+    {
+        ComponentRequestValidator.Validate(request);
+
+        string componentId;
+        if (!string.IsNullOrEmpty(request.ComponentId))
+        {
+            componentId = request.ComponentId;
+            if (await _learningComponentRepository.ExistsAsync(componentId))
+                throw new DuplicateIdException($"Component with ID '{componentId}' already exists.");
+        }
+        else
+        {
+            do
+            {
+                componentId = await _componentIdGenerator.GenerateIdAsync();
+            } while (await _learningComponentRepository.ExistsAsync(componentId));
+        }
+
+        var component = new LearningComponent(
+            componentId,
+            request.LearningSpaceId,
+            request.Width,
+            request.Height,
+            request.Depth,
+            request.X,
+            request.Y,
+            request.Z,
+            request.Orientation);
+
+        await _learningComponentRepository.AddAsync(component);
+
+        return component;
+    }
+
 }

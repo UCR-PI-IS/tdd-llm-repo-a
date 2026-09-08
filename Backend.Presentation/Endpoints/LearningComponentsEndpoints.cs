@@ -37,6 +37,29 @@ public static class LearningComponentsEndpoints
             .WithName("CreateWhiteboard")
             .WithOpenApi();
 
+        // Map the POST endpoint for creating learning components
+        builder.MapPost("/api/components",
+            async (ILearningComponentService service, CreateLearningComponentDto dto) =>
+            {
+                var handler = new CreateLearningComponentHandler(service);
+                var result = await handler.HandleAsync(dto);
+                return Results.Json(result, statusCode: result.StatusCode);
+            })
+            .WithName("CreateComponent")
+            .WithOpenApi();
+
         return builder;
+    }
+
+    /// <summary>
+    /// Maps the POST endpoint for creating a learning component.
+    /// </summary>
+    /// <param name="builder">The <see cref="IEndpointRouteBuilder"/> used to map the endpoint.</param>
+    /// <param name="handler">The handler that processes the create component request.</param>
+    public static void MapCreateComponentEndpoint(IEndpointRouteBuilder builder, CreateLearningComponentHandler handler)
+    {
+        builder.MapPost("/api/components",
+            (CreateLearningComponentDto dto) => handler.HandleAsync(dto))
+            .WithName("CreateComponent");
     }
 }

@@ -95,6 +95,126 @@ public class SqlLearningComponentRepositoryTests
         });
     }
 
+    // ========================================================================
+    // Tests for CPD-LC-001-009: ExistsAsync and AddAsync
+    // ========================================================================
+
+    /// <summary>
+    /// CPD-LC-001-009 Infrastructure-002: Verify that ExistsAsync returns true
+    /// when a component with the given ID exists in the database.
+    /// </summary>
+    [Test]
+    [Description("CPD-LC-001-009 Infrastructure-002: ExistsAsync returns true when component exists")]
+    public async Task ExistsAsync_ComponentExists_ReturnsTrue()
+    {
+        // Arrange
+        var existingComponentId = "COMP-12345";
+        var components = new List<LearningComponent>
+        {
+            new LearningComponent(existingComponentId, "LS-001", 2.5f, 1.5f, 0.5f, 10f, 20f, 0f, "North")
+        };
+
+        var mockDbSet = CreateMockDbSet(components.AsQueryable());
+        _mockDbContext
+            .Setup(c => c.LearningComponents)
+            .Returns(mockDbSet.Object);
+
+        // Act
+        var exists = await _sut.ExistsAsync(existingComponentId);
+
+        // Assert
+        Assert.That(exists, Is.True);
+    }
+
+    /// <summary>
+    /// CPD-LC-001-009 Infrastructure-003: Verify that ExistsAsync returns false
+    /// when a component with the given ID does not exist in the database.
+    /// </summary>
+    [Test]
+    [Description("CPD-LC-001-009 Infrastructure-003: ExistsAsync returns false when component does not exist")]
+    public async Task ExistsAsync_ComponentDoesNotExist_ReturnsFalse()
+    {
+        // Arrange
+        var nonExistentComponentId = "COMP-NONEXISTENT";
+        var components = new List<LearningComponent>();
+
+        var mockDbSet = CreateMockDbSet(components.AsQueryable());
+        _mockDbContext
+            .Setup(c => c.LearningComponents)
+            .Returns(mockDbSet.Object);
+
+        // Act
+        var exists = await _sut.ExistsAsync(nonExistentComponentId);
+
+        // Assert
+        Assert.That(exists, Is.False);
+    }
+
+    /// <summary>
+    /// CPD-LC-001-009 Infrastructure-004: Verify that AddAsync adds the component
+    /// to the DbSet and calls SaveChangesAsync on the DbContext.
+    /// </summary>
+    [Test]
+    [Description("CPD-LC-001-009 Infrastructure-004: AddAsync succeeds and calls SaveChanges")]
+    public async Task AddAsync_UniqueComponent_SucceedsAndCallsSaveChanges()
+    {
+        // Arrange
+        var component = new LearningComponent("COMP-NEW", "LS-001", 2.5f, 1.5f, 0.5f, 10f, 20f, 0f, "North");
+
+        var mockDbSet = new Mock<DbSet<LearningComponent>>();
+        _mockDbContext
+            .Setup(c => c.LearningComponents)
+            .Returns(mockDbSet.Object);
+
+        // Act
+        await _sut.AddAsync(component);
+
+        // Assert
+        Assert.Multiple(() =>
+        {
+            mockDbSet.Verify(x => x.AddAsync(component, It.IsAny<CancellationToken>()), Times.Once);
+            _mockDbContext.Verify(x => x.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Once);
+        });
+    }
+
+    /// <summary>
+    /// CPD-LC-001-009 Infrastructure-005: Verify that AddAsync throws a DbUpdateException
+    /// when a component with a duplicate ID is added (unique constraint violation).
+    /// </summary>
+    [Test]
+    [Description("CPD-LC-001-009 Infrastructure-005: AddAsync throws DbUpdateException on duplicate ID")]
+    public async Task AddAsync_DuplicateId_ThrowsDbUpdateException()
+    {
+        // Arrange
+        var component = new LearningComponent("COMP-DUPLICATE", "LS-001", 2.5f, 1.5f, 0.5f, 10f, 20f, 0f, "North");
+
+        var mockDbSet = new Mock<DbSet<LearningComponent>>();
+        _mockDbContext
+            .Setup(c => c.LearningComponents)
+            .Returns(mockDbSet.Object);
+        _mockDbContext
+            .Setup(x => x.SaveChangesAsync(It.IsAny<CancellationToken>()))
+            .ThrowsAsync(new DbUpdateException("Duplicate key"));
+
+        // Act
+        DbUpdateException? caughtException = null;
+        try
+        {
+            await _sut.AddAsync(component);
+        }
+        catch (DbUpdateException ex)
+        {
+            caughtException = ex;
+        }
+
+        // Assert
+        Assert.Multiple(() =>
+        {
+            Assert.That(caughtException, Is.Not.Null, "Expected DbUpdateException was not thrown");
+            Assert.That(caughtException!.Message, Does.Contain("Duplicate key"));
+        });
+    }
+
     /// <summary>
     /// Creates a mock <see cref="DbSet{T}"/> that supports synchronous and asynchronous
     /// LINQ operations for the given queryable data.
