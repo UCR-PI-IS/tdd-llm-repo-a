@@ -1,0 +1,74 @@
+{
+  "stage": "e2e-validation",
+  "status": "success",
+  "timestamp": "2026-09-09_10-43-34",
+  "storyId": "CPD-LC-001-009",
+  "model": "Qwen3.7-max",
+  "iteration": "3",
+  "database": {
+    "container": "themepark-sql-e2e-cpd-lc-001-009-qwen3-7-max-3-104334",
+    "image": "mcr.microsoft.com/mssql/server:2022-latest",
+    "network": "themepark-e2e-cpd-lc-001-009-qwen3-7-max-3-104334",
+    "database": "ThemePark",
+    "readySeconds": 4.6,
+    "baseSchemaApplied": [
+      "Semester.sql",
+      "Course.sql"
+    ],
+    "seedsApplied": [
+      "seed-CPD-LC-001-009.sql"
+    ]
+  },
+  "backend": {
+    "container": "themepark-api-e2e-cpd-lc-001-009-qwen3-7-max-3-104334",
+    "project": "Backend.Api/UCR.ECCI.PI.ThemePark.Backend.Api.csproj",
+    "publishStatus": "success",
+    "started": true,
+    "url": "http://127.0.0.1:32787",
+    "readySeconds": 2.3,
+    "errorLines": []
+  },
+  "probes": [
+    {
+      "name": "list components for LS-001 includes seeded data",
+      "method": "GET",
+      "path": "/LearningComponents/LS-001",
+      "expectedStatus": 200,
+      "actualStatus": 200,
+      "passed": true,
+      "missingContent": [],
+      "error": null,
+      "bodySnippet": "{\"components\":[{\"componentId\":\"COMP-SEED-001\",\"learningSpaceId\":\"LS-001\",\"width\":2.5,\"height\":1.5,\"depth\":0.5,\"x\":10,\"y\":20,\"z\":0,\"orientation\":\"North\"},{\"componentId\":\"COMP-SEED-002\",\"learningSpaceId\":\"LS-001\",\"width\":3,\"height\":2,\"depth\":1,\"x\":15,\"y\":25,\"z\":0,\"orientation\":\"South\"}]}"
+    },
+    {
+      "name": "list components for LS-002 includes seeded data",
+      "method": "GET",
+      "path": "/LearningComponents/LS-002",
+      "expectedStatus": 200,
+      "actualStatus": 200,
+      "passed": true,
+      "missingContent": [],
+      "error": null,
+      "bodySnippet": "{\"components\":[{\"componentId\":\"COMP-SEED-003\",\"learningSpaceId\":\"LS-002\",\"width\":1.5,\"height\":1,\"depth\":0.5,\"x\":5,\"y\":10,\"z\":0,\"orientation\":\"East\"}]}"
+    }
+  ],
+  "totalProbes": 2,
+  "probesPassed": 2,
+  "probesFailed": 0,
+  "cleanup": {
+    "status": "clean",
+    "removedContainers": [
+      "themepark-api-e2e-cpd-lc-001-009-qwen3-7-max-3-104334",
+      "themepark-sql-e2e-cpd-lc-001-009-qwen3-7-max-3-104334"
+    ],
+    "removedNetworks": [
+      "themepark-e2e-cpd-lc-001-009-qwen3-7-max-3-104334"
+    ],
+    "removedVolumes": [
+      "themepark-app-e2e-cpd-lc-001-009-qwen3-7-max-3-104334"
+    ],
+    "leftovers": []
+  },
+  "warnings": [],
+  "errors": []
+}
