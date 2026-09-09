@@ -1,0 +1,32 @@
+{
+  "stage": "refactoring",
+  "storyId": "CPD-LC-001-009",
+  "model": "Qwen3.7-max",
+  "iteration": "4",
+  "status": "partial",
+  "filesCreated": [],
+  "filesModified": [
+    "Backend.Domain/Entities/LearningComponent.cs",
+    "Backend.Application/Services/Implementations/LearningComponentService.cs"
+  ],
+  "metrics": {
+    "loopIterationsPerformed": 3,
+    "maxLoopIterations": 10,
+    "allGreenAchieved": false,
+    "baseline": { "minMI": 54, "maxCC": 14, "maxCoupling": 19, "maxDIT": 0 },
+    "final":    { "minMI": 55, "maxCC": 12, "maxCoupling": 19, "maxDIT": 0 },
+    "remainingViolations": [
+      { "type": "UCR.ECCI.PI.ThemePark.Backend.Application.Services.Implementations.LearningComponentService", "metric": "CC", "value": 12, "flag": "YELLOW" },
+      { "type": "UCR.ECCI.PI.ThemePark.Backend.Application.Services.Implementations.LearningComponentService", "metric": "Coupling", "value": 17, "flag": "YELLOW" },
+      { "type": "UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Repositories.SqlLearningComponentRepository", "metric": "Coupling", "value": 15, "flag": "YELLOW" },
+      { "type": "UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Endpoints.LearningComponentsEndpoints", "metric": "Coupling", "value": 18, "flag": "YELLOW" },
+      { "type": "UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Handlers.CreateLearningComponentHandler", "metric": "Coupling", "value": 19, "flag": "YELLOW" },
+      { "type": "UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Handlers.LearningComponentResponseFactory", "metric": "Coupling", "value": 11, "flag": "YELLOW" }
+    ]
+  },
+  "warnings": [
+    "Mapper-based coupling reduction in CreateLearningComponentHandler was reverted because it increased coupling from 19 to 20 (adding LearningComponentMapper reference offset removal of inline construction types)",
+    "Remaining coupling YELLOW violations (11-19) are structural and inherent to the DDD layer responsibilities: EF Core repository patterns require multiple framework type references, endpoint mapping classes inherently reference many handler/DTO types, and typed HTTP result handlers require specific response types in their signatures"
+  ],
+  "notes": "Refactoring improved CC from 14 to 12 in LearningComponentService by extracting ResolveComponentIdAsync and ValidateNonNegative helpers, and reduced block duplication in LearningComponent constructors by extracting ValidateDimensionsAndOrientation. MI improved from 54 to 55. All 118 tests pass. Remaining 5 YELLOW coupling violations are structural (10-40 range) and cannot be reduced below 10 without breaking DDD layer boundaries or test contracts."
+}
