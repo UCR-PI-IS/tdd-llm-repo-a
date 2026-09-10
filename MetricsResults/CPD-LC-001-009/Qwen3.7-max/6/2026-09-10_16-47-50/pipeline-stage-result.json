@@ -1,0 +1,32 @@
+{
+  "stage": "refactoring",
+  "storyId": "CPD-LC-001-009",
+  "model": "Qwen3.7-max",
+  "iteration": "6",
+  "status": "partial",
+  "filesCreated": [
+    "Backend.Application/Services/CreateComponentRequestValidator.cs"
+  ],
+  "filesModified": [
+    "Backend.Application/Services/Implementations/LearningComponentService.cs"
+  ],
+  "metrics": {
+    "loopIterationsPerformed": 2,
+    "maxLoopIterations": 10,
+    "allGreenAchieved": false,
+    "baseline": { "minMI": 52, "maxCC": 15, "maxCoupling": 18, "maxDIT": 0 },
+    "final":    { "minMI": 58, "maxCC": 7, "maxCoupling": 16, "maxDIT": 0 },
+    "remainingViolations": [
+      { "type": "UCR.ECCI.PI.ThemePark.Backend.Application.Services.Implementations.LearningComponentService", "metric": "Coupling", "value": 16, "flag": "YELLOW" },
+      { "type": "UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Repositories.SqlLearningComponentRepository", "metric": "Coupling", "value": 15, "flag": "YELLOW" },
+      { "type": "UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Endpoints.LearningComponentsEndpoints", "metric": "Coupling", "value": 14, "flag": "YELLOW" },
+      { "type": "UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Endpoints.LearningComponentEndpoints", "metric": "Coupling", "value": 13, "flag": "YELLOW" },
+      { "type": "UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Handlers.CreateLearningComponentHandler", "metric": "Coupling", "value": 11, "flag": "YELLOW" },
+      { "type": "UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Handlers.LearningComponentResponseFactory", "metric": "Coupling", "value": 11, "flag": "YELLOW" }
+    ]
+  },
+  "warnings": [
+    "All 6 remaining YELLOW violations are Class Coupling (11-16 range, low end of 10-40 YELLOW band) inherent to architecture patterns (service, repository, endpoint, handler, factory). Further reduction would require breaking DDD layer boundaries."
+  ],
+  "notes": "Extracted CreateComponentRequestValidator from LearningComponentService, reducing CC from 15 (YELLOW) to 7 (GREEN) and coupling from 18 to 16. Inlined ResolveComponentIdAsync for code simplification. All 107 tests pass. Remaining coupling violations are structural and at the low end of the YELLOW band."
+}

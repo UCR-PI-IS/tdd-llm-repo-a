@@ -1,0 +1,53 @@
+{
+  "stage": "e2e-validation",
+  "status": "failure",
+  "timestamp": "2026-09-10_16-37-17",
+  "storyId": "CPD-LC-001-009",
+  "model": "Qwen3.7-max",
+  "iteration": "6",
+  "database": {
+    "container": "themepark-sql-e2e-cpd-lc-001-009-qwen3-7-max-6-163717",
+    "image": "mcr.microsoft.com/mssql/server:2022-latest",
+    "network": "themepark-e2e-cpd-lc-001-009-qwen3-7-max-6-163717",
+    "database": "ThemePark",
+    "readySeconds": 7.8,
+    "baseSchemaApplied": [
+      "Semester.sql",
+      "Course.sql"
+    ],
+    "seedsApplied": [
+      "seed-CPD-LC-001-009.sql"
+    ]
+  },
+  "backend": {
+    "container": "themepark-api-e2e-cpd-lc-001-009-qwen3-7-max-6-163717",
+    "project": "Backend.Api/UCR.ECCI.PI.ThemePark.Backend.Api.csproj",
+    "publishStatus": "success",
+    "started": true,
+    "url": "http://127.0.0.1:32773",
+    "readySeconds": null,
+    "errorLines": []
+  },
+  "probes": [],
+  "totalProbes": 0,
+  "probesPassed": 0,
+  "probesFailed": 0,
+  "cleanup": {
+    "status": "clean",
+    "removedContainers": [
+      "themepark-api-e2e-cpd-lc-001-009-qwen3-7-max-6-163717",
+      "themepark-sql-e2e-cpd-lc-001-009-qwen3-7-max-6-163717"
+    ],
+    "removedNetworks": [
+      "themepark-e2e-cpd-lc-001-009-qwen3-7-max-6-163717"
+    ],
+    "removedVolumes": [
+      "themepark-app-e2e-cpd-lc-001-009-qwen3-7-max-6-163717"
+    ],
+    "leftovers": []
+  },
+  "warnings": [],
+  "errors": [
+    "RuntimeError: The backend container exited during startup.\n--- backend logs ---\nUnhandled exception. System.InvalidOperationException: Cannot resolve 'UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Handlers.ICreateLearningComponentHandler' from root provider because it requires scoped service 'UCR.ECCI.PI.ThemePark.Backend.Application.Services.ILearningComponentService'.\n   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteValidator.ValidateResolution(ServiceCallSite callSite, IServiceScope scope, IServiceScope rootScope)\n   at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(ServiceIdentifier serviceIdentifier, ServiceProviderEngineScope serviceProviderEngineScope)\n   at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(Type serviceType)\n   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)\n   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)\n   at Program.<Main>$(String[] args) in /workspace/Backend.Api/Program.cs:line 46\n"
+  ]
+}
