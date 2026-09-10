@@ -152,19 +152,96 @@ public class LearningComponentTests
     }
 
     /// <summary>
-    /// Domain-010: Verify that creating a LearningComponent with zero values for all
-    /// dimensions and coordinates succeeds (boundary test).
+    /// Domain-001 (CPD-LC-001-009): Verify that a LearningComponent can be created
+    /// without providing a componentId, and an auto-generated ID is assigned.
     /// </summary>
     [Test]
-    [Description("Domain-010: Verify that zero values for dimensions and coordinates succeed (boundary test)")]
-    public void Constructor_ZeroValues_AllPropertiesSetCorrectly()
+    [Description("Domain-001: Constructor without componentId assigns an auto-generated ID")]
+    public void Constructor_WithoutComponentId_GeneratesAutoId()
+    {
+        // Arrange & Act
+        var component = new LearningComponent(
+            learningSpaceId: "LS-001",
+            width: 1.5f, height: 1.0f, depth: 0.5f,
+            x: 10.0f, y: 5.0f, z: 0.0f,
+            orientation: "North");
+
+        // Assert
+        Assert.Multiple(() =>
+        {
+            Assert.That(component.ComponentId, Is.Not.Null);
+            Assert.That(component.ComponentId, Is.Not.Empty);
+        });
+    }
+
+    /// <summary>
+    /// Domain-002 (CPD-LC-001-009): Verify that a LearningComponent created with an
+    /// explicitly provided componentId uses that exact ID.
+    /// </summary>
+    [Test]
+    [Description("Domain-002: Constructor with explicit componentId assigns the provided ID")]
+    public void Constructor_WithExplicitComponentId_UsesProvidedId()
+    {
+        // Arrange
+        var explicitId = "COMP-12345";
+
+        // Act
+        var component = new LearningComponent(
+            componentId: explicitId,
+            learningSpaceId: "LS-001",
+            width: 1.5f, height: 1.0f, depth: 0.5f,
+            x: 10.0f, y: 5.0f, z: 0.0f,
+            orientation: "North");
+
+        // Assert
+        Assert.That(component.ComponentId, Is.EqualTo(explicitId));
+    }
+
+    /// <summary>
+    /// Domain-004 (CPD-LC-001-009): Verify that creating a LearningComponent with zero
+    /// width throws an ArgumentException with parameter name "width".
+    /// </summary>
+    [Test]
+    [Description("Domain-004: Zero width throws ArgumentException")]
+    public void Constructor_ZeroWidth_ThrowsArgumentException()
+    {
+        // Arrange & Act
+        ArgumentException? caughtException = null;
+        try
+        {
+            new LearningComponent(
+                learningSpaceId: "LS-001",
+                width: 0.0f, height: 1.0f, depth: 0.5f,
+                x: 10.0f, y: 5.0f, z: 0.0f,
+                orientation: "North");
+        }
+        catch (ArgumentException ex)
+        {
+            caughtException = ex;
+        }
+
+        // Assert
+        Assert.Multiple(() =>
+        {
+            Assert.That(caughtException, Is.Not.Null, "Expected ArgumentException was not thrown");
+            Assert.That(caughtException!.ParamName, Is.EqualTo("width"));
+        });
+    }
+
+    /// <summary>
+    /// Domain-010 (original): Verify that creating a LearningComponent with zero values
+    /// for coordinates succeeds while dimensions remain positive (boundary test).
+    /// </summary>
+    [Test]
+    [Description("Domain-010: Verify that zero values for coordinates succeed with positive dimensions (boundary test)")]
+    public void Constructor_ZeroCoordinates_AllPropertiesSetCorrectly()
     {
         // Arrange
         var componentId = ValidComponentId;
         var learningSpaceId = ValidLearningSpaceId;
-        var width = 0f;
-        var height = 0f;
-        var depth = 0f;
+        var width = ValidWidth;
+        var height = ValidHeight;
+        var depth = ValidDepth;
         var x = 0f;
         var y = 0f;
         var z = 0f;
@@ -177,9 +254,6 @@ public class LearningComponentTests
         // Assert
         Assert.Multiple(() =>
         {
-            Assert.That(component.Width, Is.EqualTo(0f));
-            Assert.That(component.Height, Is.EqualTo(0f));
-            Assert.That(component.Depth, Is.EqualTo(0f));
             Assert.That(component.X, Is.EqualTo(0f));
             Assert.That(component.Y, Is.EqualTo(0f));
             Assert.That(component.Z, Is.EqualTo(0f));
