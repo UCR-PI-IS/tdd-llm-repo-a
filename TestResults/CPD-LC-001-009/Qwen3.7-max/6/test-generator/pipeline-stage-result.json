@@ -1,0 +1,35 @@
+{
+  "stage": "test-generation",
+  "storyId": "CPD-LC-001-009",
+  "model": "Qwen3.7-max",
+  "iteration": "6",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Infrastructure.Tests.Unit/ComponentIdGeneratorTests.cs",
+    "Backend.Presentation.Tests.Unit/CreateLearningComponentHandlerTests.cs",
+    "Backend.Presentation.Tests.Unit/LearningComponentEndpointsTests.cs"
+  ],
+  "filesModified": [
+    "Backend.Domain.Tests.Unit/LearningComponentTests.cs",
+    "Backend.Application.Tests.Unit/LearningComponentServiceTests.cs",
+    "Backend.Infrastructure.Tests.Unit/SqlLearningComponentRepositoryTests.cs"
+  ],
+  "metrics": {
+    "intentsConfirmed": 25,
+    "testMethodsEmitted": 19,
+    "byLayer": {
+      "Domain": 3,
+      "Application": 6,
+      "Infrastructure": 5,
+      "Presentation": 5
+    }
+  },
+  "warnings": [
+    "Domain-004 (zero width throws) conflicts with existing Constructor_ZeroValues_AllPropertiesSetCorrectly test which was updated to test zero coordinates only with positive dimensions",
+    "Domain intents 003, 005-014 are already covered by existing parameterized tests in LearningComponentTests.cs and were not duplicated",
+    "Application tests reference CreateComponentRequest, CreateComponentResult, DuplicateIdException, IComponentIdGenerator which are expected to be created by the implementation phase",
+    "Presentation handler tests assume a CreateComponentHandlerResult return type with StatusCode, ComponentId, Message, and ErrorMessage properties",
+    "Presentation endpoint test assumes MapCreateComponentEndpoint is a static method on LearningComponentEndpoints taking IEndpointRouteBuilder and ICreateLearningComponentHandler"
+  ],
+  "notes": "Generated 19 new test methods across 6 files (3 new, 3 updated) covering all 25 confirmed intents for CPD-LC-001-009. Existing tests already covered Domain intents 003, 005-014 via parameterized TestCase methods, so only 3 new Domain tests were added for the auto-generated ID constructor overload (Domain-001, 002) and zero-width validation (Domain-004). The Application layer tests were added to the existing LearningComponentServiceTests.cs with an updated SetUp to include IComponentIdGenerator. Infrastructure tests added ExistsAsync and AddAsync coverage plus a new ComponentIdGeneratorTests.cs file. Presentation tests created two new files for the handler and endpoint mapping."
+}
