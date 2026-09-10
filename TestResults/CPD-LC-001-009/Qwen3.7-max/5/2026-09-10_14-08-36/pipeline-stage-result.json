@@ -1,0 +1,37 @@
+{
+  "stage": "code-generation",
+  "storyId": "CPD-LC-001-009",
+  "model": "Qwen3.7-max",
+  "iteration": "5",
+  "status": "success",
+  "filesCreated": [],
+  "filesModified": [
+    "Backend.Presentation.Tests.Unit/LearningComponentEndpointsTests.cs",
+    "Backend.Infrastructure/Services/ComponentIdGenerator.cs",
+    "Backend.Infrastructure/DependecyInjection.cs",
+    "Backend.Infrastructure/Repositories/SqlLearningComponentRepository.cs",
+    "Backend.Presentation/Endpoints/LearningComponentEndpoints.cs",
+    "Backend.Api/Program.cs"
+  ],
+  "metrics": {
+    "buildErrors": 0,
+    "buildWarnings": 0,
+    "testsTotal": 118,
+    "testsPassed": 118,
+    "testsFailed": 0,
+    "testsSkipped": 0,
+    "lineCoverage": 0.7560137457044673,
+    "branchCoverage": 0.8387096774193549,
+    "e2e": {
+      "status": "success",
+      "probesTotal": 2,
+      "probesPassed": 2,
+      "probesFailed": 0,
+      "seedsApplied": ["seed-CPD-LC-001-009.sql"],
+      "resultPath": "E2EResults/CPD-LC-001-009/Qwen3.7-max/5/2026-09-10_14-09-03/",
+      "cleanup": "clean"
+    }
+  },
+  "warnings": [],
+  "notes": "Fixed CS1061 DataSources error in test by casting to IEndpointRouteBuilder, moved ComponentIdGenerator namespace to match test expectations, changed ExistsAsync to use ToListAsync instead of AnyAsync for mock compatibility, wired POST /api/components endpoint in Program.cs with per-request handler resolution from DI."
+}

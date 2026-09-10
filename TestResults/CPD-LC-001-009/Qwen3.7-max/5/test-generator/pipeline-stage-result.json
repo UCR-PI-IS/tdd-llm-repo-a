@@ -1,0 +1,36 @@
+{
+  "stage": "test-generation",
+  "storyId": "CPD-LC-001-009",
+  "model": "Qwen3.7-max",
+  "iteration": "5",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Domain.Tests.Unit/LearningComponentCreationTests.cs",
+    "Backend.Application.Tests.Unit/LearningComponentServiceCreateComponentTests.cs",
+    "Backend.Infrastructure.Tests.Unit/ComponentIdGeneratorTests.cs",
+    "Backend.Infrastructure.Tests.Unit/SqlLearningComponentRepositoryWriteTests.cs",
+    "Backend.Presentation.Tests.Unit/CreateLearningComponentHandlerTests.cs",
+    "Backend.Presentation.Tests.Unit/LearningComponentEndpointsTests.cs"
+  ],
+  "filesModified": [],
+  "metrics": {
+    "intentsConfirmed": 30,
+    "testMethodsEmitted": 21,
+    "byLayer": {
+      "Domain": 5,
+      "Application": 6,
+      "Infrastructure": 5,
+      "Presentation": 5
+    }
+  },
+  "warnings": [
+    "Domain tests reference a new constructor overload on LearningComponent (without componentId parameter) that does not yet exist; tests will not compile until the implementation adds this overload.",
+    "Domain-004 expects zero width to throw ArgumentException, which is stricter than the existing ThrowIfNegative validation (value < 0); the implementation must update validation to reject zero dimensions.",
+    "Application tests reference IComponentIdGenerator, CreateComponentRequest, DuplicateIdException, and ValidationException which are new types not yet defined in the codebase.",
+    "Application tests assume LearningComponentService constructor is updated to accept IComponentIdGenerator as a second dependency.",
+    "Infrastructure tests reference ComponentIdGenerator class and new repository methods (ExistsAsync, AddAsync) that do not yet exist.",
+    "Presentation tests reference CreateLearningComponentHandler (instance class) and CreateLearningComponentResponse which are new types not yet defined.",
+    "Presentation endpoint test uses WebApplication.CreateBuilder to verify endpoint registration; the implementation must expose MapCreateComponentEndpoint on LearningComponentEndpoints."
+  ],
+  "notes": "Generated 21 test methods across 6 files covering all 30 confirmed intents for story CPD-LC-001-009. Tests follow existing project conventions (AAA pattern, Assert.Multiple for multi-property assertions, Moq for mocking, parameterized TestCase for validation boundaries). New test files were created alongside existing ones to avoid modifying previous story tests. The story introduces a new LearningComponent constructor overload with auto-generated ID, stricter dimension validation, a CreateComponentAsync service method with ID generation and uniqueness checks, and a new POST endpoint for component creation."
+}
