@@ -57,7 +57,7 @@ public class LearningComponent
     public string Orientation { get; }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="LearningComponent"/> class.
+    /// Initializes a new instance of the <see cref="LearningComponent"/> class with an explicit ID.
     /// </summary>
     /// <param name="componentId">Unique identifier for the learning component.</param>
     /// <param name="learningSpaceId">Identifier of the learning space this component belongs to.</param>
@@ -99,10 +99,44 @@ public class LearningComponent
         Orientation = orientation;
     }
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="LearningComponent"/> class with an auto-generated ID.
+    /// </summary>
+    /// <param name="learningSpaceId">Identifier of the learning space this component belongs to.</param>
+    /// <param name="width">Width of the component in meters. Must be positive.</param>
+    /// <param name="height">Height of the component in meters. Must be positive.</param>
+    /// <param name="depth">Depth of the component in meters. Must be positive.</param>
+    /// <param name="x">X coordinate position. Must be non-negative.</param>
+    /// <param name="y">Y coordinate position. Must be non-negative.</param>
+    /// <param name="z">Z coordinate position. Must be non-negative.</param>
+    /// <param name="orientation">Orientation of the component. Must be North, South, East, or West.</param>
+    /// <exception cref="ArgumentException">Thrown when any dimension is not positive, coordinate is negative, or orientation is invalid.</exception>
+    public LearningComponent(
+        string learningSpaceId,
+        float width,
+        float height,
+        float depth,
+        float x,
+        float y,
+        float z,
+        string orientation)
+        : this(Guid.NewGuid().ToString(), learningSpaceId, width, height, depth, x, y, z, orientation)
+    {
+        ThrowIfNotPositive(width, nameof(width));
+        ThrowIfNotPositive(height, nameof(height));
+        ThrowIfNotPositive(depth, nameof(depth));
+    }
+
     private static void ThrowIfNegative(float value, string paramName)
     {
         if (value < 0f)
             throw new ArgumentException($"{paramName} cannot be negative.", paramName);
+    }
+
+    private static void ThrowIfNotPositive(float value, string paramName)
+    {
+        if (value <= 0f)
+            throw new ArgumentException($"{paramName} must be positive.", paramName);
     }
 
     private static void ValidateOrientation(string orientation)

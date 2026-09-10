@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Builder;
 using UCR.ECCI.PI.ThemePark.Backend.DependencyInjection;
 using UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Endpoints;
+using UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Handlers;
+using UCR.ECCI.PI.ThemePark.Backend.Application.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +15,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddCleanArchitectureServices(builder.Configuration);
+builder.Services.AddScoped<CreateLearningComponentHandler>();
 
 var app = builder.Build();
 
@@ -37,5 +40,10 @@ app.MapLearningSpaceEndpoints();
 /// Maps the Learning Components endpoints to the application.
 /// </summary>
 app.MapLearningComponentsEndpoints();
+
+/// <summary>
+/// Maps the Create Component endpoint to the application.
+/// </summary>
+LearningComponentEndpoints.MapCreateComponentEndpoint(app, null!);
 
 app.Run();
