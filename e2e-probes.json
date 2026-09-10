@@ -1,0 +1,23 @@
+{
+  "probes": [
+    {
+      "name": "create component without id",
+      "method": "POST",
+      "path": "/api/components",
+      "expectStatus": 201,
+      "body": {
+        "learningSpaceId": "LS-001",
+        "width": 1.5,
+        "height": 1.0,
+        "depth": 0.5,
+        "x": 10.0,
+        "y": 5.0,
+        "z": 0.0,
+        "orientation": "North"
+      },
+      "headers": {
+        "Content-Type": "application/json"
+      }
+    }
+  ]
+}

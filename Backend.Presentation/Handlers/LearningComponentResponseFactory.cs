@@ -30,7 +30,7 @@ internal static class LearningComponentResponseFactory
     public static IResult CreateBadRequestResponse()
     {
         return TypedResults.BadRequest(
-            new ErrorResponse("Learning space ID cannot be null or empty"));
+            new ErrorResponse { StatusCode = 400, Message = "Learning space ID cannot be null or empty" });
     }
 
     /// <summary>
@@ -40,6 +40,6 @@ internal static class LearningComponentResponseFactory
     /// <returns>A <see cref="NotFound{T}"/> result with an error message.</returns>
     public static IResult CreateNotFoundResponse(string message)
     {
-        return TypedResults.NotFound(new ErrorResponse(message));
+        return TypedResults.NotFound(new ErrorResponse { StatusCode = 404, Message = message });
     }
 }

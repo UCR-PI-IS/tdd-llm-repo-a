@@ -162,8 +162,8 @@ public class LearningComponentTests
         // Arrange
         var componentId = ValidComponentId;
         var learningSpaceId = ValidLearningSpaceId;
-        var width = 0f;
-        var height = 0f;
+        var width = 1f;
+        var height = 1f;
         var depth = 0f;
         var x = 0f;
         var y = 0f;
@@ -177,8 +177,8 @@ public class LearningComponentTests
         // Assert
         Assert.Multiple(() =>
         {
-            Assert.That(component.Width, Is.EqualTo(0f));
-            Assert.That(component.Height, Is.EqualTo(0f));
+            Assert.That(component.Width, Is.EqualTo(1f));
+            Assert.That(component.Height, Is.EqualTo(1f));
             Assert.That(component.Depth, Is.EqualTo(0f));
             Assert.That(component.X, Is.EqualTo(0f));
             Assert.That(component.Y, Is.EqualTo(0f));
