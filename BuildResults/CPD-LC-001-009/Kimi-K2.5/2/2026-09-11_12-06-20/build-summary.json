@@ -1,0 +1,32 @@
+{
+  "status": "failure",
+  "timestamp": "2026-09-11_12-06-20",
+  "storyId": "CPD-LC-001-009",
+  "model": "Kimi-K2.5",
+  "iteration": "2",
+  "projects": [
+    {
+      "name": "UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit",
+      "status": "success",
+      "warnings": 0,
+      "errors": 0,
+      "errorMessages": []
+    },
+    {
+      "name": "UCR.ECCI.PI.ThemePark.Backend.Api",
+      "status": "failure",
+      "warnings": 0,
+      "errors": 6,
+      "errorMessages": [
+        "CS0246: The type or namespace name 'IRouteHandlerBuilder' could not be found (are you missing a using directive or an assembly reference?)",
+        "CS0104: 'CreateComponentRequest' is an ambiguous reference between 'UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Dtos.CreateComponentRequest' and 'UCR.ECCI.PI.ThemePark.Backend.Application.Services.CreateComponentRequest'",
+        "CS0535: 'CreateLearningComponentHandler' does not implement interface member 'ICreateLearningComponentHandler.HandleAsync(CreateComponentRequest)'",
+        "CS0246: The type or namespace name 'IRouteHandlerBuilder' could not be found (are you missing a using directive or an assembly reference?)",
+        "CS0104: 'CreateComponentRequest' is an ambiguous reference between 'UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Dtos.CreateComponentRequest' and 'UCR.ECCI.PI.ThemePark.Backend.Application.Services.CreateComponentRequest'",
+        "CS0535: 'CreateLearningComponentHandler' does not implement interface member 'ICreateLearningComponentHandler.HandleAsync(CreateComponentRequest)'"
+      ]
+    }
+  ],
+  "totalWarnings": 0,
+  "totalErrors": 6
+}

@@ -1,0 +1,71 @@
+{
+  "stage": "e2e-validation",
+  "status": "failure",
+  "timestamp": "2026-09-11_13-37-47",
+  "storyId": "CPD-LC-001-009",
+  "model": "Kimi-K2.5",
+  "iteration": "2",
+  "database": {
+    "container": "themepark-sql-e2e-cpd-lc-001-009-kimi-k2-5-2-133747",
+    "image": "mcr.microsoft.com/mssql/server:2022-latest",
+    "network": "themepark-e2e-cpd-lc-001-009-kimi-k2-5-2-133747",
+    "database": "ThemePark",
+    "readySeconds": 4.6,
+    "baseSchemaApplied": [
+      "Semester.sql",
+      "Course.sql"
+    ],
+    "seedsApplied": [
+      "CPD-LC-001-009.sql"
+    ]
+  },
+  "backend": {
+    "container": "themepark-api-e2e-cpd-lc-001-009-kimi-k2-5-2-133747",
+    "project": "Backend.Api/UCR.ECCI.PI.ThemePark.Backend.Api.csproj",
+    "publishStatus": "success",
+    "started": true,
+    "url": "http://127.0.0.1:32777",
+    "readySeconds": 2.3,
+    "errorLines": [
+      "fail: Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware[1]",
+      "An unhandled exception has occurred while executing the request.",
+      "System.MissingMethodException: Constructor on type 'Microsoft.AspNetCore.Http.HttpResults.Ok`1[[UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Responses.CreateLearningComponentResponse, UCR.ECCI.PI.ThemePark.Backend.Presentation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]' not found."
+    ]
+  },
+  "probes": [
+    {
+      "name": "create component without explicit ID",
+      "method": "POST",
+      "path": "/api/components",
+      "expectedStatus": 201,
+      "actualStatus": 500,
+      "passed": false,
+      "missingContent": [
+        "ComponentId"
+      ],
+      "error": null,
+      "bodySnippet": "System.MissingMethodException: Constructor on type 'Microsoft.AspNetCore.Http.HttpResults.Ok`1[[UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Responses.CreateLearningComponentResponse, UCR.ECCI.PI.ThemePark.Backend.Presentation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]' not found.\n   at System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture)\n   at UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Handlers.CreateLearningCompo"
+    }
+  ],
+  "totalProbes": 1,
+  "probesPassed": 0,
+  "probesFailed": 1,
+  "cleanup": {
+    "status": "clean",
+    "removedContainers": [
+      "themepark-api-e2e-cpd-lc-001-009-kimi-k2-5-2-133747",
+      "themepark-sql-e2e-cpd-lc-001-009-kimi-k2-5-2-133747"
+    ],
+    "removedNetworks": [
+      "themepark-e2e-cpd-lc-001-009-kimi-k2-5-2-133747"
+    ],
+    "removedVolumes": [
+      "themepark-app-e2e-cpd-lc-001-009-kimi-k2-5-2-133747"
+    ],
+    "leftovers": []
+  },
+  "warnings": [],
+  "errors": [
+    "1 probe(s) failed."
+  ]
+}
