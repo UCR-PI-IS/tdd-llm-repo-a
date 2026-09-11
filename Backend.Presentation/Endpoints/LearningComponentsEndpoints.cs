@@ -28,6 +28,12 @@ public static class LearningComponentsEndpoints
             .WithName("GetLearningComponents")
             .WithOpenApi();
 
+        builder.MapPost("/api/components",
+            async (ICreateLearningComponentHandler handler, Dtos.CreateComponentRequest request) =>
+                await handler.HandleAsync(request))
+            .WithName("CreateComponent")
+            .WithOpenApi();
+
         builder.MapPost("/Whiteboards",
             (IWhiteboardCreateService whiteboardCreateService, CreateWhiteboardDto dto) =>
             {

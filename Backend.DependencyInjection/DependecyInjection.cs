@@ -1,7 +1,8 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using UCR.ECCI.PI.ThemePark.Backend.Application;
 using UCR.ECCI.PI.ThemePark.Backend.Infrastructure;
-using Microsoft.Extensions.Configuration;
+using UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Handlers;
 
 namespace UCR.ECCI.PI.ThemePark.Backend.DependencyInjection;
 
@@ -20,6 +21,7 @@ public static class DependencyInjection
     {
         services.AddApplicationLayerServices();
         services.AddInfrastructureLayerServices(configuration);
+        services.AddTransient<ICreateLearningComponentHandler, CreateLearningComponentHandler>();
 
         return services;
     }
