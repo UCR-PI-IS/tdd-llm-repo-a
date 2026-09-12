@@ -1,0 +1,69 @@
+{
+  "stage": "e2e-validation",
+  "status": "failure",
+  "timestamp": "2026-09-11_17-00-01",
+  "storyId": "CPD-LC-001-009",
+  "model": "Kimi-K2.5",
+  "iteration": "3",
+  "database": {
+    "container": "themepark-sql-e2e-cpd-lc-001-009-kimi-k2-5-3-170001",
+    "image": "mcr.microsoft.com/mssql/server:2022-latest",
+    "network": "themepark-e2e-cpd-lc-001-009-kimi-k2-5-3-170001",
+    "database": "ThemePark",
+    "readySeconds": 7.8,
+    "baseSchemaApplied": [
+      "Semester.sql",
+      "Course.sql"
+    ],
+    "seedsApplied": [
+      "CPD-LC-001-009.sql"
+    ]
+  },
+  "backend": {
+    "container": "themepark-api-e2e-cpd-lc-001-009-kimi-k2-5-3-170001",
+    "project": "Backend.Api/UCR.ECCI.PI.ThemePark.Backend.Api.csproj",
+    "publishStatus": "success",
+    "started": true,
+    "url": "http://127.0.0.1:32780",
+    "readySeconds": 2.3,
+    "errorLines": [
+      "fail: Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware[1]",
+      "An unhandled exception has occurred while executing the request.",
+      "System.InvalidOperationException: Unable to read the request as JSON because the request content type '' is not a known JSON content type."
+    ]
+  },
+  "probes": [
+    {
+      "name": "POST /api/components",
+      "method": "POST",
+      "path": "/api/components",
+      "expectedStatus": 201,
+      "actualStatus": 500,
+      "passed": false,
+      "missingContent": [],
+      "error": null,
+      "bodySnippet": "System.InvalidOperationException: Unable to read the request as JSON because the request content type '' is not a known JSON content type.\n   at Microsoft.AspNetCore.Http.HttpRequestJsonExtensions.ThrowContentTypeError(HttpRequest request)\n   at Microsoft.AspNetCore.Http.HttpRequestJsonExtensions.ReadFromJsonAsync[TValue](HttpRequest request, JsonTypeInfo`1 jsonTypeInfo, CancellationToken cancellationToken)\n   at UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Endpoints.LearningComponentEndpoints"
+    }
+  ],
+  "totalProbes": 1,
+  "probesPassed": 0,
+  "probesFailed": 1,
+  "cleanup": {
+    "status": "clean",
+    "removedContainers": [
+      "themepark-api-e2e-cpd-lc-001-009-kimi-k2-5-3-170001",
+      "themepark-sql-e2e-cpd-lc-001-009-kimi-k2-5-3-170001"
+    ],
+    "removedNetworks": [
+      "themepark-e2e-cpd-lc-001-009-kimi-k2-5-3-170001"
+    ],
+    "removedVolumes": [
+      "themepark-app-e2e-cpd-lc-001-009-kimi-k2-5-3-170001"
+    ],
+    "leftovers": []
+  },
+  "warnings": [],
+  "errors": [
+    "1 probe(s) failed."
+  ]
+}
