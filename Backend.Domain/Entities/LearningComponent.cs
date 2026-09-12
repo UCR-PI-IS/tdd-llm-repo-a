@@ -58,6 +58,48 @@ public class LearningComponent
 
     /// <summary>
     /// Initializes a new instance of the <see cref="LearningComponent"/> class.
+    /// Auto-generates a unique component ID.
+    /// </summary>
+    /// <param name="learningSpaceId">Identifier of the learning space this component belongs to.</param>
+    /// <param name="width">Width of the component in meters. Must be positive.</param>
+    /// <param name="height">Height of the component in meters. Must be positive.</param>
+    /// <param name="depth">Depth of the component in meters. Must be positive.</param>
+    /// <param name="x">X coordinate position. Must be non-negative.</param>
+    /// <param name="y">Y coordinate position. Must be non-negative.</param>
+    /// <param name="z">Z coordinate position. Must be non-negative.</param>
+    /// <param name="orientation">Orientation of the component. Must be North, South, East, or West.</param>
+    /// <exception cref="ArgumentException">Thrown when any dimension is not positive, any coordinate is negative, or orientation is invalid.</exception>
+    public LearningComponent(
+        string learningSpaceId,
+        float width,
+        float height,
+        float depth,
+        float x,
+        float y,
+        float z,
+        string orientation)
+    {
+        ThrowIfNotPositive(width, nameof(width));
+        ThrowIfNotPositive(height, nameof(height));
+        ThrowIfNotPositive(depth, nameof(depth));
+        ThrowIfNegative(x, nameof(x));
+        ThrowIfNegative(y, nameof(y));
+        ThrowIfNegative(z, nameof(z));
+        ValidateOrientation(orientation);
+
+        ComponentId = Guid.NewGuid().ToString("N");
+        LearningSpaceId = learningSpaceId;
+        Width = width;
+        Height = height;
+        Depth = depth;
+        X = x;
+        Y = y;
+        Z = z;
+        Orientation = orientation;
+    }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="LearningComponent"/> class.
     /// </summary>
     /// <param name="componentId">Unique identifier for the learning component.</param>
     /// <param name="learningSpaceId">Identifier of the learning space this component belongs to.</param>
@@ -102,14 +144,27 @@ public class LearningComponent
     private static void ThrowIfNegative(float value, string paramName)
     {
         if (value < 0f)
-            throw new ArgumentException($"{paramName} cannot be negative.", paramName);
+            throw new ArgumentException($"{Capitalize(paramName)} cannot be negative.", paramName);
+    }
+
+    private static void ThrowIfNotPositive(float value, string paramName)
+    {
+        if (value <= 0f)
+            throw new ArgumentException($"{Capitalize(paramName)} must be positive.", paramName);
     }
 
     private static void ValidateOrientation(string orientation)
     {
         if (!ValidOrientations.Contains(orientation))
             throw new ArgumentException(
-                $"Invalid orientation '{orientation}'. Must be one of: North, South, East, West.",
+                $"Invalid Orientation '{orientation}'. Must be one of: North, South, East, West.",
                 nameof(orientation));
+    }
+
+    private static string Capitalize(string value)
+    {
+        if (string.IsNullOrEmpty(value))
+            return value;
+        return char.ToUpper(value[0]) + value[1..];
     }
 }

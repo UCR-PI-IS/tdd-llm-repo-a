@@ -1,0 +1,434 @@
+using NUnit.Framework;
+using UCR.ECCI.PI.ThemePark.Backend.Domain.Entities;
+
+namespace UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit;
+
+/// <summary>
+/// Unit tests for the <see cref="LearningComponent"/> entity constructor.
+/// Covers intents Domain-001 through Domain-014 for CPD-LC-001-009.
+/// </summary>
+[TestFixture]
+public class LearningComponentConstructorTests
+{
+    // Valid test data constants
+    private const string ValidLearningSpaceId = "LS-001";
+    private const float ValidWidth = 1.5f;
+    private const float ValidHeight = 1.0f;
+    private const float ValidDepth = 0.5f;
+    private const float ValidX = 10.0f;
+    private const float ValidY = 5.0f;
+    private const float ValidZ = 0.0f;
+    private const string ValidOrientation = "North";
+
+    /// <summary>
+    /// Domain-001: Verify that a LearningComponent can be created with an auto-generated ID when no ID is provided.
+    /// </summary>
+    [Test]
+    [Description("Domain-001: Verify that a LearningComponent can be created with an auto-generated ID when no ID is provided")]
+    public void Constructor_WithoutComponentId_GeneratesAutoId()
+    {
+        // Arrange & Act
+        var component = new LearningComponent(
+            learningSpaceId: ValidLearningSpaceId,
+            width: ValidWidth,
+            height: ValidHeight,
+            depth: ValidDepth,
+            x: ValidX,
+            y: ValidY,
+            z: ValidZ,
+            orientation: ValidOrientation);
+
+        // Assert
+        Assert.Multiple(() =>
+        {
+            Assert.That(component.ComponentId, Is.Not.Null);
+            Assert.That(component.ComponentId, Is.Not.Empty);
+        });
+    }
+
+    /// <summary>
+    /// Domain-002: Verify that a LearningComponent can be created with an explicitly provided ID.
+    /// </summary>
+    [Test]
+    [Description("Domain-002: Verify that a LearningComponent can be created with an explicitly provided ID")]
+    public void Constructor_WithExplicitComponentId_UsesProvidedId()
+    {
+        // Arrange
+        var explicitId = "COMP-12345";
+
+        // Act
+        var component = new LearningComponent(
+            componentId: explicitId,
+            learningSpaceId: ValidLearningSpaceId,
+            width: ValidWidth,
+            height: ValidHeight,
+            depth: ValidDepth,
+            x: ValidX,
+            y: ValidY,
+            z: ValidZ,
+            orientation: ValidOrientation);
+
+        // Assert
+        Assert.That(component.ComponentId, Is.EqualTo(explicitId));
+    }
+
+    /// <summary>
+    /// Domain-003: Verify that creating a LearningComponent with negative width throws an ArgumentException.
+    /// </summary>
+    [Test]
+    [Description("Domain-003: Verify that creating a LearningComponent with negative width throws an ArgumentException")]
+    public void Constructor_NegativeWidth_ThrowsArgumentException()
+    {
+        // Arrange & Act
+        ArgumentException? caughtException = null;
+        try
+        {
+            new LearningComponent(
+                learningSpaceId: ValidLearningSpaceId,
+                width: -1.5f,
+                height: ValidHeight,
+                depth: ValidDepth,
+                x: ValidX,
+                y: ValidY,
+                z: ValidZ,
+                orientation: ValidOrientation);
+        }
+        catch (ArgumentException ex)
+        {
+            caughtException = ex;
+        }
+
+        // Assert
+        Assert.Multiple(() =>
+        {
+            Assert.That(caughtException, Is.Not.Null, "Expected ArgumentException was not thrown");
+            Assert.That(caughtException!.ParamName, Is.EqualTo("width"));
+        });
+    }
+
+    /// <summary>
+    /// Domain-004: Verify that creating a LearningComponent with zero width throws an ArgumentException.
+    /// </summary>
+    [Test]
+    [Description("Domain-004: Verify that creating a LearningComponent with zero width throws an ArgumentException")]
+    public void Constructor_ZeroWidth_ThrowsArgumentException()
+    {
+        // Arrange & Act
+        ArgumentException? caughtException = null;
+        try
+        {
+            new LearningComponent(
+                learningSpaceId: ValidLearningSpaceId,
+                width: 0.0f,
+                height: ValidHeight,
+                depth: ValidDepth,
+                x: ValidX,
+                y: ValidY,
+                z: ValidZ,
+                orientation: ValidOrientation);
+        }
+        catch (ArgumentException ex)
+        {
+            caughtException = ex;
+        }
+
+        // Assert
+        Assert.Multiple(() =>
+        {
+            Assert.That(caughtException, Is.Not.Null, "Expected ArgumentException was not thrown");
+            Assert.That(caughtException!.ParamName, Is.EqualTo("width"));
+        });
+    }
+
+    /// <summary>
+    /// Domain-005: Verify that creating a LearningComponent with negative height throws an ArgumentException.
+    /// </summary>
+    [Test]
+    [Description("Domain-005: Verify that creating a LearningComponent with negative height throws an ArgumentException")]
+    public void Constructor_NegativeHeight_ThrowsArgumentException()
+    {
+        // Arrange & Act
+        ArgumentException? caughtException = null;
+        try
+        {
+            new LearningComponent(
+                learningSpaceId: ValidLearningSpaceId,
+                width: ValidWidth,
+                height: -1.0f,
+                depth: ValidDepth,
+                x: ValidX,
+                y: ValidY,
+                z: ValidZ,
+                orientation: ValidOrientation);
+        }
+        catch (ArgumentException ex)
+        {
+            caughtException = ex;
+        }
+
+        // Assert
+        Assert.Multiple(() =>
+        {
+            Assert.That(caughtException, Is.Not.Null, "Expected ArgumentException was not thrown");
+            Assert.That(caughtException!.ParamName, Is.EqualTo("height"));
+        });
+    }
+
+    /// <summary>
+    /// Domain-006: Verify that creating a LearningComponent with negative depth throws an ArgumentException.
+    /// </summary>
+    [Test]
+    [Description("Domain-006: Verify that creating a LearningComponent with negative depth throws an ArgumentException")]
+    public void Constructor_NegativeDepth_ThrowsArgumentException()
+    {
+        // Arrange & Act
+        ArgumentException? caughtException = null;
+        try
+        {
+            new LearningComponent(
+                learningSpaceId: ValidLearningSpaceId,
+                width: ValidWidth,
+                height: ValidHeight,
+                depth: -0.5f,
+                x: ValidX,
+                y: ValidY,
+                z: ValidZ,
+                orientation: ValidOrientation);
+        }
+        catch (ArgumentException ex)
+        {
+            caughtException = ex;
+        }
+
+        // Assert
+        Assert.Multiple(() =>
+        {
+            Assert.That(caughtException, Is.Not.Null, "Expected ArgumentException was not thrown");
+            Assert.That(caughtException!.ParamName, Is.EqualTo("depth"));
+        });
+    }
+
+    /// <summary>
+    /// Domain-007: Verify that creating a LearningComponent with negative X coordinate throws an ArgumentException.
+    /// </summary>
+    [Test]
+    [Description("Domain-007: Verify that creating a LearningComponent with negative X coordinate throws an ArgumentException")]
+    public void Constructor_NegativeX_ThrowsArgumentException()
+    {
+        // Arrange & Act
+        ArgumentException? caughtException = null;
+        try
+        {
+            new LearningComponent(
+                learningSpaceId: ValidLearningSpaceId,
+                width: ValidWidth,
+                height: ValidHeight,
+                depth: ValidDepth,
+                x: -10.0f,
+                y: ValidY,
+                z: ValidZ,
+                orientation: ValidOrientation);
+        }
+        catch (ArgumentException ex)
+        {
+            caughtException = ex;
+        }
+
+        // Assert
+        Assert.Multiple(() =>
+        {
+            Assert.That(caughtException, Is.Not.Null, "Expected ArgumentException was not thrown");
+            Assert.That(caughtException!.ParamName, Is.EqualTo("x"));
+        });
+    }
+
+    /// <summary>
+    /// Domain-008: Verify that creating a LearningComponent with negative Y coordinate throws an ArgumentException.
+    /// </summary>
+    [Test]
+    [Description("Domain-008: Verify that creating a LearningComponent with negative Y coordinate throws an ArgumentException")]
+    public void Constructor_NegativeY_ThrowsArgumentException()
+    {
+        // Arrange & Act
+        ArgumentException? caughtException = null;
+        try
+        {
+            new LearningComponent(
+                learningSpaceId: ValidLearningSpaceId,
+                width: ValidWidth,
+                height: ValidHeight,
+                depth: ValidDepth,
+                x: ValidX,
+                y: -5.0f,
+                z: ValidZ,
+                orientation: ValidOrientation);
+        }
+        catch (ArgumentException ex)
+        {
+            caughtException = ex;
+        }
+
+        // Assert
+        Assert.Multiple(() =>
+        {
+            Assert.That(caughtException, Is.Not.Null, "Expected ArgumentException was not thrown");
+            Assert.That(caughtException!.ParamName, Is.EqualTo("y"));
+        });
+    }
+
+    /// <summary>
+    /// Domain-009: Verify that creating a LearningComponent with negative Z coordinate throws an ArgumentException.
+    /// </summary>
+    [Test]
+    [Description("Domain-009: Verify that creating a LearningComponent with negative Z coordinate throws an ArgumentException")]
+    public void Constructor_NegativeZ_ThrowsArgumentException()
+    {
+        // Arrange & Act
+        ArgumentException? caughtException = null;
+        try
+        {
+            new LearningComponent(
+                learningSpaceId: ValidLearningSpaceId,
+                width: ValidWidth,
+                height: ValidHeight,
+                depth: ValidDepth,
+                x: ValidX,
+                y: ValidY,
+                z: -1.0f,
+                orientation: ValidOrientation);
+        }
+        catch (ArgumentException ex)
+        {
+            caughtException = ex;
+        }
+
+        // Assert
+        Assert.Multiple(() =>
+        {
+            Assert.That(caughtException, Is.Not.Null, "Expected ArgumentException was not thrown");
+            Assert.That(caughtException!.ParamName, Is.EqualTo("z"));
+        });
+    }
+
+    /// <summary>
+    /// Domain-010: Verify that creating a LearningComponent with invalid orientation throws an ArgumentException.
+    /// </summary>
+    [Test]
+    [Description("Domain-010: Verify that creating a LearningComponent with invalid orientation throws an ArgumentException")]
+    public void Constructor_InvalidOrientation_ThrowsArgumentException()
+    {
+        // Arrange & Act
+        ArgumentException? caughtException = null;
+        try
+        {
+            new LearningComponent(
+                learningSpaceId: ValidLearningSpaceId,
+                width: ValidWidth,
+                height: ValidHeight,
+                depth: ValidDepth,
+                x: ValidX,
+                y: ValidY,
+                z: ValidZ,
+                orientation: "InvalidDirection");
+        }
+        catch (ArgumentException ex)
+        {
+            caughtException = ex;
+        }
+
+        // Assert
+        Assert.Multiple(() =>
+        {
+            Assert.That(caughtException, Is.Not.Null, "Expected ArgumentException was not thrown");
+            Assert.That(caughtException!.ParamName, Is.EqualTo("orientation"));
+        });
+    }
+
+    /// <summary>
+    /// Domain-011: Verify that creating a LearningComponent with valid orientation North succeeds.
+    /// </summary>
+    [Test]
+    [Description("Domain-011: Verify that creating a LearningComponent with valid orientation North succeeds")]
+    public void Constructor_ValidOrientationNorth_Succeeds()
+    {
+        // Arrange & Act
+        var component = new LearningComponent(
+            learningSpaceId: ValidLearningSpaceId,
+            width: ValidWidth,
+            height: ValidHeight,
+            depth: ValidDepth,
+            x: ValidX,
+            y: ValidY,
+            z: ValidZ,
+            orientation: "North");
+
+        // Assert
+        Assert.That(component.Orientation, Is.EqualTo("North"));
+    }
+
+    /// <summary>
+    /// Domain-012: Verify that creating a LearningComponent with valid orientation South succeeds.
+    /// </summary>
+    [Test]
+    [Description("Domain-012: Verify that creating a LearningComponent with valid orientation South succeeds")]
+    public void Constructor_ValidOrientationSouth_Succeeds()
+    {
+        // Arrange & Act
+        var component = new LearningComponent(
+            learningSpaceId: ValidLearningSpaceId,
+            width: ValidWidth,
+            height: ValidHeight,
+            depth: ValidDepth,
+            x: ValidX,
+            y: ValidY,
+            z: ValidZ,
+            orientation: "South");
+
+        // Assert
+        Assert.That(component.Orientation, Is.EqualTo("South"));
+    }
+
+    /// <summary>
+    /// Domain-013: Verify that creating a LearningComponent with valid orientation East succeeds.
+    /// </summary>
+    [Test]
+    [Description("Domain-013: Verify that creating a LearningComponent with valid orientation East succeeds")]
+    public void Constructor_ValidOrientationEast_Succeeds()
+    {
+        // Arrange & Act
+        var component = new LearningComponent(
+            learningSpaceId: ValidLearningSpaceId,
+            width: ValidWidth,
+            height: ValidHeight,
+            depth: ValidDepth,
+            x: ValidX,
+            y: ValidY,
+            z: ValidZ,
+            orientation: "East");
+
+        // Assert
+        Assert.That(component.Orientation, Is.EqualTo("East"));
+    }
+
+    /// <summary>
+    /// Domain-014: Verify that creating a LearningComponent with valid orientation West succeeds.
+    /// </summary>
+    [Test]
+    [Description("Domain-014: Verify that creating a LearningComponent with valid orientation West succeeds")]
+    public void Constructor_ValidOrientationWest_Succeeds()
+    {
+        // Arrange & Act
+        var component = new LearningComponent(
+            learningSpaceId: ValidLearningSpaceId,
+            width: ValidWidth,
+            height: ValidHeight,
+            depth: ValidDepth,
+            x: ValidX,
+            y: ValidY,
+            z: ValidZ,
+            orientation: "West");
+
+        // Assert
+        Assert.That(component.Orientation, Is.EqualTo("West"));
+    }
+}

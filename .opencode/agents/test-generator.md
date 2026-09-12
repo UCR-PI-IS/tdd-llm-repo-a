@@ -1,5 +1,5 @@
 ---
-model: openrouter/qwen/qwen3.7-max
+model: openrouter/moonshotai/kimi-k2.5
 temperature: 1.0
 top_p: 0.1
 description: "Generates NUnit test classes from confirmed intents in UserIntents/ JSON files, following Clean Architecture layer conventions."
