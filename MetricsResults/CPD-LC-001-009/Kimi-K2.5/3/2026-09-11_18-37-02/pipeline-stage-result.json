@@ -1,0 +1,40 @@
+{
+  "stage": "refactoring",
+  "storyId": "CPD-LC-001-009",
+  "model": "Kimi-K2.5",
+  "iteration": "3",
+  "status": "partial",
+  "filesCreated": [
+    "Backend.Application/Exceptions/ComponentCreationException.cs",
+    "Backend.Application/Exceptions/ComponentCreationErrorType.cs",
+    "Backend.Presentation/Handlers/CreateComponentResponseFactory.cs"
+  ],
+  "filesModified": [
+    "Backend.Presentation/Endpoints/LearningComponentEndpoints.cs",
+    "Backend.Presentation/Handlers/CreateLearningComponentHandler.cs",
+    "Backend.Presentation/Handlers/LearningComponentResponseFactory.cs",
+    "Backend.Presentation/Mappers/LearningComponentMapper.cs",
+    "Backend.Presentation/Responses/GetLearningComponentsResponse.cs",
+    "Backend.Application/Exceptions/DuplicateIdException.cs",
+    "Backend.Application/Exceptions/ValidationException.cs",
+    "Backend.Presentation/Responses/ErrorResponse.cs",
+    "Backend.Presentation/Responses/CreateComponentResponse.cs"
+  ],
+  "metrics": {
+    "loopIterationsPerformed": 6,
+    "maxLoopIterations": 10,
+    "allGreenAchieved": false,
+    "baseline": { "minMI": 52, "maxCC": 8, "maxCoupling": 21, "maxDIT": 0 },
+    "final": { "minMI": 52, "maxCC": 8, "maxCoupling": 19, "maxDIT": 0 },
+    "remainingViolations": [
+      { "type": "LearningComponentEndpoints", "metric": "Coupling", "value": 19, "flag": "YELLOW" },
+      { "type": "LearningComponentService", "metric": "Coupling", "value": 17, "flag": "YELLOW" },
+      { "type": "SqlLearningComponentRepository", "metric": "Coupling", "value": 16, "flag": "YELLOW" }
+    ]
+  },
+  "warnings": [
+    "Attempted to reduce LearningComponentEndpoints coupling by using automatic DI/body binding, but reverted because test infrastructure creates bare WebApplication without DI services.",
+    "Remaining story-related violations (19, 17, 16) are intrinsically coupled to ASP.NET Core and EF Core framework types and cannot be reduced to <=9 without architectural restructuring."
+  ],
+  "notes": "Refactored story-related code through 6 iterations. CreateLearningComponentHandler improved from 16 to 9 (GREEN). CreateComponentResponseFactory improved from 12 to 9 (GREEN). LearningComponentEndpoints reduced from 21 to 19. LearningComponentMapper reduced from 9 to 7. Three violations remain due to framework-level type coupling."
+}

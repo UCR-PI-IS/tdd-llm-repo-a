@@ -1,0 +1,32 @@
+{
+  "stage": "test-generation",
+  "storyId": "CPD-LC-001-009",
+  "model": "Kimi-K2.5",
+  "iteration": "3",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Infrastructure.Tests.Unit/ComponentIdGeneratorTests.cs",
+    "Backend.Presentation.Tests.Unit/CreateLearningComponentHandlerTests.cs",
+    "Backend.Presentation.Tests.Unit/LearningComponentEndpointsTests.cs"
+  ],
+  "filesModified": [
+    "Backend.Domain.Tests.Unit/LearningComponentTests.cs",
+    "Backend.Application.Tests.Unit/LearningComponentServiceTests.cs",
+    "Backend.Infrastructure.Tests.Unit/SqlLearningComponentRepositoryTests.cs"
+  ],
+  "metrics": {
+    "intentsConfirmed": 30,
+    "testMethodsEmitted": 26,
+    "byLayer": {
+      "Domain": 5,
+      "Application": 9,
+      "Infrastructure": 7,
+      "Presentation": 5
+    }
+  },
+  "warnings": [
+    "Tests reference types not yet implemented (IComponentIdGenerator, CreateComponentRequest, CreateComponentResult, DuplicateIdException, ValidationException in Application layer, ICreateLearningComponentHandler, CreateLearningComponentHandler, LearningComponentEndpoints, ComponentIdGenerator) — compilation errors are expected until the implementation phase completes.",
+    "Endpoint test uses WebApplication.Create() as a real IEndpointRouteBuilder to verify route registration; if the test environment restricts WebApplication instantiation, the test may need adjustment."
+  ],
+  "notes": "Generated tests cover all 30 confirmed intents across 4 DDD layers. Domain tests use parameterized cases to minimize method count while achieving full decision coverage for constructor validation (negative dimensions, zero width, negative coordinates, invalid orientations, valid orientations, auto-generated vs explicit ID). Application tests cover ID generation, explicit ID, duplicate ID handling, retry logic, and input validation. Infrastructure tests cover ID generation format, repository existence checks, successful add, and DbUpdateException on duplicates. Presentation tests verify handler success/created responses, conflict for duplicates, and bad request for invalid data, plus endpoint mapping."
+}
