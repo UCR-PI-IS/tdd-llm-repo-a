@@ -16,10 +16,9 @@ internal static class LearningComponentResponseFactory
     /// </summary>
     /// <param name="components">The domain entities to include in the response.</param>
     /// <returns>An <see cref="Ok{T}"/> result containing the response.</returns>
-    public static IResult CreateOkResponse(List<LearningComponent> components)
+    public static IResult CreateOkResponse(IEnumerable<LearningComponent> components)
     {
-        var dtos = LearningComponentMapper.ToDtoList(components);
-        var response = new GetLearningComponentsResponse(dtos);
+        var response = new GetLearningComponentsResponse(LearningComponentMapper.ToDtoList(components));
         return TypedResults.Ok(response);
     }
 

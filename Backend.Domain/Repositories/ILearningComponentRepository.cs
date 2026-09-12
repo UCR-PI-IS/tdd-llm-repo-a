@@ -13,4 +13,17 @@ public interface ILearningComponentRepository
     /// <param name="learningSpaceId">The identifier of the learning space.</param>
     /// <returns>A list of learning components belonging to the specified learning space.</returns>
     Task<List<LearningComponent>> GetComponentsByLearningSpaceIdAsync(string learningSpaceId);
+
+    /// <summary>
+    /// Checks whether a learning component with the given ID exists.
+    /// </summary>
+    /// <param name="componentId">The component identifier to check.</param>
+    /// <returns><c>true</c> if the component exists; otherwise, <c>false</c>.</returns>
+    Task<bool> ExistsAsync(string componentId);
+
+    /// <summary>
+    /// Adds a new learning component to the data source.
+    /// </summary>
+    /// <param name="component">The component to add.</param>
+    Task AddAsync(LearningComponent component);
 }

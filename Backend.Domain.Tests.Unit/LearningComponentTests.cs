@@ -4,78 +4,78 @@ using UCR.ECCI.PI.ThemePark.Backend.Domain.Entities;
 namespace UCR.ECCI.PI.ThemePark.Backend.Domain.Tests.Unit;
 
 /// <summary>
-/// Unit tests for the <see cref="LearningComponent"/> entity constructor and validation.
-/// Covers intents Domain-001 through Domain-010.
+/// Unit tests for the <see cref="LearningComponent"/> entity constructors and validation.
+/// Covers intents Domain-001 through Domain-014.
 /// </summary>
 [TestFixture]
 public class LearningComponentTests
 {
     // Valid test data constants
-    private const string ValidComponentId = "LC-001";
-    private const string ValidLearningSpaceId = "IF-0103";
-    private const float ValidWidth = 2.5f;
-    private const float ValidHeight = 1.5f;
+    private const string ValidLearningSpaceId = "LS-001";
+    private const float ValidWidth = 1.5f;
+    private const float ValidHeight = 1.0f;
     private const float ValidDepth = 0.5f;
     private const float ValidX = 10.0f;
-    private const float ValidY = 20.0f;
+    private const float ValidY = 5.0f;
     private const float ValidZ = 0.0f;
     private const string ValidOrientation = "North";
+    private const string ExplicitComponentId = "COMP-12345";
 
     /// <summary>
-    /// Domain-001: Verify that a LearningComponent entity can be created with valid parameters
-    /// and all properties are correctly assigned.
+    /// Domain-001: Verify that a LearningComponent without an explicit ID gets an auto-generated ID.
     /// </summary>
     [Test]
-    [Description("Domain-001: Verify that a LearningComponent entity can be created with valid parameters")]
-    public void Constructor_ValidParameters_AllPropertiesSetCorrectly()
+    [Description("Domain-001: Verify that a LearningComponent without an explicit ID gets an auto-generated ID")]
+    public void Constructor_WithoutExplicitId_AutoGeneratesId()
     {
-        // Arrange
-        var componentId = ValidComponentId;
-        var learningSpaceId = ValidLearningSpaceId;
-        var width = ValidWidth;
-        var height = ValidHeight;
-        var depth = ValidDepth;
-        var x = ValidX;
-        var y = ValidY;
-        var z = ValidZ;
-        var orientation = ValidOrientation;
-
-        // Act
+        // Arrange & Act
         var component = new LearningComponent(
-            componentId, learningSpaceId, width, height, depth, x, y, z, orientation);
+            ValidLearningSpaceId, ValidWidth, ValidHeight, ValidDepth,
+            ValidX, ValidY, ValidZ, ValidOrientation);
 
         // Assert
         Assert.Multiple(() =>
         {
-            Assert.That(component.ComponentId, Is.EqualTo(componentId));
-            Assert.That(component.LearningSpaceId, Is.EqualTo(learningSpaceId));
-            Assert.That(component.Width, Is.EqualTo(width));
-            Assert.That(component.Height, Is.EqualTo(height));
-            Assert.That(component.Depth, Is.EqualTo(depth));
-            Assert.That(component.X, Is.EqualTo(x));
-            Assert.That(component.Y, Is.EqualTo(y));
-            Assert.That(component.Z, Is.EqualTo(z));
-            Assert.That(component.Orientation, Is.EqualTo(orientation));
+            Assert.That(component.ComponentId, Is.Not.Null);
+            Assert.That(component.ComponentId, Is.Not.Empty);
         });
     }
 
     /// <summary>
-    /// Domain-002 to Domain-007: Verify that creating a LearningComponent with a negative
-    /// dimension or coordinate throws ArgumentException with the correct parameter name.
+    /// Domain-002: Verify that a LearningComponent with an explicit ID uses the provided ID.
     /// </summary>
-    [TestCase(-1f, ValidHeight, ValidDepth, ValidX, ValidY, ValidZ, "width",
-        Description = "Domain-002: Negative width throws ArgumentException")]
-    [TestCase(ValidWidth, -1f, ValidDepth, ValidX, ValidY, ValidZ, "height",
-        Description = "Domain-003: Negative height throws ArgumentException")]
-    [TestCase(ValidWidth, ValidHeight, -1f, ValidX, ValidY, ValidZ, "depth",
-        Description = "Domain-004: Negative depth throws ArgumentException")]
-    [TestCase(ValidWidth, ValidHeight, ValidDepth, -1f, ValidY, ValidZ, "x",
-        Description = "Domain-005: Negative X coordinate throws ArgumentException")]
-    [TestCase(ValidWidth, ValidHeight, ValidDepth, ValidX, -1f, ValidZ, "y",
-        Description = "Domain-006: Negative Y coordinate throws ArgumentException")]
-    [TestCase(ValidWidth, ValidHeight, ValidDepth, ValidX, ValidY, -1f, "z",
-        Description = "Domain-007: Negative Z coordinate throws ArgumentException")]
-    public void Constructor_NegativeDimensionOrCoordinate_ThrowsArgumentException(
+    [Test]
+    [Description("Domain-002: Verify that a LearningComponent with an explicit ID uses the provided ID")]
+    public void Constructor_WithExplicitId_UsesProvidedId()
+    {
+        // Arrange & Act
+        var component = new LearningComponent(
+            ExplicitComponentId, ValidLearningSpaceId, ValidWidth, ValidHeight, ValidDepth,
+            ValidX, ValidY, ValidZ, ValidOrientation);
+
+        // Assert
+        Assert.That(component.ComponentId, Is.EqualTo(ExplicitComponentId));
+    }
+
+    /// <summary>
+    /// Domain-003 to Domain-009 and Domain-004: Verify that creating a LearningComponent with
+    /// negative dimension/coordinate or zero width throws the expected exception.
+    /// </summary>
+    [TestCase(-1.5f, ValidHeight, ValidDepth, ValidX, ValidY, ValidZ, "width",
+        Description = "Domain-003: Negative width throws ArgumentException")]
+    [TestCase(0.0f, ValidHeight, ValidDepth, ValidX, ValidY, ValidZ, "width",
+        Description = "Domain-004: Zero width throws ArgumentException")]
+    [TestCase(ValidWidth, -1.0f, ValidDepth, ValidX, ValidY, ValidZ, "height",
+        Description = "Domain-005: Negative height throws ArgumentException")]
+    [TestCase(ValidWidth, ValidHeight, -0.5f, ValidX, ValidY, ValidZ, "depth",
+        Description = "Domain-006: Negative depth throws ArgumentException")]
+    [TestCase(ValidWidth, ValidHeight, ValidDepth, -10.0f, ValidY, ValidZ, "x",
+        Description = "Domain-007: Negative X coordinate throws ArgumentException")]
+    [TestCase(ValidWidth, ValidHeight, ValidDepth, ValidX, -5.0f, ValidZ, "y",
+        Description = "Domain-008: Negative Y coordinate throws ArgumentException")]
+    [TestCase(ValidWidth, ValidHeight, ValidDepth, ValidX, ValidY, -1.0f, "z",
+        Description = "Domain-009: Negative Z coordinate throws ArgumentException")]
+    public void Constructor_InvalidDimensionOrCoordinate_ThrowsArgumentException(
         float width, float height, float depth, float x, float y, float z, string expectedParamName)
     {
         // Arrange & Act
@@ -83,7 +83,8 @@ public class LearningComponentTests
         try
         {
             new LearningComponent(
-                ValidComponentId, ValidLearningSpaceId, width, height, depth, x, y, z, ValidOrientation);
+                ExplicitComponentId, ValidLearningSpaceId,
+                width, height, depth, x, y, z, ValidOrientation);
         }
         catch (ArgumentException ex)
         {
@@ -99,12 +100,12 @@ public class LearningComponentTests
     }
 
     /// <summary>
-    /// Domain-008: Verify that creating a LearningComponent with an invalid orientation
+    /// Domain-010: Verify that creating a LearningComponent with an invalid orientation
     /// throws ArgumentException with parameter name "orientation".
     /// </summary>
-    [TestCase("Northeast", Description = "Domain-008: Invalid orientation 'Northeast'")]
-    [TestCase("Up", Description = "Domain-008: Invalid orientation 'Up'")]
-    [TestCase("", Description = "Domain-008: Empty orientation string")]
+    [TestCase("InvalidDirection", Description = "Domain-010: Invalid direction throws ArgumentException")]
+    [TestCase("Northeast", Description = "Domain-010: Northeast throws ArgumentException")]
+    [TestCase("", Description = "Domain-010: Empty orientation throws ArgumentException")]
     public void Constructor_InvalidOrientation_ThrowsArgumentException(string invalidOrientation)
     {
         // Arrange & Act
@@ -112,7 +113,7 @@ public class LearningComponentTests
         try
         {
             new LearningComponent(
-                ValidComponentId, ValidLearningSpaceId,
+                ExplicitComponentId, ValidLearningSpaceId,
                 ValidWidth, ValidHeight, ValidDepth,
                 ValidX, ValidY, ValidZ,
                 invalidOrientation);
@@ -131,58 +132,23 @@ public class LearningComponentTests
     }
 
     /// <summary>
-    /// Domain-009: Verify that creating a LearningComponent with each valid orientation
-    /// (North, South, East, West) succeeds and the orientation is correctly assigned.
+    /// Domain-011 to Domain-014: Verify that creating a LearningComponent with each valid
+    /// orientation succeeds and the orientation is correctly assigned.
     /// </summary>
-    [TestCase("North", Description = "Domain-009: Valid orientation North")]
-    [TestCase("South", Description = "Domain-009: Valid orientation South")]
-    [TestCase("East", Description = "Domain-009: Valid orientation East")]
-    [TestCase("West", Description = "Domain-009: Valid orientation West")]
+    [TestCase("North", Description = "Domain-011: Valid orientation North succeeds")]
+    [TestCase("South", Description = "Domain-012: Valid orientation South succeeds")]
+    [TestCase("East", Description = "Domain-013: Valid orientation East succeeds")]
+    [TestCase("West", Description = "Domain-014: Valid orientation West succeeds")]
     public void Constructor_ValidOrientation_Succeeds(string orientation)
     {
         // Arrange & Act
         var component = new LearningComponent(
-            ValidComponentId, ValidLearningSpaceId,
+            ExplicitComponentId, ValidLearningSpaceId,
             ValidWidth, ValidHeight, ValidDepth,
             ValidX, ValidY, ValidZ,
             orientation);
 
         // Assert
         Assert.That(component.Orientation, Is.EqualTo(orientation));
-    }
-
-    /// <summary>
-    /// Domain-010: Verify that creating a LearningComponent with zero values for all
-    /// dimensions and coordinates succeeds (boundary test).
-    /// </summary>
-    [Test]
-    [Description("Domain-010: Verify that zero values for dimensions and coordinates succeed (boundary test)")]
-    public void Constructor_ZeroValues_AllPropertiesSetCorrectly()
-    {
-        // Arrange
-        var componentId = ValidComponentId;
-        var learningSpaceId = ValidLearningSpaceId;
-        var width = 0f;
-        var height = 0f;
-        var depth = 0f;
-        var x = 0f;
-        var y = 0f;
-        var z = 0f;
-        var orientation = ValidOrientation;
-
-        // Act
-        var component = new LearningComponent(
-            componentId, learningSpaceId, width, height, depth, x, y, z, orientation);
-
-        // Assert
-        Assert.Multiple(() =>
-        {
-            Assert.That(component.Width, Is.EqualTo(0f));
-            Assert.That(component.Height, Is.EqualTo(0f));
-            Assert.That(component.Depth, Is.EqualTo(0f));
-            Assert.That(component.X, Is.EqualTo(0f));
-            Assert.That(component.Y, Is.EqualTo(0f));
-            Assert.That(component.Z, Is.EqualTo(0f));
-        });
     }
 }

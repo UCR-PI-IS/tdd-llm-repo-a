@@ -95,6 +95,108 @@ public class SqlLearningComponentRepositoryTests
         });
     }
 
+    #region ExistsAsync Tests
+
+    /// <summary>
+    /// Infrastructure-002: Verify that checking existence returns true when a component with the given ID exists.
+    /// </summary>
+    [Test]
+    [Description("Infrastructure-002: Verify ExistsAsync returns true for an existing ID")]
+    public async Task ExistsAsync_WithExistingId_ReturnsTrue()
+    {
+        // Arrange
+        var components = new List<LearningComponent>
+        {
+            new LearningComponent("COMP-12345", ValidLearningSpaceId, 2.5f, 1.5f, 0.5f, 10f, 20f, 0f, "North")
+        };
+
+        var mockDbSet = CreateMockDbSet(components.AsQueryable());
+        _mockDbContext
+            .Setup(c => c.LearningComponents)
+            .Returns(mockDbSet.Object);
+
+        // Act
+        var exists = await _sut.ExistsAsync("COMP-12345");
+
+        // Assert
+        Assert.That(exists, Is.True);
+    }
+
+    /// <summary>
+    /// Infrastructure-003: Verify that checking existence returns false when a component with the given ID does not exist.
+    /// </summary>
+    [Test]
+    [Description("Infrastructure-003: Verify ExistsAsync returns false for a non-existing ID")]
+    public async Task ExistsAsync_WithNonExistingId_ReturnsFalse()
+    {
+        // Arrange
+        var components = new List<LearningComponent>();
+
+        var mockDbSet = CreateMockDbSet(components.AsQueryable());
+        _mockDbContext
+            .Setup(c => c.LearningComponents)
+            .Returns(mockDbSet.Object);
+
+        // Act
+        var exists = await _sut.ExistsAsync("COMP-NONEXISTENT");
+
+        // Assert
+        Assert.That(exists, Is.False);
+    }
+
+    #endregion
+
+    #region AddAsync Tests
+
+    /// <summary>
+    /// Infrastructure-004: Verify that adding a component with a unique ID succeeds and calls SaveChanges.
+    /// </summary>
+    [Test]
+    [Description("Infrastructure-004: Verify AddAsync succeeds and calls SaveChanges for a unique ID")]
+    public async Task AddAsync_WithUniqueId_SucceedsAndCallsSaveChanges()
+    {
+        // Arrange
+        var component = new LearningComponent("COMP-12345", ValidLearningSpaceId, 2.5f, 1.5f, 0.5f, 10f, 20f, 0f, "North");
+        var mockDbSet = CreateMockDbSet(new List<LearningComponent>().AsQueryable());
+        _mockDbContext
+            .Setup(c => c.LearningComponents)
+            .Returns(mockDbSet.Object);
+        _mockDbContext
+            .Setup(c => c.SaveChangesAsync(It.IsAny<CancellationToken>()))
+            .ReturnsAsync(1);
+
+        // Act
+        await _sut.AddAsync(component);
+
+        // Assert
+        mockDbSet.Verify(x => x.AddAsync(component, It.IsAny<CancellationToken>()), Times.Once);
+        _mockDbContext.Verify(x => x.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Once);
+    }
+
+    /// <summary>
+    /// Infrastructure-005: Verify that adding a component with a duplicate ID throws DbUpdateException.
+    /// </summary>
+    [Test]
+    [Description("Infrastructure-005: Verify AddAsync throws DbUpdateException for duplicate ID")]
+    public void AddAsync_WithDuplicateId_ThrowsDbUpdateException()
+    {
+        // Arrange
+        var component = new LearningComponent("COMP-12345", ValidLearningSpaceId, 2.5f, 1.5f, 0.5f, 10f, 20f, 0f, "North");
+        var mockDbSet = CreateMockDbSet(new List<LearningComponent>().AsQueryable());
+        _mockDbContext
+            .Setup(c => c.LearningComponents)
+            .Returns(mockDbSet.Object);
+        _mockDbContext
+            .Setup(c => c.SaveChangesAsync(It.IsAny<CancellationToken>()))
+            .ThrowsAsync(new DbUpdateException("Duplicate key"));
+
+        // Act & Assert
+        var ex = Assert.ThrowsAsync<DbUpdateException>(() => _sut.AddAsync(component));
+        Assert.That(ex.Message, Does.Contain("Duplicate key"));
+    }
+
+    #endregion
+
     /// <summary>
     /// Creates a mock <see cref="DbSet{T}"/> that supports synchronous and asynchronous
     /// LINQ operations for the given queryable data.

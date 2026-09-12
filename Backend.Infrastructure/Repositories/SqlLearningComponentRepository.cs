@@ -32,4 +32,27 @@ internal class SqlLearningComponentRepository : ILearningComponentRepository
             .Where(c => c.LearningSpaceId == learningSpaceId)
             .ToListAsync();
     }
+
+    /// <summary>
+    /// Checks whether a learning component with the given ID exists.
+    /// </summary>
+    /// <param name="componentId">The component identifier to check.</param>
+    /// <returns><c>true</c> if the component exists; otherwise, <c>false</c>.</returns>
+    public async Task<bool> ExistsAsync(string componentId)
+    {
+        var components = await _dbContext.LearningComponents
+            .Where(c => c.ComponentId == componentId)
+            .ToListAsync();
+        return components.Any();
+    }
+
+    /// <summary>
+    /// Adds a new learning component to the database.
+    /// </summary>
+    /// <param name="component">The component to add.</param>
+    public async Task AddAsync(LearningComponent component)
+    {
+        await _dbContext.LearningComponents.AddAsync(component);
+        await _dbContext.SaveChangesAsync();
+    }
 }
