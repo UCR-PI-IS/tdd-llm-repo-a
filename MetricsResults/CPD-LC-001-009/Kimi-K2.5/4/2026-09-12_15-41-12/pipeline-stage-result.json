@@ -1,0 +1,62 @@
+{
+  "stage": "refactoring",
+  "storyId": "CPD-LC-001-009",
+  "model": "Kimi-K2.5",
+  "iteration": "4",
+  "status": "partial",
+  "filesCreated": [
+    "Backend.Presentation/Handlers/CreateLearningComponentResponseFactory.cs",
+    "Backend.Presentation/Endpoints/CreateLearningComponentsEndpoints.cs",
+    "Backend.Presentation/Endpoints/GetLearningComponentsEndpoints.cs"
+  ],
+  "filesModified": [
+    "Backend.Presentation/Handlers/CreateLearningComponentHandler.cs",
+    "Backend.Presentation/Endpoints/LearningComponentsEndpoints.cs",
+    "Backend.Presentation/Endpoints/LearningComponentEndpoints.cs",
+    "Backend.Api/Program.cs",
+    "Backend.Infrastructure/Repositories/SqlLearningComponentRepository.cs"
+  ],
+  "metrics": {
+    "loopIterationsPerformed": 8,
+    "maxLoopIterations": 10,
+    "allGreenAchieved": false,
+    "baseline": {
+      "minMI": 57,
+      "maxCC": 3,
+      "maxCoupling": 18,
+      "maxDIT": 0
+    },
+    "final": {
+      "minMI": 57,
+      "maxCC": 3,
+      "maxCoupling": 18,
+      "maxDIT": 0
+    },
+    "remainingViolations": [
+      {
+        "type": "UCR.ECCI.PI.ThemePark.Backend.Application.Services.LearningComponentService",
+        "metric": "Coupling",
+        "value": 18,
+        "flag": "YELLOW"
+      },
+      {
+        "type": "UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Repositories.SqlLearningComponentRepository",
+        "metric": "Coupling",
+        "value": 16,
+        "flag": "YELLOW"
+      },
+      {
+        "type": "UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Handlers.CreateLearningComponentResponseFactory",
+        "metric": "Coupling",
+        "value": 13,
+        "flag": "YELLOW"
+      }
+    ]
+  },
+  "warnings": [
+    "Extracted CreateLearningComponentResponseFactory to reduce handler coupling, but factory itself remains YELLOW (13).",
+    "Sync-wrapped repository queries in SqlLearningComponentRepository did not reduce class coupling.",
+    "Endpoint split plus method-group simplifications eliminated LearningComponentEndpoints and drove LearningComponentsEndpoints to GREEN."
+  ],
+  "notes": "8 refactoring iterations performed. Story-related endpoint types (CreateLearningComponentsEndpoints, GetLearningComponentsEndpoints, LearningComponentsEndpoints) are now GREEN. The remaining YELLOW types are core service/repository/factory classes whose coupling is intrinsic to the create-component flow and could not be reduced below 9 without deeper architectural changes."
+}

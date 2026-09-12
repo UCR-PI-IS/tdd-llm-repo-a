@@ -1,0 +1,53 @@
+{
+  "stage": "e2e-validation",
+  "status": "failure",
+  "timestamp": "2026-09-12_13-31-33",
+  "storyId": "CPD-LC-001-009",
+  "model": "Kimi-K2.5",
+  "iteration": "4",
+  "database": {
+    "container": "themepark-sql-e2e-cpd-lc-001-009-kimi-k2-5-4-133133",
+    "image": "mcr.microsoft.com/mssql/server:2022-latest",
+    "network": "themepark-e2e-cpd-lc-001-009-kimi-k2-5-4-133133",
+    "database": "ThemePark",
+    "readySeconds": 7.8,
+    "baseSchemaApplied": [
+      "Semester.sql",
+      "Course.sql"
+    ],
+    "seedsApplied": [
+      "seed-CPD-LC-001-009.sql"
+    ]
+  },
+  "backend": {
+    "container": "themepark-api-e2e-cpd-lc-001-009-kimi-k2-5-4-133133",
+    "project": "Backend.Api/UCR.ECCI.PI.ThemePark.Backend.Api.csproj",
+    "publishStatus": "success",
+    "started": true,
+    "url": "http://127.0.0.1:32782",
+    "readySeconds": null,
+    "errorLines": []
+  },
+  "probes": [],
+  "totalProbes": 0,
+  "probesPassed": 0,
+  "probesFailed": 0,
+  "cleanup": {
+    "status": "clean",
+    "removedContainers": [
+      "themepark-api-e2e-cpd-lc-001-009-kimi-k2-5-4-133133",
+      "themepark-sql-e2e-cpd-lc-001-009-kimi-k2-5-4-133133"
+    ],
+    "removedNetworks": [
+      "themepark-e2e-cpd-lc-001-009-kimi-k2-5-4-133133"
+    ],
+    "removedVolumes": [
+      "themepark-app-e2e-cpd-lc-001-009-kimi-k2-5-4-133133"
+    ],
+    "leftovers": []
+  },
+  "warnings": [],
+  "errors": [
+    "RuntimeError: The backend container exited during startup.\n--- backend logs ---\nUnhandled exception. System.InvalidOperationException: Cannot resolve scoped service 'UCR.ECCI.PI.ThemePark.Backend.Application.Services.ILearningComponentService' from root provider.\n   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteValidator.ValidateResolution(ServiceCallSite callSite, IServiceScope scope, IServiceScope rootScope)\n   at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(ServiceIdentifier serviceIdentifier, ServiceProviderEngineScope serviceProviderEngineScope)\n   at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(Type serviceType)\n   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)\n   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)\n   at UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Endpoints.LearningComponentsEndpoints.MapLearningComponentsEndpoints(IEndpointRouteBuilder builder) in /workspace/Backend.Presentation/Endpoints/LearningComponentsEndpoints.cs:line 41\n   at Program.<Main>$(String[] args) in /workspace/Backend.Api/Program.cs:line 39\n"
+  ]
+}

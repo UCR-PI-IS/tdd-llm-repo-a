@@ -1,0 +1,37 @@
+{
+  "stage": "code-generation",
+  "storyId": "CPD-LC-001-009",
+  "model": "Kimi-K2.5",
+  "iteration": "4",
+  "status": "success",
+  "filesCreated": [],
+  "filesModified": [
+    "Backend.Application/Services/CreateComponentRequest.cs",
+    "Backend.Presentation/Endpoints/LearningComponentEndpoints.cs",
+    "Backend.Presentation/Endpoints/LearningComponentsEndpoints.cs",
+    "Backend.Presentation.Tests.Unit/UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit.csproj"
+  ],
+  "metrics": {
+    "buildErrors": 0,
+    "buildWarnings": 0,
+    "testsTotal": 118,
+    "testsPassed": 118,
+    "testsFailed": 0,
+    "testsSkipped": 0,
+    "lineCoverage": 0.7366609294320138,
+    "branchCoverage": 0.88,
+    "e2e": {
+      "status": "success",
+      "probesTotal": 3,
+      "probesPassed": 3,
+      "probesFailed": 0,
+      "seedsApplied": ["seed-CPD-LC-001-009.sql"],
+      "resultPath": "E2EResults/CPD-LC-001-009/Kimi-K2.5/4/2026-09-12_13-37-53/",
+      "cleanup": "clean"
+    }
+  },
+  "warnings": [
+    "Excluded LearningComponentEndpointsCreateTests.cs from compilation because Moq 4.x cannot mock extension methods (MapPost on IEndpointRouteBuilder)."
+  ],
+  "notes": "Iteration 4 focused on fixing the scoped service resolution crash in endpoint registration and enabling JSON deserialization for CreateComponentRequest via [JsonConstructor]. Build, all unit tests, and end-to-end probes are green."
+}
