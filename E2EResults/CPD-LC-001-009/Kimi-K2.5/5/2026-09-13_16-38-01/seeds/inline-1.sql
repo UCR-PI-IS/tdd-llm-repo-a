@@ -1,0 +1,1 @@
+INSERT INTO LearningComponents (ComponentId, LearningSpaceId, Width, Height, Depth, X, Y, Z, Orientation) VALUES ('COMP-TEST', 'LS-001', 1.0, 1.0, 1.0, 0, 0, 0, 'North');

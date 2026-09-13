@@ -1,0 +1,40 @@
+{
+  "stage": "e2e-validation",
+  "status": "failure",
+  "timestamp": "2026-09-13_16-37-15",
+  "storyId": "CPD-LC-001-009",
+  "model": "Kimi-K2.5",
+  "iteration": "5",
+  "database": {
+    "container": "themepark-sql-e2e-cpd-lc-001-009-kimi-k2-5-5-163715",
+    "image": "mcr.microsoft.com/mssql/server:2022-latest",
+    "network": "themepark-e2e-cpd-lc-001-009-kimi-k2-5-5-163715",
+    "database": "ThemePark",
+    "readySeconds": 4.6,
+    "baseSchemaApplied": [
+      "Semester.sql",
+      "Course.sql"
+    ],
+    "seedsApplied": []
+  },
+  "backend": {},
+  "probes": [],
+  "totalProbes": 0,
+  "probesPassed": 0,
+  "probesFailed": 0,
+  "cleanup": {
+    "status": "clean",
+    "removedContainers": [
+      "themepark-sql-e2e-cpd-lc-001-009-kimi-k2-5-5-163715"
+    ],
+    "removedNetworks": [
+      "themepark-e2e-cpd-lc-001-009-kimi-k2-5-5-163715"
+    ],
+    "removedVolumes": [],
+    "leftovers": []
+  },
+  "warnings": [],
+  "errors": [
+    "RuntimeError: Seed file not found: CPD-LC-001-009.sql"
+  ]
+}

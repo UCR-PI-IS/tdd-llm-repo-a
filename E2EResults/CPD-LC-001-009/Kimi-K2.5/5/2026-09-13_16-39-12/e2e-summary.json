@@ -1,0 +1,63 @@
+{
+  "stage": "e2e-validation",
+  "status": "success",
+  "timestamp": "2026-09-13_16-39-12",
+  "storyId": "CPD-LC-001-009",
+  "model": "Kimi-K2.5",
+  "iteration": "5",
+  "database": {
+    "container": "themepark-sql-e2e-cpd-lc-001-009-kimi-k2-5-5-163912",
+    "image": "mcr.microsoft.com/mssql/server:2022-latest",
+    "network": "themepark-e2e-cpd-lc-001-009-kimi-k2-5-5-163912",
+    "database": "ThemePark",
+    "readySeconds": 4.6,
+    "baseSchemaApplied": [
+      "Semester.sql",
+      "Course.sql"
+    ],
+    "seedsApplied": [
+      "CPD-LC-001-009.sql"
+    ]
+  },
+  "backend": {
+    "container": "themepark-api-e2e-cpd-lc-001-009-kimi-k2-5-5-163912",
+    "project": "Backend.Api/UCR.ECCI.PI.ThemePark.Backend.Api.csproj",
+    "publishStatus": "success",
+    "started": true,
+    "url": "http://127.0.0.1:32788",
+    "readySeconds": 2.2,
+    "errorLines": []
+  },
+  "probes": [
+    {
+      "name": "Create component with auto-generated ID",
+      "method": "POST",
+      "path": "/api/components",
+      "expectedStatus": 201,
+      "actualStatus": 201,
+      "passed": true,
+      "missingContent": [],
+      "error": null,
+      "bodySnippet": "{\"componentId\":\"COMP-00001\",\"message\":\"Component created successfully with auto-generated ID COMP-00001\",\"statusCode\":201,\"errorMessage\":null}"
+    }
+  ],
+  "totalProbes": 1,
+  "probesPassed": 1,
+  "probesFailed": 0,
+  "cleanup": {
+    "status": "clean",
+    "removedContainers": [
+      "themepark-api-e2e-cpd-lc-001-009-kimi-k2-5-5-163912",
+      "themepark-sql-e2e-cpd-lc-001-009-kimi-k2-5-5-163912"
+    ],
+    "removedNetworks": [
+      "themepark-e2e-cpd-lc-001-009-kimi-k2-5-5-163912"
+    ],
+    "removedVolumes": [
+      "themepark-app-e2e-cpd-lc-001-009-kimi-k2-5-5-163912"
+    ],
+    "leftovers": []
+  },
+  "warnings": [],
+  "errors": []
+}

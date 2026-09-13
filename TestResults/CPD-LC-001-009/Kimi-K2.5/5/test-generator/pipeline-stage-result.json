@@ -1,0 +1,28 @@
+{
+  "stage": "test-generation",
+  "storyId": "CPD-LC-001-009",
+  "model": "Kimi-K2.5",
+  "iteration": "5",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Domain.Tests.Unit/LearningComponentConstructorTests.cs",
+    "Backend.Application.Tests.Unit/LearningComponentServiceCreateTests.cs",
+    "Backend.Infrastructure.Tests.Unit/LearningComponentInfrastructureTests.cs",
+    "Backend.Presentation.Tests.Unit/CreateLearningComponentHandlerTests.cs"
+  ],
+  "filesModified": [],
+  "metrics": {
+    "intentsConfirmed": 30,
+    "testMethodsEmitted": 30,
+    "byLayer": {
+      "Domain": 14,
+      "Application": 6,
+      "Infrastructure": 5,
+      "Presentation": 5
+    }
+  },
+  "warnings": [
+    "Tests assume existence of CreateComponentRequest, CreateLearningComponentDto, CreateLearningComponentResponse, DuplicateIdException, IComponentIdGenerator, ComponentIdGenerator, and ILearningComponentRepository.ExistsAsync/AddAsync methods that do not yet exist in the codebase. These will fail compilation until the production code is implemented."
+  ],
+  "notes": "Generated 30 test methods covering all 30 confirmed intents across 4 DDD layers. Domain tests cover LearningComponent constructor validation including auto-generated IDs, explicit IDs, dimension validation, and orientation validation. Application tests cover LearningComponentService.CreateComponentAsync with ID generation, duplicate detection, and validation. Infrastructure tests cover ComponentIdGenerator and SqlLearningComponentRepository.ExistsAsync/AddAsync. Presentation tests cover CreateLearningComponentHandler and endpoint mapping."
+}
