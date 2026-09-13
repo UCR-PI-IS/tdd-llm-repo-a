@@ -1,0 +1,69 @@
+{
+  "stage": "e2e-validation",
+  "status": "failure",
+  "timestamp": "2026-09-13_16-38-01",
+  "storyId": "CPD-LC-001-009",
+  "model": "Kimi-K2.5",
+  "iteration": "5",
+  "database": {
+    "container": "themepark-sql-e2e-cpd-lc-001-009-kimi-k2-5-5-163801",
+    "image": "mcr.microsoft.com/mssql/server:2022-latest",
+    "network": "themepark-e2e-cpd-lc-001-009-kimi-k2-5-5-163801",
+    "database": "ThemePark",
+    "readySeconds": 4.6,
+    "baseSchemaApplied": [
+      "Semester.sql",
+      "Course.sql"
+    ],
+    "seedsApplied": [
+      "CPD-LC-001-009.sql",
+      "inline-1.sql"
+    ]
+  },
+  "backend": {
+    "container": "themepark-api-e2e-cpd-lc-001-009-kimi-k2-5-5-163801",
+    "project": "Backend.Api/UCR.ECCI.PI.ThemePark.Backend.Api.csproj",
+    "publishStatus": "success",
+    "started": true,
+    "url": "http://127.0.0.1:32786",
+    "readySeconds": 2.2,
+    "errorLines": [
+      "fail: Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware[1]",
+      "An unhandled exception has occurred while executing the request."
+    ]
+  },
+  "probes": [
+    {
+      "name": "POST /api/components",
+      "method": "POST",
+      "path": "/api/components",
+      "expectedStatus": 201,
+      "actualStatus": 400,
+      "passed": false,
+      "missingContent": [],
+      "error": null,
+      "bodySnippet": "Microsoft.AspNetCore.Http.BadHttpRequestException: Implicit body inferred for parameter \"dto\" but no body was provided. Did you mean to use a Service instead?\n   at Microsoft.AspNetCore.Http.RequestDelegateFactory.Log.ImplicitBodyNotProvided(HttpContext httpContext, String parameterName, Boolean shouldThrow)\n   at lambda_method6(Closure, Object, HttpContext, Object)\n   at Microsoft.AspNetCore.Http.RequestDelegateFactory.<>c__DisplayClass102_2.<<HandleRequestBodyAndCompileRequestDelegateForJson>b"
+    }
+  ],
+  "totalProbes": 1,
+  "probesPassed": 0,
+  "probesFailed": 1,
+  "cleanup": {
+    "status": "clean",
+    "removedContainers": [
+      "themepark-api-e2e-cpd-lc-001-009-kimi-k2-5-5-163801",
+      "themepark-sql-e2e-cpd-lc-001-009-kimi-k2-5-5-163801"
+    ],
+    "removedNetworks": [
+      "themepark-e2e-cpd-lc-001-009-kimi-k2-5-5-163801"
+    ],
+    "removedVolumes": [
+      "themepark-app-e2e-cpd-lc-001-009-kimi-k2-5-5-163801"
+    ],
+    "leftovers": []
+  },
+  "warnings": [],
+  "errors": [
+    "1 probe(s) failed."
+  ]
+}
