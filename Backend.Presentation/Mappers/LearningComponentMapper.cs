@@ -1,10 +1,12 @@
+using UCR.ECCI.PI.ThemePark.Backend.Application.Services;
 using UCR.ECCI.PI.ThemePark.Backend.Domain.Entities;
 using UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Dtos;
 
 namespace UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Mappers;
 
 /// <summary>
-/// Maps <see cref="LearningComponent"/> domain entities to <see cref="LearningComponentDto"/> instances.
+/// Maps <see cref="LearningComponent"/> domain entities to <see cref="LearningComponentDto"/> instances
+/// and <see cref="CreateLearningComponentDto"/> to <see cref="CreateComponentRequest"/>.
 /// </summary>
 internal static class LearningComponentMapper
 {
@@ -25,5 +27,24 @@ internal static class LearningComponentMapper
             c.Y,
             c.Z,
             c.Orientation)).ToList();
+    }
+
+    /// <summary>
+    /// Converts a <see cref="CreateLearningComponentDto"/> to a <see cref="CreateComponentRequest"/>.
+    /// </summary>
+    /// <param name="dto">The creation DTO.</param>
+    /// <returns>A create request for the application layer.</returns>
+    public static CreateComponentRequest ToCreateRequest(CreateLearningComponentDto dto)
+    {
+        return new CreateComponentRequest(
+            dto.componentId,
+            dto.learningSpaceId,
+            dto.width,
+            dto.height,
+            dto.depth,
+            dto.x,
+            dto.y,
+            dto.z,
+            dto.orientation);
     }
 }
