@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Moq;
 using NUnit.Framework;
 using UCR.ECCI.PI.ThemePark.Backend.Domain.Entities;
@@ -8,8 +9,8 @@ using UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Repositories;
 namespace UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit;
 
 /// <summary>
-/// Unit tests for <see cref="SqlLearningComponentRepository.GetComponentsByLearningSpaceIdAsync"/>.
-/// Covers intents Infrastructure-001 through Infrastructure-003.
+/// Unit tests for <see cref="SqlLearningComponentRepository"/>.
+/// Covers intents Infrastructure-001 through Infrastructure-005.
 /// </summary>
 [TestFixture]
 public class SqlLearningComponentRepositoryTests
@@ -93,6 +94,113 @@ public class SqlLearningComponentRepositoryTests
             Assert.That(result, Is.Empty);
             Assert.That(result, Has.Count.EqualTo(0));
         });
+    }
+
+    /// <summary>
+    /// Infrastructure-002: Verify that checking existence returns true when a component
+    /// with the given ID exists in the database.
+    /// </summary>
+    [Test]
+    [Description("Infrastructure-002: ExistsAsync returns true when component with given ID exists")]
+    public async Task ExistsAsync_ExistingComponent_ReturnsTrue()
+    {
+        // Arrange
+        var componentId = "COMP-12345";
+        var components = new List<LearningComponent>
+        {
+            new LearningComponent(componentId, "LS-001", 1.5f, 1.0f, 0.5f, 10f, 5f, 0f, "North")
+        };
+
+        var mockDbSet = CreateMockDbSet(components.AsQueryable());
+        _mockDbContext
+            .Setup(c => c.LearningComponents)
+            .Returns(mockDbSet.Object);
+
+        // Act
+        var exists = await _sut.ExistsAsync(componentId);
+
+        // Assert
+        Assert.That(exists, Is.True);
+    }
+
+    /// <summary>
+    /// Infrastructure-003: Verify that checking existence returns false when a component
+    /// with the given ID does not exist in the database.
+    /// </summary>
+    [Test]
+    [Description("Infrastructure-003: ExistsAsync returns false when component with given ID does not exist")]
+    public async Task ExistsAsync_NonExistingComponent_ReturnsFalse()
+    {
+        // Arrange
+        var componentId = "COMP-NONEXISTENT";
+        var components = new List<LearningComponent>();
+
+        var mockDbSet = CreateMockDbSet(components.AsQueryable());
+        _mockDbContext
+            .Setup(c => c.LearningComponents)
+            .Returns(mockDbSet.Object);
+
+        // Act
+        var exists = await _sut.ExistsAsync(componentId);
+
+        // Assert
+        Assert.That(exists, Is.False);
+    }
+
+    /// <summary>
+    /// Infrastructure-004: Verify that adding a component with a unique ID succeeds and calls SaveChanges.
+    /// </summary>
+    [Test]
+    [Description("Infrastructure-004: AddAsync with unique ID succeeds and calls SaveChanges")]
+    public async Task AddAsync_UniqueComponent_CallsAddAndSaveChanges()
+    {
+        // Arrange
+        var component = new LearningComponent("COMP-NEW", "LS-001", 1.5f, 1.0f, 0.5f, 10f, 5f, 0f, "North");
+        var mockDbSet = CreateMockDbSet(new List<LearningComponent>().AsQueryable());
+        mockDbSet
+            .Setup(x => x.AddAsync(It.IsAny<LearningComponent>(), It.IsAny<CancellationToken>()))
+            .Returns((LearningComponent _, CancellationToken _) =>
+                new ValueTask<EntityEntry<LearningComponent>>((EntityEntry<LearningComponent>)null!));
+        _mockDbContext
+            .Setup(c => c.LearningComponents)
+            .Returns(mockDbSet.Object);
+        _mockDbContext
+            .Setup(c => c.SaveChangesAsync(It.IsAny<CancellationToken>()))
+            .ReturnsAsync(1);
+
+        // Act
+        await _sut.AddAsync(component);
+
+        // Assert
+        mockDbSet.Verify(x => x.AddAsync(component, It.IsAny<CancellationToken>()), Times.Once);
+        _mockDbContext.Verify(x => x.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Once);
+    }
+
+    /// <summary>
+    /// Infrastructure-005: Verify that adding a component with a duplicate ID throws a DbUpdateException
+    /// due to unique constraint violation.
+    /// </summary>
+    [Test]
+    [Description("Infrastructure-005: AddAsync with duplicate ID throws DbUpdateException")]
+    public void AddAsync_DuplicateId_ThrowsDbUpdateException()
+    {
+        // Arrange
+        var component = new LearningComponent("COMP-DUPLICATE", "LS-001", 1.5f, 1.0f, 0.5f, 10f, 5f, 0f, "North");
+        var mockDbSet = CreateMockDbSet(new List<LearningComponent>().AsQueryable());
+        mockDbSet
+            .Setup(x => x.AddAsync(It.IsAny<LearningComponent>(), It.IsAny<CancellationToken>()))
+            .Returns((LearningComponent _, CancellationToken _) =>
+                new ValueTask<EntityEntry<LearningComponent>>((EntityEntry<LearningComponent>)null!));
+        _mockDbContext
+            .Setup(c => c.LearningComponents)
+            .Returns(mockDbSet.Object);
+        _mockDbContext
+            .Setup(c => c.SaveChangesAsync(It.IsAny<CancellationToken>()))
+            .ThrowsAsync(new DbUpdateException("Duplicate key"));
+
+        // Act & Assert
+        var ex = Assert.ThrowsAsync<DbUpdateException>(() => _sut.AddAsync(component));
+        Assert.That(ex!.Message, Does.Contain("Duplicate key"));
     }
 
     /// <summary>

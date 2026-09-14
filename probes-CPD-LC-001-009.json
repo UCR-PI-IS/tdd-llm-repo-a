@@ -1,0 +1,22 @@
+{
+  "probes": [
+    {
+      "name": "Create component with auto-generated ID",
+      "method": "POST",
+      "path": "/api/components",
+      "body": {
+        "componentId": "",
+        "learningSpaceId": "LS-001",
+        "width": 2.5,
+        "height": 1.5,
+        "depth": 0.5,
+        "x": 10.0,
+        "y": 5.0,
+        "z": 0.0,
+        "orientation": "North"
+      },
+      "expectStatus": 201,
+      "expectBodyContains": ["componentId", "auto-generated"]
+    }
+  ]
+}

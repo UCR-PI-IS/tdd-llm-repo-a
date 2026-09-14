@@ -38,4 +38,9 @@ app.MapLearningSpaceEndpoints();
 /// </summary>
 app.MapLearningComponentsEndpoints();
 
+/// <summary>
+/// Maps the Create Component endpoint to the application.
+/// </summary>
+app.MapCreateComponentEndpoint();
+
 app.Run();

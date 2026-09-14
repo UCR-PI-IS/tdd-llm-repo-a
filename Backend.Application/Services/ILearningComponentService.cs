@@ -14,4 +14,13 @@ public interface ILearningComponentService
     /// <returns>A list of learning components belonging to the specified learning space.</returns>
     /// <exception cref="ArgumentException">Thrown when learningSpaceId is null or empty.</exception>
     Task<List<LearningComponent>> GetComponentsByLearningSpaceIdAsync(string learningSpaceId);
+
+    /// <summary>
+    /// Creates a new learning component.
+    /// </summary>
+    /// <param name="request">The request containing component data.</param>
+    /// <returns>The created learning component.</returns>
+    /// <exception cref="ValidationException">Thrown when the request data is invalid.</exception>
+    /// <exception cref="DuplicateIdException">Thrown when a component with the same ID already exists.</exception>
+    Task<LearningComponent> CreateComponentAsync(CreateComponentRequest request);
 }
