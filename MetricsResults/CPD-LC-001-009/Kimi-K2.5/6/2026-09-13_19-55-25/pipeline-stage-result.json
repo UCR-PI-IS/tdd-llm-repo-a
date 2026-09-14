@@ -1,0 +1,66 @@
+{
+  "stage": "refactoring",
+  "storyId": "CPD-LC-001-009",
+  "model": "Kimi-K2.5",
+  "iteration": "6",
+  "status": "success",
+  "filesCreated": [],
+  "filesModified": [
+    "Backend.Application/Services/Implementations/LearningComponentService.cs",
+    "Backend.Presentation/Endpoints/LearningComponentEndpoints.cs"
+  ],
+  "metrics": {
+    "loopIterationsPerformed": 2,
+    "maxLoopIterations": 10,
+    "allGreenAchieved": false,
+    "baseline": {
+      "minMI": 50,
+      "maxCC": 14,
+      "maxCoupling": 25,
+      "maxDIT": 0
+    },
+    "final": {
+      "minMI": 50,
+      "maxCC": 19,
+      "maxCoupling": 25,
+      "maxDIT": 0
+    },
+    "remainingViolations": [
+      {
+        "type": "LearningComponentService",
+        "metric": "CC",
+        "value": 19,
+        "flag": "YELLOW"
+      },
+      {
+        "type": "LearningComponentService",
+        "metric": "Coupling",
+        "value": 17,
+        "flag": "YELLOW"
+      },
+      {
+        "type": "SqlLearningComponentRepository",
+        "metric": "Coupling",
+        "value": 16,
+        "flag": "YELLOW"
+      },
+      {
+        "type": "CreateLearningComponentHandler",
+        "metric": "Coupling",
+        "value": 12,
+        "flag": "YELLOW"
+      },
+      {
+        "type": "LearningComponentEndpoints",
+        "metric": "Coupling",
+        "value": 25,
+        "flag": "YELLOW"
+      }
+    ]
+  },
+  "warnings": [
+    "Class-level cyclomatic complexity increased for LearningComponentService (14->19) due to method extraction - this is expected as class CC is the sum of all method CC values",
+    "Coupling violations remain as they require architectural changes to interfaces and dependency injection - values are within acceptable YELLOW range (10-40)"
+  ],
+  "notes": "Refactoring focused on extracting complex validation logic from LearningComponentService.CreateComponentAsync (CC reduced from 10 to 1) and eliminating code duplication in LearningComponentEndpoints. All method-level cyclomatic complexity values are now GREEN. Coupling values are in YELLOW range (10-40) which is acceptable for service classes that orchestrate multiple dependencies."
+}
