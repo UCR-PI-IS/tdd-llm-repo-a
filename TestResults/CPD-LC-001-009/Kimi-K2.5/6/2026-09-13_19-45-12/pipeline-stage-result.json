@@ -1,0 +1,48 @@
+{
+  "stage": "code-generation",
+  "storyId": "CPD-LC-001-009",
+  "model": "Kimi-K2.5",
+  "iteration": "6",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Domain/Exceptions/DuplicateIdException.cs",
+    "Backend.Domain/Repositories/IComponentIdGenerator.cs",
+    "Backend.Application/Services/CreateComponentRequest.cs",
+    "Backend.Infrastructure/ComponentIdGenerator.cs",
+    "Backend.Presentation/Endpoints/CreateLearningComponentHandler.cs",
+    "Backend.Presentation/Handlers/CreateLearningComponentHandler.cs"
+  ],
+  "filesModified": [
+    "Backend.Domain/Entities/LearningComponent.cs",
+    "Backend.Domain/Repositories/ILearningComponentRepository.cs",
+    "Backend.Application/Services/ILearningComponentService.cs",
+    "Backend.Application/Services/Implementations/LearningComponentService.cs",
+    "Backend.Infrastructure/Repositories/SqlLearningComponentRepository.cs",
+    "Backend.Infrastructure/DependecyInjection.cs",
+    "Backend.Presentation/Endpoints/LearningComponentEndpoints.cs",
+    "Backend.Api/Program.cs",
+    "Backend.DependencyInjection/DependecyInjection.cs",
+    "Backend.DependencyInjection/UCR.ECCI.PI.ThemePark.Backend.DependencyInjection.csproj"
+  ],
+  "metrics": {
+    "buildErrors": 0,
+    "buildWarnings": 1,
+    "testsTotal": 103,
+    "testsPassed": 103,
+    "testsFailed": 0,
+    "testsSkipped": 0,
+    "lineCoverage": null,
+    "branchCoverage": null,
+    "e2e": {
+      "status": "success",
+      "probesTotal": 1,
+      "probesPassed": 1,
+      "probesFailed": 0,
+      "seedsApplied": ["CPD-LC-001-009.sql"],
+      "resultPath": "E2EResults/CPD-LC-001-009/Kimi-K2.5/6/2026-09-13_19-46-47/",
+      "cleanup": "clean"
+    }
+  },
+  "warnings": [],
+  "notes": "Successfully implemented automatic ID generation for learning components. All 103 tests passing. E2E validation confirmed the endpoint returns 201 with auto-generated component ID in format COMP-{GUID}."
+}
