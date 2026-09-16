@@ -1,0 +1,32 @@
+{
+  "stage": "test-generation",
+  "storyId": "CPD-LC-001-009",
+  "model": "Qwen3.7-max",
+  "iteration": "2",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Infrastructure.Tests.Unit/ComponentIdGeneratorTests.cs",
+    "Backend.Presentation.Tests.Unit/CreateLearningComponentHandlerTests.cs",
+    "Backend.Presentation.Tests.Unit/LearningComponentsEndpointsTests.cs"
+  ],
+  "filesModified": [
+    "Backend.Domain.Tests.Unit/LearningComponentTests.cs",
+    "Backend.Application.Tests.Unit/LearningComponentServiceTests.cs",
+    "Backend.Infrastructure.Tests.Unit/SqlLearningComponentRepositoryTests.cs"
+  ],
+  "metrics": {
+    "intentsConfirmed": 30,
+    "testMethodsEmitted": 21,
+    "byLayer": {
+      "Domain": 5,
+      "Application": 6,
+      "Infrastructure": 5,
+      "Presentation": 5
+    }
+  },
+  "warnings": [
+    "Tests reference classes and methods that do not yet exist (expected in TDD): new LearningComponent constructor overload without componentId, CreateComponentRequest record, IComponentIdGenerator interface, ComponentIdGenerator class, DuplicateIdException, CreateLearningComponentHandler static class, CreateLearningComponentDto, CreateLearningComponentResponse, LearningComponentEndpoints.MapCreateComponentEndpoint, ILearningComponentRepository.ExistsAsync and AddAsync, ILearningComponentService.CreateComponentAsync",
+    "Existing test Constructor_ZeroValues_AllPropertiesSetCorrectly in LearningComponentTests.cs may conflict with new Domain-004 zero-width validation when implementation changes validation from less-than-zero to less-than-or-equal-to-zero for dimensions"
+  ],
+  "notes": "Generated 21 test methods across 6 files (3 new, 3 modified) covering all 30 confirmed intents for CPD-LC-001-009 Automatic ID Generation. Tests follow existing project patterns: NUnit 3.14.0 with Moq 4.20.72, AAA pattern, Assert.Multiple for multi-property assertions, parameterized TestCase for validation scenarios. Domain tests cover the new constructor overload (auto-ID) and updated validation. Application tests cover CreateComponentAsync with ID generation, retry logic, and validation. Infrastructure tests cover ComponentIdGenerator format, ExistsAsync, and AddAsync. Presentation tests cover handler responses for success, conflict, and bad-request scenarios plus endpoint mapping."
+}
