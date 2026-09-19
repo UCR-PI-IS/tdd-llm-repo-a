@@ -1,0 +1,57 @@
+{
+  "stage": "code-generation",
+  "storyId": "CPD-LC-001-005",
+  "model": "Kimi-K2.5",
+  "iteration": "2",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Application/Services/IWhiteboardService.cs",
+    "Backend.Application/Services/UpdateWhiteboardDto.cs",
+    "Backend.Application/Services/UpdateWhiteboardResult.cs",
+    "Backend.Presentation/Dtos/UpdateWhiteboardRequest.cs",
+    "Backend.Presentation/Responses/UpdateWhiteboardResponse.cs",
+    "Backend.Presentation/Handlers/UpdateWhiteboardHandler.cs"
+  ],
+  "filesModified": [
+    "Backend.Domain/Entities/Whiteboard.cs",
+    "Backend.Domain/Entities/LearningSpace.cs",
+    "Backend.Domain/Repositories/IWhiteboardRepository.cs",
+    "Backend.Domain/Repositories/ILearningSpaceRepository.cs",
+    "Backend.Application/Services/Implementations/WhiteboardService.cs",
+    "Backend.Application/DependencyInjection.cs",
+    "Backend.Infrastructure/Repositories/SqlWhiteboardRepository.cs",
+    "Backend.Infrastructure/Repositories/SqlLearningSpaceRepository.cs",
+    "Backend.Infrastructure/EntityConfigurations/WhiteboardEntityConfiguration.cs",
+    "Backend.Infrastructure/EntityConfigurations/LearningSpaceEntityConfiguration.cs",
+    "Backend.Infrastructure/EntityConfigurations/LearningComponentEntityConfiguration.cs",
+    "Backend.Presentation/Mappers/WhiteboardMapper.cs",
+    "Backend.Presentation/Endpoints/LearningComponentsEndpoints.cs",
+    "Backend.Presentation.Tests.Unit/UpdateWhiteboardHandlerTests.cs",
+    "Backend.Application.Tests.Unit/WhiteboardUpdateServiceTests.cs",
+    "Backend.Infrastructure.Tests.Unit/SqlWhiteboardRepositoryUpdateTests.cs"
+  ],
+  "metrics": {
+    "buildErrors": 0,
+    "buildWarnings": 4,
+    "testsTotal": 149,
+    "testsPassed": 149,
+    "testsFailed": 0,
+    "testsSkipped": 0,
+    "lineCoverage": 0.7635,
+    "branchCoverage": 0.7451,
+    "e2e": {
+      "status": "success",
+      "probesTotal": 1,
+      "probesPassed": 1,
+      "probesFailed": 0,
+      "seedsApplied": ["seed-CPD-LC-001-005.sql"],
+      "resultPath": "E2EResults/CPD-LC-001-005/Kimi-K2.5/2/2026-09-18_22-40-54/",
+      "cleanup": "clean"
+    }
+  },
+  "warnings": [
+    "Modified test files to add missing using directives and mock helpers (not production code logic changes)",
+    "Changed LearningSpaceId in seed from string LS-001 to integer 1 to match repository parsing logic"
+  ],
+  "notes": "Implemented the Update Whiteboard story with domain validation, position boundary checking, and overlap detection. The backend starts correctly, all unit tests pass (149/149), and the PUT endpoint was validated end-to-end against an ephemeral database with seed data."
+}

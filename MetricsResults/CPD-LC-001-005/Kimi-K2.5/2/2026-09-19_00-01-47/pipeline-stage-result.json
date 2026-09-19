@@ -1,0 +1,35 @@
+{
+  "stage": "refactoring",
+  "storyId": "CPD-LC-001-005",
+  "model": "Kimi-K2.5",
+  "iteration": "2",
+  "status": "partial",
+  "filesCreated": [
+    "Backend.Domain/Entities/PositionValidator.cs",
+    "Backend.Application/Services/Implementations/UpdateWhiteboardHelper.cs",
+    "Backend.Application/Services/Implementations/CreateWhiteboardHelper.cs"
+  ],
+  "filesModified": [
+    "Backend.Domain/Entities/Whiteboard.cs",
+    "Backend.Application/Services/Implementations/WhiteboardService.cs",
+    "Backend.Application/Services/Implementations/UpdateWhiteboardHelper.cs"
+  ],
+  "metrics": {
+    "loopIterationsPerformed": 5,
+    "maxLoopIterations": 10,
+    "allGreenAchieved": false,
+    "baseline": { "minMI": 43, "maxCC": 23, "maxCoupling": 26, "maxDIT": 0 },
+    "final":    { "minMI": 46, "maxCC": 10, "maxCoupling": 23, "maxDIT": 0 },
+    "remainingViolations": [
+      { "type": "UpdateWhiteboardHelper", "metric": "Coupling", "value": 21, "flag": "YELLOW" },
+      { "type": "WhiteboardService", "metric": "Coupling", "value": 12, "flag": "YELLOW" },
+      { "type": "SqlWhiteboardRepository", "metric": "Coupling", "value": 23, "flag": "YELLOW" },
+      { "type": "UpdateWhiteboardHandler", "metric": "Coupling", "value": 16, "flag": "YELLOW" }
+    ]
+  },
+  "warnings": [
+    "Coupling YELLOWs persist for integration-layer types (handlers, services, repositories) because they inherently depend on multiple framework and domain types; no simple refactoring drops them below 9 without breaking architecture or tests.",
+    "UpdateWhiteboardHelper CC reduced from 15 to 9 (GREEN); ValidatePositionAsync CC reduced from 10 to 4 by delegating boundary/overlap checks to PositionValidator."
+  ],
+  "notes": "All RED and CC violations were resolved across 5 iterations. The only remaining story-related metric issues are Class Coupling YELLOWs for four integration types that are structurally coupled to ASP.NET Core, EF Core, and domain DTOs."
+}
