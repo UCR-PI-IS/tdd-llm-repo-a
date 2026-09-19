@@ -6,8 +6,8 @@ description: "Completes the TDD cycle by running Microsoft Code Metrics, analyzi
 color: "#9B59B6"
 mode: all
 permission:
-  edit: "ask"
-  bash: "ask"
+  edit: "allow"
+  bash: "allow"
 ---
 
 # Role
