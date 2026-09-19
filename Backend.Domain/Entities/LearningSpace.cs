@@ -67,6 +67,25 @@ public class LearningSpace
         Length = length;
     }
 
+    /// <summary>
+    /// Constructor for the LearningSpace class with explicit identifier.
+    /// </summary>
+    /// <param name="learningSpaceId">Identifier of the learning space</param>
+    /// <param name="type">Type of the learning space</param>
+    /// <param name="height">Height of the learning space in meters</param>
+    /// <param name="width">Width of the learning space in meters</param>
+    /// <param name="length">Length of the learning space in meters</param>
+    /// <exception cref="ArgumentException">Thrown when validation fails.</exception>
+    public LearningSpace(string learningSpaceId, string type, float height, float width, float length)
+        : this(type, height, width, length)
+    {
+        // Try to parse the learning space ID; if invalid, keep the auto-generated one
+        if (int.TryParse(learningSpaceId, out int id))
+        {
+            LearningSpaceId = id;
+        }
+    }
+
     private static void ValidateType(string type)
     {
         if (string.IsNullOrEmpty(type))

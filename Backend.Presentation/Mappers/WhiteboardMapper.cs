@@ -38,4 +38,19 @@ internal static class WhiteboardMapper
 
         return new CreateWhiteboardResponse(whiteboardDto);
     }
+
+    public static WhiteboardDto ToDto(Whiteboard whiteboard)
+    {
+        return new WhiteboardDto(
+            whiteboard.ComponentId,
+            whiteboard.LearningSpaceId,
+            whiteboard.Width,
+            whiteboard.Height,
+            whiteboard.Depth,
+            whiteboard.X,
+            whiteboard.Y,
+            whiteboard.Z,
+            whiteboard.Orientation,
+            whiteboard.MarkerColor);
+    }
 }

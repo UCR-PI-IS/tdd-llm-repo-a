@@ -11,7 +11,7 @@ namespace UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Endpoints;
 public static class LearningComponentsEndpoints
 {
     /// <summary>
-    /// Maps the POST endpoint for creating whiteboards.
+    /// Maps the POST endpoint for creating whiteboards and PUT endpoint for updating whiteboards.
     /// </summary>
     /// <param name="builder">The <see cref="IEndpointRouteBuilder"/> used to map the endpoint.</param>
     /// <returns>The updated <see cref="IEndpointRouteBuilder"/> with the new route.</returns>
@@ -19,6 +19,14 @@ public static class LearningComponentsEndpoints
     {
         builder.MapPost("/Whiteboards", CreateWhiteboardHandler.HandleAsync)
             .WithName("CreateWhiteboard")
+            .WithOpenApi();
+
+        builder.MapPut("/api/whiteboards", UpdateWhiteboardHandler.HandleAsync)
+            .WithName("UpdateWhiteboard")
+            .WithOpenApi();
+
+        builder.MapPut("/api/whiteboards/{id}", UpdateWhiteboardHandler.HandleAsync)
+            .WithName("UpdateWhiteboardWithId")
             .WithOpenApi();
 
         return builder;

@@ -7,7 +7,7 @@ namespace UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Repositories;
 
 /// <summary>
 /// SQL-based implementation of <see cref="IWhiteboardRepository"/>.
-/// Provides creation operations for whiteboard data in the database.
+/// Provides creation, read, and update operations for whiteboard data in the database.
 /// </summary>
 internal class SqlWhiteboardRepository : IWhiteboardRepository
 {
@@ -39,5 +39,39 @@ internal class SqlWhiteboardRepository : IWhiteboardRepository
         {
             throw new DatabaseException(ex.Message);
         }
+    }
+
+    /// <summary>
+    /// Retrieves a whiteboard by its unique identifier.
+    /// </summary>
+    /// <param name="id">The unique identifier of the whiteboard.</param>
+    /// <returns>The whiteboard entity if found; otherwise, null.</returns>
+    public async Task<Whiteboard?> GetByIdAsync(string id)
+    {
+        return await _dbContext.Whiteboards.FindAsync(id);
+    }
+
+    /// <summary>
+    /// Updates an existing whiteboard in the database.
+    /// </summary>
+    /// <param name="whiteboard">The whiteboard entity to update.</param>
+    /// <returns>A task representing the asynchronous operation.</returns>
+    public async Task UpdateAsync(Whiteboard whiteboard)
+    {
+        _dbContext.Whiteboards.Update(whiteboard);
+        await _dbContext.SaveChangesAsync();
+    }
+
+    /// <summary>
+    /// Retrieves all whiteboards/components in a specific learning space.
+    /// </summary>
+    /// <param name="learningSpaceId">The identifier of the learning space.</param>
+    /// <returns>A collection of learning components in the specified learning space.</returns>
+    public Task<IEnumerable<LearningComponent>> GetByLearningSpaceIdAsync(string learningSpaceId)
+    {
+        var whiteboards = _dbContext.Whiteboards
+            .Where(w => w.LearningSpaceId == learningSpaceId)
+            .ToList();
+        return Task.FromResult<IEnumerable<LearningComponent>>(whiteboards.Select(w => (LearningComponent)w));
     }
 }

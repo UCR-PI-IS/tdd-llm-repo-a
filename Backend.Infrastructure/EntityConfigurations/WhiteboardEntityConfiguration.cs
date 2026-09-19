@@ -32,11 +32,22 @@ internal class WhiteboardEntityConfiguration : IEntityTypeConfiguration<Whiteboa
         builder.Property(w => w.MarkerColor)
             .HasMaxLength(50);
 
-        builder.Property(w => w.Width);
-        builder.Property(w => w.Height);
-        builder.Property(w => w.Depth);
-        builder.Property(w => w.X);
-        builder.Property(w => w.Y);
-        builder.Property(w => w.Z);
+        builder.Property(w => w.Width)
+            .HasColumnType("real");
+
+        builder.Property(w => w.Height)
+            .HasColumnType("real");
+
+        builder.Property(w => w.Depth)
+            .HasColumnType("real");
+
+        builder.Property(w => w.X)
+            .HasColumnType("real");
+
+        builder.Property(w => w.Y)
+            .HasColumnType("real");
+
+        builder.Property(w => w.Z)
+            .HasColumnType("real");
     }
 }
