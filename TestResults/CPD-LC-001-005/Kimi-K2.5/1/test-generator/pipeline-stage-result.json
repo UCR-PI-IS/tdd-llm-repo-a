@@ -1,0 +1,30 @@
+{
+  "stage": "test-generation",
+  "storyId": "CPD-LC-001-005",
+  "model": "Kimi-K2.5",
+  "iteration": "1",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Domain.Tests.Unit/WhiteboardUpdateTests.cs",
+    "Backend.Application.Tests.Unit/WhiteboardUpdateServiceTests.cs",
+    "Backend.Infrastructure.Tests.Unit/SqlWhiteboardRepositoryUpdateTests.cs",
+    "Backend.Presentation.Tests.Unit/UpdateWhiteboardHandlerTests.cs"
+  ],
+  "filesModified": [],
+  "metrics": {
+    "intentsConfirmed": 26,
+    "testMethodsEmitted": 26,
+    "byLayer": {
+      "Domain": 14,
+      "Application": 5,
+      "Infrastructure": 4,
+      "Presentation": 5
+    }
+  },
+  "warnings": [
+    "Tests reference methods (Update, GetByIdAsync, UpdateAsync, GetByLearningSpaceIdAsync) that are expected to be implemented in production code but do not yet exist",
+    "Application layer tests include supporting types (UpdateWhiteboardRequest, UpdateWhiteboardResult) that may need to be moved to production code",
+    "Presentation layer tests include supporting types (IWhiteboardUpdateService, UpdateWhiteboardHandler, UpdateWhiteboardRequest, UpdateWhiteboardResponse, UpdateWhiteboardDto) that may need to be moved to production code"
+  ],
+  "notes": "Generated 26 NUnit test methods covering all confirmed intents for story CPD-LC-001-005. Tests follow the established patterns in the codebase with AAA structure, Moq for mocking, and proper NUnit attributes. All tests reference expected production classes and methods that will be implemented in subsequent stages."
+}
