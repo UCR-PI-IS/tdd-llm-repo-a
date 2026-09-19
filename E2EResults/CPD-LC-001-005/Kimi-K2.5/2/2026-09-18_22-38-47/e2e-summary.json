@@ -1,0 +1,68 @@
+{
+  "stage": "e2e-validation",
+  "status": "failure",
+  "timestamp": "2026-09-18_22-38-47",
+  "storyId": "CPD-LC-001-005",
+  "model": "Kimi-K2.5",
+  "iteration": "2",
+  "database": {
+    "container": "themepark-sql-e2e-cpd-lc-001-005-kimi-k2-5-2-223847",
+    "image": "mcr.microsoft.com/mssql/server:2022-latest",
+    "network": "themepark-e2e-cpd-lc-001-005-kimi-k2-5-2-223847",
+    "database": "ThemePark",
+    "readySeconds": 8.6,
+    "baseSchemaApplied": [
+      "Semester.sql",
+      "Course.sql"
+    ],
+    "seedsApplied": [
+      "seed-CPD-LC-001-005.sql"
+    ]
+  },
+  "backend": {
+    "container": "themepark-api-e2e-cpd-lc-001-005-kimi-k2-5-2-223847",
+    "project": "Backend.Api/UCR.ECCI.PI.ThemePark.Backend.Api.csproj",
+    "publishStatus": "success",
+    "started": true,
+    "url": "http://127.0.0.1:55003",
+    "readySeconds": 2.2,
+    "errorLines": []
+  },
+  "probes": [
+    {
+      "name": "update whiteboard successfully",
+      "method": "PUT",
+      "path": "/api/whiteboards/WB-001",
+      "expectedStatus": 200,
+      "actualStatus": 400,
+      "passed": false,
+      "missingContent": [
+        "MarkerColor",
+        "Red"
+      ],
+      "error": null,
+      "bodySnippet": "\"Learning space not found\""
+    }
+  ],
+  "totalProbes": 1,
+  "probesPassed": 0,
+  "probesFailed": 1,
+  "cleanup": {
+    "status": "clean",
+    "removedContainers": [
+      "themepark-api-e2e-cpd-lc-001-005-kimi-k2-5-2-223847",
+      "themepark-sql-e2e-cpd-lc-001-005-kimi-k2-5-2-223847"
+    ],
+    "removedNetworks": [
+      "themepark-e2e-cpd-lc-001-005-kimi-k2-5-2-223847"
+    ],
+    "removedVolumes": [
+      "themepark-app-e2e-cpd-lc-001-005-kimi-k2-5-2-223847"
+    ],
+    "leftovers": []
+  },
+  "warnings": [],
+  "errors": [
+    "1 probe(s) failed."
+  ]
+}
