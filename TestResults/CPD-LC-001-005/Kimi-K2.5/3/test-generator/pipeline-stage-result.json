@@ -1,0 +1,29 @@
+{
+  "stage": "test-generation",
+  "storyId": "CPD-LC-001-005",
+  "model": "Kimi-K2.5",
+  "iteration": "3",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Domain.Tests.Unit/WhiteboardUpdateTests.cs",
+    "Backend.Application.Tests.Unit/WhiteboardServiceUpdateTests.cs",
+    "Backend.Infrastructure.Tests.Unit/SqlWhiteboardRepositoryUpdateTests.cs",
+    "Backend.Presentation.Tests.Unit/UpdateWhiteboardHandlerTests.cs"
+  ],
+  "filesModified": [],
+  "metrics": {
+    "intentsConfirmed": 19,
+    "testMethodsEmitted": 19,
+    "byLayer": {
+      "Domain": 5,
+      "Application": 5,
+      "Infrastructure": 4,
+      "Presentation": 5
+    }
+  },
+  "warnings": [
+    "Domain-001, Domain-002, and Domain-004 through Domain-010 constructor validation intents were skipped because they are already covered by existing WhiteboardTests.cs (constructor, null/empty markerColor, negative dimensions/coordinates, and invalid orientation).",
+    "Some referenced types (UpdateWhiteboardDto, UpdateWhiteboardResult, UpdateWhiteboardRequest, UpdateWhiteboardResponse, IWhiteboardService, IWhiteboardRepository.GetByIdAsync/UpdateAsync/GetByLearningSpaceIdAsync, Whiteboard.Update overloads) do not yet exist and will be implemented by downstream agents."
+  ],
+  "notes": "Tests generated for the Update Whiteboard story (CPD-LC-001-005). Coverage focuses on new update functionality including domain entity mutations, service orchestration with boundary/overlap checks, repository read/update operations, and the presentation handler. Existing constructor coverage in WhiteboardTests.cs was reused to avoid duplication."
+}
