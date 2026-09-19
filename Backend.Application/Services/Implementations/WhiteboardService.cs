@@ -5,9 +5,9 @@ using UCR.ECCI.PI.ThemePark.Backend.Domain.Repositories;
 namespace UCR.ECCI.PI.ThemePark.Backend.Application.Services.Implementations;
 
 /// <summary>
-/// Service implementation for creating whiteboards.
+/// Service implementation for creating and updating whiteboards.
 /// </summary>
-internal class WhiteboardService : IWhiteboardCreateService
+internal class WhiteboardService : IWhiteboardCreateService, IWhiteboardService
 {
     private readonly IWhiteboardRepository _whiteboardRepository;
     private readonly ILearningSpaceReadRepository _learningSpaceReadRepository;
@@ -55,5 +55,73 @@ internal class WhiteboardService : IWhiteboardCreateService
 
         await _whiteboardRepository.AddAsync(whiteboard);
         return whiteboard;
+    }
+
+    /// <summary>
+    /// Updates an existing whiteboard with the specified parameters.
+    /// </summary>
+    /// <param name="dto">The update DTO containing whiteboard parameters.</param>
+    /// <returns>A result indicating success or failure with details.</returns>
+    public async Task<UpdateWhiteboardResult> UpdateWhiteboardAsync(UpdateWhiteboardDto dto)
+    {
+        var existingWhiteboard = await _whiteboardRepository.GetByIdAsync(dto.ComponentId);
+        if (existingWhiteboard == null)
+            return UpdateWhiteboardResult.Failure("Whiteboard not found");
+
+        try
+        {
+            var learningSpace = await _learningSpaceReadRepository.GetByIdAsync(existingWhiteboard.LearningSpaceId);
+            var otherComponents = await _whiteboardRepository.GetByLearningSpaceIdAsync(existingWhiteboard.LearningSpaceId);
+
+            List<LearningComponent> excludingSelf = new();
+            if (otherComponents != null)
+            {
+                foreach (var c in otherComponents)
+                {
+                    if (c.ComponentId != existingWhiteboard.ComponentId)
+                        excludingSelf.Add(c);
+                }
+            }
+
+            bool hasLearningSpace = learningSpace != null;
+            bool hasOtherComponents = excludingSelf.Count > 0;
+
+            if (hasLearningSpace)
+            {
+                existingWhiteboard.Update(
+                    dto.Width, dto.Height, dto.Depth,
+                    dto.X, dto.Y, dto.Z,
+                    dto.Orientation, dto.MarkerColor,
+                    learningSpace!.Width, learningSpace.Length);
+            }
+
+            if (hasOtherComponents)
+            {
+                existingWhiteboard.Update(
+                    dto.Width, dto.Height, dto.Depth,
+                    dto.X, dto.Y, dto.Z,
+                    dto.Orientation, dto.MarkerColor,
+                    excludingSelf);
+            }
+
+            if (!hasLearningSpace & !hasOtherComponents)
+            {
+                existingWhiteboard.Update(
+                    dto.Width, dto.Height, dto.Depth,
+                    dto.X, dto.Y, dto.Z,
+                    dto.Orientation, dto.MarkerColor);
+            }
+
+            await _whiteboardRepository.UpdateAsync(existingWhiteboard);
+            return UpdateWhiteboardResult.Success(existingWhiteboard);
+        }
+        catch (ArgumentException ex)
+        {
+            return UpdateWhiteboardResult.Failure(ex.Message);
+        }
+        catch (InvalidOperationException ex)
+        {
+            return UpdateWhiteboardResult.Failure(ex.Message);
+        }
     }
 }
