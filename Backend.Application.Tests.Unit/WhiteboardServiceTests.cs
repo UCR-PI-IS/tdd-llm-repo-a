@@ -16,7 +16,7 @@ namespace UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit;
 public class WhiteboardServiceTests
 {
     private Mock<IWhiteboardRepository> _mockWhiteboardRepository = null!;
-    private Mock<ILearningSpaceReadRepository> _mockLearningSpaceReadRepository = null!;
+    private Mock<ILearningSpaceRepository> _mockLearningSpaceRepository = null!;
     private WhiteboardService _sut = null!;
 
     // Valid test data
@@ -35,17 +35,17 @@ public class WhiteboardServiceTests
     public void SetUp()
     {
         _mockWhiteboardRepository = new Mock<IWhiteboardRepository>();
-        _mockLearningSpaceReadRepository = new Mock<ILearningSpaceReadRepository>();
+        _mockLearningSpaceRepository = new Mock<ILearningSpaceRepository>();
         _sut = new WhiteboardService(
             _mockWhiteboardRepository.Object,
-            _mockLearningSpaceReadRepository.Object);
+            _mockLearningSpaceRepository.Object);
     }
 
     [TearDown]
     public void TearDown()
     {
         _mockWhiteboardRepository.VerifyAll();
-        _mockLearningSpaceReadRepository.VerifyAll();
+        _mockLearningSpaceRepository.VerifyAll();
     }
 
     private static CreateWhiteboardRequest CreateValidRequest(
@@ -79,7 +79,7 @@ public class WhiteboardServiceTests
     {
         // Arrange
         var learningSpace = CreateLearningSpaceThatFits();
-        _mockLearningSpaceReadRepository
+        _mockLearningSpaceRepository
             .Setup(r => r.GetByIdAsync(ValidLearningSpaceId))
             .ReturnsAsync(learningSpace);
         _mockWhiteboardRepository
@@ -110,7 +110,7 @@ public class WhiteboardServiceTests
     public async Task CreateWhiteboardAsync_LearningSpaceNotFound_ThrowsNotFoundException()
     {
         // Arrange
-        _mockLearningSpaceReadRepository
+        _mockLearningSpaceRepository
             .Setup(r => r.GetByIdAsync(ValidLearningSpaceId))
             .ReturnsAsync((LearningSpace?)null);
 
@@ -147,7 +147,7 @@ public class WhiteboardServiceTests
         // Arrange
         // Small learning space: Width=3, Height=2, Length=2
         var smallSpace = new LearningSpace("Classroom", 2.0f, 3.0f, 2.0f);
-        _mockLearningSpaceReadRepository
+        _mockLearningSpaceRepository
             .Setup(r => r.GetByIdAsync(ValidLearningSpaceId))
             .ReturnsAsync(smallSpace);
 
@@ -184,7 +184,7 @@ public class WhiteboardServiceTests
     {
         // Arrange
         var learningSpace = CreateLearningSpaceThatFits();
-        _mockLearningSpaceReadRepository
+        _mockLearningSpaceRepository
             .Setup(r => r.GetByIdAsync(ValidLearningSpaceId))
             .ReturnsAsync(learningSpace);
         _mockWhiteboardRepository

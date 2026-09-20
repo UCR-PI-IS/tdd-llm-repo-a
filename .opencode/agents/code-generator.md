@@ -6,8 +6,8 @@ description: "Implements minimal code to make failing tests pass, following DDD 
 color: "#2ECC71"
 mode: all
 permission:
-  edit: "ask"
-  bash: "ask"
+  edit: "allow"
+  bash: "allow"
 ---
 
 # Your Role

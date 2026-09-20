@@ -6,8 +6,8 @@ description: "Orchestrates the TDD pipeline: test generation, code generation, a
 color: "#E74C3C"
 mode: primary
 permission:
-  edit: "ask"
-  bash: "ask"
+  edit: "allow"
+  bash: "allow"
 ---
 
 # Role
