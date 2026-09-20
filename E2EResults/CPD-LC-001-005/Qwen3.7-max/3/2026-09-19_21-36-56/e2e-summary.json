@@ -1,0 +1,63 @@
+{
+  "stage": "e2e-validation",
+  "status": "success",
+  "timestamp": "2026-09-19_21-36-56",
+  "storyId": "CPD-LC-001-005",
+  "model": "Qwen3.7-max",
+  "iteration": "3",
+  "database": {
+    "container": "themepark-sql-e2e-cpd-lc-001-005-qwen3-7-max-3-213656",
+    "image": "mcr.microsoft.com/mssql/server:2022-latest",
+    "network": "themepark-e2e-cpd-lc-001-005-qwen3-7-max-3-213656",
+    "database": "ThemePark",
+    "readySeconds": 4.7,
+    "baseSchemaApplied": [
+      "Semester.sql",
+      "Course.sql"
+    ],
+    "seedsApplied": [
+      "seed-CPD-LC-001-005.sql"
+    ]
+  },
+  "backend": {
+    "container": "themepark-api-e2e-cpd-lc-001-005-qwen3-7-max-3-213656",
+    "project": "Backend.Api/UCR.ECCI.PI.ThemePark.Backend.Api.csproj",
+    "publishStatus": "success",
+    "started": true,
+    "url": "http://127.0.0.1:55002",
+    "readySeconds": 2.2,
+    "errorLines": []
+  },
+  "probes": [
+    {
+      "name": "Update whiteboard WB-001 successfully",
+      "method": "PUT",
+      "path": "/Whiteboards/WB-001",
+      "expectedStatus": 200,
+      "actualStatus": 200,
+      "passed": true,
+      "missingContent": [],
+      "error": null,
+      "bodySnippet": "{\"componentId\":\"WB-001\",\"learningSpaceId\":\"IF-0103\",\"width\":2.5,\"height\":1.8,\"depth\":0.15,\"x\":1,\"y\":0,\"z\":2,\"orientation\":\"South\",\"markerColor\":\"Red\"}"
+    }
+  ],
+  "totalProbes": 1,
+  "probesPassed": 1,
+  "probesFailed": 0,
+  "cleanup": {
+    "status": "clean",
+    "removedContainers": [
+      "themepark-api-e2e-cpd-lc-001-005-qwen3-7-max-3-213656",
+      "themepark-sql-e2e-cpd-lc-001-005-qwen3-7-max-3-213656"
+    ],
+    "removedNetworks": [
+      "themepark-e2e-cpd-lc-001-005-qwen3-7-max-3-213656"
+    ],
+    "removedVolumes": [
+      "themepark-app-e2e-cpd-lc-001-005-qwen3-7-max-3-213656"
+    ],
+    "leftovers": []
+  },
+  "warnings": [],
+  "errors": []
+}
