@@ -17,6 +17,7 @@ public class WhiteboardServiceTests
 {
     private Mock<IWhiteboardRepository> _mockWhiteboardRepository = null!;
     private Mock<ILearningSpaceReadRepository> _mockLearningSpaceReadRepository = null!;
+    private Mock<ILearningSpaceRepository> _mockLearningSpaceRepository = null!;
     private WhiteboardService _sut = null!;
 
     // Valid test data
@@ -36,9 +37,11 @@ public class WhiteboardServiceTests
     {
         _mockWhiteboardRepository = new Mock<IWhiteboardRepository>();
         _mockLearningSpaceReadRepository = new Mock<ILearningSpaceReadRepository>();
+        _mockLearningSpaceRepository = new Mock<ILearningSpaceRepository>();
         _sut = new WhiteboardService(
             _mockWhiteboardRepository.Object,
-            _mockLearningSpaceReadRepository.Object);
+            _mockLearningSpaceReadRepository.Object,
+            _mockLearningSpaceRepository.Object);
     }
 
     [TearDown]

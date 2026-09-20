@@ -20,7 +20,9 @@ internal class LearningSpaceEntityConfiguration : IEntityTypeConfiguration<Learn
 
         builder.HasKey(ls => ls.LearningSpaceId);
 
-        builder.Property(ls => ls.LearningSpaceId);
+        builder.Property(ls => ls.LearningSpaceId)
+            .HasColumnName("id")
+            .HasMaxLength(50);
 
         builder.Property(ls => ls.Type)
             .HasMaxLength(50);

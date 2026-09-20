@@ -40,6 +40,9 @@ internal class UCRDatabaseContext : DbContext
     /// <param name="modelBuilder">The builder being used to construct the model for this context.</param>
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        // Configure TPT (Table Per Type) inheritance strategy for LearningComponent hierarchy
+        modelBuilder.Entity<LearningComponent>().UseTptMappingStrategy();
+
         // Apply the LearningSpace entity configuration
         modelBuilder.ApplyConfiguration(new LearningSpaceEntityConfiguration());
 

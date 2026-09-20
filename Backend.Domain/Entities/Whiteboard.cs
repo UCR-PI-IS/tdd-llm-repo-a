@@ -3,62 +3,18 @@ namespace UCR.ECCI.PI.ThemePark.Backend.Domain.Entities;
 /// <summary>
 /// Represents a whiteboard learning component within a learning space.
 /// </summary>
-public class Whiteboard
+public class Whiteboard : LearningComponent
 {
-    private static readonly HashSet<string> ValidOrientations = new()
+    private static readonly HashSet<string> ValidColors = new()
     {
-        "South", "East", "West"
+        "Red", "Blue", "Green", "Black", "White",
+        "Yellow", "Orange", "Purple", "Brown", "Pink"
     };
-
-    /// <summary>
-    /// Unique identifier for the whiteboard.
-    /// </summary>
-    public string ComponentId { get; }
-
-    /// <summary>
-    /// Identifier of the learning space this whiteboard belongs to.
-    /// </summary>
-    public string LearningSpaceId { get; }
-
-    /// <summary>
-    /// Width of the whiteboard in meters.
-    /// </summary>
-    public float Width { get; }
-
-    /// <summary>
-    /// Height of the whiteboard in meters.
-    /// </summary>
-    public float Height { get; }
-
-    /// <summary>
-    /// Depth of the whiteboard in meters.
-    /// </summary>
-    public float Depth { get; }
-
-    /// <summary>
-    /// X coordinate of the whiteboard position within the learning space.
-    /// </summary>
-    public float X { get; }
-
-    /// <summary>
-    /// Y coordinate of the whiteboard position within the learning space.
-    /// </summary>
-    public float Y { get; }
-
-    /// <summary>
-    /// Z coordinate of the whiteboard position within the learning space.
-    /// </summary>
-    public float Z { get; }
-
-    /// <summary>
-    /// Orientation of the whiteboard (South, East, or West).
-    /// </summary>
-    public string Orientation { get; }
 
     /// <summary>
     /// Color of the whiteboard marker.
     /// </summary>
-    public string MarkerColor { get; }
+    public string MarkerColor { get; private set; }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="Whiteboard"/> class.
@@ -71,7 +27,7 @@ public class Whiteboard
     /// <param name="x">X coordinate position. Must be non-negative.</param>
     /// <param name="y">Y coordinate position. Must be non-negative.</param>
     /// <param name="z">Z coordinate position. Must be non-negative.</param>
-    /// <param name="orientation">Orientation of the whiteboard. Must be South, East, or West.</param>
+    /// <param name="orientation">Orientation of the whiteboard. Must be North, South, East, or West.</param>
     /// <param name="markerColor">Color of the whiteboard marker. Must not be null or empty.</param>
     /// <exception cref="ArgumentException">Thrown when any dimension or coordinate is negative, orientation is invalid, or markerColor is null or empty.</exception>
     public Whiteboard(
@@ -85,18 +41,26 @@ public class Whiteboard
         float z,
         string orientation,
         string markerColor)
+        : base(componentId, learningSpaceId, width, height, depth, x, y, z, orientation)
     {
-        ThrowIfNegative(width, nameof(width));
-        ThrowIfNegative(height, nameof(height));
-        ThrowIfNegative(depth, nameof(depth));
-        ThrowIfNegative(x, nameof(x));
-        ThrowIfNegative(y, nameof(y));
-        ThrowIfNegative(z, nameof(z));
-        ValidateOrientation(orientation);
         ValidateMarkerColor(markerColor);
+        MarkerColor = markerColor;
+    }
 
-        ComponentId = componentId;
-        LearningSpaceId = learningSpaceId;
+    /// <summary>
+    /// Updates all whiteboard properties with the specified values.
+    /// </summary>
+    /// <param name="width">New width in meters.</param>
+    /// <param name="height">New height in meters.</param>
+    /// <param name="depth">New depth in meters.</param>
+    /// <param name="x">New X coordinate position.</param>
+    /// <param name="y">New Y coordinate position.</param>
+    /// <param name="z">New Z coordinate position.</param>
+    /// <param name="orientation">New orientation.</param>
+    /// <param name="markerColor">New marker color.</param>
+    public void Update(float width, float height, float depth, float x, float y, float z, string orientation, string markerColor)
+    {
+        ValidateMarkerColor(markerColor);
         Width = width;
         Height = height;
         Depth = depth;
@@ -105,6 +69,52 @@ public class Whiteboard
         Z = z;
         Orientation = orientation;
         MarkerColor = markerColor;
+    }
+
+    /// <summary>
+    /// Updates whiteboard properties with boundary validation against the learning space dimensions.
+    /// </summary>
+    /// <param name="width">New width in meters.</param>
+    /// <param name="height">New height in meters.</param>
+    /// <param name="depth">New depth in meters.</param>
+    /// <param name="x">New X coordinate position.</param>
+    /// <param name="y">New Y coordinate position.</param>
+    /// <param name="z">New Z coordinate position.</param>
+    /// <param name="orientation">New orientation.</param>
+    /// <param name="markerColor">New marker color.</param>
+    /// <param name="learningSpaceWidth">Width of the learning space.</param>
+    /// <param name="learningSpaceLength">Length of the learning space.</param>
+    /// <exception cref="InvalidOperationException">Thrown when the new position exceeds learning space boundaries.</exception>
+    public void Update(float width, float height, float depth, float x, float y, float z, string orientation, string markerColor, float learningSpaceWidth, float learningSpaceLength)
+    {
+        if (x > learningSpaceWidth || z > learningSpaceLength)
+            throw new InvalidOperationException("Position exceeds learning space boundaries");
+
+        Update(width, height, depth, x, y, z, orientation, markerColor);
+    }
+
+    /// <summary>
+    /// Updates whiteboard properties with overlap validation against existing components.
+    /// </summary>
+    /// <param name="width">New width in meters.</param>
+    /// <param name="height">New height in meters.</param>
+    /// <param name="depth">New depth in meters.</param>
+    /// <param name="x">New X coordinate position.</param>
+    /// <param name="y">New Y coordinate position.</param>
+    /// <param name="z">New Z coordinate position.</param>
+    /// <param name="orientation">New orientation.</param>
+    /// <param name="markerColor">New marker color.</param>
+    /// <param name="existingComponents">List of existing components in the same learning space.</param>
+    /// <exception cref="InvalidOperationException">Thrown when the new position overlaps with an existing component.</exception>
+    public void Update(float width, float height, float depth, float x, float y, float z, string orientation, string markerColor, List<LearningComponent> existingComponents)
+    {
+        foreach (var component in existingComponents)
+        {
+            if (Overlaps(x, z, width, depth, component.X, component.Z, component.Width, component.Depth))
+                throw new InvalidOperationException("Position overlaps with existing component");
+        }
+
+        Update(width, height, depth, x, y, z, orientation, markerColor);
     }
 
     /// <summary>
@@ -125,21 +135,15 @@ public class Whiteboard
         return size <= spaceSize && position + size <= spaceSize;
     }
 
-    private static void ThrowIfNegative(float value, string paramName)
+    private static bool Overlaps(float x1, float z1, float w1, float d1, float x2, float z2, float w2, float d2)
     {
-        ArgumentOutOfRangeException.ThrowIfNegative(value, paramName);
-    }
-
-    private static void ValidateOrientation(string orientation)
-    {
-        if (!ValidOrientations.Contains(orientation))
-            throw new ArgumentException(
-                $"Invalid orientation '{orientation}'. Must be one of: South, East, West.",
-                nameof(orientation));
+        return x1 < x2 + w2 && x1 + w1 > x2 && z1 < z2 + d2 && z1 + d1 > z2;
     }
 
     private static void ValidateMarkerColor(string markerColor)
     {
         ArgumentException.ThrowIfNullOrEmpty(markerColor, nameof(markerColor));
+        if (!ValidColors.Contains(markerColor))
+            throw new ArgumentException($"Invalid color name '{markerColor}'. Must be one of the valid colors.", nameof(markerColor));
     }
 }

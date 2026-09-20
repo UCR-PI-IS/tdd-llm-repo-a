@@ -14,47 +14,47 @@ public class LearningComponent
     /// <summary>
     /// Unique identifier for the learning component.
     /// </summary>
-    public string ComponentId { get; }
+    public string ComponentId { get; protected set; }
 
     /// <summary>
     /// Identifier of the learning space this component belongs to.
     /// </summary>
-    public string LearningSpaceId { get; }
+    public string LearningSpaceId { get; protected set; }
 
     /// <summary>
     /// Width of the learning component in meters.
     /// </summary>
-    public float Width { get; }
+    public float Width { get; protected set; }
 
     /// <summary>
     /// Height of the learning component in meters.
     /// </summary>
-    public float Height { get; }
+    public float Height { get; protected set; }
 
     /// <summary>
     /// Depth of the learning component in meters.
     /// </summary>
-    public float Depth { get; }
+    public float Depth { get; protected set; }
 
     /// <summary>
     /// X coordinate of the learning component position within the learning space.
     /// </summary>
-    public float X { get; }
+    public float X { get; protected set; }
 
     /// <summary>
     /// Y coordinate of the learning component position within the learning space.
     /// </summary>
-    public float Y { get; }
+    public float Y { get; protected set; }
 
     /// <summary>
     /// Z coordinate of the learning component position within the learning space.
     /// </summary>
-    public float Z { get; }
+    public float Z { get; protected set; }
 
     /// <summary>
     /// Orientation of the learning component (North, South, East, or West).
     /// </summary>
-    public string Orientation { get; }
+    public string Orientation { get; protected set; }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="LearningComponent"/> class.

@@ -107,7 +107,6 @@ public class WhiteboardTests
     /// Domain-008: Verify that creating a Whiteboard with an invalid orientation
     /// throws ArgumentException with parameter name "orientation".
     /// </summary>
-    [TestCase("North", Description = "Domain-008: Invalid orientation 'North' for whiteboard")]
     [TestCase("Northeast", Description = "Domain-008: Invalid orientation 'Northeast'")]
     [TestCase("Up", Description = "Domain-008: Invalid orientation 'Up'")]
     [TestCase("", Description = "Domain-008: Empty orientation string")]
