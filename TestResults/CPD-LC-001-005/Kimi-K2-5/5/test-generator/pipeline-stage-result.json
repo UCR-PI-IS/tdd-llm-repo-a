@@ -1,0 +1,23 @@
+{
+  "stage": "test-generation",
+  "storyId": "CPD-LC-001-005",
+  "model": "Kimi-K2-5",
+  "iteration": "5",
+  "status": "success",
+  "filesCreated": [],
+  "filesModified": [
+    "Backend.Infrastructure.Tests.Unit/SqlWhiteboardRepositoryGetByLearningSpaceIdTests.cs"
+  ],
+  "metrics": {
+    "intentsConfirmed": 28,
+    "testMethodsEmitted": 28,
+    "byLayer": {
+      "Domain": 14,
+      "Application": 5,
+      "Infrastructure": 4,
+      "Presentation": 5
+    }
+  },
+  "warnings": [],
+  "notes": "Fixed the broken DbSet mock setup in SqlWhiteboardRepositoryGetByLearningSpaceIdTests.cs. The test was using manual IQueryable.Provider mock setup which causes NotSupportedException at runtime due to EF Core's explicit interface implementation. Replaced with the CreateMockDbSet helper pattern that includes AsyncQueryProvider, AsyncEnumerable, and AsyncEnumerator classes to properly support EF Core async LINQ operations. All 28 confirmed intents remain covered by existing test files."
+}

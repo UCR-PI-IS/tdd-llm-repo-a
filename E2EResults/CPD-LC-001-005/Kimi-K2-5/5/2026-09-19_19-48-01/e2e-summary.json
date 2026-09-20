@@ -1,0 +1,72 @@
+{
+  "stage": "e2e-validation",
+  "status": "failure",
+  "timestamp": "2026-09-19_19-48-01",
+  "storyId": "CPD-LC-001-005",
+  "model": "Kimi-K2-5",
+  "iteration": "5",
+  "database": {
+    "container": "themepark-sql-e2e-cpd-lc-001-005-kimi-k2-5-5-194801",
+    "image": "mcr.microsoft.com/mssql/server:2022-latest",
+    "network": "themepark-e2e-cpd-lc-001-005-kimi-k2-5-5-194801",
+    "database": "ThemePark",
+    "readySeconds": 4.8,
+    "baseSchemaApplied": [
+      "Semester.sql",
+      "Course.sql"
+    ],
+    "seedsApplied": [
+      "seed-CPD-LC-001-005.sql"
+    ]
+  },
+  "backend": {
+    "container": "themepark-api-e2e-cpd-lc-001-005-kimi-k2-5-5-194801",
+    "project": "Backend.Api/UCR.ECCI.PI.ThemePark.Backend.Api.csproj",
+    "publishStatus": "success",
+    "started": true,
+    "url": "http://127.0.0.1:55005",
+    "readySeconds": 2.1,
+    "errorLines": [
+      "fail: Microsoft.EntityFrameworkCore.Query[10100]",
+      "System.InvalidCastException: Unable to cast object of type 'System.Double' to type 'System.Single'.",
+      "System.InvalidCastException: Unable to cast object of type 'System.Double' to type 'System.Single'.",
+      "fail: Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware[1]",
+      "An unhandled exception has occurred while executing the request.",
+      "System.InvalidCastException: Unable to cast object of type 'System.Double' to type 'System.Single'."
+    ]
+  },
+  "probes": [
+    {
+      "name": "Update whiteboard with valid data",
+      "method": "PUT",
+      "path": "/api/whiteboards/WB-001",
+      "expectedStatus": 200,
+      "actualStatus": 500,
+      "passed": false,
+      "missingContent": [],
+      "error": null,
+      "bodySnippet": "System.InvalidCastException: Unable to cast object of type 'System.Double' to type 'System.Single'.\n   at Microsoft.Data.SqlClient.SqlBuffer.get_Single()\n   at Microsoft.Data.SqlClient.SqlDataReader.GetFloat(Int32 i)\n   at lambda_method18(Closure, QueryContext, DbDataReader, ResultContext, SingleQueryResultCoordinator)\n   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()\n   at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpress"
+    }
+  ],
+  "totalProbes": 1,
+  "probesPassed": 0,
+  "probesFailed": 1,
+  "cleanup": {
+    "status": "clean",
+    "removedContainers": [
+      "themepark-api-e2e-cpd-lc-001-005-kimi-k2-5-5-194801",
+      "themepark-sql-e2e-cpd-lc-001-005-kimi-k2-5-5-194801"
+    ],
+    "removedNetworks": [
+      "themepark-e2e-cpd-lc-001-005-kimi-k2-5-5-194801"
+    ],
+    "removedVolumes": [
+      "themepark-app-e2e-cpd-lc-001-005-kimi-k2-5-5-194801"
+    ],
+    "leftovers": []
+  },
+  "warnings": [],
+  "errors": [
+    "1 probe(s) failed."
+  ]
+}
