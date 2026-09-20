@@ -5,9 +5,9 @@ using UCR.ECCI.PI.ThemePark.Backend.Domain.Repositories;
 namespace UCR.ECCI.PI.ThemePark.Backend.Application.Services.Implementations;
 
 /// <summary>
-/// Service implementation for creating whiteboards.
+/// Service implementation for creating and updating whiteboards.
 /// </summary>
-internal class WhiteboardService : IWhiteboardCreateService
+internal class WhiteboardService : IWhiteboardCreateService, IWhiteboardService
 {
     private readonly IWhiteboardRepository _whiteboardRepository;
     private readonly ILearningSpaceReadRepository _learningSpaceReadRepository;
@@ -55,5 +55,48 @@ internal class WhiteboardService : IWhiteboardCreateService
 
         await _whiteboardRepository.AddAsync(whiteboard);
         return whiteboard;
+    }
+
+    /// <summary>
+    /// Updates an existing whiteboard with validation for boundaries and overlaps.
+    /// </summary>
+    /// <param name="dto">The data transfer object containing the update parameters.</param>
+    /// <returns>A result indicating success or failure of the update operation.</returns>
+    public async Task<UpdateWhiteboardResult> UpdateWhiteboardAsync(UpdateWhiteboardDto dto)
+    {
+        var whiteboard = await _whiteboardRepository.GetByIdAsync(dto.WhiteboardId);
+        if (whiteboard == null)
+            return UpdateWhiteboardResult.Failure("Whiteboard not found");
+
+        if (string.IsNullOrEmpty(dto.MarkerColor))
+            return UpdateWhiteboardResult.Failure("Invalid marker color");
+
+        try
+        {
+            var learningSpace = await _learningSpaceReadRepository.GetByIdAsync(whiteboard.LearningSpaceId);
+            if (learningSpace != null)
+            {
+                if (dto.X > learningSpace.Width || dto.Z > learningSpace.Length)
+                    return UpdateWhiteboardResult.Failure("Position exceeds learning space boundaries");
+
+                var existingComponents = await _whiteboardRepository.GetByLearningSpaceIdAsync(whiteboard.LearningSpaceId);
+                whiteboard.Update(dto.Width, dto.Height, dto.Depth, dto.X, dto.Y, dto.Z, dto.Orientation, dto.MarkerColor, existingComponents);
+            }
+            else
+            {
+                whiteboard.Update(dto.Width, dto.Height, dto.Depth, dto.X, dto.Y, dto.Z, dto.Orientation, dto.MarkerColor);
+            }
+        }
+        catch (ArgumentException ex)
+        {
+            return UpdateWhiteboardResult.Failure(ex.Message);
+        }
+        catch (InvalidOperationException ex)
+        {
+            return UpdateWhiteboardResult.Failure(ex.Message);
+        }
+
+        await _whiteboardRepository.UpdateAsync(whiteboard);
+        return UpdateWhiteboardResult.Success(whiteboard);
     }
 }
