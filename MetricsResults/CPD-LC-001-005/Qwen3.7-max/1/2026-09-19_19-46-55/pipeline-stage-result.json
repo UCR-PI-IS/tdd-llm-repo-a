@@ -1,0 +1,29 @@
+{
+  "stage": "refactoring",
+  "storyId": "CPD-LC-001-005",
+  "model": "Qwen3.7-max",
+  "iteration": "1",
+  "status": "partial",
+  "filesCreated": [],
+  "filesModified": [
+    "Backend.Application/Services/Implementations/WhiteboardService.cs",
+    "Backend.Presentation/Handlers/UpdateWhiteboardHandler.cs",
+    "Backend.Presentation/Mappers/WhiteboardMapper.cs"
+  ],
+  "metrics": {
+    "loopIterationsPerformed": 2,
+    "maxLoopIterations": 10,
+    "allGreenAchieved": false,
+    "baseline": { "minMI": 50, "maxCC": 19, "maxCoupling": 28, "maxDIT": 1 },
+    "final":    { "minMI": 50, "maxCC": 19, "maxCoupling": 28, "maxDIT": 1 },
+    "remainingViolations": [
+      { "type": "WhiteboardService", "metric": "CC", "value": 13, "flag": "YELLOW" },
+      { "type": "WhiteboardService", "metric": "Coupling", "value": 28, "flag": "YELLOW" },
+      { "type": "Whiteboard", "metric": "CC", "value": 19, "flag": "YELLOW" },
+      { "type": "SqlWhiteboardRepository", "metric": "Coupling", "value": 25, "flag": "YELLOW" },
+      { "type": "UpdateWhiteboardHandler", "metric": "Coupling", "value": 15, "flag": "YELLOW" }
+    ]
+  },
+  "warnings": [],
+  "notes": "Eliminated the only method-level YELLOW CC violation (UpdateWhiteboardAsync CC 11→4) by extracting ApplyUpdateWithValidation and FilterOtherComponents helper methods. Reduced UpdateWhiteboardHandler coupling 17→15 and improved its MI 63→70 by delegating response construction to WhiteboardMapper. Remaining 5 YELLOW violations are structural coupling inherent to the DDD architecture (service orchestration, EF Core repository, domain entity method count) and cannot be reduced without changing test contracts or architecture."
+}

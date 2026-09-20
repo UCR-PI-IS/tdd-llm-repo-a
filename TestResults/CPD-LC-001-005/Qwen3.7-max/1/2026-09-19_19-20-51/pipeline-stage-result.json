@@ -1,0 +1,45 @@
+{
+  "stage": "code-generation",
+  "storyId": "CPD-LC-001-005",
+  "model": "Qwen3.7-max",
+  "iteration": "1",
+  "status": "partial",
+  "filesCreated": [
+    "Backend.Domain/Entities/Whiteboard.cs",
+    "Backend.Domain/Repositories/IWhiteboardRepository.cs",
+    "Backend.Application/Services/IWhiteboardService.cs",
+    "Backend.Application/Services/UpdateWhiteboardDto.cs",
+    "Backend.Application/Services/UpdateWhiteboardResult.cs",
+    "Backend.Application/Services/Implementations/WhiteboardService.cs",
+    "Backend.Infrastructure/Repositories/SqlWhiteboardRepository.cs",
+    "Backend.Infrastructure/EntityConfigurations/WhiteboardEntityConfiguration.cs",
+    "Backend.Presentation/Handlers/UpdateWhiteboardHandler.cs",
+    "Backend.Presentation/Dtos/UpdateWhiteboardRequest.cs",
+    "Backend.Presentation/Responses/UpdateWhiteboardResponse.cs"
+  ],
+  "filesModified": [],
+  "metrics": {
+    "buildErrors": 0,
+    "buildWarnings": 0,
+    "testsTotal": 147,
+    "testsPassed": 145,
+    "testsFailed": 2,
+    "testsSkipped": 0,
+    "lineCoverage": 0.7734,
+    "branchCoverage": 0.7857,
+    "e2e": {
+      "status": "skipped",
+      "probesTotal": 0,
+      "probesPassed": 0,
+      "probesFailed": 0,
+      "seedsApplied": [],
+      "resultPath": "",
+      "cleanup": "skipped"
+    }
+  },
+  "warnings": [
+    "Domain test 'Constructor_InvalidOrientation_ThrowsArgumentException(North)' in WhiteboardTests.cs expects 'North' to be an invalid orientation, but WhiteboardUpdateTests.cs uses 'North' as a valid orientation throughout (ValidOrientation constant). These are contradictory test requirements that cannot be simultaneously satisfied without modifying test files.",
+    "Infrastructure test 'GetByLearningSpaceIdAsync_ExistingLearningSpace_ReturnsComponents' in SqlWhiteboardRepositoryUpdateTests.cs sets up As<IQueryable<Whiteboard>>() AFTER .Object was accessed in SetUp, making the IQueryable mock setups ineffective due to Moq/EF Core DbSet proxy limitations. The DbSet explicit interface implementations for IQueryable and IEnumerable throw NotSupportedException."
+  ],
+  "notes": "Build succeeds with 0 errors. 145/147 tests pass. 2 remaining failures are due to contradictory test data (Domain: 'North' orientation validity differs between WhiteboardTests.cs and WhiteboardUpdateTests.cs) and a broken mock setup timing issue (Infrastructure: As<T>() called after .Object access). E2E validation was skipped because the entry gate requires all tests to pass."
+}
