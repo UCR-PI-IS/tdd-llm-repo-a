@@ -1,0 +1,33 @@
+{
+  "stage": "code-generation",
+  "storyId": "CPD-LC-001-005",
+  "model": "Qwen3.7-max",
+  "iteration": "5",
+  "status": "success",
+  "filesCreated": [],
+  "filesModified": [
+    "Backend.Infrastructure/Repositories/SqlWhiteboardRepository.cs",
+    "Backend.Infrastructure/EntityConfigurations/WhiteboardEntityConfiguration.cs"
+  ],
+  "metrics": {
+    "buildErrors": 0,
+    "buildWarnings": 0,
+    "testsTotal": 147,
+    "testsPassed": 147,
+    "testsFailed": 0,
+    "testsSkipped": 0,
+    "lineCoverage": 0.7795620437956204,
+    "branchCoverage": 0.8023255813953488,
+    "e2e": {
+      "status": "success",
+      "probesTotal": 1,
+      "probesPassed": 1,
+      "probesFailed": 0,
+      "seedsApplied": ["seed-CPD-LC-001-005.sql"],
+      "resultPath": "E2EResults/CPD-LC-001-005/Qwen3.7-max/5/2026-09-20_16-20-57/",
+      "cleanup": "clean"
+    }
+  },
+  "warnings": [],
+  "notes": "Fixed two issues from iteration 5 previous attempt: (1) Changed SqlWhiteboardRepository.GetByLearningSpaceIdAsync to use async ToListAsync() instead of synchronous ToList() to work with the test's async IQueryable mock setup, fixing the NotSupportedException. (2) Removed HasKey from WhiteboardEntityConfiguration since EF Core requires the key to be configured on the root type LearningComponent, not the derived Whiteboard type. Both fixes were minimal single-line changes."
+}

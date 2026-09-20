@@ -1,0 +1,72 @@
+{
+  "stage": "e2e-validation",
+  "status": "failure",
+  "timestamp": "2026-09-20_16-19-16",
+  "storyId": "CPD-LC-001-005",
+  "model": "Qwen3.7-max",
+  "iteration": "5",
+  "database": {
+    "container": "themepark-sql-e2e-cpd-lc-001-005-qwen3-7-max-5-161916",
+    "image": "mcr.microsoft.com/mssql/server:2022-latest",
+    "network": "themepark-e2e-cpd-lc-001-005-qwen3-7-max-5-161916",
+    "database": "ThemePark",
+    "readySeconds": 8.3,
+    "baseSchemaApplied": [
+      "Semester.sql",
+      "Course.sql"
+    ],
+    "seedsApplied": [
+      "seed-CPD-LC-001-005.sql"
+    ]
+  },
+  "backend": {
+    "container": "themepark-api-e2e-cpd-lc-001-005-qwen3-7-max-5-161916",
+    "project": "Backend.Api/UCR.ECCI.PI.ThemePark.Backend.Api.csproj",
+    "publishStatus": "success",
+    "started": true,
+    "url": "http://127.0.0.1:55000",
+    "readySeconds": 2.1,
+    "errorLines": [
+      "fail: Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware[1]",
+      "An unhandled exception has occurred while executing the request.",
+      "System.InvalidOperationException: A key cannot be configured on 'Whiteboard' because it is a derived type. The key must be configured on the root type 'LearningComponent'. If you did not intend for 'LearningComponent' to be included in the model, ensure that it is not referenced by a DbSet property on your context, referenced in a configuration call to ModelBuilder, or referenced from a navigation on a type that is included in the model."
+    ]
+  },
+  "probes": [
+    {
+      "name": "Update whiteboard WB-001 marker color to Red",
+      "method": "PUT",
+      "path": "/Whiteboards",
+      "expectedStatus": 200,
+      "actualStatus": 500,
+      "passed": false,
+      "missingContent": [
+        "WB-001",
+        "Red"
+      ],
+      "error": null,
+      "bodySnippet": "System.InvalidOperationException: A key cannot be configured on 'Whiteboard' because it is a derived type. The key must be configured on the root type 'LearningComponent'. If you did not intend for 'LearningComponent' to be included in the model, ensure that it is not referenced by a DbSet property on your context, referenced in a configuration call to ModelBuilder, or referenced from a navigation on a type that is included in the model.\n   at Microsoft.EntityFrameworkCore.Metadata.Internal.Enti"
+    }
+  ],
+  "totalProbes": 1,
+  "probesPassed": 0,
+  "probesFailed": 1,
+  "cleanup": {
+    "status": "clean",
+    "removedContainers": [
+      "themepark-api-e2e-cpd-lc-001-005-qwen3-7-max-5-161916",
+      "themepark-sql-e2e-cpd-lc-001-005-qwen3-7-max-5-161916"
+    ],
+    "removedNetworks": [
+      "themepark-e2e-cpd-lc-001-005-qwen3-7-max-5-161916"
+    ],
+    "removedVolumes": [
+      "themepark-app-e2e-cpd-lc-001-005-qwen3-7-max-5-161916"
+    ],
+    "leftovers": []
+  },
+  "warnings": [],
+  "errors": [
+    "1 probe(s) failed."
+  ]
+}
