@@ -5,15 +5,27 @@ using UCR.ECCI.PI.ThemePark.Backend.Domain.Repositories;
 namespace UCR.ECCI.PI.ThemePark.Backend.Application.Services.Implementations;
 
 /// <summary>
-/// Service implementation for creating whiteboards.
+/// Service implementation for creating and updating whiteboards.
 /// </summary>
-internal class WhiteboardService : IWhiteboardCreateService
+internal class WhiteboardService : IWhiteboardCreateService, IWhiteboardService
 {
     private readonly IWhiteboardRepository _whiteboardRepository;
     private readonly ILearningSpaceReadRepository _learningSpaceReadRepository;
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="WhiteboardService"/> class.
+    /// Initializes a new instance of the <see cref="WhiteboardService"/> class
+    /// with only the whiteboard repository (no learning space boundary checks).
+    /// </summary>
+    /// <param name="whiteboardRepository">The whiteboard repository dependency.</param>
+    public WhiteboardService(IWhiteboardRepository whiteboardRepository)
+    {
+        _whiteboardRepository = whiteboardRepository;
+        _learningSpaceReadRepository = NullLearningSpaceReadRepository.Instance;
+    }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="WhiteboardService"/> class
+    /// with both repositories for full validation including boundary and overlap checks.
     /// </summary>
     /// <param name="whiteboardRepository">The whiteboard repository dependency.</param>
     /// <param name="learningSpaceReadRepository">The learning space read repository dependency.</param>
@@ -55,5 +67,64 @@ internal class WhiteboardService : IWhiteboardCreateService
 
         await _whiteboardRepository.AddAsync(whiteboard);
         return whiteboard;
+    }
+
+    /// <summary>
+    /// Updates an existing whiteboard with the specified parameters.
+    /// Validates marker color, existence, boundary constraints, and overlap constraints.
+    /// </summary>
+    /// <param name="dto">The update DTO containing whiteboard parameters.</param>
+    /// <returns>A result indicating success or failure of the update operation.</returns>
+    public async Task<UpdateWhiteboardResult> UpdateWhiteboardAsync(UpdateWhiteboardDto dto)
+    {
+        if (string.IsNullOrEmpty(dto.MarkerColor))
+            return UpdateWhiteboardResult.Failure("Invalid marker color");
+
+        var whiteboard = await _whiteboardRepository.GetByIdAsync(dto.ComponentId);
+        if (whiteboard == null)
+            return UpdateWhiteboardResult.Failure("Whiteboard not found");
+
+        try
+        {
+            var learningSpace = await _learningSpaceReadRepository.GetByIdAsync(whiteboard.LearningSpaceId);
+            if (learningSpace != null)
+            {
+                whiteboard.Update(
+                    dto.Width, dto.Height, dto.Depth,
+                    dto.X, dto.Y, dto.Z,
+                    dto.Orientation, dto.MarkerColor,
+                    learningSpace.Width, learningSpace.Length);
+
+                var existingComponents = await _whiteboardRepository.GetByLearningSpaceIdAsync(whiteboard.LearningSpaceId);
+                var otherComponents = existingComponents
+                    .Where(c => c.ComponentId != whiteboard.ComponentId)
+                    .ToList();
+                whiteboard.Update(
+                    dto.Width, dto.Height, dto.Depth,
+                    dto.X, dto.Y, dto.Z,
+                    dto.Orientation, dto.MarkerColor,
+                    otherComponents);
+            }
+            else
+            {
+                whiteboard.Update(
+                    dto.Width, dto.Height, dto.Depth,
+                    dto.X, dto.Y, dto.Z,
+                    dto.Orientation, dto.MarkerColor);
+            }
+        }
+        catch (InvalidOperationException ex)
+        {
+            return UpdateWhiteboardResult.Failure(ex.Message);
+        }
+
+        await _whiteboardRepository.UpdateAsync(whiteboard);
+        return UpdateWhiteboardResult.Success(whiteboard);
+    }
+
+    private sealed class NullLearningSpaceReadRepository : ILearningSpaceReadRepository
+    {
+        public static readonly NullLearningSpaceReadRepository Instance = new();
+        public Task<LearningSpace?> GetByIdAsync(string id) => Task.FromResult<LearningSpace?>(null);
     }
 }

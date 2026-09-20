@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
+using UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Dtos;
 using UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Handlers;
 
 namespace UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Endpoints;
@@ -11,14 +12,18 @@ namespace UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Endpoints;
 public static class LearningComponentsEndpoints
 {
     /// <summary>
-    /// Maps the POST endpoint for creating whiteboards.
+    /// Maps the endpoints for whiteboard operations.
     /// </summary>
     /// <param name="builder">The <see cref="IEndpointRouteBuilder"/> used to map the endpoint.</param>
-    /// <returns>The updated <see cref="IEndpointRouteBuilder"/> with the new route.</returns>
+    /// <returns>The updated <see cref="IEndpointRouteBuilder"/> with the new routes.</returns>
     public static IEndpointRouteBuilder MapLearningComponentsEndpoints(this IEndpointRouteBuilder builder)
     {
         builder.MapPost("/Whiteboards", CreateWhiteboardHandler.HandleAsync)
             .WithName("CreateWhiteboard")
+            .WithOpenApi();
+
+        builder.MapPut("/Whiteboards", UpdateWhiteboardHandler.HandleAsync)
+            .WithName("UpdateWhiteboard")
             .WithOpenApi();
 
         return builder;

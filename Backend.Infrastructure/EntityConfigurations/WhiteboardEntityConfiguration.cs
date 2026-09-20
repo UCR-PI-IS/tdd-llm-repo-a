@@ -18,8 +18,6 @@ internal class WhiteboardEntityConfiguration : IEntityTypeConfiguration<Whiteboa
     {
         builder.ToTable("Whiteboard");
 
-        builder.HasKey(w => w.ComponentId);
-
         builder.Property(w => w.ComponentId)
             .HasMaxLength(50);
 
