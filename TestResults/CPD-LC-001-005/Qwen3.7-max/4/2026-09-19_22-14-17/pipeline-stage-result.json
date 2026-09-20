@@ -1,0 +1,49 @@
+{
+  "stage": "code-generation",
+  "storyId": "CPD-LC-001-005",
+  "model": "Qwen3.7-max",
+  "iteration": "4",
+  "status": "partial",
+  "filesCreated": [
+    "Backend.Application/Services/IWhiteboardService.cs",
+    "Backend.Application/Services/UpdateWhiteboardDto.cs",
+    "Backend.Application/Services/UpdateWhiteboardResult.cs",
+    "Backend.Application/Services/UpdateWhiteboardRequest.cs",
+    "Backend.Presentation/Handlers/UpdateWhiteboardHandler.cs",
+    "Backend.Presentation/Responses/UpdateWhiteboardResponse.cs"
+  ],
+  "filesModified": [
+    "Backend.Domain/Entities/LearningComponent.cs",
+    "Backend.Domain/Entities/Whiteboard.cs",
+    "Backend.Domain/Repositories/IWhiteboardRepository.cs",
+    "Backend.Application/Services/Implementations/WhiteboardService.cs",
+    "Backend.Application/DependencyInjection.cs",
+    "Backend.Infrastructure/Repositories/SqlWhiteboardRepository.cs",
+    "Backend.Presentation/Endpoints/LearningComponentsEndpoints.cs"
+  ],
+  "metrics": {
+    "buildErrors": 0,
+    "buildWarnings": 2,
+    "testsTotal": 147,
+    "testsPassed": 145,
+    "testsFailed": 2,
+    "testsSkipped": 0,
+    "lineCoverage": null,
+    "branchCoverage": null,
+    "e2e": {
+      "status": "skipped",
+      "probesTotal": 0,
+      "probesPassed": 0,
+      "probesFailed": 0,
+      "seedsApplied": [],
+      "resultPath": "",
+      "cleanup": "skipped"
+    }
+  },
+  "warnings": [
+    "Domain test 'WhiteboardTests.Constructor_InvalidOrientation_ThrowsArgumentException(North)' from previous story expects 'North' to be invalid, but new story CPD-LC-001-005 requires 'North' to be valid (Domain-001). This is a requirement conflict between stories that cannot be resolved without modifying the old test file.",
+    "Infrastructure test 'SqlWhiteboardRepositoryUpdateTests.GetByLearningSpaceIdAsync_ValidId_ReturnsAllComponents' fails due to mock setup limitation: DbSet<T> explicitly implements IQueryable, and the test's As<IQueryable<Whiteboard>>() setup does not override the explicit implementation.",
+    "End-to-end validation was skipped because not all tests passed (2 failures out of 147 tests)."
+  ],
+  "notes": "Successfully implemented whiteboard update functionality across all DDD layers: Domain (Whiteboard entity with Update methods, color validation, boundary/overlap checks), Application (IWhiteboardService, UpdateWhiteboardDto, UpdateWhiteboardResult, WhiteboardService.UpdateWhiteboardAsync), Infrastructure (IWhiteboardRepository extensions, SqlWhiteboardRepository methods), and Presentation (UpdateWhiteboardHandler, UpdateWhiteboardRequest, UpdateWhiteboardResponse, PUT endpoint). 145 out of 147 tests pass. Two failures are due to: (1) requirement conflict between stories regarding 'North' orientation validity, and (2) mock setup limitation with DbSet<T> explicit IQueryable implementation."
+}
