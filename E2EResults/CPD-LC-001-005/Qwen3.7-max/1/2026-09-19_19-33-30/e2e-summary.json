@@ -1,0 +1,69 @@
+{
+  "stage": "e2e-validation",
+  "status": "failure",
+  "timestamp": "2026-09-19_19-33-30",
+  "storyId": "CPD-LC-001-005",
+  "model": "Qwen3.7-max",
+  "iteration": "1",
+  "database": {
+    "container": "themepark-sql-e2e-cpd-lc-001-005-qwen3-7-max-1-193330",
+    "image": "mcr.microsoft.com/mssql/server:2022-latest",
+    "network": "themepark-e2e-cpd-lc-001-005-qwen3-7-max-1-193330",
+    "database": "ThemePark",
+    "readySeconds": 8.5,
+    "baseSchemaApplied": [
+      "Semester.sql",
+      "Course.sql"
+    ],
+    "seedsApplied": [
+      "CPD-LC-001-005.sql"
+    ]
+  },
+  "backend": {
+    "container": "themepark-api-e2e-cpd-lc-001-005-qwen3-7-max-1-193330",
+    "project": "Backend.Api/UCR.ECCI.PI.ThemePark.Backend.Api.csproj",
+    "publishStatus": "success",
+    "started": true,
+    "url": "http://127.0.0.1:55011",
+    "readySeconds": 2.2,
+    "errorLines": [
+      "fail: Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware[1]",
+      "An unhandled exception has occurred while executing the request.",
+      "System.InvalidOperationException: A key cannot be configured on 'Whiteboard' because it is a derived type. The key must be configured on the root type 'LearningComponent'. If you did not intend for 'LearningComponent' to be included in the model, ensure that it is not referenced by a DbSet property on your context, referenced in a configuration call to ModelBuilder, or referenced from a navigation on a type that is included in the model."
+    ]
+  },
+  "probes": [
+    {
+      "name": "update whiteboard",
+      "method": "PUT",
+      "path": "/Whiteboards",
+      "expectedStatus": 200,
+      "actualStatus": 500,
+      "passed": false,
+      "missingContent": [],
+      "error": null,
+      "bodySnippet": "System.InvalidOperationException: A key cannot be configured on 'Whiteboard' because it is a derived type. The key must be configured on the root type 'LearningComponent'. If you did not intend for 'LearningComponent' to be included in the model, ensure that it is not referenced by a DbSet property on your context, referenced in a configuration call to ModelBuilder, or referenced from a navigation on a type that is included in the model.\n   at Microsoft.EntityFrameworkCore.Metadata.Internal.Enti"
+    }
+  ],
+  "totalProbes": 1,
+  "probesPassed": 0,
+  "probesFailed": 1,
+  "cleanup": {
+    "status": "clean",
+    "removedContainers": [
+      "themepark-api-e2e-cpd-lc-001-005-qwen3-7-max-1-193330",
+      "themepark-sql-e2e-cpd-lc-001-005-qwen3-7-max-1-193330"
+    ],
+    "removedNetworks": [
+      "themepark-e2e-cpd-lc-001-005-qwen3-7-max-1-193330"
+    ],
+    "removedVolumes": [
+      "themepark-app-e2e-cpd-lc-001-005-qwen3-7-max-1-193330"
+    ],
+    "leftovers": []
+  },
+  "warnings": [],
+  "errors": [
+    "1 probe(s) failed."
+  ]
+}

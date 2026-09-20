@@ -1,0 +1,40 @@
+{
+  "stage": "e2e-validation",
+  "status": "failure",
+  "timestamp": "2026-09-19_19-25-57",
+  "storyId": "CPD-LC-001-005",
+  "model": "Qwen3.7-max",
+  "iteration": "1",
+  "database": {
+    "container": "themepark-sql-e2e-cpd-lc-001-005-qwen3-7-max-1-192557",
+    "image": "mcr.microsoft.com/mssql/server:2022-latest",
+    "network": "themepark-e2e-cpd-lc-001-005-qwen3-7-max-1-192557",
+    "database": "ThemePark",
+    "readySeconds": 8.6,
+    "baseSchemaApplied": [
+      "Semester.sql",
+      "Course.sql"
+    ],
+    "seedsApplied": []
+  },
+  "backend": {},
+  "probes": [],
+  "totalProbes": 0,
+  "probesPassed": 0,
+  "probesFailed": 0,
+  "cleanup": {
+    "status": "clean",
+    "removedContainers": [
+      "themepark-sql-e2e-cpd-lc-001-005-qwen3-7-max-1-192557"
+    ],
+    "removedNetworks": [
+      "themepark-e2e-cpd-lc-001-005-qwen3-7-max-1-192557"
+    ],
+    "removedVolumes": [],
+    "leftovers": []
+  },
+  "warnings": [],
+  "errors": [
+    "RuntimeError: Seed file not found: CPD-LC-001-005.sql"
+  ]
+}
