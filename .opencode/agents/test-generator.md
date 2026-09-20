@@ -6,7 +6,7 @@ description: "Generates NUnit test classes from confirmed intents in UserIntents
 color: "#E8833A"
 mode: all
 permission:
-  edit: "ask"
+  edit: "allow"
 ---
 
 # Your Role

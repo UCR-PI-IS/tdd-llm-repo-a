@@ -21,6 +21,10 @@ public static class LearningComponentsEndpoints
             .WithName("CreateWhiteboard")
             .WithOpenApi();
 
+        builder.MapPut("/api/whiteboards/{id}", UpdateWhiteboardHandler.HandleAsync)
+            .WithName("UpdateWhiteboard")
+            .WithOpenApi();
+
         return builder;
     }
 }

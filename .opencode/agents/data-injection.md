@@ -6,7 +6,7 @@ description: "Seeds the Dockerized ThemePark SQL database with sample rows. Disc
 color: "#2ECC71"
 mode: all
 permission:
-  bash: "ask"
+  bash: "allow"
 ---
 
 # Role
