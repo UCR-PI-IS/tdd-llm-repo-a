@@ -1,0 +1,72 @@
+{
+  "stage": "e2e-validation",
+  "status": "failure",
+  "timestamp": "2026-09-19_19-48-36",
+  "storyId": "CPD-LC-001-005",
+  "model": "Kimi-K2-5",
+  "iteration": "5",
+  "database": {
+    "container": "themepark-sql-e2e-cpd-lc-001-005-kimi-k2-5-5-194836",
+    "image": "mcr.microsoft.com/mssql/server:2022-latest",
+    "network": "themepark-e2e-cpd-lc-001-005-kimi-k2-5-5-194836",
+    "database": "ThemePark",
+    "readySeconds": 4.7,
+    "baseSchemaApplied": [
+      "Semester.sql",
+      "Course.sql"
+    ],
+    "seedsApplied": [
+      "seed-CPD-LC-001-005.sql"
+    ]
+  },
+  "backend": {
+    "container": "themepark-api-e2e-cpd-lc-001-005-kimi-k2-5-5-194836",
+    "project": "Backend.Api/UCR.ECCI.PI.ThemePark.Backend.Api.csproj",
+    "publishStatus": "success",
+    "started": true,
+    "url": "http://127.0.0.1:55006",
+    "readySeconds": 2.2,
+    "errorLines": [
+      "fail: Microsoft.EntityFrameworkCore.Query[10100]",
+      "System.ArgumentException: Invalid orientation 'North'. Must be one of: South, East, West. (Parameter 'orientation')",
+      "System.ArgumentException: Invalid orientation 'North'. Must be one of: South, East, West. (Parameter 'orientation')",
+      "fail: Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware[1]",
+      "An unhandled exception has occurred while executing the request.",
+      "System.ArgumentException: Invalid orientation 'North'. Must be one of: South, East, West. (Parameter 'orientation')"
+    ]
+  },
+  "probes": [
+    {
+      "name": "Update whiteboard with valid data",
+      "method": "PUT",
+      "path": "/api/whiteboards/WB-001",
+      "expectedStatus": 200,
+      "actualStatus": 500,
+      "passed": false,
+      "missingContent": [],
+      "error": null,
+      "bodySnippet": "System.ArgumentException: Invalid orientation 'North'. Must be one of: South, East, West. (Parameter 'orientation')\n   at UCR.ECCI.PI.ThemePark.Backend.Domain.Entities.Whiteboard.ValidateOrientation(String orientation) in /workspace/Backend.Domain/Entities/Whiteboard.cs:line 81\n   at lambda_method18(Closure, QueryContext, DbDataReader, ResultContext, SingleQueryResultCoordinator)\n   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()\n   at M"
+    }
+  ],
+  "totalProbes": 1,
+  "probesPassed": 0,
+  "probesFailed": 1,
+  "cleanup": {
+    "status": "clean",
+    "removedContainers": [
+      "themepark-api-e2e-cpd-lc-001-005-kimi-k2-5-5-194836",
+      "themepark-sql-e2e-cpd-lc-001-005-kimi-k2-5-5-194836"
+    ],
+    "removedNetworks": [
+      "themepark-e2e-cpd-lc-001-005-kimi-k2-5-5-194836"
+    ],
+    "removedVolumes": [
+      "themepark-app-e2e-cpd-lc-001-005-kimi-k2-5-5-194836"
+    ],
+    "leftovers": []
+  },
+  "warnings": [],
+  "errors": [
+    "1 probe(s) failed."
+  ]
+}

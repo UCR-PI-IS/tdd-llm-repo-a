@@ -1,0 +1,57 @@
+{
+  "stage": "code-generation",
+  "storyId": "CPD-LC-001-005",
+  "model": "Kimi-K2-5",
+  "iteration": "5",
+  "status": "partial",
+  "filesCreated": [
+    "Backend.Domain/Entities/Whiteboard.cs",
+    "Backend.Domain/Exceptions/DatabaseException.cs",
+    "Backend.Domain/Exceptions/DuplicateIdException.cs",
+    "Backend.Domain/Exceptions/EntityNotFoundException.cs",
+    "Backend.Domain/Exceptions/InvalidComponentException.cs",
+    "Backend.Domain/Repositories/ILearningSpaceReadRepository.cs",
+    "Backend.Domain/Repositories/IWhiteboardRepository.cs",
+    "Backend.Application/Services/CreateWhiteboardRequest.cs",
+    "Backend.Application/Services/IWhiteboardService.cs",
+    "Backend.Application/Services/Implementations/WhiteboardService.cs",
+    "Backend.Application/Services/UpdateWhiteboardDto.cs",
+    "Backend.Application/Services/UpdateWhiteboardResult.cs",
+    "Backend.Infrastructure/Repositories/SqlWhiteboardRepository.cs",
+    "Backend.Presentation/Endpoints/UpdateWhiteboardEndpoint.cs",
+    "Backend.Presentation/Handlers/UpdateWhiteboardHandler.cs",
+    "Backend.Presentation/Requests/UpdateWhiteboardRequest.cs",
+    "Backend.Presentation/Responses/UpdateWhiteboardResponse.cs"
+  ],
+  "filesModified": [
+    "Backend.Domain/Entities/LearningComponent.cs",
+    "Backend.Domain/Entities/LearningSpace.cs",
+    "Backend.Domain/Repositories/ILearningSpaceRepository.cs",
+    "Backend.DependencyInjection/DependencyInjection.cs"
+  ],
+  "metrics": {
+    "buildErrors": 0,
+    "buildWarnings": 1,
+    "testsTotal": 147,
+    "testsPassed": 146,
+    "testsFailed": 1,
+    "testsSkipped": 0,
+    "lineCoverage": 0.7695262483994878,
+    "branchCoverage": 0.6475409836065574,
+    "e2e": {
+      "status": "skipped",
+      "probesTotal": 0,
+      "probesPassed": 0,
+      "probesFailed": 0,
+      "seedsApplied": [],
+      "resultPath": "",
+      "cleanup": "skipped"
+    }
+  },
+  "warnings": [
+    "1 infrastructure test fails due to an incomplete mock setup in SqlWhiteboardRepositoryGetByLearningSpaceIdTests.cs. The test does NOT use the CreateMockDbSet helper (with AsyncQueryProvider) that all other working tests use. EF Core's DbSet<T> explicit interface implementation of IQueryable.Provider throws NotSupportedException on any mock that isn't wrapped with an AsyncQueryProvider. Since test files cannot be modified, this test is unfixable from production code alone.",
+    "Build has 1 pre-existing warning (CS8602 in SqlWhiteboardRepositoryGetByIdTests.cs).",
+    "E2E validation skipped because 1 unit test is still failing."
+  ],
+  "notes": "146/147 tests pass (99.3%). The single failing test (Infrastructure-004: GetByLearningSpaceIdAsync_ExistingWhiteboards_ReturnsWhiteboards) is a broken mock setup issue. All domain, application, and presentation tests pass. All story-required production code for updating whiteboards has been implemented across Domain, Application, Infrastructure, and Presentation layers."
+}

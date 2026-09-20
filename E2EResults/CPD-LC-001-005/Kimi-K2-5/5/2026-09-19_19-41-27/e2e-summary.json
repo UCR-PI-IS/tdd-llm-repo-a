@@ -1,0 +1,40 @@
+{
+  "stage": "e2e-validation",
+  "status": "failure",
+  "timestamp": "2026-09-19_19-41-27",
+  "storyId": "CPD-LC-001-005",
+  "model": "Kimi-K2-5",
+  "iteration": "5",
+  "database": {
+    "container": "themepark-sql-e2e-cpd-lc-001-005-kimi-k2-5-5-194127",
+    "image": "mcr.microsoft.com/mssql/server:2022-latest",
+    "network": "themepark-e2e-cpd-lc-001-005-kimi-k2-5-5-194127",
+    "database": "ThemePark",
+    "readySeconds": 4.8,
+    "baseSchemaApplied": [
+      "Semester.sql",
+      "Course.sql"
+    ],
+    "seedsApplied": []
+  },
+  "backend": {},
+  "probes": [],
+  "totalProbes": 0,
+  "probesPassed": 0,
+  "probesFailed": 0,
+  "cleanup": {
+    "status": "clean",
+    "removedContainers": [
+      "themepark-sql-e2e-cpd-lc-001-005-kimi-k2-5-5-194127"
+    ],
+    "removedNetworks": [
+      "themepark-e2e-cpd-lc-001-005-kimi-k2-5-5-194127"
+    ],
+    "removedVolumes": [],
+    "leftovers": []
+  },
+  "warnings": [],
+  "errors": [
+    "seed seed-CPD-LC-001-005.sql: Msg 544, Level 16, State 1, Server 434fa5f6ed67, Line 30\nCannot insert explicit value for identity column in table 'LearningSpace' when IDENTITY_INSERT is set to OFF.\n\n(1 rows affected)\n\n(1 rows affected)"
+  ]
+}
