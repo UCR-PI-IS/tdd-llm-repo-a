@@ -1,0 +1,30 @@
+{
+  "stage": "refactoring",
+  "storyId": "CPD-LC-001-005",
+  "model": "Qwen3.7-max",
+  "iteration": "2",
+  "status": "partial",
+  "filesCreated": [],
+  "filesModified": [
+    "Backend.Domain/Entities/Whiteboard.cs",
+    "Backend.Application/Services/Implementations/WhiteboardService.cs",
+    "Backend.Presentation/Handlers/UpdateWhiteboardHandler.cs",
+    "Backend.Presentation/Mappers/WhiteboardMapper.cs"
+  ],
+  "metrics": {
+    "loopIterationsPerformed": 2,
+    "maxLoopIterations": 10,
+    "allGreenAchieved": false,
+    "baseline": { "minMI": 48, "maxCC": 23, "maxCoupling": 25, "maxDIT": 1 },
+    "final":    { "minMI": 48, "maxCC": 23, "maxCoupling": 24, "maxDIT": 1 },
+    "remainingViolations": [
+      { "type": "WhiteboardService", "metric": "CC", "value": 16, "flag": "YELLOW" },
+      { "type": "WhiteboardService", "metric": "Coupling", "value": 24, "flag": "YELLOW" },
+      { "type": "Whiteboard", "metric": "CC", "value": 23, "flag": "YELLOW" },
+      { "type": "SqlWhiteboardRepository", "metric": "Coupling", "value": 21, "flag": "YELLOW" },
+      { "type": "UpdateWhiteboardHandler", "metric": "Coupling", "value": 16, "flag": "YELLOW" }
+    ]
+  },
+  "warnings": [],
+  "notes": "Removed duplicated Overlaps method (static smell fix), extracted ValidatePositionAsync to reduce UpdateWhiteboardAsync CC from 9 to 5, and delegated DTO/response mapping to WhiteboardMapper to reduce handler coupling. Remaining YELLOW violations are structural: class-level CC sums from multiple tested overloads/methods, and coupling inherent to EF Core infrastructure and ASP.NET handler patterns. Further reduction would require speculative redesign."
+}
