@@ -1,0 +1,79 @@
+{
+  "stage": "e2e-validation",
+  "status": "failure",
+  "timestamp": "2026-09-20_16-24-52",
+  "storyId": "CPD-LC-001-005",
+  "model": "Qwen3.7-max",
+  "iteration": "4",
+  "database": {
+    "container": "themepark-sql-e2e-cpd-lc-001-005-qwen3-7-max-4-162452",
+    "image": "mcr.microsoft.com/mssql/server:2022-latest",
+    "network": "themepark-e2e-cpd-lc-001-005-qwen3-7-max-4-162452",
+    "database": "ThemePark",
+    "readySeconds": 8.5,
+    "baseSchemaApplied": [
+      "Semester.sql",
+      "Course.sql"
+    ],
+    "seedsApplied": [
+      "seed-CPD-LC-001-005.sql"
+    ]
+  },
+  "backend": {
+    "container": "themepark-api-e2e-cpd-lc-001-005-qwen3-7-max-4-162452",
+    "project": "Backend.Api/UCR.ECCI.PI.ThemePark.Backend.Api.csproj",
+    "publishStatus": "success",
+    "started": true,
+    "url": "http://127.0.0.1:55019",
+    "readySeconds": 2.2,
+    "errorLines": []
+  },
+  "probes": [
+    {
+      "name": "Update whiteboard WB-001 successfully",
+      "method": "PUT",
+      "path": "/Whiteboards",
+      "expectedStatus": 200,
+      "actualStatus": 400,
+      "passed": false,
+      "missingContent": [
+        "WB-001",
+        "Red"
+      ],
+      "error": null,
+      "bodySnippet": "\"Whiteboard not found\""
+    },
+    {
+      "name": "Update non-existent whiteboard returns 400",
+      "method": "PUT",
+      "path": "/Whiteboards",
+      "expectedStatus": 400,
+      "actualStatus": 400,
+      "passed": true,
+      "missingContent": [],
+      "error": null,
+      "bodySnippet": "\"Whiteboard not found\""
+    }
+  ],
+  "totalProbes": 2,
+  "probesPassed": 1,
+  "probesFailed": 1,
+  "cleanup": {
+    "status": "clean",
+    "removedContainers": [
+      "themepark-api-e2e-cpd-lc-001-005-qwen3-7-max-4-162452",
+      "themepark-sql-e2e-cpd-lc-001-005-qwen3-7-max-4-162452"
+    ],
+    "removedNetworks": [
+      "themepark-e2e-cpd-lc-001-005-qwen3-7-max-4-162452"
+    ],
+    "removedVolumes": [
+      "themepark-app-e2e-cpd-lc-001-005-qwen3-7-max-4-162452"
+    ],
+    "leftovers": []
+  },
+  "warnings": [],
+  "errors": [
+    "1 probe(s) failed."
+  ]
+}

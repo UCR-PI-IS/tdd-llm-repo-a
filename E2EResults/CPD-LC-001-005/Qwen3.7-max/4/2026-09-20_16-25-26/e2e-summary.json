@@ -1,0 +1,74 @@
+{
+  "stage": "e2e-validation",
+  "status": "success",
+  "timestamp": "2026-09-20_16-25-26",
+  "storyId": "CPD-LC-001-005",
+  "model": "Qwen3.7-max",
+  "iteration": "4",
+  "database": {
+    "container": "themepark-sql-e2e-cpd-lc-001-005-qwen3-7-max-4-162526",
+    "image": "mcr.microsoft.com/mssql/server:2022-latest",
+    "network": "themepark-e2e-cpd-lc-001-005-qwen3-7-max-4-162526",
+    "database": "ThemePark",
+    "readySeconds": 8.5,
+    "baseSchemaApplied": [
+      "Semester.sql",
+      "Course.sql"
+    ],
+    "seedsApplied": [
+      "seed-CPD-LC-001-005.sql"
+    ]
+  },
+  "backend": {
+    "container": "themepark-api-e2e-cpd-lc-001-005-qwen3-7-max-4-162526",
+    "project": "Backend.Api/UCR.ECCI.PI.ThemePark.Backend.Api.csproj",
+    "publishStatus": "success",
+    "started": true,
+    "url": "http://127.0.0.1:55020",
+    "readySeconds": 2.2,
+    "errorLines": []
+  },
+  "probes": [
+    {
+      "name": "Update whiteboard WB-001 successfully",
+      "method": "PUT",
+      "path": "/Whiteboards",
+      "expectedStatus": 200,
+      "actualStatus": 200,
+      "passed": true,
+      "missingContent": [],
+      "error": null,
+      "bodySnippet": "{\"componentId\":\"WB-001\",\"learningSpaceId\":\"LS-0103\",\"width\":3,\"height\":2,\"depth\":0.2,\"x\":2,\"y\":1,\"z\":3,\"orientation\":\"South\",\"markerColor\":\"Red\"}"
+    },
+    {
+      "name": "Update non-existent whiteboard returns 400",
+      "method": "PUT",
+      "path": "/Whiteboards",
+      "expectedStatus": 400,
+      "actualStatus": 400,
+      "passed": true,
+      "missingContent": [],
+      "error": null,
+      "bodySnippet": "\"Whiteboard not found\""
+    }
+  ],
+  "totalProbes": 2,
+  "probesPassed": 2,
+  "probesFailed": 0,
+  "cleanup": {
+    "status": "clean",
+    "removedContainers": [
+      "themepark-api-e2e-cpd-lc-001-005-qwen3-7-max-4-162526",
+      "themepark-sql-e2e-cpd-lc-001-005-qwen3-7-max-4-162526"
+    ],
+    "removedNetworks": [
+      "themepark-e2e-cpd-lc-001-005-qwen3-7-max-4-162526"
+    ],
+    "removedVolumes": [
+      "themepark-app-e2e-cpd-lc-001-005-qwen3-7-max-4-162526"
+    ],
+    "leftovers": []
+  },
+  "warnings": [],
+  "errors": []
+}
