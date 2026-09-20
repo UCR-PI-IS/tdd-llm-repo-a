@@ -16,6 +16,7 @@ internal class WhiteboardEntityConfiguration : IEntityTypeConfiguration<Whiteboa
     /// <param name="builder">The builder used to configure the entity type.</param>
     public void Configure(EntityTypeBuilder<Whiteboard> builder)
     {
+        builder.HasBaseType((Type?)null);
         builder.ToTable("Whiteboard");
 
         builder.HasKey(w => w.ComponentId);

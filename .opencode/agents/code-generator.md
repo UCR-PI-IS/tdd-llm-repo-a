@@ -1,13 +1,13 @@
 ---
-model: openrouter/moonshotai/kimi-k2.5
+model: openrouter/qwen/qwen3.7-max
 temperature: 1.0
 top_p: 0.1
 description: "Implements minimal code to make failing tests pass, following DDD layer boundaries. Builds, tests, and end-to-end self-validates autonomously via Docker against an ephemeral database."
 color: "#2ECC71"
 mode: all
 permission:
-  edit: "ask"
-  bash: "ask"
+  edit: "allow"
+  bash: "allow"
 ---
 
 # Your Role
