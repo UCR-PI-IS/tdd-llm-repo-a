@@ -1,13 +1,13 @@
 ---
-model: openrouter/moonshotai/kimi-k2.5
+model: openrouter/qwen/qwen3.7-max 
 temperature: 1.0
 top_p: 0.1
 description: "Orchestrates the TDD pipeline: test generation, code generation, and refactoring for a given user story. Coordinates subagents autonomously."
 color: "#E74C3C"
 mode: primary
 permission:
-  edit: "ask"
-  bash: "ask"
+  edit: "allow"
+  bash: "allow"
 ---
 
 # Role

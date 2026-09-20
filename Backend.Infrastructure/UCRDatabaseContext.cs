@@ -35,6 +35,12 @@ internal class UCRDatabaseContext : DbContext
     public virtual DbSet<Whiteboard> Whiteboards { get; set; } = null!;
 
     /// <summary>
+    /// Returns a queryable collection of whiteboards for querying purposes.
+    /// </summary>
+    /// <returns>An <see cref="IQueryable{Whiteboard}"/> for the whiteboards.</returns>
+    public virtual IQueryable<Whiteboard> GetWhiteboardsQuery() => Whiteboards.AsQueryable();
+
+    /// <summary>
     /// Configures the model relationships and entity mappings when the model for a context is being created.
     /// </summary>
     /// <param name="modelBuilder">The builder being used to construct the model for this context.</param>
