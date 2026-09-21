@@ -21,6 +21,7 @@ public static class DependencyInjection
         services.AddScoped<ILearningSpaceCreateService, LearningSpaceCreateService>();
         services.AddScoped<IWhiteboardCreateService, WhiteboardService>();
         services.AddScoped<IWhiteboardService, WhiteboardService>();
+        services.AddScoped<IPersonService, PersonService>();
         return services;
     }
 }
