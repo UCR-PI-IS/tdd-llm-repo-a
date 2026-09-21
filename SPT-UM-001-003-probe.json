@@ -1,0 +1,20 @@
+{
+  "probes": [
+    {
+      "name": "Create person with valid data",
+      "method": "POST",
+      "path": "/api/persons",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "firstName": "Test",
+        "lastName": "User",
+        "email": "test.user.e2e@example.com",
+        "identityNumber": "E2E999999",
+        "birthDate": "1990-01-01"
+      },
+      "expectStatus": 200
+    }
+  ]
+}
