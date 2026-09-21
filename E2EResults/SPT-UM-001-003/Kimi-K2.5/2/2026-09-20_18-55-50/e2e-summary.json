@@ -1,0 +1,63 @@
+{
+  "stage": "e2e-validation",
+  "status": "success",
+  "timestamp": "2026-09-20_18-55-50",
+  "storyId": "SPT-UM-001-003",
+  "model": "Kimi-K2.5",
+  "iteration": "2",
+  "database": {
+    "container": "themepark-sql-e2e-spt-um-001-003-kimi-k2-5-2-185550",
+    "image": "mcr.microsoft.com/mssql/server:2022-latest",
+    "network": "themepark-e2e-spt-um-001-003-kimi-k2-5-2-185550",
+    "database": "ThemePark",
+    "readySeconds": 8.5,
+    "baseSchemaApplied": [
+      "Semester.sql",
+      "Course.sql"
+    ],
+    "seedsApplied": [
+      "SPT-UM-001-003.sql"
+    ]
+  },
+  "backend": {
+    "container": "themepark-api-e2e-spt-um-001-003-kimi-k2-5-2-185550",
+    "project": "Backend.Api/UCR.ECCI.PI.ThemePark.Backend.Api.csproj",
+    "publishStatus": "success",
+    "started": true,
+    "url": "http://127.0.0.1:55023",
+    "readySeconds": 2.2,
+    "errorLines": []
+  },
+  "probes": [
+    {
+      "name": "Create person with valid data",
+      "method": "POST",
+      "path": "/api/persons",
+      "expectedStatus": 200,
+      "actualStatus": 200,
+      "passed": true,
+      "missingContent": [],
+      "error": null,
+      "bodySnippet": "{\"success\":true,\"personId\":\"PER-E31F1AEA\"}"
+    }
+  ],
+  "totalProbes": 1,
+  "probesPassed": 1,
+  "probesFailed": 0,
+  "cleanup": {
+    "status": "clean",
+    "removedContainers": [
+      "themepark-api-e2e-spt-um-001-003-kimi-k2-5-2-185550",
+      "themepark-sql-e2e-spt-um-001-003-kimi-k2-5-2-185550"
+    ],
+    "removedNetworks": [
+      "themepark-e2e-spt-um-001-003-kimi-k2-5-2-185550"
+    ],
+    "removedVolumes": [
+      "themepark-app-e2e-spt-um-001-003-kimi-k2-5-2-185550"
+    ],
+    "leftovers": []
+  },
+  "warnings": [],
+  "errors": []
+}
