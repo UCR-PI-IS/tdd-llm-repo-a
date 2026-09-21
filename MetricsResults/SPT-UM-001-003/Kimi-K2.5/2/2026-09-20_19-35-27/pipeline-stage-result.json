@@ -1,0 +1,49 @@
+{
+  "stage": "refactoring",
+  "storyId": "SPT-UM-001-003",
+  "model": "Kimi-K2.5",
+  "iteration": "2",
+  "status": "partial",
+  "filesCreated": [],
+  "filesModified": [
+    "Backend.Application/Services/Implementations/PersonService.cs",
+    "Backend.Infrastructure/Repositories/SqlPersonRepository.cs",
+    "Backend.Presentation/Handlers/CreatePersonHandler.cs"
+  ],
+  "metrics": {
+    "loopIterationsPerformed": 2,
+    "maxLoopIterations": 10,
+    "allGreenAchieved": false,
+    "baseline": {
+      "minMI": 63,
+      "maxCC": 4,
+      "maxCoupling": 27,
+      "maxDIT": 0
+    },
+    "final": {
+      "minMI": 62,
+      "maxCC": 4,
+      "maxCoupling": 26,
+      "maxDIT": 0
+    },
+    "remainingViolations": [
+      {
+        "type": "UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Handlers.CreatePersonHandler",
+        "metric": "Coupling",
+        "value": 26,
+        "flag": "YELLOW"
+      },
+      {
+        "type": "UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Repositories.SqlPersonRepository",
+        "metric": "Coupling",
+        "value": 11,
+        "flag": "YELLOW"
+      }
+    ]
+  },
+  "warnings": [
+    "SqlPersonRepository: attempted consolidaton into Expression<Func<Person,bool>> helper; coupling increased 11→13, change reverted.",
+    "CreatePersonHandler: replaced LINQ Select with manual loop and Range operator with Substring; coupling decreased only 27→26, still above GREEN threshold."
+  ],
+  "notes": "Two YELLOW class-coupling violations remain due to structural constraints: CreatePersonHandler's strongly-typed Results<> return signature inherently requires multiple framework types, and SqlPersonRepository's EF Core lambda queries cannot be reduced further without breaking tests or introducing inefficient patterns. All other story-related metrics are GREEN."
+}

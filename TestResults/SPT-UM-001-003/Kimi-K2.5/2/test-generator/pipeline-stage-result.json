@@ -1,0 +1,21 @@
+{
+  "stage": "test-generation",
+  "storyId": "SPT-UM-001-003",
+  "model": "Kimi-K2.5",
+  "iteration": "2",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Domain.Tests.Unit/PersonTests.cs",
+    "Backend.Application.Tests.Unit/PersonServiceTests.cs",
+    "Backend.Infrastructure.Tests.Unit/SqlPersonRepositoryTests.cs",
+    "Backend.Presentation.Tests.Unit/CreatePersonTests.cs"
+  ],
+  "filesModified": [],
+  "metrics": {
+    "intentsConfirmed": 28,
+    "testMethodsEmitted": 38,
+    "byLayer": { "Domain": 17, "Application": 5, "Infrastructure": 5, "Presentation": 11 }
+  },
+  "warnings": [],
+  "notes": "Generated NUnit test classes for Person entity creation across all four DDD layers. Domain tests cover entity constructor validation. Application tests cover PersonService with duplicate checking. Infrastructure tests cover SqlPersonRepository with EF Core mocking. Presentation tests cover DTO, Validator, Handler, and Endpoint. All tests follow existing project patterns and use Moq for dependency mocking."
+}

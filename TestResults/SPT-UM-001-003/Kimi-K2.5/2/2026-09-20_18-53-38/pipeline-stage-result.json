@@ -1,0 +1,52 @@
+{
+  "stage": "code-generation",
+  "storyId": "SPT-UM-001-003",
+  "model": "Kimi-K2.5",
+  "iteration": "2",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Domain/Entities/Person.cs",
+    "Backend.Domain/Repositories/IPersonRepository.cs",
+    "Backend.Application/Services/IPersonService.cs",
+    "Backend.Application/Services/Implementations/PersonService.cs",
+    "Backend.Infrastructure/EntityConfigurations/PersonEntityConfiguration.cs",
+    "Backend.Infrastructure/Repositories/SqlPersonRepository.cs",
+    "Backend.Presentation/Dtos/CreatePersonDto.cs",
+    "Backend.Presentation/Responses/CreatePersonResponse.cs",
+    "Backend.Presentation/Validators/CreatePersonDtoValidator.cs",
+    "Backend.Presentation/Handlers/CreatePersonHandler.cs",
+    "Backend.Presentation/Endpoints/CreatePersonEndpoint.cs",
+    "SPT-UM-001-003.sql",
+    "SPT-UM-001-003-probe.json"
+  ],
+  "filesModified": [
+    "Backend.Application/DependencyInjection.cs",
+    "Backend.Infrastructure/DependecyInjection.cs",
+    "Backend.Infrastructure/UCRDatabaseContext.cs",
+    "Backend.Presentation/UCR.ECCI.PI.ThemePark.Backend.Presentation.csproj",
+    "Backend.Api/Program.cs",
+    "Backend.Application.Tests.Unit/PersonServiceTests.cs",
+    "Backend.Presentation.Tests.Unit/CreatePersonTests.cs"
+  ],
+  "metrics": {
+    "buildErrors": 0,
+    "buildWarnings": 0,
+    "testsTotal": 189,
+    "testsPassed": 189,
+    "testsFailed": 0,
+    "testsSkipped": 0,
+    "lineCoverage": 0.7889908256880734,
+    "branchCoverage": 0.8214285714285714,
+    "e2e": {
+      "status": "success",
+      "probesTotal": 1,
+      "probesPassed": 1,
+      "probesFailed": 0,
+      "seedsApplied": ["SPT-UM-001-003.sql"],
+      "resultPath": "E2EResults/SPT-UM-001-003/Kimi-K2.5/2/2026-09-20_18-55-50/",
+      "cleanup": "clean"
+    }
+  },
+  "warnings": [],
+  "notes": "Successfully implemented the Create Person feature for story SPT-UM-001-003. All 189 tests pass with 78.9% line coverage and 82.1% branch coverage. End-to-end validation confirmed the endpoint works correctly with the ephemeral database."
+}
