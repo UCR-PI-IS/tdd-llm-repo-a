@@ -1,0 +1,29 @@
+{
+  "stage": "test-generation",
+  "storyId": "SPT-UM-001-003",
+  "model": "Kimi-K2.5",
+  "iteration": "3",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Domain.Tests.Unit/PersonTests.cs",
+    "Backend.Application.Tests.Unit/PersonServiceTests.cs",
+    "Backend.Infrastructure.Tests.Unit/SqlPersonRepositoryTests.cs",
+    "Backend.Presentation.Tests.Unit/CreatePersonDtoTests.cs",
+    "Backend.Presentation.Tests.Unit/CreatePersonDtoValidatorTests.cs",
+    "Backend.Presentation.Tests.Unit/CreatePersonHandlerTests.cs",
+    "Backend.Presentation.Tests.Unit/CreatePersonEndpointTests.cs"
+  ],
+  "filesModified": [],
+  "metrics": {
+    "intentsConfirmed": 42,
+    "testMethodsEmitted": 42,
+    "byLayer": {
+      "Domain": 17,
+      "Application": 5,
+      "Infrastructure": 5,
+      "Presentation": 15
+    }
+  },
+  "warnings": [],
+  "notes": "Generated 7 test files covering all 42 confirmed intents across all DDD layers. Domain layer tests cover Person entity constructor validation. Application layer tests cover PersonService duplicate checking and error handling. Infrastructure layer tests cover SqlPersonRepository database operations. Presentation layer tests cover DTOs, validators, handlers, and endpoints."
+}

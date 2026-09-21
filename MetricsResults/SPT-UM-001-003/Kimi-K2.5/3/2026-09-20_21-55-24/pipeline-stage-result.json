@@ -1,0 +1,54 @@
+{
+  "stage": "refactoring",
+  "storyId": "SPT-UM-001-003",
+  "model": "Kimi-K2.5",
+  "iteration": "3",
+  "status": "partial",
+  "filesCreated": [],
+  "filesModified": [
+    "Backend.Domain/Entities/Person.cs"
+  ],
+  "metrics": {
+    "loopIterationsPerformed": 1,
+    "maxLoopIterations": 10,
+    "allGreenAchieved": false,
+    "baseline": {
+      "minMI": 54,
+      "maxCC": 8,
+      "maxCoupling": 28,
+      "maxDIT": 0
+    },
+    "final": {
+      "minMI": 55,
+      "maxCC": 8,
+      "maxCoupling": 28,
+      "maxDIT": 0
+    },
+    "remainingViolations": [
+      {
+        "type": "UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Repositories.SqlPersonRepository",
+        "metric": "Coupling",
+        "value": 11,
+        "flag": "YELLOW"
+      },
+      {
+        "type": "UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Handlers.CreatePersonHandler",
+        "metric": "Coupling",
+        "value": 28,
+        "flag": "YELLOW"
+      },
+      {
+        "type": "UCR.ECCI.PI.ThemePark.Backend.Infrastructure.EntityConfigurations.PersonEntityConfiguration",
+        "metric": "Coupling",
+        "value": 10,
+        "flag": "YELLOW"
+      }
+    ]
+  },
+  "warnings": [
+    "Attempted to use AnyAsync in SqlPersonRepository to reduce coupling, but this broke unit tests due to mock DbSet not implementing IAsyncQueryProvider; reverted to preserve test compatibility",
+    "CreatePersonHandler coupling (28) is due to standard .NET 8 minimal API typed Results<T1, T2, T3> pattern; cannot be reduced without breaking tests or significant architectural redesign",
+    "SqlPersonRepository coupling (11) and PersonEntityConfiguration coupling (10) are due to standard EF Core patterns; minor YELLOW violations that are acceptable for infrastructure layer"
+  ],
+  "notes": "Refactored Person.cs to chain constructors, eliminating block duplication of validation logic. Maintainability Index improved from 54 to 55. Three YELLOW coupling violations remain, all due to standard architectural patterns (EF Core, ASP.NET Core minimal APIs) that cannot be changed without breaking tests or violating Clean Architecture principles. All 194 tests pass. Target all-GREEN not fully achieved due to inherent coupling in framework patterns."
+}
