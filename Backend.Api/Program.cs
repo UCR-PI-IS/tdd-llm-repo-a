@@ -40,4 +40,9 @@ app.MapLearningComponentsEndpoints();
 app.MapGetLearningComponentsEndpoints();
 app.MapCreateLearningComponentsEndpoint();
 
+/// <summary>
+/// Maps the Person creation endpoint to the application.
+/// </summary>
+app.MapEndpoint();
+
 app.Run();
