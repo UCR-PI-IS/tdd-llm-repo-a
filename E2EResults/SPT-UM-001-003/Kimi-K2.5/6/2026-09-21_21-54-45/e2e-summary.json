@@ -1,0 +1,85 @@
+{
+  "stage": "e2e-validation",
+  "status": "success",
+  "timestamp": "2026-09-21_21-54-45",
+  "storyId": "SPT-UM-001-003",
+  "model": "Kimi-K2.5",
+  "iteration": "6",
+  "database": {
+    "container": "themepark-sql-e2e-spt-um-001-003-kimi-k2-5-6-215445",
+    "image": "mcr.microsoft.com/mssql/server:2022-latest",
+    "network": "themepark-e2e-spt-um-001-003-kimi-k2-5-6-215445",
+    "database": "ThemePark",
+    "readySeconds": 13.0,
+    "baseSchemaApplied": [
+      "Semester.sql",
+      "Course.sql"
+    ],
+    "seedsApplied": [
+      "seed-SPT-UM-001-003.sql"
+    ]
+  },
+  "backend": {
+    "container": "themepark-api-e2e-spt-um-001-003-kimi-k2-5-6-215445",
+    "project": "Backend.Api/UCR.ECCI.PI.ThemePark.Backend.Api.csproj",
+    "publishStatus": "success",
+    "started": true,
+    "url": "http://127.0.0.1:55000",
+    "readySeconds": 2.2,
+    "errorLines": []
+  },
+  "probes": [
+    {
+      "name": "create person success",
+      "method": "POST",
+      "path": "/api/persons",
+      "expectedStatus": 200,
+      "actualStatus": 200,
+      "passed": true,
+      "missingContent": [],
+      "error": null,
+      "bodySnippet": "{\"success\":true,\"id\":4,\"firstName\":\"Test\",\"lastName\":\"User\",\"email\":\"newuser@example.com\"}"
+    },
+    {
+      "name": "create person duplicate email returns conflict",
+      "method": "POST",
+      "path": "/api/persons",
+      "expectedStatus": 409,
+      "actualStatus": 409,
+      "passed": true,
+      "missingContent": [],
+      "error": null,
+      "bodySnippet": "{\"message\":\"A person with this email already exists.\"}"
+    },
+    {
+      "name": "create person missing fields returns bad request",
+      "method": "POST",
+      "path": "/api/persons",
+      "expectedStatus": 400,
+      "actualStatus": 400,
+      "passed": true,
+      "missingContent": [],
+      "error": null,
+      "bodySnippet": "{\"message\":\"Validation failed\",\"errors\":[\"First name is required\",\"Email format is invalid\",\"Birth date must be in the past\"]}"
+    }
+  ],
+  "totalProbes": 3,
+  "probesPassed": 3,
+  "probesFailed": 0,
+  "cleanup": {
+    "status": "clean",
+    "removedContainers": [
+      "themepark-api-e2e-spt-um-001-003-kimi-k2-5-6-215445",
+      "themepark-sql-e2e-spt-um-001-003-kimi-k2-5-6-215445"
+    ],
+    "removedNetworks": [
+      "themepark-e2e-spt-um-001-003-kimi-k2-5-6-215445"
+    ],
+    "removedVolumes": [
+      "themepark-app-e2e-spt-um-001-003-kimi-k2-5-6-215445"
+    ],
+    "leftovers": []
+  },
+  "warnings": [],
+  "errors": []
+}
