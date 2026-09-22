@@ -1,0 +1,32 @@
+{
+  "stage": "test-generation",
+  "storyId": "SPT-UM-001-003",
+  "model": "Kimi-K2.5",
+  "iteration": "5",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Domain.Tests.Unit/PersonTests.cs",
+    "Backend.Application.Tests.Unit/PersonServiceTests.cs",
+    "Backend.Infrastructure.Tests.Unit/SqlPersonRepositoryTests.cs",
+    "Backend.Presentation.Tests.Unit/CreatePersonDtoTests.cs",
+    "Backend.Presentation.Tests.Unit/CreatePersonDtoValidatorTests.cs",
+    "Backend.Presentation.Tests.Unit/CreatePersonHandlerTests.cs",
+    "Backend.Presentation.Tests.Unit/CreatePersonEndpointTests.cs"
+  ],
+  "filesModified": [],
+  "metrics": {
+    "intentsConfirmed": 38,
+    "testMethodsEmitted": 41,
+    "byLayer": {
+      "Domain": 16,
+      "Application": 5,
+      "Infrastructure": 5,
+      "Presentation": 15
+    }
+  },
+  "warnings": [
+    "Person entity, PersonService, SqlPersonRepository, IPersonRepository, CreatePersonResult, CreatePersonDtoValidator, CreatePersonHandler, CreatePersonEndpoint, CreatePersonResponse, ValidationErrorResponse are unimplemented; tests assume their existence per pipeline guidance.",
+    "Endpoint test uses mock-based MapPost verification, which follows the project's existing excluded test pattern and may require compilation adjustment."
+  ],
+  "notes": "All 38 confirmed intents were translated into 7 test files across 4 DDD layers. Parameterized tests were used extensively for Domain constructor validation and DTO validator boundary checks to minimize duplication while preserving decision coverage. Missing production classes are expected."
+}

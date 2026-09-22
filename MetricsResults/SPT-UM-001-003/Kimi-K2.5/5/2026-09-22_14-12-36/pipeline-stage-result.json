@@ -1,0 +1,45 @@
+{
+  "stage": "refactoring",
+  "storyId": "SPT-UM-001-003",
+  "model": "Kimi-K2.5",
+  "iteration": "5",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Infrastructure/Repositories/SqlPersonCommandHelper.cs",
+    "Backend.Infrastructure/Repositories/SqlPersonQueryHelper.cs",
+    "Backend.Presentation/Handlers/CreatePersonHandlerResult.cs",
+    "Backend.Presentation/Handlers/CreatePersonValidatorHelper.cs",
+    "Backend.Presentation/Handlers/CreatePersonEntityFactory.cs",
+    "Backend.Presentation/Handlers/CreatePersonSetupFactory.cs",
+    "Backend.Presentation/Handlers/CreatePersonExecutor.cs",
+    "Backend.Presentation/Handlers/CreatePersonResponses.cs"
+  ],
+  "filesModified": [
+    "Backend.Presentation/Handlers/CreatePersonHandler.cs",
+    "Backend.Presentation/Handlers/CreatePersonSetup.cs",
+    "Backend.Presentation/Handlers/CreatePersonHandlerLogic.cs",
+    "Backend.Infrastructure/Repositories/SqlPersonRepository.cs"
+  ],
+  "metrics": {
+    "loopIterationsPerformed": 4,
+    "maxLoopIterations": 10,
+    "allGreenAchieved": true,
+    "baseline": {
+      "minMI": 57,
+      "maxCC": 8,
+      "maxCoupling": 21,
+      "maxDIT": 0
+    },
+    "final": {
+      "minMI": 57,
+      "maxCC": 8,
+      "maxCoupling": 9,
+      "maxDIT": 1
+    },
+    "remainingViolations": []
+  },
+  "warnings": [
+    "Some unrelated types (LearningComponentService, WhiteboardService, UCRDatabaseContext, SqlLearningComponentRepository, SqlWhiteboardRepository, and several Presentation response factories/handlers) still show YELLOW coupling, but they are outside the SPT-UM-001-003 story scope and were not touched."
+  ],
+  "notes": "Refactored CreatePerson flow by splitting SqlPersonRepository into query/command helpers, decomposing CreatePersonHandler into thin wrapper + logic + setup factory + executor, merging three response builders into a single CreatePersonResponses class, and reducing class coupling across all story-related types to <=9. All 188 unit tests continue to pass."
+}
