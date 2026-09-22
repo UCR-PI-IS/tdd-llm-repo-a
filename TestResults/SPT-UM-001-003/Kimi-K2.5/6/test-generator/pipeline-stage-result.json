@@ -1,0 +1,29 @@
+{
+  "stage": "test-generation",
+  "storyId": "SPT-UM-001-003",
+  "model": "Kimi-K2.5",
+  "iteration": "6",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Domain.Tests.Unit/PersonTests.cs",
+    "Backend.Application.Tests.Unit/PersonServiceTests.cs",
+    "Backend.Infrastructure.Tests.Unit/SqlPersonRepositoryTests.cs",
+    "Backend.Presentation.Tests.Unit/CreatePersonDtoTests.cs",
+    "Backend.Presentation.Tests.Unit/CreatePersonDtoValidatorTests.cs",
+    "Backend.Presentation.Tests.Unit/CreatePersonHandlerTests.cs",
+    "Backend.Presentation.Tests.Unit/CreatePersonEndpointTests.cs"
+  ],
+  "filesModified": [],
+  "metrics": {
+    "intentsConfirmed": 42,
+    "testMethodsEmitted": 35,
+    "byLayer": {
+      "Domain": 17,
+      "Application": 5,
+      "Infrastructure": 5,
+      "Presentation": 8
+    }
+  },
+  "warnings": [],
+  "notes": "Generated 35 test methods covering all 42 confirmed intents across all DDD layers. Domain layer tests cover Person entity constructor validation (17 tests). Application layer tests cover PersonService duplicate checking and error handling (5 tests). Infrastructure layer tests cover SqlPersonRepository database operations (5 tests). Presentation layer tests cover DTO, Validator, Handler, and Endpoint (8 tests). All tests follow NUnit 3.14.0 conventions with Moq 4.20.72 for mocking."
+}
