@@ -1,0 +1,33 @@
+{
+  "stage": "test-generation",
+  "storyId": "SPT-UM-001-003",
+  "model": "Qwen3.7-max",
+  "iteration": "2",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Domain.Tests.Unit/PersonTests.cs",
+    "Backend.Application.Tests.Unit/PersonServiceTests.cs",
+    "Backend.Infrastructure.Tests.Unit/SqlPersonRepositoryTests.cs",
+    "Backend.Presentation.Tests.Unit/CreatePersonDtoTests.cs",
+    "Backend.Presentation.Tests.Unit/CreatePersonDtoValidatorTests.cs",
+    "Backend.Presentation.Tests.Unit/CreatePersonHandlerTests.cs",
+    "Backend.Presentation.Tests.Unit/CreatePersonEndpointTests.cs"
+  ],
+  "filesModified": [],
+  "metrics": {
+    "intentsConfirmed": 33,
+    "testMethodsEmitted": 26,
+    "byLayer": {
+      "Domain": 8,
+      "Application": 5,
+      "Infrastructure": 5,
+      "Presentation": 8
+    }
+  },
+  "warnings": [
+    "CreatePersonEndpointTests.cs uses WebApplication.CreateBuilder() to test endpoint mapping, avoiding the Moq limitation with extension methods (MapPost on IEndpointRouteBuilder) that caused LearningComponentEndpointsCreateTests.cs to be excluded from compilation.",
+    "CreatePersonDtoValidatorTests.cs references FluentValidation types (ValidationFailure, AbstractValidator) which must be available as a dependency in the Presentation project when the validator is implemented.",
+    "Handler and service tests reference types not yet implemented: PersonCreationResult, CreatePersonResponse, ValidationErrorResponse, IPersonService, IPersonRepository, PersonService, CreatePersonDtoValidator, CreatePersonEndpoint."
+  ],
+  "notes": "Generated 26 test methods across 7 files covering all 33 confirmed intents for story SPT-UM-001-003 (Create a Person). Parameterized tests consolidate related scenarios (null/empty/whitespace validation, duplicate checks) to minimize method count while achieving full decision coverage. Infrastructure tests include async queryable mock helpers (TestAsyncQueryProvider, TestAsyncEnumerable, TestAsyncEnumerator) to support EF Core AnyAsync mocking for ExistsByEmailAsync and ExistsByIdentityNumberAsync."
+}
