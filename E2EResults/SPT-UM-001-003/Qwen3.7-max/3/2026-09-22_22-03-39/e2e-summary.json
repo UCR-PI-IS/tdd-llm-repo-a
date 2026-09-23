@@ -1,0 +1,63 @@
+{
+  "stage": "e2e-validation",
+  "status": "success",
+  "timestamp": "2026-09-22_22-03-39",
+  "storyId": "SPT-UM-001-003",
+  "model": "Qwen3.7-max",
+  "iteration": "3",
+  "database": {
+    "container": "themepark-sql-e2e-spt-um-001-003-qwen3-7-max-3-220339",
+    "image": "mcr.microsoft.com/mssql/server:2022-latest",
+    "network": "themepark-e2e-spt-um-001-003-qwen3-7-max-3-220339",
+    "database": "ThemePark",
+    "readySeconds": 4.8,
+    "baseSchemaApplied": [
+      "Semester.sql",
+      "Course.sql"
+    ],
+    "seedsApplied": [
+      "seed-SPT-UM-001-003.sql"
+    ]
+  },
+  "backend": {
+    "container": "themepark-api-e2e-spt-um-001-003-qwen3-7-max-3-220339",
+    "project": "Backend.Api/UCR.ECCI.PI.ThemePark.Backend.Api.csproj",
+    "publishStatus": "success",
+    "started": true,
+    "url": "http://127.0.0.1:55002",
+    "readySeconds": 2.1,
+    "errorLines": []
+  },
+  "probes": [
+    {
+      "name": "create person with valid data",
+      "method": "POST",
+      "path": "/api/persons",
+      "expectedStatus": 200,
+      "actualStatus": 200,
+      "passed": true,
+      "missingContent": [],
+      "error": null,
+      "bodySnippet": "{\"success\":true}"
+    }
+  ],
+  "totalProbes": 1,
+  "probesPassed": 1,
+  "probesFailed": 0,
+  "cleanup": {
+    "status": "clean",
+    "removedContainers": [
+      "themepark-api-e2e-spt-um-001-003-qwen3-7-max-3-220339",
+      "themepark-sql-e2e-spt-um-001-003-qwen3-7-max-3-220339"
+    ],
+    "removedNetworks": [
+      "themepark-e2e-spt-um-001-003-qwen3-7-max-3-220339"
+    ],
+    "removedVolumes": [
+      "themepark-app-e2e-spt-um-001-003-qwen3-7-max-3-220339"
+    ],
+    "leftovers": []
+  },
+  "warnings": [],
+  "errors": []
+}
