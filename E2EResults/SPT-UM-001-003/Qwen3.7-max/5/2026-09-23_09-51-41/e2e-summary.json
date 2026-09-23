@@ -1,0 +1,80 @@
+{
+  "stage": "e2e-validation",
+  "status": "failure",
+  "timestamp": "2026-09-23_09-51-41",
+  "storyId": "SPT-UM-001-003",
+  "model": "Qwen3.7-max",
+  "iteration": "5",
+  "database": {
+    "container": "themepark-sql-e2e-spt-um-001-003-qwen3-7-max-5-095141",
+    "image": "mcr.microsoft.com/mssql/server:2022-latest",
+    "network": "themepark-e2e-spt-um-001-003-qwen3-7-max-5-095141",
+    "database": "ThemePark",
+    "readySeconds": 4.8,
+    "baseSchemaApplied": [
+      "Semester.sql",
+      "Course.sql"
+    ],
+    "seedsApplied": [
+      "seed-SPT-UM-001-003.sql"
+    ]
+  },
+  "backend": {
+    "container": "themepark-api-e2e-spt-um-001-003-qwen3-7-max-5-095141",
+    "project": "Backend.Api/UCR.ECCI.PI.ThemePark.Backend.Api.csproj",
+    "publishStatus": "success",
+    "started": true,
+    "url": "http://127.0.0.1:55000",
+    "readySeconds": 2.1,
+    "errorLines": []
+  },
+  "probes": [
+    {
+      "name": "Create person with valid data returns success",
+      "method": "POST",
+      "path": "/api/persons",
+      "expectedStatus": 200,
+      "actualStatus": 404,
+      "passed": false,
+      "missingContent": [
+        "true"
+      ],
+      "error": null,
+      "bodySnippet": ""
+    },
+    {
+      "name": "Create person with duplicate email returns conflict",
+      "method": "POST",
+      "path": "/api/persons",
+      "expectedStatus": 409,
+      "actualStatus": 404,
+      "passed": false,
+      "missingContent": [
+        "already exists"
+      ],
+      "error": null,
+      "bodySnippet": ""
+    }
+  ],
+  "totalProbes": 2,
+  "probesPassed": 0,
+  "probesFailed": 2,
+  "cleanup": {
+    "status": "clean",
+    "removedContainers": [
+      "themepark-api-e2e-spt-um-001-003-qwen3-7-max-5-095141",
+      "themepark-sql-e2e-spt-um-001-003-qwen3-7-max-5-095141"
+    ],
+    "removedNetworks": [
+      "themepark-e2e-spt-um-001-003-qwen3-7-max-5-095141"
+    ],
+    "removedVolumes": [
+      "themepark-app-e2e-spt-um-001-003-qwen3-7-max-5-095141"
+    ],
+    "leftovers": []
+  },
+  "warnings": [],
+  "errors": [
+    "2 probe(s) failed."
+  ]
+}

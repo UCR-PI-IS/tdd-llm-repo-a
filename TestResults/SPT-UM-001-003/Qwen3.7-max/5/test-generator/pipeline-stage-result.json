@@ -1,0 +1,33 @@
+{
+  "stage": "test-generation",
+  "storyId": "SPT-UM-001-003",
+  "model": "Qwen3.7-max",
+  "iteration": "5",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Domain.Tests.Unit/PersonTests.cs",
+    "Backend.Application.Tests.Unit/PersonServiceTests.cs",
+    "Backend.Infrastructure.Tests.Unit/SqlPersonRepositoryTests.cs",
+    "Backend.Presentation.Tests.Unit/CreatePersonDtoTests.cs",
+    "Backend.Presentation.Tests.Unit/CreatePersonDtoValidatorTests.cs",
+    "Backend.Presentation.Tests.Unit/CreatePersonHandlerTests.cs",
+    "Backend.Presentation.Tests.Unit/CreatePersonEndpointTests.cs"
+  ],
+  "filesModified": [],
+  "metrics": {
+    "intentsConfirmed": 33,
+    "testMethodsEmitted": 25,
+    "byLayer": {
+      "Domain": 7,
+      "Application": 5,
+      "Infrastructure": 5,
+      "Presentation": 8
+    }
+  },
+  "warnings": [
+    "Presentation-011 (CreatePersonEndpointTests) uses a real WebApplication instance instead of Moq since Moq 4.x cannot mock extension methods (MapPost on IEndpointRouteBuilder). This is consistent with the existing project workaround documented in the Presentation test csproj.",
+    "Infrastructure tests for ExistsByEmailAsync and ExistsByIdentityNumberAsync include a TestAsyncQueryProvider helper class to support EF Core async LINQ extension methods (AnyAsync) with Moq. This is a standard EF Core testing pattern, not a dummy/temporal class.",
+    "All production types (Person, IPersonRepository, PersonService, CreatePersonResult, SqlPersonRepository, CreatePersonDto, CreatePersonDtoValidator, CreatePersonHandler, CreatePersonEndpoint, etc.) are referenced but do not yet exist since the story is not implemented. Tests will compile once the implementation is created."
+  ],
+  "notes": "Generated 25 test methods across 7 test files covering all 33 confirmed intents for story SPT-UM-001-003 (Create a Person). Tests follow existing codebase conventions: NUnit 3.14.0 with Moq 4.20.72, AAA pattern with section comments, Assert.Multiple for multi-property assertions, TestCaseSource for parameterized validation tests, and consistent namespace/naming patterns. Domain tests use pure unit testing (no mocking), Application tests mock IPersonRepository, Infrastructure tests mock UCRDatabaseContext with async query support, and Presentation tests mock IPersonService and CreatePersonDtoValidator."
+}
