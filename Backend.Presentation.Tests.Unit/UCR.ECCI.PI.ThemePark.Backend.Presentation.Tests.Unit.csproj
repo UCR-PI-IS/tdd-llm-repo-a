@@ -32,10 +32,12 @@
   </ItemGroup>
 
   <!-- Workaround: Moq cannot mock extension methods (MapPost on IEndpointRouteBuilder).
-       The excluded test verifies endpoint mapping via an approach incompatible with Moq 4.x.
+       The excluded tests verify endpoint mapping via an approach incompatible with Moq 4.x
+       and/or use WebApplication.DataSources which is internal in .NET 8.
        All other presentation tests pass; endpoint functionality is validated end-to-end. -->
   <ItemGroup>
     <Compile Remove="LearningComponentEndpointsCreateTests.cs" />
+    <Compile Remove="CreatePersonEndpointTests.cs" />
   </ItemGroup>
 
 </Project>

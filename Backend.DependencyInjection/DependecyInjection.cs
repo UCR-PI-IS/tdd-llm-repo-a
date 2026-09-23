@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using UCR.ECCI.PI.ThemePark.Backend.Application;
 using UCR.ECCI.PI.ThemePark.Backend.Infrastructure;
+using UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Handlers;
+using UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Validators;
 using Microsoft.Extensions.Configuration;
 
 namespace UCR.ECCI.PI.ThemePark.Backend.DependencyInjection;
@@ -20,6 +22,10 @@ public static class DependencyInjection
     {
         services.AddApplicationLayerServices();
         services.AddInfrastructureLayerServices(configuration);
+
+        // Register Presentation layer services
+        services.AddScoped<CreatePersonHandler>();
+        services.AddScoped<CreatePersonDtoValidator>();
 
         return services;
     }
