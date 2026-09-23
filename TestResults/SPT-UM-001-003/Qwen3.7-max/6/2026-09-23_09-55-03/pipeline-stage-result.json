@@ -1,0 +1,52 @@
+{
+  "stage": "code-generation",
+  "storyId": "SPT-UM-001-003",
+  "model": "Qwen3.7-max",
+  "iteration": "6",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Domain/Entities/Person.cs",
+    "Backend.Domain/Repositories/IPersonRepository.cs",
+    "Backend.Application/Services/CreatePersonResult.cs",
+    "Backend.Application/Services/IPersonCreateService.cs",
+    "Backend.Application/Services/Implementations/PersonService.cs",
+    "Backend.Infrastructure/Repositories/SqlPersonRepository.cs",
+    "Backend.Infrastructure/EntityConfigurations/PersonEntityConfiguration.cs",
+    "Backend.Presentation/Dtos/CreatePersonDto.cs",
+    "Backend.Presentation/Dtos/CreatePersonDtoValidator.cs",
+    "Backend.Presentation/Handlers/CreatePersonHandler.cs",
+    "Backend.Presentation/Responses/CreatePersonResponse.cs",
+    "Backend.Presentation/Responses/ValidationErrorResponse.cs",
+    "Backend.Presentation/Endpoints/CreatePersonEndpoint.cs"
+  ],
+  "filesModified": [
+    "Backend.Infrastructure/UCRDatabaseContext.cs",
+    "Backend.Application/DependencyInjection.cs",
+    "Backend.Infrastructure/DependecyInjection.cs",
+    "Backend.Presentation/UCR.ECCI.PI.ThemePark.Backend.Presentation.csproj",
+    "Backend.Api/Program.cs"
+  ],
+  "metrics": {
+    "buildErrors": 0,
+    "buildWarnings": 2,
+    "testsTotal": 191,
+    "testsPassed": 191,
+    "testsFailed": 0,
+    "testsSkipped": 0,
+    "lineCoverage": 0.7986,
+    "branchCoverage": 0.8529,
+    "e2e": {
+      "status": "success",
+      "probesTotal": 2,
+      "probesPassed": 2,
+      "probesFailed": 0,
+      "seedsApplied": ["seed-SPT-UM-001-003.sql"],
+      "resultPath": "E2EResults/SPT-UM-001-003/Qwen3.7-max/6/2026-09-23_09-55-26/",
+      "cleanup": "clean"
+    }
+  },
+  "warnings": [
+    "Pre-existing CS8602 warnings in UpdateWhiteboardHandlerTests.cs and CreateWhiteboardHandlerTests.cs (not related to this story)"
+  ],
+  "notes": "Implemented full Person creation feature across all DDD layers: Domain entity with validation, Application service with duplicate checking, Infrastructure SQL repository, Presentation DTO/validator/handler/endpoint. All 191 unit tests pass and 2 e2e probes succeed against an ephemeral SQL Server."
+}

@@ -1,0 +1,32 @@
+{
+  "stage": "refactoring",
+  "storyId": "SPT-UM-001-003",
+  "model": "Qwen3.7-max",
+  "iteration": "6",
+  "status": "partial",
+  "filesCreated": [
+    "Backend.Presentation/Handlers/CreatePersonMapper.cs",
+    "Backend.Presentation/Handlers/CreatePersonResponseFactory.cs"
+  ],
+  "filesModified": [
+    "Backend.Domain/Entities/Person.cs",
+    "Backend.Presentation/Handlers/CreatePersonHandler.cs"
+  ],
+  "metrics": {
+    "loopIterationsPerformed": 3,
+    "maxLoopIterations": 10,
+    "allGreenAchieved": false,
+    "baseline": { "minMI": 55, "maxCC": 11, "maxCoupling": 24, "maxDIT": 0 },
+    "final":    { "minMI": 56, "maxCC": 7, "maxCoupling": 25, "maxDIT": 0 },
+    "remainingViolations": [
+      { "type": "SqlPersonRepository", "metric": "Coupling", "value": 11, "flag": "YELLOW" },
+      { "type": "CreatePersonResponseFactory", "metric": "Coupling", "value": 25, "flag": "YELLOW" },
+      { "type": "CreatePersonEndpoint", "metric": "Coupling", "value": 14, "flag": "YELLOW" }
+    ]
+  },
+  "warnings": [
+    "Attempted to remove [FromServices]/[FromBody] attributes from CreatePersonEndpoint to reduce coupling, but minimal API parameter binding inference failed — reverted.",
+    "CreatePersonResponseFactory (new internal type) absorbed coupling from CreatePersonHandler; coupling=25 is YELLOW but the type is internal and single-responsibility."
+  ],
+  "notes": "Extracted repeated guard clauses in Person constructor into ValidateRequiredString/ValidatePastDate helpers, reducing CC from 11 to 7 (YELLOW→GREEN). Extracted CreatePersonMapper and CreatePersonResponseFactory to decouple CreatePersonHandler from domain entity and response mapping, reducing handler coupling from 24 to 9 (YELLOW→GREEN). Remaining YELLOW violations (SqlPersonRepository coupling=11, CreatePersonEndpoint coupling=14) are inherent to their architectural patterns and cannot be reduced below 10 without breaking the repository/endpoint contracts."
+}
