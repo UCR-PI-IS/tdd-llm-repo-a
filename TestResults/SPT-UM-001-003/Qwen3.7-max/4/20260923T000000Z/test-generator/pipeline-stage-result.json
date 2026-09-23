@@ -1,0 +1,33 @@
+{
+  "stage": "test-generation",
+  "storyId": "SPT-UM-001-003",
+  "model": "Qwen3.7-max",
+  "iteration": "4",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Domain.Tests.Unit/PersonTests.cs",
+    "Backend.Application.Tests.Unit/PersonServiceTests.cs",
+    "Backend.Infrastructure.Tests.Unit/SqlPersonRepositoryTests.cs",
+    "Backend.Presentation.Tests.Unit/CreatePersonDtoTests.cs",
+    "Backend.Presentation.Tests.Unit/CreatePersonDtoValidatorTests.cs",
+    "Backend.Presentation.Tests.Unit/CreatePersonHandlerTests.cs",
+    "Backend.Presentation.Tests.Unit/CreatePersonEndpointTests.cs"
+  ],
+  "filesModified": [],
+  "metrics": {
+    "intentsConfirmed": 38,
+    "testMethodsEmitted": 29,
+    "byLayer": {
+      "Domain": 8,
+      "Application": 5,
+      "Infrastructure": 5,
+      "Presentation": 11
+    }
+  },
+  "warnings": [
+    "CreatePersonEndpointTests.cs (Presentation-011) may need to be excluded from compilation via <Compile Remove> in the .csproj because Moq 4.x cannot mock extension methods (MapPost on IEndpointRouteBuilder). This follows the existing exclusion pattern for LearningComponentEndpointsCreateTests.cs.",
+    "CreatePersonDtoValidatorTests.cs references FluentValidation types (ValidationFailure, IValidator). The Presentation project will need a FluentValidation package reference when the validator is implemented.",
+    "CreatePersonHandlerTests.cs references CreatePersonResult, IPersonCreateService, CreatePersonResponse, ValidationErrorResponse, and CreatePersonHandler types that do not yet exist. These are expected to be created during implementation."
+  ],
+  "notes": "Generated 29 test methods across 7 files covering all 38 confirmed intents for story SPT-UM-001-003 (Create a Person). Domain tests use parameterized TestCase attributes to consolidate null/empty/whitespace validation scenarios. Application tests mock IPersonRepository. Infrastructure tests mock UCRDatabaseContext and DbSet. Presentation tests cover DTO construction, FluentValidation validator, handler responses, and endpoint mapping."
+}
