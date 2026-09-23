@@ -1,0 +1,29 @@
+using UCR.ECCI.PI.ThemePark.Backend.Domain.Entities;
+
+namespace UCR.ECCI.PI.ThemePark.Backend.Domain.Repositories;
+
+/// <summary>
+/// Contract for accessing person data sources.
+/// </summary>
+public interface IPersonRepository
+{
+    /// <summary>
+    /// Adds a new person to the data source.
+    /// </summary>
+    /// <param name="person">The person to add.</param>
+    Task AddAsync(Person person);
+
+    /// <summary>
+    /// Checks whether a person with the specified email already exists.
+    /// </summary>
+    /// <param name="email">The email to check.</param>
+    /// <returns>True if a person with the email exists; otherwise, false.</returns>
+    Task<bool> ExistsByEmailAsync(string email);
+
+    /// <summary>
+    /// Checks whether a person with the specified identity number already exists.
+    /// </summary>
+    /// <param name="identityNumber">The identity number to check.</param>
+    /// <returns>True if a person with the identity number exists; otherwise, false.</returns>
+    Task<bool> ExistsByIdentityNumberAsync(string identityNumber);
+}
