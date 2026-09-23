@@ -1,0 +1,34 @@
+{
+  "stage": "test-generation",
+  "storyId": "SPT-UM-001-003",
+  "model": "Qwen3.7-max",
+  "iteration": "1",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Domain.Tests.Unit/PersonTests.cs",
+    "Backend.Application.Tests.Unit/PersonServiceTests.cs",
+    "Backend.Infrastructure.Tests.Unit/SqlPersonRepositoryTests.cs",
+    "Backend.Infrastructure.Tests.Unit/TestAsyncHelpers.cs",
+    "Backend.Presentation.Tests.Unit/CreatePersonDtoTests.cs",
+    "Backend.Presentation.Tests.Unit/CreatePersonDtoValidatorTests.cs",
+    "Backend.Presentation.Tests.Unit/CreatePersonHandlerTests.cs",
+    "Backend.Presentation.Tests.Unit/CreatePersonEndpointTests.cs"
+  ],
+  "filesModified": [],
+  "metrics": {
+    "intentsConfirmed": 38,
+    "testMethodsEmitted": 28,
+    "byLayer": {
+      "Domain": 7,
+      "Application": 5,
+      "Infrastructure": 5,
+      "Presentation": 11
+    }
+  },
+  "warnings": [
+    "CreatePersonDtoValidatorTests.cs requires FluentValidation NuGet package to be added to Backend.Presentation and Backend.Presentation.Tests.Unit projects (not currently in csproj dependencies).",
+    "CreatePersonEndpointTests.cs uses WebApplication.CreateBuilder() for endpoint resolution; may need to be excluded from compilation similar to LearningComponentEndpointsCreateTests.cs due to Moq 4.x limitations with extension methods on IEndpointRouteBuilder.",
+    "Infrastructure tests for ExistsByEmailAsync/ExistsByIdentityNumberAsync use async queryable mock helpers (TestAsyncHelpers.cs) which require Microsoft.EntityFrameworkCore.Query.IAsyncQueryProvider — available via the existing Microsoft.EntityFrameworkCore 8.0.4 dependency."
+  ],
+  "notes": "Generated 28 test methods across 8 files covering all 38 confirmed intents for the Create Person user story (SPT-UM-001-003). Domain tests cover Person entity constructor validation (null, empty, whitespace, future/today birthdate, optional phone). Application tests cover PersonService duplicate detection and error handling. Infrastructure tests cover SqlPersonRepository AddAsync and ExistsBy methods with async queryable mocks. Presentation tests cover DTO construction, FluentValidation validator, handler response mapping, and endpoint routing."
+}

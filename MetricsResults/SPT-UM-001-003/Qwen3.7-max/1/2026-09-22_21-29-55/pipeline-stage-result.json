@@ -1,0 +1,31 @@
+{
+  "stage": "refactoring",
+  "storyId": "SPT-UM-001-003",
+  "model": "Qwen3.7-max",
+  "iteration": "1",
+  "status": "partial",
+  "filesCreated": [
+    "Backend.Presentation/Mappers/CreatePersonMapper.cs",
+    "Backend.Presentation/Validators/CreatePersonValidationHelper.cs"
+  ],
+  "filesModified": [
+    "Backend.Presentation/Handlers/CreatePersonHandler.cs"
+  ],
+  "metrics": {
+    "loopIterationsPerformed": 2,
+    "maxLoopIterations": 10,
+    "allGreenAchieved": false,
+    "baseline": { "minMI": 57, "maxCC": 6, "maxCoupling": 27, "maxDIT": 1 },
+    "final":    { "minMI": 57, "maxCC": 6, "maxCoupling": 20, "maxDIT": 1 },
+    "remainingViolations": [
+      { "type": "UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Handlers.CreatePersonHandler", "metric": "Coupling", "value": 20, "flag": "YELLOW" },
+      { "type": "UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Repositories.SqlPersonRepository", "metric": "Coupling", "value": 10, "flag": "YELLOW" },
+      { "type": "UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Validators.CreatePersonValidationHelper", "metric": "Coupling", "value": 10, "flag": "YELLOW" }
+    ]
+  },
+  "warnings": [
+    "SqlPersonRepository: Attempted to replace AddAsync with synchronous Add to reduce coupling, but test AddAsync_ValidPerson_AddsToDbSetAndCallsSaveChanges expects AddAsync — reverted.",
+    "CreatePersonHandler coupling cannot reach GREEN (<=9) because the method signature alone (Results<Ok<...>, BadRequest<...>, Conflict<...>>) requires 11+ distinct type references."
+  ],
+  "notes": "Extracted validation logic into CreatePersonValidationHelper and DTO-to-domain mapping into CreatePersonMapper, reducing CreatePersonHandler coupling from 27 to 20 (26% improvement). All MI, CC, and DIT metrics are GREEN. Remaining 3 YELLOW violations are structural Class Coupling issues inherent to the ASP.NET Core typed-results pattern, EF Core repository pattern, and FluentValidation integration — cannot be resolved without changing API contracts or test expectations."
+}
