@@ -1,0 +1,33 @@
+{
+  "stage": "refactoring",
+  "storyId": "SPT-UM-001-003",
+  "model": "Qwen3.7-max",
+  "iteration": "4",
+  "status": "partial",
+  "filesCreated": [
+    "Backend.Presentation/ResponseFactories/CreatePersonResponseFactory.cs",
+    "Backend.Presentation/ResponseFactories/CreatePersonValidationHelper.cs"
+  ],
+  "filesModified": [
+    "Backend.Domain/Entities/Person.cs",
+    "Backend.Presentation/Handlers/CreatePersonHandler.cs"
+  ],
+  "metrics": {
+    "loopIterationsPerformed": 2,
+    "maxLoopIterations": 10,
+    "allGreenAchieved": false,
+    "baseline": { "minMI": 59, "maxCC": 6, "maxCoupling": 27, "maxDIT": 1 },
+    "final":    { "minMI": 58, "maxCC": 5, "maxCoupling": 19, "maxDIT": 1 },
+    "remainingViolations": [
+      { "type": "SqlPersonRepository", "metric": "Coupling", "value": 11, "flag": "YELLOW" },
+      { "type": "CreatePersonResponseFactory", "metric": "Coupling", "value": 19, "flag": "YELLOW" },
+      { "type": "CreatePersonValidationHelper", "metric": "Coupling", "value": 11, "flag": "YELLOW" }
+    ]
+  },
+  "warnings": [
+    "SqlPersonRepository AnyAsync refactoring reverted: mock DbSet does not implement IAsyncQueryProvider, breaking 4 infrastructure tests",
+    "SqlPersonRepository coupling (11) cannot be reduced without changing test infrastructure",
+    "CreatePersonResponseFactory coupling (19) is structurally limited by ASP.NET Core typed-results return signature requiring 7+ type references"
+  ],
+  "notes": "Extracted guard clauses in Person entity (static smell fix), extracted CreatePersonResponseFactory and CreatePersonValidationHelper to reduce CreatePersonHandler coupling from 27 to 8 (GREEN). Three low-severity YELLOW coupling violations remain (11-19 range, well within 10-40 YELLOW band). No RED violations. All 190 tests pass."
+}
