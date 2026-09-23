@@ -1,5 +1,7 @@
+using FluentValidation;
 using Microsoft.AspNetCore.Builder;
 using UCR.ECCI.PI.ThemePark.Backend.DependencyInjection;
+using UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Dtos;
 using UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Endpoints;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +15,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddCleanArchitectureServices(builder.Configuration);
+builder.Services.AddScoped<IValidator<CreatePersonDto>, CreatePersonDtoValidator>();
 
 var app = builder.Build();
 
@@ -39,5 +42,10 @@ app.MapLearningSpaceEndpoints();
 app.MapLearningComponentsEndpoints();
 app.MapGetLearningComponentsEndpoints();
 app.MapCreateLearningComponentsEndpoint();
+
+/// <summary>
+/// Maps the Person creation endpoint to the application.
+/// </summary>
+app.MapCreatePersonEndpoint();
 
 app.Run();
