@@ -1,0 +1,32 @@
+{
+  "stage": "refactoring",
+  "storyId": "SPT-UM-001-003",
+  "model": "Qwen3.7-max",
+  "iteration": "3",
+  "status": "partial",
+  "filesCreated": [
+    "Backend.Presentation/Mappers/PersonMapper.cs",
+    "Backend.Presentation/Handlers/CreatePersonResponseFactory.cs"
+  ],
+  "filesModified": [
+    "Backend.Infrastructure/EntityConfigurations/PersonEntityConfiguration.cs",
+    "Backend.Presentation/Handlers/CreatePersonHandler.cs",
+    "Backend.Presentation/Endpoints/CreatePersonEndpoint.cs",
+    "Backend.Api/Program.cs"
+  ],
+  "metrics": {
+    "loopIterationsPerformed": 2,
+    "maxLoopIterations": 10,
+    "allGreenAchieved": false,
+    "baseline": { "minMI": 59, "maxCC": 7, "maxCoupling": 27, "maxDIT": 1 },
+    "final":    { "minMI": 59, "maxCC": 7, "maxCoupling": 16, "maxDIT": 1 },
+    "remainingViolations": [
+      { "type": "CreatePersonHandler", "metric": "Coupling", "value": 16, "flag": "YELLOW" },
+      { "type": "CreatePersonResponseFactory", "metric": "Coupling", "value": 15, "flag": "YELLOW" },
+      { "type": "CreatePersonEndpoint", "metric": "Coupling", "value": 11, "flag": "YELLOW" },
+      { "type": "SqlPersonRepository", "metric": "Coupling", "value": 11, "flag": "YELLOW" }
+    ]
+  },
+  "warnings": [],
+  "notes": "Reduced CreatePersonHandler coupling from 27 to 16 by extracting PersonMapper and CreatePersonResponseFactory. Reduced CreatePersonEndpoint coupling from 14 to 11 by injecting handler via DI. Removed duplicate ValueGeneratedNever() in PersonEntityConfiguration. Remaining 4 YELLOW coupling violations (11-16) are at practical minimum for EF Core repositories and ASP.NET Core minimal API endpoints without architectural changes."
+}

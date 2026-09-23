@@ -1,0 +1,70 @@
+{
+  "stage": "e2e-validation",
+  "status": "failure",
+  "timestamp": "2026-09-22_22-02-49",
+  "storyId": "SPT-UM-001-003",
+  "model": "Qwen3.7-max",
+  "iteration": "3",
+  "database": {
+    "container": "themepark-sql-e2e-spt-um-001-003-qwen3-7-max-3-220249",
+    "image": "mcr.microsoft.com/mssql/server:2022-latest",
+    "network": "themepark-e2e-spt-um-001-003-qwen3-7-max-3-220249",
+    "database": "ThemePark",
+    "readySeconds": 4.7,
+    "baseSchemaApplied": [
+      "Semester.sql",
+      "Course.sql"
+    ],
+    "seedsApplied": [
+      "seed-SPT-UM-001-003.sql"
+    ]
+  },
+  "backend": {
+    "container": "themepark-api-e2e-spt-um-001-003-qwen3-7-max-3-220249",
+    "project": "Backend.Api/UCR.ECCI.PI.ThemePark.Backend.Api.csproj",
+    "publishStatus": "success",
+    "started": true,
+    "url": "http://127.0.0.1:55001",
+    "readySeconds": 2.2,
+    "errorLines": [
+      "fail: Microsoft.EntityFrameworkCore.Database.Command[20102]",
+      "fail: Microsoft.EntityFrameworkCore.Update[10000]"
+    ]
+  },
+  "probes": [
+    {
+      "name": "create person with valid data",
+      "method": "POST",
+      "path": "/api/persons",
+      "expectedStatus": 200,
+      "actualStatus": 409,
+      "passed": false,
+      "missingContent": [
+        "true"
+      ],
+      "error": null,
+      "bodySnippet": "{\"message\":\"An error occurred while saving the entity changes. See the inner exception for details.\"}"
+    }
+  ],
+  "totalProbes": 1,
+  "probesPassed": 0,
+  "probesFailed": 1,
+  "cleanup": {
+    "status": "clean",
+    "removedContainers": [
+      "themepark-api-e2e-spt-um-001-003-qwen3-7-max-3-220249",
+      "themepark-sql-e2e-spt-um-001-003-qwen3-7-max-3-220249"
+    ],
+    "removedNetworks": [
+      "themepark-e2e-spt-um-001-003-qwen3-7-max-3-220249"
+    ],
+    "removedVolumes": [
+      "themepark-app-e2e-spt-um-001-003-qwen3-7-max-3-220249"
+    ],
+    "leftovers": []
+  },
+  "warnings": [],
+  "errors": [
+    "1 probe(s) failed."
+  ]
+}
