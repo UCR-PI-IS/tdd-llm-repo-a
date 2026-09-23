@@ -1,0 +1,20 @@
+{
+  "probes": [
+    {
+      "name": "Create person (valid data)",
+      "method": "POST",
+      "path": "/api/persons",
+      "expectStatus": 200,
+      "body": {
+        "firstName": "Juan",
+        "lastName": "Perez",
+        "email": "juan.perez@themepark.ucr.ac.cr",
+        "identityNumber": "1-1234-5678",
+        "birthDate": "1995-03-15T00:00:00"
+      },
+      "headers": {
+        "Content-Type": "application/json"
+      }
+    }
+  ]
+}

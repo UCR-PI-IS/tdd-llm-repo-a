@@ -1,0 +1,41 @@
+using NUnit.Framework;
+using UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Dtos;
+
+namespace UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit;
+
+/// <summary>
+/// Unit tests for the <see cref="CreatePersonDto"/> record.
+/// Covers intent Presentation-001.
+/// </summary>
+[TestFixture]
+public class CreatePersonDtoTests
+{
+    // Valid test data constants
+    private const string ValidFirstName = "John";
+    private const string ValidLastName = "Doe";
+    private const string ValidEmail = "john.doe@example.com";
+    private const string ValidIdentityNumber = "123456789";
+    private static readonly DateTime ValidBirthDate = new(1990, 5, 15);
+
+    /// <summary>
+    /// Presentation-001: Verify that a CreatePersonDto can be created with all valid required fields
+    /// and all properties are correctly assigned.
+    /// </summary>
+    [Test]
+    [Description("Presentation-001: DTO can be created with all valid required fields")]
+    public void Constructor_ValidRequiredFields_AllPropertiesSetCorrectly()
+    {
+        // Arrange & Act
+        var dto = new CreatePersonDto(ValidFirstName, ValidLastName, ValidEmail, ValidIdentityNumber, ValidBirthDate);
+
+        // Assert
+        Assert.Multiple(() =>
+        {
+            Assert.That(dto.FirstName, Is.EqualTo(ValidFirstName));
+            Assert.That(dto.LastName, Is.EqualTo(ValidLastName));
+            Assert.That(dto.Email, Is.EqualTo(ValidEmail));
+            Assert.That(dto.IdentityNumber, Is.EqualTo(ValidIdentityNumber));
+            Assert.That(dto.BirthDate, Is.EqualTo(ValidBirthDate));
+        });
+    }
+}
