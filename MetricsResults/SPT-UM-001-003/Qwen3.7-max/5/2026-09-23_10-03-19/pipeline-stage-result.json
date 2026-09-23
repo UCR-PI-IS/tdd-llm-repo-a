@@ -1,0 +1,30 @@
+{
+  "stage": "refactoring",
+  "storyId": "SPT-UM-001-003",
+  "model": "Qwen3.7-max",
+  "iteration": "5",
+  "status": "partial",
+  "filesCreated": [],
+  "filesModified": [
+    "Backend.Domain/Entities/Person.cs",
+    "Backend.Presentation/Validators/CreatePersonDtoValidator.cs",
+    "Backend.Infrastructure/Repositories/SqlPersonRepository.cs"
+  ],
+  "metrics": {
+    "loopIterationsPerformed": 3,
+    "maxLoopIterations": 10,
+    "allGreenAchieved": false,
+    "baseline": { "minMI": 59, "maxCC": 7, "maxCoupling": 22, "maxDIT": 0 },
+    "final":    { "minMI": 58, "maxCC": 8, "maxCoupling": 22, "maxDIT": 0 },
+    "remainingViolations": [
+      { "type": "UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Handlers.CreatePersonHandler", "metric": "Coupling", "value": 22, "flag": "YELLOW" },
+      { "type": "UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Repositories.SqlPersonRepository", "metric": "Coupling", "value": 10, "flag": "YELLOW" }
+    ]
+  },
+  "warnings": [
+    "Reverted DbContext.AddAsync change in SqlPersonRepository because test mocks DbSet.AddAsync specifically",
+    "CreatePersonHandler coupling=22 is structural to the Results<Ok,BadRequest,Conflict> typed results pattern; cannot reduce without changing test assertions",
+    "SqlPersonRepository coupling=10 is structural to the EF Core repository pattern with DbSet mocking"
+  ],
+  "notes": "Three targeted refactorings were applied: (1) extracted repeated guard clauses in Person.cs into ValidateRequired/ValidateBirthDate helpers, reducing constructor CC from 6 to 1; (2) extracted validation rules in CreatePersonDtoValidator into focused helper methods, reducing Validate method CC from 7 to 1; (3) switched SqlPersonRepository from synchronous Any()+Task.FromResult to native async AnyAsync, reducing coupling from 11 to 10. Two YELLOW coupling violations remain due to structural constraints imposed by test expectations."
+}
