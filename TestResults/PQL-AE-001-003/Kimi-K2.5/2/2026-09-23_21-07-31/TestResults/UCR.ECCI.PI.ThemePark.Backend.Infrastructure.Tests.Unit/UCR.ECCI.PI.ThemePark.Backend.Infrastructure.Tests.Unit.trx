@@ -1,0 +1,224 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="617ce82e-0d56-4d1f-a7e9-bba8e3be609f" name="@9cf4e2d2e217 2026-09-24 03:07:45" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-09-24T03:07:45.2107529+00:00" queuing="2026-09-24T03:07:45.2107530+00:00" start="2026-09-24T03:07:44.5430900+00:00" finish="2026-09-24T03:07:45.6351425+00:00" />
+  <TestSettings name="default" id="a66ca0c6-0248-4341-b8ee-f78889595706">
+    <Deployment runDeploymentRoot="_9cf4e2d2e217_2026-09-24_03_07_45" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="6316a692-9a7e-4597-98f7-4506461670e9" testId="5e6b6ecc-5263-32ca-105b-50e7a1160ff1" testName="AddAsync_DuplicateId_ThrowsDbUpdateException" computerName="9cf4e2d2e217" duration="00:00:00.0745450" startTime="2026-09-24T03:07:45.0856861+00:00" endTime="2026-09-24T03:07:45.1602312+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="6316a692-9a7e-4597-98f7-4506461670e9" />
+    <UnitTestResult executionId="2fbb778a-487e-4dec-8011-15ab7918d346" testId="320f2472-612f-1df6-c4d5-e514c9e53c18" testName="AddAsync_ValidWhiteboard_AddsToDbSetAndCallsSaveChanges" computerName="9cf4e2d2e217" duration="00:00:00.0010500" startTime="2026-09-24T03:07:45.4518842+00:00" endTime="2026-09-24T03:07:45.4529342+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2fbb778a-487e-4dec-8011-15ab7918d346" />
+    <UnitTestResult executionId="3d3a32c9-2844-4311-b489-2b8d73ff0f80" testId="952ddc32-d274-037e-6210-7a3dcfa9e00b" testName="ExistsByNameAsync_NameExists_ReturnsTrue" computerName="9cf4e2d2e217" duration="00:00:00.0006579" startTime="2026-09-24T03:07:45.4451619+00:00" endTime="2026-09-24T03:07:45.4458198+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3d3a32c9-2844-4311-b489-2b8d73ff0f80">
+      <Output>
+        <ErrorInfo>
+          <Message>System.NotSupportedException : Specified method is not supported.</Message>
+          <StackTrace>   at Microsoft.EntityFrameworkCore.DbSet`1.System.Collections.IEnumerable.GetEnumerator()
+   at UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Repositories.SqlUniversityRepository.ExistsByNameAsync(String name) in /workspace/Backend.Infrastructure/Repositories/SqlUniversityRepository.cs:line 45
+   at UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.SqlUniversityRepositoryTests.ExistsByNameAsync_NameExists_ReturnsTrue() in /workspace/Backend.Infrastructure.Tests.Unit/SqlUniversityRepositoryTests.cs:line 81
+   at NUnit.Framework.Internal.TaskAwaitAdapter.GenericAdapter`1.GetResult()
+   at NUnit.Framework.Internal.AsyncToSyncAdapter.Await(Func`1 invoke)
+   at NUnit.Framework.Internal.Commands.TestMethodCommand.RunTestMethod(TestExecutionContext context)
+   at NUnit.Framework.Internal.Commands.TestMethodCommand.Execute(TestExecutionContext context)
+   at NUnit.Framework.Internal.Commands.BeforeAndAfterTestCommand.&lt;&gt;c__DisplayClass1_0.&lt;Execute&gt;b__0()
+   at NUnit.Framework.Internal.Commands.DelegatingTestCommand.RunTestMethodInThreadAbortSafeZone(TestExecutionContext context, Action action)
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="0d81d01d-3738-4293-9984-43f81666a056" testId="7384165b-9f31-8ea0-4ab2-b928d51873c0" testName="ExistsAsync_ComponentExists_ReturnsTrue" computerName="9cf4e2d2e217" duration="00:00:00.0009010" startTime="2026-09-24T03:07:45.1749695+00:00" endTime="2026-09-24T03:07:45.1758703+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="0d81d01d-3738-4293-9984-43f81666a056" />
+    <UnitTestResult executionId="e92ecd6c-62fb-4ba7-8720-39aa65d82740" testId="dc89fba1-ce54-1fb4-bf59-f33697b8d4ff" testName="ExistsByIdentityNumberAsync_IdentityNumberExists_ReturnsTrue" computerName="9cf4e2d2e217" duration="00:00:00.0005080" startTime="2026-09-24T03:07:45.4282548+00:00" endTime="2026-09-24T03:07:45.4287626+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e92ecd6c-62fb-4ba7-8720-39aa65d82740" />
+    <UnitTestResult executionId="8c27a308-4dc3-4669-8c52-532992e129da" testId="5144c2e7-fb9a-b687-b456-87a30eb72943" testName="GenerateIdAsync_ReturnsUniqueIdWithCorrectFormat" computerName="9cf4e2d2e217" duration="00:00:00.0008000" startTime="2026-09-24T03:07:45.0840179+00:00" endTime="2026-09-24T03:07:45.0848183+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="8c27a308-4dc3-4669-8c52-532992e129da" />
+    <UnitTestResult executionId="504987d7-0876-47c2-880c-8658d396312d" testId="6a0027cd-2596-b887-5382-015dfc14571b" testName="AddAsync_UniqueId_CallsAddAndSaveChanges" computerName="9cf4e2d2e217" duration="00:00:00.0045050" startTime="2026-09-24T03:07:45.1602543+00:00" endTime="2026-09-24T03:07:45.1647592+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="504987d7-0876-47c2-880c-8658d396312d" />
+    <UnitTestResult executionId="2c8f89f0-7bb4-45ef-ac93-0f481b812c22" testId="b169ece1-f1aa-1008-b7df-3b8b24277612" testName="ExistsByIdentityNumberAsync_IdentityNumberDoesNotExist_ReturnsFalse" computerName="9cf4e2d2e217" duration="00:00:00.0015230" startTime="2026-09-24T03:07:45.4267150+00:00" endTime="2026-09-24T03:07:45.4282384+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2c8f89f0-7bb4-45ef-ac93-0f481b812c22" />
+    <UnitTestResult executionId="166de97b-aead-449b-a0d2-2c6e7f7659c4" testId="cabac07f-0115-2356-1d37-43e0979e24ef" testName="UpdateAsync_ValidWhiteboard_UpdatesAndSaves" computerName="9cf4e2d2e217" duration="00:00:00.0013430" startTime="2026-09-24T03:07:45.4654240+00:00" endTime="2026-09-24T03:07:45.4667667+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="166de97b-aead-449b-a0d2-2c6e7f7659c4" />
+    <UnitTestResult executionId="42833a09-d28d-44aa-8326-eab15d1e9976" testId="7a2db7ec-a266-8e80-6fd5-45fec7e79c01" testName="AddAsync_SaveChangesFails_ThrowsDatabaseException" computerName="9cf4e2d2e217" duration="00:00:00.0060010" startTime="2026-09-24T03:07:45.4458686+00:00" endTime="2026-09-24T03:07:45.4518696+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="42833a09-d28d-44aa-8326-eab15d1e9976" />
+    <UnitTestResult executionId="b9c86dfd-2e13-430e-98fd-b93889e11e4f" testId="ded28fb3-bc6a-70dc-c322-8bacdaea536d" testName="ExistsByNameAsync_NameDoesNotExist_ReturnsFalse" computerName="9cf4e2d2e217" duration="00:00:00.0058040" startTime="2026-09-24T03:07:45.4392992+00:00" endTime="2026-09-24T03:07:45.4451027+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b9c86dfd-2e13-430e-98fd-b93889e11e4f">
+      <Output>
+        <ErrorInfo>
+          <Message>System.NotSupportedException : Specified method is not supported.</Message>
+          <StackTrace>   at Microsoft.EntityFrameworkCore.DbSet`1.System.Collections.IEnumerable.GetEnumerator()
+   at UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Repositories.SqlUniversityRepository.ExistsByNameAsync(String name) in /workspace/Backend.Infrastructure/Repositories/SqlUniversityRepository.cs:line 45
+   at UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.SqlUniversityRepositoryTests.ExistsByNameAsync_NameDoesNotExist_ReturnsFalse() in /workspace/Backend.Infrastructure.Tests.Unit/SqlUniversityRepositoryTests.cs:line 102
+   at NUnit.Framework.Internal.TaskAwaitAdapter.GenericAdapter`1.GetResult()
+   at NUnit.Framework.Internal.AsyncToSyncAdapter.Await(Func`1 invoke)
+   at NUnit.Framework.Internal.Commands.TestMethodCommand.RunTestMethod(TestExecutionContext context)
+   at NUnit.Framework.Internal.Commands.TestMethodCommand.Execute(TestExecutionContext context)
+   at NUnit.Framework.Internal.Commands.BeforeAndAfterTestCommand.&lt;&gt;c__DisplayClass1_0.&lt;Execute&gt;b__0()
+   at NUnit.Framework.Internal.Commands.DelegatingTestCommand.RunTestMethodInThreadAbortSafeZone(TestExecutionContext context, Action action)
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="4f29ac44-9c2f-4118-a868-6728050f0c68" testId="608ed9dd-373a-8bef-8869-015a6b360119" testName="GenerateIdAsync_MultipleCalls_ReturnsDifferentIds" computerName="9cf4e2d2e217" duration="00:00:00.0068830" startTime="2026-09-24T03:07:45.0739623+00:00" endTime="2026-09-24T03:07:45.0808157+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4f29ac44-9c2f-4118-a868-6728050f0c68" />
+    <UnitTestResult executionId="7579eb32-705e-47fa-878b-d8ba668b5902" testId="9b3c7b0d-25f2-396c-0ddc-be74763f77ba" testName="ExistsAsync_ComponentDoesNotExist_ReturnsFalse" computerName="9cf4e2d2e217" duration="00:00:00.0101700" startTime="2026-09-24T03:07:45.1647797+00:00" endTime="2026-09-24T03:07:45.1749499+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="7579eb32-705e-47fa-878b-d8ba668b5902" />
+    <UnitTestResult executionId="128c628f-56d0-4f0d-bf33-8ae64f130f9b" testId="5b4b3199-de53-b8d0-0670-582c9b9620bf" testName="GetByLearningSpaceIdAsync_WhiteboardsInSpace_ReturnsList" computerName="9cf4e2d2e217" duration="00:00:00.0096130" startTime="2026-09-24T03:07:45.4557941+00:00" endTime="2026-09-24T03:07:45.4654074+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="128c628f-56d0-4f0d-bf33-8ae64f130f9b" />
+    <UnitTestResult executionId="4f52e80a-8250-4cca-811b-ae0bafe5464d" testId="020a5432-8ce1-187b-4114-5ce542074264" testName="AddAsync_ValidUniversity_AddsToDbSetAndCallsSaveChanges" computerName="9cf4e2d2e217" duration="00:00:00.0104480" startTime="2026-09-24T03:07:45.4288301+00:00" endTime="2026-09-24T03:07:45.4392783+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4f52e80a-8250-4cca-811b-ae0bafe5464d" />
+    <UnitTestResult executionId="f87c599a-3c54-4b1f-8219-964e228c64af" testId="fa6e0d93-1d6e-7d72-3d50-3ec0708f574c" testName="GetByIdAsync_NonExistentWhiteboard_ReturnsNull" computerName="9cf4e2d2e217" duration="00:00:00.0006060" startTime="2026-09-24T03:07:45.4551728+00:00" endTime="2026-09-24T03:07:45.4557785+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f87c599a-3c54-4b1f-8219-964e228c64af" />
+    <UnitTestResult executionId="22b03c0d-a779-43e6-953f-0c18466b8de1" testId="d17a15e8-7f96-2a39-8928-4a7d1a61ee6b" testName="AddAsync_ValidLearningSpace_AddsToDbSetAndCallsSaveChanges" computerName="9cf4e2d2e217" duration="00:00:00.0008680" startTime="2026-09-24T03:07:45.1939954+00:00" endTime="2026-09-24T03:07:45.1948628+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="22b03c0d-a779-43e6-953f-0c18466b8de1" />
+    <UnitTestResult executionId="753bcf8b-61a0-4223-98c3-376629d95029" testId="5979b915-3030-7596-88a6-06fe246113af" testName="GetComponentsByLearningSpaceIdAsync_NoMatchingComponents_ReturnsEmptyList(&quot;NON-EXISTENT-999&quot;)" computerName="9cf4e2d2e217" duration="00:00:00.0006640" startTime="2026-09-24T03:07:45.1795519+00:00" endTime="2026-09-24T03:07:45.1802163+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="753bcf8b-61a0-4223-98c3-376629d95029" />
+    <UnitTestResult executionId="1c1f7c22-7669-4db6-aefe-1f13286593f3" testId="476012b1-bf9a-e01b-8dea-a7333c9924cc" testName="ExistsByEmailAsync_EmailExists_ReturnsTrue" computerName="9cf4e2d2e217" duration="00:00:00.0052010" startTime="2026-09-24T03:07:45.4214980+00:00" endTime="2026-09-24T03:07:45.4266987+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="1c1f7c22-7669-4db6-aefe-1f13286593f3" />
+    <UnitTestResult executionId="31ff6973-49c8-4355-8f16-febd5ce63ee1" testId="20bce922-6b11-3dd0-7e7c-75e0fa3a35c9" testName="GetComponentsByLearningSpaceIdAsync_ValidIdWithComponents_ReturnsList" computerName="9cf4e2d2e217" duration="00:00:00.0009400" startTime="2026-09-24T03:07:45.1802495+00:00" endTime="2026-09-24T03:07:45.1811896+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="31ff6973-49c8-4355-8f16-febd5ce63ee1" />
+    <UnitTestResult executionId="8e92c54c-8127-457d-a409-18233fbf5ce2" testId="cfa8760d-306a-18f3-4d50-b8a61b02ee5a" testName="ExistsByEmailAsync_EmailDoesNotExist_ReturnsFalse" computerName="9cf4e2d2e217" duration="00:00:00.0128800" startTime="2026-09-24T03:07:45.4085977+00:00" endTime="2026-09-24T03:07:45.4214772+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="8e92c54c-8127-457d-a409-18233fbf5ce2" />
+    <UnitTestResult executionId="190576cc-bad3-4706-b7cd-c93f53d457cf" testId="66920399-61af-fdad-d641-833ec78aa0b0" testName="AddAsync_SaveChangesFails_PropagatesDbUpdateException" computerName="9cf4e2d2e217" duration="00:00:00.0016070" startTime="2026-09-24T03:07:45.1923634+00:00" endTime="2026-09-24T03:07:45.1939705+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="190576cc-bad3-4706-b7cd-c93f53d457cf" />
+    <UnitTestResult executionId="6acf8772-8752-46dc-b94f-455d6cb176f5" testId="03ae0261-f544-d9e0-bfcc-c301017c7897" testName="GetComponentsByLearningSpaceIdAsync_NoMatchingComponents_ReturnsEmptyList(&quot;IF-0103&quot;)" computerName="9cf4e2d2e217" duration="00:00:00.0035820" startTime="2026-09-24T03:07:45.1759563+00:00" endTime="2026-09-24T03:07:45.1795378+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="6acf8772-8752-46dc-b94f-455d6cb176f5" />
+    <UnitTestResult executionId="6d079289-f7d5-4aa0-969c-5f40540b3435" testId="f6657235-7387-e229-33cc-1bac7383e9cd" testName="AddAsync_ValidPerson_AddsToDbSetAndCallsSaveChanges" computerName="9cf4e2d2e217" duration="00:00:00.2136490" startTime="2026-09-24T03:07:45.1949156+00:00" endTime="2026-09-24T03:07:45.4085636+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="6d079289-f7d5-4aa0-969c-5f40540b3435" />
+    <UnitTestResult executionId="6f9f74e2-92b4-4a34-93f9-20ab4a726093" testId="4d10ec4e-db24-54e8-3343-3e47ba9feb8f" testName="GetByIdAsync_ExistingWhiteboard_ReturnsWhiteboard" computerName="9cf4e2d2e217" duration="00:00:00.0021490" startTime="2026-09-24T03:07:45.4530076+00:00" endTime="2026-09-24T03:07:45.4551568+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="6f9f74e2-92b4-4a34-93f9-20ab4a726093" />
+    <UnitTestResult executionId="dbb98c55-92c2-45d0-9bcc-01195ac99b59" testId="80f55917-cdee-a912-df4c-b6f50d8ac45f" testName="AddAsync_MultipleLearningSpaces_CallsAddForEachEntity" computerName="9cf4e2d2e217" duration="00:00:00.0111170" startTime="2026-09-24T03:07:45.1812389+00:00" endTime="2026-09-24T03:07:45.1923554+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="dbb98c55-92c2-45d0-9bcc-01195ac99b59" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="AddAsync_ValidLearningSpace_AddsToDbSetAndCallsSaveChanges" storage="/workspace/backend.infrastructure.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.infrastructure.tests.unit.dll" id="d17a15e8-7f96-2a39-8928-4a7d1a61ee6b">
+      <Execution id="22b03c0d-a779-43e6-953f-0c18466b8de1" />
+      <TestMethod codeBase="/workspace/Backend.Infrastructure.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.SqlLearningSpaceRepositoryTests" name="AddAsync_ValidLearningSpace_AddsToDbSetAndCallsSaveChanges" />
+    </UnitTest>
+    <UnitTest name="GenerateIdAsync_ReturnsUniqueIdWithCorrectFormat" storage="/workspace/backend.infrastructure.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.infrastructure.tests.unit.dll" id="5144c2e7-fb9a-b687-b456-87a30eb72943">
+      <Execution id="8c27a308-4dc3-4669-8c52-532992e129da" />
+      <TestMethod codeBase="/workspace/Backend.Infrastructure.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.ComponentIdGeneratorTests" name="GenerateIdAsync_ReturnsUniqueIdWithCorrectFormat" />
+    </UnitTest>
+    <UnitTest name="ExistsByNameAsync_NameDoesNotExist_ReturnsFalse" storage="/workspace/backend.infrastructure.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.infrastructure.tests.unit.dll" id="ded28fb3-bc6a-70dc-c322-8bacdaea536d">
+      <Execution id="b9c86dfd-2e13-430e-98fd-b93889e11e4f" />
+      <TestMethod codeBase="/workspace/Backend.Infrastructure.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.SqlUniversityRepositoryTests" name="ExistsByNameAsync_NameDoesNotExist_ReturnsFalse" />
+    </UnitTest>
+    <UnitTest name="GetByIdAsync_ExistingWhiteboard_ReturnsWhiteboard" storage="/workspace/backend.infrastructure.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.infrastructure.tests.unit.dll" id="4d10ec4e-db24-54e8-3343-3e47ba9feb8f">
+      <Execution id="6f9f74e2-92b4-4a34-93f9-20ab4a726093" />
+      <TestMethod codeBase="/workspace/Backend.Infrastructure.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.SqlWhiteboardRepositoryUpdateTests" name="GetByIdAsync_ExistingWhiteboard_ReturnsWhiteboard" />
+    </UnitTest>
+    <UnitTest name="ExistsByIdentityNumberAsync_IdentityNumberExists_ReturnsTrue" storage="/workspace/backend.infrastructure.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.infrastructure.tests.unit.dll" id="dc89fba1-ce54-1fb4-bf59-f33697b8d4ff">
+      <Execution id="e92ecd6c-62fb-4ba7-8720-39aa65d82740" />
+      <TestMethod codeBase="/workspace/Backend.Infrastructure.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.SqlPersonRepositoryTests" name="ExistsByIdentityNumberAsync_IdentityNumberExists_ReturnsTrue" />
+    </UnitTest>
+    <UnitTest name="AddAsync_ValidUniversity_AddsToDbSetAndCallsSaveChanges" storage="/workspace/backend.infrastructure.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.infrastructure.tests.unit.dll" id="020a5432-8ce1-187b-4114-5ce542074264">
+      <Execution id="4f52e80a-8250-4cca-811b-ae0bafe5464d" />
+      <TestMethod codeBase="/workspace/Backend.Infrastructure.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.SqlUniversityRepositoryTests" name="AddAsync_ValidUniversity_AddsToDbSetAndCallsSaveChanges" />
+    </UnitTest>
+    <UnitTest name="AddAsync_DuplicateId_ThrowsDbUpdateException" storage="/workspace/backend.infrastructure.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.infrastructure.tests.unit.dll" id="5e6b6ecc-5263-32ca-105b-50e7a1160ff1">
+      <Execution id="6316a692-9a7e-4597-98f7-4506461670e9" />
+      <TestMethod codeBase="/workspace/Backend.Infrastructure.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.SqlLearningComponentRepositoryCreateTests" name="AddAsync_DuplicateId_ThrowsDbUpdateException" />
+    </UnitTest>
+    <UnitTest name="AddAsync_UniqueId_CallsAddAndSaveChanges" storage="/workspace/backend.infrastructure.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.infrastructure.tests.unit.dll" id="6a0027cd-2596-b887-5382-015dfc14571b">
+      <Execution id="504987d7-0876-47c2-880c-8658d396312d" />
+      <TestMethod codeBase="/workspace/Backend.Infrastructure.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.SqlLearningComponentRepositoryCreateTests" name="AddAsync_UniqueId_CallsAddAndSaveChanges" />
+    </UnitTest>
+    <UnitTest name="GetComponentsByLearningSpaceIdAsync_NoMatchingComponents_ReturnsEmptyList(&quot;NON-EXISTENT-999&quot;)" storage="/workspace/backend.infrastructure.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.infrastructure.tests.unit.dll" id="5979b915-3030-7596-88a6-06fe246113af">
+      <Execution id="753bcf8b-61a0-4223-98c3-376629d95029" />
+      <TestMethod codeBase="/workspace/Backend.Infrastructure.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.SqlLearningComponentRepositoryTests" name="GetComponentsByLearningSpaceIdAsync_NoMatchingComponents_ReturnsEmptyList(&quot;NON-EXISTENT-999&quot;)" />
+    </UnitTest>
+    <UnitTest name="ExistsByEmailAsync_EmailExists_ReturnsTrue" storage="/workspace/backend.infrastructure.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.infrastructure.tests.unit.dll" id="476012b1-bf9a-e01b-8dea-a7333c9924cc">
+      <Execution id="1c1f7c22-7669-4db6-aefe-1f13286593f3" />
+      <TestMethod codeBase="/workspace/Backend.Infrastructure.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.SqlPersonRepositoryTests" name="ExistsByEmailAsync_EmailExists_ReturnsTrue" />
+    </UnitTest>
+    <UnitTest name="ExistsByIdentityNumberAsync_IdentityNumberDoesNotExist_ReturnsFalse" storage="/workspace/backend.infrastructure.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.infrastructure.tests.unit.dll" id="b169ece1-f1aa-1008-b7df-3b8b24277612">
+      <Execution id="2c8f89f0-7bb4-45ef-ac93-0f481b812c22" />
+      <TestMethod codeBase="/workspace/Backend.Infrastructure.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.SqlPersonRepositoryTests" name="ExistsByIdentityNumberAsync_IdentityNumberDoesNotExist_ReturnsFalse" />
+    </UnitTest>
+    <UnitTest name="GetComponentsByLearningSpaceIdAsync_NoMatchingComponents_ReturnsEmptyList(&quot;IF-0103&quot;)" storage="/workspace/backend.infrastructure.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.infrastructure.tests.unit.dll" id="03ae0261-f544-d9e0-bfcc-c301017c7897">
+      <Execution id="6acf8772-8752-46dc-b94f-455d6cb176f5" />
+      <TestMethod codeBase="/workspace/Backend.Infrastructure.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.SqlLearningComponentRepositoryTests" name="GetComponentsByLearningSpaceIdAsync_NoMatchingComponents_ReturnsEmptyList(&quot;IF-0103&quot;)" />
+    </UnitTest>
+    <UnitTest name="ExistsByNameAsync_NameExists_ReturnsTrue" storage="/workspace/backend.infrastructure.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.infrastructure.tests.unit.dll" id="952ddc32-d274-037e-6210-7a3dcfa9e00b">
+      <Execution id="3d3a32c9-2844-4311-b489-2b8d73ff0f80" />
+      <TestMethod codeBase="/workspace/Backend.Infrastructure.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.SqlUniversityRepositoryTests" name="ExistsByNameAsync_NameExists_ReturnsTrue" />
+    </UnitTest>
+    <UnitTest name="GetByLearningSpaceIdAsync_WhiteboardsInSpace_ReturnsList" storage="/workspace/backend.infrastructure.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.infrastructure.tests.unit.dll" id="5b4b3199-de53-b8d0-0670-582c9b9620bf">
+      <Execution id="128c628f-56d0-4f0d-bf33-8ae64f130f9b" />
+      <TestMethod codeBase="/workspace/Backend.Infrastructure.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.SqlWhiteboardRepositoryUpdateTests" name="GetByLearningSpaceIdAsync_WhiteboardsInSpace_ReturnsList" />
+    </UnitTest>
+    <UnitTest name="AddAsync_ValidWhiteboard_AddsToDbSetAndCallsSaveChanges" storage="/workspace/backend.infrastructure.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.infrastructure.tests.unit.dll" id="320f2472-612f-1df6-c4d5-e514c9e53c18">
+      <Execution id="2fbb778a-487e-4dec-8011-15ab7918d346" />
+      <TestMethod codeBase="/workspace/Backend.Infrastructure.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.SqlWhiteboardRepositoryTests" name="AddAsync_ValidWhiteboard_AddsToDbSetAndCallsSaveChanges" />
+    </UnitTest>
+    <UnitTest name="AddAsync_SaveChangesFails_PropagatesDbUpdateException" storage="/workspace/backend.infrastructure.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.infrastructure.tests.unit.dll" id="66920399-61af-fdad-d641-833ec78aa0b0">
+      <Execution id="190576cc-bad3-4706-b7cd-c93f53d457cf" />
+      <TestMethod codeBase="/workspace/Backend.Infrastructure.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.SqlLearningSpaceRepositoryTests" name="AddAsync_SaveChangesFails_PropagatesDbUpdateException" />
+    </UnitTest>
+    <UnitTest name="GenerateIdAsync_MultipleCalls_ReturnsDifferentIds" storage="/workspace/backend.infrastructure.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.infrastructure.tests.unit.dll" id="608ed9dd-373a-8bef-8869-015a6b360119">
+      <Execution id="4f29ac44-9c2f-4118-a868-6728050f0c68" />
+      <TestMethod codeBase="/workspace/Backend.Infrastructure.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.ComponentIdGeneratorTests" name="GenerateIdAsync_MultipleCalls_ReturnsDifferentIds" />
+    </UnitTest>
+    <UnitTest name="AddAsync_ValidPerson_AddsToDbSetAndCallsSaveChanges" storage="/workspace/backend.infrastructure.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.infrastructure.tests.unit.dll" id="f6657235-7387-e229-33cc-1bac7383e9cd">
+      <Execution id="6d079289-f7d5-4aa0-969c-5f40540b3435" />
+      <TestMethod codeBase="/workspace/Backend.Infrastructure.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.SqlPersonRepositoryTests" name="AddAsync_ValidPerson_AddsToDbSetAndCallsSaveChanges" />
+    </UnitTest>
+    <UnitTest name="ExistsByEmailAsync_EmailDoesNotExist_ReturnsFalse" storage="/workspace/backend.infrastructure.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.infrastructure.tests.unit.dll" id="cfa8760d-306a-18f3-4d50-b8a61b02ee5a">
+      <Execution id="8e92c54c-8127-457d-a409-18233fbf5ce2" />
+      <TestMethod codeBase="/workspace/Backend.Infrastructure.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.SqlPersonRepositoryTests" name="ExistsByEmailAsync_EmailDoesNotExist_ReturnsFalse" />
+    </UnitTest>
+    <UnitTest name="AddAsync_SaveChangesFails_ThrowsDatabaseException" storage="/workspace/backend.infrastructure.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.infrastructure.tests.unit.dll" id="7a2db7ec-a266-8e80-6fd5-45fec7e79c01">
+      <Execution id="42833a09-d28d-44aa-8326-eab15d1e9976" />
+      <TestMethod codeBase="/workspace/Backend.Infrastructure.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.SqlWhiteboardRepositoryTests" name="AddAsync_SaveChangesFails_ThrowsDatabaseException" />
+    </UnitTest>
+    <UnitTest name="AddAsync_MultipleLearningSpaces_CallsAddForEachEntity" storage="/workspace/backend.infrastructure.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.infrastructure.tests.unit.dll" id="80f55917-cdee-a912-df4c-b6f50d8ac45f">
+      <Execution id="dbb98c55-92c2-45d0-9bcc-01195ac99b59" />
+      <TestMethod codeBase="/workspace/Backend.Infrastructure.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.SqlLearningSpaceRepositoryTests" name="AddAsync_MultipleLearningSpaces_CallsAddForEachEntity" />
+    </UnitTest>
+    <UnitTest name="ExistsAsync_ComponentExists_ReturnsTrue" storage="/workspace/backend.infrastructure.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.infrastructure.tests.unit.dll" id="7384165b-9f31-8ea0-4ab2-b928d51873c0">
+      <Execution id="0d81d01d-3738-4293-9984-43f81666a056" />
+      <TestMethod codeBase="/workspace/Backend.Infrastructure.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.SqlLearningComponentRepositoryCreateTests" name="ExistsAsync_ComponentExists_ReturnsTrue" />
+    </UnitTest>
+    <UnitTest name="GetByIdAsync_NonExistentWhiteboard_ReturnsNull" storage="/workspace/backend.infrastructure.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.infrastructure.tests.unit.dll" id="fa6e0d93-1d6e-7d72-3d50-3ec0708f574c">
+      <Execution id="f87c599a-3c54-4b1f-8219-964e228c64af" />
+      <TestMethod codeBase="/workspace/Backend.Infrastructure.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.SqlWhiteboardRepositoryUpdateTests" name="GetByIdAsync_NonExistentWhiteboard_ReturnsNull" />
+    </UnitTest>
+    <UnitTest name="UpdateAsync_ValidWhiteboard_UpdatesAndSaves" storage="/workspace/backend.infrastructure.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.infrastructure.tests.unit.dll" id="cabac07f-0115-2356-1d37-43e0979e24ef">
+      <Execution id="166de97b-aead-449b-a0d2-2c6e7f7659c4" />
+      <TestMethod codeBase="/workspace/Backend.Infrastructure.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.SqlWhiteboardRepositoryUpdateTests" name="UpdateAsync_ValidWhiteboard_UpdatesAndSaves" />
+    </UnitTest>
+    <UnitTest name="GetComponentsByLearningSpaceIdAsync_ValidIdWithComponents_ReturnsList" storage="/workspace/backend.infrastructure.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.infrastructure.tests.unit.dll" id="20bce922-6b11-3dd0-7e7c-75e0fa3a35c9">
+      <Execution id="31ff6973-49c8-4355-8f16-febd5ce63ee1" />
+      <TestMethod codeBase="/workspace/Backend.Infrastructure.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.SqlLearningComponentRepositoryTests" name="GetComponentsByLearningSpaceIdAsync_ValidIdWithComponents_ReturnsList" />
+    </UnitTest>
+    <UnitTest name="ExistsAsync_ComponentDoesNotExist_ReturnsFalse" storage="/workspace/backend.infrastructure.tests.unit/bin/release/net8.0/ucr.ecci.pi.themepark.backend.infrastructure.tests.unit.dll" id="9b3c7b0d-25f2-396c-0ddc-be74763f77ba">
+      <Execution id="7579eb32-705e-47fa-878b-d8ba668b5902" />
+      <TestMethod codeBase="/workspace/Backend.Infrastructure.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.dll" adapterTypeName="executor://nunit3testexecutor/" className="UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.SqlLearningComponentRepositoryCreateTests" name="ExistsAsync_ComponentDoesNotExist_ReturnsFalse" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="5e6b6ecc-5263-32ca-105b-50e7a1160ff1" executionId="6316a692-9a7e-4597-98f7-4506461670e9" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="320f2472-612f-1df6-c4d5-e514c9e53c18" executionId="2fbb778a-487e-4dec-8011-15ab7918d346" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="952ddc32-d274-037e-6210-7a3dcfa9e00b" executionId="3d3a32c9-2844-4311-b489-2b8d73ff0f80" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="7384165b-9f31-8ea0-4ab2-b928d51873c0" executionId="0d81d01d-3738-4293-9984-43f81666a056" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="dc89fba1-ce54-1fb4-bf59-f33697b8d4ff" executionId="e92ecd6c-62fb-4ba7-8720-39aa65d82740" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="5144c2e7-fb9a-b687-b456-87a30eb72943" executionId="8c27a308-4dc3-4669-8c52-532992e129da" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="6a0027cd-2596-b887-5382-015dfc14571b" executionId="504987d7-0876-47c2-880c-8658d396312d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b169ece1-f1aa-1008-b7df-3b8b24277612" executionId="2c8f89f0-7bb4-45ef-ac93-0f481b812c22" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="cabac07f-0115-2356-1d37-43e0979e24ef" executionId="166de97b-aead-449b-a0d2-2c6e7f7659c4" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="7a2db7ec-a266-8e80-6fd5-45fec7e79c01" executionId="42833a09-d28d-44aa-8326-eab15d1e9976" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ded28fb3-bc6a-70dc-c322-8bacdaea536d" executionId="b9c86dfd-2e13-430e-98fd-b93889e11e4f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="608ed9dd-373a-8bef-8869-015a6b360119" executionId="4f29ac44-9c2f-4118-a868-6728050f0c68" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="9b3c7b0d-25f2-396c-0ddc-be74763f77ba" executionId="7579eb32-705e-47fa-878b-d8ba668b5902" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="5b4b3199-de53-b8d0-0670-582c9b9620bf" executionId="128c628f-56d0-4f0d-bf33-8ae64f130f9b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="020a5432-8ce1-187b-4114-5ce542074264" executionId="4f52e80a-8250-4cca-811b-ae0bafe5464d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="fa6e0d93-1d6e-7d72-3d50-3ec0708f574c" executionId="f87c599a-3c54-4b1f-8219-964e228c64af" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="d17a15e8-7f96-2a39-8928-4a7d1a61ee6b" executionId="22b03c0d-a779-43e6-953f-0c18466b8de1" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="5979b915-3030-7596-88a6-06fe246113af" executionId="753bcf8b-61a0-4223-98c3-376629d95029" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="476012b1-bf9a-e01b-8dea-a7333c9924cc" executionId="1c1f7c22-7669-4db6-aefe-1f13286593f3" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="20bce922-6b11-3dd0-7e7c-75e0fa3a35c9" executionId="31ff6973-49c8-4355-8f16-febd5ce63ee1" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="cfa8760d-306a-18f3-4d50-b8a61b02ee5a" executionId="8e92c54c-8127-457d-a409-18233fbf5ce2" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="66920399-61af-fdad-d641-833ec78aa0b0" executionId="190576cc-bad3-4706-b7cd-c93f53d457cf" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="03ae0261-f544-d9e0-bfcc-c301017c7897" executionId="6acf8772-8752-46dc-b94f-455d6cb176f5" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f6657235-7387-e229-33cc-1bac7383e9cd" executionId="6d079289-f7d5-4aa0-969c-5f40540b3435" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="4d10ec4e-db24-54e8-3343-3e47ba9feb8f" executionId="6f9f74e2-92b4-4a34-93f9-20ab4a726093" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="80f55917-cdee-a912-df4c-b6f50d8ac45f" executionId="dbb98c55-92c2-45d0-9bcc-01195ac99b59" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="26" executed="26" passed="24" failed="2" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>NUnit Adapter 4.6.0.0: Test execution started
+Running all tests in /workspace/Backend.Infrastructure.Tests.Unit/bin/Release/net8.0/UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Tests.Unit.dll
+   NUnit3TestExecutor discovered 26 of 26 NUnit test cases using Current Discovery mode, Non-Explicit run
+NUnit Adapter 4.6.0.0: Test execution complete
+</StdOut>
+    </Output>
+    <CollectorDataEntries>
+      <Collector agentName="9cf4e2d2e217" uri="datacollector://microsoft/CoverletCodeCoverage/1.0" collectorDisplayName="XPlat code coverage">
+        <UriAttachments>
+          <UriAttachment>
+            <A href="9cf4e2d2e217/coverage.cobertura.xml"></A>
+          </UriAttachment>
+        </UriAttachments>
+      </Collector>
+    </CollectorDataEntries>
+  </ResultSummary>
+</TestRun>
