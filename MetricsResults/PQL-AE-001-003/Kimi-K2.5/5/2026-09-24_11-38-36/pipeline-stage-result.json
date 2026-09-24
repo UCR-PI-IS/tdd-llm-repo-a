@@ -1,0 +1,25 @@
+{
+  "stage": "refactoring",
+  "storyId": "PQL-AE-001-003",
+  "model": "Kimi-K2.5",
+  "iteration": "5",
+  "status": "success",
+  "filesCreated": [],
+  "filesModified": [
+    "Backend.Application/Services/Implementations/UniversityService.cs",
+    "Backend.Presentation/Api/Endpoints/AddUniversityEndpoint.cs",
+    "Backend.Presentation/Api/Handlers/AddUniversityResult.cs",
+    "Backend.Presentation/Api/Handlers/AddUniversityHandler.cs",
+    "Backend.Infrastructure/Repositories/SqlUniversityRepository.cs"
+  ],
+  "metrics": {
+    "loopIterationsPerformed": 1,
+    "maxLoopIterations": 10,
+    "allGreenAchieved": true,
+    "baseline": { "minMI": 64, "maxCC": 4, "maxCoupling": 11, "maxDIT": 0 },
+    "final": { "minMI": 64, "maxCC": 4, "maxCoupling": 9, "maxDIT": 0 },
+    "remainingViolations": []
+  },
+  "warnings": [],
+  "notes": "All story-related metrics achieved GREEN status in a single iteration. Class coupling reduced by removing redundant Minimal API attributes ([FromServices], [FromBody]), extracting Success/Failure factory methods into AddUniversityResult to decouple AddUniversityHandler from TypedResults and AddUniversityResponse, eliminating duplicate University instantiation in UniversityService, and removing unnecessary async/await state machines in SqlUniversityRepository."
+}
