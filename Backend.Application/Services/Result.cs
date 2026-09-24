@@ -1,0 +1,36 @@
+namespace UCR.ECCI.PI.ThemePark.Backend.Application.Services;
+
+/// <summary>
+/// Represents the result of an operation with success/failure status.
+/// </summary>
+public class Result
+{
+    /// <summary>
+    /// Gets a value indicating whether the operation was successful.
+    /// </summary>
+    public bool IsSuccess { get; }
+
+    /// <summary>
+    /// Gets the error message if the operation failed.
+    /// </summary>
+    public string? ErrorMessage { get; }
+
+    private Result(bool isSuccess, string? errorMessage)
+    {
+        IsSuccess = isSuccess;
+        ErrorMessage = errorMessage;
+    }
+
+    /// <summary>
+    /// Creates a successful result.
+    /// </summary>
+    /// <returns>A successful result.</returns>
+    public static Result Success() => new Result(true, null);
+
+    /// <summary>
+    /// Creates a failed result with the specified error message.
+    /// </summary>
+    /// <param name="errorMessage">The error message.</param>
+    /// <returns>A failed result.</returns>
+    public static Result Failure(string errorMessage) => new Result(false, errorMessage);
+}
