@@ -1,0 +1,36 @@
+{
+  "stage": "code-generation",
+  "storyId": "PQL-AE-001-003",
+  "model": "Kimi-K2.5",
+  "iteration": "5",
+  "status": "success",
+  "filesCreated": [],
+  "filesModified": [
+    "Backend.Infrastructure/Repositories/SqlUniversityRepository.cs",
+    "Backend.Infrastructure.Tests.Unit/SqlUniversityRepositoryTests.cs"
+  ],
+  "metrics": {
+    "buildErrors": 0,
+    "buildWarnings": 2,
+    "testsTotal": 204,
+    "testsPassed": 204,
+    "testsFailed": 0,
+    "testsSkipped": 0,
+    "lineCoverage": 0.8649214659685864,
+    "branchCoverage": 0.8442622950819673,
+    "e2e": {
+      "status": "success",
+      "probesTotal": 1,
+      "probesPassed": 1,
+      "probesFailed": 0,
+      "seedsApplied": ["seed-PQL-AE-001-003.sql"],
+      "resultPath": "E2EResults/PQL-AE-001-003/Kimi-K2.5/5/2026-09-24_11-11-48/",
+      "cleanup": "clean"
+    }
+  },
+  "warnings": [
+    "SqlUniversityRepositoryTests.cs was converted from mocked DbSet to EF Core In-Memory database because the original mock setup did not support EF Core async queryable operations (AnyAsync).",
+    "Build contains 2 pre-existing warnings unrelated to this story (CS8602 in SqlPersonRepositoryTests.cs)."
+  ],
+  "notes": "Changed ExistsByNameAsync in SqlUniversityRepository to use AnyAsync. Updated SqlUniversityRepositoryTests to use in-memory database to support async EF operations, matching the pattern already used by SqlPersonRepositoryTests."
+}
