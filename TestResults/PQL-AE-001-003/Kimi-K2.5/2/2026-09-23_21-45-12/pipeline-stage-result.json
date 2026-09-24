@@ -1,0 +1,43 @@
+{
+  "stage": "code-generation",
+  "storyId": "PQL-AE-001-003",
+  "model": "Kimi-K2.5",
+  "iteration": "2",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Presentation/Api/Endpoints/UniversityEndpoints.cs",
+    "/tmp/seed-PQL-AE-001-003.sql",
+    "/tmp/probes-PQL-AE-001-003.json"
+  ],
+  "filesModified": [
+    "Backend.Infrastructure.Tests.Unit/SqlUniversityRepositoryTests.cs",
+    "Backend.Presentation/Api/Handlers/AddUniversityHandler.cs",
+    "Backend.Presentation.Tests.Unit/AddUniversityHandlerTests.cs",
+    "Backend.Api/Program.cs"
+  ],
+  "metrics": {
+    "buildErrors": 0,
+    "buildWarnings": 3,
+    "testsTotal": 204,
+    "testsPassed": 204,
+    "testsFailed": 0,
+    "testsSkipped": 0,
+    "lineCoverage": 0.857,
+    "branchCoverage": 0.849,
+    "e2e": {
+      "status": "success",
+      "probesTotal": 1,
+      "probesPassed": 1,
+      "probesFailed": 0,
+      "seedsApplied": ["seed-PQL-AE-001-003.sql"],
+      "resultPath": "E2EResults/PQL-AE-001-003/Kimi-K2.5/2/2026-09-23_21-45-42/",
+      "cleanup": "clean"
+    }
+  },
+  "warnings": [
+    "CS8602: Dereference of a possibly null reference in AddUniversityHandlerTests.cs",
+    "CS8602: Dereference of a possibly null reference in UpdateWhiteboardHandlerTests.cs",
+    "CS8602: Dereference of a possibly null reference in CreateWhiteboardHandlerTests.cs"
+  ],
+  "notes": "Fixed the failing test ExistsByNameAsync_NameExists_ReturnsTrue by correcting the mock setup for IQueryable.GetEnumerator() to use a lambda expression. Created the missing University endpoint and updated the handler to return 201 Created instead of 200 OK. All 204 tests pass with 85.7% line coverage. E2E validation successful with clean teardown."
+}
