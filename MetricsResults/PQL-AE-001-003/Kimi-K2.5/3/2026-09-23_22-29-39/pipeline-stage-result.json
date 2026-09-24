@@ -1,0 +1,42 @@
+{
+  "stage": "refactoring",
+  "storyId": "PQL-AE-001-003",
+  "model": "Kimi-K2.5",
+  "iteration": "3",
+  "status": "partial",
+  "filesCreated": [],
+  "filesModified": [
+    "Backend.Presentation/Handlers/AddUniversityHandler.cs",
+    "Backend.Presentation/Api/Endpoints/UniversityEndpoints.cs",
+    "Backend.Infrastructure/Repositories/SqlUniversityRepository.cs"
+  ],
+  "metrics": {
+    "loopIterationsPerformed": 5,
+    "maxLoopIterations": 10,
+    "allGreenAchieved": false,
+    "baseline": {
+      "minMI": 62,
+      "maxCC": 5,
+      "maxCoupling": 22,
+      "maxDIT": 0
+    },
+    "final": {
+      "minMI": 62,
+      "maxCC": 5,
+      "maxCoupling": 10,
+      "maxDIT": 1
+    },
+    "remainingViolations": [
+      {
+        "type": "SqlUniversityRepository",
+        "metric": "Coupling",
+        "value": 10,
+        "flag": "YELLOW"
+      }
+    ]
+  },
+  "warnings": [
+    "SqlUniversityRepository class coupling remained at 10 (YELLOW) after 4 refactoring attempts; skipped per 3-consecutive-attempt rule."
+  ],
+  "notes": "Refactored AddUniversityHandler and UniversityEndpoints to reduce class coupling. SqlUniversityRepository coupling could not be reduced below 10 despite multiple targeted refactors."
+}
