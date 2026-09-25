@@ -1,0 +1,38 @@
+{
+  "stage": "code-generation",
+  "storyId": "PQL-AE-001-003",
+  "model": "Qwen3.7-max",
+  "iteration": "4",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Presentation/Api/Dtos/CreateUniversityDto.cs",
+    "Backend.Presentation/Api/Endpoints/CreateUniversityEndpoint.cs"
+  ],
+  "filesModified": [
+    "Backend.Infrastructure/Repositories/SqlUniversityRepository.cs",
+    "Backend.Infrastructure.Tests.Unit/SqlUniversityRepositoryTests.cs"
+  ],
+  "metrics": {
+    "buildErrors": 0,
+    "buildWarnings": 6,
+    "testsTotal": 204,
+    "testsPassed": 204,
+    "testsFailed": 0,
+    "testsSkipped": 0,
+    "lineCoverage": 0.8708,
+    "branchCoverage": 0.84375,
+    "e2e": {
+      "status": "success",
+      "probesTotal": 1,
+      "probesPassed": 1,
+      "probesFailed": 0,
+      "seedsApplied": ["seed-PQL-AE-001-003.sql"],
+      "resultPath": "E2EResults/PQL-AE-001-003/Qwen3.7-max/4/2026-09-24_19-38-24/",
+      "cleanup": "clean"
+    }
+  },
+  "warnings": [
+    "The suggested IEnumerable mock fix was insufficient; DbSet<T> explicit IQueryable implementation cannot be intercepted by Moq. Rewrote test to use EF Core In-Memory database (matching SqlPersonRepositoryTests pattern) and changed repository to use synchronous Any() wrapped in Task.FromResult()."
+  ],
+  "notes": "Fixed 2 failing ExistsByNameAsync tests by switching from Moq-based DbSet mocking to EF Core In-Memory database, and changed repository from AnyAsync to Task.FromResult(Any) to match the existing SqlPersonRepository pattern. Created university POST endpoint and DTO for E2E validation."
+}

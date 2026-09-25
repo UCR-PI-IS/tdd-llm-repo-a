@@ -1,0 +1,63 @@
+{
+  "stage": "e2e-validation",
+  "status": "success",
+  "timestamp": "2026-09-24_19-38-24",
+  "storyId": "PQL-AE-001-003",
+  "model": "Qwen3.7-max",
+  "iteration": "4",
+  "database": {
+    "container": "themepark-sql-e2e-pql-ae-001-003-qwen3-7-max-4-193824",
+    "image": "mcr.microsoft.com/mssql/server:2022-latest",
+    "network": "themepark-e2e-pql-ae-001-003-qwen3-7-max-4-193824",
+    "database": "ThemePark",
+    "readySeconds": 8.3,
+    "baseSchemaApplied": [
+      "Semester.sql",
+      "Course.sql"
+    ],
+    "seedsApplied": [
+      "seed-PQL-AE-001-003.sql"
+    ]
+  },
+  "backend": {
+    "container": "themepark-api-e2e-pql-ae-001-003-qwen3-7-max-4-193824",
+    "project": "Backend.Api/UCR.ECCI.PI.ThemePark.Backend.Api.csproj",
+    "publishStatus": "success",
+    "started": true,
+    "url": "http://127.0.0.1:55000",
+    "readySeconds": 2.2,
+    "errorLines": []
+  },
+  "probes": [
+    {
+      "name": "add university returns success",
+      "method": "POST",
+      "path": "/api/universities",
+      "expectedStatus": 200,
+      "actualStatus": 200,
+      "passed": true,
+      "missingContent": [],
+      "error": null,
+      "bodySnippet": "{\"message\":\"University added successfully\"}"
+    }
+  ],
+  "totalProbes": 1,
+  "probesPassed": 1,
+  "probesFailed": 0,
+  "cleanup": {
+    "status": "clean",
+    "removedContainers": [
+      "themepark-api-e2e-pql-ae-001-003-qwen3-7-max-4-193824",
+      "themepark-sql-e2e-pql-ae-001-003-qwen3-7-max-4-193824"
+    ],
+    "removedNetworks": [
+      "themepark-e2e-pql-ae-001-003-qwen3-7-max-4-193824"
+    ],
+    "removedVolumes": [
+      "themepark-app-e2e-pql-ae-001-003-qwen3-7-max-4-193824"
+    ],
+    "leftovers": []
+  },
+  "warnings": [],
+  "errors": []
+}
