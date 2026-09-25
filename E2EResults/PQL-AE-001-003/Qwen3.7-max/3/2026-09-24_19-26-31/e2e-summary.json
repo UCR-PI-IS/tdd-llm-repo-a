@@ -1,0 +1,68 @@
+{
+  "stage": "e2e-validation",
+  "status": "failure",
+  "timestamp": "2026-09-24_19-26-31",
+  "storyId": "PQL-AE-001-003",
+  "model": "Qwen3.7-max",
+  "iteration": "3",
+  "database": {
+    "container": "themepark-sql-e2e-pql-ae-001-003-qwen3-7-max-3-192631",
+    "image": "mcr.microsoft.com/mssql/server:2022-latest",
+    "network": "themepark-e2e-pql-ae-001-003-qwen3-7-max-3-192631",
+    "database": "ThemePark",
+    "readySeconds": 8.5,
+    "baseSchemaApplied": [
+      "Semester.sql",
+      "Course.sql"
+    ],
+    "seedsApplied": [
+      "PQL-AE-001-003.sql"
+    ]
+  },
+  "backend": {
+    "container": "themepark-api-e2e-pql-ae-001-003-qwen3-7-max-3-192631",
+    "project": "Backend.Api/UCR.ECCI.PI.ThemePark.Backend.Api.csproj",
+    "publishStatus": "success",
+    "started": true,
+    "url": "http://127.0.0.1:55013",
+    "readySeconds": 2.3,
+    "errorLines": [
+      "fail: Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware[1]",
+      "An unhandled exception has occurred while executing the request."
+    ]
+  },
+  "probes": [
+    {
+      "name": "POST /api/universities",
+      "method": "POST",
+      "path": "/api/universities",
+      "expectedStatus": 200,
+      "actualStatus": 400,
+      "passed": false,
+      "missingContent": [],
+      "error": null,
+      "bodySnippet": "Microsoft.AspNetCore.Http.BadHttpRequestException: Required parameter \"AddUniversityDto dto\" was not provided from body.\n   at lambda_method9(Closure, Object, HttpContext, Object)\n   at Microsoft.AspNetCore.Http.RequestDelegateFactory.<>c__DisplayClass102_2.<<HandleRequestBodyAndCompileRequestDelegateForJson>b__2>d.MoveNext()\n--- End of stack trace from previous location ---\n   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)\n   at Swashbuckle.AspNetCore.Sw"
+    }
+  ],
+  "totalProbes": 1,
+  "probesPassed": 0,
+  "probesFailed": 1,
+  "cleanup": {
+    "status": "clean",
+    "removedContainers": [
+      "themepark-api-e2e-pql-ae-001-003-qwen3-7-max-3-192631",
+      "themepark-sql-e2e-pql-ae-001-003-qwen3-7-max-3-192631"
+    ],
+    "removedNetworks": [
+      "themepark-e2e-pql-ae-001-003-qwen3-7-max-3-192631"
+    ],
+    "removedVolumes": [
+      "themepark-app-e2e-pql-ae-001-003-qwen3-7-max-3-192631"
+    ],
+    "leftovers": []
+  },
+  "warnings": [],
+  "errors": [
+    "1 probe(s) failed."
+  ]
+}

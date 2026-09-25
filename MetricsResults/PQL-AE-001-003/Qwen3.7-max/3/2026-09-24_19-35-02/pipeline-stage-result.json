@@ -1,0 +1,27 @@
+{
+  "stage": "refactoring",
+  "storyId": "PQL-AE-001-003",
+  "model": "Qwen3.7-max",
+  "iteration": "3",
+  "status": "partial",
+  "filesCreated": [],
+  "filesModified": [
+    "Backend.Presentation/Api/Handlers/AddUniversityHandler.cs",
+    "Backend.Presentation/Api/Endpoints/AddUniversityEndpoint.cs",
+    "Backend.Infrastructure/Repositories/SqlUniversityRepository.cs"
+  ],
+  "metrics": {
+    "loopIterationsPerformed": 4,
+    "maxLoopIterations": 10,
+    "allGreenAchieved": false,
+    "baseline": { "minMI": 64, "maxCC": 5, "maxCoupling": 11, "maxDIT": 1 },
+    "final":    { "minMI": 64, "maxCC": 5, "maxCoupling": 10, "maxDIT": 1 },
+    "remainingViolations": [
+      { "type": "SqlUniversityRepository", "metric": "Coupling", "value": 10, "flag": "YELLOW" }
+    ]
+  },
+  "warnings": [
+    "SqlUniversityRepository coupling=10 is structural to the repository pattern (EF Core + Domain types); could not reduce below 10 after 2 distinct refactoring attempts"
+  ],
+  "notes": "Resolved 2 of 3 YELLOW coupling violations by extracting factory methods into AddUniversityResult (reducing AddUniversityHandler coupling from 11 to ≤9) and removing redundant [FromServices]/[FromBody] attributes from AddUniversityEndpoint (reducing coupling from 11 to ≤9). SqlUniversityRepository coupling=10 remains as a structural characteristic of the EF Core repository pattern."
+}

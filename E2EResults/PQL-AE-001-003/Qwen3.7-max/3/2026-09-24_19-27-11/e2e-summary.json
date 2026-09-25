@@ -1,0 +1,67 @@
+{
+  "stage": "e2e-validation",
+  "status": "failure",
+  "timestamp": "2026-09-24_19-27-11",
+  "storyId": "PQL-AE-001-003",
+  "model": "Qwen3.7-max",
+  "iteration": "3",
+  "database": {
+    "container": "themepark-sql-e2e-pql-ae-001-003-qwen3-7-max-3-192711",
+    "image": "mcr.microsoft.com/mssql/server:2022-latest",
+    "network": "themepark-e2e-pql-ae-001-003-qwen3-7-max-3-192711",
+    "database": "ThemePark",
+    "readySeconds": 8.5,
+    "baseSchemaApplied": [
+      "Semester.sql",
+      "Course.sql"
+    ],
+    "seedsApplied": [
+      "PQL-AE-001-003.sql"
+    ]
+  },
+  "backend": {
+    "container": "themepark-api-e2e-pql-ae-001-003-qwen3-7-max-3-192711",
+    "project": "Backend.Api/UCR.ECCI.PI.ThemePark.Backend.Api.csproj",
+    "publishStatus": "success",
+    "started": true,
+    "url": "http://127.0.0.1:55014",
+    "readySeconds": 2.3,
+    "errorLines": []
+  },
+  "probes": [
+    {
+      "name": "add university",
+      "method": "POST",
+      "path": "/api/universities",
+      "expectedStatus": 200,
+      "actualStatus": 400,
+      "passed": false,
+      "missingContent": [
+        "University added successfully"
+      ],
+      "error": null,
+      "bodySnippet": "\"University with name 'Universidad de Costa Rica' already exists\""
+    }
+  ],
+  "totalProbes": 1,
+  "probesPassed": 0,
+  "probesFailed": 1,
+  "cleanup": {
+    "status": "clean",
+    "removedContainers": [
+      "themepark-api-e2e-pql-ae-001-003-qwen3-7-max-3-192711",
+      "themepark-sql-e2e-pql-ae-001-003-qwen3-7-max-3-192711"
+    ],
+    "removedNetworks": [
+      "themepark-e2e-pql-ae-001-003-qwen3-7-max-3-192711"
+    ],
+    "removedVolumes": [
+      "themepark-app-e2e-pql-ae-001-003-qwen3-7-max-3-192711"
+    ],
+    "leftovers": []
+  },
+  "warnings": [],
+  "errors": [
+    "1 probe(s) failed."
+  ]
+}
