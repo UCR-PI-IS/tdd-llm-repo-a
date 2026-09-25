@@ -45,4 +45,9 @@ app.MapCreateLearningComponentsEndpoint();
 /// </summary>
 app.MapEndpoint();
 
+/// <summary>
+/// Maps the University addition endpoint to the application.
+/// </summary>
+app.MapAddUniversityEndpoint();
+
 app.Run();

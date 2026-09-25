@@ -29,6 +29,8 @@ public static class DependencyInjection
         services.AddTransient<ILearningSpaceReadRepository, SqlLearningSpaceReadRepository>();
         services.AddTransient<IPersonRepository, SqlPersonRepository>();
         services.AddTransient<IPersonService, PersonService>();
+        services.AddTransient<IUniversityRepository, SqlUniversityRepository>();
+        services.AddTransient<IUniversityService, UniversityService>();
 
         // Register ID generator
         services.AddTransient<IComponentIdGenerator, ComponentIdGenerator>();
