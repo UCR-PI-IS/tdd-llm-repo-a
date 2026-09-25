@@ -1,0 +1,40 @@
+{
+  "stage": "e2e-validation",
+  "status": "failure",
+  "timestamp": "2026-09-24_17-53-04",
+  "storyId": "PQL-AE-001-003",
+  "model": "Qwen3.7-max",
+  "iteration": "2",
+  "database": {
+    "container": "themepark-sql-e2e-pql-ae-001-003-qwen3-7-max-2-175304",
+    "image": "mcr.microsoft.com/mssql/server:2022-latest",
+    "network": "themepark-e2e-pql-ae-001-003-qwen3-7-max-2-175304",
+    "database": "ThemePark",
+    "readySeconds": 8.5,
+    "baseSchemaApplied": [
+      "Semester.sql",
+      "Course.sql"
+    ],
+    "seedsApplied": []
+  },
+  "backend": {},
+  "probes": [],
+  "totalProbes": 0,
+  "probesPassed": 0,
+  "probesFailed": 0,
+  "cleanup": {
+    "status": "clean",
+    "removedContainers": [
+      "themepark-sql-e2e-pql-ae-001-003-qwen3-7-max-2-175304"
+    ],
+    "removedNetworks": [
+      "themepark-e2e-pql-ae-001-003-qwen3-7-max-2-175304"
+    ],
+    "removedVolumes": [],
+    "leftovers": []
+  },
+  "warnings": [],
+  "errors": [
+    "seed PQL-AE-001-003.sql: Msg 208, Level 16, State 1, Server 4b178b5ec757, Line 4\nInvalid object name 'University'."
+  ]
+}

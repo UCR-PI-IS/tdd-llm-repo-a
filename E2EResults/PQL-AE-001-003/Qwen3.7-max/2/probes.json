@@ -1,0 +1,22 @@
+[
+  {
+    "method": "POST",
+    "path": "/api/universities",
+    "expectStatus": 200,
+    "body": {
+      "name": "Stanford University",
+      "country": "United States"
+    },
+    "expectBodyContains": ["University added successfully"]
+  },
+  {
+    "method": "POST",
+    "path": "/api/universities",
+    "expectStatus": 400,
+    "body": {
+      "name": "Universidad de Costa Rica",
+      "country": "Costa Rica"
+    },
+    "expectBodyContains": ["already exists"]
+  }
+]

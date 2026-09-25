@@ -1,0 +1,79 @@
+{
+  "stage": "e2e-validation",
+  "status": "failure",
+  "timestamp": "2026-09-24_17-54-33",
+  "storyId": "PQL-AE-001-003",
+  "model": "Qwen3.7-max",
+  "iteration": "2",
+  "database": {
+    "container": "themepark-sql-e2e-pql-ae-001-003-qwen3-7-max-2-175433",
+    "image": "mcr.microsoft.com/mssql/server:2022-latest",
+    "network": "themepark-e2e-pql-ae-001-003-qwen3-7-max-2-175433",
+    "database": "ThemePark",
+    "readySeconds": 8.5,
+    "baseSchemaApplied": [
+      "Semester.sql",
+      "University.sql",
+      "Course.sql"
+    ],
+    "seedsApplied": [
+      "PQL-AE-001-003.sql"
+    ]
+  },
+  "backend": {
+    "container": "themepark-api-e2e-pql-ae-001-003-qwen3-7-max-2-175433",
+    "project": "Backend.Api/UCR.ECCI.PI.ThemePark.Backend.Api.csproj",
+    "publishStatus": "success",
+    "started": true,
+    "url": "http://127.0.0.1:55009",
+    "readySeconds": 2.2,
+    "errorLines": []
+  },
+  "probes": [
+    {
+      "name": "POST /api/universities",
+      "method": "POST",
+      "path": "/api/universities",
+      "expectedStatus": 200,
+      "actualStatus": 400,
+      "passed": false,
+      "missingContent": [
+        "University added successfully"
+      ],
+      "error": null,
+      "bodySnippet": "\"University with name 'Universidad de Costa Rica' already exists\""
+    },
+    {
+      "name": "POST /api/universities",
+      "method": "POST",
+      "path": "/api/universities",
+      "expectedStatus": 200,
+      "actualStatus": 400,
+      "passed": false,
+      "missingContent": [],
+      "error": null,
+      "bodySnippet": "\"University with name 'Universidad de Costa Rica' already exists\""
+    }
+  ],
+  "totalProbes": 2,
+  "probesPassed": 0,
+  "probesFailed": 2,
+  "cleanup": {
+    "status": "clean",
+    "removedContainers": [
+      "themepark-api-e2e-pql-ae-001-003-qwen3-7-max-2-175433",
+      "themepark-sql-e2e-pql-ae-001-003-qwen3-7-max-2-175433"
+    ],
+    "removedNetworks": [
+      "themepark-e2e-pql-ae-001-003-qwen3-7-max-2-175433"
+    ],
+    "removedVolumes": [
+      "themepark-app-e2e-pql-ae-001-003-qwen3-7-max-2-175433"
+    ],
+    "leftovers": []
+  },
+  "warnings": [],
+  "errors": [
+    "2 probe(s) failed."
+  ]
+}
