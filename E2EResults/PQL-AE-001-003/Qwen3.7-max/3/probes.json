@@ -1,0 +1,18 @@
+{
+  "probes": [
+    {
+      "name": "add university",
+      "method": "POST",
+      "path": "/api/universities",
+      "expectStatus": 200,
+      "expectBodyContains": ["University added successfully"],
+      "body": {
+        "name": "Universidad Latina",
+        "country": "Costa Rica"
+      },
+      "headers": {
+        "Content-Type": "application/json"
+      }
+    }
+  ]
+}
