@@ -1,0 +1,29 @@
+{
+  "stage": "refactoring",
+  "storyId": "PQL-AE-001-003",
+  "model": "Qwen3.7-max",
+  "iteration": "4",
+  "status": "partial",
+  "filesCreated": [],
+  "filesModified": [
+    "Backend.Application/Services/Implementations/UniversityService.cs",
+    "Backend.Presentation/Api/Endpoints/CreateUniversityEndpoint.cs"
+  ],
+  "metrics": {
+    "loopIterationsPerformed": 2,
+    "maxLoopIterations": 10,
+    "allGreenAchieved": false,
+    "baseline": { "minMI": 61, "maxCC": 5, "maxCoupling": 12, "maxDIT": 0 },
+    "final":    { "minMI": 64, "maxCC": 5, "maxCoupling": 11, "maxDIT": 0 },
+    "remainingViolations": [
+      { "type": "SqlUniversityRepository", "metric": "Coupling", "value": 11, "flag": "YELLOW" },
+      { "type": "AddUniversityHandler", "metric": "Coupling", "value": 11, "flag": "YELLOW" },
+      { "type": "CreateUniversityEndpoint", "metric": "Coupling", "value": 10, "flag": "YELLOW" }
+    ]
+  },
+  "warnings": [
+    "AddUniversityHandler: attempted to replace TypedResults with direct Ok/BadRequest constructors but Ok<T> and BadRequest<T> have internal constructors — reverted",
+    "SqlUniversityRepository coupling=11 is inherent to EF Core repository pattern (DbContext + DbSet + entity + EF extensions)"
+  ],
+  "notes": "Extracted Failure() helper in UniversityService to eliminate block duplication (MI 61→64). Removed redundant [FromBody] and [FromServices] attributes from CreateUniversityEndpoint (coupling 12→10). Remaining 3 YELLOW coupling violations (10-11) are structural to the typed-results handler pattern and EF Core repository pattern; further reduction would require architectural changes outside this story's scope. All 204 tests pass. No RED violations exist."
+}
