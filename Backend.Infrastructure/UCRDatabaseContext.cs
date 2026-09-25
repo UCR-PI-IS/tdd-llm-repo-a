@@ -40,6 +40,11 @@ internal class UCRDatabaseContext : DbContext
     public virtual DbSet<Person> Persons { get; set; } = null!;
 
     /// <summary>
+    /// Gets or sets the collection of universities in the database.
+    /// </summary>
+    public virtual DbSet<University> Universities { get; set; } = null!;
+
+    /// <summary>
     /// Configures the model relationships and entity mappings when the model for a context is being created.
     /// </summary>
     /// <param name="modelBuilder">The builder being used to construct the model for this context.</param>
@@ -56,6 +61,9 @@ internal class UCRDatabaseContext : DbContext
 
         // Apply the Person entity configuration
         modelBuilder.ApplyConfiguration(new PersonEntityConfiguration());
+
+        // Apply the University entity configuration
+        modelBuilder.ApplyConfiguration(new UniversityEntityConfiguration());
 
         // Alternatively, you can apply all configurations from the assembly
         // modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
