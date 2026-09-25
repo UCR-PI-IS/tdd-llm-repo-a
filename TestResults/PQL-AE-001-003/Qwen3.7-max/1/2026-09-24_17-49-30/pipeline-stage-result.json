@@ -1,0 +1,37 @@
+{
+  "stage": "code-generation",
+  "storyId": "PQL-AE-001-003",
+  "model": "Qwen3.7-max",
+  "iteration": "1",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Presentation/Api/Dtos/CreateUniversityDto.cs",
+    "Backend.Presentation/Api/Endpoints/AddUniversityEndpoint.cs"
+  ],
+  "filesModified": [
+    "Backend.Infrastructure/Repositories/SqlUniversityRepository.cs",
+    "Backend.Infrastructure.Tests.Unit/SqlUniversityRepositoryTests.cs",
+    "Backend.Api/Program.cs"
+  ],
+  "metrics": {
+    "buildErrors": 0,
+    "buildWarnings": 5,
+    "testsTotal": 204,
+    "testsPassed": 204,
+    "testsFailed": 0,
+    "testsSkipped": 0,
+    "lineCoverage": 0.8594871794871795,
+    "branchCoverage": 0.8492063492063492,
+    "e2e": {
+      "status": "success",
+      "probesTotal": 2,
+      "probesPassed": 2,
+      "probesFailed": 0,
+      "seedsApplied": ["seed-PQL-AE-001-003.sql"],
+      "resultPath": "E2EResults/PQL-AE-001-003/Qwen3.7-max/1/2026-09-24_18-17-52/",
+      "cleanup": "clean"
+    }
+  },
+  "warnings": [],
+  "notes": "Fixed SqlUniversityRepository.ExistsByNameAsync to use .Any() instead of .Local.Any() for correct database querying. Rewrote SqlUniversityRepositoryTests to use EF Core In-Memory database approach (matching SqlPersonRepositoryTests pattern) to resolve DbSet mocking incompatibility. Created AddUniversity endpoint and DTO for e2e validation. All 204 tests pass, both e2e probes green, environment fully cleaned up."
+}
