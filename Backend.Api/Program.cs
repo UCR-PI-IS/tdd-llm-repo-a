@@ -13,6 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddCleanArchitectureServices(builder.Configuration);
+builder.Services.AddScoped<UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Handlers.AddUniversityHandler>();
 
 var app = builder.Build();
 
@@ -44,5 +45,10 @@ app.MapCreateLearningComponentsEndpoint();
 /// Maps the Person creation endpoint to the application.
 /// </summary>
 app.MapEndpoint();
+
+/// <summary>
+/// Maps the University endpoints to the application.
+/// </summary>
+app.MapAddUniversityEndpoint();
 
 app.Run();
