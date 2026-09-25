@@ -1,0 +1,29 @@
+{
+  "stage": "refactoring",
+  "storyId": "PQL-AE-001-003",
+  "model": "Qwen3.7-max",
+  "iteration": "2",
+  "status": "partial",
+  "filesCreated": [],
+  "filesModified": [
+    "Backend.Infrastructure/Repositories/SqlUniversityRepository.cs",
+    "Backend.Presentation/Api/Endpoints/AddUniversityEndpoint.cs",
+    "Backend.Application/Services/ServiceResult.cs",
+    "Backend.Application/Services/IUniversityService.cs",
+    "Backend.Application/Services/Implementations/UniversityService.cs"
+  ],
+  "metrics": {
+    "loopIterationsPerformed": 3,
+    "maxLoopIterations": 10,
+    "allGreenAchieved": false,
+    "baseline": { "minMI": 63, "maxCC": 6, "maxCoupling": 12, "maxDIT": 0 },
+    "final":    { "minMI": 63, "maxCC": 6, "maxCoupling": 11, "maxDIT": 0 },
+    "remainingViolations": [
+      { "type": "UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Handlers.AddUniversityHandler", "metric": "Coupling", "value": 11, "flag": "YELLOW" }
+    ]
+  },
+  "warnings": [
+    "AddUniversityHandler coupling=11 is inherent to the ASP.NET Core typed results pattern (Results<Ok<T>, BadRequest<T>>). Further reduction would require changing the return type to IResult, which would break existing tests that check result.Result type."
+  ],
+  "notes": "Reduced 2 of 3 YELLOW coupling violations to GREEN. SqlUniversityRepository coupling reduced from 10 to 9 by using synchronous DbSet.Add instead of AddAsync. AddUniversityEndpoint coupling reduced from 12 to 9 by removing explicit [FromServices]/[FromBody] attributes and async/await. AddUniversityHandler coupling remains at 11 due to inherent ASP.NET Core typed results pattern coupling (Results<Ok<AddUniversityResponse>, BadRequest<string>>). All 202 tests pass after refactoring."
+}
