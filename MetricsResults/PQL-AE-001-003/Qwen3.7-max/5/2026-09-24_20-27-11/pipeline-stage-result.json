@@ -1,0 +1,26 @@
+{
+  "stage": "refactoring",
+  "storyId": "PQL-AE-001-003",
+  "model": "Qwen3.7-max",
+  "iteration": "5",
+  "status": "partial",
+  "filesCreated": [],
+  "filesModified": [
+    "Backend.Presentation/Api/Endpoints/AddUniversityEndpoint.cs",
+    "Backend.Infrastructure/Repositories/SqlUniversityRepository.cs"
+  ],
+  "metrics": {
+    "loopIterationsPerformed": 3,
+    "maxLoopIterations": 10,
+    "allGreenAchieved": false,
+    "baseline": { "minMI": 62, "maxCC": 6, "maxCoupling": 11, "maxDIT": 0 },
+    "final":    { "minMI": 62, "maxCC": 6, "maxCoupling": 10, "maxDIT": 0 },
+    "remainingViolations": [
+      { "type": "UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Handlers.AddUniversityHandler", "metric": "Coupling", "value": 10, "flag": "YELLOW" }
+    ]
+  },
+  "warnings": [
+    "AddUniversityHandler coupling=10 is at architectural minimum for ASP.NET Core typed-results handler pattern; further reduction requires changing service contract or return type which would break tests"
+  ],
+  "notes": "Resolved 2 of 3 YELLOW coupling violations. AddUniversityEndpoint coupling reduced from 11 to 9 by removing implicit [FromServices]/[FromBody] attributes. SqlUniversityRepository coupling reduced from 11 to 9 by using synchronous DbSet.Add() and async AnyAsync(). AddUniversityHandler coupling=10 is the minimum for the Results<Ok<T>,BadRequest<T>> handler pattern."
+}
