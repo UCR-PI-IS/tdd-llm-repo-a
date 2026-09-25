@@ -1,0 +1,31 @@
+{
+  "stage": "refactoring",
+  "storyId": "PQL-AE-001-003",
+  "model": "Qwen3.7-max",
+  "iteration": "6",
+  "status": "partial",
+  "filesCreated": [],
+  "filesModified": [
+    "Backend.Api/Program.cs",
+    "Backend.Presentation/Endpoints/AddUniversityEndpoint.cs"
+  ],
+  "metrics": {
+    "loopIterationsPerformed": 2,
+    "maxLoopIterations": 10,
+    "allGreenAchieved": false,
+    "baseline": { "minMI": 61, "maxCC": 5, "maxCoupling": 14, "maxDIT": 1 },
+    "final":    { "minMI": 61, "maxCC": 5, "maxCoupling": 12, "maxDIT": 1 },
+    "remainingViolations": [
+      { "type": "UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Endpoints.AddUniversityEndpoint", "metric": "Coupling", "value": 12, "flag": "YELLOW" },
+      { "type": "UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Handlers.AddUniversityHandler", "metric": "Coupling", "value": 11, "flag": "YELLOW" },
+      { "type": "UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Repositories.SqlUniversityRepository", "metric": "Coupling", "value": 10, "flag": "YELLOW" }
+    ]
+  },
+  "warnings": [
+    "AddUniversityHandler: Attempted to replace TypedResults.Ok/BadRequest with direct Ok<T>/BadRequest<T> constructors to reduce coupling, but Ok<T> and BadRequest<T> do not expose public constructors in ASP.NET Core 8. Reverted.",
+    "AddUniversityEndpoint: Coupling is inherent to ASP.NET Core minimal API endpoint pattern (MapPost, WithName, WithOpenApi, FromServices, FromBody attributes). Further reduction requires removing API metadata or changing the endpoint pattern.",
+    "SqlUniversityRepository: Coupling is inherent to EF Core repository pattern (DbSet, EntityFrameworkQueryableExtensions). Cannot reduce without changing data access approach, which would break existing tests.",
+    "UCRDatabaseContext: Shared infrastructure type with coupling=12. Not modified as it serves all stories and changes would affect unrelated modules."
+  ],
+  "notes": "Reduced AddUniversityEndpoint coupling from 14 to 12 by injecting AddUniversityHandler via DI instead of creating it inline, eliminating the direct IUniversityService dependency from the endpoint. Removed unused Microsoft.AspNetCore.Http import. All 202 tests pass after refactoring. Remaining 3 YELLOW coupling violations are inherent to ASP.NET Core minimal API and EF Core repository patterns and cannot be reduced to GREEN (<=9) without breaking tests or changing the architecture."
+}
