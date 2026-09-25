@@ -1,0 +1,80 @@
+{
+  "stage": "e2e-validation",
+  "status": "failure",
+  "timestamp": "2026-09-24_20-21-42",
+  "storyId": "PQL-AE-001-003",
+  "model": "Qwen3.7-max",
+  "iteration": "6",
+  "database": {
+    "container": "themepark-sql-e2e-pql-ae-001-003-qwen3-7-max-6-202142",
+    "image": "mcr.microsoft.com/mssql/server:2022-latest",
+    "network": "themepark-e2e-pql-ae-001-003-qwen3-7-max-6-202142",
+    "database": "ThemePark",
+    "readySeconds": 8.5,
+    "baseSchemaApplied": [
+      "Semester.sql",
+      "Course.sql"
+    ],
+    "seedsApplied": [
+      "seed-PQL-AE-001-003.sql"
+    ]
+  },
+  "backend": {
+    "container": "themepark-api-e2e-pql-ae-001-003-qwen3-7-max-6-202142",
+    "project": "Backend.Api/UCR.ECCI.PI.ThemePark.Backend.Api.csproj",
+    "publishStatus": "success",
+    "started": true,
+    "url": "http://127.0.0.1:55016",
+    "readySeconds": 2.3,
+    "errorLines": []
+  },
+  "probes": [
+    {
+      "name": "add new university succeeds",
+      "method": "POST",
+      "path": "/api/universities",
+      "expectedStatus": 200,
+      "actualStatus": 415,
+      "passed": false,
+      "missingContent": [
+        "University added successfully"
+      ],
+      "error": null,
+      "bodySnippet": ""
+    },
+    {
+      "name": "duplicate university name is rejected",
+      "method": "POST",
+      "path": "/api/universities",
+      "expectedStatus": 400,
+      "actualStatus": 415,
+      "passed": false,
+      "missingContent": [
+        "already exists"
+      ],
+      "error": null,
+      "bodySnippet": ""
+    }
+  ],
+  "totalProbes": 2,
+  "probesPassed": 0,
+  "probesFailed": 2,
+  "cleanup": {
+    "status": "clean",
+    "removedContainers": [
+      "themepark-api-e2e-pql-ae-001-003-qwen3-7-max-6-202142",
+      "themepark-sql-e2e-pql-ae-001-003-qwen3-7-max-6-202142"
+    ],
+    "removedNetworks": [
+      "themepark-e2e-pql-ae-001-003-qwen3-7-max-6-202142"
+    ],
+    "removedVolumes": [
+      "themepark-app-e2e-pql-ae-001-003-qwen3-7-max-6-202142"
+    ],
+    "leftovers": []
+  },
+  "warnings": [],
+  "errors": [
+    "2 probe(s) failed."
+  ]
+}
