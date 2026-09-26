@@ -1,0 +1,34 @@
+{
+  "stage": "refactoring",
+  "storyId": "PQL-LB-002-001",
+  "model": "Kimi-K2.5",
+  "iteration": "2",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Presentation/Api/Handlers/GetBuildingListResponseFactory.cs",
+    "Backend.Presentation/Mappers/BuildingMapper.cs"
+  ],
+  "filesModified": [
+    "Backend.Presentation/Api/Handlers/GetBuildingListHandler.cs"
+  ],
+  "metrics": {
+    "loopIterationsPerformed": 4,
+    "maxLoopIterations": 10,
+    "allGreenAchieved": true,
+    "baseline": {
+      "minMI": 58,
+      "maxCC": 2,
+      "maxCoupling": 16,
+      "maxDIT": 0
+    },
+    "final": {
+      "minMI": 58,
+      "maxCC": 2,
+      "maxCoupling": 9,
+      "maxDIT": 0
+    },
+    "remainingViolations": []
+  },
+  "warnings": [],
+  "notes": "Reduced GetBuildingListHandler class coupling from 16 to 8 by extracting a BuildingMapper and a GetBuildingListResponseFactory, and switching the handler to return Task<IResult>. All story-related types now show GREEN flags."
+}
