@@ -32,6 +32,7 @@ public static class DependencyInjection
         services.AddTransient<IPersonService, PersonService>();
         services.AddTransient<IUniversityRepository, SqlUniversityRepository>();
         services.AddTransient<IUniversityService, UniversityService>();
+        services.AddTransient<IBuildingListRepository, SqlBuildingListRepository>();
 
         // Register ID generator
         services.AddTransient<IComponentIdGenerator, ComponentIdGenerator>();
