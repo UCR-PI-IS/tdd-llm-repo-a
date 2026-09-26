@@ -1,0 +1,23 @@
+{
+  "stage": "refactoring",
+  "storyId": "PQL-LB-002-001",
+  "model": "Kimi-K2.5",
+  "iteration": "1",
+  "status": "success",
+  "filesCreated": [],
+  "filesModified": [
+    "Backend.Presentation/Api/Handlers/GetBuildingListHandler.cs",
+    "Backend.Presentation/Api/Responses/GetBuildingListResponse.cs",
+    "Backend.Presentation/Api/Mappers/BuildingMapper.cs"
+  ],
+  "metrics": {
+    "loopIterationsPerformed": 5,
+    "maxLoopIterations": 10,
+    "allGreenAchieved": true,
+    "baseline": { "minMI": 74, "maxCC": 1, "maxCoupling": 13, "maxDIT": 0 },
+    "final": { "minMI": 72, "maxCC": 1, "maxCoupling": 7, "maxDIT": 0 },
+    "remainingViolations": []
+  },
+  "warnings": ["Created and then deleted Backend.Presentation/Handlers/GetBuildingListResponseFactory.cs after it failed to drop below coupling=10; moved factory logic into GetBuildingListResponse.CreateOk static method instead."],
+  "notes": "The only story-related violation was GetBuildingListHandler class coupling=13 (YELLOW). Refactored by returning Task<IResult>, removing [FromServices], deleting unused BuildingMapper, and embedding the response factory logic into GetBuildingListResponse.CreateOk to distribute coupling. All story-related types now have GREEN flags."
+}
