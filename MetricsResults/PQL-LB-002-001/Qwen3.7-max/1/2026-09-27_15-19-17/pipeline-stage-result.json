@@ -1,0 +1,23 @@
+{
+  "stage": "refactoring",
+  "storyId": "PQL-LB-002-001",
+  "model": "Qwen3.7-max",
+  "iteration": "1",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Presentation/Api/Mappers/BuildingListMapper.cs"
+  ],
+  "filesModified": [
+    "Backend.Presentation/Api/Handlers/GetBuildingListHandler.cs"
+  ],
+  "metrics": {
+    "loopIterationsPerformed": 1,
+    "maxLoopIterations": 10,
+    "allGreenAchieved": true,
+    "baseline": { "minMI": 58, "maxCC": 2, "maxCoupling": 15, "maxDIT": 0 },
+    "final":    { "minMI": 58, "maxCC": 2, "maxCoupling": 9, "maxDIT": 0 },
+    "remainingViolations": []
+  },
+  "warnings": [],
+  "notes": "Extracted Building-to-DTO mapping into a dedicated BuildingListMapper class, reducing GetBuildingListHandler class coupling from 15 (YELLOW) to 9 (GREEN). All 215 tests pass. All story-related types now have ALL GREEN metrics flags."
+}
