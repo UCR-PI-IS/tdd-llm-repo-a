@@ -1,0 +1,63 @@
+{
+  "stage": "e2e-validation",
+  "status": "success",
+  "timestamp": "2026-09-26_18-56-57",
+  "storyId": "PQL-LB-002-001",
+  "model": "Kimi-K2.5",
+  "iteration": "4",
+  "database": {
+    "container": "themepark-sql-e2e-pql-lb-002-001-kimi-k2-5-4-185657",
+    "image": "mcr.microsoft.com/mssql/server:2022-latest",
+    "network": "themepark-e2e-pql-lb-002-001-kimi-k2-5-4-185657",
+    "database": "ThemePark",
+    "readySeconds": 4.7,
+    "baseSchemaApplied": [
+      "Semester.sql",
+      "Course.sql"
+    ],
+    "seedsApplied": [
+      "PQL-LB-002-001.sql"
+    ]
+  },
+  "backend": {
+    "container": "themepark-api-e2e-pql-lb-002-001-kimi-k2-5-4-185657",
+    "project": "Backend.Api/UCR.ECCI.PI.ThemePark.Backend.Api.csproj",
+    "publishStatus": "success",
+    "started": true,
+    "url": "http://127.0.0.1:55001",
+    "readySeconds": 2.1,
+    "errorLines": []
+  },
+  "probes": [
+    {
+      "name": "list includes seeded buildings",
+      "method": "GET",
+      "path": "/api/buildings",
+      "expectedStatus": 200,
+      "actualStatus": 200,
+      "passed": true,
+      "missingContent": [],
+      "error": null,
+      "bodySnippet": "{\"buildings\":[{\"id\":1,\"name\":\"Engineering Building\"},{\"id\":2,\"name\":\"Science Building\"},{\"id\":3,\"name\":\"Library\"}]}"
+    }
+  ],
+  "totalProbes": 1,
+  "probesPassed": 1,
+  "probesFailed": 0,
+  "cleanup": {
+    "status": "clean",
+    "removedContainers": [
+      "themepark-api-e2e-pql-lb-002-001-kimi-k2-5-4-185657",
+      "themepark-sql-e2e-pql-lb-002-001-kimi-k2-5-4-185657"
+    ],
+    "removedNetworks": [
+      "themepark-e2e-pql-lb-002-001-kimi-k2-5-4-185657"
+    ],
+    "removedVolumes": [
+      "themepark-app-e2e-pql-lb-002-001-kimi-k2-5-4-185657"
+    ],
+    "leftovers": []
+  },
+  "warnings": [],
+  "errors": []
+}
