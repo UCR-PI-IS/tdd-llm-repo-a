@@ -50,4 +50,9 @@ app.MapEndpoint();
 /// </summary>
 app.MapAddUniversityEndpoint();
 
+/// <summary>
+/// Maps the Get Building List endpoint to the application.
+/// </summary>
+app.MapGetBuildingListEndpoint();
+
 app.Run();
