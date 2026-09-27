@@ -1,0 +1,35 @@
+{
+  "stage": "code-generation",
+  "storyId": "PQL-LB-002-001",
+  "model": "Qwen3.7-max",
+  "iteration": "2",
+  "status": "success",
+  "filesCreated": [],
+  "filesModified": [
+    "Backend.Infrastructure/Repositories/SqlBuildingListRepository.cs",
+    "Backend.Infrastructure.Tests.Unit/SqlBuildingListRepositoryTests.cs"
+  ],
+  "metrics": {
+    "buildErrors": 0,
+    "buildWarnings": 0,
+    "testsTotal": 215,
+    "testsPassed": 215,
+    "testsFailed": 0,
+    "testsSkipped": 0,
+    "lineCoverage": 0.8570019723865878,
+    "branchCoverage": 0.8359375,
+    "e2e": {
+      "status": "success",
+      "probesTotal": 1,
+      "probesPassed": 1,
+      "probesFailed": 0,
+      "seedsApplied": ["seed-PQL-LB-002-001.sql"],
+      "resultPath": "E2EResults/PQL-LB-002-001/Qwen3.7-max/2/2026-09-27_14-57-50/",
+      "cleanup": "clean"
+    }
+  },
+  "warnings": [
+    "Infrastructure test mock for DbSet<Building> was fundamentally incompatible with DbSet's explicit non-virtual interface implementations; rewrote SqlBuildingListRepositoryTests to use EF Core In-Memory database (same pattern as SqlUniversityRepositoryTests)"
+  ],
+  "notes": "Fixed the SqlBuildingListRepository to use .ToList() and rewrote the infrastructure tests to use EF Core In-Memory database instead of Moq DbSet mocking, which was incompatible with DbSet's explicit non-virtual interface implementations. All 215 tests pass, e2e probe confirmed GET /BuildingList returns seeded buildings."
+}

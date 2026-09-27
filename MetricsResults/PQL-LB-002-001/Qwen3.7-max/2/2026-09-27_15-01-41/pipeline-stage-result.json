@@ -1,0 +1,28 @@
+{
+  "stage": "refactoring",
+  "storyId": "PQL-LB-002-001",
+  "model": "Qwen3.7-max",
+  "iteration": "2",
+  "status": "partial",
+  "filesCreated": [
+    "Backend.Presentation/Mappers/BuildingListMapper.cs"
+  ],
+  "filesModified": [
+    "Backend.Presentation/Handlers/GetBuildingListHandler.cs"
+  ],
+  "metrics": {
+    "loopIterationsPerformed": 2,
+    "maxLoopIterations": 10,
+    "allGreenAchieved": false,
+    "baseline": { "minMI": 58, "maxCC": 2, "maxCoupling": 16, "maxDIT": 0 },
+    "final":    { "minMI": 58, "maxCC": 2, "maxCoupling": 10, "maxDIT": 0 },
+    "remainingViolations": [
+      { "type": "GetBuildingListHandler", "metric": "Coupling", "value": 10, "flag": "YELLOW" }
+    ]
+  },
+  "warnings": [
+    "Attempted to replace TypedResults.Ok() with direct Ok<T> constructor — reverted because Ok<T> has no public 1-arg constructor (CS1729)",
+    "GetBuildingListHandler coupling reduced from 16 to 10 but remains YELLOW (threshold ≤9 for GREEN); remaining coupling is to irreducible ASP.NET Core framework types (Task, TypedResults, Ok<T>, IBuildingListService, List<Building>)"
+  ],
+  "notes": "Extracted BuildingListMapper to move Building→BuildingDto mapping out of the handler, reducing coupling by 5. Removed [FromServices] attribute (redundant in .NET 8 minimal APIs) reducing coupling by 1 more. All 10 of 11 story-related types are fully GREEN; only GetBuildingListHandler retains a borderline YELLOW coupling of 10."
+}
