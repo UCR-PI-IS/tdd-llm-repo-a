@@ -1,0 +1,30 @@
+{
+  "stage": "test-generation",
+  "storyId": "PQL-LB-002-001",
+  "model": "Qwen3.7-max",
+  "iteration": "1",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Domain.Tests.Unit/BuildingTests.cs",
+    "Backend.Domain.Tests.Unit/IBuildingListRepositoryTests.cs",
+    "Backend.Application.Tests.Unit/IBuildingListServiceTests.cs",
+    "Backend.Application.Tests.Unit/BuildingListServiceTests.cs",
+    "Backend.Infrastructure.Tests.Unit/SqlBuildingListRepositoryTests.cs",
+    "Backend.Presentation.Tests.Unit/BuildingDtoTests.cs",
+    "Backend.Presentation.Tests.Unit/GetBuildingListResponseTests.cs",
+    "Backend.Presentation.Tests.Unit/GetBuildingListHandlerTests.cs"
+  ],
+  "filesModified": [],
+  "metrics": {
+    "intentsConfirmed": 11,
+    "testMethodsEmitted": 11,
+    "byLayer": {
+      "Domain": 2,
+      "Application": 3,
+      "Infrastructure": 2,
+      "Presentation": 4
+    }
+  },
+  "warnings": [],
+  "notes": "Generated 8 test files with 11 test methods covering all 11 confirmed intents across 4 DDD layers. All multi-property assertions use Assert.Multiple to enforce single logical assertion per test. Tests reference not-yet-implemented Building entity, IBuildingListRepository, IBuildingListService, BuildingListService, SqlBuildingListRepository, BuildingDto, GetBuildingListResponse, and GetBuildingListHandler types following existing codebase patterns."
+}
