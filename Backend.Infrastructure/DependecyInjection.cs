@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using UCR.ECCI.PI.ThemePark.Backend.Application.Services;
 using UCR.ECCI.PI.ThemePark.Backend.Application.Services.Implementations;
+using UCR.ECCI.PI.ThemePark.Backend.Domain.Entities;
 using UCR.ECCI.PI.ThemePark.Backend.Domain.Repositories;
 using UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Repositories;
 using UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Services;
@@ -32,6 +33,7 @@ public static class DependencyInjection
         services.AddTransient<IPersonService, PersonService>();
         services.AddTransient<IUniversityRepository, SqlUniversityRepository>();
         services.AddTransient<IUniversityService, UniversityService>();
+        services.AddTransient<IBuildingListRepository, SqlBuildingListRepository>();
 
         // Register ID generator
         services.AddTransient<IComponentIdGenerator, ComponentIdGenerator>();
