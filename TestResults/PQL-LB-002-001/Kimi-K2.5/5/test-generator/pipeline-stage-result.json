@@ -1,0 +1,30 @@
+{
+  "stage": "test-generation",
+  "storyId": "PQL-LB-002-001",
+  "model": "Kimi-K2.5",
+  "iteration": "5",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Domain.Tests.Unit/BuildingTests.cs",
+    "Backend.Domain.Tests.Unit/IBuildingListRepositoryTests.cs",
+    "Backend.Application.Tests.Unit/IBuildingListServiceTests.cs",
+    "Backend.Application.Tests.Unit/BuildingListServiceTests.cs",
+    "Backend.Infrastructure.Tests.Unit/SqlBuildingListRepositoryTests.cs",
+    "Backend.Presentation.Tests.Unit/BuildingDtoTests.cs",
+    "Backend.Presentation.Tests.Unit/GetBuildingListResponseTests.cs",
+    "Backend.Presentation.Tests.Unit/GetBuildingListHandlerTests.cs"
+  ],
+  "filesModified": [],
+  "metrics": {
+    "intentsConfirmed": 11,
+    "testMethodsEmitted": 11,
+    "byLayer": {
+      "Domain": 2,
+      "Application": 3,
+      "Infrastructure": 2,
+      "Presentation": 4
+    }
+  },
+  "warnings": [],
+  "notes": "Generated 11 test methods across 8 test files covering all 11 confirmed intents. Used Assert.Multiple for all multi-property assertions. Infrastructure tests include the async queryable mock helper pattern established in the codebase."
+}
