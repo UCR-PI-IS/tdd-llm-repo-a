@@ -1,0 +1,40 @@
+{
+  "stage": "e2e-validation",
+  "status": "failure",
+  "timestamp": "2026-09-27_17-05-42",
+  "storyId": "PQL-LB-002-001",
+  "model": "Qwen3.7-max",
+  "iteration": "5",
+  "database": {
+    "container": "themepark-sql-e2e-pql-lb-002-001-qwen3-7-max-5-170542",
+    "image": "mcr.microsoft.com/mssql/server:2022-latest",
+    "network": "themepark-e2e-pql-lb-002-001-qwen3-7-max-5-170542",
+    "database": "ThemePark",
+    "readySeconds": 8.5,
+    "baseSchemaApplied": [
+      "Semester.sql",
+      "Course.sql"
+    ],
+    "seedsApplied": []
+  },
+  "backend": {},
+  "probes": [],
+  "totalProbes": 0,
+  "probesPassed": 0,
+  "probesFailed": 0,
+  "cleanup": {
+    "status": "clean",
+    "removedContainers": [
+      "themepark-sql-e2e-pql-lb-002-001-qwen3-7-max-5-170542"
+    ],
+    "removedNetworks": [
+      "themepark-e2e-pql-lb-002-001-qwen3-7-max-5-170542"
+    ],
+    "removedVolumes": [],
+    "leftovers": []
+  },
+  "warnings": [],
+  "errors": [
+    "RuntimeError: Seed file not found: PQL-LB-002-001-seed.sql"
+  ]
+}
