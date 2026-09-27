@@ -1,0 +1,30 @@
+{
+  "stage": "test-generation",
+  "storyId": "PQL-LB-002-001",
+  "model": "Kimi-K2.5",
+  "iteration": "6",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Domain.Tests.Unit/BuildingTests.cs",
+    "Backend.Domain.Tests.Unit/IBuildingListRepositoryTests.cs",
+    "Backend.Application.Tests.Unit/IBuildingListServiceTests.cs",
+    "Backend.Application.Tests.Unit/BuildingListServiceTests.cs",
+    "Backend.Infrastructure.Tests.Unit/SqlBuildingListRepositoryTests.cs",
+    "Backend.Presentation.Tests.Unit/BuildingDtoTests.cs",
+    "Backend.Presentation.Tests.Unit/GetBuildingListResponseTests.cs",
+    "Backend.Presentation.Tests.Unit/GetBuildingListHandlerTests.cs"
+  ],
+  "filesModified": [],
+  "metrics": {
+    "intentsConfirmed": 11,
+    "testMethodsEmitted": 11,
+    "byLayer": {
+      "Domain": 2,
+      "Application": 3,
+      "Infrastructure": 2,
+      "Presentation": 4
+    }
+  },
+  "warnings": [],
+  "notes": "Generated 11 NUnit test methods across 8 test classes covering all 11 confirmed intents for story PQL-LB-002-001. Domain layer tests cover Building entity constructor and IBuildingListRepository interface contract. Application layer tests cover IBuildingListService interface contract and BuildingListService delegation to the repository. Infrastructure layer tests cover SqlBuildingListRepository querying via mocked DbSet with async query provider support. Presentation layer tests cover BuildingDto, GetBuildingListResponse records, and GetBuildingListHandler returning Ok results with populated and empty building lists."
+}

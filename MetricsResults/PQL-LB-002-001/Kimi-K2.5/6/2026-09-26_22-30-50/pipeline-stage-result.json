@@ -1,0 +1,19 @@
+{
+  "stage": "refactoring",
+  "storyId": "PQL-LB-002-001",
+  "model": "Kimi-K2.5",
+  "iteration": "6",
+  "status": "success",
+  "filesCreated": ["Backend.Presentation/Handlers/BuildingListHelper.cs"],
+  "filesModified": ["Backend.Presentation/Handlers/GetBuildingListHandler.cs"],
+  "metrics": {
+    "loopIterationsPerformed": 1,
+    "maxLoopIterations": 10,
+    "allGreenAchieved": true,
+    "baseline": { "minMI": 58, "maxCC": 2, "maxCoupling": 15, "maxDIT": 0 },
+    "final":    { "minMI": 58, "maxCC": 2, "maxCoupling": 8, "maxDIT": 0 },
+    "remainingViolations": []
+  },
+  "warnings": [],
+  "notes": "Extracted BuildingListHelper to decouple GetBuildingListHandler, moving domain-to-DTO mapping and response construction out of the handler. Handler class coupling dropped from 15 (YELLOW) to 7 (GREEN) and the new helper stays at 8 (GREEN). All story-related metrics are now GREEN after 1 iteration."
+}
