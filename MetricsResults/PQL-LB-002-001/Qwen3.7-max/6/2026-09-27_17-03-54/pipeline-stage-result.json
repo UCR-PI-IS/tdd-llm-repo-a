@@ -1,0 +1,22 @@
+{
+  "stage": "refactoring",
+  "storyId": "PQL-LB-002-001",
+  "model": "Qwen3.7-max",
+  "iteration": "6",
+  "status": "success",
+  "filesCreated": [],
+  "filesModified": [
+    "Backend.Presentation/Handlers/GetBuildingListHandler.cs",
+    "Backend.Presentation/Responses/GetBuildingListResponse.cs"
+  ],
+  "metrics": {
+    "loopIterationsPerformed": 2,
+    "maxLoopIterations": 10,
+    "allGreenAchieved": true,
+    "baseline": { "minMI": 58, "maxCC": 2, "maxCoupling": 13, "maxDIT": 0 },
+    "final":    { "minMI": 58, "maxCC": 2, "maxCoupling": 8, "maxDIT": 0 },
+    "remainingViolations": []
+  },
+  "warnings": [],
+  "notes": "Reduced GetBuildingListHandler class coupling from 13 (YELLOW) to 8 (GREEN) by removing the [FromServices] attribute (unnecessary in ASP.NET Core minimal APIs) and introducing a FromBuildings() factory method on GetBuildingListResponse that encapsulates the Building-to-BuildingDto mapping, eliminating the handler's direct dependency on BuildingMapper, BuildingDto, and IEnumerable. All 215 tests pass after refactoring."
+}
