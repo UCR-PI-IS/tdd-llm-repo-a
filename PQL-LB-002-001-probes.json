@@ -1,0 +1,11 @@
+{
+  "probes": [
+    {
+      "name": "list buildings includes seeded data",
+      "method": "GET",
+      "path": "/api/buildings",
+      "expectStatus": 200,
+      "expectBodyContains": ["Engineering Building", "Science Building", "Library"]
+    }
+  ]
+}
