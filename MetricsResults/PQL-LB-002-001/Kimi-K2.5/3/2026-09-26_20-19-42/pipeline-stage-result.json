@@ -1,0 +1,24 @@
+{
+  "stage": "refactoring",
+  "storyId": "PQL-LB-002-001",
+  "model": "Kimi-K2.5",
+  "iteration": "3",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Presentation/Mappers/BuildingMapper.cs",
+    "Backend.Presentation/Api/Handlers/BuildingListResponseFactory.cs"
+  ],
+  "filesModified": [
+    "Backend.Presentation/Api/Handlers/GetBuildingListHandler.cs"
+  ],
+  "metrics": {
+    "loopIterationsPerformed": 3,
+    "maxLoopIterations": 10,
+    "allGreenAchieved": true,
+    "baseline": { "minMI": 58, "maxCC": 2, "maxCoupling": 15, "maxDIT": 0 },
+    "final": { "minMI": 58, "maxCC": 2, "maxCoupling": 9, "maxDIT": 0 },
+    "remainingViolations": []
+  },
+  "warnings": [],
+  "notes": "Refactored GetBuildingListHandler to return Task<IResult> and delegated mapping logic to a new BuildingMapper and BuildingListResponseFactory. This reduced the handler's class coupling from 15 to 3 and split remaining cross-cutting concerns across new well-scoped types. All story-related types are now GREEN."
+}
