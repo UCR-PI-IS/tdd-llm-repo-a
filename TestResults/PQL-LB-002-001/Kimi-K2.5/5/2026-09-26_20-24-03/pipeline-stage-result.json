@@ -1,0 +1,51 @@
+{
+  "stage": "code-generation",
+  "storyId": "PQL-LB-002-001",
+  "model": "Kimi-K2.5",
+  "iteration": "5",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Domain/Entities/Building.cs",
+    "Backend.Domain/Repositories/IBuildingListRepository.cs",
+    "Backend.Application/Services/IBuildingListService.cs",
+    "Backend.Application/Services/Implementations/BuildingListService.cs",
+    "Backend.Infrastructure/Repositories/SqlBuildingListRepository.cs",
+    "Backend.Infrastructure/EntityConfigurations/BuildingEntityConfiguration.cs",
+    "Backend.Presentation/Api/Dtos/BuildingDto.cs",
+    "Backend.Presentation/Api/Responses/GetBuildingListResponse.cs",
+    "Backend.Presentation/Api/Handlers/GetBuildingListHandler.cs",
+    "Backend.Presentation/Api/Endpoints/BuildingListEndpoint.cs",
+    "PQL-LB-002-001.sql",
+    "PQL-LB-002-001-probes.json"
+  ],
+  "filesModified": [
+    "Backend.Infrastructure/UCRDatabaseContext.cs",
+    "Backend.Application/DependencyInjection.cs",
+    "Backend.Infrastructure/DependecyInjection.cs",
+    "Backend.Api/Program.cs"
+  ],
+  "metrics": {
+    "buildErrors": 0,
+    "buildWarnings": 14,
+    "testsTotal": 215,
+    "testsPassed": 215,
+    "testsFailed": 0,
+    "testsSkipped": 0,
+    "lineCoverage": 0.8589494163424124,
+    "branchCoverage": 0.8359375,
+    "e2e": {
+      "status": "success",
+      "probesTotal": 2,
+      "probesPassed": 2,
+      "probesFailed": 0,
+      "seedsApplied": ["PQL-LB-002-001.sql"],
+      "resultPath": "E2EResults/PQL-LB-002-001/Kimi-K2.5/5/2026-09-26_20-26-39/",
+      "cleanup": "clean"
+    }
+  },
+  "warnings": [
+    "Initial build required multiple attempts due to test file namespace mismatch — resolved by aligning BuildingListService namespace with test imports.",
+    "14 build warnings from unrelated existing test files (CS8602 null dereference warnings)."
+  ],
+  "notes": "Implemented the List Buildings feature across all DDD layers: Building entity, repository interface, application service, SQL repository, EF configuration, DTOs, response, handler, and endpoint. Build, tests, and end-to-end validation all passed."
+}
