@@ -1,0 +1,27 @@
+{
+  "stage": "test-generation",
+  "storyId": "PQL-AE-001-001",
+  "model": "Kimi-K2.5",
+  "iteration": "5",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Application.Tests.Unit/BuildingServiceTests.cs",
+    "Backend.Infrastructure.Tests.Unit/SqlBuildingRepositoryTests.cs",
+    "Backend.Presentation.Tests.Unit/AddBuildingHandlerTests.cs"
+  ],
+  "filesModified": [
+    "Backend.Domain.Tests.Unit/BuildingTests.cs"
+  ],
+  "metrics": {
+    "intentsConfirmed": 18,
+    "testMethodsEmitted": 17,
+    "byLayer": {
+      "Domain": 8,
+      "Application": 3,
+      "Infrastructure": 3,
+      "Presentation": 3
+    }
+  },
+  "warnings": [],
+  "notes": "Generated tests for Building entity new constructor with areaId (8 new methods plus 1 preserved existing), BuildingService application layer (3 methods), SqlBuildingRepository infrastructure layer (3 methods), and AddBuildingHandler presentation layer (3 methods). All 18 confirmed intents covered across 17 newly emitted test methods."
+}
