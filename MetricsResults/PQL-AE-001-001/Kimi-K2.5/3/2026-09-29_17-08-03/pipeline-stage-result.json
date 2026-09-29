@@ -1,0 +1,52 @@
+{
+  "stage": "refactoring",
+  "storyId": "PQL-AE-001-001",
+  "model": "Kimi-K2.5",
+  "iteration": "3",
+  "status": "partial",
+  "filesCreated": [
+    "Backend.Domain/Exceptions/BuildingDomainException.cs",
+    "Backend.Application/Services/BuildingValidator.cs",
+    "Backend.Presentation/Api/Handlers/AddBuildingResult.cs",
+    "Backend.Presentation/Api/Handlers/AddBuildingResultFactory.cs"
+  ],
+  "filesModified": [
+    "Backend.Domain/Entities/Building.cs",
+    "Backend.Domain/Exceptions/AreaNotFoundException.cs",
+    "Backend.Domain/Exceptions/DuplicateBuildingException.cs",
+    "Backend.Application/Services/BuildingService.cs",
+    "Backend.Infrastructure/Repositories/SqlBuildingRepository.cs",
+    "Backend.Presentation/Endpoints/AddBuildingEndpoints.cs",
+    "Backend.Presentation/Api/Handlers/AddBuildingHandler.cs"
+  ],
+  "metrics": {
+    "loopIterationsPerformed": 6,
+    "maxLoopIterations": 10,
+    "allGreenAchieved": false,
+    "baseline": {
+      "minMI": 53,
+      "maxCC": 9,
+      "maxCoupling": 16,
+      "maxDIT": 1
+    },
+    "final": {
+      "minMI": 52,
+      "maxCC": 9,
+      "maxCoupling": 10,
+      "maxDIT": 2
+    },
+    "remainingViolations": [
+      {
+        "type": "UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Repositories.SqlBuildingRepository",
+        "metric": "Coupling",
+        "value": 10,
+        "flag": "YELLOW"
+      }
+    ]
+  },
+  "warnings": [
+    "Removed explicit interface implementation on SqlBuildingRepository to reduce coupling but reverted because it broke interface contract (CS0738).",
+    "SqlBuildingRepository class coupling remained at 10 after multiple targeted refactors and was skipped per the 3-attempt rule."
+  ],
+  "notes": "All story-related types except SqlBuildingRepository achieved GREEN flags. SqlBuildingRepository is borderline at 10 (YELLOW) and could not be pushed below the threshold without breaking the IBuildingRepository contract or test expectations."
+}

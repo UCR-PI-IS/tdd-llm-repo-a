@@ -1,0 +1,69 @@
+{
+  "stage": "e2e-validation",
+  "status": "failure",
+  "timestamp": "2026-09-29_14-18-39",
+  "storyId": "PQL-AE-001-001",
+  "model": "Kimi-K2.5",
+  "iteration": "3",
+  "database": {
+    "container": "themepark-sql-e2e-pql-ae-001-001-kimi-k2-5-3-141839",
+    "image": "mcr.microsoft.com/mssql/server:2022-latest",
+    "network": "themepark-e2e-pql-ae-001-001-kimi-k2-5-3-141839",
+    "database": "ThemePark",
+    "readySeconds": 8.4,
+    "baseSchemaApplied": [
+      "Semester.sql",
+      "Course.sql"
+    ],
+    "seedsApplied": [
+      "PQL-AE-001-001.sql"
+    ]
+  },
+  "backend": {
+    "container": "themepark-api-e2e-pql-ae-001-001-kimi-k2-5-3-141839",
+    "project": "Backend.Api/UCR.ECCI.PI.ThemePark.Backend.Api.csproj",
+    "publishStatus": "success",
+    "started": true,
+    "url": "http://127.0.0.1:55000",
+    "readySeconds": 2.2,
+    "errorLines": [
+      "fail: Microsoft.EntityFrameworkCore.Update[10000]",
+      "fail: Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware[1]",
+      "An unhandled exception has occurred while executing the request."
+    ]
+  },
+  "probes": [
+    {
+      "name": "add building",
+      "method": "POST",
+      "path": "/api/buildings",
+      "expectedStatus": 201,
+      "actualStatus": 500,
+      "passed": false,
+      "missingContent": [],
+      "error": null,
+      "bodySnippet": "Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.\n ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'InternalId', table 'ThemePark.dbo.Building'; column does not allow nulls. INSERT fails.\n   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)\n   at Microsoft.Data.SqlClient.SqlInternalCon"
+    }
+  ],
+  "totalProbes": 1,
+  "probesPassed": 0,
+  "probesFailed": 1,
+  "cleanup": {
+    "status": "clean",
+    "removedContainers": [
+      "themepark-api-e2e-pql-ae-001-001-kimi-k2-5-3-141839",
+      "themepark-sql-e2e-pql-ae-001-001-kimi-k2-5-3-141839"
+    ],
+    "removedNetworks": [
+      "themepark-e2e-pql-ae-001-001-kimi-k2-5-3-141839"
+    ],
+    "removedVolumes": [
+      "themepark-app-e2e-pql-ae-001-001-kimi-k2-5-3-141839"
+    ],
+    "leftovers": []
+  },
+  "warnings": [],
+  "errors": [
+    "1 probe(s) failed."
+  ]
+}

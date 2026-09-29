@@ -1,0 +1,34 @@
+{
+  "stage": "test-generation",
+  "storyId": "PQL-AE-001-001",
+  "model": "Kimi-K2.5",
+  "iteration": "3",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Domain.Tests.Unit/BuildingConstructorValidationTests.cs",
+    "Backend.Application.Tests.Unit/BuildingServiceTests.cs",
+    "Backend.Infrastructure.Tests.Unit/SqlBuildingRepositoryTests.cs",
+    "Backend.Presentation.Tests.Unit/AddBuildingHandlerTests.cs"
+  ],
+  "filesModified": [],
+  "metrics": {
+    "intentsConfirmed": 18,
+    "testMethodsEmitted": 23,
+    "byLayer": {
+      "Domain": 14,
+      "Application": 3,
+      "Infrastructure": 3,
+      "Presentation": 3
+    }
+  },
+  "warnings": [
+    "Domain-002 and Domain-003 intent validation for null vs empty name are split into two test methods to provide clear, granular failure messages",
+    "Domain-004 null and empty color validation are split into two test methods for granular assertion",
+    "Domain-005, Domain-006, Domain-007, and Domain-008 each generate two test methods (zero and negative boundary) to achieve full decision coverage",
+    "Domain-009 uses parameterized test cases with TestCase attribute for minimum valid boundary values",
+    "Application layer assumes existence of IBuildingRepository, IAreaRepository, BuildingService, DuplicateBuildingException, and AreaNotFoundException per intent specification",
+    "Presentation layer assumes existence of AddBuildingHandler, AddBuildingDto, AddBuildingResponse, and IBuildingService per intent specification",
+    "No existing production classes were created or modified; tests target expected interfaces and entities that will be implemented in subsequent pipeline stages"
+  ],
+  "notes": "Generated 4 test classes covering 18 confirmed intents across all 4 DDD layers. Domain layer uses pure unit tests without mocking. Application layer mocks repository interfaces via Moq. Infrastructure layer uses EF Core In-Memory database per project convention. Presentation layer mocks the application service and verifies HTTP result types. All tests follow AAA pattern, Assert.Multiple for multi-property assertions, and existing project naming conventions."
+}
