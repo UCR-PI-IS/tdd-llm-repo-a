@@ -51,6 +51,11 @@ public class Building
     public float Z { get; private set; }
 
     /// <summary>
+    /// Identifier of the area where the building is located.
+    /// </summary>
+    public int AreaId { get; private set; }
+
+    /// <summary>
     /// Parameterless constructor for EF Core materialization.
     /// </summary>
     private Building()
@@ -82,5 +87,56 @@ public class Building
         X = x;
         Y = y;
         Z = z;
+        AreaId = 0;
+    }
+
+    /// <summary>
+    /// Constructor for creating a new building.
+    /// </summary>
+    /// <param name="name">Name of the building</param>
+    /// <param name="color">Color of the building</param>
+    /// <param name="height">Height in meters</param>
+    /// <param name="length">Length in meters</param>
+    /// <param name="width">Width in meters</param>
+    /// <param name="x">X coordinate</param>
+    /// <param name="y">Y coordinate</param>
+    /// <param name="z">Z coordinate</param>
+    /// <param name="areaId">Area identifier</param>
+    public Building(string name, string color, float height, float length, float width, float x, float y, float z, int areaId)
+    {
+        ThrowIfNullOrWhiteSpace(name, nameof(name));
+        ThrowIfNullOrWhiteSpace(color, nameof(color));
+        ThrowIfNotPositive(height, nameof(height));
+        ThrowIfNotPositive(length, nameof(length));
+        ThrowIfNotPositive(width, nameof(width));
+        ThrowIfNotPositive(areaId, nameof(areaId));
+
+        Name = name;
+        Color = color;
+        Height = height;
+        Length = length;
+        Width = width;
+        X = x;
+        Y = y;
+        Z = z;
+        AreaId = areaId;
+    }
+
+    private static void ThrowIfNullOrWhiteSpace(string value, string paramName)
+    {
+        if (string.IsNullOrWhiteSpace(value))
+            throw new ArgumentException($"{paramName} cannot be empty", paramName);
+    }
+
+    private static void ThrowIfNotPositive(float value, string paramName)
+    {
+        if (value <= 0)
+            throw new ArgumentException($"{paramName} must be greater than zero", paramName);
+    }
+
+    private static void ThrowIfNotPositive(int value, string paramName)
+    {
+        if (value <= 0)
+            throw new ArgumentException($"{paramName} must be greater than zero", paramName);
     }
 }
