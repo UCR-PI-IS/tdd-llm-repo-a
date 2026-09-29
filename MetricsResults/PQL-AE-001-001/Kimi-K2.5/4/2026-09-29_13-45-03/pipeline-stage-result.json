@@ -1,0 +1,31 @@
+{
+  "stage": "refactoring",
+  "storyId": "PQL-AE-001-001",
+  "model": "Kimi-K2.5",
+  "iteration": "4",
+  "status": "success",
+  "filesCreated": [],
+  "filesModified": [
+    "Backend.Domain/Entities/Building.cs"
+  ],
+  "metrics": {
+    "loopIterationsPerformed": 1,
+    "maxLoopIterations": 10,
+    "allGreenAchieved": true,
+    "baseline": {
+      "minMI": 53,
+      "maxCC": 9,
+      "maxCoupling": 17,
+      "maxDIT": 0
+    },
+    "final": {
+      "minMI": 51,
+      "maxCC": 9,
+      "maxCoupling": 17,
+      "maxDIT": 0
+    },
+    "remainingViolations": []
+  },
+  "warnings": [],
+  "notes": "Refactored Building entity constructor to extract repeated guard clauses into private validation methods (ValidateRequiredString, ValidatePositiveDimension, ValidatePositiveId). This eliminates the static code smell of repeated validation patterns while maintaining all existing test behavior (238 tests pass). The Maintainability Index slightly decreased (53→51) due to the addition of helper methods and increased source lines, but remains well within GREEN threshold (≥20). No RED or YELLOW metric violations were introduced."
+}

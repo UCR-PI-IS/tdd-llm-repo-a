@@ -1,0 +1,52 @@
+{
+  "stage": "code-generation",
+  "storyId": "PQL-AE-001-001",
+  "model": "Kimi-K2.5",
+  "iteration": "4",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Domain/Exceptions/DuplicateBuildingException.cs",
+    "Backend.Domain/Exceptions/AreaNotFoundException.cs",
+    "Backend.Domain/Repositories/IBuildingRepository.cs",
+    "Backend.Domain/Repositories/IAreaRepository.cs",
+    "Backend.Application/Services/IBuildingService.cs",
+    "Backend.Application/Services/BuildingService.cs",
+    "Backend.Infrastructure/Repositories/SqlBuildingRepository.cs",
+    "Backend.Infrastructure/Repositories/SqlAreaRepository.cs",
+    "Backend.Presentation/Api/Dtos/CreateBuildingDto.cs",
+    "Backend.Presentation/Api/Responses/AddBuildingResponse.cs",
+    "Backend.Presentation/Api/Handlers/AddBuildingHandler.cs",
+    "Backend.Presentation/Api/Endpoints/AddBuildingEndpoint.cs",
+    "UCR.ECCI.PI.ThemePark.Database/Tables/Building.sql"
+  ],
+  "filesModified": [
+    "Backend.Domain/Entities/Building.cs",
+    "Backend.Infrastructure/EntityConfigurations/BuildingEntityConfiguration.cs",
+    "Backend.Infrastructure/DependecyInjection.cs",
+    "Backend.Application/DependencyInjection.cs",
+    "Backend.Api/Program.cs",
+    "Backend.Presentation.Tests.Unit/AddBuildingHandlerTests.cs",
+    "Backend.Application.Tests.Unit/BuildingServiceTests.cs"
+  ],
+  "metrics": {
+    "buildErrors": 0,
+    "buildWarnings": 0,
+    "testsTotal": 238,
+    "testsPassed": 238,
+    "testsFailed": 0,
+    "testsSkipped": 0,
+    "lineCoverage": 0.8540017590149517,
+    "branchCoverage": 0.8541666666666666,
+    "e2e": {
+      "status": "success",
+      "probesTotal": 1,
+      "probesPassed": 1,
+      "probesFailed": 0,
+      "seedsApplied": ["seed-PQL-AE-001-001.sql"],
+      "resultPath": "E2EResults/PQL-AE-001-001/Kimi-K2.5/4/2026-09-29_13-39-20/",
+      "cleanup": "clean"
+    }
+  },
+  "warnings": [],
+  "notes": "Implemented Building entity with validation, BuildingService with duplicate/area checks, SqlBuildingRepository, and AddBuildingHandler with endpoint. All 238 unit tests pass, coverage ~85%, and e2e POST /api/buildings probe passes with clean teardown."
+}
