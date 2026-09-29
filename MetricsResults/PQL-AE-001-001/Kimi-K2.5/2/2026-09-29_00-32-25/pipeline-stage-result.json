@@ -1,0 +1,37 @@
+{
+  "stage": "refactoring",
+  "storyId": "PQL-AE-001-001",
+  "model": "Kimi-K2.5",
+  "iteration": "2",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Presentation/Api/Handlers/BuildingServiceCaller.cs"
+  ],
+  "filesModified": [
+    "Backend.Domain/Entities/Building.cs",
+    "Backend.Infrastructure/Repositories/SqlBuildingRepository.cs",
+    "Backend.Presentation/Api/Endpoints/AddBuildingEndpoint.cs",
+    "Backend.Presentation/Api/Handlers/AddBuildingHandler.cs",
+    "Backend.Presentation/Api/Handlers/AddBuildingResultFactory.cs"
+  ],
+  "metrics": {
+    "loopIterationsPerformed": 3,
+    "maxLoopIterations": 10,
+    "allGreenAchieved": true,
+    "baseline": {
+      "minMI": 53,
+      "maxCC": 9,
+      "maxCoupling": 15,
+      "maxDIT": 0
+    },
+    "final": {
+      "minMI": 52,
+      "maxCC": 9,
+      "maxCoupling": 9,
+      "maxDIT": 0
+    },
+    "remainingViolations": []
+  },
+  "warnings": [],
+  "notes": "All story-related types are GREEN. Deleted unused BuildingCreationFactory.cs as dead code after inlining its logic into BuildingServiceCaller. Distributed exception handling between AddBuildingHandler (catch/error mapping) and BuildingServiceCaller (pure orchestration) to keep both under the coupling threshold of 10."
+}
