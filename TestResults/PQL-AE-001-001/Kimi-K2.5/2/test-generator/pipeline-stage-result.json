@@ -1,0 +1,30 @@
+{
+  "stage": "test-generation",
+  "storyId": "PQL-AE-001-001",
+  "model": "Kimi-K2.5",
+  "iteration": "2",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Domain.Tests.Unit/BuildingConstructorTests.cs",
+    "Backend.Application.Tests.Unit/BuildingServiceTests.cs",
+    "Backend.Infrastructure.Tests.Unit/SqlBuildingRepositoryTests.cs",
+    "Backend.Presentation.Tests.Unit/AddBuildingHandlerTests.cs"
+  ],
+  "filesModified": [],
+  "metrics": {
+    "intentsConfirmed": 18,
+    "testMethodsEmitted": 17,
+    "byLayer": {
+      "Domain": 8,
+      "Application": 3,
+      "Infrastructure": 3,
+      "Presentation": 3
+    }
+  },
+  "warnings": [
+    "Assumed IBuildingRepository interface includes ExistsByAreaIdAsync for area validation in Application layer.",
+    "Assumed CreateBuildingDto and AddBuildingResponse types for Presentation layer; production code may adjust naming.",
+    "Domain test file named BuildingConstructorTests.cs to avoid overwriting existing BuildingTests.cs."
+  ],
+  "notes": "Generated test classes reference new production types (Building constructor with areaId, IBuildingRepository, BuildingService, SqlBuildingRepository, IBuildingService, AddBuildingHandler, CreateBuildingDto, AddBuildingResponse, DuplicateBuildingException, AreaNotFoundException) that are expected to be implemented as part of story PQL-AE-001-001."
+}
