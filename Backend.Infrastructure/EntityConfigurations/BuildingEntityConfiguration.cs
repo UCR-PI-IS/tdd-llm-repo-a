@@ -20,7 +20,8 @@ internal class BuildingEntityConfiguration : IEntityTypeConfiguration<Building>
 
         builder.HasKey(b => b.InternalId);
 
-        builder.Property(b => b.InternalId);
+        builder.Property(b => b.InternalId)
+            .ValueGeneratedNever();
 
         builder.Property(b => b.Name)
             .HasMaxLength(100);
@@ -34,5 +35,6 @@ internal class BuildingEntityConfiguration : IEntityTypeConfiguration<Building>
         builder.Property(b => b.X);
         builder.Property(b => b.Y);
         builder.Property(b => b.Z);
+        builder.Property(b => b.AreaId);
     }
 }
