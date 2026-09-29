@@ -51,6 +51,11 @@ public class Building
     public float Z { get; private set; }
 
     /// <summary>
+    /// Area ID where the building is located.
+    /// </summary>
+    public int AreaId { get; private set; }
+
+    /// <summary>
     /// Parameterless constructor for EF Core materialization.
     /// </summary>
     private Building()
@@ -82,5 +87,55 @@ public class Building
         X = x;
         Y = y;
         Z = z;
+    }
+
+    /// <summary>
+    /// Constructor for the Building class with AreaId.
+    /// </summary>
+    /// <param name="name">Name of the building</param>
+    /// <param name="color">Color of the building</param>
+    /// <param name="height">Height in meters</param>
+    /// <param name="length">Length in meters</param>
+    /// <param name="width">Width in meters</param>
+    /// <param name="x">X coordinate</param>
+    /// <param name="y">Y coordinate</param>
+    /// <param name="z">Z coordinate</param>
+    /// <param name="areaId">Area ID where the building is located</param>
+    public Building(string name, string color, float height, float length, float width, float x, float y, float z, int areaId)
+    {
+        ThrowIfNullOrEmpty(name, nameof(name), "Name cannot be empty");
+        ThrowIfNullOrEmpty(color, nameof(color), "Color cannot be empty");
+        ThrowIfNotPositive(height, nameof(height), "Height must be greater than zero");
+        ThrowIfNotPositive(length, nameof(length), "Length must be greater than zero");
+        ThrowIfNotPositive(width, nameof(width), "Width must be greater than zero");
+        ThrowIfNotPositive(areaId, nameof(areaId), "AreaId must be greater than zero");
+
+        Name = name;
+        Color = color;
+        Height = height;
+        Length = length;
+        Width = width;
+        X = x;
+        Y = y;
+        Z = z;
+        AreaId = areaId;
+    }
+
+    private static void ThrowIfNullOrEmpty(string value, string paramName, string message)
+    {
+        if (string.IsNullOrEmpty(value))
+            throw new ArgumentException(message, paramName);
+    }
+
+    private static void ThrowIfNotPositive(float value, string paramName, string message)
+    {
+        if (value <= 0)
+            throw new ArgumentException(message, paramName);
+    }
+
+    private static void ThrowIfNotPositive(int value, string paramName, string message)
+    {
+        if (value <= 0)
+            throw new ArgumentException(message, paramName);
     }
 }
