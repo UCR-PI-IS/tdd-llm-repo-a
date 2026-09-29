@@ -1,0 +1,49 @@
+{
+  "stage": "refactoring",
+  "storyId": "PQL-AE-001-001",
+  "model": "Kimi-K2.5",
+  "iteration": "5",
+  "status": "partial",
+  "filesCreated": [],
+  "filesModified": [
+    "Backend.Domain/Entities/Building.cs",
+    "Backend.Domain/Repositories/IBuildingRepository.cs",
+    "Backend.Infrastructure/Repositories/SqlBuildingRepository.cs"
+  ],
+  "metrics": {
+    "loopIterationsPerformed": 2,
+    "maxLoopIterations": 10,
+    "allGreenAchieved": false,
+    "baseline": {
+      "minMI": 53,
+      "maxCC": 9,
+      "maxCoupling": 16,
+      "maxDIT": 0
+    },
+    "final": {
+      "minMI": 52,
+      "maxCC": 9,
+      "maxCoupling": 15,
+      "maxDIT": 0
+    },
+    "remainingViolations": [
+      {
+        "type": "SqlBuildingRepository",
+        "metric": "Coupling",
+        "value": 12,
+        "flag": "YELLOW"
+      },
+      {
+        "type": "AddBuildingHandler",
+        "metric": "Coupling",
+        "value": 15,
+        "flag": "YELLOW"
+      }
+    ]
+  },
+  "warnings": [
+    "SqlBuildingRepository coupling stayed YELLOW (12) after removing AreaExistsAsync and switching ExistsByNameAsync to .Any(). Interface-mandated types (Task<Building>, Task<bool>, Building, string, UCRDatabaseContext, IBuildingRepository, plus EF Core framework types from AddAsync/SaveChangesAsync) keep it above the 9 threshold.",
+    "AddBuildingHandler coupling stayed YELLOW (15) because test assertions lock the exact return types (Created<AddBuildingResponse>, Conflict<string>, BadRequest<string>) and the handler must reference Building, DuplicateBuildingException, ArgumentException, and AreaNotFoundException."
+  ],
+  "notes": "Eliminated manual enumerator loop and explicit IQueryable/IEnumerator/IDisposable references in SqlBuildingRepository (coupling dropped 16→12). Extracted repeated guard clauses in Building constructor into private static helpers (constructor CC 7→1). Made AreaExistsAsync a default interface method to keep the contract while removing the trivial implementation from the repository. All 238 tests passed across every build/test cycle."
+}

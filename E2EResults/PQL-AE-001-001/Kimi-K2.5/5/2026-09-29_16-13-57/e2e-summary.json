@@ -1,0 +1,63 @@
+{
+  "stage": "e2e-validation",
+  "status": "success",
+  "timestamp": "2026-09-29_16-13-57",
+  "storyId": "PQL-AE-001-001",
+  "model": "Kimi-K2.5",
+  "iteration": "5",
+  "database": {
+    "container": "themepark-sql-e2e-pql-ae-001-001-kimi-k2-5-5-161357",
+    "image": "mcr.microsoft.com/mssql/server:2022-latest",
+    "network": "themepark-e2e-pql-ae-001-001-kimi-k2-5-5-161357",
+    "database": "ThemePark",
+    "readySeconds": 8.5,
+    "baseSchemaApplied": [
+      "Semester.sql",
+      "Course.sql"
+    ],
+    "seedsApplied": [
+      "PQL-AE-001-001.sql"
+    ]
+  },
+  "backend": {
+    "container": "themepark-api-e2e-pql-ae-001-001-kimi-k2-5-5-161357",
+    "project": "Backend.Api/UCR.ECCI.PI.ThemePark.Backend.Api.csproj",
+    "publishStatus": "success",
+    "started": true,
+    "url": "http://127.0.0.1:55027",
+    "readySeconds": 2.2,
+    "errorLines": []
+  },
+  "probes": [
+    {
+      "name": "add building",
+      "method": "POST",
+      "path": "/buildings",
+      "expectedStatus": 201,
+      "actualStatus": 201,
+      "passed": true,
+      "missingContent": [],
+      "error": null,
+      "bodySnippet": "{\"building\":{\"internalId\":4,\"name\":\"E2E Building\",\"color\":\"Red\",\"height\":20.5,\"length\":50,\"width\":30,\"x\":100,\"y\":200,\"z\":0,\"areaId\":1}}"
+    }
+  ],
+  "totalProbes": 1,
+  "probesPassed": 1,
+  "probesFailed": 0,
+  "cleanup": {
+    "status": "clean",
+    "removedContainers": [
+      "themepark-api-e2e-pql-ae-001-001-kimi-k2-5-5-161357",
+      "themepark-sql-e2e-pql-ae-001-001-kimi-k2-5-5-161357"
+    ],
+    "removedNetworks": [
+      "themepark-e2e-pql-ae-001-001-kimi-k2-5-5-161357"
+    ],
+    "removedVolumes": [
+      "themepark-app-e2e-pql-ae-001-001-kimi-k2-5-5-161357"
+    ],
+    "leftovers": []
+  },
+  "warnings": [],
+  "errors": []
+}
