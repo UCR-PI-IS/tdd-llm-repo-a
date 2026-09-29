@@ -1,0 +1,35 @@
+{
+  "status": "failure",
+  "timestamp": "2026-09-28_21-20-58",
+  "storyId": "PQL-AE-001-001",
+  "model": "Kimi-K2.5",
+  "iteration": "1",
+  "projects": [
+    {
+      "name": "UCR.ECCI.PI.ThemePark.Backend.Presentation.Tests.Unit",
+      "status": "success",
+      "warnings": 8,
+      "errors": 0,
+      "errorMessages": []
+    },
+    {
+      "name": "UCR.ECCI.PI.ThemePark.Backend.Application.Tests.Unit",
+      "status": "success",
+      "warnings": 2,
+      "errors": 0,
+      "errorMessages": []
+    },
+    {
+      "name": "UCR.ECCI.PI.ThemePark.Backend.Api",
+      "status": "failure",
+      "warnings": 0,
+      "errors": 2,
+      "errorMessages": [
+        "CS0051: Inconsistent accessibility: parameter type 'UCRDatabaseContext' is less accessible than method 'SqlBuildingRepository.SqlBuildingRepository(UCRDatabaseContext)'",
+        "CS0051: Inconsistent accessibility: parameter type 'UCRDatabaseContext' is less accessible than method 'SqlBuildingRepository.SqlBuildingRepository(UCRDatabaseContext)'"
+      ]
+    }
+  ],
+  "totalWarnings": 10,
+  "totalErrors": 2
+}
