@@ -1,0 +1,26 @@
+{
+  "stage": "test-generation",
+  "storyId": "PQL-AE-001-001",
+  "model": "Kimi-K2.5",
+  "iteration": "1",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Domain.Tests.Unit/BuildingConstructorTests.cs",
+    "Backend.Application.Tests.Unit/BuildingServiceTests.cs",
+    "Backend.Infrastructure.Tests.Unit/SqlBuildingRepositoryTests.cs",
+    "Backend.Presentation.Tests.Unit/AddBuildingHandlerTests.cs"
+  ],
+  "filesModified": [],
+  "metrics": {
+    "intentsConfirmed": 15,
+    "testMethodsEmitted": 18,
+    "byLayer": {
+      "Domain": 9,
+      "Application": 3,
+      "Infrastructure": 3,
+      "Presentation": 3
+    }
+  },
+  "warnings": [],
+  "notes": "Generated 18 test methods covering all 15 confirmed intents across 4 DDD layers. Domain tests cover Building entity constructor validation (valid properties, null/empty name, null/empty color, zero/negative dimensions, invalid areaId, boundary values). Application tests cover BuildingService.AddBuildingAsync (successful add, duplicate detection, area validation). Infrastructure tests cover SqlBuildingRepository (AddAsync persistence, ExistsByNameAsync true/false cases). Presentation tests cover AddBuildingHandler (201 Created, 409 Conflict, 400 Bad Request responses). All tests follow established patterns with AAA structure, Assert.Multiple for multiple assertions, and proper Moq usage."
+}

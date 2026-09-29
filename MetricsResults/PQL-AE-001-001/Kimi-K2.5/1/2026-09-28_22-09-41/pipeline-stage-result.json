@@ -1,0 +1,51 @@
+{
+  "stage": "refactoring",
+  "storyId": "PQL-AE-001-001",
+  "model": "Kimi-K2.5",
+  "iteration": "1",
+  "status": "partial",
+  "filesCreated": [],
+  "filesModified": [
+    "Backend.Domain/Entities/Building.cs",
+    "Backend.Presentation/Api/Handlers/AddBuildingHandler.cs",
+    "Backend.Presentation/Api/Responses/AddBuildingResponse.cs",
+    "Backend.Domain/Repositories/IBuildingRepository.cs",
+    "Backend.Infrastructure/Repositories/SqlBuildingRepository.cs"
+  ],
+  "metrics": {
+    "loopIterationsPerformed": 3,
+    "maxLoopIterations": 10,
+    "allGreenAchieved": false,
+    "baseline": {
+      "minMI": 47,
+      "maxCC": 9,
+      "maxCoupling": 17,
+      "maxDIT": 0
+    },
+    "final": {
+      "minMI": 47,
+      "maxCC": 9,
+      "maxCoupling": 13,
+      "maxDIT": 0
+    },
+    "remainingViolations": [
+      {
+        "type": "UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Handlers.AddBuildingHandler",
+        "metric": "Coupling",
+        "value": 13,
+        "flag": "YELLOW"
+      },
+      {
+        "type": "UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Repositories.SqlBuildingRepository",
+        "metric": "Coupling",
+        "value": 11,
+        "flag": "YELLOW"
+      }
+    ]
+  },
+  "warnings": [
+    "SqlBuildingRepository class coupling remained at 11 after removing AreaExistsAsync via default interface method; cannot reach ≤9 without architectural redesign",
+    "AddBuildingHandler class coupling dropped from 17 to 13 but cannot reach ≤9 while preserving test expectations for Created<AddBuildingResponse>, Conflict<string>, and BadRequest<string> return types"
+  ],
+  "notes": "Static smell pass extracted repeated guard clauses in Building.cs into ThrowIfNullOrWhiteSpace and ThrowIfNotPositive helpers. AddBuildingHandler coupling reduced from 17 to 13 by switching from TypedResults to Results and extracting BuildingDto creation into AddBuildingResponse.FromBuilding. SqlBuildingRepository coupling stayed at 11 after converting AreaExistsAsync to a default interface method on IBuildingRepository. Remaining YELLOW violations are structural in thin bridge layers that naturally reference multiple DDD layers and ASP.NET Core result types."
+}
