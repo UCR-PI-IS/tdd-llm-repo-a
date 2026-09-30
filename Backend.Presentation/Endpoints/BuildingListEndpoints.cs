@@ -1,5 +1,8 @@
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
+using UCR.ECCI.PI.ThemePark.Backend.Application.Services;
+using UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Dtos;
 using UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Handlers;
 
 namespace UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Endpoints
@@ -18,6 +21,11 @@ namespace UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Endpoints
         {
             builder.MapGet("/buildings", GetBuildingListHandler.HandleAsync)
                 .WithName("GetBuildingList")
+                .WithOpenApi();
+
+            builder.MapPost("/buildings", async (AddBuildingRequest request, IBuildingService service) =>
+                await AddBuildingHandler.HandleAsync(request, service))
+                .WithName("AddBuilding")
                 .WithOpenApi();
 
             return builder;
