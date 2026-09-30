@@ -73,6 +73,12 @@ public class Building
     /// <param name="z">Z coordinate</param>
     public Building(int internalId, string name, string color, float height, float length, float width, float x, float y, float z)
     {
+        ThrowIfNullOrEmpty(name, nameof(name));
+        ThrowIfNullOrEmpty(color, nameof(color));
+        ThrowIfNotPositive(height, nameof(height));
+        ThrowIfNotPositive(length, nameof(length));
+        ThrowIfNotPositive(width, nameof(width));
+
         InternalId = internalId;
         Name = name;
         Color = color;
@@ -82,5 +88,17 @@ public class Building
         X = x;
         Y = y;
         Z = z;
+    }
+
+    private static void ThrowIfNullOrEmpty(string value, string paramName)
+    {
+        if (string.IsNullOrEmpty(value))
+            throw new ArgumentException($"{paramName} cannot be null or empty", paramName);
+    }
+
+    private static void ThrowIfNotPositive(float value, string paramName)
+    {
+        if (value <= 0)
+            throw new ArgumentException($"{paramName} must be greater than zero", paramName);
     }
 }
