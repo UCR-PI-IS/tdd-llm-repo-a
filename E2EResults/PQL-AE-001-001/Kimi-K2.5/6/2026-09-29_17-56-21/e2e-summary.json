@@ -1,0 +1,66 @@
+{
+  "stage": "e2e-validation",
+  "status": "failure",
+  "timestamp": "2026-09-29_17-56-21",
+  "storyId": "PQL-AE-001-001",
+  "model": "Kimi-K2.5",
+  "iteration": "6",
+  "database": {
+    "container": "themepark-sql-e2e-pql-ae-001-001-kimi-k2-5-6-175621",
+    "image": "mcr.microsoft.com/mssql/server:2022-latest",
+    "network": "themepark-e2e-pql-ae-001-001-kimi-k2-5-6-175621",
+    "database": "ThemePark",
+    "readySeconds": 8.6,
+    "baseSchemaApplied": [
+      "Building.sql",
+      "Semester.sql",
+      "Course.sql"
+    ],
+    "seedsApplied": [
+      "PQL-AE-001-001.sql"
+    ]
+  },
+  "backend": {
+    "container": "themepark-api-e2e-pql-ae-001-001-kimi-k2-5-6-175621",
+    "project": "Backend.Api/UCR.ECCI.PI.ThemePark.Backend.Api.csproj",
+    "publishStatus": "success",
+    "started": true,
+    "url": "http://127.0.0.1:55028",
+    "readySeconds": 2.3,
+    "errorLines": []
+  },
+  "probes": [
+    {
+      "name": "POST /api/buildings",
+      "method": "POST",
+      "path": "/api/buildings",
+      "expectedStatus": 201,
+      "actualStatus": 404,
+      "passed": false,
+      "missingContent": [],
+      "error": null,
+      "bodySnippet": ""
+    }
+  ],
+  "totalProbes": 1,
+  "probesPassed": 0,
+  "probesFailed": 1,
+  "cleanup": {
+    "status": "clean",
+    "removedContainers": [
+      "themepark-api-e2e-pql-ae-001-001-kimi-k2-5-6-175621",
+      "themepark-sql-e2e-pql-ae-001-001-kimi-k2-5-6-175621"
+    ],
+    "removedNetworks": [
+      "themepark-e2e-pql-ae-001-001-kimi-k2-5-6-175621"
+    ],
+    "removedVolumes": [
+      "themepark-app-e2e-pql-ae-001-001-kimi-k2-5-6-175621"
+    ],
+    "leftovers": []
+  },
+  "warnings": [],
+  "errors": [
+    "1 probe(s) failed."
+  ]
+}

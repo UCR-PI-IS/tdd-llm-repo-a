@@ -1,0 +1,52 @@
+{
+  "stage": "code-generation",
+  "storyId": "PQL-AE-001-001",
+  "model": "Kimi-K2.5",
+  "iteration": "6",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Domain/Exceptions/DuplicateBuildingException.cs",
+    "Backend.Domain/Exceptions/AreaNotFoundException.cs",
+    "Backend.Domain/Repositories/IBuildingRepository.cs",
+    "Backend.Domain/Repositories/IAreaRepository.cs",
+    "Backend.Application/Services/IBuildingService.cs",
+    "Backend.Application/Services/BuildingService.cs",
+    "Backend.Infrastructure/Repositories/SqlBuildingRepository.cs",
+    "Backend.Infrastructure/Repositories/SqlAreaRepository.cs",
+    "Backend.Presentation/Api/Dtos/CreateBuildingDto.cs",
+    "Backend.Presentation/Api/Responses/AddBuildingResponse.cs",
+    "Backend.Presentation/Api/Handlers/AddBuildingHandler.cs",
+    "Backend.Presentation/Api/Endpoints/AddBuildingEndpoint.cs",
+    "UCR.ECCI.PI.ThemePark.Database/Tables/Building.sql",
+    "PQL-AE-001-001.sql"
+  ],
+  "filesModified": [
+    "Backend.Domain/Entities/Building.cs",
+    "Backend.Infrastructure/DependecyInjection.cs",
+    "Backend.Api/Program.cs"
+  ],
+  "metrics": {
+    "buildErrors": 0,
+    "buildWarnings": 8,
+    "testsTotal": 236,
+    "testsPassed": 236,
+    "testsFailed": 0,
+    "testsSkipped": 0,
+    "lineCoverage": null,
+    "branchCoverage": null,
+    "e2e": {
+      "status": "success",
+      "probesTotal": 1,
+      "probesPassed": 1,
+      "probesFailed": 0,
+      "seedsApplied": ["PQL-AE-001-001.sql"],
+      "resultPath": "E2EResults/PQL-AE-001-001/Kimi-K2.5/6/2026-09-29_17-58-56/",
+      "cleanup": "clean"
+    }
+  },
+  "warnings": [
+    "The backend logged 2 error line(s) during e2e validation; a probe expected an error response, so this was not treated as a failure.",
+    "Build produced 8 warnings (CS8602 dereference of possibly null reference in test files)"
+  ],
+  "notes": "Successfully implemented all components for the Add Building user story (PQL-AE-001-001). All 236 unit tests pass. The endpoint /api/buildings is accessible and returns appropriate status codes. The mock-based infrastructure tests required a workaround due to Moq's IQueryable limitations."
+}
