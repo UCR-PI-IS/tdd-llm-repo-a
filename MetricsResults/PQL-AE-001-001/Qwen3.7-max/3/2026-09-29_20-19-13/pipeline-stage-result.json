@@ -1,0 +1,29 @@
+{
+  "stage": "refactoring",
+  "storyId": "PQL-AE-001-001",
+  "model": "Qwen3.7-max",
+  "iteration": "3",
+  "status": "partial",
+  "filesCreated": [],
+  "filesModified": [
+    "Backend.Domain/Entities/Building.cs",
+    "Backend.Presentation/Api/Handlers/AddBuildingHandler.cs",
+    "Backend.Presentation/Mappers/BuildingMapper.cs"
+  ],
+  "metrics": {
+    "loopIterationsPerformed": 2,
+    "maxLoopIterations": 10,
+    "allGreenAchieved": false,
+    "baseline": { "minMI": 51, "maxCC": 10, "maxCoupling": 14, "maxDIT": 0 },
+    "final":    { "minMI": 50, "maxCC": 10, "maxCoupling": 14, "maxDIT": 0 },
+    "remainingViolations": [
+      { "type": "SqlBuildingRepository", "metric": "Coupling", "value": 12, "flag": "YELLOW" },
+      { "type": "AddBuildingHandler", "metric": "Coupling", "value": 14, "flag": "YELLOW" }
+    ]
+  },
+  "warnings": [
+    "SqlBuildingRepository Coupling=12 is structural (EF Core repository pattern requires coupling to DbContext, DbSet, Entity, EF extensions); cannot reduce below 10 without removing functionality",
+    "AddBuildingHandler Coupling=14 is structural (ASP.NET Core handler pattern requires coupling to IResult, Results, Request/Response types, Service, Entity, Exception types); mapper extraction did not reduce coupling below 10"
+  ],
+  "notes": "Extracted guard clause helpers in Building.cs to eliminate repeated guard clauses (static smell fix). Delegated building creation and response mapping to BuildingMapper to improve AddBuildingHandler MI (+3) and CC (-1). Two YELLOW coupling violations remain as structural constraints inherent to their respective patterns."
+}
