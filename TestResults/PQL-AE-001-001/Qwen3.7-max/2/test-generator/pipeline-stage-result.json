@@ -1,0 +1,30 @@
+{
+  "stage": "test-generation",
+  "storyId": "PQL-AE-001-001",
+  "model": "Qwen3.7-max",
+  "iteration": "2",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Domain.Tests.Unit/BuildingAddConstructorTests.cs",
+    "Backend.Application.Tests.Unit/BuildingServiceAddTests.cs",
+    "Backend.Infrastructure.Tests.Unit/SqlBuildingRepositoryTests.cs",
+    "Backend.Presentation.Tests.Unit/AddBuildingHandlerTests.cs"
+  ],
+  "filesModified": [],
+  "metrics": {
+    "intentsConfirmed": 18,
+    "testMethodsEmitted": 15,
+    "byLayer": {
+      "Domain": 6,
+      "Application": 3,
+      "Infrastructure": 3,
+      "Presentation": 3
+    }
+  },
+  "warnings": [
+    "Building entity requires a new constructor with validation (string name, string color, float height, float length, float width, float x, float y, float z, int areaId) — current entity only has a constructor with internalId and no validation",
+    "New types expected by tests but not yet implemented: IBuildingRepository, IBuildingService, BuildingService, SqlBuildingRepository, AddBuildingHandler, AddBuildingRequest, AddBuildingResponse, DuplicateBuildingException, AreaNotFoundException",
+    "IBuildingRepository expected to include AreaExistsAsync(int areaId) for area validation in Application-003"
+  ],
+  "notes": "Generated 15 test methods across 4 DDD layers covering all 18 confirmed intents for the add-building feature. Domain tests use parameterized TestCase for validation coverage. Application tests mock IBuildingRepository. Infrastructure tests use EF Core InMemory provider. Presentation tests mock IBuildingService and verify Created/Conflict/BadRequest HTTP results."
+}

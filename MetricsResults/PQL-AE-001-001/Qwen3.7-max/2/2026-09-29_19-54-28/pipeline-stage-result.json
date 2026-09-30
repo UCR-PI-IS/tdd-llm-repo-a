@@ -1,0 +1,26 @@
+{
+  "stage": "refactoring",
+  "storyId": "PQL-AE-001-001",
+  "model": "Qwen3.7-max",
+  "iteration": "2",
+  "status": "partial",
+  "filesCreated": [],
+  "filesModified": ["Backend.Domain/Entities/Building.cs"],
+  "metrics": {
+    "loopIterationsPerformed": 2,
+    "maxLoopIterations": 10,
+    "allGreenAchieved": false,
+    "baseline": { "minMI": 51, "maxCC": 12, "maxCoupling": 16, "maxDIT": 0 },
+    "final":    { "minMI": 50, "maxCC": 10, "maxCoupling": 16, "maxDIT": 0 },
+    "remainingViolations": [
+      { "type": "SqlBuildingRepository", "metric": "Coupling", "value": 13, "flag": "YELLOW" },
+      { "type": "AddBuildingEndpoint", "metric": "Coupling", "value": 10, "flag": "YELLOW" },
+      { "type": "AddBuildingHandler", "metric": "Coupling", "value": 16, "flag": "YELLOW" }
+    ]
+  },
+  "warnings": [
+    "Attempted to reduce AddBuildingHandler coupling via BuildingMapper.ToEntity extraction, but coupling increased from 16 to 17 (added BuildingMapper reference without removing Building); reverted.",
+    "Remaining coupling violations (10-16) are structural and inherent to EF Core repository patterns and ASP.NET Core Minimal API handler patterns; reducing below 10 would require major architectural restructuring."
+  ],
+  "notes": "Successfully resolved the only YELLOW cyclomatic complexity violation (Building CC 12→10) by extracting repeated guard clauses into private static validation helpers (ThrowIfNullOrEmpty, ThrowIfNotPositive) and removing redundant null-coalescing operators from the non-validating constructor. Three remaining YELLOW coupling violations are structural (EF Core DbContext coupling, ASP.NET handler coupling) and cannot be reduced without breaking DDD layer boundaries."
+}

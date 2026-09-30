@@ -1,0 +1,47 @@
+{
+  "stage": "code-generation",
+  "storyId": "PQL-AE-001-001",
+  "model": "Qwen3.7-max",
+  "iteration": "2",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Domain/Repositories/IBuildingRepository.cs",
+    "Backend.Application/Exceptions/DuplicateBuildingException.cs",
+    "Backend.Application/Exceptions/AreaNotFoundException.cs",
+    "Backend.Application/Services/IBuildingService.cs",
+    "Backend.Application/Services/Implementations/BuildingService.cs",
+    "Backend.Infrastructure/Repositories/SqlBuildingRepository.cs",
+    "Backend.Presentation/Api/Dtos/AddBuildingRequest.cs",
+    "Backend.Presentation/Api/Responses/AddBuildingResponse.cs",
+    "Backend.Presentation/Api/Handlers/AddBuildingHandler.cs",
+    "Backend.Presentation/Api/Endpoints/AddBuildingEndpoint.cs"
+  ],
+  "filesModified": [
+    "Backend.Domain/Entities/Building.cs",
+    "Backend.Infrastructure/EntityConfigurations/BuildingEntityConfiguration.cs",
+    "Backend.Application/DependencyInjection.cs",
+    "Backend.Infrastructure/DependecyInjection.cs",
+    "Backend.Api/Program.cs"
+  ],
+  "metrics": {
+    "buildErrors": 0,
+    "buildWarnings": 6,
+    "testsTotal": 238,
+    "testsPassed": 238,
+    "testsFailed": 0,
+    "testsSkipped": 0,
+    "lineCoverage": 0.8667866786678667,
+    "branchCoverage": 0.8355263157894737,
+    "e2e": {
+      "status": "success",
+      "probesTotal": 2,
+      "probesPassed": 2,
+      "probesFailed": 0,
+      "seedsApplied": ["seed-PQL-AE-001-001.sql"],
+      "resultPath": "E2EResults/PQL-AE-001-001/Qwen3.7-max/2/2026-09-29_19-49-33/",
+      "cleanup": "clean"
+    }
+  },
+  "warnings": [],
+  "notes": "Implemented the Add Building feature across all DDD layers: domain entity with validation, application service with duplicate and area checks, SQL repository, presentation handler with typed results, and minimal API endpoint. All 238 unit tests pass and both e2e probes (GET /buildings, POST /api/buildings) succeeded against an ephemeral SQL Server."
+}
