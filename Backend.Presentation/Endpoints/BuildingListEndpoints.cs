@@ -20,6 +20,10 @@ namespace UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Endpoints
                 .WithName("GetBuildingList")
                 .WithOpenApi();
 
+            builder.MapPost("/buildings", AddBuildingHandler.HandleAsync)
+                .WithName("AddBuilding")
+                .WithOpenApi();
+
             return builder;
         }
     }
