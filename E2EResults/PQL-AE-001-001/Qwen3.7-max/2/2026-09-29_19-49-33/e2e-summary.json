@@ -1,0 +1,74 @@
+{
+  "stage": "e2e-validation",
+  "status": "success",
+  "timestamp": "2026-09-29_19-49-33",
+  "storyId": "PQL-AE-001-001",
+  "model": "Qwen3.7-max",
+  "iteration": "2",
+  "database": {
+    "container": "themepark-sql-e2e-pql-ae-001-001-qwen3-7-max-2-194933",
+    "image": "mcr.microsoft.com/mssql/server:2022-latest",
+    "network": "themepark-e2e-pql-ae-001-001-qwen3-7-max-2-194933",
+    "database": "ThemePark",
+    "readySeconds": 8.3,
+    "baseSchemaApplied": [
+      "Semester.sql",
+      "Course.sql"
+    ],
+    "seedsApplied": [
+      "seed-PQL-AE-001-001.sql"
+    ]
+  },
+  "backend": {
+    "container": "themepark-api-e2e-pql-ae-001-001-qwen3-7-max-2-194933",
+    "project": "Backend.Api/UCR.ECCI.PI.ThemePark.Backend.Api.csproj",
+    "publishStatus": "success",
+    "started": true,
+    "url": "http://127.0.0.1:55000",
+    "readySeconds": 2.2,
+    "errorLines": []
+  },
+  "probes": [
+    {
+      "name": "list buildings includes seeded data",
+      "method": "GET",
+      "path": "/buildings",
+      "expectedStatus": 200,
+      "actualStatus": 200,
+      "passed": true,
+      "missingContent": [],
+      "error": null,
+      "bodySnippet": "{\"buildings\":[{\"id\":1,\"name\":\"Engineering Building\"},{\"id\":2,\"name\":\"Science Hall\"},{\"id\":3,\"name\":\"Library Wing\"}]}"
+    },
+    {
+      "name": "add new building returns 201",
+      "method": "POST",
+      "path": "/api/buildings",
+      "expectedStatus": 201,
+      "actualStatus": 201,
+      "passed": true,
+      "missingContent": [],
+      "error": null,
+      "bodySnippet": "{\"building\":{\"internalId\":4,\"name\":\"New Arts Building\",\"color\":\"Yellow\",\"height\":10,\"length\":25,\"width\":15,\"x\":50,\"y\":75,\"z\":0,\"areaId\":1}}"
+    }
+  ],
+  "totalProbes": 2,
+  "probesPassed": 2,
+  "probesFailed": 0,
+  "cleanup": {
+    "status": "clean",
+    "removedContainers": [
+      "themepark-api-e2e-pql-ae-001-001-qwen3-7-max-2-194933",
+      "themepark-sql-e2e-pql-ae-001-001-qwen3-7-max-2-194933"
+    ],
+    "removedNetworks": [
+      "themepark-e2e-pql-ae-001-001-qwen3-7-max-2-194933"
+    ],
+    "removedVolumes": [
+      "themepark-app-e2e-pql-ae-001-001-qwen3-7-max-2-194933"
+    ],
+    "leftovers": []
+  },
+  "warnings": [],
+  "errors": []
+}
