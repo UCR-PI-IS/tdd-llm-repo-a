@@ -1,0 +1,31 @@
+{
+  "stage": "refactoring",
+  "storyId": "PQL-AE-001-001",
+  "model": "Qwen3.7-max",
+  "iteration": "5",
+  "status": "partial",
+  "filesCreated": [],
+  "filesModified": [
+    "Backend.Domain/Entities/Building.cs",
+    "Backend.Infrastructure/Repositories/SqlBuildingRepository.cs",
+    "Backend.Presentation/Api/Endpoints/AddBuildingEndpoint.cs",
+    "Backend.Presentation/Mappers/BuildingMapper.cs"
+  ],
+  "metrics": {
+    "loopIterationsPerformed": 2,
+    "maxLoopIterations": 10,
+    "allGreenAchieved": false,
+    "baseline": { "minMI": 53, "maxCC": 9, "maxCoupling": 15, "maxDIT": 0 },
+    "final":    { "minMI": 52, "maxCC": 9, "maxCoupling": 15, "maxDIT": 0 },
+    "remainingViolations": [
+      { "type": "SqlBuildingRepository", "metric": "Coupling", "value": 11, "flag": "YELLOW" },
+      { "type": "AddBuildingHandler", "metric": "Coupling", "value": 15, "flag": "YELLOW" },
+      { "type": "AddBuildingEndpoint", "metric": "Coupling", "value": 10, "flag": "YELLOW" }
+    ]
+  },
+  "warnings": [
+    "BuildingMapper.ToEntity approach for AddBuildingHandler was reverted because it increased coupling from 15 to 16 (added BuildingMapper without removing Building reference through service return type)",
+    "Remaining YELLOW coupling violations are inherent to DDD layer patterns: handlers must reference HTTP types, domain entities, services, and DTOs; repositories must reference EF Core types"
+  ],
+  "notes": "Extracted repeated guard clauses in Building.cs into helper methods (static smell fix). Changed SqlBuildingRepository to use synchronous Add and async AnyAsync, reducing coupling from 12 to 11. Removed unnecessary async/await in AddBuildingEndpoint (MI improved 72 to 74). All 238 tests pass. No RED violations remain; 3 YELLOW coupling violations persist due to architectural constraints."
+}

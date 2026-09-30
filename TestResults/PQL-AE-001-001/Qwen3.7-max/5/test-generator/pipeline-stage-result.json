@@ -1,0 +1,31 @@
+{
+  "stage": "test-generation",
+  "storyId": "PQL-AE-001-001",
+  "model": "Qwen3.7-max",
+  "iteration": "5",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Domain.Tests.Unit/BuildingConstructorValidationTests.cs",
+    "Backend.Application.Tests.Unit/BuildingServiceTests.cs",
+    "Backend.Infrastructure.Tests.Unit/SqlBuildingRepositoryTests.cs",
+    "Backend.Presentation.Tests.Unit/AddBuildingHandlerTests.cs"
+  ],
+  "filesModified": [],
+  "metrics": {
+    "intentsConfirmed": 18,
+    "testMethodsEmitted": 17,
+    "byLayer": {
+      "Domain": 8,
+      "Application": 3,
+      "Infrastructure": 3,
+      "Presentation": 3
+    }
+  },
+  "warnings": [
+    "Domain intents Domain-002 and Domain-003 (null name and empty name) are covered by a single parameterized test method Constructor_NullOrEmptyName_ThrowsArgumentException with two TestCase entries, reducing 9 domain intents to 8 test methods.",
+    "Application tests assume BuildingService depends on IBuildingRepository with ExistsByNameAsync, AreaExistsAsync, and AddAsync methods, and that custom exceptions DuplicateBuildingException and AreaNotFoundException exist in UCR.ECCI.PI.ThemePark.Backend.Application.Exceptions namespace.",
+    "Infrastructure tests use EF Core InMemory provider instead of mocking DbSet/DbContext directly, following the existing codebase pattern established in SqlBuildingListRepositoryTests.",
+    "Presentation tests assume AddBuildingHandler follows the static handler pattern with IBuildingCreateService interface and AddBuildingDto/AddBuildingResponse types, consistent with existing CreateLearningSpaceHandler conventions."
+  ],
+  "notes": "Generated 17 NUnit test methods across 4 test files covering all 18 confirmed intents for story PQL-AE-001-001 (Add Building). Tests follow existing codebase conventions: Assert.Multiple for multi-property assertions, try/catch pattern for exception testing in Domain layer, InMemory EF Core for Infrastructure, and static handler pattern for Presentation. All tests reference production classes that do not yet exist (TDD red phase)."
+}
