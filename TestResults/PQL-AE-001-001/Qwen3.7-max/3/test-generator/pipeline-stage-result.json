@@ -1,0 +1,29 @@
+{
+  "stage": "test-generation",
+  "storyId": "PQL-AE-001-001",
+  "model": "Qwen3.7-max",
+  "iteration": "3",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Domain.Tests.Unit/BuildingConstructorValidationTests.cs",
+    "Backend.Application.Tests.Unit/BuildingServiceTests.cs",
+    "Backend.Infrastructure.Tests.Unit/SqlBuildingRepositoryTests.cs",
+    "Backend.Presentation.Tests.Unit/AddBuildingHandlerTests.cs"
+  ],
+  "filesModified": [],
+  "metrics": {
+    "intentsConfirmed": 18,
+    "testMethodsEmitted": 14,
+    "byLayer": {
+      "Domain": 5,
+      "Application": 3,
+      "Infrastructure": 3,
+      "Presentation": 3
+    }
+  },
+  "warnings": [
+    "Tests reference new types not yet implemented: Building constructor with (name, color, height, length, width, x, y, z, areaId) signature and AreaId property, IBuildingRepository, BuildingService, IBuildingService, SqlBuildingRepository, AddBuildingHandler, AddBuildingRequest, AddBuildingResponse, DuplicateBuildingException, AreaNotFoundException. These will be created by the implementation phase.",
+    "Existing BuildingTests.cs uses the old Building constructor signature (with internalId, without areaId). The implementation phase should reconcile both constructors or update the existing tests."
+  ],
+  "notes": "Generated 14 test methods across 4 test files covering all 18 confirmed intents for story PQL-AE-001-001 (Add Building). Domain tests cover constructor validation (positive, negative, boundary). Application tests cover AddBuildingAsync with success, duplicate, and non-existent area scenarios. Infrastructure tests use EF Core InMemory provider for AddAsync and ExistsByNameAsync. Presentation tests cover AddBuildingHandler returning Created, Conflict, and BadRequest responses."
+}

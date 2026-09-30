@@ -1,0 +1,46 @@
+{
+  "stage": "code-generation",
+  "storyId": "PQL-AE-001-001",
+  "model": "Qwen3.7-max",
+  "iteration": "3",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Domain/Repositories/IBuildingRepository.cs",
+    "Backend.Application/Exceptions/DuplicateBuildingException.cs",
+    "Backend.Application/Exceptions/AreaNotFoundException.cs",
+    "Backend.Application/Services/IBuildingService.cs",
+    "Backend.Application/Services/BuildingService.cs",
+    "Backend.Infrastructure/Repositories/SqlBuildingRepository.cs",
+    "Backend.Presentation/Api/Dtos/AddBuildingRequest.cs",
+    "Backend.Presentation/Api/Responses/AddBuildingResponse.cs",
+    "Backend.Presentation/Api/Handlers/AddBuildingHandler.cs"
+  ],
+  "filesModified": [
+    "Backend.Domain/Entities/Building.cs",
+    "Backend.Infrastructure/EntityConfigurations/BuildingEntityConfiguration.cs",
+    "Backend.Application/DependencyInjection.cs",
+    "Backend.Infrastructure/DependecyInjection.cs",
+    "Backend.Presentation/Endpoints/BuildingListEndpoints.cs"
+  ],
+  "metrics": {
+    "buildErrors": 0,
+    "buildWarnings": 5,
+    "testsTotal": 238,
+    "testsPassed": 238,
+    "testsFailed": 0,
+    "testsSkipped": 0,
+    "lineCoverage": 0.8573959255978743,
+    "branchCoverage": 0.8333333333333334,
+    "e2e": {
+      "status": "success",
+      "probesTotal": 2,
+      "probesPassed": 2,
+      "probesFailed": 0,
+      "seedsApplied": ["seed-PQL-AE-001-001.sql"],
+      "resultPath": "E2EResults/PQL-AE-001-001/Qwen3.7-max/3/2026-09-29_20-10-35/",
+      "cleanup": "clean"
+    }
+  },
+  "warnings": [],
+  "notes": "Implemented Add Building feature across all DDD layers: Domain entity with validation constructor, Application service with duplicate and area checks, Infrastructure repository with EF Core, and Presentation handler with POST endpoint. All 238 tests pass, e2e probes confirm GET /buildings and POST /buildings work against a real SQL Server."
+}
