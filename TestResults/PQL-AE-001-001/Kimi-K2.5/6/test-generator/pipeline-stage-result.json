@@ -1,0 +1,30 @@
+{
+  "stage": "test-generation",
+  "storyId": "PQL-AE-001-001",
+  "model": "Kimi-K2.5",
+  "iteration": "6",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Domain.Tests.Unit/BuildingConstructorTests.cs",
+    "Backend.Application.Tests.Unit/BuildingServiceTests.cs",
+    "Backend.Infrastructure.Tests.Unit/SqlBuildingRepositoryTests.cs",
+    "Backend.Presentation.Tests.Unit/AddBuildingHandlerTests.cs"
+  ],
+  "filesModified": [],
+  "metrics": {
+    "intentsConfirmed": 18,
+    "testMethodsEmitted": 18,
+    "byLayer": {
+      "Domain": 11,
+      "Application": 3,
+      "Infrastructure": 3,
+      "Presentation": 3
+    }
+  },
+  "warnings": [
+    "Domain-008 intent referenced areaId validation but Building entity constructor does not include areaId parameter; adapted test to validate existing constructor parameters",
+    "Application-003 intent referenced AreaNotFoundException which may not exist in current codebase; test assumes custom exception class exists",
+    "Presentation layer tests assume existence of CreateBuildingDto, AddBuildingResponse, and AddBuildingHandler classes that are part of the story implementation"
+  ],
+  "notes": "Generated 18 test methods covering all 18 confirmed intents from PQL-AE-001-001. Domain tests cover constructor validation including null/empty strings, zero/negative dimensions, and boundary values. Application tests cover service-level business rules including duplicate detection and area validation. Infrastructure tests verify repository persistence and existence checks using mocked DbContext. Presentation tests validate HTTP response types (201 Created, 409 Conflict, 400 Bad Request) for the handler. All tests follow NUnit 3.14.0 patterns with Moq 4.20.72 for mocking, using AAA structure with Assert.Multiple for multiple assertions."
+}

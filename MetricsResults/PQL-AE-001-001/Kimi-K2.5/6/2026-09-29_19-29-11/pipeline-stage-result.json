@@ -1,0 +1,38 @@
+{
+  "stage": "refactoring",
+  "storyId": "PQL-AE-001-001",
+  "model": "Kimi-K2.5",
+  "iteration": "6",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Infrastructure/Repositories/BuildingExistsQuery.cs",
+    "Backend.Infrastructure/Repositories/BuildingAddCommand.cs",
+    "Backend.Presentation/Api/Endpoints/AddBuildingEndpointHandler.cs"
+  ],
+  "filesModified": [
+    "Backend.Domain/Entities/Building.cs",
+    "Backend.Infrastructure/Repositories/SqlBuildingRepository.cs",
+    "Backend.Presentation/Api/Handlers/AddBuildingHandler.cs",
+    "Backend.Presentation/Api/Endpoints/AddBuildingEndpoint.cs"
+  ],
+  "metrics": {
+    "loopIterationsPerformed": 5,
+    "maxLoopIterations": 10,
+    "allGreenAchieved": true,
+    "baseline": {
+      "minMI": 56,
+      "maxCC": 7,
+      "maxCoupling": 15,
+      "maxDIT": 1
+    },
+    "final": {
+      "minMI": 56,
+      "maxCC": 6,
+      "maxCoupling": 7,
+      "maxDIT": 1
+    },
+    "remainingViolations": []
+  },
+  "warnings": [],
+  "notes": "Extracted validation helpers in Building, decoupled SqlBuildingRepository from EF Core types via BuildingExistsQuery and BuildingAddCommand, removed IResult coupling from AddBuildingResult by introducing AddBuildingEndpointHandler, and reduced AddBuildingHandler coupling through factory methods. All story-related types are now GREEN."
+}

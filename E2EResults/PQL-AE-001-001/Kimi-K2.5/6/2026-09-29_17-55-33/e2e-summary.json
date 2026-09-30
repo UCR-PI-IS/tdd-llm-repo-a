@@ -1,0 +1,40 @@
+{
+  "stage": "e2e-validation",
+  "status": "failure",
+  "timestamp": "2026-09-29_17-55-33",
+  "storyId": "PQL-AE-001-001",
+  "model": "Kimi-K2.5",
+  "iteration": "6",
+  "database": {
+    "container": "themepark-sql-e2e-pql-ae-001-001-kimi-k2-5-6-175533",
+    "image": "mcr.microsoft.com/mssql/server:2022-latest",
+    "network": "themepark-e2e-pql-ae-001-001-kimi-k2-5-6-175533",
+    "database": "ThemePark",
+    "readySeconds": 10.0,
+    "baseSchemaApplied": [
+      "Semester.sql",
+      "Course.sql"
+    ],
+    "seedsApplied": []
+  },
+  "backend": {},
+  "probes": [],
+  "totalProbes": 0,
+  "probesPassed": 0,
+  "probesFailed": 0,
+  "cleanup": {
+    "status": "clean",
+    "removedContainers": [
+      "themepark-sql-e2e-pql-ae-001-001-kimi-k2-5-6-175533"
+    ],
+    "removedNetworks": [
+      "themepark-e2e-pql-ae-001-001-kimi-k2-5-6-175533"
+    ],
+    "removedVolumes": [],
+    "leftovers": []
+  },
+  "warnings": [],
+  "errors": [
+    "seed PQL-AE-001-001.sql: Msg 208, Level 16, State 1, Server f1d6252c416f, Line 5\nInvalid object name 'Building'."
+  ]
+}
