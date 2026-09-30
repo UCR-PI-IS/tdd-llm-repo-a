@@ -51,6 +51,11 @@ public class Building
     public float Z { get; private set; }
 
     /// <summary>
+    /// Identifier of the area the building belongs to.
+    /// </summary>
+    public int AreaId { get; private set; }
+
+    /// <summary>
     /// Parameterless constructor for EF Core materialization.
     /// </summary>
     private Building()
@@ -82,5 +87,77 @@ public class Building
         X = x;
         Y = y;
         Z = z;
+    }
+
+    /// <summary>
+    /// Constructor for the Building class with area reference (no validation).
+    /// Used by the presentation layer to defer validation to the application service.
+    /// </summary>
+    /// <param name="internalId">Unique internal identifier</param>
+    /// <param name="name">Name of the building</param>
+    /// <param name="color">Color of the building</param>
+    /// <param name="height">Height in meters</param>
+    /// <param name="length">Length in meters</param>
+    /// <param name="width">Width in meters</param>
+    /// <param name="x">X coordinate</param>
+    /// <param name="y">Y coordinate</param>
+    /// <param name="z">Z coordinate</param>
+    /// <param name="areaId">Identifier of the area</param>
+    public Building(int internalId, string name, string color, float height, float length, float width, float x, float y, float z, int areaId)
+    {
+        InternalId = internalId;
+        Name = name;
+        Color = color;
+        Height = height;
+        Length = length;
+        Width = width;
+        X = x;
+        Y = y;
+        Z = z;
+        AreaId = areaId;
+    }
+
+    /// <summary>
+    /// Constructor for the Building class with area reference and validation.
+    /// </summary>
+    /// <param name="name">Name of the building (must not be null or empty)</param>
+    /// <param name="color">Color of the building (must not be null or empty)</param>
+    /// <param name="height">Height in meters (must be positive)</param>
+    /// <param name="length">Length in meters (must be positive)</param>
+    /// <param name="width">Width in meters (must be positive)</param>
+    /// <param name="x">X coordinate</param>
+    /// <param name="y">Y coordinate</param>
+    /// <param name="z">Z coordinate</param>
+    /// <param name="areaId">Identifier of the area (must be positive)</param>
+    /// <exception cref="ArgumentException">Thrown when any validation rule is violated.</exception>
+    public Building(string name, string color, float height, float length, float width, float x, float y, float z, int areaId)
+    {
+        if (string.IsNullOrEmpty(name))
+            throw new ArgumentException("Name cannot be null or empty", nameof(name));
+
+        if (string.IsNullOrEmpty(color))
+            throw new ArgumentException("Color cannot be null or empty", nameof(color));
+
+        if (height <= 0)
+            throw new ArgumentException("Height must be positive", nameof(height));
+
+        if (length <= 0)
+            throw new ArgumentException("Length must be positive", nameof(length));
+
+        if (width <= 0)
+            throw new ArgumentException("Width must be positive", nameof(width));
+
+        if (areaId <= 0)
+            throw new ArgumentException("AreaId must be positive", nameof(areaId));
+
+        Name = name;
+        Color = color;
+        Height = height;
+        Length = length;
+        Width = width;
+        X = x;
+        Y = y;
+        Z = z;
+        AreaId = areaId;
     }
 }

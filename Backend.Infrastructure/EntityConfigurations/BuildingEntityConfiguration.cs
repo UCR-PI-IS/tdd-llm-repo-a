@@ -34,5 +34,7 @@ internal class BuildingEntityConfiguration : IEntityTypeConfiguration<Building>
         builder.Property(b => b.X);
         builder.Property(b => b.Y);
         builder.Property(b => b.Z);
+
+        builder.Property(b => b.AreaId);
     }
 }
