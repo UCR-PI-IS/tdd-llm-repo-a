@@ -51,6 +51,11 @@ public class Building
     public float Z { get; private set; }
 
     /// <summary>
+    /// Identifier of the area the building belongs to.
+    /// </summary>
+    public int AreaId { get; private set; }
+
+    /// <summary>
     /// Parameterless constructor for EF Core materialization.
     /// </summary>
     private Building()
@@ -82,5 +87,56 @@ public class Building
         X = x;
         Y = y;
         Z = z;
+    }
+
+    /// <summary>
+    /// Constructor for the Building class with areaId and validation.
+    /// </summary>
+    /// <param name="name">Name of the building</param>
+    /// <param name="color">Color of the building</param>
+    /// <param name="height">Height in meters (must be positive)</param>
+    /// <param name="length">Length in meters (must be positive)</param>
+    /// <param name="width">Width in meters (must be positive)</param>
+    /// <param name="x">X coordinate</param>
+    /// <param name="y">Y coordinate</param>
+    /// <param name="z">Z coordinate</param>
+    /// <param name="areaId">Area identifier (must be positive)</param>
+    /// <exception cref="ArgumentException">Thrown when any validation rule is violated.</exception>
+    public Building(string name, string color, float height, float length, float width, float x, float y, float z, int areaId)
+    {
+        ValidateRequiredString(name, nameof(name));
+        ValidateRequiredString(color, nameof(color));
+        ValidatePositiveDimension(height, nameof(height));
+        ValidatePositiveDimension(length, nameof(length));
+        ValidatePositiveDimension(width, nameof(width));
+        ValidatePositiveId(areaId, nameof(areaId));
+
+        Name = name;
+        Color = color;
+        Height = height;
+        Length = length;
+        Width = width;
+        X = x;
+        Y = y;
+        Z = z;
+        AreaId = areaId;
+    }
+
+    private static void ValidateRequiredString(string value, string paramName)
+    {
+        if (string.IsNullOrEmpty(value))
+            throw new ArgumentException($"{paramName} cannot be empty", paramName);
+    }
+
+    private static void ValidatePositiveDimension(float value, string paramName)
+    {
+        if (value <= 0)
+            throw new ArgumentException($"{paramName} must be positive", paramName);
+    }
+
+    private static void ValidatePositiveId(int value, string paramName)
+    {
+        if (value <= 0)
+            throw new ArgumentException($"{paramName} must be positive", paramName);
     }
 }
