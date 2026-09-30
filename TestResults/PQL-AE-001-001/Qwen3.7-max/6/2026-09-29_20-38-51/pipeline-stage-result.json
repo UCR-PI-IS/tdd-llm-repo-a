@@ -1,0 +1,49 @@
+{
+  "stage": "code-generation",
+  "storyId": "PQL-AE-001-001",
+  "model": "Qwen3.7-max",
+  "iteration": "6",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Domain/Exceptions/DuplicateBuildingException.cs",
+    "Backend.Domain/Exceptions/AreaNotFoundException.cs",
+    "Backend.Domain/Repositories/IBuildingRepository.cs",
+    "Backend.Application/Services/IBuildingService.cs",
+    "Backend.Application/Services/Implementations/BuildingService.cs",
+    "Backend.Infrastructure/Repositories/SqlBuildingRepository.cs",
+    "Backend.Presentation/Api/Dtos/AddBuildingDto.cs",
+    "Backend.Presentation/Api/Responses/AddBuildingResponse.cs",
+    "Backend.Presentation/Api/Handlers/AddBuildingHandler.cs",
+    "Backend.Presentation/Endpoints/AddBuildingEndpoints.cs"
+  ],
+  "filesModified": [
+    "Backend.Domain/Entities/Building.cs",
+    "Backend.Infrastructure/EntityConfigurations/BuildingEntityConfiguration.cs",
+    "Backend.Infrastructure/DependecyInjection.cs",
+    "Backend.Application/DependencyInjection.cs",
+    "Backend.Api/Program.cs"
+  ],
+  "metrics": {
+    "buildErrors": 0,
+    "buildWarnings": 3,
+    "testsTotal": 238,
+    "testsPassed": 238,
+    "testsFailed": 0,
+    "testsSkipped": 0,
+    "lineCoverage": 0.8644222020018199,
+    "branchCoverage": 0.8541666666666666,
+    "e2e": {
+      "status": "success",
+      "probesTotal": 1,
+      "probesPassed": 1,
+      "probesFailed": 0,
+      "seedsApplied": ["seed-PQL-AE-001-001.sql"],
+      "resultPath": "E2EResults/PQL-AE-001-001/Qwen3.7-max/6/2026-09-29_20-40-27/",
+      "cleanup": "clean"
+    }
+  },
+  "warnings": [
+    "Pre-existing CS8602 warnings in unrelated test files (AddUniversityHandlerTests, CreateWhiteboardHandlerTests, UpdateWhiteboardHandlerTests)"
+  ],
+  "notes": "Implemented Add Building feature (PQL-AE-001-001) across all DDD layers: Domain entity with validation, Application service with duplicate/area checks, Infrastructure repository with EF Core, and Presentation handler with typed results. All 238 tests pass, e2e probe confirmed seeded data round-trips through GET /buildings."
+}

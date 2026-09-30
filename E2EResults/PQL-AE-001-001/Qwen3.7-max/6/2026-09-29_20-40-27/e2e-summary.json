@@ -1,0 +1,63 @@
+{
+  "stage": "e2e-validation",
+  "status": "success",
+  "timestamp": "2026-09-29_20-40-27",
+  "storyId": "PQL-AE-001-001",
+  "model": "Qwen3.7-max",
+  "iteration": "6",
+  "database": {
+    "container": "themepark-sql-e2e-pql-ae-001-001-qwen3-7-max-6-204027",
+    "image": "mcr.microsoft.com/mssql/server:2022-latest",
+    "network": "themepark-e2e-pql-ae-001-001-qwen3-7-max-6-204027",
+    "database": "ThemePark",
+    "readySeconds": 8.5,
+    "baseSchemaApplied": [
+      "Semester.sql",
+      "Course.sql"
+    ],
+    "seedsApplied": [
+      "seed-PQL-AE-001-001.sql"
+    ]
+  },
+  "backend": {
+    "container": "themepark-api-e2e-pql-ae-001-001-qwen3-7-max-6-204027",
+    "project": "Backend.Api/UCR.ECCI.PI.ThemePark.Backend.Api.csproj",
+    "publishStatus": "success",
+    "started": true,
+    "url": "http://127.0.0.1:55032",
+    "readySeconds": 2.2,
+    "errorLines": []
+  },
+  "probes": [
+    {
+      "name": "GET buildings list returns seeded data",
+      "method": "GET",
+      "path": "/buildings",
+      "expectedStatus": 200,
+      "actualStatus": 200,
+      "passed": true,
+      "missingContent": [],
+      "error": null,
+      "bodySnippet": "{\"buildings\":[{\"id\":1,\"name\":\"Engineering Building\"},{\"id\":2,\"name\":\"Science Hall\"},{\"id\":3,\"name\":\"Library\"}]}"
+    }
+  ],
+  "totalProbes": 1,
+  "probesPassed": 1,
+  "probesFailed": 0,
+  "cleanup": {
+    "status": "clean",
+    "removedContainers": [
+      "themepark-api-e2e-pql-ae-001-001-qwen3-7-max-6-204027",
+      "themepark-sql-e2e-pql-ae-001-001-qwen3-7-max-6-204027"
+    ],
+    "removedNetworks": [
+      "themepark-e2e-pql-ae-001-001-qwen3-7-max-6-204027"
+    ],
+    "removedVolumes": [
+      "themepark-app-e2e-pql-ae-001-001-qwen3-7-max-6-204027"
+    ],
+    "leftovers": []
+  },
+  "warnings": [],
+  "errors": []
+}
