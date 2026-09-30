@@ -1,0 +1,30 @@
+{
+  "stage": "test-generation",
+  "storyId": "PQL-AE-001-001",
+  "model": "Qwen3.7-max",
+  "iteration": "1",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Domain.Tests.Unit/BuildingConstructorValidationTests.cs",
+    "Backend.Application.Tests.Unit/BuildingServiceTests.cs",
+    "Backend.Infrastructure.Tests.Unit/SqlBuildingRepositoryTests.cs",
+    "Backend.Presentation.Tests.Unit/AddBuildingHandlerTests.cs"
+  ],
+  "filesModified": [],
+  "metrics": {
+    "intentsConfirmed": 18,
+    "testMethodsEmitted": 16,
+    "byLayer": {
+      "Domain": 7,
+      "Application": 3,
+      "Infrastructure": 3,
+      "Presentation": 3
+    }
+  },
+  "warnings": [
+    "Domain intents reference a new Building constructor with (name, color, height, length, width, x, y, z, areaId) signature and validation — distinct from the existing Building(int internalId, ...) constructor. Tests target the new constructor.",
+    "Application and Presentation layers reference new types not yet implemented: IBuildingService, BuildingService, IBuildingRepository, AddBuildingHandler, AddBuildingRequest, AddBuildingResponse, DuplicateBuildingException, AreaNotFoundException. These are expected to be created during implementation.",
+    "Presentation-003 test relies on the Building constructor throwing ArgumentException for empty name before the service is invoked; the mock service has no setup for this scenario."
+  ],
+  "notes": "Generated 16 test methods across 4 test classes covering all 18 confirmed intents. Domain tests use parameterized TestCase for validation scenarios (null/empty strings, zero/negative numerics, boundary values). Application tests mock IBuildingRepository for duplicate and area-not-found flows. Infrastructure tests use EF Core In-Memory provider following existing repository test patterns. Presentation tests mock IBuildingService and verify HTTP result types (Created, Conflict, BadRequest)."
+}
