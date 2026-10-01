@@ -1,0 +1,53 @@
+{
+  "stage": "refactoring",
+  "storyId": "PQL-AE-001-002",
+  "model": "Kimi-K2.5",
+  "iteration": "6",
+  "status": "partial",
+  "filesCreated": [],
+  "filesModified": [
+    "Backend.Domain/Entities/Building.cs",
+    "Backend.Application/Services/BuildingService.cs"
+  ],
+  "metrics": {
+    "loopIterationsPerformed": 1,
+    "maxLoopIterations": 10,
+    "allGreenAchieved": false,
+    "baseline": {
+      "minMI": 46,
+      "maxCC": 21,
+      "maxCoupling": 15,
+      "maxDIT": 0
+    },
+    "final": {
+      "minMI": 50,
+      "maxCC": 6,
+      "maxCoupling": 15,
+      "maxDIT": 0
+    },
+    "remainingViolations": [
+      {
+        "type": "BuildingService",
+        "metric": "Coupling",
+        "value": 12,
+        "flag": "YELLOW"
+      },
+      {
+        "type": "SqlBuildingRepository",
+        "metric": "Coupling",
+        "value": 15,
+        "flag": "YELLOW"
+      },
+      {
+        "type": "UpdateBuildingHandler",
+        "metric": "Coupling",
+        "value": 13,
+        "flag": "YELLOW"
+      }
+    ]
+  },
+  "warnings": [
+    "Class coupling YELLOW on BuildingService (12), SqlBuildingRepository (15), and UpdateBuildingHandler (13) remain intrinsic to layer responsibilities and could not be reduced below the 9 GREEN threshold without breaking tests or speculative redesign."
+  ],
+  "notes": "Refactored Building entity validation from manual guard clauses to ArgumentException/ArgumentOutOfRangeException standard helpers, eliminating duplicated validation blocks and reducing Building cyclomatic complexity from 21 to 5. Removed redundant guard clauses in BuildingService.AddBuildingAsync. Remaining YELLOW class-coupling flags are intrinsic to the layer responsibilities (EF repository, service orchestration, typed minimal-API Results) and cannot be reduced below 9 without breaking tests."
+}
