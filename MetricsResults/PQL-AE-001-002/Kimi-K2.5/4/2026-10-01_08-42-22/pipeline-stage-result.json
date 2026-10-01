@@ -1,0 +1,28 @@
+{
+  "stage": "refactoring",
+  "storyId": "PQL-AE-001-002",
+  "model": "Kimi-K2.5",
+  "iteration": "4",
+  "status": "partial",
+  "filesCreated": ["Backend.Domain/Entities/BuildingValidation.cs"],
+  "filesModified": ["Backend.Domain/Entities/Building.cs", "Backend.Presentation/Api/Endpoints/UpdateBuildingEndpoint.cs"],
+  "metrics": {
+    "loopIterationsPerformed": 2,
+    "maxLoopIterations": 10,
+    "allGreenAchieved": false,
+    "baseline": { "minMI": 48, "maxCC": 16, "maxCoupling": 15, "maxDIT": 1 },
+    "final":    { "minMI": 50, "maxCC": 8, "maxCoupling": 15, "maxDIT": 1 },
+    "remainingViolations": [
+      { "type": "BuildingService", "metric": "Coupling", "value": 13, "flag": "YELLOW" },
+      { "type": "SqlBuildingRepository", "metric": "Coupling", "value": 15, "flag": "YELLOW" },
+      { "type": "UpdateBuildingEndpoint", "metric": "Coupling", "value": 10, "flag": "YELLOW" },
+      { "type": "UpdateBuildingHandler", "metric": "Coupling", "value": 14, "flag": "YELLOW" }
+    ]
+  },
+  "warnings": [
+    "Class coupling for UpdateBuildingHandler remains at 14 due to the strongly-typed Results<Ok<...>, BadRequest<...>, NotFound<...>> return type required by existing unit tests.",
+    "Class coupling for BuildingService (13) and SqlBuildingRepository (15) are structurally inherent to the Clean Architecture service/repository patterns and cannot be reduced to <=9 without splitting interfaces or removing exception type references, which would break existing test contracts or functional behavior.",
+    "Class coupling for UpdateBuildingEndpoint improved from 15 to 10 but remains YELLOW because of the int route parameter and the strongly-typed handler return chain."
+  ],
+  "notes": "Iteration 1 extracted shared BuildingValidation helpers to eliminate repeated guard clauses, reducing Building CC from 16 to 5 (GREEN) and improving MI from 48 to 50. Iteration 2 replaced HttpContext-based manual JSON reading in UpdateBuildingEndpoint with ASP.NET parameter binding, dropping coupling from 15 to 10. All 259 unit tests passed after every change. Remaining class-coupling YELLOW flags are bounded by the architectural use of typed minimal-API results and EF Core repository patterns; further reduction to GREEN (<=9) would require signature or interface redesigns that violate the existing test suite."
+}

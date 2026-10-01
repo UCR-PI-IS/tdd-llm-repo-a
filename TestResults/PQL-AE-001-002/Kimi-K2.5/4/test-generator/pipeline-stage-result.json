@@ -1,0 +1,26 @@
+{
+  "stage": "test-generation",
+  "storyId": "PQL-AE-001-002",
+  "model": "Kimi-K2.5",
+  "iteration": "4",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Domain.Tests.Unit/BuildingUpdateTests.cs",
+    "Backend.Application.Tests.Unit/BuildingServiceUpdateTests.cs",
+    "Backend.Infrastructure.Tests.Unit/SqlBuildingRepositoryUpdateTests.cs",
+    "Backend.Presentation.Tests.Unit/UpdateBuildingHandlerTests.cs"
+  ],
+  "filesModified": [],
+  "metrics": {
+    "intentsConfirmed": 16,
+    "testMethodsEmitted": 16,
+    "byLayer": {
+      "Domain": 7,
+      "Application": 3,
+      "Infrastructure": 3,
+      "Presentation": 3
+    }
+  },
+  "warnings": [],
+  "notes": "Generated 16 test methods covering all 16 confirmed intents for story PQL-AE-001-002 (Edit Building). Tests follow existing project patterns with AAA structure, Assert.Multiple for multiple assertions, and proper Moq usage for mocking. Domain tests cover Building constructor validation and Update method. Application tests cover BuildingService.UpdateBuildingAsync with success, not-found, and validation error scenarios. Infrastructure tests cover SqlBuildingRepository.GetByIdAsync and UpdateAsync operations. Presentation tests cover UpdateBuildingHandler.HandleAsync with 200 OK, 400 BadRequest, and 404 NotFound responses."
+}
