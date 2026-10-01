@@ -1,0 +1,42 @@
+{
+  "stage": "code-generation",
+  "storyId": "PQL-AE-001-002",
+  "model": "Kimi-K2.5",
+  "iteration": "2",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Domain/Exceptions/BuildingNotFoundException.cs",
+    "Backend.Presentation/Api/Dtos/UpdateBuildingDto.cs",
+    "Backend.Presentation/Api/Responses/UpdateBuildingResponse.cs",
+    "Backend.Presentation/Api/Handlers/UpdateBuildingHandler.cs",
+    "Backend.Presentation/Api/Endpoints/UpdateBuildingEndpoint.cs"
+  ],
+  "filesModified": [
+    "Backend.Domain/Repositories/IBuildingRepository.cs",
+    "Backend.Application/Services/IBuildingService.cs",
+    "Backend.Application/Services/BuildingService.cs",
+    "Backend.Infrastructure/Repositories/SqlBuildingRepository.cs",
+    "Backend.Api/Program.cs"
+  ],
+  "metrics": {
+    "buildErrors": 0,
+    "buildWarnings": 8,
+    "testsTotal": 257,
+    "testsPassed": 257,
+    "testsFailed": 0,
+    "testsSkipped": 0,
+    "lineCoverage": 0.8619528619528619,
+    "branchCoverage": 0.8271604938271605,
+    "e2e": {
+      "status": "success",
+      "probesTotal": 4,
+      "probesPassed": 4,
+      "probesFailed": 0,
+      "seedsApplied": ["seed-PQL-AE-001-002.sql"],
+      "resultPath": "E2EResults/PQL-AE-001-002/Kimi-K2.5/2/2026-09-30_21-27-57/",
+      "cleanup": "clean"
+    }
+  },
+  "warnings": [],
+  "notes": "Implemented edit building functionality across all DDD layers. All 257 unit tests pass and 4/4 e2e probes succeed. Cleanup verified clean."
+}
