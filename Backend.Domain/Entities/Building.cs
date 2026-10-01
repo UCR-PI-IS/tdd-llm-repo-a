@@ -5,6 +5,17 @@ namespace UCR.ECCI.PI.ThemePark.Backend.Domain.Entities;
 /// </summary>
 public class Building
 {
+    private static void ValidateRequiredString(string value, string paramName)
+    {
+        if (string.IsNullOrEmpty(value))
+            throw new ArgumentException($"{paramName} cannot be null or empty", paramName);
+    }
+
+    private static void ValidatePositive(float value, string paramName)
+    {
+        if (value <= 0)
+            throw new ArgumentException($"{paramName} must be positive", paramName);
+    }
     /// <summary>
     /// Unique internal identifier for the building.
     /// </summary>
@@ -78,6 +89,12 @@ public class Building
     /// <param name="z">Z coordinate</param>
     public Building(int internalId, string name, string color, float height, float length, float width, float x, float y, float z)
     {
+        ValidateRequiredString(name, nameof(name));
+        ValidateRequiredString(color, nameof(color));
+        ValidatePositive(height, nameof(height));
+        ValidatePositive(length, nameof(length));
+        ValidatePositive(width, nameof(width));
+
         InternalId = internalId;
         Name = name;
         Color = color;
@@ -132,20 +149,11 @@ public class Building
     /// <exception cref="ArgumentException">Thrown when any validation rule is violated.</exception>
     public Building(string name, string color, float height, float length, float width, float x, float y, float z, int areaId)
     {
-        if (string.IsNullOrEmpty(name))
-            throw new ArgumentException("Name cannot be null or empty", nameof(name));
-
-        if (string.IsNullOrEmpty(color))
-            throw new ArgumentException("Color cannot be null or empty", nameof(color));
-
-        if (height <= 0)
-            throw new ArgumentException("Height must be positive", nameof(height));
-
-        if (length <= 0)
-            throw new ArgumentException("Length must be positive", nameof(length));
-
-        if (width <= 0)
-            throw new ArgumentException("Width must be positive", nameof(width));
+        ValidateRequiredString(name, nameof(name));
+        ValidateRequiredString(color, nameof(color));
+        ValidatePositive(height, nameof(height));
+        ValidatePositive(length, nameof(length));
+        ValidatePositive(width, nameof(width));
 
         if (areaId <= 0)
             throw new ArgumentException("AreaId must be positive", nameof(areaId));
@@ -159,5 +167,35 @@ public class Building
         Y = y;
         Z = z;
         AreaId = areaId;
+    }
+
+    /// <summary>
+    /// Updates all mutable fields of the building.
+    /// </summary>
+    /// <param name="name">Name of the building (must not be null or empty)</param>
+    /// <param name="color">Color of the building (must not be null or empty)</param>
+    /// <param name="height">Height in meters (must be positive)</param>
+    /// <param name="length">Length in meters (must be positive)</param>
+    /// <param name="width">Width in meters (must be positive)</param>
+    /// <param name="x">X coordinate</param>
+    /// <param name="y">Y coordinate</param>
+    /// <param name="z">Z coordinate</param>
+    /// <exception cref="ArgumentException">Thrown when any validation rule is violated.</exception>
+    public void Update(string name, string color, float height, float length, float width, float x, float y, float z)
+    {
+        ValidateRequiredString(name, nameof(name));
+        ValidateRequiredString(color, nameof(color));
+        ValidatePositive(height, nameof(height));
+        ValidatePositive(length, nameof(length));
+        ValidatePositive(width, nameof(width));
+
+        Name = name;
+        Color = color;
+        Height = height;
+        Length = length;
+        Width = width;
+        X = x;
+        Y = y;
+        Z = z;
     }
 }

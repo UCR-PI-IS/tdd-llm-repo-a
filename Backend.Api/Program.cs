@@ -60,4 +60,9 @@ app.MapBuildingListEndpoints();
 /// </summary>
 app.MapAddBuildingEndpoint();
 
+/// <summary>
+/// Maps the Update Building endpoint to the application.
+/// </summary>
+app.MapUpdateBuildingEndpoint();
+
 app.Run();

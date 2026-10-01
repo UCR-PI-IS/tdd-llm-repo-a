@@ -13,4 +13,12 @@ public interface IBuildingService
     /// <param name="building">The building entity to add.</param>
     /// <returns>The persisted building entity.</returns>
     Task<Building> AddBuildingAsync(Building building);
+
+    /// <summary>
+    /// Updates an existing building with the specified data.
+    /// </summary>
+    /// <param name="id">The internal identifier of the building to update.</param>
+    /// <param name="dto">The update DTO containing building parameters.</param>
+    /// <returns>A task representing the asynchronous operation.</returns>
+    Task UpdateBuildingAsync(int id, UpdateBuildingDto dto);
 }
