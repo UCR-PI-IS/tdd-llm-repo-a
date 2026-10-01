@@ -1,0 +1,23 @@
+{
+  "stage": "refactoring",
+  "storyId": "PQL-AE-001-002",
+  "model": "Qwen3.7-max",
+  "iteration": "1",
+  "status": "partial",
+  "filesCreated": [],
+  "filesModified": ["Backend.Domain/Entities/Building.cs"],
+  "metrics": {
+    "loopIterationsPerformed": 1,
+    "maxLoopIterations": 10,
+    "allGreenAchieved": false,
+    "baseline": { "minMI": 46, "maxCC": 21, "maxCoupling": 15, "maxDIT": 0 },
+    "final":    { "minMI": 50, "maxCC": 8, "maxCoupling": 15, "maxDIT": 0 },
+    "remainingViolations": [
+      { "type": "BuildingService", "metric": "Coupling", "value": 12, "flag": "YELLOW" },
+      { "type": "SqlBuildingRepository", "metric": "Coupling", "value": 15, "flag": "YELLOW" },
+      { "type": "UpdateBuildingHandler", "metric": "Coupling", "value": 13, "flag": "YELLOW" }
+    ]
+  },
+  "warnings": [],
+  "notes": "Extracted repeated validation guards into a shared private method and replaced manual if-throw patterns with .NET 8 ThrowIf helpers, reducing Building CC from 21 to 6 (GREEN). Three low-YELLOW coupling violations (12-15) remain on BuildingService, SqlBuildingRepository, and UpdateBuildingHandler; these are inherent to their responsibilities (EF Core repository pattern, multi-error-type handler, shared service with AddBuildingAsync from a different story) and cannot be reduced without breaking architecture or exceeding story scope."
+}
