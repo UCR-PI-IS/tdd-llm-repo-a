@@ -1,0 +1,40 @@
+{
+  "stage": "e2e-validation",
+  "status": "failure",
+  "timestamp": "2026-10-01_17-40-19",
+  "storyId": "PQL-AE-001-002",
+  "model": "Qwen3.7-max",
+  "iteration": "4",
+  "database": {
+    "container": "themepark-sql-e2e-pql-ae-001-002-qwen3-7-max-4-174019",
+    "image": "mcr.microsoft.com/mssql/server:2022-latest",
+    "network": "themepark-e2e-pql-ae-001-002-qwen3-7-max-4-174019",
+    "database": "ThemePark",
+    "readySeconds": 8.5,
+    "baseSchemaApplied": [
+      "Semester.sql",
+      "Course.sql"
+    ],
+    "seedsApplied": []
+  },
+  "backend": {},
+  "probes": [],
+  "totalProbes": 0,
+  "probesPassed": 0,
+  "probesFailed": 0,
+  "cleanup": {
+    "status": "clean",
+    "removedContainers": [
+      "themepark-sql-e2e-pql-ae-001-002-qwen3-7-max-4-174019"
+    ],
+    "removedNetworks": [
+      "themepark-e2e-pql-ae-001-002-qwen3-7-max-4-174019"
+    ],
+    "removedVolumes": [],
+    "leftovers": []
+  },
+  "warnings": [],
+  "errors": [
+    "seed seed-PQL-AE-001-002.sql: Msg 544, Level 16, State 1, Server c139d1c266d6, Line 21\nCannot insert explicit value for identity column in table 'Building' when IDENTITY_INSERT is set to OFF.\nMsg 544, Level 16, State 1, Server c139d1c266d6, Line 24\nCannot insert explicit value for identity column in table 'Building' when IDENTITY_INSERT is set to OFF.\nMsg 544, Level 16, State 1, Server c139d1c266d6, Line 27\nCannot insert explicit value for identity column in table 'Building' when IDENTITY_INSERT is set to OFF."
+  ]
+}
