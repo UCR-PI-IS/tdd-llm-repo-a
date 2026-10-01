@@ -1,0 +1,43 @@
+{
+  "stage": "code-generation",
+  "storyId": "PQL-AE-001-002",
+  "model": "Kimi-K2.5",
+  "iteration": "4",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Domain/Exceptions/BuildingNotFoundException.cs",
+    "Backend.Application/Services/UpdateBuildingDto.cs",
+    "Backend.Presentation/Api/Handlers/UpdateBuildingHandler.cs",
+    "Backend.Presentation/Api/Endpoints/UpdateBuildingEndpoint.cs",
+    "PQL-AE-001-002.sql"
+  ],
+  "filesModified": [
+    "Backend.Domain/Entities/Building.cs",
+    "Backend.Domain/Repositories/IBuildingRepository.cs",
+    "Backend.Application/Services/IBuildingService.cs",
+    "Backend.Application/Services/BuildingService.cs",
+    "Backend.Infrastructure/Repositories/SqlBuildingRepository.cs",
+    "Backend.Api/Program.cs"
+  ],
+  "metrics": {
+    "buildErrors": 0,
+    "buildWarnings": 8,
+    "testsTotal": 259,
+    "testsPassed": 259,
+    "testsFailed": 0,
+    "testsSkipped": 0,
+    "lineCoverage": 0.8435430463576159,
+    "branchCoverage": 0.83125,
+    "e2e": {
+      "status": "success",
+      "probesTotal": 1,
+      "probesPassed": 1,
+      "probesFailed": 0,
+      "seedsApplied": ["PQL-AE-001-002.sql"],
+      "resultPath": "E2EResults/PQL-AE-001-002/Kimi-K2.5/4/2026-10-01_08-16-37/",
+      "cleanup": "clean"
+    }
+  },
+  "warnings": [],
+  "notes": "All tests pass and e2e validates successfully. The PUT /buildings/{id} endpoint was added to support editing building information, matching the story acceptance criteria."
+}
