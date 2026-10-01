@@ -1,0 +1,29 @@
+{
+  "stage": "test-generation",
+  "storyId": "PQL-AE-001-002",
+  "model": "Kimi-K2.5",
+  "iteration": "1",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Domain.Tests.Unit/BuildingUpdateTests.cs",
+    "Backend.Application.Tests.Unit/BuildingServiceUpdateTests.cs",
+    "Backend.Infrastructure.Tests.Unit/SqlBuildingRepositoryUpdateTests.cs",
+    "Backend.Presentation.Tests.Unit/UpdateBuildingHandlerTests.cs"
+  ],
+  "filesModified": [],
+  "metrics": {
+    "intentsConfirmed": 16,
+    "testMethodsEmitted": 16,
+    "byLayer": {
+      "Domain": 7,
+      "Application": 3,
+      "Infrastructure": 3,
+      "Presentation": 3
+    }
+  },
+  "warnings": [
+    "Referenced types that do not yet exist in the codebase (BuildingNotFoundException, UpdateBuildingDto, UpdateBuildingResponse, UpdateBuildingHandler, Building.Update) since the user story is pending implementation.",
+    "Parameterized tests consolidate intent pairs (e.g., Domain-002 null/empty, Domain-003 null/empty) into single test methods with multiple TestCases to minimize duplication while preserving coverage."
+  ],
+  "notes": "Generated 16 test methods across four test classes covering all 16 confirmed intents for story PQL-AE-001-002. Domain layer verifies both constructor validation and the new Update method. Application layer mocks IBuildingRepository to test UpdateBuildingAsync success, not-found, and validation-error paths. Infrastructure layer mocks DbContext/DbSet to verify GetByIdAsync and UpdateAsync interactions. Presentation layer mocks IBuildingService to verify 200 OK, 400 BadRequest, and 404 NotFound responses from UpdateBuildingHandler."
+}
