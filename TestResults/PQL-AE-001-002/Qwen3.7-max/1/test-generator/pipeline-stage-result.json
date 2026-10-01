@@ -1,0 +1,30 @@
+{
+  "stage": "test-generation",
+  "storyId": "PQL-AE-001-002",
+  "model": "Qwen3.7-max",
+  "iteration": "1",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Domain.Tests.Unit/BuildingEditTests.cs",
+    "Backend.Application.Tests.Unit/BuildingServiceUpdateTests.cs",
+    "Backend.Infrastructure.Tests.Unit/SqlBuildingRepositoryUpdateTests.cs",
+    "Backend.Presentation.Tests.Unit/UpdateBuildingHandlerTests.cs"
+  ],
+  "filesModified": [],
+  "metrics": {
+    "intentsConfirmed": 16,
+    "testMethodsEmitted": 14,
+    "byLayer": {
+      "Domain": 5,
+      "Application": 3,
+      "Infrastructure": 3,
+      "Presentation": 3
+    }
+  },
+  "warnings": [
+    "Tests reference types not yet implemented: UpdateBuildingDto, UpdateBuildingResponse, UpdateBuildingHandler, BuildingNotFoundException (with BuildingId property), Building.Update method, IBuildingRepository.GetByIdAsync, IBuildingRepository.UpdateAsync, IBuildingService.UpdateBuildingAsync, BuildingService.UpdateBuildingAsync",
+    "Domain constructor tests (Domain-002 through Domain-006) expect validation on the 9-param constructor (int internalId, string name, ...) which currently has no validation — implementation must add validation to this constructor",
+    "Infrastructure UpdateAsync test uses a detached entity pattern to simulate a fresh update scenario"
+  ],
+  "notes": "Generated 14 test methods across 4 test files covering all 16 confirmed intents for the Edit Building story (PQL-AE-001-002). Tests follow existing codebase patterns: try/catch exception testing for Domain, Moq for Application and Presentation, EF Core In-Memory for Infrastructure. All tests use Assert.Multiple for multi-property assertions and parameterized TestCase attributes for validation boundary coverage."
+}
