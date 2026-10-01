@@ -1,0 +1,64 @@
+{
+  "stage": "refactoring",
+  "storyId": "PQL-AE-001-002",
+  "model": "Kimi-K2.5",
+  "iteration": "3",
+  "status": "partial",
+  "filesCreated": [],
+  "filesModified": [
+    "Backend.Domain/Entities/Building.cs"
+  ],
+  "metrics": {
+    "loopIterationsPerformed": 1,
+    "maxLoopIterations": 10,
+    "allGreenAchieved": false,
+    "baseline": {
+      "minMI": 46,
+      "maxCC": 21,
+      "maxCoupling": 21,
+      "maxDIT": 0
+    },
+    "final": {
+      "minMI": 48,
+      "maxCC": 11,
+      "maxCoupling": 21,
+      "maxDIT": 0
+    },
+    "remainingViolations": [
+      {
+        "type": "Building",
+        "metric": "CC",
+        "value": 11,
+        "flag": "YELLOW"
+      },
+      {
+        "type": "BuildingService",
+        "metric": "Coupling",
+        "value": 13,
+        "flag": "YELLOW"
+      },
+      {
+        "type": "SqlBuildingRepository",
+        "metric": "Coupling",
+        "value": 15,
+        "flag": "YELLOW"
+      },
+      {
+        "type": "UpdateBuildingEndpoint",
+        "metric": "Coupling",
+        "value": 21,
+        "flag": "YELLOW"
+      },
+      {
+        "type": "UpdateBuildingHandler",
+        "metric": "Coupling",
+        "value": 13,
+        "flag": "YELLOW"
+      }
+    ]
+  },
+  "warnings": [
+    "Class coupling violations remain in BuildingService, SqlBuildingRepository, UpdateBuildingEndpoint, and UpdateBuildingHandler. These require architectural changes (facade pattern or additional abstraction layers) that are beyond the scope of simple refactoring."
+  ],
+  "notes": "Successfully reduced Cyclomatic Complexity in Building entity from 21 to 11 (48% improvement) by extracting validation methods (ValidateNotNullOrEmpty, ValidatePositive, ValidatePositiveId). This eliminated the repeated guard clause pattern across constructors and the Update method. All tests pass. Class coupling violations remain as they require significant architectural refactoring."
+}

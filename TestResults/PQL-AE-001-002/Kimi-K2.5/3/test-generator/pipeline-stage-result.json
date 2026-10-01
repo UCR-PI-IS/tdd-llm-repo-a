@@ -1,0 +1,26 @@
+{
+  "stage": "test-generation",
+  "storyId": "PQL-AE-001-002",
+  "model": "Kimi-K2.5",
+  "iteration": "3",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Domain.Tests.Unit/BuildingUpdateTests.cs",
+    "Backend.Application.Tests.Unit/BuildingServiceUpdateTests.cs",
+    "Backend.Infrastructure.Tests.Unit/SqlBuildingRepositoryUpdateTests.cs",
+    "Backend.Presentation.Tests.Unit/UpdateBuildingHandlerTests.cs"
+  ],
+  "filesModified": [],
+  "metrics": {
+    "intentsConfirmed": 16,
+    "testMethodsEmitted": 16,
+    "byLayer": {
+      "Domain": 7,
+      "Application": 3,
+      "Infrastructure": 3,
+      "Presentation": 3
+    }
+  },
+  "warnings": [],
+  "notes": "All 16 confirmed intents across 4 DDD layers were translated into NUnit test methods. Tests reference new production types (Building.Update, BuildingService.UpdateBuildingAsync, UpdateBuildingDto, BuildingNotFoundException, UpdateBuildingHandler, SqlBuildingRepository.GetByIdAsync/UpdateAsync) that are expected to be implemented for story PQL-AE-001-002."
+}
