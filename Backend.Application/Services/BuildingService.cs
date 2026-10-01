@@ -44,4 +44,26 @@ public class BuildingService : IBuildingService
 
         return await _buildingRepository.AddAsync(building);
     }
+
+    /// <inheritdoc />
+    public async Task UpdateBuildingAsync(int buildingId, UpdateBuildingDto updateDto)
+    {
+        var building = await _buildingRepository.GetByIdAsync(buildingId);
+        if (building == null)
+        {
+            throw new BuildingNotFoundException(buildingId);
+        }
+
+        building.Update(
+            updateDto.Name,
+            updateDto.Color,
+            updateDto.Height,
+            updateDto.Length,
+            updateDto.Width,
+            updateDto.X,
+            updateDto.Y,
+            updateDto.Z);
+
+        await _buildingRepository.UpdateAsync(building);
+    }
 }
