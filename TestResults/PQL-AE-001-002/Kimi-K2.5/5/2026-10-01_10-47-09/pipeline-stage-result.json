@@ -1,0 +1,42 @@
+{
+  "stage": "code-generation",
+  "storyId": "PQL-AE-001-002",
+  "model": "Kimi-K2.5",
+  "iteration": "5",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Domain/Exceptions/BuildingNotFoundException.cs",
+    "Backend.Application/Services/UpdateBuildingDto.cs",
+    "Backend.Presentation/Handlers/UpdateBuildingHandler.cs",
+    "Backend.Presentation/Api/Endpoints/UpdateBuildingEndpoint.cs"
+  ],
+  "filesModified": [
+    "Backend.Domain/Entities/Building.cs",
+    "Backend.Domain/Repositories/IBuildingRepository.cs",
+    "Backend.Application/Services/IBuildingService.cs",
+    "Backend.Application/Services/BuildingService.cs",
+    "Backend.Infrastructure/Repositories/SqlBuildingRepository.cs",
+    "Backend.Api/Program.cs"
+  ],
+  "metrics": {
+    "buildErrors": 0,
+    "buildWarnings": 0,
+    "testsTotal": 259,
+    "testsPassed": 259,
+    "testsFailed": 0,
+    "testsSkipped": 0,
+    "lineCoverage": 0.8535598705501618,
+    "branchCoverage": 0.8411764705882353,
+    "e2e": {
+      "status": "success",
+      "probesTotal": 1,
+      "probesPassed": 1,
+      "probesFailed": 0,
+      "seedsApplied": ["seed-PQL-AE-001-002.sql"],
+      "resultPath": "E2EResults/PQL-AE-001-002/Kimi-K2.5/5/2026-10-01_14-06-22/",
+      "cleanup": "clean"
+    }
+  },
+  "warnings": [],
+  "notes": "Successfully implemented building update functionality across all layers: Domain (Building.Update method + BuildingNotFoundException), Application (UpdateBuildingAsync in BuildingService with UpdateBuildingDto), Infrastructure (GetByIdAsync and UpdateAsync in SqlBuildingRepository), and Presentation (UpdateBuildingHandler with PUT endpoint returning Ok/BadRequest/NotFound). All 259 tests pass with 85.36% line coverage and 84.12% branch coverage. E2E validation confirmed the endpoint works correctly against a real database."
+}
