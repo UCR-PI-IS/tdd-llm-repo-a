@@ -78,6 +78,12 @@ public class Building
     /// <param name="z">Z coordinate</param>
     public Building(int internalId, string name, string color, float height, float length, float width, float x, float y, float z)
     {
+        ArgumentException.ThrowIfNullOrEmpty(name, nameof(name));
+        ArgumentException.ThrowIfNullOrEmpty(color, nameof(color));
+        ArgumentOutOfRangeException.ThrowIfNegativeOrZero(height, nameof(height));
+        ArgumentOutOfRangeException.ThrowIfNegativeOrZero(length, nameof(length));
+        ArgumentOutOfRangeException.ThrowIfNegativeOrZero(width, nameof(width));
+
         InternalId = internalId;
         Name = name;
         Color = color;
@@ -132,23 +138,12 @@ public class Building
     /// <exception cref="ArgumentException">Thrown when any validation rule is violated.</exception>
     public Building(string name, string color, float height, float length, float width, float x, float y, float z, int areaId)
     {
-        if (string.IsNullOrEmpty(name))
-            throw new ArgumentException("Name cannot be null or empty", nameof(name));
-
-        if (string.IsNullOrEmpty(color))
-            throw new ArgumentException("Color cannot be null or empty", nameof(color));
-
-        if (height <= 0)
-            throw new ArgumentException("Height must be positive", nameof(height));
-
-        if (length <= 0)
-            throw new ArgumentException("Length must be positive", nameof(length));
-
-        if (width <= 0)
-            throw new ArgumentException("Width must be positive", nameof(width));
-
-        if (areaId <= 0)
-            throw new ArgumentException("AreaId must be positive", nameof(areaId));
+        ArgumentException.ThrowIfNullOrEmpty(name, nameof(name));
+        ArgumentException.ThrowIfNullOrEmpty(color, nameof(color));
+        ArgumentOutOfRangeException.ThrowIfNegativeOrZero(height, nameof(height));
+        ArgumentOutOfRangeException.ThrowIfNegativeOrZero(length, nameof(length));
+        ArgumentOutOfRangeException.ThrowIfNegativeOrZero(width, nameof(width));
+        ArgumentOutOfRangeException.ThrowIfNegativeOrZero(areaId, nameof(areaId));
 
         Name = name;
         Color = color;
@@ -159,5 +154,35 @@ public class Building
         Y = y;
         Z = z;
         AreaId = areaId;
+    }
+
+    /// <summary>
+    /// Updates the building properties with new values.
+    /// </summary>
+    /// <param name="name">Name of the building (must not be null or empty)</param>
+    /// <param name="color">Color of the building (must not be null or empty)</param>
+    /// <param name="height">Height in meters (must be positive)</param>
+    /// <param name="length">Length in meters (must be positive)</param>
+    /// <param name="width">Width in meters (must be positive)</param>
+    /// <param name="x">X coordinate</param>
+    /// <param name="y">Y coordinate</param>
+    /// <param name="z">Z coordinate</param>
+    /// <exception cref="ArgumentException">Thrown when any validation rule is violated.</exception>
+    public void Update(string name, string color, float height, float length, float width, float x, float y, float z)
+    {
+        ArgumentException.ThrowIfNullOrEmpty(name, nameof(name));
+        ArgumentException.ThrowIfNullOrEmpty(color, nameof(color));
+        ArgumentOutOfRangeException.ThrowIfNegativeOrZero(height, nameof(height));
+        ArgumentOutOfRangeException.ThrowIfNegativeOrZero(length, nameof(length));
+        ArgumentOutOfRangeException.ThrowIfNegativeOrZero(width, nameof(width));
+
+        Name = name;
+        Color = color;
+        Height = height;
+        Length = length;
+        Width = width;
+        X = x;
+        Y = y;
+        Z = z;
     }
 }

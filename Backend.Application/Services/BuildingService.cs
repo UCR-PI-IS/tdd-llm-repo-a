@@ -23,13 +23,6 @@ public class BuildingService : IBuildingService
     /// <inheritdoc />
     public async Task<Building> AddBuildingAsync(Building building)
     {
-        // Validate building properties
-        if (string.IsNullOrEmpty(building.Name))
-            throw new ArgumentException("Name cannot be empty", nameof(building.Name));
-
-        if (string.IsNullOrEmpty(building.Color))
-            throw new ArgumentException("Color cannot be empty", nameof(building.Color));
-
         var exists = await _buildingRepository.ExistsByNameAsync(building.Name);
         if (exists)
         {
@@ -43,5 +36,27 @@ public class BuildingService : IBuildingService
         }
 
         return await _buildingRepository.AddAsync(building);
+    }
+
+    /// <inheritdoc />
+    public async Task UpdateBuildingAsync(int id, UpdateBuildingDto updateDto)
+    {
+        var existingBuilding = await _buildingRepository.GetByIdAsync(id);
+        if (existingBuilding == null)
+        {
+            throw new BuildingNotFoundException(id);
+        }
+
+        existingBuilding.Update(
+            updateDto.Name,
+            updateDto.Color,
+            updateDto.Height,
+            updateDto.Length,
+            updateDto.Width,
+            updateDto.X,
+            updateDto.Y,
+            updateDto.Z);
+
+        await _buildingRepository.UpdateAsync(existingBuilding);
     }
 }

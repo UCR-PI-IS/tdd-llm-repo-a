@@ -1,0 +1,20 @@
+{
+  "probes": [
+    {
+      "name": "update seeded building returns 200",
+      "method": "PUT",
+      "path": "/buildings/1",
+      "expectStatus": 200,
+      "body": {
+        "name": "Updated Engineering Building",
+        "color": "Green",
+        "height": 15.0,
+        "length": 30.0,
+        "width": 20.0,
+        "x": 50.0,
+        "y": 25.0,
+        "z": 150.0
+      }
+    }
+  ]
+}
