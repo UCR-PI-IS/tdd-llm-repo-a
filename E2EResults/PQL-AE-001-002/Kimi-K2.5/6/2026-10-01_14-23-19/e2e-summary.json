@@ -1,0 +1,63 @@
+{
+  "stage": "e2e-validation",
+  "status": "success",
+  "timestamp": "2026-10-01_14-23-19",
+  "storyId": "PQL-AE-001-002",
+  "model": "Kimi-K2.5",
+  "iteration": "6",
+  "database": {
+    "container": "themepark-sql-e2e-pql-ae-001-002-kimi-k2-5-6-142319",
+    "image": "mcr.microsoft.com/mssql/server:2022-latest",
+    "network": "themepark-e2e-pql-ae-001-002-kimi-k2-5-6-142319",
+    "database": "ThemePark",
+    "readySeconds": 8.5,
+    "baseSchemaApplied": [
+      "Semester.sql",
+      "Course.sql"
+    ],
+    "seedsApplied": [
+      "PQL-AE-001-002.sql"
+    ]
+  },
+  "backend": {
+    "container": "themepark-api-e2e-pql-ae-001-002-kimi-k2-5-6-142319",
+    "project": "Backend.Api/UCR.ECCI.PI.ThemePark.Backend.Api.csproj",
+    "publishStatus": "success",
+    "started": true,
+    "url": "http://127.0.0.1:55006",
+    "readySeconds": 2.3,
+    "errorLines": []
+  },
+  "probes": [
+    {
+      "name": "update seeded building returns 200",
+      "method": "PUT",
+      "path": "/buildings/1",
+      "expectedStatus": 200,
+      "actualStatus": 200,
+      "passed": true,
+      "missingContent": [],
+      "error": null,
+      "bodySnippet": "{\"success\":true}"
+    }
+  ],
+  "totalProbes": 1,
+  "probesPassed": 1,
+  "probesFailed": 0,
+  "cleanup": {
+    "status": "clean",
+    "removedContainers": [
+      "themepark-api-e2e-pql-ae-001-002-kimi-k2-5-6-142319",
+      "themepark-sql-e2e-pql-ae-001-002-kimi-k2-5-6-142319"
+    ],
+    "removedNetworks": [
+      "themepark-e2e-pql-ae-001-002-kimi-k2-5-6-142319"
+    ],
+    "removedVolumes": [
+      "themepark-app-e2e-pql-ae-001-002-kimi-k2-5-6-142319"
+    ],
+    "leftovers": []
+  },
+  "warnings": [],
+  "errors": []
+}
