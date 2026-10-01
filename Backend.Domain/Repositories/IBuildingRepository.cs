@@ -27,4 +27,18 @@ public interface IBuildingRepository
     /// <param name="areaId">The area identifier to check.</param>
     /// <returns>True if the area exists; otherwise false.</returns>
     Task<bool> AreaExistsAsync(int areaId);
+
+    /// <summary>
+    /// Retrieves a building by its internal identifier.
+    /// </summary>
+    /// <param name="id">The internal identifier of the building.</param>
+    /// <returns>The building entity if found; otherwise null.</returns>
+    Task<Building?> GetByIdAsync(int id);
+
+    /// <summary>
+    /// Updates an existing building in the data store.
+    /// </summary>
+    /// <param name="building">The building entity with updated values.</param>
+    /// <returns>The updated building entity.</returns>
+    Task<Building> UpdateAsync(Building building);
 }
