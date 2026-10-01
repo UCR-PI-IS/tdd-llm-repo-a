@@ -1,0 +1,29 @@
+{
+  "stage": "test-generation",
+  "storyId": "PQL-AE-001-002",
+  "model": "Qwen3.7-max",
+  "iteration": "4",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Domain.Tests.Unit/BuildingEditTests.cs",
+    "Backend.Application.Tests.Unit/BuildingServiceUpdateTests.cs",
+    "Backend.Infrastructure.Tests.Unit/SqlBuildingRepositoryUpdateTests.cs",
+    "Backend.Presentation.Tests.Unit/UpdateBuildingHandlerTests.cs"
+  ],
+  "filesModified": [],
+  "metrics": {
+    "intentsConfirmed": 16,
+    "testMethodsEmitted": 16,
+    "byLayer": {
+      "Domain": 7,
+      "Application": 3,
+      "Infrastructure": 3,
+      "Presentation": 3
+    }
+  },
+  "warnings": [
+    "Tests reference types not yet implemented: Building.Update(), BuildingNotFoundException, UpdateBuildingDto, UpdateBuildingHandler, UpdateBuildingResponse, IBuildingService.UpdateBuildingAsync(), IBuildingRepository.GetByIdAsync(), IBuildingRepository.UpdateAsync(), SqlBuildingRepository.GetByIdAsync(), SqlBuildingRepository.UpdateAsync(). These are expected to be created during the implementation phase.",
+    "Domain-001 through Domain-006 test the 9-parameter Building constructor (with internalId) expecting validation that does not yet exist in the current constructor; validation must be added during implementation."
+  ],
+  "notes": "Generated 16 test methods across 4 test files covering all 16 confirmed intents for story PQL-AE-001-002 (Edit Building). Tests follow existing codebase patterns: Assert.Multiple for multi-property assertions, AAA pattern with section comments, Moq for mocking, and NUnit TestCase parameterization for boundary/negative scenarios. Infrastructure tests use mocked DbContext/DbSet consistent with SqlWhiteboardRepositoryUpdateTests patterns."
+}
