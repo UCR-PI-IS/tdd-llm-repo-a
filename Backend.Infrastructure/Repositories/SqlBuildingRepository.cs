@@ -30,6 +30,19 @@ internal class SqlBuildingRepository : IBuildingRepository
     }
 
     /// <inheritdoc />
+    public async Task<Building?> GetByIdAsync(int id)
+    {
+        return await _dbContext.Buildings.FindAsync(id);
+    }
+
+    /// <inheritdoc />
+    public async Task UpdateAsync(Building building)
+    {
+        _dbContext.Buildings.Update(building);
+        await _dbContext.SaveChangesAsync();
+    }
+
+    /// <inheritdoc />
     public async Task<bool> ExistsByNameAsync(string name)
     {
         return await _dbContext.Buildings.AnyAsync(b => b.Name == name);

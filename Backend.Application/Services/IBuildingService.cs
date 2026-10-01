@@ -3,7 +3,7 @@ using UCR.ECCI.PI.ThemePark.Backend.Domain.Entities;
 namespace UCR.ECCI.PI.ThemePark.Backend.Application.Services;
 
 /// <summary>
-/// Interface for the service that manages building creation.
+/// Interface for the service that manages building creation and updates.
 /// </summary>
 public interface IBuildingService
 {
@@ -13,4 +13,14 @@ public interface IBuildingService
     /// <param name="building">The building entity to add.</param>
     /// <returns>The persisted building entity.</returns>
     Task<Building> AddBuildingAsync(Building building);
+
+    /// <summary>
+    /// Updates an existing building with the provided data.
+    /// </summary>
+    /// <param name="id">The unique identifier of the building to update.</param>
+    /// <param name="dto">The data transfer object containing the updated building information.</param>
+    /// <returns>A task representing the asynchronous operation.</returns>
+    /// <exception cref="BuildingNotFoundException">Thrown when the building with the specified ID is not found.</exception>
+    /// <exception cref="ArgumentException">Thrown when the provided data is invalid.</exception>
+    Task UpdateBuildingAsync(int id, UpdateBuildingDto dto);
 }

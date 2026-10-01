@@ -43,5 +43,9 @@ public static class AddBuildingHandler
         {
             return TypedResults.BadRequest(ex.Message);
         }
+        catch (AreaNotFoundException ex)
+        {
+            return TypedResults.BadRequest(ex.Message);
+        }
     }
 }

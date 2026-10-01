@@ -5,7 +5,7 @@ using UCR.ECCI.PI.ThemePark.Backend.Domain.Repositories;
 namespace UCR.ECCI.PI.ThemePark.Backend.Application.Services;
 
 /// <summary>
-/// Service implementation for adding buildings.
+/// Service implementation for adding and updating buildings.
 /// </summary>
 public class BuildingService : IBuildingService
 {
@@ -43,5 +43,30 @@ public class BuildingService : IBuildingService
         }
 
         return await _buildingRepository.AddAsync(building);
+    }
+
+    /// <inheritdoc />
+    public async Task UpdateBuildingAsync(int id, UpdateBuildingDto dto)
+    {
+        // Retrieve the existing building
+        var existingBuilding = await _buildingRepository.GetByIdAsync(id);
+        if (existingBuilding == null)
+        {
+            throw new BuildingNotFoundException(id);
+        }
+
+        // Update the building properties (validation happens in the Update method)
+        existingBuilding.Update(
+            dto.Name,
+            dto.Color,
+            dto.Height,
+            dto.Length,
+            dto.Width,
+            dto.X,
+            dto.Y,
+            dto.Z);
+
+        // Persist the changes
+        await _buildingRepository.UpdateAsync(existingBuilding);
     }
 }

@@ -15,6 +15,20 @@ public interface IBuildingRepository
     Task<Building> AddAsync(Building building);
 
     /// <summary>
+    /// Retrieves a building by its unique identifier.
+    /// </summary>
+    /// <param name="id">The unique identifier of the building.</param>
+    /// <returns>The building entity if found; otherwise, null.</returns>
+    Task<Building?> GetByIdAsync(int id);
+
+    /// <summary>
+    /// Updates an existing building in the data store.
+    /// </summary>
+    /// <param name="building">The building entity to update.</param>
+    /// <returns>A task representing the asynchronous operation.</returns>
+    Task UpdateAsync(Building building);
+
+    /// <summary>
     /// Checks whether a building with the specified name already exists.
     /// </summary>
     /// <param name="name">The building name to check.</param>
