@@ -1,0 +1,62 @@
+{
+  "stage": "refactoring",
+  "storyId": "PQL-AE-001-002",
+  "model": "Qwen3.7-max",
+  "iteration": "2",
+  "status": "partial",
+  "filesCreated": [],
+  "filesModified": [
+    "Backend.Domain/Entities/Building.cs",
+    "Backend.Presentation/Api/Handlers/UpdateBuildingHandler.cs"
+  ],
+  "metrics": {
+    "loopIterationsPerformed": 1,
+    "maxLoopIterations": 10,
+    "allGreenAchieved": false,
+    "baseline": {
+      "minMI": 46,
+      "maxCC": 21,
+      "maxCoupling": 15,
+      "maxDIT": 0
+    },
+    "final": {
+      "minMI": 49,
+      "maxCC": 13,
+      "maxCoupling": 15,
+      "maxDIT": 0
+    },
+    "remainingViolations": [
+      {
+        "type": "UCR.ECCI.PI.ThemePark.Backend.Domain.Entities.Building",
+        "metric": "CC",
+        "value": 13,
+        "flag": "YELLOW"
+      },
+      {
+        "type": "UCR.ECCI.PI.ThemePark.Backend.Application.Services.BuildingService",
+        "metric": "Coupling",
+        "value": 13,
+        "flag": "YELLOW"
+      },
+      {
+        "type": "UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Repositories.SqlBuildingRepository",
+        "metric": "Coupling",
+        "value": 15,
+        "flag": "YELLOW"
+      },
+      {
+        "type": "UCR.ECCI.PI.ThemePark.Backend.Presentation.Api.Handlers.UpdateBuildingHandler",
+        "metric": "Coupling",
+        "value": 14,
+        "flag": "YELLOW"
+      }
+    ]
+  },
+  "warnings": [
+    "Building CC=13 is a type-level aggregate; all individual methods are GREEN (max 6). Inherent to having multiple constructors with validation.",
+    "BuildingService Coupling=13 is inherent to service orchestration with multiple exception types (BuildingNotFoundException, DuplicateBuildingException, AreaNotFoundException).",
+    "SqlBuildingRepository Coupling=15 is inherent to EF Core repository pattern (DbSet, DbContext, async types).",
+    "UpdateBuildingHandler Coupling=14 is inherent to ASP.NET Core typed results pattern (Results<,,>, Ok<T>, BadRequest<T>, NotFound<T>, TypedResults)."
+  ],
+  "notes": "Static-smell pass successfully extracted repeated guard clauses and property assignment blocks in Building.cs, reducing type-level CC from 21 to 13 and improving MI from 46 to 49. Removed duplicate using statement in UpdateBuildingHandler.cs. All 259 tests pass. Remaining YELLOW flags are architectural coupling inherent to ASP.NET Core typed results, EF Core repository, and service orchestration patterns — cannot be reduced without breaking DDD layer boundaries or test contracts."
+}
