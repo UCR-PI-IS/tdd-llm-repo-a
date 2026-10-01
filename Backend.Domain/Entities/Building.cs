@@ -1,3 +1,5 @@
+using UCR.ECCI.PI.ThemePark.Backend.Domain.Validation;
+
 namespace UCR.ECCI.PI.ThemePark.Backend.Domain.Entities;
 
 /// <summary>
@@ -132,23 +134,7 @@ public class Building
     /// <exception cref="ArgumentException">Thrown when any validation rule is violated.</exception>
     public Building(string name, string color, float height, float length, float width, float x, float y, float z, int areaId)
     {
-        if (string.IsNullOrEmpty(name))
-            throw new ArgumentException("Name cannot be null or empty", nameof(name));
-
-        if (string.IsNullOrEmpty(color))
-            throw new ArgumentException("Color cannot be null or empty", nameof(color));
-
-        if (height <= 0)
-            throw new ArgumentException("Height must be positive", nameof(height));
-
-        if (length <= 0)
-            throw new ArgumentException("Length must be positive", nameof(length));
-
-        if (width <= 0)
-            throw new ArgumentException("Width must be positive", nameof(width));
-
-        if (areaId <= 0)
-            throw new ArgumentException("AreaId must be positive", nameof(areaId));
+        Validate(name, color, height, length, width, areaId);
 
         Name = name;
         Color = color;
@@ -159,5 +145,25 @@ public class Building
         Y = y;
         Z = z;
         AreaId = areaId;
+    }
+
+    /// <summary>
+    /// Validates the specified building properties.
+    /// </summary>
+    /// <param name="name">Name of the building.</param>
+    /// <param name="color">Color of the building.</param>
+    /// <param name="height">Height in meters.</param>
+    /// <param name="length">Length in meters.</param>
+    /// <param name="width">Width in meters.</param>
+    /// <param name="areaId">Identifier of the area.</param>
+    /// <exception cref="ArgumentException">Thrown when any validation rule is violated.</exception>
+    public static void Validate(string name, string color, float height, float length, float width, int areaId)
+    {
+        Guard.AgainstNullOrEmpty(name, nameof(name));
+        Guard.AgainstNullOrEmpty(color, nameof(color));
+        Guard.AgainstNonPositive(height, nameof(height));
+        Guard.AgainstNonPositive(length, nameof(length));
+        Guard.AgainstNonPositive(width, nameof(width));
+        Guard.AgainstNonPositive(areaId, nameof(areaId));
     }
 }

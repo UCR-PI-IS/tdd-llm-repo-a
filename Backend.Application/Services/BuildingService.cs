@@ -1,6 +1,7 @@
 using UCR.ECCI.PI.ThemePark.Backend.Domain.Entities;
 using UCR.ECCI.PI.ThemePark.Backend.Domain.Exceptions;
 using UCR.ECCI.PI.ThemePark.Backend.Domain.Repositories;
+using UCR.ECCI.PI.ThemePark.Backend.Domain.Validation;
 
 namespace UCR.ECCI.PI.ThemePark.Backend.Application.Services;
 
@@ -23,12 +24,8 @@ public class BuildingService : IBuildingService
     /// <inheritdoc />
     public async Task<Building> AddBuildingAsync(Building building)
     {
-        // Validate building properties
-        if (string.IsNullOrEmpty(building.Name))
-            throw new ArgumentException("Name cannot be empty", nameof(building.Name));
-
-        if (string.IsNullOrEmpty(building.Color))
-            throw new ArgumentException("Color cannot be empty", nameof(building.Color));
+        Guard.AgainstNullOrEmpty(building.Name, nameof(building.Name));
+        Guard.AgainstNullOrEmpty(building.Color, nameof(building.Color));
 
         var exists = await _buildingRepository.ExistsByNameAsync(building.Name);
         if (exists)
@@ -43,5 +40,35 @@ public class BuildingService : IBuildingService
         }
 
         return await _buildingRepository.AddAsync(building);
+    }
+
+    /// <inheritdoc />
+    public async Task UpdateBuildingAsync(int id, Building building)
+    {
+        var existingBuilding = await _buildingRepository.GetByIdAsync(id);
+        if (existingBuilding == null)
+        {
+            throw new BuildingNotFoundException(id);
+        }
+
+        Guard.AgainstNullOrEmpty(building.Name, "name");
+        Guard.AgainstNullOrEmpty(building.Color, "color");
+        Guard.AgainstNonPositive(building.Height, "height");
+        Guard.AgainstNonPositive(building.Length, "length");
+        Guard.AgainstNonPositive(building.Width, "width");
+
+        var buildingToUpdate = new Building(
+            id,
+            building.Name,
+            building.Color,
+            building.Height,
+            building.Length,
+            building.Width,
+            building.X,
+            building.Y,
+            building.Z,
+            building.AreaId);
+
+        await _buildingRepository.UpdateAsync(buildingToUpdate);
     }
 }
