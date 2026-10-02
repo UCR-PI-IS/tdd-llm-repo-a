@@ -1,0 +1,42 @@
+{
+  "stage": "code-generation",
+  "storyId": "PQL-AE-001-002",
+  "model": "Qwen3.7-max",
+  "iteration": "3",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Domain/Exceptions/BuildingNotFoundException.cs",
+    "Backend.Application/Services/UpdateBuildingDto.cs",
+    "Backend.Presentation/Api/Handlers/UpdateBuildingHandler.cs",
+    "Backend.Presentation/Api/Endpoints/UpdateBuildingEndpoint.cs"
+  ],
+  "filesModified": [
+    "Backend.Domain/Entities/Building.cs",
+    "Backend.Domain/Repositories/IBuildingRepository.cs",
+    "Backend.Application/Services/IBuildingService.cs",
+    "Backend.Application/Services/BuildingService.cs",
+    "Backend.Infrastructure/Repositories/SqlBuildingRepository.cs",
+    "Backend.Api/Program.cs"
+  ],
+  "metrics": {
+    "buildErrors": 0,
+    "buildWarnings": 6,
+    "testsTotal": 259,
+    "testsPassed": 259,
+    "testsFailed": 0,
+    "testsSkipped": 0,
+    "lineCoverage": 0.8614506927465363,
+    "branchCoverage": 0.8372093023255814,
+    "e2e": {
+      "status": "success",
+      "probesTotal": 3,
+      "probesPassed": 3,
+      "probesFailed": 0,
+      "seedsApplied": ["seed-PQL-AE-001-002.sql"],
+      "resultPath": "E2EResults/PQL-AE-001-002/Qwen3.7-max/3/2026-10-02_09-34-07/",
+      "cleanup": "clean"
+    }
+  },
+  "warnings": [],
+  "notes": "Implemented Edit Building functionality across all DDD layers: added validation to Building constructor with internalId, added Update method to Building entity, created BuildingNotFoundException, extended IBuildingRepository with GetByIdAsync and UpdateAsync, added UpdateBuildingDto and UpdateBuildingAsync to the application service, implemented SqlBuildingRepository update with EF Core tracking conflict resolution, and created UpdateBuildingHandler with PUT endpoint. All 259 tests pass and 3/3 e2e probes succeeded."
+}

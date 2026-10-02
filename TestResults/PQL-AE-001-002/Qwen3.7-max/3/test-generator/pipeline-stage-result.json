@@ -1,0 +1,32 @@
+{
+  "stage": "test-generation",
+  "storyId": "PQL-AE-001-002",
+  "model": "Qwen3.7-max",
+  "iteration": "3",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Domain.Tests.Unit/BuildingUpdateTests.cs",
+    "Backend.Application.Tests.Unit/BuildingServiceUpdateTests.cs",
+    "Backend.Infrastructure.Tests.Unit/SqlBuildingRepositoryUpdateTests.cs",
+    "Backend.Presentation.Tests.Unit/UpdateBuildingHandlerTests.cs"
+  ],
+  "filesModified": [],
+  "metrics": {
+    "intentsConfirmed": 16,
+    "testMethodsEmitted": 14,
+    "byLayer": {
+      "Domain": 5,
+      "Application": 3,
+      "Infrastructure": 3,
+      "Presentation": 3
+    }
+  },
+  "warnings": [
+    "Domain intents Domain-002 through Domain-006 expect validation on the 9-parameter Building constructor (int internalId, string name, ...) which currently has no validation; implementation must add validation to this constructor.",
+    "Domain-007 references Building.Update() method which does not yet exist on the entity.",
+    "Application intents reference IBuildingRepository.GetByIdAsync(), IBuildingRepository.UpdateAsync(), BuildingService.UpdateBuildingAsync(), UpdateBuildingDto, and BuildingNotFoundException — none of which exist yet.",
+    "Infrastructure intents reference SqlBuildingRepository.GetByIdAsync() and UpdateAsync() which do not yet exist.",
+    "Presentation intents reference UpdateBuildingHandler, UpdateBuildingRequest, UpdateBuildingResponse, and IBuildingService.UpdateBuildingAsync() — none of which exist yet."
+  ],
+  "notes": "Generated 14 test methods (21 test cases with parameterization) across 4 test files covering all 16 confirmed intents for the Edit Building story. Domain tests use parameterized TestCase for validation coverage. Application and Infrastructure tests follow existing codebase patterns (Moq for Application, EF Core In-Memory for Infrastructure). Presentation tests follow the AddBuildingHandler test pattern with IResult return type."
+}
