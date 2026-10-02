@@ -1,0 +1,44 @@
+{
+  "stage": "code-generation",
+  "storyId": "PQL-AE-001-002",
+  "model": "Qwen3.7-max",
+  "iteration": "6",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Domain/Exceptions/BuildingNotFoundException.cs",
+    "Backend.Application/Services/UpdateBuildingDto.cs",
+    "Backend.Presentation/Api/Handlers/UpdateBuildingHandler.cs",
+    "Backend.Presentation/Api/Endpoints/UpdateBuildingEndpoint.cs"
+  ],
+  "filesModified": [
+    "Backend.Domain/Entities/Building.cs",
+    "Backend.Domain/Repositories/IBuildingRepository.cs",
+    "Backend.Application/Services/IBuildingService.cs",
+    "Backend.Application/Services/BuildingService.cs",
+    "Backend.Infrastructure/Repositories/SqlBuildingRepository.cs",
+    "Backend.Api/Program.cs"
+  ],
+  "metrics": {
+    "buildErrors": 0,
+    "buildWarnings": 6,
+    "testsTotal": 259,
+    "testsPassed": 259,
+    "testsFailed": 0,
+    "testsSkipped": 0,
+    "lineCoverage": 0.8542009884678748,
+    "branchCoverage": 0.8411764705882353,
+    "e2e": {
+      "status": "success",
+      "probesTotal": 3,
+      "probesPassed": 3,
+      "probesFailed": 0,
+      "seedsApplied": ["seed-PQL-AE-001-002.sql"],
+      "resultPath": "E2EResults/PQL-AE-001-002/Qwen3.7-max/6/2026-10-02_10-15-34/",
+      "cleanup": "clean"
+    }
+  },
+  "warnings": [
+    "Pre-existing CS8602 nullable dereference warnings in unrelated test files (AddUniversityHandlerTests, AddBuildingHandlerTests, UpdateWhiteboardHandlerTests, CreateWhiteboardHandlerTests, SqlUniversityRepositoryTests, SqlPersonRepositoryTests)"
+  ],
+  "notes": "Implemented building edit functionality across all DDD layers: added validation to Building constructor and new Update method, created BuildingNotFoundException, extended IBuildingRepository with GetByIdAsync/UpdateAsync, added UpdateBuildingDto and UpdateBuildingAsync to application layer, implemented SqlBuildingRepository read/update operations, and created UpdateBuildingHandler with PUT endpoint. All 16 story-specific tests pass (7 domain, 3 application, 3 infrastructure, 3 presentation) along with 243 pre-existing tests. End-to-end validation confirmed all 3 acceptance criteria scenarios (successful update, not found, validation error)."
+}

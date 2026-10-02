@@ -1,0 +1,24 @@
+{
+  "stage": "refactoring",
+  "storyId": "PQL-AE-001-002",
+  "model": "Qwen3.7-max",
+  "iteration": "6",
+  "status": "partial",
+  "filesCreated": [],
+  "filesModified": ["Backend.Domain/Entities/Building.cs"],
+  "metrics": {
+    "loopIterationsPerformed": 1,
+    "maxLoopIterations": 10,
+    "allGreenAchieved": false,
+    "baseline": { "minMI": 46, "maxCC": 21, "maxCoupling": 15, "maxDIT": 0 },
+    "final":    { "minMI": 48, "maxCC": 12, "maxCoupling": 15, "maxDIT": 0 },
+    "remainingViolations": [
+      { "type": "Building", "metric": "CC", "value": 12, "flag": "YELLOW" },
+      { "type": "BuildingService", "metric": "Coupling", "value": 13, "flag": "YELLOW" },
+      { "type": "SqlBuildingRepository", "metric": "Coupling", "value": 15, "flag": "YELLOW" },
+      { "type": "UpdateBuildingHandler", "metric": "Coupling", "value": 13, "flag": "YELLOW" }
+    ]
+  },
+  "warnings": [],
+  "notes": "Extracted validation helpers (ValidateBuildingProperties, ValidateRequiredString, ValidatePositiveFloat, ValidatePositiveInt) from Building.cs to eliminate repeated guard clauses across 3 constructors and Update method. Building CC reduced from 21 to 12 (-43%). Remaining YELLOW violations are structural coupling inherent to Clean Architecture patterns (service, repository, handler) and class-level CC sum across 9 small methods each with CC 1-2."
+}
