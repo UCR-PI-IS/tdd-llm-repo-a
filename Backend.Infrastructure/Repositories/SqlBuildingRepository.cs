@@ -43,4 +43,25 @@ internal class SqlBuildingRepository : IBuildingRepository
         // A proper implementation would check an Areas table.
         return Task.FromResult(true);
     }
+
+    /// <inheritdoc />
+    public async Task<Building?> GetByIdAsync(int id)
+    {
+        return await _dbContext.Buildings.FindAsync(id);
+    }
+
+    /// <inheritdoc />
+    public async Task UpdateAsync(Building building)
+    {
+        var existing = await _dbContext.Buildings.FindAsync(building.InternalId);
+        if (existing != null)
+        {
+            _dbContext.Entry(existing).CurrentValues.SetValues(building);
+        }
+        else
+        {
+            _dbContext.Buildings.Update(building);
+        }
+        await _dbContext.SaveChangesAsync();
+    }
 }

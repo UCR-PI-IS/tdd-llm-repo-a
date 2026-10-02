@@ -78,15 +78,27 @@ public class Building
     /// <param name="z">Z coordinate</param>
     public Building(int internalId, string name, string color, float height, float length, float width, float x, float y, float z)
     {
+        ValidateProperties(name, color, height, length, width);
         InternalId = internalId;
-        Name = name;
-        Color = color;
-        Height = height;
-        Length = length;
-        Width = width;
-        X = x;
-        Y = y;
-        Z = z;
+        SetProperties(name, color, height, length, width, x, y, z);
+    }
+
+    /// <summary>
+    /// Updates all editable properties of the building with validation.
+    /// </summary>
+    /// <param name="name">Name of the building (must not be null or empty)</param>
+    /// <param name="color">Color of the building (must not be null or empty)</param>
+    /// <param name="height">Height in meters (must be positive)</param>
+    /// <param name="length">Length in meters (must be positive)</param>
+    /// <param name="width">Width in meters (must be positive)</param>
+    /// <param name="x">X coordinate</param>
+    /// <param name="y">Y coordinate</param>
+    /// <param name="z">Z coordinate</param>
+    /// <exception cref="ArgumentException">Thrown when any validation rule is violated.</exception>
+    public void Update(string name, string color, float height, float length, float width, float x, float y, float z)
+    {
+        ValidateProperties(name, color, height, length, width);
+        SetProperties(name, color, height, length, width, x, y, z);
     }
 
     /// <summary>
@@ -106,14 +118,7 @@ public class Building
     public Building(int internalId, string name, string color, float height, float length, float width, float x, float y, float z, int areaId)
     {
         InternalId = internalId;
-        Name = name;
-        Color = color;
-        Height = height;
-        Length = length;
-        Width = width;
-        X = x;
-        Y = y;
-        Z = z;
+        SetProperties(name, color, height, length, width, x, y, z);
         AreaId = areaId;
     }
 
@@ -132,6 +137,17 @@ public class Building
     /// <exception cref="ArgumentException">Thrown when any validation rule is violated.</exception>
     public Building(string name, string color, float height, float length, float width, float x, float y, float z, int areaId)
     {
+        ValidateProperties(name, color, height, length, width);
+
+        if (areaId <= 0)
+            throw new ArgumentException("AreaId must be positive", nameof(areaId));
+
+        SetProperties(name, color, height, length, width, x, y, z);
+        AreaId = areaId;
+    }
+
+    private static void ValidateProperties(string name, string color, float height, float length, float width)
+    {
         if (string.IsNullOrEmpty(name))
             throw new ArgumentException("Name cannot be null or empty", nameof(name));
 
@@ -146,10 +162,10 @@ public class Building
 
         if (width <= 0)
             throw new ArgumentException("Width must be positive", nameof(width));
+    }
 
-        if (areaId <= 0)
-            throw new ArgumentException("AreaId must be positive", nameof(areaId));
-
+    private void SetProperties(string name, string color, float height, float length, float width, float x, float y, float z)
+    {
         Name = name;
         Color = color;
         Height = height;
@@ -158,6 +174,5 @@ public class Building
         X = x;
         Y = y;
         Z = z;
-        AreaId = areaId;
     }
 }
