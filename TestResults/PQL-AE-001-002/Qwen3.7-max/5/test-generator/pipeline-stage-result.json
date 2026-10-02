@@ -1,0 +1,30 @@
+{
+  "stage": "test-generation",
+  "storyId": "PQL-AE-001-002",
+  "model": "Qwen3.7-max",
+  "iteration": "5",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Domain.Tests.Unit/BuildingUpdateTests.cs",
+    "Backend.Application.Tests.Unit/BuildingServiceUpdateTests.cs",
+    "Backend.Infrastructure.Tests.Unit/SqlBuildingRepositoryUpdateTests.cs",
+    "Backend.Presentation.Tests.Unit/UpdateBuildingHandlerTests.cs"
+  ],
+  "filesModified": [],
+  "metrics": {
+    "intentsConfirmed": 16,
+    "testMethodsEmitted": 14,
+    "byLayer": {
+      "Domain": 5,
+      "Application": 3,
+      "Infrastructure": 3,
+      "Presentation": 3
+    }
+  },
+  "warnings": [
+    "Tests reference not-yet-implemented types: Building.Update(), UpdateBuildingDto, BuildingNotFoundException, IBuildingRepository.GetByIdAsync/UpdateAsync, BuildingService.UpdateBuildingAsync, UpdateBuildingHandler, UpdateBuildingResponse",
+    "The existing Building 9-param constructor (with internalId) does not validate; Domain tests expect validation to be added by the implementation",
+    "Presentation handler tests assume UpdateBuildingHandler.HandleAsync returns IResult directly (matching AddBuildingHandler pattern)"
+  ],
+  "notes": "Generated 14 test methods across 4 test classes covering all 16 confirmed intents for the Edit Building story (PQL-AE-001-002). Domain tests use parameterized TestCase for validation scenarios. Application and Infrastructure tests use Moq for repository mocking. Presentation tests follow the AddBuildingHandler IResult return pattern."
+}
