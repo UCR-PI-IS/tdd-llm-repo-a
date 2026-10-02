@@ -78,15 +78,8 @@ public class Building
     /// <param name="z">Z coordinate</param>
     public Building(int internalId, string name, string color, float height, float length, float width, float x, float y, float z)
     {
-        InternalId = internalId;
-        Name = name;
-        Color = color;
-        Height = height;
-        Length = length;
-        Width = width;
-        X = x;
-        Y = y;
-        Z = z;
+        ValidateBuildingProperties(name, color, height, length, width);
+        AssignCoreProperties(internalId, name, color, height, length, width, x, y, z);
     }
 
     /// <summary>
@@ -105,15 +98,7 @@ public class Building
     /// <param name="areaId">Identifier of the area</param>
     public Building(int internalId, string name, string color, float height, float length, float width, float x, float y, float z, int areaId)
     {
-        InternalId = internalId;
-        Name = name;
-        Color = color;
-        Height = height;
-        Length = length;
-        Width = width;
-        X = x;
-        Y = y;
-        Z = z;
+        AssignCoreProperties(internalId, name, color, height, length, width, x, y, z);
         AreaId = areaId;
     }
 
@@ -132,24 +117,8 @@ public class Building
     /// <exception cref="ArgumentException">Thrown when any validation rule is violated.</exception>
     public Building(string name, string color, float height, float length, float width, float x, float y, float z, int areaId)
     {
-        if (string.IsNullOrEmpty(name))
-            throw new ArgumentException("Name cannot be null or empty", nameof(name));
-
-        if (string.IsNullOrEmpty(color))
-            throw new ArgumentException("Color cannot be null or empty", nameof(color));
-
-        if (height <= 0)
-            throw new ArgumentException("Height must be positive", nameof(height));
-
-        if (length <= 0)
-            throw new ArgumentException("Length must be positive", nameof(length));
-
-        if (width <= 0)
-            throw new ArgumentException("Width must be positive", nameof(width));
-
-        if (areaId <= 0)
-            throw new ArgumentException("AreaId must be positive", nameof(areaId));
-
+        ValidateBuildingProperties(name, color, height, length, width);
+        ValidatePositiveDimension(areaId, nameof(areaId));
         Name = name;
         Color = color;
         Height = height;
@@ -159,5 +128,57 @@ public class Building
         Y = y;
         Z = z;
         AreaId = areaId;
+    }
+
+    /// <summary>
+    /// Updates all editable properties of the building with validation.
+    /// </summary>
+    /// <param name="name">Name of the building (must not be null or empty)</param>
+    /// <param name="color">Color of the building (must not be null or empty)</param>
+    /// <param name="height">Height in meters (must be positive)</param>
+    /// <param name="length">Length in meters (must be positive)</param>
+    /// <param name="width">Width in meters (must be positive)</param>
+    /// <param name="x">X coordinate</param>
+    /// <param name="y">Y coordinate</param>
+    /// <param name="z">Z coordinate</param>
+    /// <exception cref="ArgumentException">Thrown when any validation rule is violated.</exception>
+    public void Update(string name, string color, float height, float length, float width, float x, float y, float z)
+    {
+        ValidateBuildingProperties(name, color, height, length, width);
+        AssignCoreProperties(InternalId, name, color, height, length, width, x, y, z);
+    }
+
+    private static void ValidateRequiredString(string value, string paramName)
+    {
+        if (string.IsNullOrEmpty(value))
+            throw new ArgumentException($"{paramName} cannot be null or empty", paramName);
+    }
+
+    private static void ValidatePositiveDimension(float value, string paramName)
+    {
+        if (value <= 0)
+            throw new ArgumentException($"{paramName} must be positive", paramName);
+    }
+
+    private static void ValidateBuildingProperties(string name, string color, float height, float length, float width)
+    {
+        ValidateRequiredString(name, nameof(name));
+        ValidateRequiredString(color, nameof(color));
+        ValidatePositiveDimension(height, nameof(height));
+        ValidatePositiveDimension(length, nameof(length));
+        ValidatePositiveDimension(width, nameof(width));
+    }
+
+    private void AssignCoreProperties(int internalId, string name, string color, float height, float length, float width, float x, float y, float z)
+    {
+        InternalId = internalId;
+        Name = name;
+        Color = color;
+        Height = height;
+        Length = length;
+        Width = width;
+        X = x;
+        Y = y;
+        Z = z;
     }
 }
