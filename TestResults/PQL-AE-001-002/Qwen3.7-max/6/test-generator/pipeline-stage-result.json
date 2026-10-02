@@ -1,0 +1,35 @@
+{
+  "stage": "test-generation",
+  "storyId": "PQL-AE-001-002",
+  "model": "Qwen3.7-max",
+  "iteration": "6",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Domain.Tests.Unit/BuildingEditTests.cs",
+    "Backend.Application.Tests.Unit/BuildingServiceUpdateTests.cs",
+    "Backend.Infrastructure.Tests.Unit/SqlBuildingRepositoryUpdateTests.cs",
+    "Backend.Presentation.Tests.Unit/UpdateBuildingHandlerTests.cs"
+  ],
+  "filesModified": [],
+  "metrics": {
+    "intentsConfirmed": 16,
+    "testMethodsEmitted": 16,
+    "byLayer": {
+      "Domain": 7,
+      "Application": 3,
+      "Infrastructure": 3,
+      "Presentation": 3
+    }
+  },
+  "warnings": [
+    "Building entity 9-param constructor (int,string,string,float,float,float,float,float,float) currently lacks validation; tests expect validation to be added per story requirements",
+    "Building.Update method does not exist yet; Domain-007 test references it",
+    "BuildingService.UpdateBuildingAsync method does not exist yet; Application tests reference it",
+    "IBuildingRepository.GetByIdAsync and UpdateAsync methods do not exist yet; Application and Infrastructure tests reference them",
+    "BuildingNotFoundException does not exist yet; Application-002 and Presentation-003 tests reference it with BuildingId property",
+    "UpdateBuildingDto does not exist yet; Application and Presentation tests reference it",
+    "UpdateBuildingHandler does not exist yet; Presentation tests reference it",
+    "UpdateBuildingResponse does not exist yet; Presentation tests reference it"
+  ],
+  "notes": "Generated 4 test files with 16 test methods covering all 16 confirmed intents across 4 DDD layers for the Edit Building story (PQL-AE-001-002). All tests follow TDD principles and will fail until the corresponding production code is implemented. Tests follow existing codebase conventions: NUnit 3.14.0, Moq 4.20.72, AAA pattern, Assert.Multiple for multi-property assertions, and parameterized TestCase for boundary values."
+}
