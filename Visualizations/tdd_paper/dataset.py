@@ -228,23 +228,12 @@ def load_story(story: str) -> tuple[dict, pd.DataFrame]:
     return data, summ
 
 
-def _harness_versions(chain_rows: list[dict]) -> dict[str, int]:
-    """Fingerprint -> version number by first appearance along the chain."""
-    seen: dict[str, int] = {}
-    for row in sorted(chain_rows, key=lambda r: r["pos"]):
-        fp = row["harness_fingerprint"]
-        if fp not in seen:
-            seen[fp] = len(seen) + 1
-    return seen
-
-
 def build_runs(stories: list[str] | None = None, *, with_git: bool = True, refresh_cache: bool = False,
                progress=None) -> dict:
     """Build every table. Returns a dict with ``runs``, ``executions``, ``types``,
     ``cells``, ``stories``, ``excluded_refs`` DataFrames and ``warnings``."""
     stories = list(stories or C.STORY_ORDER)
     chain = {r["story"]: r for r in gf.story_chain_facts()} if with_git else {}
-    versions = _harness_versions(list(chain.values())) if chain else {}
     refs = gf.list_run_refs() if with_git else []
     run_rows: list[dict] = []
     exec_rows: list[pd.DataFrame] = []
@@ -266,9 +255,7 @@ def build_runs(stories: list[str] | None = None, *, with_git: bool = True, refre
                            "merge_kind": link.merge_kind if link else None,
                            **{k: v for k, v in chain.get(story, {}).items()
                               if k in ("baseline_sha", "baseline_full_sha", "baseline_date", "baseline_test_attrs",
-                                       "baseline_test_files", "baseline_prod_files", "baseline_prod_lines",
-                                       "harness_fingerprint")},
-                           "harness_version": versions.get(chain.get(story, {}).get("harness_fingerprint"), pd.NA)})
+                                       "baseline_test_files", "baseline_prod_files", "baseline_prod_lines")}})
 
         summ = _with_key(summ)
         summ = summ[summ["model_key"].isin(C.MODEL_LABELS)].copy()
@@ -306,9 +293,7 @@ def build_runs(stories: list[str] | None = None, *, with_git: bool = True, refre
                         "baseline_author_model": baseline_author, "own_baseline": baseline_author == model,
                         "merged_into_trunk": bool(link and link.merged_model == model and link.merged_iteration == it),
                         "baseline_test_attrs": chain.get(story, {}).get("baseline_test_attrs", pd.NA),
-                        "baseline_prod_lines": chain.get(story, {}).get("baseline_prod_lines", pd.NA),
-                        "harness_version": versions.get(chain.get(story, {}).get("harness_fingerprint"), pd.NA),
-                        "harness_agents_tree": chain.get(story, {}).get("harness_agents_tree")})
+                        "baseline_prod_lines": chain.get(story, {}).get("baseline_prod_lines", pd.NA)})
 
             build = _cell_rows(frames["build"], mk, it)
             test = _cell_rows(frames["test"], mk, it)

@@ -90,8 +90,6 @@ def filter_set(runs: pd.DataFrame, set_id: str) -> dict[str, pd.DataFrame]:
         return {"S1": r[~r["identity_ambiguous"].fillna(False).astype(bool)]}
     if set_id == "S2":
         return {"S2": r[pd.to_numeric(r["compile_remove_added"], errors="coerce").fillna(0) == 0]}
-    if set_id == "S3":
-        return {f"S3:v{int(v)}": g for v, g in r.groupby("harness_version") if pd.notna(v)}
     if set_id == "S4":
         return {"S4": r[r["story_pos"] <= 4]}
     if set_id == "S5":
@@ -103,7 +101,7 @@ def filter_set(runs: pd.DataFrame, set_id: str) -> dict[str, pd.DataFrame]:
             if not sub.empty:
                 out[label] = sub
         return out
-    if set_id == "S7":
+    if set_id == "S7":  # the secondary e2e measure counts infrastructure executions as attempts
         r2 = r.copy()
         if "e2e_attempts_to_pass" in r2.columns:
             r2["e2e_attempts_to_pass_noinfra"] = r2["e2e_attempts_to_pass"]
@@ -440,8 +438,6 @@ def register_numbers(nums: Numbers, runs: pd.DataFrame, desc: pd.DataFrame, eff:
              family="E evidence", provenance="tool-measured")
     nums.add("NCompileRed", int(runs["compile_red"].fillna(False).astype(bool).sum()), fmt="int", unit="runs",
              family="V verification", provenance="tool-measured")
-    nums.add("NHarnessVersions", int(runs["harness_version"].nunique()), fmt="int", unit="versions", family="E evidence",
-             provenance="derived-from-git")
     nums.add("NRunBranches", int(len(excluded) + runs["ref"].notna().sum()) if not excluded.empty else int(runs["ref"].notna().sum()),
              fmt="int", unit="branches", family="E evidence", provenance="derived-from-git",
              notes="distinct run branches considered (used plus excluded)")
@@ -475,7 +471,7 @@ def register_numbers(nums: Numbers, runs: pd.DataFrame, desc: pd.DataFrame, eff:
             continue
         row = row.iloc[0]
         for col in ("build_execs", "build_failed_execs", "build_errors_burned", "attempts_to_green", "test_execs",
-                    "e2e_execs", "e2e_attempts_to_pass", "new_test_methods", "new_test_cases", "tg_test_methods",
+                    "e2e_execs", "e2e_attempts_to_pass", "e2e_attempts_to_pass_noinfra", "new_test_methods", "new_test_cases", "tg_test_methods",
                     "n_intents", "first_run_new_fail_share", "story_min_mi", "story_max_coupling", "metrics_snapshots"):
             if col in row.index and pd.notna(row[col]):
                 spec = COLUMN_CATALOG[col]

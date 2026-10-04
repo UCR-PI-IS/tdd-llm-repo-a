@@ -62,7 +62,7 @@ def wilson(k: int, n: int, z: float = 1.96) -> tuple[float, float, float]:
 
 
 def _story_labels(stories: pd.DataFrame) -> list[str]:
-    return [f"S{int(p)}" for p in stories.sort_values("story_pos")["story_pos"]]
+    return [f"{int(p)}" for p in stories.sort_values("story_pos")["story_pos"]]
 
 
 def _model_legend(ax, loc="upper left", **kw):
@@ -76,42 +76,61 @@ def _model_legend(ax, loc="upper left", **kw):
 # ---------------------------------------------------------------------------
 
 
+# Baseline author encoding for fig_chain: fill colour plus hatching, so the author is never
+# carried by hue alone (grey-scale prints still separate Kimi-K2.5, Qwen3.7-max and human).
+# Hatch ink is chosen per fill so it stays legible in grey-scale: white on the dark blue,
+# black on the light orange.
+_CHAIN_HATCH = {KIMI: ("///", "white"), QWEN: ("...", "black")}
+_CHAIN_MACRO_WORD = {1: "One", 10: "Ten"}
+
+
 def fig_chain(ctx: FigureContext) -> dict:
     st = ctx.stories.sort_values("story_pos").reset_index(drop=True)
-    fig, (ax1, ax2) = plt.subplots(2, 1, figsize=T.fig_size("text", height=3.0), sharex=True,
-                                   gridspec_kw={"height_ratios": [1, 1.1]})
-    x = st["story_pos"].to_numpy()
-    colors = [T.model_color(m) if m in T.MODEL_STYLE else T.NEUTRAL for m in st["baseline_author_model"]]
-    ax1.bar(x, st["n_intents"], color=colors, edgecolor="white", width=0.7)
-    for xi, n, mr in zip(x, st["n_intents"], st["merged_run"].fillna("")):
-        ax1.text(xi, n + 0.6, f"{int(n)}", ha="center", va="bottom", fontsize=plt.rcParams["font.size"] - 2)
-    ax1.set_ylabel("confirmed intents")
-    # harness strata shading
-    if "harness_version" in st.columns and st["harness_version"].notna().any():
-        for v, g in st.groupby("harness_version"):
-            lo, hi = g["story_pos"].min() - 0.5, g["story_pos"].max() + 0.5
-            for ax in (ax1, ax2):
-                ax.axvspan(lo, hi, color=T.LIGHTER if int(v) % 2 else "white", zorder=0)
-            ax2.text((lo + hi) / 2, 0.03, f"harness prompts v{int(v)}", ha="center", va="bottom",
-                     transform=ax2.get_xaxis_transform(), fontsize=plt.rcParams["font.size"] - 2, color=T.NEUTRAL)
-    ax2.plot(x, st["baseline_prod_lines"], color="black", marker="o", markersize=3, label="production lines inherited")
-    ax2.set_ylabel("production lines")
-    ax3 = ax2.twinx()
-    ax3.plot(x, st["baseline_test_attrs"], color=T.NEUTRAL, marker="^", markersize=3, linestyle=":", label="test attributes inherited")
-    ax3.set_ylabel("test attributes", color=T.NEUTRAL)
-    ax3.grid(False)
-    ax2.set_xticks(x)
-    ax2.set_xticklabels([f"S{int(p)}\n{s}" for p, s in zip(st["story_pos"], st["story"])], fontsize=plt.rcParams["font.size"] - 2.5)
-    handles = [Patch(color=T.model_color(KIMI), label=f"baseline authored by {KIMI}"),
-               Patch(color=T.model_color(QWEN), label=f"baseline authored by {QWEN}"),
-               Patch(color=T.NEUTRAL, label="human baseline")]
-    ax1.legend(handles=handles, loc="upper right", ncol=3, fontsize=plt.rcParams["font.size"] - 2.5,
-               bbox_to_anchor=(1.0, 1.28))
-    lines = ax2.get_legend_handles_labels()[0] + ax3.get_legend_handles_labels()[0]
-    ax2.legend(handles=lines, loc="upper left", fontsize=plt.rcParams["font.size"] - 2)
-    data = {"stories": st[["story", "story_pos", "n_intents", "baseline_author_model", "merged_run",
-                           "baseline_prod_lines", "baseline_test_attrs", "harness_version", "effort_minutes"]].to_dict("list")}
-    return _save(ctx, fig, "fig_chain", data=data, width_class="text", rq=None, kind="chain")
+    with plt.rc_context({"hatch.linewidth": 0.7}):
+        fig, (ax1, ax2) = plt.subplots(2, 1, figsize=T.fig_size("text", height=3.0), sharex=True,
+                                       gridspec_kw={"height_ratios": [1, 1.1]})
+        x = st["story_pos"].to_numpy()
+        authors = list(st["baseline_author_model"])
+        colors = [T.model_color(m) if m in T.MODEL_STYLE else T.NEUTRAL for m in authors]
+        ax1.bar(x, st["n_intents"], color=colors, edgecolor="white", width=0.7)
+        # Hatching goes on a second, transparent bar layer so the hatch ink differs from the white outline.
+        for xi, n, m in zip(x, st["n_intents"], authors):
+            if m in _CHAIN_HATCH:
+                hatch, ink = _CHAIN_HATCH[m]
+                ax1.bar(xi, n, width=0.7, fill=False, hatch=hatch, edgecolor=ink, linewidth=0)
+        for xi, n in zip(x, st["n_intents"]):
+            ax1.text(xi, n + 0.6, f"{int(n)}", ha="center", va="bottom", fontsize=plt.rcParams["font.size"] - 2)
+        ax1.set_ylabel("confirmed intents")
+        ax2.plot(x, st["baseline_prod_lines"], color="black", marker="o", markersize=3, label="production lines inherited")
+        ax2.set_ylabel("production lines")
+        ax3 = ax2.twinx()
+        ax3.plot(x, st["baseline_test_attrs"], color=T.NEUTRAL, marker="^", markersize=3, linestyle=":", label="test attributes inherited")
+        ax3.set_ylabel("test attributes", color=T.NEUTRAL)
+        ax3.grid(False)
+        ax2.set_xticks(x)
+        ax2.set_xticklabels([f"{int(p)}\n{s}" for p, s in zip(st["story_pos"], st["story"])], fontsize=plt.rcParams["font.size"] - 2.5)
+        ax2.set_xlabel("story, in chain order")
+        handles = [Patch(facecolor=T.model_color(KIMI), edgecolor=_CHAIN_HATCH[KIMI][1], hatch=_CHAIN_HATCH[KIMI][0],
+                         linewidth=0, label=f"baseline authored by {KIMI}"),
+                   Patch(facecolor=T.model_color(QWEN), edgecolor=_CHAIN_HATCH[QWEN][1], hatch=_CHAIN_HATCH[QWEN][0],
+                         linewidth=0, label=f"baseline authored by {QWEN}"),
+                   Patch(facecolor=T.NEUTRAL, edgecolor=T.NEUTRAL, linewidth=0, label="human baseline")]
+        ax1.legend(handles=handles, loc="upper right", ncol=3, fontsize=plt.rcParams["font.size"] - 2.5,
+                   handleheight=1.3, handlelength=2.2, bbox_to_anchor=(1.0, 1.28))
+        lines = ax2.get_legend_handles_labels()[0] + ax3.get_legend_handles_labels()[0]
+        ax2.legend(handles=lines, loc="upper left", fontsize=plt.rcParams["font.size"] - 2)
+        data = {"stories": st[["story", "story_pos", "n_intents", "baseline_author_model", "merged_run",
+                               "baseline_prod_lines", "baseline_test_attrs", "effort_minutes"]].to_dict("list")}
+        data["encoding"] = {"baseline_author_model": {KIMI: {"fill": T.model_color(KIMI), "hatch": _CHAIN_HATCH[KIMI][0]},
+                                                      QWEN: {"fill": T.model_color(QWEN), "hatch": _CHAIN_HATCH[QWEN][0]},
+                                                      "human": {"fill": T.NEUTRAL, "hatch": ""}}}
+        # Baseline sizes quoted in the caption (macro names of numbers.tex), read from the stories frame.
+        numbers = {}
+        for pos, word in _CHAIN_MACRO_WORD.items():
+            row = st.loc[st["story_pos"] == pos].iloc[0]
+            numbers[f"Story{word}BaselineProdLines"] = row["baseline_prod_lines"]
+            numbers[f"Story{word}BaselineTests"] = row["baseline_test_attrs"]
+        return _save(ctx, fig, "fig_chain", data=data, numbers=numbers, width_class="text", rq=None, kind="chain")
 
 
 # ---------------------------------------------------------------------------
@@ -148,7 +167,7 @@ def fig_evidence(ctx: FigureContext) -> dict:
     ax.set_xticks(range(6))
     ax.set_xticklabels([str(k) for k in range(1, 7)])
     ax.set_yticks(range(len(rows)))
-    ax.set_yticklabels([f"S{C.STORY_POS[s]} {C.MODEL_SHORT[m]}" for s, m in rows], fontsize=plt.rcParams["font.size"] - 2)
+    ax.set_yticklabels([f"{C.STORY_POS[s]} {C.MODEL_SHORT[m]}" for s, m in rows], fontsize=plt.rcParams["font.size"] - 2)
     ax.set_xlabel("iteration")
     ax.grid(False)
     for spine in ax.spines.values():
@@ -341,7 +360,8 @@ def _by_story_strips(ax, runs: pd.DataFrame, metric: str, seed: int, ref_line: f
     if ref_line is not None:
         ax.axhline(ref_line, color=T.NEUTRAL, linewidth=0.7, linestyle=":")
     ax.set_xticks(range(1, 11))
-    ax.set_xticklabels([f"S{i}" for i in range(1, 11)])
+    ax.set_xticklabels([str(i) for i in range(1, 11)])
+    ax.set_xlabel("story position in the chain")
     return data
 
 
@@ -512,7 +532,7 @@ def fig_rankings(ctx: FigureContext) -> dict:
     ax.set_xticks(range(12))
     ax.set_xticklabels([str(k + 1) for k in range(12)])
     ax.set_yticks(range(len(stories)))
-    ax.set_yticklabels([f"S{C.STORY_POS[s]} {s}" for s in stories], fontsize=plt.rcParams["font.size"] - 2)
+    ax.set_yticklabels([f"{C.STORY_POS[s]}. {s}" for s in stories], fontsize=plt.rcParams["font.size"] - 2)
     ax.invert_yaxis()
     ax.set_xlabel("composite rank within the story (1 = best); cell label = iteration, * = Pareto-optimal")
     ax.grid(False)

@@ -67,7 +67,9 @@ def dataset_checks(bundle: dict) -> list[Check]:
     row = runs[runs["run_id"] == cell]
     ok = (not row.empty and int(row["new_test_methods"].iloc[0]) == methods and int(row["new_test_cases"].iloc[0]) == cases)
     out.append(Check("calibration-run", ok, f"{cell}: methods={row['new_test_methods'].iloc[0] if not row.empty else None} cases={row['new_test_cases'].iloc[0] if not row.empty else None}"))
-    out.append(Check("evidence-completeness", int((runs["evidence_completeness"] == 0.75).sum()) == 1, "exactly one run with three trees"))
+    incomplete = int((runs["evidence_completeness"] < 1.0).sum())
+    out.append(Check("evidence-completeness", incomplete == len(C.E2E_MISSING_CELLS),
+                     f"{incomplete} runs with fewer than four trees, expected {len(C.E2E_MISSING_CELLS)}"))
     scored = [m for m, s in COLUMN_CATALOG.items() if s.family in ("C convergence", "V verification", "Q quality", "B behavioral")
               and s.dtype in ("Int64", "float64", "boolean") and m in runs.columns and m not in ("tests_per_intent", "layer_coverage", "layer_balance")]
     dead = [m for m in scored if runs[m].nunique(dropna=True) <= 1]
@@ -186,6 +188,31 @@ def write_manifest(out_dir: Path, *, extra: dict | None = None) -> Path:
     return out_dir / "manifest.json"
 
 
+def untracked_execution_check() -> list[Check]:
+    """Every timestamped execution folder in the four result trees must hold at least one tracked file.
+
+    A folder with only git-ignored files (logs, raw coverage, packages) is the residue of a discarded attempt
+    (for example after ``git reset``); the loaders would read it as an execution and pick it as a cell's final one
+    (2026-10-04: 23 such folders from a mislabelled re-run sat in SPT-UM-001-003/Qwen3.7-max/1).
+    """
+    trees = ("BuildResults", "TestResults", "MetricsResults", "E2EResults")
+    tracked = set()
+    for line in gf.git("ls-files", "--", *trees, check=False).splitlines():
+        parts = line.split("/")
+        if len(parts) >= 5:
+            tracked.add("/".join(parts[:5]))
+    stray = []
+    for tree in trees:
+        root = C.REPO / tree
+        if not root.is_dir():
+            continue
+        for d in root.glob("*/*/*/*"):
+            if d.is_dir() and re.match(r"\d{4}-\d{2}-\d{2}_", d.name) and str(d.relative_to(C.REPO)) not in tracked:
+                stray.append(str(d.relative_to(C.REPO)))
+    return [Check("no-untracked-executions", not stray, f"{len(stray)} execution folders without tracked files"
+                  + (f", e.g. {stray[:3]}" if stray else ""))]
+
+
 def run_checks(bundle: dict | None = None, *, out_dir: Path | None = None, with_composite: bool = True,
                with_latest: bool = True) -> list[Check]:
     checks: list[Check] = []
@@ -194,6 +221,7 @@ def run_checks(bundle: dict | None = None, *, out_dir: Path | None = None, with_
     checks += stage_identity_checks()
     if with_latest:
         checks += latest_duplicate_check()
+    checks += untracked_execution_check()
     if with_composite:
         try:
             checks += composite_regression()

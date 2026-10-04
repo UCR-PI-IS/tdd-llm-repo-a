@@ -64,14 +64,13 @@ ARTIFACT_CORE_STORIES = ("CPD-LC-001-001", "SQL-LS-001-007", "CPD-LC-001-003", "
 
 # Expected integrity facts (asserted by `tdd_paper check`).
 EXPECTED_CELLS = 120
-EXPECTED_E2E_CELLS = 119
-E2E_MISSING_CELLS = ("SPT-UM-001-003/Qwen3.7-max/4",)
-IDENTITY_AMBIGUOUS_CELLS = (
-    "CPD-LC-001-009/Qwen3.7-max/1", "SPT-UM-001-003/Qwen3.7-max/4",
+EXPECTED_E2E_CELLS = 120
+E2E_MISSING_CELLS: tuple[str, ...] = ()   # SPT-UM-001-003/Qwen3.7-max/4 re-run with e2e evidence (D17, 2026-10-04)
+IDENTITY_AMBIGUOUS_CELLS = (   # the two Qwen-labelled cells were re-run on the right model (D17, 2026-10-04)
     "CPD-LC-001-003/Kimi-K2.5/5", "CPD-LC-001-009/Kimi-K2.5/2", "PQL-AE-001-002/Kimi-K2.5/3",
 )
 COMPILE_REMOVE_CELLS = (
-    "CPD-LC-001-009/Qwen3.7-max/1", "CPD-LC-001-009/Kimi-K2.5/4",
+    "CPD-LC-001-009/Kimi-K2.5/4",   # CPD-LC-001-009/Qwen3.7-max/1 re-run without a <Compile Remove> (D17)
     "SPT-UM-001-003/Kimi-K2.5/1", "SPT-UM-001-003/Kimi-K2.5/3", "SPT-UM-001-003/Kimi-K2.5/4",
     "SPT-UM-001-003/Kimi-K2.5/5", "SPT-UM-001-003/Qwen3.7-max/1", "SPT-UM-001-003/Qwen3.7-max/3",
     "SPT-UM-001-003/Qwen3.7-max/4", "SPT-UM-001-003/Qwen3.7-max/5",
@@ -82,7 +81,8 @@ EXCEPTIONAL_ENDING_CELLS = {
     "CPD-LC-001-005/Qwen3.7-max/1": "final e2e execution failed its probe (0 of 1)",
 }
 CALIBRATION_CELL = ("CPD-LC-001-003/Kimi-K2.5/1", 25, 35)  # (cell, new test methods, new test cases)
-INTENTS_CONFIRMED_WRONG_EXPECTED = 25   # agent intentsConfirmed differs from UserIntents/<story>.json
+INTENTS_CONFIRMED_WRONG_EXPECTED = 26   # agent intentsConfirmed differs from UserIntents/<story>.json; 26 since the
+                                        # re-run of CPD-LC-001-009/Qwen3.7-max/1 reported 25 of 30 (D17, 2026-10-04)
 INTENTS_CONFIRMED_MISSING_EXPECTED = 1  # cells without a readable test-generation stage report
 
 # Statistics.
@@ -98,9 +98,10 @@ CONFIRMATORY_FAMILY: tuple[str, ...] = (
     "new_tests_per_intent", "red_first", "build_failed_execs", "build_peak_errors",
     "build_errors_burned", "attempts_to_green", "test_failures_burned", "e2e_execs",
 )
-# Secondary family (own Holm correction), labelled as such everywhere.
+# Secondary family (own Holm correction), labelled as such everywhere. The e2e measure removes infrastructure
+# executions (API never started), as pre-specified; S7 swaps in the raw index that counts them (STATUS.md Q19).
 SECONDARY_FAMILY: tuple[str, ...] = (
-    "first_run_new_fail_share", "story_min_mi_gain", "self_report_gap_methods_abs", "e2e_attempts_to_pass",
+    "first_run_new_fail_share", "story_min_mi_gain", "self_report_gap_methods_abs", "e2e_attempts_to_pass_noinfra",
 )
 BINARY_METRICS: tuple[str, ...] = ("red_first", "build_first_pass", "compile_red", "e2e_first_pass",
                                    "final_tests_green", "final_e2e_ok", "final_all_ok")
@@ -122,15 +123,14 @@ SUCCESS_PREDICATES: dict[str, str] = {
 }
 # Sensitivity sets: id -> (label, description). Filters are implemented in analysis.filter_set.
 SENSITIVITY_SETS: dict[str, tuple[str, str]] = {
-    "S0": ("primary", "all 120 runs (119 for e2e metrics)"),
-    "S1": ("identity", "drop the 5 cells whose agent files name the other model"),
-    "S2": ("compile-remove", "drop the 10 runs that excluded generated tests from compilation"),
-    "S3": ("harness", "stratify by harness version (reported per stratum)"),
-    "S4": ("core-4", "stories 1 to 4 only (the artifact's 48 runs)"),
-    "S5": ("no-story-1", "drop story 1 (empty baseline, first harness use, re-run batch)"),
+    "S0": ("primary", "all runs, blocked by story"),
+    "S1": ("identity", "drop the cells whose agent files name the other model"),
+    "S2": ("compile-remove", "drop the runs that excluded generated tests from compilation"),
+    "S4": ("core-4", "stories 1 to 4 only (the artifact core)"),
+    "S5": ("no-story-1", "drop story 1 (empty baseline, first harness use)"),
     "S6": ("regime", "stories 1 to 3 (composite-selected merges) vs stories 4 to 10 (hand-picked merges, five per model)"),
     "S7": ("infra", "count infrastructure e2e executions as attempts"),
-    "S8": ("exceptional", "drop the 3 runs with exceptional endings"),
+    "S8": ("exceptional", "drop the runs with exceptional endings"),
     "S9": ("snapshots", "drop runs whose final metrics snapshot is an n_types outlier"),
     "S10": ("holdout", "stories 5 to 10 only (not used to form F1 to F5)"),
 }

@@ -37,15 +37,15 @@ def _median_iqr(desc: pd.DataFrame, metric: str, model: str) -> str:
 
 def tab_stories(bundle, out_dir) -> Path:
     st = bundle["stories"].sort_values("story_pos").copy()
-    st["label"] = st["story_pos"].map(lambda p: f"S{int(p)}")
+    st["label"] = st["story_pos"].map(lambda p: f"{int(p)}")
     st["intents_layers"] = st.apply(lambda r: f"{int(r['intents_Domain'])}/{int(r['intents_Application'])}/{int(r['intents_Infrastructure'])}/{int(r['intents_Presentation'])}", axis=1)
     st["baseline_author"] = st["baseline_author_model"].map(lambda m: SHORT.get(m, m))
     st["merged"] = st["merged_run"].map(lambda s: s.replace("Kimi-K2.5", "Kimi").replace("Qwen3.7-max", "Qwen") if isinstance(s, str) else "")
     cols = [("label", "Pos.", "str"), ("story", "Story", "str"), ("title", "Feature", "str"), ("n_scenarios", "Scen.", "int"),
             ("n_intents", "Intents", "int"), ("intents_layers", "D/A/I/P", "str"), ("effort_minutes", "Est. min", "int"),
             ("baseline_author", "Baseline by", "str"), ("baseline_prod_lines", "Prod. lines", "int"),
-            ("baseline_test_attrs", "Tests inh.", "int"), ("harness_version", "Harness", "int"), ("merged", "Merged run", "str")]
-    body = to_booktabs(st, cols, align="llp{4.2cm}rrrrlrrrl")
+            ("baseline_test_attrs", "Tests inh.", "int"), ("merged", "Merged run", "str")]
+    body = to_booktabs(st, cols, align="llp{4.6cm}rrrrlrrl")
     return write_table(out_dir, "tab_stories", body, meta={"rows": len(st), "provenance": "design + derived-from-git"})
 
 
@@ -155,7 +155,6 @@ def tab_integrity(bundle, out_dir) -> Path:
         ("Runs that excluded generated tests from compilation", int((pd.to_numeric(runs["compile_remove_added"], errors="coerce").fillna(0) > 0).sum()), "derived-from-git"),
         ("Runs with a first test execution of zero tests (compile-red)", int(runs["compile_red"].fillna(False).astype(bool).sum()), "tool-measured"),
         ("Runs not ending green on every check", int((runs["exceptional_ending"].fillna("") != "").sum()), "tool-measured"),
-        ("Harness prompt versions across the chain", int(runs["harness_version"].nunique()), "derived-from-git"),
         ("Agent intent counts that disagree with the intent file", int((runs["intents_confirmed_ok"] == False).sum()), "self-reported"),
     ]
     # Excluded model arms are never mentioned in the report (STATUS.md decision D11, 2026-10-04); they stay in
@@ -294,7 +293,7 @@ def tab_rankings(frames, out_dir) -> Path:
     for story, g in sorted(rk.groupby("story"), key=lambda kv: C.STORY_POS[kv[0]]):
         g = g.sort_values("rank")
         top = g.head(3)
-        rows.append({"story": f"S{C.STORY_POS[story]} {story}",
+        rows.append({"story": f"{C.STORY_POS[story]}. {story}",
                      **{f"r{i + 1}": f"{SHORT[r['model']]}/{int(r['iteration'])} ({r['composite']:.2f}{'*' if r.get('pareto') else ''})"
                         for i, (_, r) in enumerate(top.iterrows())},
                      "kimi_top3": int((top["model"] == KIMI).sum()), "pareto_n": int(g["pareto"].sum()) if "pareto" in g else 0})

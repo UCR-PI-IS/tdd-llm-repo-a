@@ -48,7 +48,7 @@ def _synthetic_bundle(seed=3):
     executions = pd.DataFrame(ex_rows)
     stories = pd.DataFrame([{"story": l.story, "story_pos": l.pos, "n_intents": 20, "baseline_author_model": "Qwen3.7-max" if l.pos > 1 else "human",
                              "merged_run": f"{l.merged_model}/{l.merged_iteration}", "baseline_prod_lines": 400 * l.pos,
-                             "baseline_test_attrs": 25 * (l.pos - 1), "harness_version": 1 if l.pos <= 5 else 2, "effort_minutes": 500}
+                             "baseline_test_attrs": 25 * (l.pos - 1), "effort_minutes": 500}
                             for l in C.STORY_CHAIN])
     metrics = ["build_failed_execs", "build_errors_burned", "attempts_to_green", "e2e_execs", "new_tests_per_intent", "red_first"]
     effects = pd.DataFrame([{"metric": m, "family": "primary", "delta": 0.3, "ci_low": 0.1, "ci_high": 0.5, "p_used": 0.01,

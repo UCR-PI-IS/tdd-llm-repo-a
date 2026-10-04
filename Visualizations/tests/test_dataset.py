@@ -37,7 +37,7 @@ def test_runs_contract(pooled):
     assert set(runs.loc[runs["compile_remove_added"] > 0, "run_id"]) == set(C.COMPILE_REMOVE_CELLS)
     assert int((runs["intents_confirmed_ok"] == False).sum()) == C.INTENTS_CONFIRMED_WRONG_EXPECTED
     assert int(runs["intents_confirmed_ok"].isna().sum()) == C.INTENTS_CONFIRMED_MISSING_EXPECTED
-    assert (runs["evidence_completeness"] == 0.75).sum() == 1
+    assert (runs["evidence_completeness"] < 1.0).sum() == len(C.E2E_MISSING_CELLS)  # only cells without e2e evidence lack a tree
     assert not runs["harness_pre_e2e"].fillna(False).any()
     assert runs["n_run_commits"].eq(2).all()
     ending = runs.loc[runs["exceptional_ending"].fillna("") != "", "run_id"]

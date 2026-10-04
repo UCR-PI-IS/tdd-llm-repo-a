@@ -69,8 +69,6 @@ _SPECS: list[ColumnSpec] = [
     _spec("commit_a_sha", "design", G, 0, "str", "", "results commit"),
     _spec("commit_b_sha", "design", G, 0, "str", "", "code commit"),
     _spec("n_run_commits", "design", G, 0, "Int64", "", "run commits on the branch (expected 2)"),
-    _spec("harness_version", "design", G, 0, "Int64", "", "harness stratum from the .opencode/agents tree at the baseline"),
-    _spec("harness_agents_tree", "design", G, 0, "str", "", "tree hash of .opencode/agents at the baseline"),
     _spec("harness_pre_e2e", "design", G, 0, "boolean", "", "run branch predates the e2e harness commit"),
     _spec("identity_declared_model", "design", G, 0, "str", "", "model key named by the agent files on the branch"),
     _spec("identity_agents_agree", "design", G, 0, "boolean", "", "all agent files on the branch name the same model"),

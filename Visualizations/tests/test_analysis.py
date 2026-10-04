@@ -28,6 +28,16 @@ def test_robustness_labels_rules():
     assert lab["regime_metric"] == "regime-dependent"
 
 
+
+def test_s7_changes_the_tested_secondary_e2e_measure():
+    """The secondary family tests the e2e index without infrastructure executions; S7 counts them (Q19)."""
+    assert "e2e_attempts_to_pass_noinfra" in C.SECONDARY_FAMILY
+    assert "e2e_attempts_to_pass" not in C.SECONDARY_FAMILY
+    runs = pd.DataFrame({"e2e_attempts_to_pass": [3, 1, 2], "e2e_attempts_to_pass_noinfra": [1, 1, 2]})
+    s7 = an.filter_set(runs, "S7")["S7"]
+    assert s7["e2e_attempts_to_pass_noinfra"].tolist() == [3, 1, 2]
+    assert runs["e2e_attempts_to_pass_noinfra"].tolist() == [1, 1, 2]  # S0 frame untouched
+
 @pytest.fixture(scope="module")
 def result():
     bundle = ds.build_runs()
@@ -43,7 +53,9 @@ def test_filter_sets(result):
     assert len(an.filter_set(runs, "S2")["S2"]) == C.EXPECTED_CELLS - len(C.COMPILE_REMOVE_CELLS)
     assert len(an.filter_set(runs, "S4")["S4"]) == 48
     assert len(an.filter_set(runs, "S10")["S10"]) == 72
-    assert set(an.filter_set(runs, "S3")) == {"S3:v1", "S3:v2"}
+    assert "S3" not in C.SENSITIVITY_SETS  # retired with the harness-version split (D18)
+    with pytest.raises(KeyError):
+        an.filter_set(runs, "S3")
     assert len(an.filter_set(runs, "S8")["S8"]) == C.EXPECTED_CELLS - len(C.EXCEPTIONAL_ENDING_CELLS)
 
 

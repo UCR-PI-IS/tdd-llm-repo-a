@@ -175,19 +175,52 @@ def resolve_cell_ref(story: str, model_key: str, iteration: int,
 # ---------------------------------------------------------------------------
 
 
-def run_commits(sha: str, max_walk: int = 12) -> dict:
+_REVERT_RE = re.compile(r'^Revert "(.*)"$')
+_RUN_ID_RE = re.compile(r"for (\S+) wave-\d+ (\S+) iteration (\S+)\s*$")
+
+
+def _run_identity(subject: str) -> tuple | None:
+    """(story, normalised model, iteration) named by a (run) commit subject, or None."""
+    m = _RUN_ID_RE.search(subject)
+    if not m:
+        return None
+    return m.group(1), re.sub(r"[^a-z0-9]", "", m.group(2).lower()), m.group(3)
+
+
+def run_commits(sha: str, max_walk: int = 24) -> dict:
     """Walk back over ``(run)`` commits: tip = commit B (code), then commit A
-    (results); the first non-run commit is the per-run baseline."""
+    (results); the first non-run commit is the per-run baseline.
+
+    A cell re-run on its own branch carries, below its live pair, the
+    ``Revert "..."`` commits of the superseded attempt and then that attempt's run
+    commits. They are skipped only when the reverted subject names the same story,
+    model and iteration as the live pair, so trunk commits such as
+    ``Revert "chore(run): ... for <previous story> ..."`` (a story baseline) still
+    end the walk.
+    """
     out = git("log", f"--format=%H%x1f%s%x1f%cI", f"-n{max_walk}", sha)
     commits = [line.split("\x1f") for line in out.splitlines() if line]
-    run = []
-    baseline = None
-    for h, subject, when in commits:
-        if RUN_SUBJECT_RE.match(subject):
-            run.append({"sha": h, "subject": subject, "time": when})
+    run, reverts, superseded = [], [], []
+    i = 0
+    while i < len(commits) and RUN_SUBJECT_RE.match(commits[i][1]):
+        h, subject, when = commits[i]
+        run.append({"sha": h, "subject": subject, "time": when})
+        i += 1
+    live = {_run_identity(c["subject"]) for c in run} - {None}
+    while i < len(commits) and live:
+        h, subject, _ = commits[i]
+        m = _REVERT_RE.match(subject)
+        if m and RUN_SUBJECT_RE.match(m.group(1)) and _run_identity(m.group(1)) in live:
+            reverts.append(h)
+        elif reverts and RUN_SUBJECT_RE.match(subject) and _run_identity(subject) in live:
+            superseded.append(h)
         else:
-            baseline = {"sha": h, "subject": subject, "time": when}
             break
+        i += 1
+    baseline = None
+    if i < len(commits):
+        h, subject, when = commits[i]
+        baseline = {"sha": h, "subject": subject, "time": when}
     commit_b = next((c for c in run if c["subject"].startswith("feat(run)")), None)
     commit_a = next((c for c in run if c["subject"].startswith("chore(run)")), None)
     return {
@@ -201,6 +234,8 @@ def run_commits(sha: str, max_walk: int = 12) -> dict:
         "baseline_sha": baseline["sha"] if baseline else None,
         "baseline_time": baseline["time"] if baseline else None,
         "baseline_subject": baseline["subject"] if baseline else None,
+        "n_reverted_run_commits": len(reverts),
+        "superseded_run_shas": superseded,
     }
 
 
@@ -411,22 +446,6 @@ def declared_models(sha: str) -> dict:
             "identity_agents_agree": len(keys) <= 1}
 
 
-def harness_fingerprint(sha: str) -> dict:
-    """Fingerprint of the harness at a commit: agent prompts with ``model:`` lines
-    removed plus the Automations tree hash."""
-    h = hashlib.sha1()
-    for name in AGENT_FILES:
-        src = show(sha, f".opencode/agents/{name}") or ""
-        src = re.sub(r"^model:.*$", "model: <stripped>", src, flags=re.MULTILINE)
-        h.update(name.encode())
-        h.update(src.encode("utf-8", "replace"))
-    agents_tree = git("rev-parse", f"{sha}:.opencode/agents", check=False).strip() or None
-    autom_tree = git("rev-parse", f"{sha}:Automations", check=False).strip() or None
-    h.update((autom_tree or "").encode())
-    return {"harness_fingerprint": h.hexdigest()[:12], "harness_agents_tree": agents_tree,
-            "harness_automations_tree": autom_tree}
-
-
 def is_pre_e2e(sha: str) -> bool:
     return not git_ok("merge-base", "--is-ancestor", E2E_HARNESS_COMMIT, sha)
 
@@ -485,7 +504,6 @@ def cell_facts(story: str, model_key: str, iteration: int, *, refs: list[RunRef]
     facts["identity_ambiguous"] = bool(facts["identity_declared_model"]) and facts["identity_declared_model"] != model_key
     facts["harness_pre_e2e"] = is_pre_e2e(res["sha"])
     if base:
-        facts.update(harness_fingerprint(base))
         facts.update(test_method_delta(base, res["sha"]))
         facts.update(compile_remove_added(base, res["sha"]))
         facts.update(loc_churn(base, res["sha"]))
@@ -514,8 +532,7 @@ def story_chain_facts() -> list[dict]:
         sha = head_sha(link.baseline_sha)
         when = git("log", "-1", "--format=%cI", sha).strip()
         row = {**asdict(link), "baseline_full_sha": sha, "baseline_date": when,
-               **{f"baseline_{k}": v for k, v in inherited_size(sha).items()},
-               **harness_fingerprint(sha)}
+               **{f"baseline_{k}": v for k, v in inherited_size(sha).items()}}
         rows.append(row)
     return rows
 
