@@ -116,3 +116,44 @@ done
 Papermill exits non-zero if any cell fails; each notebook ends with a
 sanity-assert cell (finals uniqueness, value ranges, iteration filter), so a
 green headless run means the data layer and charts are healthy.
+
+## Pooled paper build (`tdd_paper`)
+
+The notebooks above analyse one story at a time. The `tdd_paper` package pools the ten wave-1 stories
+(120 runs) and produces every number, table and figure of the technical report from tool-written
+evidence plus read-only git facts about the run branches. Agent self-reports are loaded, tagged
+`self-reported` and never scored.
+
+The venv's launcher scripts point at an old path on this machine, so always call the interpreter
+directly:
+
+```bash
+cd Visualizations
+.venv/bin/python -m pytest tests -q                       # unit, regression and repo-gated tests
+.venv/bin/python -m tdd_paper check                       # integrity gate (120 cells, flags, composite regression)
+.venv/bin/python -m tdd_paper all --out _build/paper      # dataset -> stats -> figures -> tables -> numbers -> manifest
+.venv/bin/python -m tdd_paper all --out "../../tdd-llm-docs/technical-report/generated"   # the report's inputs
+.venv/bin/python -m tdd_paper query attempts_to_green --out _build/paper                  # look up macros
+.venv/bin/python -m papermill 50_pooled_analysis.ipynb _executed/50.ipynb -p OUT_DIR _build/paper
+```
+
+Outputs under `--out`: `data/runs.csv` (one row per run, every column catalogued in
+`tdd_paper/schema.py` with its provenance), `data/executions.csv`, `data/types.csv`, `data/cells.csv`,
+`data/stories.csv`, `data/excluded_refs.csv`; `stats/*.csv` (descriptives, effects, effects by story, TOST,
+pass@k, rankings, rank stability, sensitivity, robustness); `figures/fig_<slug>.{pdf,png,json}` (sidecar
+JSON holds every plotted number); `tables/tab_<slug>.tex` (bare booktabs bodies); `numbers.json` and
+`numbers.tex` (`\val<Macro>` for every quotable number, with provenance); `manifest.json` (hashes of all
+outputs, branch heads, seed).
+
+Conventions that the report relies on:
+
+* identity comes from the folder path and is canonicalised across stories (`Kimi-K2-5`, `Kimi-k2.5`,
+  `qwen3.7-max` fold into the two display labels);
+* the per-run baseline is the parent of the results commit (`chore(run)`), never `git merge-base`
+  with the trunk (merged runs were fast-forwarded);
+* story-new tests are counted from the branch diff as methods (comparable to `testMethodsEmitted`)
+  and as cases (comparable to TRX after `[TestCase]` expansion);
+* `red_first` means "first recorded test execution not green"; the harness has no controlled red phase;
+* the primary confirmatory family is the artifact's eight contrasts (Holm); the secondary family has
+  its own Holm correction; everything else is exploratory;
+* sensitivity sets S0 to S10 are defined in `tdd_paper/config.py`.

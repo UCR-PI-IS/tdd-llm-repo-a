@@ -1,0 +1,68 @@
+"""Analysis layer: sensitivity filters, robustness labels and the macro grammar (repo-gated end to end)."""
+import numpy as np
+import pandas as pd
+import pytest
+
+from tdd_paper import analysis as an
+from tdd_paper import config as C
+from tdd_paper import dataset as ds
+
+from conftest import requires_repo
+
+
+def test_robustness_labels_rules():
+    rows = []
+    def add(metric, set_id, delta, reject):
+        rows.append({"metric": metric, "set": set_id, "delta": delta, "reject": reject, "family": "primary"})
+    for s in ["S0", *C.ROBUSTNESS_SETS, "S4", "S10", "S6:pos1-3", "S6:pos4-10"]:
+        add("robust_metric", s, 0.5, True)
+        add("null_metric", s, 0.01 if s != "S1" else -0.01, False)      # sign flip of a null is ignored
+        add("subset_metric", s, 0.4, s not in ("S4",))                   # only the 4-story subset changes
+        add("fragile_metric", s, 0.4, s != "S1")                          # a robustness set changes the decision
+        add("regime_metric", s, -0.3 if s == "S6:pos1-3" else 0.3, True)
+    lab = an.robustness_labels(pd.DataFrame(rows)).set_index("metric")["robustness"]
+    assert lab["robust_metric"] == "robust"
+    assert lab["null_metric"] == "robust-null"
+    assert lab["subset_metric"] == "subset-dependent"
+    assert lab["fragile_metric"] == "fragile"
+    assert lab["regime_metric"] == "regime-dependent"
+
+
+@pytest.fixture(scope="module")
+def result():
+    bundle = ds.build_runs()
+    res = an.run_all(bundle, n_boot=200, n_perm=300, with_stability=False, sets=("S0", "S1", "S4"))
+    return bundle, res
+
+
+@requires_repo
+def test_filter_sets(result):
+    bundle, _ = result
+    runs = bundle["runs"]
+    assert len(an.filter_set(runs, "S1")["S1"]) == C.EXPECTED_CELLS - len(C.IDENTITY_AMBIGUOUS_CELLS)
+    assert len(an.filter_set(runs, "S2")["S2"]) == C.EXPECTED_CELLS - len(C.COMPILE_REMOVE_CELLS)
+    assert len(an.filter_set(runs, "S4")["S4"]) == 48
+    assert len(an.filter_set(runs, "S10")["S10"]) == 72
+    assert set(an.filter_set(runs, "S3")) == {"S3:v1", "S3:v2"}
+    assert len(an.filter_set(runs, "S8")["S8"]) == C.EXPECTED_CELLS - len(C.EXCEPTIONAL_ENDING_CELLS)
+
+
+@requires_repo
+def test_effects_and_macro_grammar(result):
+    _, res = result
+    eff = res.frames["effects"].set_index("metric")
+    assert set(C.CONFIRMATORY_FAMILY) <= set(eff.index)
+    prim = eff.loc[list(C.CONFIRMATORY_FAMILY)]
+    assert prim["p_holm"].notna().all()
+    # red-first is a null effect over ten stories; the build-cost metrics are not
+    assert abs(eff.loc["red_first", "delta"]) < 0.1
+    assert eff.loc["build_failed_execs", "delta"] > 0.3 and bool(eff.loc["build_failed_execs", "reject"])
+    macros = res.numbers.entries
+    for name in ("NStories", "NCells", "NRunsEndToEnd", "BuildFailedExecsKimiMedian", "BuildFailedExecsKimiIqr",
+                 "RedFirstQwenShare", "BuildFailedExecsCliffDelta", "BuildFailedExecsPHolm", "BuildFailedExecsDirection",
+                 "BuildFailedExecsCliffDeltaSFour", "NewTestsPerIntentTostSmallestBand", "BuildFirstPassKimiPassAtThree",
+                 "CompositeQwenWins", "ExampleNewTestMethods", "StoryThreeIntents"):
+        assert name in macros, name
+    assert macros["NCells"]["value"] == 120 and macros["ExampleNewTestMethods"]["value"] == 25
+    assert macros["BuildFailedExecsKimiMedian"]["provenance"] == "tool-measured"
+    assert all(e["provenance"] for e in macros.values())

@@ -48,7 +48,9 @@ def _iteration_included(iteration: int) -> bool:
 
 _TS_FORMATS = ("%Y-%m-%d_%H-%M-%S", "%Y%m%d%H%M%S")
 # Folders that legitimately sit beside timestamp folders inside an iteration.
-_NON_TS_DIRS = {"test-generator"}
+# ``latest`` is a duplicate metrics snapshot; the agent-named folders hold
+# stage files only (no tool execution), so none of them is an execution.
+_NON_TS_DIRS = {"test-generator", "code-generator", "refactor-generator", "latest"}
 
 _KEYS = ["story", "model", "iteration"]
 
@@ -474,24 +476,51 @@ _VIOLATION_COLS = _KEYS + ["ts", "type", "metric", "value", "flag"]
 
 
 def _stage_files(story: str):
+    """Yield (tree, path) for every stage file under the test and metrics trees."""
     for tree in (TEST_TREE, METRICS_TREE):
         story_dir = tree / story
         if story_dir.is_dir():
-            yield from sorted(story_dir.rglob("pipeline-stage-result.json"))
+            for path in sorted(story_dir.rglob("pipeline-stage-result.json")):
+                yield tree, path
+
+
+def _stage_identity(story: str, tree: Path, path: Path, rec: dict | None):
+    """(model, iteration, ts) of a stage file, read from its path *relative to the
+    tree root* (``STORY/MODEL/ITER/.../pipeline-stage-result.json``).
+
+    Identity comes from the harness-created folders, never from the payload.
+    Reading the path relative to the tree root (rather than by fixed offsets from
+    the file) keeps the identity right when an agent nests the file one level
+    too deep, e.g. ``.../4/20260923T000000Z/test-generator/pipeline-stage-result.json``
+    which fixed offsets would read as model "4".
+    """
+    rec = rec or {}
+    parts = path.relative_to(tree).parts
+    model_name = parts[1] if len(parts) > 1 else str(rec.get("model"))
+    iter_name = parts[2] if len(parts) > 2 else None
+    model = resolve_model(story, model_name)
+    iteration = as_int(iter_name, as_int(rec.get("iteration"), 0))
+    ts = None
+    for part in parts[3:-1]:
+        ts = parse_ts(part)
+        if ts is not None:
+            break
+    if len(parts) > 5:
+        load_warnings.append(f"stage file at non-canonical depth: {path}")
+    return model, iteration, ts
 
 
 def load_stage_results(story: str) -> pd.DataFrame:
     """One row per (cell, stage) — deduped to the latest result when agents
     committed several (code-generation has duplicates in the raw data)."""
     rows = []
-    for path in _stage_files(story):
+    for tree, path in _stage_files(story):
         rec = _read_json(path)
         if rec is None or "stage" not in rec:
             continue
         # Identity comes from the path (harness-created), never from the
         # payload: agents spell their own name inconsistently.
-        model = resolve_model(story, path.parts[-4])
-        iteration = as_int(path.parts[-3], as_int(rec.get("iteration"), 0))
+        model, iteration, ts = _stage_identity(story, tree, path, rec)
         if not _iteration_included(iteration):
             continue
         m = rec.get("metrics") or {}
@@ -499,7 +528,7 @@ def load_stage_results(story: str) -> pd.DataFrame:
             "story": story,
             "model": model,
             "iteration": iteration,
-            "ts": parse_ts(path.parent.name),
+            "ts": ts,
             "stage": rec["stage"], "status": rec.get("status"),
             "n_warnings": len(rec.get("warnings") or []),
             "notes": rec.get("notes"),
@@ -531,15 +560,14 @@ def load_stage_results(story: str) -> pd.DataFrame:
 def load_remaining_violations(story: str) -> pd.DataFrame:
     """Exploded refactoring `remainingViolations` (latest refactoring result per cell)."""
     per_cell: dict[tuple, tuple] = {}
-    for path in _stage_files(story):
+    for tree, path in _stage_files(story):
         rec = _read_json(path)
         if rec is None or rec.get("stage") != "refactoring":
             continue
-        iteration = as_int(path.parts[-3], as_int(rec.get("iteration"), 0))
+        model, iteration, ts = _stage_identity(story, tree, path, rec)
         if not _iteration_included(iteration):
             continue
-        key = (resolve_model(story, path.parts[-4]), iteration)
-        ts = parse_ts(path.parent.name)
+        key = (model, iteration)
         if key not in per_cell or (ts or datetime.min) > (per_cell[key][0] or datetime.min):
             per_cell[key] = (ts, rec)
     rows = []
