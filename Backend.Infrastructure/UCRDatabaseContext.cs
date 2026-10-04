@@ -35,11 +35,6 @@ internal class UCRDatabaseContext : DbContext
     public virtual DbSet<Whiteboard> Whiteboards { get; set; } = null!;
 
     /// <summary>
-    /// Gets or sets the collection of persons in the database.
-    /// </summary>
-    public virtual DbSet<Person> Persons { get; set; } = null!;
-
-    /// <summary>
     /// Configures the model relationships and entity mappings when the model for a context is being created.
     /// </summary>
     /// <param name="modelBuilder">The builder being used to construct the model for this context.</param>
