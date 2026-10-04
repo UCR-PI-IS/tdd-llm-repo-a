@@ -185,4 +185,180 @@ public class LearningComponentTests
             Assert.That(component.Z, Is.EqualTo(0f));
         });
     }
+
+    // ========================================================================
+    // Tests for CPD-LC-001-009: Auto-generated ID constructor and validation
+    // ========================================================================
+
+    /// <summary>
+    /// Domain-001 (CPD-LC-001-009): Verify that a LearningComponent can be created
+    /// without providing a componentId, and an auto-generated non-empty ID is assigned.
+    /// </summary>
+    [Test]
+    [Description("Domain-001 (CPD-LC-001-009): Constructor without componentId auto-generates a non-empty ID")]
+    public void Constructor_WithoutComponentId_AutoGeneratesNonEmptyId()
+    {
+        // Arrange & Act
+        var component = new LearningComponent(
+            learningSpaceId: "LS-001",
+            width: 1.5f, height: 1.0f, depth: 0.5f,
+            x: 10.0f, y: 5.0f, z: 0.0f,
+            orientation: "North");
+
+        // Assert
+        Assert.Multiple(() =>
+        {
+            Assert.That(component.ComponentId, Is.Not.Null);
+            Assert.That(component.ComponentId, Is.Not.Empty);
+        });
+    }
+
+    /// <summary>
+    /// Domain-002 (CPD-LC-001-009): Verify that a LearningComponent can be created
+    /// with an explicitly provided componentId, and the provided ID is used.
+    /// </summary>
+    [Test]
+    [Description("Domain-002 (CPD-LC-001-009): Constructor with explicit componentId uses the provided ID")]
+    public void Constructor_WithExplicitComponentId_UsesProvidedId()
+    {
+        // Arrange
+        var expectedId = "COMP-12345";
+
+        // Act
+        var component = new LearningComponent(
+            componentId: expectedId,
+            learningSpaceId: "LS-001",
+            width: 1.5f, height: 1.0f, depth: 0.5f,
+            x: 10.0f, y: 5.0f, z: 0.0f,
+            orientation: "North");
+
+        // Assert
+        Assert.That(component.ComponentId, Is.EqualTo(expectedId));
+    }
+
+    /// <summary>
+    /// Domain-003, 005, 006, 007, 008, 009 (CPD-LC-001-009): Verify that creating a
+    /// LearningComponent with a negative dimension or coordinate throws ArgumentException
+    /// with the correct parameter name (using constructor without componentId).
+    /// </summary>
+    [TestCase(-1.5f, 1.0f, 0.5f, 10.0f, 5.0f, 0.0f, "width",
+        Description = "Domain-003 (CPD-LC-001-009): Negative width throws ArgumentException")]
+    [TestCase(1.5f, -1.0f, 0.5f, 10.0f, 5.0f, 0.0f, "height",
+        Description = "Domain-005 (CPD-LC-001-009): Negative height throws ArgumentException")]
+    [TestCase(1.5f, 1.0f, -0.5f, 10.0f, 5.0f, 0.0f, "depth",
+        Description = "Domain-006 (CPD-LC-001-009): Negative depth throws ArgumentException")]
+    [TestCase(1.5f, 1.0f, 0.5f, -10.0f, 5.0f, 0.0f, "x",
+        Description = "Domain-007 (CPD-LC-001-009): Negative X coordinate throws ArgumentException")]
+    [TestCase(1.5f, 1.0f, 0.5f, 10.0f, -5.0f, 0.0f, "y",
+        Description = "Domain-008 (CPD-LC-001-009): Negative Y coordinate throws ArgumentException")]
+    [TestCase(1.5f, 1.0f, 0.5f, 10.0f, 5.0f, -1.0f, "z",
+        Description = "Domain-009 (CPD-LC-001-009): Negative Z coordinate throws ArgumentException")]
+    public void Constructor_WithoutId_NegativeValue_ThrowsArgumentException(
+        float width, float height, float depth, float x, float y, float z, string expectedParamName)
+    {
+        // Arrange & Act
+        ArgumentException? caughtException = null;
+        try
+        {
+            new LearningComponent(
+                learningSpaceId: "LS-001",
+                width: width, height: height, depth: depth,
+                x: x, y: y, z: z,
+                orientation: "North");
+        }
+        catch (ArgumentException ex)
+        {
+            caughtException = ex;
+        }
+
+        // Assert
+        Assert.Multiple(() =>
+        {
+            Assert.That(caughtException, Is.Not.Null, "Expected ArgumentException was not thrown");
+            Assert.That(caughtException!.ParamName, Is.EqualTo(expectedParamName));
+        });
+    }
+
+    /// <summary>
+    /// Domain-004 (CPD-LC-001-009): Verify that creating a LearningComponent with zero
+    /// width throws an ArgumentException.
+    /// </summary>
+    [Test]
+    [Description("Domain-004 (CPD-LC-001-009): Zero width throws ArgumentException")]
+    public void Constructor_WithoutId_ZeroWidth_ThrowsArgumentException()
+    {
+        // Arrange & Act
+        ArgumentException? caughtException = null;
+        try
+        {
+            new LearningComponent(
+                learningSpaceId: "LS-001",
+                width: 0.0f, height: 1.0f, depth: 0.5f,
+                x: 10.0f, y: 5.0f, z: 0.0f,
+                orientation: "North");
+        }
+        catch (ArgumentException ex)
+        {
+            caughtException = ex;
+        }
+
+        // Assert
+        Assert.Multiple(() =>
+        {
+            Assert.That(caughtException, Is.Not.Null, "Expected ArgumentException was not thrown");
+            Assert.That(caughtException!.ParamName, Is.EqualTo("width"));
+        });
+    }
+
+    /// <summary>
+    /// Domain-010 (CPD-LC-001-009): Verify that creating a LearningComponent with an
+    /// invalid orientation throws ArgumentException (using constructor without componentId).
+    /// </summary>
+    [Test]
+    [Description("Domain-010 (CPD-LC-001-009): Invalid orientation throws ArgumentException (new constructor)")]
+    public void Constructor_WithoutId_InvalidOrientation_ThrowsArgumentException()
+    {
+        // Arrange & Act
+        ArgumentException? caughtException = null;
+        try
+        {
+            new LearningComponent(
+                learningSpaceId: "LS-001",
+                width: 1.5f, height: 1.0f, depth: 0.5f,
+                x: 10.0f, y: 5.0f, z: 0.0f,
+                orientation: "InvalidDirection");
+        }
+        catch (ArgumentException ex)
+        {
+            caughtException = ex;
+        }
+
+        // Assert
+        Assert.Multiple(() =>
+        {
+            Assert.That(caughtException, Is.Not.Null, "Expected ArgumentException was not thrown");
+            Assert.That(caughtException!.ParamName, Is.EqualTo("orientation"));
+        });
+    }
+
+    /// <summary>
+    /// Domain-011, 012, 013, 014 (CPD-LC-001-009): Verify that creating a LearningComponent
+    /// with each valid orientation succeeds (using constructor without componentId).
+    /// </summary>
+    [TestCase("North", Description = "Domain-011 (CPD-LC-001-009): Valid orientation North")]
+    [TestCase("South", Description = "Domain-012 (CPD-LC-001-009): Valid orientation South")]
+    [TestCase("East", Description = "Domain-013 (CPD-LC-001-009): Valid orientation East")]
+    [TestCase("West", Description = "Domain-014 (CPD-LC-001-009): Valid orientation West")]
+    public void Constructor_WithoutId_ValidOrientation_Succeeds(string orientation)
+    {
+        // Arrange & Act
+        var component = new LearningComponent(
+            learningSpaceId: "LS-001",
+            width: 1.5f, height: 1.0f, depth: 0.5f,
+            x: 10.0f, y: 5.0f, z: 0.0f,
+            orientation: orientation);
+
+        // Assert
+        Assert.That(component.Orientation, Is.EqualTo(orientation));
+    }
 }
