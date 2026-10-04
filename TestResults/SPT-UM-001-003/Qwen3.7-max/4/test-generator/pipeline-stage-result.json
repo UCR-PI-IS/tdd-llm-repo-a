@@ -1,0 +1,33 @@
+{
+  "stage": "test-generation",
+  "storyId": "SPT-UM-001-003",
+  "model": "Qwen3.7-max",
+  "iteration": "4",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Domain.Tests.Unit/PersonTests.cs",
+    "Backend.Application.Tests.Unit/PersonServiceTests.cs",
+    "Backend.Infrastructure.Tests.Unit/SqlPersonRepositoryTests.cs",
+    "Backend.Presentation.Tests.Unit/CreatePersonDtoTests.cs",
+    "Backend.Presentation.Tests.Unit/CreatePersonDtoValidatorTests.cs",
+    "Backend.Presentation.Tests.Unit/CreatePersonHandlerTests.cs",
+    "Backend.Presentation.Tests.Unit/CreatePersonEndpointTests.cs"
+  ],
+  "filesModified": [],
+  "metrics": {
+    "intentsConfirmed": 38,
+    "testMethodsEmitted": 29,
+    "byLayer": {
+      "Domain": 8,
+      "Application": 5,
+      "Infrastructure": 5,
+      "Presentation": 11
+    }
+  },
+  "warnings": [
+    "CreatePersonEndpointTests.cs uses WebApplication to test endpoint mapping; may need exclusion like existing LearningComponentEndpointsCreateTests.cs if Moq compatibility issues arise",
+    "CreatePersonDtoValidatorTests.cs references FluentValidation types (ValidationFailure, ValidationResult) which require FluentValidation package to be added to Backend.Presentation.csproj as a transitive dependency",
+    "All referenced production classes (Person, IPersonRepository, PersonService, SqlPersonRepository, CreatePersonDto, CreatePersonDtoValidator, CreatePersonHandler, CreatePersonEndpoint, CreatePersonResult, CreatePersonResponse, ValidationErrorResponse, IPersonService) must be created during implementation"
+  ],
+  "notes": "Generated 29 test methods across 7 test files covering all 38 confirmed intents for story SPT-UM-001-003 (Create a Person). Domain tests use TestCaseSource for parameterized null/empty/whitespace validation. Infrastructure tests reuse the AsyncQueryProvider pattern from existing SqlLearningComponentRepositoryTests. Presentation tests cover DTO construction, FluentValidation validator, handler response mapping, and endpoint registration."
+}
