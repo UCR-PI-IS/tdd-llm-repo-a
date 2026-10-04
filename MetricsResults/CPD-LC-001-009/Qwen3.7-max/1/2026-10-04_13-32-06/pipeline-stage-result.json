@@ -1,0 +1,32 @@
+{
+  "stage": "refactoring",
+  "storyId": "CPD-LC-001-009",
+  "model": "Qwen3.7-max",
+  "iteration": "1",
+  "status": "partial",
+  "filesCreated": [],
+  "filesModified": [
+    "Backend.Application/Services/Implementations/LearningComponentService.cs"
+  ],
+  "metrics": {
+    "loopIterationsPerformed": 2,
+    "maxLoopIterations": 10,
+    "allGreenAchieved": false,
+    "baseline": { "minMI": 51, "maxCC": 14, "maxCoupling": 18, "maxDIT": 1 },
+    "final":    { "minMI": 51, "maxCC": 14, "maxCoupling": 18, "maxDIT": 1 },
+    "remainingViolations": [
+      { "type": "LearningComponentService", "metric": "CC", "value": 14, "flag": "YELLOW" },
+      { "type": "LearningComponentService", "metric": "Coupling", "value": 16, "flag": "YELLOW" },
+      { "type": "SqlLearningComponentRepository", "metric": "Coupling", "value": 15, "flag": "YELLOW" },
+      { "type": "LearningComponentsEndpoints", "metric": "Coupling", "value": 18, "flag": "YELLOW" },
+      { "type": "CreateLearningComponentHandler", "metric": "Coupling", "value": 18, "flag": "YELLOW" },
+      { "type": "LearningComponentResponseFactory", "metric": "Coupling", "value": 11, "flag": "YELLOW" }
+    ]
+  },
+  "warnings": [
+    "SqlLearningComponentRepository.ExistsAsync: AnyAsync refactoring reverted because mock DbSet in tests does not implement IAsyncQueryProvider",
+    "CreateLearningComponentHandler: IResult return type refactoring reverted because tests depend on strongly-typed Results<T1,T2,T3>.Result property",
+    "LearningComponentsEndpoints coupling=18 is inflated by non-story endpoint mappings (whiteboard, learning space)"
+  ],
+  "notes": "Refactored LearningComponentService: extracted guard clause helpers (ThrowIfNotPositive, ThrowIfNegative, ValidateOrientation) and extracted ID resolution into ResolveComponentIdAsync. Replaced HashSet<string> ValidOrientations with pattern matching, reducing coupling from 17 to 16. Max method CC reduced from 8 to 3. Remaining 6 YELLOW violations are all class coupling inherent to ASP.NET Core typed results and EF Core patterns, not reducible without modifying test files."
+}

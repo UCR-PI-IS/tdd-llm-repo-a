@@ -1,0 +1,91 @@
+{
+  "stage": "e2e-validation",
+  "status": "failure",
+  "timestamp": "2026-10-04_13-23-36",
+  "storyId": "CPD-LC-001-009",
+  "model": "Qwen3.7-max",
+  "iteration": "1",
+  "database": {
+    "container": "themepark-sql-e2e-cpd-lc-001-009-qwen3-7-max-1-132336",
+    "image": "mcr.microsoft.com/mssql/server:2022-latest",
+    "network": "themepark-e2e-cpd-lc-001-009-qwen3-7-max-1-132336",
+    "database": "ThemePark",
+    "readySeconds": 8.4,
+    "baseSchemaApplied": [
+      "Semester.sql",
+      "Course.sql"
+    ],
+    "seedsApplied": [
+      "seed-CPD-LC-001-009.sql"
+    ]
+  },
+  "backend": {
+    "container": "themepark-api-e2e-cpd-lc-001-009-qwen3-7-max-1-132336",
+    "project": "Backend.Api/UCR.ECCI.PI.ThemePark.Backend.Api.csproj",
+    "publishStatus": "success",
+    "started": true,
+    "url": "http://127.0.0.1:55000",
+    "readySeconds": 2.2,
+    "errorLines": []
+  },
+  "probes": [
+    {
+      "name": "Create component without ID - auto-generates ID",
+      "method": "POST",
+      "path": "/api/components",
+      "expectedStatus": 200,
+      "actualStatus": 404,
+      "passed": false,
+      "missingContent": [
+        "componentId"
+      ],
+      "error": null,
+      "bodySnippet": ""
+    },
+    {
+      "name": "Create component with explicit ID",
+      "method": "POST",
+      "path": "/api/components",
+      "expectedStatus": 200,
+      "actualStatus": 404,
+      "passed": false,
+      "missingContent": [
+        "COMP-E2E-TEST-001"
+      ],
+      "error": null,
+      "bodySnippet": ""
+    },
+    {
+      "name": "Create component with duplicate ID returns 409",
+      "method": "POST",
+      "path": "/api/components",
+      "expectedStatus": 409,
+      "actualStatus": 404,
+      "passed": false,
+      "missingContent": [],
+      "error": null,
+      "bodySnippet": ""
+    }
+  ],
+  "totalProbes": 3,
+  "probesPassed": 0,
+  "probesFailed": 3,
+  "cleanup": {
+    "status": "clean",
+    "removedContainers": [
+      "themepark-api-e2e-cpd-lc-001-009-qwen3-7-max-1-132336",
+      "themepark-sql-e2e-cpd-lc-001-009-qwen3-7-max-1-132336"
+    ],
+    "removedNetworks": [
+      "themepark-e2e-cpd-lc-001-009-qwen3-7-max-1-132336"
+    ],
+    "removedVolumes": [
+      "themepark-app-e2e-cpd-lc-001-009-qwen3-7-max-1-132336"
+    ],
+    "leftovers": []
+  },
+  "warnings": [],
+  "errors": [
+    "3 probe(s) failed."
+  ]
+}

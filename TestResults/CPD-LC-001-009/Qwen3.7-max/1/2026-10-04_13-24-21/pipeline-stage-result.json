@@ -1,0 +1,48 @@
+{
+  "stage": "code-generation",
+  "storyId": "CPD-LC-001-009",
+  "model": "Qwen3.7-max",
+  "iteration": "1",
+  "status": "success",
+  "filesCreated": [
+    "Backend.Domain/Exceptions/DuplicateIdException.cs",
+    "Backend.Application/Services/IIdGenerator.cs",
+    "Backend.Application/Services/CreateComponentRequest.cs",
+    "Backend.Infrastructure/Repositories/ComponentIdGenerator.cs",
+    "Backend.Presentation/Dtos/CreateLearningComponentDto.cs",
+    "Backend.Presentation/Responses/CreateLearningComponentResponse.cs",
+    "Backend.Presentation/Handlers/CreateLearningComponentHandler.cs"
+  ],
+  "filesModified": [
+    "Backend.Domain/Entities/LearningComponent.cs",
+    "Backend.Domain/Repositories/ILearningComponentRepository.cs",
+    "Backend.Application/Services/ILearningComponentService.cs",
+    "Backend.Application/Services/Implementations/LearningComponentService.cs",
+    "Backend.Infrastructure/Repositories/SqlLearningComponentRepository.cs",
+    "Backend.Infrastructure/UCR.ECCI.PI.ThemePark.Backend.Infrastructure.csproj",
+    "Backend.Infrastructure/DependecyInjection.cs",
+    "Backend.Presentation/Endpoints/LearningComponentsEndpoints.cs",
+    "Backend.Presentation.Tests.Unit/LearningComponentsEndpointsTests.cs"
+  ],
+  "metrics": {
+    "buildErrors": 0,
+    "buildWarnings": 0,
+    "testsTotal": 118,
+    "testsPassed": 118,
+    "testsFailed": 0,
+    "testsSkipped": 0,
+    "lineCoverage": 0.7445255474452555,
+    "branchCoverage": 0.8448275862068966,
+    "e2e": {
+      "status": "success",
+      "probesTotal": 3,
+      "probesPassed": 3,
+      "probesFailed": 0,
+      "seedsApplied": ["seed-CPD-LC-001-009.sql"],
+      "resultPath": "E2EResults/CPD-LC-001-009/Qwen3.7-max/1/2026-10-04_13-24-40/",
+      "cleanup": "clean"
+    }
+  },
+  "warnings": [],
+  "notes": "Implemented auto-generated ID feature for LearningComponent. Added second constructor without componentId parameter that generates a GUID-based ID. Created IIdGenerator interface and ComponentIdGenerator implementation. Extended repository with ExistsAsync and AddAsync methods. Created POST /api/components endpoint with handler, DTO, and response types. Fixed test file compilation error (WebApplication.DataSources → IEndpointRouteBuilder cast)."
+}
