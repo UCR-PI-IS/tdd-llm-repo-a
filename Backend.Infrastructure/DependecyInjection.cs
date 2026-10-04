@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using UCR.ECCI.PI.ThemePark.Backend.Application.Services;
 using UCR.ECCI.PI.ThemePark.Backend.Domain.Repositories;
 using UCR.ECCI.PI.ThemePark.Backend.Infrastructure.Repositories;
 
@@ -26,9 +25,6 @@ public static class DependencyInjection
         services.AddTransient<ILearningSpaceRepository, SqlLearningSpaceRepository>();
         services.AddTransient<IWhiteboardRepository, SqlWhiteboardRepository>();
         services.AddTransient<ILearningSpaceReadRepository, SqlLearningSpaceReadRepository>();
-
-        // Register ID generator
-        services.AddTransient<IComponentIdGenerator, ComponentIdGenerator>();
 
         // Register EF Core DbContext with SQL Server provider
         services.AddDbContext<UCRDatabaseContext>(options =>
