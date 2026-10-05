@@ -42,6 +42,8 @@ def test_runs_contract(pooled):
     assert runs["n_run_commits"].eq(2).all()
     ending = runs.loc[runs["exceptional_ending"].fillna("") != "", "run_id"]
     assert set(ending) == set(C.EXCEPTIONAL_ENDING_CELLS)
+    # an exceptional ending is exactly a failed final check (build, tests or e2e), D27
+    assert set(ending) == set(runs.loc[runs["final_all_ok"] == False, "run_id"])
 
 
 @requires_repo

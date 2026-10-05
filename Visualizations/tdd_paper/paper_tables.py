@@ -354,7 +354,7 @@ def tab_final_state(bundle, out_dir) -> Path:
         rows.append(row)
     df = pd.DataFrame(rows)
     body = to_booktabs(df, [("outcome", "Final-state outcome", "str"), (KIMI, KIMI, "str"), (QWEN, QWEN, "str")], align="lrr")
-    return write_table(out_dir, "tab_final_state", body, meta={"rows": len(df), "note": "saturated by construction; exceptions listed in tab_exceptional_runs"})
+    return write_table(out_dir, "tab_final_state", body, meta={"rows": len(df), "note": "nearly saturated; every run with a failed final check is listed in tab_exceptional_runs"})
 
 
 def make_tables(bundle: dict, frames: dict, out_dir: Path) -> dict[str, str]:

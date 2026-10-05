@@ -327,7 +327,9 @@ def build_runs(stories: list[str] | None = None, *, with_git: bool = True, refre
                                         if pd.notna(row.get("failed")) and pd.notna(row.get("total_tests")) else pd.NA)
             finals = [rec["final_build_ok"], rec["final_tests_green"], rec["final_e2e_ok"]]
             rec["final_all_ok"] = pd.NA if any(pd.isna(f) for f in finals) else all(bool(f) for f in finals)
-            ending = []
+            ending = []  # any failed final check (build, tests, e2e) is an exceptional ending (STATUS.md Q21, D27)
+            if rec["final_build_ok"] is False:
+                ending.append("final build failed")
             if rec["final_tests_green"] is False:
                 ending.append("final test execution red")
             if rec["final_e2e_ok"] is False:

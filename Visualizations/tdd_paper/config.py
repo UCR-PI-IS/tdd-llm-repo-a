@@ -79,6 +79,10 @@ EXCEPTIONAL_ENDING_CELLS = {
     "CPD-LC-001-003/Qwen3.7-max/4": "last recorded test execution red (1 of 88), later metrics snapshot",
     "SQL-LS-001-007/Kimi-K2.5/6": "final e2e execution ended on a Docker timeout (infrastructure)",
     "CPD-LC-001-005/Qwen3.7-max/1": "final e2e execution failed its probe (0 of 1)",
+    # D27 (2026-10-04): a failed final build is an exceptional ending too; both runs end on a failed build after
+    # their last green test execution, with tests and e2e green.
+    "PQL-AE-001-001/Kimi-K2.5/3": "final build failed (2 errors) after the last green test execution",
+    "PQL-AE-001-002/Kimi-K2.5/2": "final build failed (18 errors) after the last green test execution",
 }
 CALIBRATION_CELL = ("CPD-LC-001-003/Kimi-K2.5/1", 25, 35)  # (cell, new test methods, new test cases)
 INTENTS_CONFIRMED_WRONG_EXPECTED = 26   # agent intentsConfirmed differs from UserIntents/<story>.json; 26 since the
