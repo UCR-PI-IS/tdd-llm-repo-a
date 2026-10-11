@@ -1,0 +1,43 @@
+% Fallback for tests/test_paper_names.py when the SANER 2027 paper is not reachable: verbatim copy (2026-10-06) of
+% the tabular of Table IV (tab:metrics) in sections/02-6-metrics.tex. Refresh it when Table IV changes.
+\begin{tabular}{@{}p{0.19\textwidth}lllp{0.40\textwidth}@{}}
+\toprule
+Metric & Unit & Better & Provenance & Definition \\
+\midrule
+\multicolumn{5}{@{}l}{\textbf{Verification (RQ1, RQ2)}} \\
+\raggedright New tests per intent & methods per intent & none & derived & {\raggedright story-new test methods in the branch diff per confirmed intent\strut\par} \\
+\raggedright Solution line coverage & share & higher & tool-measured & {\raggedright line coverage of the whole solution\strut\par} \\
+\raggedright Story line coverage & share & higher & derived & {\raggedright line coverage of the production files that the run created or modified\strut\par} \\
+\raggedright New tests failing at first execution & share & none & derived & {\raggedright share of the story-new test cases not passing at the first test execution\strut\par} \\
+\addlinespace
+\multicolumn{5}{@{}l}{\textbf{Convergence (RQ2, RQ3)}} \\
+\raggedright First-execution red & flag & none & tool-measured & {\raggedright the first recorded test execution was not green\strut\par} \\
+\raggedright Failed builds & executions & lower & tool-measured & {\raggedright build executions that did not compile\strut\par} \\
+\raggedright Peak compiler errors & errors & lower & tool-measured & {\raggedright largest number of compiler errors in one build execution\strut\par} \\
+\raggedright Total compiler errors & errors & lower & tool-measured & {\raggedright compiler errors summed over all build executions\strut\par} \\
+\raggedright Test executions to green & executions & lower & tool-measured & {\raggedright position of the first test execution with the whole suite green\strut\par} \\
+\raggedright Total test failures & failures & lower & tool-measured & {\raggedright failed test cases summed over all test executions\strut\par} \\
+\addlinespace
+\multicolumn{5}{@{}l}{\textbf{Behavioral (RQ3)}} \\
+\raggedright End-to-end executions & executions & lower & tool-measured & {\raggedright end-to-end executions recorded in the run\strut\par} \\
+\raggedright End-to-end attempts to pass & executions & lower & agent-authored-oracle & {\raggedright position of the first end-to-end execution that passed, counting only executions in which the backend started\strut\par} \\
+\addlinespace
+\multicolumn{5}{@{}l}{\textbf{Quality (RQ4)}} \\
+\raggedright Refactoring gain in worst story MI & MI points & higher & derived & {\raggedright worst MI over the story-new types, last minus first metrics snapshot\strut\par} \\
+\raggedright Maximum class coupling & classes & lower & tool-measured & {\raggedright largest class coupling of any type in the solution\strut\par} \\
+\raggedright Median maintainability index & MI points & higher & tool-measured & {\raggedright median MI over all types of the solution\strut\par} \\
+\raggedright Worst story maintainability index & MI points & higher & derived & {\raggedright worst MI over the story-new types\strut\par} \\
+\raggedright Worst story cyclomatic complexity & CC & lower & derived & {\raggedright largest type CC over the story-new types\strut\par} \\
+\addlinespace
+\multicolumn{5}{@{}l}{\textbf{Reliability (RQ5)}} \\
+\raggedright First build compiles & flag & higher & tool-measured & {\raggedright the first build execution succeeded\strut\par} \\
+\raggedright Suite green at first execution & flag & higher & tool-measured & {\raggedright the whole suite was green at the first test execution\strut\par} \\
+\raggedright End-to-end passed first & flag & higher & agent-authored-oracle & {\raggedright the first end-to-end execution in which the backend started passed\strut\par} \\
+\raggedright Final end-to-end passed & flag & higher & agent-authored-oracle & {\raggedright the last end-to-end execution passed\strut\par} \\
+\raggedright Final suite green & flag & higher & tool-measured & {\raggedright the last test execution was green\strut\par} \\
+\raggedright Clean run & flag & higher & derived & {\raggedright the first build, the first test execution and the first end-to-end execution in which the backend started all succeeded\strut\par} \\
+\addlinespace
+\multicolumn{5}{@{}l}{\textbf{Provenance (RQ6)}} \\
+\raggedright Self-report gap in test methods & methods & lower & derived & {\raggedright absolute difference between the test methods in the stage file of the test generator and those in the branch diff\strut\par} \\
+\bottomrule
+\end{tabular}

@@ -244,6 +244,23 @@ _BUILD_COLS = _KEYS + ["ts", "status", "total_errors", "total_warnings",
 _BUILD_PROJ_COLS = _KEYS + ["ts", "project", "status", "errors", "warnings",
                             "n_error_messages"]
 
+#: docker-build.py counts every "error XX0000" and "warning XX0000" line of a project's dotnet build output, and
+#: MSBuild repeats each diagnostic in the summary that closes the build, so build-summary.json reports every compiler
+#: error and warning twice (all 1254 wave-1 build summaries have even totals and even per-project counts, and every
+#: errorMessages list holds each message an even number of times). The loader divides the counts by this factor, so
+#: the frames hold distinct diagnostics (JP, 2026-10-10, SANER decision P106).
+BUILD_DIAGNOSTIC_REPEAT = 2
+
+
+def _distinct_diagnostics(value: object, what: str, where: Path) -> object:
+    """Count of distinct diagnostics from a doubled build-summary count; an odd count is kept and reported."""
+    if not isinstance(value, (int, float)) or isinstance(value, bool):
+        return value
+    if value % BUILD_DIAGNOSTIC_REPEAT:
+        load_warnings.append(f"odd {what} count {value} kept undivided: {where}")
+        return value
+    return int(value) // BUILD_DIAGNOSTIC_REPEAT
+
 
 def load_build_executions(story: str) -> pd.DataFrame:
     rows = []
@@ -255,8 +272,8 @@ def load_build_executions(story: str) -> pd.DataFrame:
         rows.append({
             "story": story, "model": model, "iteration": iteration, "ts": ts,
             "status": rec.get("status"),
-            "total_errors": rec.get("totalErrors", 0),
-            "total_warnings": rec.get("totalWarnings", 0),
+            "total_errors": _distinct_diagnostics(rec.get("totalErrors", 0), "totalErrors", ts_dir),
+            "total_warnings": _distinct_diagnostics(rec.get("totalWarnings", 0), "totalWarnings", ts_dir),
             "n_projects": len(projects),
             "n_failed_projects": sum(1 for p in projects if p.get("status") != "success"),
         })
@@ -274,9 +291,10 @@ def load_build_projects(story: str) -> pd.DataFrame:
                 "story": story, "model": model, "iteration": iteration, "ts": ts,
                 "project": proj.get("name"),
                 "status": proj.get("status"),
-                "errors": proj.get("errors", 0),
-                "warnings": proj.get("warnings", 0),
-                "n_error_messages": len(proj.get("errorMessages") or []),
+                "errors": _distinct_diagnostics(proj.get("errors", 0), "errors", ts_dir),
+                "warnings": _distinct_diagnostics(proj.get("warnings", 0), "warnings", ts_dir),
+                "n_error_messages": _distinct_diagnostics(len(proj.get("errorMessages") or []),
+                                                          "errorMessages", ts_dir),
             })
     return _frame(rows, _BUILD_PROJ_COLS)
 
@@ -471,7 +489,9 @@ _STAGE_COLS = _KEYS + ["ts", "stage", "status", "n_warnings", "notes",
                        "ref_baseline_minMI", "ref_final_minMI",
                        "ref_baseline_maxCC", "ref_final_maxCC",
                        "ref_baseline_maxCoupling", "ref_final_maxCoupling",
-                       "ref_baseline_maxDIT", "ref_final_maxDIT"]
+                       "ref_baseline_maxDIT", "ref_final_maxDIT",
+                       # self-consistency of the stage file (SANER P117): fields read only to check the report against itself
+                       "tg_layers_sum", "cg_tests_failed", "cg_build_errors", "cg_e2e_status"]
 _VIOLATION_COLS = _KEYS + ["ts", "type", "metric", "value", "flag"]
 
 
@@ -510,6 +530,14 @@ def _stage_identity(story: str, tree: Path, path: Path, rec: dict | None):
     return model, iteration, ts
 
 
+def _layers_sum(by_layer) -> int | None:
+    """Sum of the per-layer test-method counts of a test-generation stage file, or None when absent or not numeric."""
+    if not isinstance(by_layer, dict) or not by_layer:
+        return None
+    vals = [v for v in by_layer.values() if isinstance(v, (int, float)) and not isinstance(v, bool)]
+    return int(sum(vals)) if len(vals) == len(by_layer) else None
+
+
 def load_stage_results(story: str) -> pd.DataFrame:
     """One row per (cell, stage) — deduped to the latest result when agents
     committed several (code-generation has duplicates in the raw data)."""
@@ -540,6 +568,10 @@ def load_stage_results(story: str) -> pd.DataFrame:
             "ref_max_loop_iterations": m.get("maxLoopIterations"),
             "ref_all_green": m.get("allGreenAchieved"),
             "ref_n_remaining_violations": len(m.get("remainingViolations") or []),
+            "tg_layers_sum": _layers_sum(m.get("byLayer")),
+            "cg_tests_failed": m.get("testsFailed"),
+            "cg_build_errors": m.get("buildErrors"),
+            "cg_e2e_status": (m.get("e2e") or {}).get("status") if isinstance(m.get("e2e"), dict) else None,
         }
         for k in ("minMI", "maxCC", "maxCoupling", "maxDIT"):
             row[f"ref_baseline_{k}"] = (m.get("baseline") or {}).get(k)
@@ -668,9 +700,11 @@ def iteration_summary(story: str, data: dict[str, pd.DataFrame] | None = None) -
 
     stages = d["stages"]
     stage_cols = {
-        "test-generation": {"status": "tg_status", "tg_test_methods": "tg_test_methods"},
+        "test-generation": {"status": "tg_status", "tg_test_methods": "tg_test_methods",
+                            "tg_layers_sum": "tg_layers_sum"},
         "code-generation": {"status": "cg_status", "n_files_created": "cg_files_created",
-                            "n_files_modified": "cg_files_modified"},
+                            "n_files_modified": "cg_files_modified", "cg_tests_failed": "cg_tests_failed",
+                            "cg_build_errors": "cg_build_errors", "cg_e2e_status": "cg_e2e_status"},
         "refactoring": {"status": "ref_status", "ref_all_green": "ref_all_green",
                         "ref_loop_iterations": "ref_loop_iterations",
                         "ref_n_remaining_violations": "ref_n_remaining_violations"},

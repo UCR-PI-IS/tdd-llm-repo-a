@@ -1,0 +1,30 @@
+% Fallback for tests/test_paper_names.py when the SANER 2027 paper is not reachable: verbatim copy (2026-10-06) of
+% the tabular of Table V (tab:hypotheses) in sections/02-7-statistics.tex. Refresh it when Table V changes.
+\begin{tabular}{@{}lll@{}}
+\toprule
+Id & Metric & Band \\
+\midrule
+\multicolumn{3}{@{}l}{\textbf{Confirmatory}} \\
+H1 & New tests per intent & \dc{0.20} methods per intent \\
+H2 & First-execution red & -- \\
+H3 & Failed builds & -- \\
+H4 & Peak compiler errors & -- \\
+H5 & Total compiler errors & -- \\
+H6 & Test executions to green & -- \\
+H7 & Total test failures & -- \\
+H8 & End-to-end executions & -- \\
+\addlinespace
+\multicolumn{3}{@{}l}{\textbf{Secondary}} \\
+ & New tests failing at first execution & -- \\
+ & Refactoring gain in worst story MI & -- \\
+ & Self-report gap in test methods & -- \\
+ & End-to-end attempts to pass & -- \\
+\addlinespace
+\multicolumn{3}{@{}l}{\textbf{Equivalence only}} \\
+ & Solution line coverage & \dc{0.02} \\
+ & Story line coverage & \dc{0.05} \\
+ & Maximum class coupling & \dc{2} classes \\
+ & Median maintainability index & \dc{2} MI points \\
+ & Worst story maintainability index & \dc{3} MI points \\
+\bottomrule
+\end{tabular}

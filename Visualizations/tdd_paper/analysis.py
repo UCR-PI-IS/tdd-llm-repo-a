@@ -464,6 +464,23 @@ def register_numbers(nums: Numbers, runs: pd.DataFrame, desc: pd.DataFrame, eff:
                  family="P provenance", provenance="self-reported", n=int(gg.notna().sum()), group={"model": model})
         nums.add(macro_name("SelfReportGap", _short(model), "Median"), float(gg.median()), fmt="{:.1f}", unit="methods",
                  family="P provenance", provenance="self-reported", n=int(gg.notna().sum()), group={"model": model})
+    # self-consistency of the stage files (SANER P117): contradictions of a report with itself, per model -----
+    for col, stem, what in (("tg_layers_mismatch", "SelfConsistLayers", "per-layer counts that do not sum to the reported total"),
+                            ("cg_success_contradiction", "SelfConsistCodeSuccess", "code-generation success with failures, build errors or a failed end-to-end check"),
+                            ("ref_success_not_green", "SelfConsistRefSuccess", "refactoring success with allGreenAchieved false"),
+                            ("ref_green_with_violations", "SelfConsistRefGreen", "refactoring allGreenAchieved with remaining violations")):
+        if col not in runs.columns:
+            continue
+        for model, g in runs.groupby("model"):
+            v = g[col].astype("boolean")
+            applies = v.notna()
+            k = int(v[applies].astype(bool).sum())
+            nums.add(macro_name(stem, _short(model), "K"), k, fmt="int", unit="runs", family="P provenance",
+                     provenance="self-reported", n=int(applies.sum()), group={"model": model},
+                     notes=f"stage files that contradict themselves: {what}")
+            nums.add(macro_name(stem, _short(model), "N"), int(applies.sum()), fmt="int", unit="runs",
+                     family="P provenance", provenance="self-reported", group={"model": model},
+                     notes=f"runs where the check applies: {what}")
     # example runs (the paired story-3 runs used throughout the report) --------------------------------
     for run_id, tag in (("CPD-LC-001-003/Kimi-K2.5/1", "Kimi"), ("CPD-LC-001-003/Qwen3.7-max/4", "Qwen")):
         row = runs[runs["run_id"] == run_id]
@@ -652,6 +669,8 @@ def run_all(bundle: dict, *, n_boot: int = C.N_BOOT, n_perm: int = C.N_PERM, see
                       "sensitivity_sets": {k: v[1] for k, v in C.SENSITIVITY_SETS.items()}})
     register_numbers(nums, runs, desc, eff, tost, passk, rank_summary, sens, robust, excluded, stories,
                      executions=bundle.get("executions"))
+    from . import story_macros  # SANER paper only (P44): no-op unless TDD_PAPER_STORY_MACROS=1
+    story_macros.register_if_enabled(nums, runs)
     frames = {"descriptives": desc, "descriptives_by_story": desc_story, "effects": eff, "effects_by_story": by_story,
               "tost": tost, "passk": passk, "rankings": rank, "rank_summary": rank_summary, "rank_stability": stability,
               "sensitivity": sens, "robustness": robust}

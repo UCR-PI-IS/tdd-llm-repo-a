@@ -35,8 +35,10 @@ def _median_iqr(desc: pd.DataFrame, metric: str, model: str) -> str:
     return f"{fmt.format(r['median'])} [{fmt.format(r['q1'])}, {fmt.format(r['q3'])}]"
 
 
-def tab_stories(bundle, out_dir) -> Path:
+def tab_stories(bundle, out_dir, story_labels: dict | None = None) -> Path:
     st = bundle["stories"].sort_values("story_pos").copy()
+    if story_labels:  # anonymous copy: paraphrased features (story ids are relabelled for every table in make_tables)
+        st["title"] = st.apply(lambda r: story_labels.get(r["story"], {}).get("feature") or r["title"], axis=1)
     st["label"] = st["story_pos"].map(lambda p: f"{int(p)}")
     st["intents_layers"] = st.apply(lambda r: f"{int(r['intents_Domain'])}/{int(r['intents_Application'])}/{int(r['intents_Infrastructure'])}/{int(r['intents_Presentation'])}", axis=1)
     st["baseline_author"] = st["baseline_author_model"].map(lambda m: SHORT.get(m, m))
@@ -357,9 +359,24 @@ def tab_final_state(bundle, out_dir) -> Path:
     return write_table(out_dir, "tab_final_state", body, meta={"rows": len(df), "note": "nearly saturated; every run with a failed final check is listed in tab_exceptional_runs"})
 
 
-def make_tables(bundle: dict, frames: dict, out_dir: Path) -> dict[str, str]:
+def read_story_labels(path) -> dict:
+    """Optional anonymisation map (CSV with columns story_id, label, feature) for a double-anonymous copy."""
+    if not path:
+        return {}
+    df = pd.read_csv(path, dtype=str).fillna("")
+    return {r["story_id"]: {"label": r["label"], "feature": r.get("feature", "")} for _, r in df.iterrows()}
+
+
+def _relabel_file(path: Path, story_labels: dict) -> None:
+    text = path.read_text()
+    for sid in sorted(story_labels, key=len, reverse=True):  # longest id first
+        text = text.replace(sid, story_labels[sid]["label"])
+    path.write_text(text)
+
+
+def make_tables(bundle: dict, frames: dict, out_dir: Path, story_labels: dict | None = None) -> dict[str, str]:
     written = {}
-    jobs = [("tab_stories", lambda: tab_stories(bundle, out_dir)), ("tab_metric_catalog", lambda: tab_metric_catalog(out_dir)),
+    jobs = [("tab_stories", lambda: tab_stories(bundle, out_dir, story_labels)), ("tab_metric_catalog", lambda: tab_metric_catalog(out_dir)),
             ("tab_metric_catalog_full", lambda: tab_metric_catalog_full(out_dir)),
             ("tab_integrity", lambda: tab_integrity(bundle, out_dir)), ("tab_descriptives", lambda: tab_descriptives(frames, out_dir)),
             ("tab_effects", lambda: tab_effects(frames, out_dir)), ("tab_effects_exploratory", lambda: tab_effects_exploratory(frames, out_dir)),
@@ -368,9 +385,17 @@ def make_tables(bundle: dict, frames: dict, out_dir: Path) -> dict[str, str]:
             ("tab_passk", lambda: tab_passk(frames, out_dir)), ("tab_rankings", lambda: tab_rankings(frames, out_dir)),
             ("tab_provenance", lambda: tab_provenance(bundle, frames, out_dir)), ("tab_exceptional_runs", lambda: tab_exceptional_runs(bundle, out_dir)),
             ("tab_final_state", lambda: tab_final_state(bundle, out_dir))]
+    from . import paper_names  # SANER paper only (name-to-column table): no-op unless TDD_PAPER_NAME_MAP=1
+    if paper_names.enabled():
+        jobs.append((paper_names.SLUG, lambda: paper_names.tab_metric_names(bundle, out_dir)))
     for slug, fn in jobs:
         try:
             written[slug] = str(fn())
         except Exception as exc:
             written[slug] = f"ERROR {type(exc).__name__}: {exc}"
+    if story_labels:  # anonymous copy: replace every story id in every written table
+        for slug, res in written.items():
+            if not res.startswith("ERROR"):
+                for f in Path(out_dir, "tables").glob(f"{slug}.*"):
+                    _relabel_file(f, story_labels)
     return written

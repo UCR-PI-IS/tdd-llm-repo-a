@@ -174,9 +174,13 @@ _SPECS: list[ColumnSpec] = [
     _spec("tg_status", "P provenance", S, 0, "str", "", "test-generation stage status (agent)"),
     _spec("tg_test_methods", "P provenance", S, 0, "Int64", "methods", "testMethodsEmitted (agent)"),
     _spec("tg_intents_confirmed", "P provenance", S, 0, "Int64", "intents", "intentsConfirmed (agent)"),
+    _spec("tg_layers_sum", "P provenance", S, 0, "Int64", "methods", "sum of the per-layer test-method counts (agent, byLayer), read for the self-consistency check (P117)"),
     _spec("cg_status", "P provenance", S, 0, "str", "", "code-generation stage status (agent)"),
     _spec("cg_files_created", "P provenance", S, 0, "Int64", "files", "filesCreated count (agent)"),
     _spec("cg_files_modified", "P provenance", S, 0, "Int64", "files", "filesModified count (agent)"),
+    _spec("cg_tests_failed", "P provenance", S, 0, "Int64", "tests", "testsFailed (agent), read for the self-consistency check (P117)"),
+    _spec("cg_build_errors", "P provenance", S, 0, "Int64", "errors", "buildErrors (agent), read for the self-consistency check (P117)"),
+    _spec("cg_e2e_status", "P provenance", S, 0, "str", "", "e2e.status (agent), read for the self-consistency check (P117)"),
     _spec("ref_status", "P provenance", S, 0, "str", "", "refactoring stage status (agent)"),
     _spec("ref_all_green", "P provenance", S, 0, "boolean", "", "allGreenAchieved (agent)"),
     _spec("ref_loop_iterations", "P provenance", S, 0, "Int64", "", "loopIterationsPerformed (agent)"),
@@ -189,6 +193,11 @@ _SPECS: list[ColumnSpec] = [
     _spec("intents_report_error", "P provenance", X, 0, "Int64", "intents", "tg_intents_confirmed minus n_intents"),
     _spec("intents_confirmed_ok", "P provenance", X, +1, "boolean", "", "agent intent count equals the file"),
     _spec("refactor_loop_gap", "P provenance", X, 0, "Int64", "", "ref_loop_iterations minus refactor_cycles_measured"),
+    # --- self-consistency of the stage files (SANER P117): the report against itself ---------------------
+    _spec("tg_layers_mismatch", "P provenance", X, -1, "boolean", "", "the per-layer counts of the test-generation stage file do not sum to its own testMethodsEmitted"),
+    _spec("cg_success_contradiction", "P provenance", X, -1, "boolean", "", "the code-generation stage file says success but reports failed tests, build errors or a failed end-to-end check"),
+    _spec("ref_success_not_green", "P provenance", X, -1, "boolean", "", "the refactoring stage file says success but its allGreenAchieved is false"),
+    _spec("ref_green_with_violations", "P provenance", X, -1, "boolean", "", "the refactoring stage file says allGreenAchieved but lists remaining violations"),
 ]
 
 COLUMN_CATALOG: dict[str, ColumnSpec] = {s.name: s for s in _SPECS}

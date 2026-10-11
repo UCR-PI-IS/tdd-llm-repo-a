@@ -228,6 +228,35 @@ def load_story(story: str) -> tuple[dict, pd.DataFrame]:
     return data, summ
 
 
+def _is_success(status) -> bool:
+    return isinstance(status, str) and status.strip().lower() == "success"
+
+
+def _report_self_consistency(row) -> dict:
+    """Contradictions inside a stage file (SANER P117): the agent's report against itself, no tool record needed.
+
+    Each flag is NA where the check does not apply, True where the report contradicts itself, False otherwise:
+    tg_layers_mismatch (test generation: the per-layer counts do not sum to testMethodsEmitted),
+    cg_success_contradiction (code generation: status success with failed tests, build errors or a failed
+    end-to-end status), ref_success_not_green (refactoring: status success with allGreenAchieved false),
+    ref_green_with_violations (refactoring: allGreenAchieved true with remaining violations listed)."""
+    out = {}
+    tls, tgm = row.get("tg_layers_sum"), row.get("tg_test_methods")
+    out["tg_layers_mismatch"] = bool(int(tls) != int(tgm)) if pd.notna(tls) and pd.notna(tgm) else pd.NA
+    if _is_success(row.get("cg_status")):
+        tf, be, es = row.get("cg_tests_failed"), row.get("cg_build_errors"), row.get("cg_e2e_status")
+        out["cg_success_contradiction"] = bool((pd.notna(tf) and int(tf) > 0) or (pd.notna(be) and int(be) > 0)
+                                               or (isinstance(es, str) and es.strip().lower() != "success"))
+    else:
+        out["cg_success_contradiction"] = pd.NA
+    ag = row.get("ref_all_green")
+    ag = bool(ag) if ag in (True, False) else None
+    out["ref_success_not_green"] = (ag is False) if _is_success(row.get("ref_status")) and ag is not None else pd.NA
+    rv = row.get("ref_n_remaining_violations")
+    out["ref_green_with_violations"] = bool(pd.notna(rv) and int(rv) > 0) if ag is True else pd.NA
+    return out
+
+
 def build_runs(stories: list[str] | None = None, *, with_git: bool = True, refresh_cache: bool = False,
                progress=None) -> dict:
     """Build every table. Returns a dict with ``runs``, ``executions``, ``types``,
@@ -403,6 +432,7 @@ def build_runs(stories: list[str] | None = None, *, with_git: bool = True, refre
             rl = row.get("ref_loop_iterations")
             rec["refactor_loop_gap"] = (int(rl) - rec["refactor_cycles_measured"]
                                         if pd.notna(rl) and not pd.isna(rec["refactor_cycles_measured"]) else pd.NA)
+            rec.update(_report_self_consistency(row))
             rec["clean_run"] = (bool(rec.get("build_first_pass")) and bool(rec["green_first_try"]) and bool(rec["e2e_first_pass"])
                                 if not any(pd.isna(x) for x in (rec.get("build_first_pass"), rec["green_first_try"], rec["e2e_first_pass"])) else pd.NA)
             rec["included_core"] = (not bool(rec.get("identity_ambiguous"))) and int(rec.get("compile_remove_added") or 0) == 0

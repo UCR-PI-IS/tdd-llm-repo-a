@@ -117,10 +117,20 @@ def cmd_tables(args) -> int:
     from . import paper_tables as PT
     bundle = _load_bundle(args.out)
     frames = _load_frames(args.out)
-    written = PT.make_tables(bundle, frames, Path(args.out))
+    written = PT.make_tables(bundle, frames, Path(args.out), PT.read_story_labels(getattr(args, "story_labels", None)))
     _refresh_manifest(args.out)
     _p(f"tables: {len(written)} written -> {args.out}/tables")
-    return 0
+    return _report_name_map(written)
+
+
+def _report_name_map(written: dict) -> int:
+    """SANER paper only: print the name-to-column table's result; 1 if it failed. No-op unless TDD_PAPER_NAME_MAP=1."""
+    from . import paper_names
+    if not paper_names.enabled():
+        return 0
+    res = written.get(paper_names.SLUG, "ERROR not written")
+    _p(f"tables: {paper_names.SLUG} ({paper_names.ENV}=1) -> {res}")
+    return 1 if res.startswith("ERROR") else 0
 
 
 def cmd_numbers(args) -> int:
@@ -130,9 +140,13 @@ def cmd_numbers(args) -> int:
     payload = json.loads(jpath.read_text())
     nums = Numbers(payload.get("meta", {}))
     nums.entries = payload["numbers"]
+    from . import story_macros  # SANER paper only (P44): no-op unless TDD_PAPER_STORY_MACROS=1
+    n_story = story_macros.register_if_enabled(nums, out_dir=Path(args.out))
     nums.write(args.out)
     _refresh_manifest(args.out)
     _p(f"numbers: {len(nums.entries)} macros re-emitted")
+    if n_story:
+        _p(f"numbers: {n_story} per-story macros ({story_macros.ENV}=1, S0, descriptive)")
     return 0
 
 
@@ -146,11 +160,12 @@ def cmd_all(args) -> int:
     frames = {k: v for k, v in res.frames.items()}
     figs = _run_figures(args, bundle, frames)
     from . import paper_tables as PT
-    PT.make_tables(bundle, frames, Path(args.out))
+    written = PT.make_tables(bundle, frames, Path(args.out), PT.read_story_labels(getattr(args, "story_labels", None)))
     K.write_manifest(Path(args.out), extra={"seed": args.seed, "n_boot": args.boot, "n_perm": args.perm,
                                             "figures_with_errors": [k for k, v in figs.items() if "error" in v]})
     _p(f"all: done -> {args.out} (manifest written)")
-    return 1 if any("error" in v for v in figs.values()) else 0
+    rc_names = _report_name_map(written)
+    return 1 if any("error" in v for v in figs.values()) or rc_names else 0
 
 
 def cmd_check(args) -> int:
@@ -204,6 +219,7 @@ def build_parser() -> argparse.ArgumentParser:
         sp.add_argument("--only", nargs="*", help="figure slugs to (re)render")
         sp.add_argument("--rebuild", action="store_true", help="check: rebuild the dataset instead of loading it")
         sp.add_argument("--set", default="S0", help="stats: restrict to one sensitivity set (single-stratum sets only)")
+        sp.add_argument("--story-labels", type=Path, default=None, help="tables: CSV (story_id,label,feature) that relabels story ids and paraphrases features for a double-anonymous copy")
 
     for name, fn in (("dataset", cmd_dataset), ("stats", cmd_stats), ("figures", cmd_figures), ("tables", cmd_tables),
                      ("numbers", cmd_numbers), ("all", cmd_all), ("build", cmd_all), ("check", cmd_check)):
